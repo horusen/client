@@ -1,0 +1,59 @@
+<!-- Logo -->
+<div class="bd-b">
+    <div class="d-flex flex-row">
+
+        <a href="" class="tx-white mg-l-30 "
+            style="font-family: 'Tangerine'; text-align: center; font-size: 250%; vertical-align: middle; text-shadow: 0px 1px 0px ;">
+
+            Explore.<span class="tx-yellow1">S<U>chool</U> </span></a>
+
+    </div>
+</div>
+
+<!-- Content -->
+<div class=" mg-t-5 bd-b mg-b-10  pd-0  ">
+    <div class="row row-xs mg-0 pd-0 clearfix mg-l-1">
+        <!-- Nav tabs -->
+        <ul class="nav mg-t-1 bd-b w-100 d-flex justify-content-center">
+            <!-- Tableaux -->
+            <li class="nav-item">
+                <a class="nav-link p-2 tx-white clickable"
+                    (click)="activateComponent('tableaux')"
+                    [ngClass]="{'active': activeComponents.tableaux}">
+                    {{ 'TABLEAUX' | translate }}
+                </a>
+            </li>
+
+            <!-- Classe -->
+            <li class="nav-item">
+                <a class="nav-link p-2 tx-white clickable"
+                    (click)="activateComponent('classe')"
+                    [ngClass]="{'active': activeComponents.classe}">
+                    {{ 'CLASSES' | translate }}
+                </a>
+            </li>
+
+            <!-- Groupe -->
+            <li class="nav-item">
+                <a class="nav-link p-2 tx-white clickable"
+                    (click)="activateComponent('groupe')"
+                    [ngClass]="{'active': activeComponents.groupe}">
+                    {{ 'GROUPES' | translate }}
+                </a>
+            </li>
+        </ul>
+
+        <!-- Nav content -->
+
+        <!-- Tableaux -->
+        <app-tableaux *ngIf="activeComponents.tableaux"></app-tableaux>
+
+
+        <!-- Classe -->
+        <app-classe-eleve-list-min *ngIf="activeComponents.classe"></app-classe-eleve-list-min>
+
+        <!-- groupe -->
+        <app-groupe-list-min *ngIf="activeComponents.groupe"></app-groupe-list-min>
+
+    </div>
+</div>

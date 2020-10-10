@@ -1,0 +1,84 @@
+<div class="page-container">
+    <div class="page-sidebar bg-white">
+        <div class="page-sidebar-inner">
+            <div class="page-sidebar-menu ">
+                <ul class="navbar nav  " role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active show tx-center" data-toggle="pill" href="#explore_school">
+                            <i class="fal fa-comments tx-20  tx-primary"></i>
+                            <p class=" tx-primary tx-10 p-0 mb-0">Explore.S</p>
+                        </a></li>
+
+                    <li class="nav-item tx-center ">
+                        <a class="nav-link " data-toggle="pill" href="#sites_groupes">
+                            <i class="fal fa-users-class tx-primary tx-20"></i>
+                            <p class=" tx-primary tx-10 p-0 mb-0">classes</p>
+                        </a></li>
+                    <li class="nav-item tx-center">
+                        <a class="nav-link  " data-toggle="pill" href="#groupes_inde">
+                            <i class="fal fa-users  tx-primary tx-20"></i>
+                            <p class=" tx-primary tx-10 p-0 mb-0">Groupes</p>
+                        </a></li>
+                    <li class="nav-item tx-center">
+                        <a class="nav-link " data-toggle="pill" href="#professeurs">
+                            <i class="fal fa-chalkboard-teacher  tx-20"></i>
+                            <p class=" tx-primary tx-10 p-0 mb-0 tx-center">Professeurs</p>
+                        </a>
+                    </li>
+                    <li class="nav-item tx-center">
+                        <a class="nav-link " data-toggle="pill" href="#calendriers">
+                            <i class="fal fa-calendar-alt  tx-primary tx-20"></i>
+                            <p class=" tx-primary tx-10 p-0 mb-0 tx-center">Calendrier</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item tx-center">
+                        <a class="nav-link   tx-primary " data-toggle="pill" href="#explore_reseau">
+                            <i class="fal fa-network-wired  tx-primary tx-20"></i>
+                            <p class=" tx-primary tx-10 p-0 mb-0">Réseau</p>
+                        </a>
+                    </li>
+                    <li class="nav-item tx-center">
+                        <a class="nav-link   tx-primary " data-toggle="pill" href="#explore_memoire">
+                            <i class="fal fa-book  tx-primary tx-20"></i>
+                            <p class=" tx-primary tx-10 p-0 mb-0">Mémoires</p>
+                        </a>
+                    </li>
+                    <li class="nav-item tx-center">
+                        <a class="nav-link   tx-primary " data-toggle="pill" href="#explore_these">
+                            <i class="fal fa-atlas  tx-primary tx-20"></i>
+                            <p class=" tx-primary tx-10 p-0 mb-0">Thèses</p>
+                        </a>
+                    </li>
+                    <li class="nav-item tx-center">
+                        <a class="nav-link   tx-primary " data-toggle="pill" href="#notes">
+                            <i class="fal fa-pencil-paintbrush  tx-primary tx-20"></i>
+                            <p class=" tx-primary tx-10 p-0 mb-0">Notes</p>
+                        </a>
+                    </li>
+                    <li class="nav-item tx-center">
+                        <a class="nav-link  tx- tx-primary mg-b-60 " data-toggle="pill" href="#figes">
+                            <i class="fal fa-times-circle  tx-20"></i>
+                            <p class=" tx-primary tx-10 p-0 mb-0">Figés</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item tx-center">
+                        <a class="nav-link  " data-toggle="pill" href="#">
+                            <i class="fad fa-th tx-10 tx-facebook tx-30"></i>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <div class="tab-content">
+            <div class="tab-pane fade active show " id="explore_school">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
