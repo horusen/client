@@ -1,0 +1,160 @@
+<div class="card border-0 ">
+    <!-- Header -->
+    <div class="row row-xs  mg-0 pd-0 pd-y-10 bd-b">
+        <div class="col-lg-12  ">
+            <p class="tx- tx-16 tx-facebook italic mg-l-5 mb-0">
+                {{  'correctionDeLaTache' | translate}}
+
+                <!-- boutton ajouter -->
+                <span class="btn-demo float-right" (click)="showCreateComponent()">
+                    <i class="fad fa-plus-circle clickable tx-14 tx-primary bg-light "
+                        style="padding:6px; border-radius:50%"
+                        [ngbTooltip]="'ajouterUneCorrectionACetteTache' | translate">
+                    </i>
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <!-- content -->
+    <div class="profiletimeline border-0 mt-0" *ngIf="single && !loading">
+        <!-- Détails correction -->
+        <div class="sl-item p-0">
+            <!-- Icone -->
+            <div class="sl-left">
+                <span
+                    class="wd-40 ht-40 card-icon-gris d-flex align-items-center justify-content-center rounded-circle hidden-xs">
+                    <i class="fal fa-swatchbook tx-20 tx-primary"></i></span>
+            </div>
+
+            <!-- Correction -->
+            <div class="sl-right">
+                <!-- Titre -->
+                <div>
+                    <!-- Header titre -->
+                    <span class="tx-gray-600 tx-16">
+                        {{ 'titreDeLaTache' | translate }}
+                    </span>
+
+                    <!-- titre -->
+                    <p class="tx-facebook tx-14 bg-bluelight p-2"
+                        style="text-align:justify">
+                        {{ single.libelle }}
+                    </p>
+
+                </div>
+
+                <!-- Solution (Description) -->
+                <div class="mg-t-10">
+                    <span class="tx-gray-600 tx-16">
+                        {{ 'solutionDeLaTache' | translate }}
+                    </span>
+                    <p class="tx-facebook tx-14 bg-light p-2"
+                        style="text-align:justify" [innerHTML]="single.description">
+                    </p>
+                </div>
+
+                <!-- Observation (Remarque) -->
+                <div class="mg-t-10" *ngIf="single.remarque">
+                    <span class="tx-gray-600 tx-16">
+                        {{ 'OBSERVATION' | translate }}
+                    </span>
+                    <p class="tx-primary tx-14 bg-light p-2"
+                        style="text-align:justify" [innerHTML]="single.remarque">
+                    </p>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- Autres solutions -->
+        <app-autres-corrections></app-autres-corrections>
+
+
+        <div class="sl-item">
+            <div
+                class="sl-left">
+                <span
+                    class="wd-40 ht-40 card-icon-gris d-flex align-items-center justify-content-center rounded-circle hidden-xs">
+                    <i
+                        class="fal fa-users tx-16 tx-primary"></i></span>
+            </div>
+            <div
+                class="sl-right">
+                <div>
+                    <span
+                        class="tx-gray-600 tx-16">
+                        Groupes
+                    </span>
+
+                </div>
+
+                <div
+                    class="row mt-1">
+                    <div
+                        class="col-md-6">
+                        <div
+                            class=" bg-white p-2 rounded px-3">
+                            <div
+                                class="d-flex justify-content-between stats">
+                                <div
+                                    class="d-flex flex-row align-items-center">
+                                    <div
+                                        class="profiles">
+                                        <img class="rounded-circle"
+                                            src="assets/images/xs/avatar7.jpg"
+                                            alt="avatar"
+                                            width="30">
+                                        <img class="rounded-circle"
+                                            src="assets/images/xs/avatar6.jpg"
+                                            alt="avatar"
+                                            width="30">
+                                        <img class="rounded-circle"
+                                            src="assets/images/xs/avatar5.jpg"
+                                            alt="avatar"
+                                            width="30">
+                                        <img class="rounded-circle"
+                                            src="assets/images/xs/avatar4.jpg"
+                                            alt="avatar"
+                                            width="30">
+                                        <img class="rounded-circle"
+                                            src="assets/images/xs/avatar3.jpg"
+                                            alt="avatar"
+                                            width="30">
+                                        <img class="rounded-circle"
+                                            src="assets/images/xs/avatar2.jpg"
+                                            alt="avatar"
+                                            width="30">
+                                        <img class="rounded-circle"
+                                            src="assets/images/xs/avatar1.jpg"
+                                            alt="avatar"
+                                            width="30">
+                                    </div>
+                                    <span
+                                        class="badge badge-pill badge-light bg-light tx-warning mg-l-20">
+                                        12</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <app-loading *ngIf="loading"></app-loading>
+    <app-missing-data *ngIf="!single && !loading" [message]="'pasDeCorrectionDisponiblePourCetteTache'">
+    </app-missing-data>
+
+</div>
+
+
+<app-modal
+    [configuration]="{titre: 'CORRECTION', name: 'correction-tache-create-modal', icone:'check-double'}">
+    <!-- <div *ngIf="tache"> -->
+    <app-correction-tache-create *ngIf="displayCreateComponent" [tache]="tache"></app-correction-tache-create>
+    <!-- </div> -->
+</app-modal>
