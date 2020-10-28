@@ -1,6 +1,6 @@
 import { NgxPicaService } from "@digitalascetic/ngx-pica";
 import { Injectable } from "@angular/core";
-import { ToastrManager } from "ng6-toastr-notifications";
+// import { ToastrManager } from "ng6-toastr-notifications";s
 import { TranslateService } from "@ngx-translate/core";
 import Swal from "sweetalert2";
 import {
@@ -25,12 +25,12 @@ export class Helper {
     private _route: ActivatedRoute
   ) {}
 
-  navigate(path: string, params?: any): void {
-    if (params) {
-      this.router.navigate([path, params]);
-    } else {
-      this.router.navigate([path], { relativeTo: this._route });
-    }
+  navigate(path: string[], queryParams?: {}, fragment?: string): void {
+    this.router.navigate(path, {
+      queryParams: queryParams,
+      fragment: fragment,
+      relativeTo: this._route,
+    });
   }
 
   toggleModal(id: string): void {
@@ -54,9 +54,7 @@ export class Helper {
       timer: 4000,
     };
 
-    Swal.fire({
-      ...options,
-    });
+    // Swal.fire({ ...options });
   }
 
   alertDanger(word: string = "ERREUR"): void {
@@ -68,7 +66,7 @@ export class Helper {
       timer: 1500,
     };
 
-    Swal.fire({ ...options });
+    // Swal.fire({ ...options });
   }
 
   toastSuccess(word: string = "effectueAvecSucces"): void {
@@ -79,12 +77,14 @@ export class Helper {
     // this.toastr.errorToastr(this.getTranslation(word));
   }
 
-  getTranslation(word: string): string {
+  getTranslation(word: string) {
     let translatedWord: string;
     this.translate.get(word).subscribe((value) => {
       translatedWord = value;
+      return translatedWord;
     });
-    return translatedWord;
+
+    // return;
   }
 
   alertConfirmation(callback: Function) {
@@ -99,11 +99,11 @@ export class Helper {
       cancelButtonText: this.getTranslation("nonQuitter"),
     };
 
-    Swal.fire({ ...options }).then((result) => {
-      if (result.value) {
-        callback();
-      }
-    });
+    // Swal.fire({ ...options }).then((result) => {
+    //   if (result.value) {
+    //     callback();
+    //   }
+    // });
   }
 
   unsubscribe(subscriptions: any) {

@@ -20,10 +20,11 @@ import { ModalComponent } from "./components/modal/modal.component";
 import { LoadingComponent } from "./components/loading/loading.component";
 import { MissingDataComponent } from "./components/missing-data/missing-data.component";
 import { PageLoadingComponent } from "./components/page-loading/page-loading.component";
+import { CommonCreateComponent } from "./components/common-component/common-create/common-create.component";
 @NgModule({
   declarations: [
     ModalComponent,
-    // CommonCreateComponent,
+    CommonCreateComponent,
     // CommonEditComponent,
     LoadingComponent,
     MissingDataComponent,
@@ -66,7 +67,7 @@ import { PageLoadingComponent } from "./components/page-loading/page-loading.com
     ToastrModule,
 
     ModalComponent,
-    // CommonCreateComponent,
+    CommonCreateComponent,
     // CommonEditComponent,
     LoadingComponent,
     MissingDataComponent,

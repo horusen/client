@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from "@angular/core";
 export class ModalComponent implements OnInit {
   @Input() configuration: {
     name: string;
-    titre: string;
+    titre?: string;
     icone?: string;
     taille?: string;
   } = {

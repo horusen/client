@@ -1,0 +1,99 @@
+<div class="row row-xs mg-0 pd-0 clearfix p-0">
+    <!-- Liste des taches -->
+    <div class="col-lg-4 p-1">
+        <!-- Header -->
+        <div class="card">
+            <div class="row mg-t-10 mg-b-5">
+                <!-- titre de la tache -->
+                <div class="col-lg-10 float-right">
+                    <h3
+                        class="tx- tx-16 tx-primary italic mg-l-20 bold">
+                        <i class="fal fa-list"></i> {{ 'listeDesTaches' | translate }}
+                    </h3>
+                </div>
+
+                <!-- Boutton ajouter -->
+                <div class="col-lg-2  btn-demo">
+                    <i class="fad fa-plus-circle clickable tx-14 tx-primary bg-light "
+                        style="padding:6px; border-radius:50%"
+                        (click)="showTacheCreateComponent()"
+                        [ngbTooltip]="'creerUneTache' | translate">
+                    </i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtre -->
+        <app-filtre-tache-list></app-filtre-tache-list>
+
+        <!-- Taches -->
+        <div class="card-body p-0">
+            <div class="row row-xs mg-0 pd-0 clearfix">
+                <ng-container *ngIf="tacheService.data.length && !loading">
+                    <!-- Tache -->
+                    <div class="card bd-b w-100 mg-b-1" *ngFor="let tache of tacheService.data">
+                        <div class="d-flex align-items-center">
+                            <!-- Icone -->
+                            <div class="tx-20 pd-y-25 pd-x-10 bg-white">
+                                <i class="fal fa-tasks-alt tx-primary"></i>
+                            </div>
+                            <div class="ml-3 mr-3 wd-100p">
+                                <a [routerLink]="[tache.id]" class="tx-facebook tx-13"
+                                    style="text-align: justify">
+                                    {{  tache.libelle }}</a>
+                                <p class="tx-10 mg-t-10 mg-b-5 tx-gray ">
+                                    <!-- Sous domaine -->
+                                    <span class="mr-2" [ngbTooltip]="'sousDomaine' | translate">
+                                        <i class="fad fa-layer-group tx-warning"></i> {{ tache.sous_domaine.libelle }}
+                                    </span>
+
+                                    <!-- Periode -->
+                                    <span class="mr-2" [ngbTooltip]="'PERIODE' | translate">
+                                        <i class="fad fa-clock tx-teal"></i>
+                                        {{ tache.affectation_groupe.periode_details.libelle }}
+                                    </span>
+
+
+                                    <!--                                         
+                                    <i  class="fal fa-calendar-alt tx-teal mr-2"></i>
+                                    <i
+                                        class="fal fa-users tx-primary mr-2"></i> -->
+
+                                    <span *ngIf="tache.mot_cles.length" [ngbTooltip]="motCles">
+                                        <i class="fad fa-quote-left tx-success-100"></i>
+                                        <span *ngFor="let motCle of tache.mot_cles; let i = index">
+                                            <span *ngIf="i < 1">
+                                                {{ motCle }}
+                                                <span *ngIf="tache.mot_cles.length > i + 1 && i < 2">,</span>
+                                                <span *ngIf="i > 1">...</span>
+                                            </span>
+                                        </span>
+                                    </span>
+
+                                    <ng-template #motCles>
+                                        <span *ngFor="let motCle of tache.mot_cles; let i = index">
+                                            {{ motCle }}
+                                            <span *ngIf="tache.mot_cles.length > i + 1">,</span>
+                                        </span>
+                                    </ng-template>
+
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <app-loading *ngIf="loading" class="ml-5 mt-5"></app-loading>
+                <app-missing-data *ngIf="!tacheService.data.length && !loading"></app-missing-data>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Details de la tache -->
+    <div class="col-lg-8 p-1 ">
+        <router-outlet></router-outlet>
+    </div>
+</div>

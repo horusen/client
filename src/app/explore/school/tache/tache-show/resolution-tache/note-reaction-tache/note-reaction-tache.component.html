@@ -1,0 +1,70 @@
+<div class="note-reaction__container">
+    <div class="note-reaction__header">
+        <b class="d-flex justify-content-between tx-facebook font-weight-bolder">
+            <!-- Titre -->
+            <span>
+                <span *ngIf="note && allowEdit">
+                    {{ 'modifierLaNote' | translate }}
+                </span>
+
+                <span *ngIf="!note">
+                    {{ 'ajouterUneNote' | translate }}
+                </span>
+
+                <span *ngIf="note && !allowEdit">
+                    {{ 'NOTE' | translate }}
+                </span>
+            </span>
+
+
+            <!-- Buttons -->
+            <span class="float-right">
+                <!-- Edit button -->
+                <button
+                    *ngIf="!allowEdit && note"
+                    (click)="allowEdit = true"
+                    class="btn btn-primary rounded-circle pd-4"
+                    style="font-size: 10px !important;">
+                    <i class="far fa-pen"></i>
+                </button>
+
+
+                <!-- Submit button -->
+                <button
+                    *ngIf="allowEdit || !note"
+                    [disabled]="loading"
+                    type="submit"
+                    (click)="noter()"
+                    class="btn btn-success rounded-circle mr-1  pd-4"
+                    style="font-size: 10px !important;">
+                    <i class="far fa-check" *ngIf="!loading"></i>
+                    <i class="fas fa-circle-notch fa-spin" *ngIf="loading"></i>
+                </button>
+
+                <!-- Button annuler modification -->
+                <button
+                    *ngIf="allowEdit"
+                    (click)="allowEdit = false"
+                    class="btn btn-danger rounded-circle pd-4"
+                    style="font-size: 10px !important; padding-left: 6px; padding-right: 6px;">
+                    <i class="far fa-times"></i>
+                </button>
+            </span>
+        </b>
+    </div>
+
+
+    <div class="note-reaction__body">
+        <div class="note-reaction__note">
+            <!-- Note Input -->
+            <input class='form-control' type="number" [(ngModel)]="note" *ngIf="!note || allowEdit">
+
+            <!-- Note -->
+            <span *ngIf="note && !allowEdit">{{ note + ' ' }}</span>
+            <span class="tx-danger">{{'/ 20'}}</span>
+        </div>
+        <div *ngIf="showNoteError" class="invalid-feedback">
+            {{ 'veuillezSaisirUneNotevalide' | translate }}
+        </div>
+    </div>
+</div>

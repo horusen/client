@@ -1,6 +1,6 @@
 import { BaseComponent } from "./base.component";
 
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import {
@@ -17,22 +17,18 @@ import { AppInjector } from "../../services/app-injector.service";
   template: "",
   styles: [],
 })
-export class BaseCreateComponent extends BaseComponent implements OnInit {
+export class BaseCreateComponent
+  extends BaseComponent
+  implements OnInit, OnDestroy {
   /* PROPRIÉTÉS */
-  protected isFormOk: boolean = false; // permet de savoir si le formulaire est pret à etre rendu dans la vues
-  protected form: FormGroup; // Formulaire d'ajout
-  protected formData: FormData = new FormData();
-  protected schema: any; // Architechture de la table (depuis la base de données)
+  public isFormOk: boolean = false; // permet de savoir si le formulaire est pret à etre rendu dans la vues
+  public form: FormGroup; // Formulaire d'ajout
+  public formData: FormData = new FormData();
+  public schema: any; // Architechture de la table (depuis la base de données)
   public Editor = ClassicEditor; // Editor variable
-  protected enableRetrieveSchema: boolean = true;
-  protected subscription = {
-    // Stocke toutes les souscriptions liés aux observables
-    user: null,
-    schema: null,
-    etablissement: null,
-  };
+  public enableRetrieveSchema: boolean = true;
 
-  protected configCalendrier = {
+  public configCalendrier = {
     // Configuration de ng2DatePicker
     day: {
       format: "YYYY-MM-DD",
@@ -50,62 +46,10 @@ export class BaseCreateComponent extends BaseComponent implements OnInit {
     },
   };
 
-  protected dropdownSettings = {
-    multi: {
-      singleSelection: false,
-      idField: "id",
-      textField: "libelle",
-      selectAllText: "Tout selectionner",
-      unSelectAllText: "Tout deselectionner",
-      itemsShowLimit: 5,
-      allowSearchFilter: true,
-    },
-
-    single: {
-      singleSelection: true,
-      idField: "id",
-      textField: "libelle",
-      allowSearchFilter: true,
-    },
-  };
-
-  protected dropdownSettingsAlt = {
-    single: {
-      singleSelection: true,
-      labelKey: "libelle",
-      enableSearchFilter: true,
-    },
-    multi: {
-      singleSelection: false,
-      selectAllText: "Tout selectionner",
-      unSelectAllText: "Tout deselectionner",
-      itemsShowLimit: 5,
-      labelKey: "libelle",
-      enableSearchFilter: true,
-    },
-    user: {
-      text: this.helper.getTranslation("selctionnerLesMembres"),
-      enableSearchFilter: true,
-      primaryKey: "id_inscription",
-      singleSelection: true,
-      allowSearchFilter: true,
-    },
-    users: {
-      text: this.helper.getTranslation("selctionnerLesMembres"),
-      enableSearchFilter: true,
-      primaryKey: "id_inscription",
-      singleSelection: false,
-      selectAllText: "Tout selectionner",
-      unSelectAllText: "Tout deselectionner",
-      itemsShowLimit: 5,
-      allowSearchFilter: true,
-    },
-  };
-
-  protected fb: FormBuilder;
+  public fb: FormBuilder;
 
   /* CONSTRUCTOR */
-  constructor(protected service: BaseService) {
+  constructor(public service: BaseService) {
     super(service);
     this.fb = AppInjector.injector.get(FormBuilder);
   }
@@ -115,10 +59,10 @@ export class BaseCreateComponent extends BaseComponent implements OnInit {
     if (this.enableRetrieveSchema) {
       // Get l'architecture de la table depuis la base de données
       this.service.describe().subscribe();
+      this._subscription["_schema"] = this.service.schema$.subscribe(
+        (schema) => (this.schema = schema)
+      );
     }
-
-    // initialisation du formulaire
-    this.form = this.fb.group({});
   }
 
   /* METHODS */
@@ -129,14 +73,14 @@ export class BaseCreateComponent extends BaseComponent implements OnInit {
   // Le parametre requiredFiel recoit les champs qui sont required
   // Le paramete callback permet de renseigner des actions à faire aprés l'initalisation du formulaire
   initForm(
-    schema: any,
     requiredField?: string[],
     ignoreField?: string[],
     callback?: Function
   ) {
-    if (schema) {
-      schema.forEach((element) => {
-        let field = element.Field;
+    // initialisation du formulaire
+    if (this.schema) {
+      this.form = this.fb.group({});
+      this.schema.forEach((field: string) => {
         if (!ignoreField.includes(field)) {
           if (requiredField.includes(field)) {
             this.form.addControl(
@@ -215,7 +159,6 @@ export class BaseCreateComponent extends BaseComponent implements OnInit {
       }
     });
     this.form.controls[maxField].valueChanges.subscribe((value) => {
-      // console.log(this.form.controls[minField].value > value)
       if (isDate) {
         if (
           new Date(this.form.controls[minField].value) >
@@ -286,5 +229,19 @@ export class BaseCreateComponent extends BaseComponent implements OnInit {
       this.valuePatcher(field, values[counter]);
       counter++;
     });
+  }
+
+  shouldShowRequiredError(field: string) {
+    const control = this.form.controls[field];
+    if (control.dirty || control.pristine) {
+      return control.invalid;
+    }
+  }
+
+  isValid(field: string) {
+    const control = this.form.controls[field];
+    if (control) {
+      return control.valid;
+    }
   }
 }

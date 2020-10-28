@@ -1,0 +1,14 @@
+<div class="reaction__container scroll-11"
+    style="max-height: 550px;"
+    #scrollMe
+    [scrollTop]="scrollMe.scrollHeight">
+    <div class="col-12 p-0" *ngIf="reactionService.data.length && !loading">
+        <app-reaction-mode-commentaire-solo
+            *ngFor="let reaction of reactionService.data"
+            [reversed]="reaction.user?.id === auth.user?.id_inscription"
+            [reaction]="reaction">
+        </app-reaction-mode-commentaire-solo>
+    </div>
+
+    <app-loading *ngIf="loading" class="w-100"></app-loading>
+</div>

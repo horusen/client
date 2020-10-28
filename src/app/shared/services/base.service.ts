@@ -8,7 +8,7 @@ import { Helper } from "./helper";
 @Injectable({
   providedIn: "root",
 })
-export class BaseService {
+export abstract class BaseService {
   private _data: any[] = [];
   private _singleData: any;
 
@@ -77,6 +77,10 @@ export class BaseService {
     return this.factory.get(`${this.endPoint}/latest`);
   }
 
+  download(fileID: number) {
+    return this.factory.get(`file/${fileID}/download`);
+  }
+
   add(elements: object) {
     return this.factory.post(this.endPoint, elements).pipe(
       tap({
@@ -94,7 +98,7 @@ export class BaseService {
   describe() {
     return this.factory.get(`${this.endPoint}/describe`).pipe(
       tap({
-        next: (schema) => this.schema,
+        next: (schema) => (this.schema = schema),
         error: (error) => this.errorResponseHandler(error),
       })
     );
@@ -174,4 +178,11 @@ export class BaseService {
   errorResponseHandler(error: any) {
     this.helper.alertDanger(error);
   }
+
+  listResponseHandler = () => {
+    return {
+      next: (data) => (this.data = data),
+      error: (error) => this.errorResponseHandler(error),
+    };
+  };
 }

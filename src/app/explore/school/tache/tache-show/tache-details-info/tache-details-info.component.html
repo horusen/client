@@ -1,0 +1,91 @@
+<div class="profiletimeline border-0 mt-0" *ngIf="single && !loading">
+    <div class="sl-item p-0">
+        <!-- Icone -->
+        <div class="sl-left">
+            <span
+                class="wd-40 ht-40 card-icon-gris d-flex align-items-center justify-content-center rounded-circle hidden-xs">
+                <i class="fal fa-swatchbook tx-20 tx-primary"></i>
+            </span>
+        </div>
+
+
+        <div class="sl-right">
+            <div>
+                <!-- Titre -->
+                <span class="tx-gray-600 tx-16">
+                    {{ 'titreDeLaTache' | translate }}
+                </span>
+                <span
+                    class="badge badge-pill badge-light bg-light tx-primary">
+                    30 minutes</span>
+                <p class="tx-facebook tx-14 bg-bluelight p-2"
+                    style="text-align:justify">
+                    {{ single.libelle }}
+                </p>
+
+                <!-- <span
+                    class="badge badge-pill badge-light bg-light tx-facebook">
+                    Cours lié à
+                    l'exercice</span>
+                <span
+                    class="badge badge-pill badge-light bg-light tx-danger">
+                    Chapitre lié à
+                    l'exercice</span> -->
+            </div>
+
+            <!-- Cours lié -->
+            <span class="badge badge-pill badge-light bg-light tx-facebook" [ngbTooltip]="coursLie">
+                {{ 'coursLieALaTache' | translate }}
+            </span>
+            <ng-template #coursLie>
+                <span>
+                    <i class="fas fa-file-alt"></i>
+                    {{ single.affectation_groupe.chapitre_details.cours.libelle }}
+                </span>
+            </ng-template>
+
+            <!-- Chapitre lié -->
+            <span class="badge badge-pill badge-light bg-light tx-danger" [ngbTooltip]="chapitreLie">
+                {{ 'chapitreLieALaTache' | translate }}
+            </span>
+            <ng-template #chapitreLie>
+                <span>
+                    <i class="fas fa-file"></i>
+                    {{ single.affectation_groupe.chapitre_details.libelle }}
+                </span>
+            </ng-template>
+
+            <!-- Description de la tache -->
+            <div class="mg-t-10">
+                <!-- Titre -->
+                <span class="tx-gray-600 tx-16">
+                    {{ 'descriptionDeLaTache' | translate }}
+                </span>
+
+                <!-- Content -->
+                <p class="tx-facebook tx-14 bg-light p-2"
+                    style="text-align:justify" [innerHTML]="single.description">
+                </p>
+            </div>
+
+            <!-- Objectifs de la tâche -->
+            <div *ngIf="single.objectifs">
+                <span class="tx-gray-600 tx-16">
+                    {{ 'objectifsDeLaTache' | translate }}
+                </span>
+
+                <p class="tx-facebook tx-14 bg-light p-2"
+                    style="text-align:justify" [innerHTML]="single.objectifs">
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Liste des groupes   -->
+    <app-groupe-tache-list></app-groupe-tache-list>
+
+    <!-- Correction -->
+    <app-correction-tache-list [tache]="single"></app-correction-tache-list>
+</div>
+
+<app-loading *ngIf="loading"></app-loading>

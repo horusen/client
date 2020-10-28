@@ -72,76 +72,9 @@
         <app-autres-corrections></app-autres-corrections>
 
 
-        <div class="sl-item">
-            <div
-                class="sl-left">
-                <span
-                    class="wd-40 ht-40 card-icon-gris d-flex align-items-center justify-content-center rounded-circle hidden-xs">
-                    <i
-                        class="fal fa-users tx-16 tx-primary"></i></span>
-            </div>
-            <div
-                class="sl-right">
-                <div>
-                    <span
-                        class="tx-gray-600 tx-16">
-                        Groupes
-                    </span>
 
-                </div>
-
-                <div
-                    class="row mt-1">
-                    <div
-                        class="col-md-6">
-                        <div
-                            class=" bg-white p-2 rounded px-3">
-                            <div
-                                class="d-flex justify-content-between stats">
-                                <div
-                                    class="d-flex flex-row align-items-center">
-                                    <div
-                                        class="profiles">
-                                        <img class="rounded-circle"
-                                            src="assets/images/xs/avatar7.jpg"
-                                            alt="avatar"
-                                            width="30">
-                                        <img class="rounded-circle"
-                                            src="assets/images/xs/avatar6.jpg"
-                                            alt="avatar"
-                                            width="30">
-                                        <img class="rounded-circle"
-                                            src="assets/images/xs/avatar5.jpg"
-                                            alt="avatar"
-                                            width="30">
-                                        <img class="rounded-circle"
-                                            src="assets/images/xs/avatar4.jpg"
-                                            alt="avatar"
-                                            width="30">
-                                        <img class="rounded-circle"
-                                            src="assets/images/xs/avatar3.jpg"
-                                            alt="avatar"
-                                            width="30">
-                                        <img class="rounded-circle"
-                                            src="assets/images/xs/avatar2.jpg"
-                                            alt="avatar"
-                                            width="30">
-                                        <img class="rounded-circle"
-                                            src="assets/images/xs/avatar1.jpg"
-                                            alt="avatar"
-                                            width="30">
-                                    </div>
-                                    <span
-                                        class="badge badge-pill badge-light bg-light tx-warning mg-l-20">
-                                        12</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
+        <!-- Liste des groupes -->
+        <app-groupe-tache-list [tache]="tache" *ngIf="tache"></app-groupe-tache-list>
     </div>
 
 

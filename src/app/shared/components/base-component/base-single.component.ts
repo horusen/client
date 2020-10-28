@@ -17,17 +17,14 @@ export class BaseSingleComponent
   public enableSubscribeToSingleData: boolean = true;
   public enableFetchDataFromURL: boolean = false;
 
-  protected route: ActivatedRoute;
-
-  constructor(public service: BaseService) {
+  constructor(public service: BaseService, public route: ActivatedRoute) {
     super(service);
-    this.route = AppInjector.injector.get(ActivatedRoute);
   }
 
   ngOnInit() {
     if (this.enableFetchDataFromURL) {
       this.route.params.subscribe((param) => {
-        this.id = param.id;
+        this.id = this.helper.parseInt(param["id"]);
         this.service.getSingle(this.id).subscribe();
       });
     }

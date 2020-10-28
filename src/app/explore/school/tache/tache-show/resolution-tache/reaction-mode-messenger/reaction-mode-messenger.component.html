@@ -1,0 +1,9 @@
+<div class="col-lg-12 " style="background-image:url(assets/images/0.png)">
+    <div class="chat-box-right ">
+        <app-reaction-mode-messenger-list></app-reaction-mode-messenger-list>
+
+        <!-- Create -->
+        <app-reaction-mode-messenger-create *ngIf="reactionService.data.length">
+        </app-reaction-mode-messenger-create>
+    </div>
+</div>

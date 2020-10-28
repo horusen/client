@@ -19,6 +19,7 @@ import { SharedModule } from "./shared/shared.module";
     SharedModule,
     SweetAlert2Module.forRoot(),
     TranslateModule.forRoot({
+      defaultLanguage: "fr",
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,

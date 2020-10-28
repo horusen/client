@@ -4,10 +4,20 @@ import { CommonModule } from "@angular/common";
 import { ExploreSchoolComponent } from "./explore-school.component";
 import { RouterModule, Routes } from "@angular/router";
 
+
 const routes: Routes = [
   {
     path: "",
     component: ExploreSchoolComponent,
+    children: [
+      {
+        path: "",
+        loadChildren: () =>
+          import("./../tache/tache.module").then(
+            (module) => module.TacheModule
+          ),
+      },
+    ],
   },
 ];
 

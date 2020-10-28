@@ -1,0 +1,14 @@
+<div class="chat-container scroll-11" #scrollMe
+    [scrollTop]="scrollMe.scrollHeight" *ngIf="reactionService.data.length && !loading">
+    <div class="chat-body pd-20 bg-white">
+        <!-- reaction -->
+        <app-reaction-mode-messenger-solo
+            *ngFor="let reaction of reactionService.data"
+            [reaction]="reaction"
+            [reversed]="reaction.user?.id === auth.user?.id_inscription">
+        </app-reaction-mode-messenger-solo>
+    </div>
+</div>
+
+<app-loading class="w-100 mt-5" *ngIf="loading"></app-loading>
+<app-missing-data *ngIf="!reactionService.data.length && !loading" [message]="'aucuneReaction'"></app-missing-data>

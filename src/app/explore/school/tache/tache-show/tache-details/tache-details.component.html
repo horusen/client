@@ -1,0 +1,51 @@
+<div class="card border-0 ">
+
+    <!-- Header -->
+    <div class="row row-xs  mg-0 pd-0 pd-y-10 bd-b">
+        <div class="col-lg-12  ">
+            <p class="tx- tx-16 tx-facebook  mg-l-5 mb-0">
+                <!-- Détails de la tâche ou de l'exercice -->
+                {{ 'detailsDeLaTache' | translate }}
+            </p>
+        </div>
+    </div>
+
+    <div class="tab-content">
+        <div class="card bg-light  border-0 p-0  ">
+            <ul class="nav">
+                <!-- Details -->
+                <li class="nav-item">
+                    <a class="nav-link  tx-yeto2 mg-t-2 mr-30"
+                        [routerLink]="['details']"
+                        [routerLinkActive]="'active'"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        {{ 'DETAILS' | translate }}
+                    </a>
+                </li>
+
+                <!-- Correction -->
+                <li class="nav-item">
+                    <a class="nav-link tx-yeto2 mg-t-2"
+                        [routerLinkActive]="'active'"
+                        [routerLink]="['correction']">
+                        {{ 'CORRECTION' | translate }}
+                    </a>
+                </li>
+
+                <!-- Dans la même catégorie -->
+                <li class="nav-item">
+                    <a class="nav-link tx-yeto2 mg-t-2"
+                        [routerLinkActive]="'active'"
+                        [routerLink]="['related']">
+                        {{ 'dansLaMemeCategorie' | translate }}
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <router-outlet></router-outlet>
+    </div>
+
+
+</div>

@@ -35,7 +35,6 @@
 //   ) {}
 
 //   ngOnInit() {
-//     console.log(this.configuration.item);
 //     if (this.configuration.item) {
 //       this.form = this.fb.group({
 //         libelle: [this.configuration.item.libelle, Validators.required],

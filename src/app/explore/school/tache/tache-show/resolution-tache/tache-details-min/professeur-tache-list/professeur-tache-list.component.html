@@ -1,0 +1,36 @@
+<!-- Header -->
+<div class="card pd-y-10 pd-x-10 mg-b-10">
+    <h3 class="tx- tx-16 tx-primary italic mg-l-0 bold">
+        <i class="fal fa-list"></i>
+        {{ 'PROFESSEUR' | translate }}
+    </h3>
+</div>
+
+<!-- Body -->
+<div class="card-body p-0">
+    <div class="row row-xs mg-l-0 mg-r-0">
+        <div class="col-sm-6 col-xl-4">
+            <div class=" card mg-b-20 bg-light">
+                <div class="card-body text-center p-0" *ngIf="single">
+                    <!-- Image -->
+                    <span class="avatar3 mb-2">
+                        <img class="avatar3"
+                            [src]=" single.affectation_groupe.professeur_details.photo"
+                            alt="avatar">
+                    </span>
+
+
+                    <!-- Nom du professeur -->
+                    <h5 class="tx-gray tx-14  ">
+                        {{ single.affectation_groupe.professeur_details.nom_complet }}
+                    </h5>
+                    <h5 class="tx-facebook tx-13  ">
+                        {{ single.affectation_groupe.groupe_details.libelle }}
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

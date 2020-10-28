@@ -1,71 +1,63 @@
-// import { AuthService } from "src/app/Facade/service/authentication/auth.service";
-// import { Input, Output } from "@angular/core";
-// import { FormControl } from "@angular/forms";
-// import { HelperService } from "./../../../../../shared/service/helper.service";
-// import { FactoryService } from "./../../../../../shared/service/factory.service";
-// import { CommonService } from "./../../../../../service/admin/common/common.service";
-// import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-// import { Component, OnInit, EventEmitter } from "@angular/core";
-// import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { FormControl, Validators } from "@angular/forms";
+import { BaseCreateComponent } from "../../base-component/base-create.component";
+import { CommonService } from "../common.service";
 
-// @Component({
-//   selector: "app-common-create",
-//   templateUrl: "./common-create.component.html",
-//   styleUrls: ["./common-create.component.css"],
-// })
-// export class CommonCreateComponent implements OnInit {
-//   protected userID: number;
-//   @Output() lastItemCreated = new EventEmitter<{ name: string; item: any }>();
-//   protected loading: boolean = false;
+@Component({
+  selector: "app-common-create",
+  templateUrl: "./common-create.component.html",
+  styleUrls: ["./common-create.component.css"],
+})
+export class CommonCreateComponent
+  extends BaseCreateComponent
+  implements OnInit {
+  @Output() itemCreated = new EventEmitter<{ name: string; item: any }>();
 
-//   @Input() configuration = {
-//     endpoint: null,
-//     name: null,
-//     hasDescription: false,
-//   };
+  @Input() configuration = {
+    endpoint: null,
+    name: null,
+    hasDescription: false,
+  };
 
-//   @Input() extraFields: any;
-//   protected form: FormGroup;
-//   protected Editor = ClassicEditor;
-//   constructor(
-//     private fb: FormBuilder,
-//     private helper: HelperService,
-//     private factory: FactoryService,
-//     private auth: AuthService
-//   ) {}
+  @Input() extraFields: any;
 
-//   ngOnInit() {
-//     this.form = this.fb.group({
-//       libelle: ["", Validators.required],
-//       inscription: [""],
-//     });
+  constructor(public commonService: CommonService) {
+    super(commonService);
+  }
 
-//     if (this.extraFields && !this.extraFields[0]) {
-//       Object.keys(this.extraFields).forEach((key) => {
-//         this.form.addControl(key, new FormControl(this.extraFields[key]));
-//       });
-//     }
+  ngOnInit() {
+    this.enableRetrieveSchema = false;
 
-//     this.auth.user$.subscribe((id) => (this.userID = id));
+    this.form = this.fb.group({
+      libelle: ["", Validators.required],
+      inscription: [""],
+    });
 
-//     if (this.configuration.hasDescription) {
-//       this.form.addControl("description", new FormControl());
-//     }
-//   }
+    if (this.extraFields && !this.extraFields[0]) {
+      Object.keys(this.extraFields).forEach((key) => {
+        this.form.addControl(key, new FormControl(this.extraFields[key]));
+      });
+    }
 
-//   create() {
-//     this.loading = true;
-//     this.factory.postWE(this.configuration.endpoint, this.form.value).subscribe(
-//       (data) => {
-//         const output = { name: this.configuration.name, item: data };
-//         this.lastItemCreated.emit(output);
-//       },
-//       () => {},
-//       () => {
-//         this.loading = false;
-//         this.form.reset();
-//         this.helper.toastAdded();
-//       }
-//     );
-//   }
-// }
+    if (this.configuration.hasDescription) {
+      this.form.addControl("description", new FormControl());
+    }
+  }
+
+  create() {
+    this.loading = true;
+    this.commonService
+      .create(this.configuration.endpoint, this.form.value)
+      .subscribe(
+        (data) => {
+          const output = { name: this.configuration.name, item: data };
+          this.itemCreated.emit(output);
+        },
+        () => {},
+        () => {
+          this.loading = false;
+          this.form.reset;
+        }
+      );
+  }
+}

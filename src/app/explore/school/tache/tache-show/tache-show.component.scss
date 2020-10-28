@@ -1,0 +1,13 @@
+.nav-link {
+  i {
+    padding: 6px;
+    border-radius: 50%;
+  }
+
+  .active {
+    font-weight: bolder;
+    i {
+      font-weight: bolder;
+    }
+  }
+}

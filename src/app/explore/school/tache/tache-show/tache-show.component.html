@@ -1,0 +1,52 @@
+<!-- Tab content -->
+<ul class="nav bg-white mg-0 pd-0 bd-b bd-t">
+    <!-- Details -->
+    <li class="nav-item mg-0 pd-0 ">
+        <a class="nav-link"
+            routerLinkActive="font-weight-bold"
+            [routerLinkActiveOptions]="{exact: true}"
+            [routerLink]="['./']">
+            <i class="fal fa-file-alt tx-12 bg-light tx-facebook"
+                [routerLinkActiveOptions]="{exact: true}"
+                routerLinkActive="font-weight-bold">
+            </i>
+            <span class="tx-facebook">
+                {{ 'DETAILS' | translate }}
+            </span>
+        </a>
+    </li>
+
+    <!-- Mode messenger -->
+    <li class="nav-item mg-0 pd-0">
+        <a class="nav-link "
+            routerLinkActive="font-weight-bold"
+            [routerLink]="['resolution/messenger']">
+            <i class="fal fa-sms tx-12 bg-light tx-facebook" routerLinkActive="font-weight-bold"></i>
+            <span class="tx-facebook">
+                {{ 'modeMessenger' | translate }}
+            </span>
+        </a>
+    </li>
+
+    <!-- Mode commentaire -->
+    <li class="nav-item mg-0 pd-0">
+        <a class="nav-link "
+            routerLinkActive="font-weight-bold"
+            [routerLink]="['resolution/commentaire']">
+            <i class="fal fa-comments tx-12 bg-light tx-facebook" routerLinkActive="font-weight-bold"></i>
+            <span class="tx-facebook">
+                {{ 'modeCommentaire' | translate }}
+            </span>
+        </a>
+    </li>
+
+</ul>
+<div class="tab-content">
+    <div class="tab-pane fade active show"
+        id="details">
+        <div class="d-flex justify-content-center pb-5" *ngIf="loading">
+            <app-loading></app-loading>
+        </div>
+        <router-outlet *ngIf="single"></router-outlet>
+    </div>
+</div>

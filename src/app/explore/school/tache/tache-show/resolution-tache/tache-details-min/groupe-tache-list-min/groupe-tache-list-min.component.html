@@ -1,0 +1,63 @@
+<!-- Titre -->
+<div class="card pd-y-10 pd-x-10 mg-b-10">
+    <h3 class="tx- tx-16 tx-primary italic mg-l-0 bold">
+        <i class="fal fa-list"></i>
+        {{ 'listeDesGroupesDeVotreClasse' |translate }}
+    </h3>
+</div>
+
+<!-- Contenu -->
+<div class="card-body p-0">
+    <div class="row row-xs mg-l-0 mg-r-0">
+        <ng-container *ngIf="groupeService.data && !loading">
+            <div class="col-4" *ngFor="let groupe of groupeService.data">
+                <div class=" card mg-b-20 bg-light">
+                    <div class="card-body text-center p-0">
+                        <!-- icone -->
+                        <i class="hidden-xs fal fa-users tx-40 tx-facebook bg-light op-7"
+                            style="padding:10px; border-radius: 50%; "></i>
+
+                        <!-- Titre -->
+                        <h5 class="tx-gray tx-14  ">
+                            {{ groupe.libelle }}
+                        </h5>
+
+                        <!-- Domaines -->
+                        <h5 class="tx-primary tx-13  " [ngbTooltip]="listeDomaine">
+                            {{ groupe.liste_domaines[0] }}
+                            <span *ngIf="groupe.liste_domaines.length > 2">
+                                + {{ groupe.liste_domaines.length - 1 }}
+                            </span>
+                        </h5>
+                        <ng-template #listeDomaine>
+                            <i class="fad fa-layer-group"></i>
+                            {{ 'DOMAINE' | translate }}:
+                            <span *ngFor="let domaine of groupe.liste_domaines">{{ domaine }}</span>
+                        </ng-template>
+
+                        <!-- autres elements -->
+                        <div class="d-flex justify-content-around">
+                            <!-- nombre de tache -->
+                            <span [ngbTooltip]="'nombreDeTache' | translate">
+                                <i class="fad fa-tasks"></i>
+                                {{ groupe.nombre_taches }}
+                            </span>
+
+                            <!-- Nombre de membres -->
+                            <span [ngbTooltip]="'nombreDeMembres' | translate">
+                                <i class="fad fa-users"></i>
+                                {{ groupe.nombre_membres }}
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </ng-container>
+
+        <app-loading *ngIf="loading" class="w-100"></app-loading>
+        <app-missing-data *ngIf="!groupeService.data && !loading"></app-missing-data>
+    </div>
+
+</div>

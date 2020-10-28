@@ -1,0 +1,39 @@
+::ng-deep .popover-body {
+  padding: 0px;
+}
+
+.note-reaction {
+  &__header {
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    color: inherit;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ebebeb;
+    border-top-left-radius: calc(0.3rem - 1px);
+    border-top-right-radius: calc(0.3rem - 1px);
+  }
+
+  &__body {
+    background: white;
+    width: 300px;
+    padding: 0.5rem 0.75rem;
+  }
+
+  &__note {
+    text-align: center;
+    font-size: 30px;
+    font-family: fantasy;
+    display: flex;
+    justify-content: center;
+
+    input {
+      width: 25%;
+      margin-right: 10px;
+      font-size: inherit;
+      padding: 0;
+      text-align: center;
+      height: 44px;
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { JsonPipe } from "@angular/common";
 import { Injectable } from "@angular/core";
 
 @Injectable({
@@ -13,12 +14,11 @@ export class TokenStorage {
   }
 
   public getUser(): any {
-    return localStorage.getItem("user");
+    return JSON.parse(localStorage.getItem("user"));
   }
 
   public getTokenPayload(token: string) {
     const payload = token.split(".")[1];
-    console.log(JSON.parse(atob(payload)));
   }
 
   public save(user: any, accessToken: string, refreshToken: string) {
@@ -36,7 +36,7 @@ export class TokenStorage {
   }
 
   private setUser(user: any): void {
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user", JSON.parse(user));
   }
 
   public clear(): void {
