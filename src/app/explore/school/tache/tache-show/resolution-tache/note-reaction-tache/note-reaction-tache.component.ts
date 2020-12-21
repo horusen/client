@@ -17,7 +17,6 @@ export class NoteReactionTacheComponent implements OnInit {
 
   ngOnInit(): void {
     this.note = this.reaction.note;
-    console.log(this.reaction);
   }
 
   noter() {

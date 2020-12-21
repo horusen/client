@@ -24,7 +24,8 @@ export class TacheMemeCategorieComponent
 
   getData(chapitre: number) {
     this.loading = true;
-    this.tacheService.getByChapitre(chapitre).subscribe(() => {
+    this.tacheService.getByChapitre(chapitre).subscribe((taches) => {
+      this.data = taches;
       this.loading = false;
     });
   }

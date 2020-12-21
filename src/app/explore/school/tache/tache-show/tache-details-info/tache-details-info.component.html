@@ -20,7 +20,7 @@
                     30 minutes</span>
                 <p class="tx-facebook tx-14 bg-bluelight p-2"
                     style="text-align:justify">
-                    {{ single.libelle }}
+                    {{single?.libelle }}
                 </p>
 
                 <!-- <span
@@ -40,7 +40,7 @@
             <ng-template #coursLie>
                 <span>
                     <i class="fas fa-file-alt"></i>
-                    {{ single.affectation_groupe.chapitre_details.cours.libelle }}
+                    {{single?.chapitre_details?.cours.libelle }}
                 </span>
             </ng-template>
 
@@ -51,7 +51,7 @@
             <ng-template #chapitreLie>
                 <span>
                     <i class="fas fa-file"></i>
-                    {{ single.affectation_groupe.chapitre_details.libelle }}
+                    {{single?.chapitre_details?.libelle }}
                 </span>
             </ng-template>
 

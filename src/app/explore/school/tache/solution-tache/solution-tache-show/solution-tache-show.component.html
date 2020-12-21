@@ -1,0 +1,81 @@
+<div class="row" [ngClass]="{'height-265': afficherRemarque}">
+    <div class="col-12 d-flex justify-content-end">
+        <!-- Noter -->
+        <i class="fad fa-pen mr-3 clickable"
+            [ngbTooltip]="'NOTER' | translate"
+            (click)="afficherRemarque = true"
+            *ngIf="single?.affectation_tache?.etat == 'TERMINE' && single?.affectation_tache?.professeur_details?.id == auth?.user?.id_inscription && suivie">
+        </i>
+
+        <ng-container
+            *ngIf="single?.affectation_tache?.etat == 'enCours'  && single?.created_at == auth?.user?.id_inscription">
+            <!-- MODIfier -->
+            <i class="fad fa-edit mr-3 clickable" (click)="editer()" [ngbTooltip]="'MODIFIER' | translate"></i>
+
+            <!-- Supprimer -->
+            <i class="fad fa-trash clickable" (click)="supprimer()" [ngbTooltip]="'SUPPRIMER' | translate"></i>
+        </ng-container>
+    </div>
+
+    <!-- Solution -->
+    <div class="col-12 text-center" *ngIf="single">
+        <p [innerHTML]="single?.solution"></p>
+    </div>
+
+    <div class="col-12 d-flex justify-content-between mt-2">
+        <!-- classe -->
+        <span [ngbTooltip]="'CLASSE' | translate" *ngIf="single?.affectation_tache?.groupe_details?.classe">
+            <span class="mr-2 font-weight-bolder">
+                <i class="fad fa-users-class tx-primary"></i>
+                {{ 'CLASSE' | translate }}:
+            </span>
+            <span>{{ single?.affectation_tache?.groupe_details?.classe?.libelle }}</span>
+        </span>
+
+        <!-- Groupe -->
+        <span [ngbTooltip]="'GROUPE' | translate">
+            <span class="mr-2 font-weight-bolder">
+                <i class="fad fa-users tx-success"></i>
+                {{ 'GROUPE' | translate }}:
+            </span>
+            <span>{{ single?.affectation_tache?.groupe_details?.libelle }}</span>
+        </span>
+
+        <!-- Periode -->
+        <span [ngbTooltip]="'PERIODE' | translate">
+            <span class="mr-2 font-weight-bolder">
+                <i class="fad fa-clock tx-warning"></i>
+                {{ 'PERIODE' | translate }}:
+            </span>
+            <span>{{ single?.affectation_tache?.periode_details?.libelle }}</span>
+        </span>
+
+
+        <!-- Date -->
+        <span [ngbTooltip]="'DATE' | translate">
+            <span class="mr-2 font-weight-bolder">
+                <i class="fad fa-calendar tx-danger"></i>
+                {{ 'DATE' | translate }}:
+            </span>
+            <span>{{ single?.affectation_tache?.debut | date }} - {{ single?.affectation_tache?.fin | date }}</span>
+        </span>
+
+        <span *ngIf="single?.note" [ngbTooltip]="'NOTE' | translate">
+            <span class="mr-2 font-weight-bolder">
+                <i class="fad fa-calendar tx-facebook"></i>
+                {{ 'NOTE' | translate }}:
+            </span>
+            <span class="note tx-12" style="font-family: fantasy;">
+                {{ single?.note }}
+                <span class="tx-facebook">
+                    / 20
+                </span>
+            </span>
+        </span>
+    </div>
+</div>
+
+
+<app-overlay *ngIf="afficherRemarque" (closed)="afficherRemarque = false">
+    <app-remarque-solution-tache></app-remarque-solution-tache>
+</app-overlay>

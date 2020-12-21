@@ -24,24 +24,41 @@
         </div>
 
         <!-- Filtre -->
-        <app-filtre-tache-list></app-filtre-tache-list>
+        <app-filtre-mes-taches></app-filtre-mes-taches>
 
         <!-- Taches -->
         <div class="card-body p-0">
-            <div class="row row-xs mg-0 pd-0 clearfix">
+            <div class="row row-xs  clearfix border-top mt-1 pt-1 mg-0 pd-0">
                 <ng-container *ngIf="tacheService.data.length && !loading">
                     <!-- Tache -->
-                    <div class="card bd-b w-100 mg-b-1" *ngFor="let tache of tacheService.data">
-                        <div class="d-flex align-items-center">
+                    <div class="bd-b w-100 mg-b-1"
+                        *ngFor="let tache of tacheService.data"
+                        [routerLinkActive]="'border border-primary'">
+                        <div class="d-flex ">
                             <!-- Icone -->
-                            <div class="tx-20 pd-y-25 pd-x-10 bg-white">
+                            <div class="tx-20 pd-y-15 pd-x-10 bg-white">
                                 <i class="fal fa-tasks-alt tx-primary"></i>
                             </div>
                             <div class="ml-3 mr-3 wd-100p">
-                                <a [routerLink]="[tache.id]" class="tx-facebook tx-13"
-                                    style="text-align: justify">
-                                    {{  tache.libelle }}</a>
-                                <p class="tx-10 mg-t-10 mg-b-5 tx-gray ">
+                                <!-- date de soumission et libelle -->
+                                <div class="mb-0 d-flex justify-content-between align-items-center">
+                                    <!-- Libelle -->
+                                    <a [routerLink]="['tache',tache.id]"
+                                        class="tx-facebook tx-13"
+                                        style="text-align: justify">
+                                        {{  tache.libelle }}
+                                    </a>
+
+                                    <!-- Date d'affectation -->
+                                    <span class="tx-11">
+                                        <i class="fad fa-calendar tx-primary"></i>
+                                        {{ tache.created_at | date }}
+                                    </span>
+                                </div>
+
+
+                                <!-- Assets -->
+                                <p class="tx-10 mg-t-10 mb-0 tx-gray ">
                                     <!-- Sous domaine -->
                                     <span class="mr-2" [ngbTooltip]="'sousDomaine' | translate">
                                         <i class="fad fa-layer-group tx-warning"></i> {{ tache.sous_domaine.libelle }}
@@ -49,9 +66,16 @@
 
                                     <!-- Periode -->
                                     <span class="mr-2" [ngbTooltip]="'PERIODE' | translate">
-                                        <i class="fad fa-clock tx-teal"></i>
-                                        {{ tache.affectation_groupe.periode_details.libelle }}
+                                        <i class="fad fa-lock tx-info"></i>
+                                        {{ tache.confidentialite.libelle | translate }}
                                     </span>
+
+
+                                    <span class="mr-2" [ngbTooltip]="'LANGUE' | translate">
+                                        <i class="fad fa-language tx-teal"></i>
+                                        {{ tache.langue.libelle }}
+                                    </span>
+
 
 
                                     <!--                                         
@@ -59,24 +83,32 @@
                                     <i
                                         class="fal fa-users tx-primary mr-2"></i> -->
 
-                                    <span *ngIf="tache.mot_cles.length" [ngbTooltip]="motCles">
-                                        <i class="fad fa-quote-left tx-success-100"></i>
-                                        <span *ngFor="let motCle of tache.mot_cles; let i = index">
-                                            <span *ngIf="i < 1">
-                                                {{ motCle }}
-                                                <span *ngIf="tache.mot_cles.length > i + 1 && i < 2">,</span>
-                                                <span *ngIf="i > 1">...</span>
-                                            </span>
-                                        </span>
+
+                                </p>
+
+                                <!-- mot cles -->
+                                <p class="mb-1" *ngIf="tache.mot_cles.length">
+                                    <span class="tx-9 tx-facebook font-weight-bold">{{ 'motCles' | translate }}: </span>
+                                    <!-- Choisir de maniere aleatoir la couleur du badge:
+                                            * Pour cela on utilise l'unité de la valeur ascii correpondant à l'avant dernière lettre de la chaine de caractere 
+                                            * Dans le cas où la chaine de caractère ne possède qu'un seul caractère, on prend l'unité de la valeur ascii pour definir la couleur du bagde -->
+                                    <span
+                                        class="badge mr-1  p-0 "
+                                        *ngFor="let mc of tache.mot_cles; let i = index"
+                                        [ngClass]="{
+                                        'bgm-warning': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 1,
+                                        'bgm-yellow': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 2,
+                                        'bgm-primary': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 3,
+                                        'bg-facebook': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 4,
+                                        'bgm-blue': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 5,
+                                        'bgm-mint': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 6,
+                                        'bgm-success': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 7,
+                                        'bgm-danger': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 8,
+                                        'bgm-secondary': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 9,
+                                        'bgm-indigo': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 0
+                                    }">
+                                        {{ '#' + mc  }}
                                     </span>
-
-                                    <ng-template #motCles>
-                                        <span *ngFor="let motCle of tache.mot_cles; let i = index">
-                                            {{ motCle }}
-                                            <span *ngIf="tache.mot_cles.length > i + 1">,</span>
-                                        </span>
-                                    </ng-template>
-
                                 </p>
 
                             </div>
@@ -84,8 +116,12 @@
                     </div>
                 </ng-container>
 
-                <app-loading *ngIf="loading" class="ml-5 mt-5"></app-loading>
-                <app-missing-data *ngIf="!tacheService.data.length && !loading"></app-missing-data>
+                <div class="row w-100">
+                    <div class="col-12">
+                        <app-loading *ngIf="loading" class="ml-5 mt-5"></app-loading>
+                        <app-missing-data *ngIf="!tacheService.data.length && !loading"></app-missing-data>
+                    </div>
+                </div>
             </div>
         </div>
 

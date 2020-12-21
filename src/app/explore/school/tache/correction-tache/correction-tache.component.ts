@@ -12,6 +12,7 @@ import { TacheService } from "../tache.service";
 export class CorrectionTacheComponent
   extends BaseSingleComponent
   implements OnInit {
+  tache: any; // Est passé au component enfant correction-tache-create
   displayCreateComponent: boolean = true;
   constructor(
     public correctionTacheService: CorrectionTacheService,
@@ -26,7 +27,8 @@ export class CorrectionTacheComponent
 
     this._subscription["tache"] = this.tacheService.singleData$.subscribe(
       (tache) => {
-        this.getCorrection(tache);
+        this.tache = tache;
+        this.getCorrection(tache.id);
       }
     );
   }
@@ -37,13 +39,11 @@ export class CorrectionTacheComponent
       if (params["id"]) {
         this.correctionTacheService.getSingle(params["id"]).subscribe(() => {
           this.loading = false;
-          console.log(this.single);
         });
       } else {
         this.correctionTacheService
           .getCorrectionParDefaut(tache)
           .subscribe(() => {
-            console.log(this.single);
             this.loading = false;
           });
       }

@@ -21,6 +21,8 @@ import { LoadingComponent } from "./components/loading/loading.component";
 import { MissingDataComponent } from "./components/missing-data/missing-data.component";
 import { PageLoadingComponent } from "./components/page-loading/page-loading.component";
 import { CommonCreateComponent } from "./components/common-component/common-create/common-create.component";
+import { OverlayComponent } from "./components/overlay/overlay.component";
+import { ModalSidebarComponent } from "./components/modal-sidebar/modal-sidebar.component";
 @NgModule({
   declarations: [
     ModalComponent,
@@ -29,6 +31,8 @@ import { CommonCreateComponent } from "./components/common-component/common-crea
     LoadingComponent,
     MissingDataComponent,
     PageLoadingComponent,
+    OverlayComponent,
+    ModalSidebarComponent,
   ],
   imports: [
     // BrowserModule,
@@ -65,9 +69,10 @@ import { CommonCreateComponent } from "./components/common-component/common-crea
     TranslateModule,
     PickerModule,
     ToastrModule,
-
+    OverlayComponent,
     ModalComponent,
     CommonCreateComponent,
+    ModalSidebarComponent,
     // CommonEditComponent,
     LoadingComponent,
     MissingDataComponent,

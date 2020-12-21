@@ -10,5 +10,10 @@
         </app-reaction-mode-commentaire-solo>
     </div>
 
-    <app-loading *ngIf="loading" class="w-100"></app-loading>
+    <div class="col-12">
+        <app-loading *ngIf="loading" class="w-100"></app-loading>
+        <app-missing-data *ngIf="!reactionService.data.length && !loading"
+            [message]="'aucuneReaction' | translate">
+        </app-missing-data>
+    </div>
 </div>

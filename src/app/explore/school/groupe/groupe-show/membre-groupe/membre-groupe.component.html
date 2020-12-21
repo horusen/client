@@ -1,0 +1,39 @@
+<div [ngClass]="{'h-625': activeAddComponent}">
+    <button class="btn btn-sm btn-success mb-1" (click)="activeAddComponent = true">
+        {{ 'ajouterMembre' | translate }} <i class="fal fa-plus"></i>
+    </button>
+    <app-membre-groupe-list></app-membre-groupe-list>
+
+    <app-overlay *ngIf="activeAddComponent" (closed)="activeAddComponent = false">
+        <app-membre-groupe-add>
+        </app-membre-groupe-add>
+    </app-overlay>
+
+</div>
+
+
+<div class="modal animated bounceInDown"
+    id="privilege-modal"
+    tabindex="-1"
+    role="dialog"
+    data-backdrop="static"
+    aria-hidden="true">
+    <div [class]="'modal-dialog modal-sm'" role=" document">
+        <div class="modal-content p-0">
+            <div class="modal-header w-100 p-1">
+                <h5 class="modal-title " id="exampleModalLabel_5">
+                    <i [class]="'fad fa-users-crown'"></i>
+                    {{ 'changerPrivilege' | translate }}
+                </h5>
+
+                <span class="float-right" (click)="helper.toggleModal('privilege-modal')">
+                    <i class="far fa-times"></i>
+                </span>
+
+            </div>
+            <div class="modal-body">
+                <app-changer-privilege-membre-groupee></app-changer-privilege-membre-groupee>
+            </div>
+        </div>
+    </div>
+</div>

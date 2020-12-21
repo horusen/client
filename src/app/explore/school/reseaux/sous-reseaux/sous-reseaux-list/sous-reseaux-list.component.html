@@ -1,0 +1,97 @@
+<!-- Filtre -->
+<div class="form-group bd-b p-0">
+    <div class="input-group"
+        style="padding-left:0px; padding-right:0px; border-radius:0">
+        <select class="custom-select border-0 bg-light tx-yeto2"
+            id="inputGroupSelect04">
+            <option selected> Année...</option>
+            <option value="1">2017</option>
+            <option value="2">2018</option>
+            <option value="3">2020</option>
+        </select>
+        <select class="custom-select border-0 bg-light tx-yeto2"
+            id="inputGroupSelect02">
+            <option selected> Domaines...</option>
+            <option value="1">Comptabilité</option>
+            <option value="2">Informatique</option>
+            <option value="3">Environnement</option>
+        </select>
+        <select class="custom-select border-0 bg-light tx-yeto2"
+            id="inputGroupSelect02">
+            <option selected> Sous domaines...</option>
+            <option value="1">Comptabilité</option>
+            <option value="2">Informatique</option>
+            <option value="3">Environnement</option>
+        </select>
+        <select class="custom-select border-0 bg-light tx-yeto2"
+            id="inputGroupSelect02">
+            <option selected> Réseaux...</option>
+            <option value="1">Internes</option>
+            <option value="2">Etablissements</option>
+        </select>
+    </div>
+</div>
+<div class="row row-xs mg-l-0 fade-in mg-r-0" *ngIf="sousDomaineService.data.length && !loading">
+    <div class="col-sm-6 col-xl-4"
+        *ngFor="let item of sousDomaineService.data | paginate: {itemsPerPage: 8, currentPage: currentPage, id: 'sous-reseaux'}">
+        <div class="card mg-15 bg-light">
+            <div class="card-body text-center p-0">
+                <!-- Icone -->
+                <i class="hidden-xs fal fa-network-wired tx-40 tx-facebook bg-light op-5"
+                    style="padding:10px; border-radius: 50%; "></i>
+
+                <!-- libelle -->
+                <h5 class="tx-gray tx-14  bold">
+                    {{ item.libelle }}
+                </h5>
+                <div class="tx-facebook tx-13 d-flex justify-content-center ">
+                    <span><i class="fad fa-user-class"></i></span>
+                    {{ 'nombreDeSujets' | translate }}: {{ item.nombre_sujets }}
+                </div>
+            </div>
+            <div class=" card-footer bg-light">
+                <div class="card-body text-center p-0">
+                    <a [ngbTooltip]="'VOIR' | translate"
+                        [routerLink]="[item.id]"
+                        class="link mr-2 tx-facebook tx-16">
+                        <i class="fal fa-eye"></i>
+                    </a>
+
+                    <!-- Participant -->
+                    <a [ngbTooltip]="'MEMBRES' | translate"
+                        [routerLink]="[item.id, 'membre']"
+                        class="link mr-2 tx-facebook tx-16">
+                        <i class="fal fa-users"></i>
+                    </a>
+
+                    <!-- Sujets -->
+
+                    <a href="" class="link mr-2 tx-facebook tx-16"><i
+                            class="fal fa-address-card"></i> </a>
+
+                    <!-- Discussion -->
+                    <a [ngbTooltip]="'DISCUSSION' | translate"
+                        [routerLink]="[item.id, 'discussion']"
+                        class="link mr-2 tx-facebook tx-16">
+                        <i class="fal fa-comments-alt"></i>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="col-12 mt-1 d-flex justify-content-center">
+        <pagination-controls
+            id="sous-reseaux"
+            (pageChange)="currentPage = $event"
+            autoHide="true"
+            previousLabel="{{ 'PRECEDENT' | translate }}"
+            nextLabel="{{ 'SUIVANT' | translate }}">
+        </pagination-controls>
+    </div>
+
+
+    <app-loading *ngIf="loading"></app-loading>
+    <app-missing-data *ngIf="!sousDomaineService.data.length && !loading"></app-missing-data>

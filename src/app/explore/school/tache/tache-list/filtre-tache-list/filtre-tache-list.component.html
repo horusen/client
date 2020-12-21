@@ -2,28 +2,26 @@
     <div class="input-group"
         style="padding-left:0px; padding-right:0px; border-radius:0">
 
-        <!-- Periode -->
+        <!-- Langue -->
         <select class="custom-select border-0 bg-light tx-yeto2"
-            (change)="applyFilter('periodes', $event.target.value)"
-            (click)="getPeriode()"
-            id="inputGroupSelect04"
-            [ngClass]="{'fit-content': dependancies.periode.length }">
+            (change)="applyFilter('langues', $event.target.value)"
+            id="inputGroupSelect04">
             <option selected
                 [value]="null"
-                (click)="applyFilter('periode')">
-                {{ 'PERIODE' | translate }}
+                (click)="applyFilter('langue')">
+                {{ 'LANGUE' | translate }}
 
             </option>
 
-            <!-- Liste des periode -->
-            <ng-container *ngIf="dependancies.periode.length && !localLoading.periode">
-                <option *ngFor="let periode of dependancies.periode"
-                    [value]="periode.id">
-                    {{ periode.libelle }}
+            <!-- Liste des langue -->
+            <ng-container *ngIf="dependancies.langue.length && !localLoading.langue">
+                <option *ngFor="let langue of dependancies.langue"
+                    [value]="langue.id">
+                    {{ langue.libelle }}
                 </option>
             </ng-container>
 
-            <option disabled *ngIf="localLoading.periode">
+            <option disabled *ngIf="localLoading.langue">
                 <i class="fas fa-circle-notch tx-white fa-spin fa-2x"></i>
             </option>
         </select>
@@ -32,9 +30,7 @@
         <!-- NIVEAU -->
         <select class="custom-select border-0 bg-light tx-yeto2"
             (change)="applyFilter('niveaux', $event.target.value)"
-            (click)="getNiveau()"
-            id="inputGroupSelect04"
-            [ngClass]="{'fit-content': dependancies.periode.length }">
+            id="inputGroupSelect04">
             <option selected
                 [value]="null">
                 {{ 'NIVEAU' | translate }}
@@ -57,13 +53,13 @@
 </div>
 
 <!-- <div class="template-form-fields p-0"> -->
-<!-- Periode -->
+<!-- Langue -->
 <!-- <div class="col-lg-4 p-0">
 
         <angular2-multiselect
-            [data]="dependancies.periode"
+            [data]="dependancies.langue"
             [settings]="dropdownSettingsAlt.single"
-            class="periode p-0">
+            class="langue p-0">
         </angular2-multiselect>
 
     </div>

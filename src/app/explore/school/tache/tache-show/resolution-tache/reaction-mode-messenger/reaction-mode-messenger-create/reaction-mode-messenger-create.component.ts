@@ -2,10 +2,9 @@ import { EnregistreurAudioService } from "./../../../../../../../shared/enregist
 import { ReactionResolutionTacheService } from "./../../resolution-tache/reaction-resolution-tache.service";
 import { Component, OnInit } from "@angular/core";
 import { BaseCreateComponent } from "src/app/shared/components/base-component/base-create.component";
-import { TacheService } from "../../../../tache.service";
 import { ImageHandlerService } from "src/app/shared/services/image-handler.service";
-import { FileHandler } from "src/app/shared/services/file-handler";
 import { DocumentHandlerService } from "src/app/shared/services/document-handle.service";
+import { AffectationTacheService } from "../../../../affectation-tache/affectation-tache.service";
 
 @Component({
   selector: "app-reaction-mode-messenger-create",
@@ -16,11 +15,11 @@ export class ReactionModeMessengerCreateComponent
   extends BaseCreateComponent
   implements OnInit {
   rebondissement: any;
-  tache: any;
+  affectationTache: any;
   showEmojiPicker: boolean = false;
   constructor(
     public reactionService: ReactionResolutionTacheService,
-    public tacheService: TacheService,
+    public affectationTacheService: AffectationTacheService,
     public enregistreurService: EnregistreurAudioService,
     public imageService: ImageHandlerService,
     public documentService: DocumentHandlerService
@@ -31,10 +30,12 @@ export class ReactionModeMessengerCreateComponent
   ngOnInit(): void {
     super.ngOnInit();
 
-    // Subscribe to tache
-    this._subscription["tache"] = this.tacheService.singleData$.subscribe(
-      (tache) => {
-        this.tache = tache;
+    // Subscribe to affectationTache
+    this._subscription[
+      "affectationTache"
+    ] = this.affectationTacheService.singleData$.subscribe(
+      (affectationTache) => {
+        this.affectationTache = affectationTache;
         this._subscription["schema"] = this.reactionService.schema$.subscribe(
           () => {
             this.initialiseForm();
@@ -60,8 +61,8 @@ export class ReactionModeMessengerCreateComponent
   }
 
   initialiseForm() {
-    this.initForm(["tache"], [], () => {
-      this.valuePatcher("tache", this.tache.id);
+    this.initForm(["affectation_tache"], [], () => {
+      this.valuePatcher("affectation_tache", this.affectationTache.id);
 
       this.formData = new FormData();
     });

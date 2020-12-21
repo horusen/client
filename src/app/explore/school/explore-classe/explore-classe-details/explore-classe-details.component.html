@@ -1,0 +1,69 @@
+<div class="nav-tabs-top" *ngIf="single">
+    <!-- Tab list -->
+    <ul class="nav bg-white mg-0 pd-0 bd-b bd-t">
+        <!-- Groupe -->
+        <li class="nav-item mg-0 pd-0 ">
+            <a class="nav-link3 "
+                [routerLink]="['groupe']"
+                [routerLinkActive]="'active'"
+                style="padding: 5px 12px;">
+                <i class="fal fa-layer-group tx-12 bg-light tx-purple "
+                    [routerLinkActive]="'fas'"
+                    style="padding:6px; border-radius:50%">
+                </i>
+                <span class="tx-facebook">
+                    {{ 'GROUPES' | translate }}
+                </span>
+            </a>
+        </li>
+
+        <!-- Classes -->
+        <li class="nav-item ">
+            <a class="nav-link3 "
+                [routerLinkActive]="'active'"
+                [routerLink]="['eleves']">
+                <i class="fal fa-users-class tx-12 bg-light tx-danger "
+                    [routerLinkActive]="'fas'"
+                    style="padding:6px; border-radius:50%">
+                </i>
+                <span class="tx-facebook">
+                    {{ 'ELEVES' | translate }}
+                </span>
+            </a>
+        </li>
+
+        <!-- Emploie du temps -->
+        <li class="nav-item ">
+            <a class="nav-link3"
+                [routerLinkActive]="'active'"
+                routerLink="['emploie-du-temps']">
+                <i class="fal fa-calendar-edit bg-light tx-jaune "
+                    [routerLinkActive]="'fas'"
+                    style="padding:6px; border-radius:50%">
+                </i>
+                <span class="tx-facebook">
+                    {{ 'emploieDuTemps' | translate }}
+                </span>
+            </a>
+        </li>
+
+        <!-- Evenement -->
+        <li class="nav-item ">
+            <a class="nav-link3 "
+                [routerLinkActive]="'active'"
+                routerLink="['evenement']">
+                <i class="fal fa-calendar-alt bg-light tx-primary "
+                    [routerLinkActive]="'fas'"
+                    style="padding:6px; border-radius:50%">
+                </i>
+                <span class="tx-facebook">
+                    {{ 'EVENEMENTS' | translate }}
+                </span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

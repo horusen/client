@@ -1,7 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { BaseComponent } from "src/app/shared/components/base-component/base.component";
-import { TacheService } from "./tache.service";
 
 @Component({
   selector: "app-tache",

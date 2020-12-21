@@ -1,0 +1,164 @@
+<form [formGroup]="form" (submit)="submit()" *ngIf="form && elementAFiltrer">
+    <div class=" card bg-white  bd border-bottom-0">
+        <div class="py-1 px-3 border bg-light clickable" (click)="afficherFiltre = !afficherFiltre">
+            <h6 class="font-weight-bolder d-flex justify-content-between w-100">
+                <!-- Titre -->
+                <span>
+                    <i class="fad fa-filter"></i> {{ "FILTRE" | translate }}
+                </span>
+
+                <!-- Icone up and down -->
+                <span>
+                    <span *ngIf="filtreActif" class="mr-3">
+                        <a class="badge badge-danger p-1" [routerLink]="['./']" (click)="form.reset()">
+                            <i class="fas fa-times-circle"></i>
+                            {{ 'FILTRE' | translate }}
+                        </a>
+                    </span>
+
+                    <i class="far fa-caret-down float-right" *ngIf="!afficherFiltre"></i>
+                    <i class="far fa-caret-up float-right" *ngIf="afficherFiltre"></i>
+                </span>
+            </h6>
+        </div>
+        <div class="card-body p-0 animate__animated animate__fadeInDown border animate__faster" *ngIf="afficherFiltre">
+
+            <!-- Domaine et niveau  -->
+            <div class="row m-1">
+                <!-- Domaine -->
+                <div class="col-6 p-1">
+                    <div class="form-group">
+                        <!-- Label -->
+                        <label for="domaine">
+                            {{ 'DOMAINE' | translate }}
+                            <i class="fas fa-circle-notch fa-spin" *ngIf="loadingDepandacies.domaine"></i>
+                        </label>
+
+                        <!-- Field -->
+                        <angular2-multiselect
+                            id="domaine"
+                            (onOpen)="getDomaines()"
+                            [data]="dependancies.domaine"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="domaines"
+                            class="form-control ">
+                        </angular2-multiselect>
+                    </div>
+                </div>
+
+                <!-- Niveau -->
+                <div class="col-6 p-1">
+                    <div class="form-group">
+                        <!-- Label -->
+                        <label for="niveau">
+                            {{ 'NIVEAU' | translate }}
+                            <i class="fas fa-circle-notch fa-spin" *ngIf="loadingDepandacies.niveau"></i>
+                        </label>
+
+                        <!-- Field -->
+                        <angular2-multiselect
+                            id="niveau"
+                            (onOpen)="getNiveaux()"
+                            [data]="dependancies.niveau"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="niveaux"
+                            class="form-control ">
+                        </angular2-multiselect>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sous domaines, niveau difficulte  -->
+            <div class="row m-1">
+                <!-- Sous domaine -->
+                <div class="col-6 p-1">
+                    <div class="form-group">
+                        <label for="finTemporalite">
+                            {{ 'sousDomaine' | translate }}
+                            <i class="fas fa-circle-notch fa-spin" *ngIf="loadingDepandacies.sous_domaine"></i>
+                        </label>
+                        <angular2-multiselect
+                            id="sous_domaine"
+                            (onOpen)="getSousDomaines()"
+                            [data]="dependancies.sous_domaine"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="sous_domaines"
+                            class="form-control ">
+                        </angular2-multiselect>
+                    </div>
+                </div>
+
+                <!-- Niveau difficulte -->
+                <div class="col-6 p-1">
+                    <div class="form-group">
+                        <label for="niveau_difficulte">
+                            {{ 'niveauDeDifficulte' | translate }}
+                            <i class="fas fa-circle-notch fa-spin" *ngIf="loadingDepandacies.niveau_difficulte"></i>
+                        </label>
+                        <angular2-multiselect
+                            id="niveau_difficulte"
+                            (onOpen)="getNiveauDifficultes()"
+                            [data]="dependancies.niveau_difficulte"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="niveau_difficultes"
+                            class="form-control ">
+                        </angular2-multiselect>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Langue et mot clé -->
+            <div class="row m-1">
+                <!-- langue -->
+                <div class="col-6 p-1">
+                    <div class="form-group">
+                        <label for="langue">
+                            {{ 'LANGUE' | translate }}
+                            <i class="fas fa-circle-notch fa-spin" *ngIf="loadingDepandacies.langue"></i>
+                        </label>
+                        <angular2-multiselect
+                            id="langue"
+                            (onOpen)="getLangues()"
+                            [data]="dependancies.langue"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="langues"
+                            class="form-control ">
+                        </angular2-multiselect>
+                    </div>
+                </div>
+
+                <!-- uniquement crée par le user -->
+                <div class="col-6 p-1">
+                    <div class="form-group">
+                        <!-- Label -->
+                        <label for="outil">
+                            {{ 'motCle' | translate }}
+                            <i class="fas fa-circle-notch fa-spin" *ngIf="loadingDepandacies.mot_cle"></i>
+                        </label>
+
+                        <!-- Field -->
+                        <angular2-multiselect
+                            id="outil"
+                            (onOpen)="getMotCles()"
+                            [data]="dependancies.mot_cle"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="mot_cles"
+                            class="form-control ">
+                        </angular2-multiselect>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boutton valider -->
+            <div class="row m-1">
+                <div class="col-12 p-1">
+                    <button class="btn btn-outline-primary btn-block">
+                        {{ 'VALIDER' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

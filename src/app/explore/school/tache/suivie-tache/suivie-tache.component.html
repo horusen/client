@@ -1,0 +1,7 @@
+<app-suivie-tache-list (showAffectationTacheCreate)="affecterTache = true"></app-suivie-tache-list>
+
+
+<app-modal-sidebar
+    [configuration]="{name: 'affectation-tache-create-modal', titre: 'affecterUneTache', icone: 'exchange'}">
+    <app-affecter-tache *ngIf="affecterTache"></app-affecter-tache>
+</app-modal-sidebar>

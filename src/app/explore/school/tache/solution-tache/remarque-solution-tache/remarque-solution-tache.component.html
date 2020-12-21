@@ -1,0 +1,20 @@
+<app-loading *ngIf="loading"></app-loading>
+<ng-container *ngIf="!loading">
+    <!-- Create -->
+    <app-remarque-solution-tache-create
+        *ngIf="activeComponents.add"
+        (done)="activateComponent('show')">
+    </app-remarque-solution-tache-create>
+
+    <!-- Show -->
+    <app-remarque-solution-tache-show
+        (deleted)="activateComponent('add')"
+        (edit)="activateComponent('edit')"
+        *ngIf="activeComponents.show">
+    </app-remarque-solution-tache-show>
+
+    <!-- edir -->
+    <app-remarque-solution-tache-edit *ngIf="activeComponents.edit">
+    </app-remarque-solution-tache-edit>
+
+</ng-container>

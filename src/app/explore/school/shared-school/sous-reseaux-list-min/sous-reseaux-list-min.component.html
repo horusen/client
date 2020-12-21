@@ -1,0 +1,54 @@
+<div class="w-100 pd-t-15">
+    <!-- Titres -->
+    <!-- Titre -->
+    <div class="d-flex align-items-center  justify-content-between pd-x-10 mg-b-10">
+        <span class="tx-10 tx-uppercase tx-facebook">
+            {{ 'vosSousReseaux' | translate }}
+        </span>
+    </div>
+
+
+    <div *ngIf="!loading && sousDomaineService.data.length">
+        <a class="media clickable pd-y-10 bd-b"
+            *ngFor="let sousReseaux of sousDomaineService.data | paginate: {itemsPerPage: 8, currentPage: currentPage, id: 'discussion-sous-reseaux'}; let i = index">
+            <div class="mr-2">
+                <div class="avatar mg-l-5">
+                    <span class="avatar-initial rounded-circle bg-primary op-6"
+                        [ngClass]="{
+                            'bg-primary': (helper.parseInt(i.toString().charAt(i.toString().length - 1)) - 1 == 0) || ((helper.parseInt(i.toString().charAt(i.toString().length - 1)) + 5) - 1 == 0) ,
+                            'bg-warning': (helper.parseInt(i.toString().charAt(i.toString().length - 1)) - 2 == 0 )|| ((helper.parseInt(i.toString().charAt(i.toString().length - 1)) + 5) - 2 == 0),
+                            'bg-success': (helper.parseInt(i.toString().charAt(i.toString().length - 1)) - 3 == 0) || ((helper.parseInt(i.toString().charAt(i.toString().length - 1)) + 5) - 3 == 0),
+                            'bg-info': (helper.parseInt(i.toString().charAt(i.toString().length - 1)) - 4 == 0) || ((helper.parseInt(i.toString().charAt(i.toString().length - 1)) + 5) - 4 == 0),
+                            'bg-danger': (helper.parseInt(i.toString().charAt(i.toString().length - 1)) - 5 == 0) || ((helper.parseInt(i.toString().charAt(i.toString().length - 1)) + 5) - 5 == 0)
+                        }">
+                        {{ sousReseaux.libelle.split(' ')[0].charAt(0) + (sousReseaux.libelle.split(' ')[1] ? sousReseaux.libelle.split(' ')[1].charAt(0) : sousReseaux.libelle.split(' ')[0].charAt(1))}}
+                        <i class="fas fa-network-wired tx-warning"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                <div class="d-inline-block">
+                    <h6 class="mb-0 tx-13 tx-facebook">
+                        {{ sousReseaux.libelle }}
+                    </h6>
+                    <p class="mb-0 tx-gray-600 tx-12">Congratulations Friend...</p>
+                </div>
+            </div>
+
+        </a>
+
+        <!-- Pagination -->
+        <div class="col-12 mt-1 d-flex justify-content-center">
+            <pagination-controls
+                id="discussion-sous-reseaux"
+                (pageChange)="currentPage = $event"
+                autoHide="true"
+                previousLabel="{{ '' | translate }}"
+                nextLabel="{{ '' | translate }}">
+            </pagination-controls>
+        </div>
+    </div>
+
+    <app-loading *ngIf="loading"></app-loading>
+    <app-missing-data *ngIf="!loading && !sousDomaineService.data.length"></app-missing-data>
+</div>

@@ -1,0 +1,203 @@
+<div class="reaction__container scroll-11"
+    style="max-height: 550px;"
+    #scrollMe
+    [scrollTop]="scrollMe.scrollHeight">
+    <div class="col-12 p-0" *ngIf="reactionService.data.length && !loading">
+        <div class="row m-0 p-0" *ngFor="let reaction of reactionService.data">
+
+            <div class="col-11 p-0 m-0">
+                <div class="border-0 mt-0">
+                    <div class="sl-item d-flex">
+                        <!-- Image profile -->
+                        <div style="align-self: center;">
+                            <img class="avatar3 mr-3"
+                                [src]="reaction.user.photo"
+                                alt="avatar">
+                        </div>
+
+
+                        <div>
+                            <!-- Nom -->
+                            <a href=""
+                                class="link tx-primary mr-2">
+                                {{ reaction.user.nom_complet }}
+                            </a>
+                            <!-- Date -->
+                            <span class="sl-date">
+                                {{ reaction.created_at | date }}
+                            </span>
+
+                            <!-- rebondissement -->
+                            <div class="d-flex align-items-center"
+                                *ngIf="reaction.rebondissement">
+                                <!-- Bande de couleur -->
+                                <div class="tx-30 pd-y-20 pd-x-2 bg-soft-primary">
+                                </div>
+
+                                <div class="bg-soft-primary p-1 mg-l-10 w-100">
+                                    <div class="mb-0">
+                                        {{ reaction.rebondissement?.user.nom_complet }}
+                                    </div>
+                                    <!-- reaction -->
+                                    <p class="mb-0" *ngIf="reaction.rebondissement?.reaction">
+                                        {{ reaction?.rebondissement?.reaction }}
+                                    </p>
+
+                                    <div class="p-0" *ngIf="reaction.rebondissement?.file">
+                                        <!-- Audio -->
+                                        <audio controls
+                                            class="audio-chat"
+                                            *ngIf="helper.checkExtension(reaction.rebondissement?.file?.path, 'mp3')">
+                                            <source [src]="reaction.rebondissement?.file?.path">
+                                        </audio>
+
+                                        <!-- Document -->
+                                        <div class="p-3 bg-white bd clickable"
+                                            *ngIf="helper.checkExtensions(reaction.rebondissement?.file?.path, ['pdf', 'PDF'])">
+                                            <i class="fad fa-file-alt"></i> {{ reaction.rebondissement?.file.name }}
+                                            <i class="fad fa-download float-right ml-5 mt-1"></i>
+                                        </div>
+
+                                        <!-- image -->
+                                        <img [src]="reaction.file?.path"
+                                            class="img-chat"
+                                            [alt]="reaction.user.nom_complet + '_image'"
+                                            *ngIf="helper.checkExtensions(reaction.rebondissement?.file.path, imageHandlerService.acceptedImageExtension)">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Reaction -->
+                            <div class="d-flex align-items-center"
+                                *ngIf="reaction.reaction">
+                                <div class="tx-30 pd-y-20 pd-x-2" [ngClass]="{
+                                    'bgm-warning': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 1,
+                                    'bgm-yellow': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 2,
+                                    'bgm-success': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 3,
+                                    'bg-facebook': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 4,
+                                    'bgm-blue': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 5,
+                                    'bgm-mint': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 6,
+                                    'bgm-primary': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 7,
+                                    'bgm-danger': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 8,
+                                    'bgm-secondary': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 9,
+                                    'bgm-indigo': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 0
+                                }">
+                                </div>
+
+                                <!-- Reaction -->
+                                <p class="  mb-0  mg-l-10 bg-light"
+                                    style="max-width: 75%"
+                                    [innerHTML]="reaction.reaction">
+                                </p>
+
+                            </div>
+
+                            <!-- File -->
+                            <div class="col-md-12 p-0" *ngIf="reaction.file">
+                                <div class="clearfix">
+                                    <ul class="list-unstyled list-inline mb-0 align-items-center">
+                                        <!-- Fichier pdf -->
+                                        <li class="list-inline-item mb-3 d-flex"
+                                            *ngIf="helper.checkExtensions(reaction.file.path, ['pdf', 'PDF'])">
+                                            <div class="tx-30 pd-y-20 pd-x-2" [ngClass]="{
+                                                'bgm-warning': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 1,
+                                                'bgm-yellow': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 2,
+                                                'bgm-success': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 3,
+                                                'bg-facebook': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 4,
+                                                'bgm-blue': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 5,
+                                                'bgm-mint': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 6,
+                                                'bgm-primary': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 7,
+                                                'bgm-danger': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 8,
+                                                'bgm-secondary': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 9,
+                                                'bgm-indigo': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 0
+                                            }">
+                                            </div>
+
+
+                                            <a (click)="download(reaction.file.id)"
+                                                class="clickable d-block ml-2  mg-t-10">
+                                                <div
+                                                    class="ht-65 d-flex align-items-center justify-content-center rounded card-icon-teal">
+                                                    <i class="fa fa-file-pdf tx-40"></i>
+                                                </div>
+                                                <div class="caption">
+                                                    <p class="text-main mg-0">
+                                                        {{ reaction.file.name }}
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <!-- Fichier image -->
+                                        <li class="list-inline-item d-flex"
+                                            *ngIf="helper.checkExtensions(reaction.file.path, imageHandlerService.acceptedImageExtension)">
+                                            <div class="tx-30 pd-y-20 pd-x-2" [ngClass]="{
+                                                'bgm-warning': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 1,
+                                                'bgm-yellow': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 2,
+                                                'bgm-success': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 3,
+                                                'bg-facebook': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 4,
+                                                'bgm-blue': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 5,
+                                                'bgm-mint': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 6,
+                                                'bgm-primary': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 7,
+                                                'bgm-danger': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 8,
+                                                'bgm-secondary': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 9,
+                                                'bgm-indigo': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 0
+                                            }">
+                                            </div>
+                                            <a class="d-block ml-2 clickable">
+                                                <div style="width: 150px; height: auto"
+                                                    class="d-flex align-items-center justify-content-center rounded card-icon-teal">
+                                                    <img [src]="reaction.file.path"
+                                                        [alt]="reaction.file.name + '_photo'">
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <!-- Fichier audio -->
+                                        <li class="list-inline-item my-3 d-flex"
+                                            *ngIf="helper.checkExtension(reaction.file.path, 'mp3')">
+                                            <div class="tx-30 pd-y-20 pd-x-2" [ngClass]="{
+                                                'bgm-warning': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 1,
+                                                'bgm-yellow': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 2,
+                                                'bgm-success': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 3,
+                                                'bg-facebook': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 4,
+                                                'bgm-blue': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 5,
+                                                'bgm-mint': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 6,
+                                                'bgm-primary': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 7,
+                                                'bgm-danger': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 8,
+                                                'bgm-secondary': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 9,
+                                                'bgm-indigo': helper.parseInt(reaction?.user?.id.toString().slice(-1)) == 0
+                                            }">
+                                            </div>
+                                            <audio controls
+                                                class="audio-chat ml-2"
+                                                *ngIf="helper.checkExtension(reaction.file?.path, 'mp3')">
+                                                <source [src]="reaction.file?.path">
+                                            </audio>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Icone repondre -->
+            <div class="col-1 p-0 m-0 align-self-center">
+                <span class="tx-facebook clickable" (click)="rebondir(reaction)">
+                    <i class="fad fa-comments-alt"></i>
+                </span>
+            </div>
+
+            <div class="col-12 p-0">
+                <hr>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-12">
+        <app-loading *ngIf="loading" class="w-100"></app-loading>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="bg-white">
+    <div class="" *ngIf="tunelService.data.length && !loading">
+        <div class="col-12 border-bottom tunel clickable p-2" *ngFor="let tunel of tunelService.data"
+            (click)="select(tunel)">
+            <div class="d-flex tx-facebook">
+                <!-- Icone -->
+                <div class="mr-2">
+                    <i class="fad tx-facebook fa-comments"></i>
+                </div>
+
+                <!-- Libelle -->
+                <div>
+                    {{ tunel.libelle }}
+                </div>
+            </div>
+
+            <!-- Assets -->
+            <div class="d-flex justify-content-between tx-10 tx-facebook mt-1">
+                <!-- Tache -->
+                <span>
+                    <i class="fad fa-tasks-alt"></i>
+                    {{ tunel.tache.libelle }}
+                </span>
+                <div>
+                    <i class="fad fa-users"></i>
+                    {{ tunel.autre_participant.nom_complet }}, <span *ngIf="tunel.nombre_participants > 1">
+                        +{{ tunel.nombre_participants - 1 }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-3" *ngIf="loading">
+        <app-loading></app-loading>
+    </div>
+
+    <app-missing-data
+        *ngIf="!tunelService.data.length && !loading"
+        [message]="'pasDeTunel' | translate">
+    </app-missing-data>
+</div>

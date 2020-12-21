@@ -78,8 +78,11 @@
     </div>
 
 
+    <!-- Loading -->
     <app-loading *ngIf="loading"></app-loading>
-    <app-missing-data *ngIf="!single && !loading" [message]="'pasDeCorrectionDisponiblePourCetteTache'">
+
+    <!-- Missing data handling -->
+    <app-missing-data *ngIf="!single && !loading" [message]="'pasDeCorrectionsDisponiblesPourCetteTache' | translate">
     </app-missing-data>
 
 </div>
@@ -88,6 +91,9 @@
 <app-modal
     [configuration]="{titre: 'CORRECTION', name: 'correction-tache-create-modal', icone:'check-double'}">
     <!-- <div *ngIf="tache"> -->
-    <app-correction-tache-create *ngIf="displayCreateComponent" [tache]="tache"></app-correction-tache-create>
+    <app-correction-tache-create
+        *ngIf="displayCreateComponent && tache"
+        [tache]="tache">
+    </app-correction-tache-create>
     <!-- </div> -->
 </app-modal>

@@ -56,17 +56,17 @@ $valid-color: #23bf08;
     background: white;
     width: 300px;
   }
+
+  .form-control {
+    height: auto;
+    .form-control-sm {
+      height: auto;
+      min-height: calc(1.8125rem + 2px);
+    }
+  }
 }
 
 .p-form-group-3 {
   padding-left: 70px !important;
   padding-right: 70px !important;
-}
-
-.form-control {
-  height: auto;
-  .form-control-sm {
-    height: auto;
-    min-height: calc(1.8125rem + 2px);
-  }
 }

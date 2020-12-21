@@ -24,14 +24,19 @@ export class BaseSingleComponent
   ngOnInit() {
     if (this.enableFetchDataFromURL) {
       this.route.params.subscribe((param) => {
+        this.loading = true;
         this.id = this.helper.parseInt(param["id"]);
-        this.service.getSingle(this.id).subscribe();
+        this.service.getSingle(this.id).subscribe(() => {
+          this.loading = false;
+        });
       });
     }
 
     if (this.enableSubscribeToSingleData) {
       this._subscription["single"] = this.service.singleData$.subscribe(
-        (single) => (this.single = single)
+        (single) => {
+          this.single = single;
+        }
       );
     }
   }

@@ -1,0 +1,52 @@
+<div>
+    <!-- Header -->
+    <div class="border-bottom px-2 pt-2 mb-2 pb-2 tunel-header">
+        <div class="tx-15 tx-facebook d-flex">
+            <!-- Icone -->
+            <span class="border rounded-circle p-2 mr-2">
+                <i class="fas fa-comments-alt tx-teal"></i>
+            </span>
+            <div class="w-100">
+                <!-- libelle -->
+                <div>
+                    {{ tunel?.libelle }}
+
+                    <span class="float-right">
+                        <!-- Participation tunel -->
+                        <span class="clickable mr-3"
+                            *ngIf="!tunel?.is_user_participant"
+                            (click)="participer()"
+                            [ngbTooltip]="'participerACeTunel' | translate">
+                            <i class="fad fa-user-plus tx-warning" *ngIf="!participerLoading"></i>
+                            <i class="fad fa-circle-notch fa-spin tx-warning" *ngIf="participerLoading"></i>
+                        </span>
+
+                        <!-- Boutton afficher participant -->
+                        <span class="clickable"
+                            (click)="afficherParticipants = true;"
+                            [ngbTooltip]="'voirLesParticipants' | translate">
+                            <i class="fad fa-users tx-warning"></i>
+                        </span>
+                    </span>
+                </div>
+
+                <!-- tache -->
+                <div class="tx-12">
+                    <i class="far fa-tasks-alt tx-danger"></i>
+                    {{ tunel?.tache?.libelle }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reaction list -->
+    <app-reaction-tunel-list></app-reaction-tunel-list>
+
+    <!-- reaction add -->
+    <app-reaction-tunel-create *ngIf="tunel?.is_user_participant"></app-reaction-tunel-create>
+
+    <!-- Ajojuter participant -->
+    <app-overlay *ngIf="afficherParticipants" (closed)="afficherParticipants = false">
+        <app-participant-tunel></app-participant-tunel>
+    </app-overlay>
+</div>

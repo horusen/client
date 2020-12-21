@@ -28,7 +28,7 @@ export class Factory {
     });
   }
 
-  public put(endPoint: string, elements: {}, options?: any) {
+  public put(endPoint: string, elements: {}, options?: any): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}/${endPoint}`, elements, {
       headers: this._headers,
       ...options,

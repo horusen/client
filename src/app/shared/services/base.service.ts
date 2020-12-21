@@ -9,8 +9,9 @@ import { Helper } from "./helper";
   providedIn: "root",
 })
 export abstract class BaseService {
-  private _data: any[] = [];
-  private _singleData: any;
+  protected _data: any[] = [];
+  protected _singleData: any;
+  protected _schema: string[];
 
   protected factory: Factory;
   protected helper: Helper;
@@ -18,7 +19,7 @@ export abstract class BaseService {
   public singleData$ = new ReplaySubject<any>(1);
   public data$ = new ReplaySubject<any[]>(1);
   public loading$ = new BehaviorSubject(false);
-  public schema$ = new ReplaySubject<any>(1);
+  public schema$ = new ReplaySubject<string[]>(1);
   public lastItemcreated$ = new ReplaySubject<any>(1);
   public lastItemDeleted$ = new ReplaySubject<any>(1);
 
@@ -28,18 +29,27 @@ export abstract class BaseService {
   }
 
   set singleData(singleData: any) {
-    if (singleData) {
-      this._singleData = singleData;
-      this.singleData$.next(this._singleData);
-    }
+    // if (singleData) {
+    this._singleData = singleData;
+    this.singleData$.next(this._singleData);
+    // }
   }
 
   set lastItemCreated(item: any) {
     this.lastItemcreated$.next(item);
   }
 
+  set loading(loading: boolean) {
+    this.loading$.next(loading);
+  }
+
   set schema(schema: any) {
-    this.schema$.next(schema);
+    this._schema = schema;
+    this.schema$.next(this._schema);
+  }
+
+  get schema() {
+    return this._schema;
   }
 
   get data() {
@@ -64,7 +74,13 @@ export abstract class BaseService {
     );
   }
 
-  get() {
+  search(word: string, fields: string[]) {
+    return this.factory
+      .post(`${this.endPoint}/search`, { word, fields })
+      .pipe(tap(this.listResponseHandler()));
+  }
+
+  get(params?: any) {
     return this.factory.get(`${this.endPoint}`).pipe(
       tap({
         next: (data) => (this.data = data),
@@ -128,7 +144,7 @@ export abstract class BaseService {
     );
   }
 
-  deleteWI(id: number) {
+  delete(id: number) {
     return this.factory.delete(`${this.endPoint}/${id}`).pipe(
       tap({
         next: () => {
@@ -182,6 +198,12 @@ export abstract class BaseService {
   listResponseHandler = () => {
     return {
       next: (data) => (this.data = data),
+      error: (error) => this.errorResponseHandler(error),
+    };
+  };
+
+  onlyErrorResponseHandler = () => {
+    return {
       error: (error) => this.errorResponseHandler(error),
     };
   };

@@ -1,0 +1,12 @@
+<app-solution-tache-list></app-solution-tache-list>
+
+
+<app-modal
+    [configuration]="{name: 'solution-tache-show-modal', icone: 'file-certificate', titre: affectationTache.tache_details.libelle}">
+    <app-solution-tache-show></app-solution-tache-show>
+</app-modal>
+
+<app-modal
+    [configuration]="{name: 'solution-tache-edit-modal', icone: 'file-certificate', titre: affectationTache.tache_details.libelle}">
+    <app-solution-tache-edit></app-solution-tache-edit>
+</app-modal>

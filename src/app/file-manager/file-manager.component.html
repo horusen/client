@@ -1,0 +1,52 @@
+<div class="card-body p-0" id="collapse9">
+    <div class=" bg-white">
+        <div class="row row-xs clearfix mg-0 pd-0">
+            <div class="col-lg-12">
+
+                <!-- Header -->
+                <app-header-file-manager></app-header-file-manager>
+
+                <!-- Liste  -->
+                <router-outlet></router-outlet>
+
+                <!-- Pagination -->
+                <div class=" mg-b-20 border-0">
+                    <nav>
+                        <ul
+                            class="pagination justify-content-center mg-t-10">
+                            <li
+                                class="page-item disabled">
+                                <a class="page-link"
+                                    href="#"
+                                    tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item"><a
+                                    class="page-link"
+                                    href="#">1</a>
+                            </li>
+                            <li class="page-item"><a
+                                    class="page-link"
+                                    href="#">2</a>
+                            </li>
+                            <li class="page-item"><a
+                                    class="page-link"
+                                    href="#">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<app-modal
+    [configuration]="{titre: 'ajouterLesFichiersDansUnDossier', name: 'ajouter-fichier-dans-dossier-modal', icone: 'folder',  taille: 'md'}">
+    <app-dossier-list-min></app-dossier-list-min>
+</app-modal>

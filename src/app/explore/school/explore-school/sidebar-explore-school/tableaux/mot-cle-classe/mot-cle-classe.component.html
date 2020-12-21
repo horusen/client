@@ -1,4 +1,4 @@
-<div class="flex-fill pd-15 pl-1 bd-t bd-b">
+<div class="flex-fill pd-15 pl-1 scroll-sidebar  sidebar-element-container bd-t bd-b">
     <!-- Titre -->
     <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
         <span class="tx-10 tx-uppercase">
@@ -8,8 +8,10 @@
 
     <!-- Element -->
     <nav class="nav flex-column" *ngIf="!loading && motCleService.data.length">
-        <a class="nav-link tx-white clickable" *ngFor="let motCle of motCleService.data">#
-            {{ motCle.mot_cle }}
+        <a class="nav-link tx-white clickable"
+            [ngClass]="{'font-weight-bold text-primary': affectationTacheService.getFiltre('motCles').includes(motCle.id)}"
+            *ngFor="let motCle of motCleService.data">#
+            <span (click)="filtrer(motCle.id)">{{ motCle.libelle }}</span>
         </a>
     </nav>
 

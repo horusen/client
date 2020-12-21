@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { AffectationTacheService } from "src/app/explore/school/tache/affectation-tache/affectation-tache.service";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { SousDomaineClasseService } from "./sous-domaine-classe.service";
 
@@ -11,7 +13,11 @@ export class SousDomaineClasseListComponent
   extends BaseComponent
   implements OnInit {
   @Input() domaine: number;
-  constructor(public sousDomaineClasseService: SousDomaineClasseService) {
+  constructor(
+    public sousDomaineClasseService: SousDomaineClasseService,
+    public affectationTacheService: AffectationTacheService,
+    public route: ActivatedRoute
+  ) {
     super(sousDomaineClasseService);
   }
 
@@ -27,5 +33,9 @@ export class SousDomaineClasseListComponent
         this.data = data;
         this.loading = false;
       });
+  }
+
+  filtrerTache(sous_domaine: number) {
+    this.affectationTacheService.applyFilter("sous_domaines", sous_domaine);
   }
 }

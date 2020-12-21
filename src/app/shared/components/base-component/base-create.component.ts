@@ -56,13 +56,19 @@ export class BaseCreateComponent
 
   /* ONINIT */
   ngOnInit() {
+    // Verifie si l'architechture de la table n'a pas préalablement etait recuperer
+    if (this.service.schema) {
+      this.enableRetrieveSchema = false;
+    }
+
     if (this.enableRetrieveSchema) {
       // Get l'architecture de la table depuis la base de données
       this.service.describe().subscribe();
-      this._subscription["_schema"] = this.service.schema$.subscribe(
-        (schema) => (this.schema = schema)
-      );
     }
+
+    this._subscription["_schema"] = this.service.schema$.subscribe(
+      (schema) => (this.schema = schema)
+    );
   }
 
   /* METHODS */
@@ -233,14 +239,14 @@ export class BaseCreateComponent
 
   shouldShowRequiredError(field: string) {
     const control = this.form.controls[field];
-    if (control.dirty || control.pristine) {
+    if (control.touched) {
       return control.invalid;
     }
   }
 
   isValid(field: string) {
     const control = this.form.controls[field];
-    if (control) {
+    if (control.touched) {
       return control.valid;
     }
   }

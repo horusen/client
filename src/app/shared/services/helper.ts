@@ -45,27 +45,17 @@ export class Helper {
     return returned;
   }
 
-  alertSuccess(word: string = "effectueAvecSucces"): void {
-    const options = {
-      // position: 'top-end',
-      type: "success",
-      title: this.getTranslation(word),
+  alertSuccess(): void {
+    Swal.fire({
+      icon: "success",
+      title: "Effectué avec succés",
       showConfirmButton: false,
-      timer: 4000,
-    };
-
-    // Swal.fire({ ...options });
+      timer: 1500,
+    });
   }
 
   alertDanger(word: string = "ERREUR"): void {
-    const options = {
-      // position: 'top-end',
-      type: "error",
-      title: this.getTranslation(word),
-      showConfirmButton: false,
-      timer: 1500,
-    };
-
+    // Swal.fire(word, "", "error");
     // Swal.fire({ ...options });
   }
 
@@ -98,6 +88,18 @@ export class Helper {
       confirmButtonText: this.getTranslation("OUI"),
       cancelButtonText: this.getTranslation("nonQuitter"),
     };
+
+    Swal.fire({
+      title: "Êtes vous sûr de votre choix?",
+      icon: "warning",
+      showDenyButton: true,
+      confirmButtonText: `Oui`,
+      denyButtonText: `Non`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        callback();
+      }
+    });
 
     // Swal.fire({ ...options }).then((result) => {
     //   if (result.value) {
@@ -145,8 +147,23 @@ export class Helper {
     return newObject;
   }
 
+  omitEmptyArraysInObject(obj: {}) {
+    let newObject = {};
+    Object.keys(obj).forEach((key) => {
+      if (obj[key] && obj[key].length) {
+        newObject[key] = obj[key];
+      }
+    });
+
+    return newObject;
+  }
+
   parseInt(num: string) {
     return parseInt(num);
+  }
+
+  findValueInArrayByID(array: any[], id: number, libelleID: string = "id") {
+    return array.find((item) => item[libelleID] == id);
   }
 
   findIndexItemInArray(array: any[], id: number, libelleID: string = "id") {
@@ -199,5 +216,20 @@ export class Helper {
     } else {
       return text;
     }
+  }
+
+  // Transform les parametres d'une url en objet
+  urlParamsToObject(params: Object) {
+    let returnedObject = {};
+    Object.keys(params).forEach((key) => {
+      if (+params[key][1]) {
+        returnedObject[key] = params[key].split(",");
+        returnedObject[key].map((item: string) => this.parseInt(item));
+      } else {
+        returnedObject[key] = [+params[key]];
+      }
+    });
+
+    return returnedObject;
   }
 }

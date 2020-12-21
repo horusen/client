@@ -3,6 +3,8 @@ import { Component, OnInit } from "@angular/core";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { TacheService } from "../../../../tache.service";
 import { AuthService } from "src/app/shared/services/auth.service";
+import { AffectationTacheService } from "../../../../affectation-tache/affectation-tache.service";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-reaction-mode-messenger-list",
@@ -12,28 +14,35 @@ import { AuthService } from "src/app/shared/services/auth.service";
 export class ReactionModeMessengerListComponent
   extends BaseComponent
   implements OnInit {
+  parentUrl: string;
   constructor(
     public reactionService: ReactionResolutionTacheService,
-    public tacheService: TacheService,
-    public auth: AuthService
+    public affectationTacheService: AffectationTacheService,
+    public auth: AuthService,
+    public router: Router
   ) {
     super(reactionService);
   }
 
   ngOnInit(): void {
-    this._subscription["tache"] = this.tacheService.singleData$.subscribe(
-      (tache) => {
-        this.getData(tache.id);
+    this._subscription[
+      "affectationTache"
+    ] = this.affectationTacheService.singleData$.subscribe(
+      (affectationTache) => {
+        if (affectationTache.id != this.reactionService.affectationTache?.id) {
+          this.reactionService.affectationTache = affectationTache;
+          this.getData(affectationTache.id);
+        }
       }
     );
+
+    this.parentUrl = this.router.url.includes("suivie") ? "suivie" : "tache";
   }
 
-  getData(tache: number) {
-    if (!this.reactionService.data.length) {
-      this.loading = true;
-      this.reactionService.getReaction(tache).subscribe(() => {
-        this.loading = false;
-      });
-    }
+  getData(affectationTache: number) {
+    this.loading = true;
+    this.reactionService.getReaction(affectationTache).subscribe(() => {
+      this.loading = false;
+    });
   }
 }

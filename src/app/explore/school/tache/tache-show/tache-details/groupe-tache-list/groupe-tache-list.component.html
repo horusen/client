@@ -1,4 +1,4 @@
-<div class="sl-item p-0">
+<div class="sl-item p-0" *ngIf="data.length">
     <!-- Icone groupe -->
     <div class="sl-left">
         <span
@@ -16,7 +16,7 @@
             </span>
         </div>
         <div class="bg-bluelight1 pd-y-10 p-2">
-            <span class="badge badge-pill badge-light bg-white tx-purple" *ngFor="let groupe of data">
+            <span class="badge badge-pill badge-light bg-white tx-info" *ngFor="let groupe of data">
                 {{ groupe.libelle }}
             </span>
             <!-- <span

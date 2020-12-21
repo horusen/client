@@ -32,7 +32,7 @@ export class TacheListComponent extends BaseComponent implements OnInit {
 
   getData() {
     this.loading = true;
-    this.tacheService.getTache(this.filtre).subscribe(() => {
+    this.tacheService.initialise().subscribe(() => {
       this.loading = false;
     });
   }

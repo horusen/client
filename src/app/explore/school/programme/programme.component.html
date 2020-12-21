@@ -1,0 +1,28 @@
+<!-- Header -->
+<div class="card">
+    <div class="row mg-t-10 mg-b-10">
+        <!-- Titre -->
+        <div class="col-11">
+            <h3 class="tx- tx-16 tx-info italic mg-l-20 bold">
+                <i class="fal fa-list"></i>
+                {{ 'listeDeVosProgrammes' | translate }}
+            </h3>
+        </div>
+
+        <!-- Boutton ajouter -->
+        <div class="col-lg-1 float-right btn-demo">
+            <a class="btn btn-oblong btn-light tx-info bd-0 btn-icon clickable">
+                <i class="fad fa-plus-circle tx-14 tx-info"
+                    style="padding:0px; border-radius:50%">
+                </i>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="card-body p-2 bg-light bd-t">
+    <app-programme-list-by-professeur></app-programme-list-by-professeur>
+</div>

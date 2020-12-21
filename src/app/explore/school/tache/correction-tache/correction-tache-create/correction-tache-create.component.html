@@ -57,6 +57,7 @@
                 type="submit"
                 [disabled]="form.invalid">
                 {{ 'VALIDER' | translate }}
+                <i class="fas fa-circle-notch fa-spin" *ngIf="loading"></i>
             </button>
 
             <!-- Bouton reset -->

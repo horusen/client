@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-12">
+        <span class="note">{{ single.note }} <span class="tx-facebook">/ 20</span></span>
+        <span class="float-right">
+            <span class="mr-3" (click)="editer()">
+                <i class="fal fa-edit clickable"></i>
+            </span>
+
+            <span (click)="supprimer()">
+                <i class="fad fa-trash clickable"></i>
+            </span>
+        </span>
+    </div>
+    <div class="col-12" *ngIf="single.remarque">
+        <p class="font-weight-bold text-decoration mb-0">{{ 'REMARQUE' | translate }}:</p>
+        <p [innerHTML]="single.remarque"></p>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<form class="custom-placeholder" [formGroup]="form" (submit)="edit()">
+
+    <div class="formSep form-group  d-flex justify-content-center pb-0">
+        <div class="note">
+            <!-- Note Input -->
+            <input class='form-control mr-1' type="number" formControlName="note">
+
+            <!-- Note -->
+            <span class="tx-facebook">{{'/ 20'}}</span>
+        </div>
+
+        <div *ngIf="shouldShowRequiredError('note')" class="invalid-feedback">
+            {{ 'laNoteEstObligatoire' | translate }}
+        </div>
+    </div>
+
+
+
+    <div class="formSep form-group  d-flex justify-content-center pb-0">
+        <div class="col-12">
+            <label class="control-label" for="remarque">{{ 'REMARQUE' | translate }}</label>
+            <ckeditor
+                [editor]="Editor"
+                class=""
+                formControlName="remarque">
+            </ckeditor>
+        </div>
+    </div>
+
+
+    <!-- Valider -->
+    <div class="col-lg-12 mt-2">
+        <button class="btn btn-sm btn-facebook mb-3 float-right">
+            {{ 'VALIDER' | translate }}
+            <span *ngIf="loading">
+                <i class="fas fa-circle-notch fa-spin"></i>
+            </span>
+        </button>
+    </div>
+</form>

@@ -8,6 +8,10 @@ import { TacheDetailsComponent } from "./tache-details/tache-details.component";
 import { SharedTacheModuleModule } from "../shared-tache-module/shared-tache-module.module";
 import { TacheDetailsInfoComponent } from "./tache-details-info/tache-details-info.component";
 import { TacheMemeCategorieComponent } from "./tache-meme-categorie/tache-meme-categorie.component";
+import { SolutionTacheModule } from "../solution-tache/solution-tache.module";
+import { SolutionTacheComponent } from "../solution-tache/solution-tache.component";
+import { TunelModule } from "../tunel/tunel.module";
+import { TunelComponent } from "../tunel/tunel.component";
 
 const routes: Routes = [
   {
@@ -55,6 +59,16 @@ const routes: Routes = [
             (module) => module.ResolutionTacheModule
           ),
       },
+      // solution
+      {
+        path: "solution",
+        component: SolutionTacheComponent,
+      },
+      // Tunel
+      {
+        path: "tunel",
+        component: TunelComponent,
+      },
     ],
   },
 ];
@@ -70,6 +84,8 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     SharedTacheModuleModule,
+    SolutionTacheModule,
+    TunelModule,
     RouterModule.forChild(routes),
   ],
   exports: [RouterModule],

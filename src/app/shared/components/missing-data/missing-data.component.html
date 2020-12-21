@@ -1,5 +1,7 @@
-<div class="alert alert-info">
-    <h6 class="alert-heading text-center"><i class="class fas fa-exclamation-circle fa-3x"></i></h6>
-    <hr>
-    <h6 class="mb-0 text-center">{{ (message || 'pasDeDonnees') |translate }}</h6>
+<div class="p-1">
+    <div class="alert alert-info mb-0">
+        <h6 class="alert-heading text-center"><i class="class fas fa-exclamation-circle fa-3x"></i></h6>
+        <hr>
+        <h6 class="mb-0 text-center">{{ message || ('pasDeDonnees' |translate) }}</h6>
+    </div>
 </div>

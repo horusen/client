@@ -1,0 +1,53 @@
+<div class="card   border-0 p-0  ">
+    <div class="card-header p-0 border-0 bg-light">
+        <ul class="nav d-flex w-100 justify-content-center">
+            <!-- Details -->
+            <li class="nav-item">
+                <a class="nav-link  tx-facebook mg-t-2 mr-30"
+                    [routerLink]="['./']"
+                    [ngClass]="{'font-weight-bold': activeComponents.details}"
+                    fragment="details">
+                    <i class="fal fa-file-alt" [ngClass]="{'font-weight-bold': activeComponents.details}"></i>
+                    {{ 'DETAILS' | translate }}
+                </a>
+            </li>
+
+            <!-- MEMBRE -->
+            <li class="nav-item">
+                <a class="nav-link tx-facebook mg-t-2"
+                    [routerLink]="['./']"
+                    [ngClass]="{'font-weight-bold': activeComponents.membre}"
+                    fragment="membre">
+                    <i class="fal fa-users" [ngClass]="{'font-weight-bold': activeComponents.membre}"></i>
+                    {{ 'MEMBRES' | translate }}
+                </a>
+            </li>
+
+            <!-- Tache -->
+            <li class="nav-item">
+                <a class="nav-link tx-facebook mg-t-2"
+                    [routerLink]="['./']"
+                    [ngClass]="{'font-weight-bold': activeComponents.tache}"
+                    fragment="tache">
+                    <i class="fal fa-tasks-alt" [ngClass]="{'font-weight-bold': activeComponents.tache}"></i>
+                    {{ 'TACHE' | translate }}
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="card-body border-0">
+
+        <div class="d-flex justify-content-center py-4" *ngIf="loading">
+            <app-loading></app-loading>
+        </div>
+
+
+        <ng-container *ngIf="single && !loading">
+            <app-groupe-details *ngIf="activeComponents.details"></app-groupe-details>
+            <app-membre-groupe *ngIf="activeComponents.membre"></app-membre-groupe>
+            <app-tache-groupe *ngIf="activeComponents.tache"></app-tache-groupe>
+        </ng-container>
+    </div>
+</div>

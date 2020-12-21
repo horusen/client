@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AffectationTacheService } from "src/app/explore/school/tache/affectation-tache/affectation-tache.service";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { NiveauDifficulteClasseService } from "./niveau-difficulte-classe.service";
 
@@ -11,7 +12,8 @@ export class NiveauDifficulteClasseComponent
   extends BaseComponent
   implements OnInit {
   constructor(
-    public niveauDifficulteClasseService: NiveauDifficulteClasseService
+    public niveauDifficulteClasseService: NiveauDifficulteClasseService,
+    public affectationTacheService: AffectationTacheService
   ) {
     super(niveauDifficulteClasseService);
   }
@@ -27,5 +29,12 @@ export class NiveauDifficulteClasseComponent
         this.loading = false;
       });
     }
+  }
+
+  fitrer(niveau_difficulte: number) {
+    this.affectationTacheService.applyFilter(
+      "niveaux_difficultes",
+      niveau_difficulte
+    );
   }
 }

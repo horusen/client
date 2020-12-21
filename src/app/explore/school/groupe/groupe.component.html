@@ -1,0 +1,63 @@
+<!-- Header -->
+<div class="card pd-y-10 pd-x-10 mg-b-10">
+    <h3 class="tx- tx-16 tx-primary italic mg-l-0 bold">
+        <i class="fad fa-users mr-2"></i>
+        <span *ngIf="showData.byClasse">{{ ('groupesDeLaClasse' | translate) + ': ' +classeService.singleData.libelle }}
+        </span>
+        <span *ngIf="showData.byEtudiant">{{ 'listeDesGroupesDeVotreClasse' | translate }}</span>
+        <span *ngIf="showData.byProfesseur">{{ 'listeDesGroupesSousVotreTutel' | translate }}</span>
+        <span *ngIf="showData.byGroupeIndependant">{{ 'listeDesGroupesIndependants' | translate }}</span>
+
+        <!-- Boutton ajouter -->
+        <i class="fad fa-plus-circle clickable tx-14 float-right tx-primary bg-light "
+            style="padding:6px; border-radius:50%"
+            (click)="showGroupeCreateComponent()"
+            [ngbTooltip]="'creerUnGroupe' | translate">
+        </i>
+    </h3>
+</div>
+
+<!-- Liste des groupes -->
+<app-groupe-list *ngIf="showData.byEtudiant"></app-groupe-list>
+<app-groupe-classe-list *ngIf="showData.byClasse"></app-groupe-classe-list>
+<app-groupe-list-by-professeur *ngIf="showData.byProfesseur"></app-groupe-list-by-professeur>
+<app-groupe-independant-list *ngIf="showData.byGroupeIndependant"></app-groupe-independant-list>
+
+<!-- Groupe create modal -->
+<app-modal
+    [configuration]="{name: 'groupe-create-modal', titre: (this.showData.byGroupeIndependant ? 'creerUnGroupeIndependant' : 'creerUnGroupe'), icone: 'users'}">
+    <app-groupe-create *ngIf="showGroupeCreate"></app-groupe-create>
+</app-modal>
+
+<!-- Groupe show modal -->
+<div class="modal animated bounceInDown"
+    id="groupe-show-modal"
+    tabindex="-1"
+    role="dialog"
+    data-backdrop="static"
+    aria-labelledby="groupe-show-modal"
+    aria-hidden="true">
+    <div [class]="'modal-dialog modal-lg'" role=" document">
+        <div class="modal-content p-0">
+            <div class="modal-header ">
+                <h5 class="modal-title" id="exampleModalLabel_5">
+                    <i class="fad fa-users"></i>
+                    {{ "GROUPE" | translate }}
+                </h5>
+                <a [routerLink]="['../']">
+                    <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true"><i class="ion-ios-close-empty"></i></span>
+                    </button>
+                </a>
+
+            </div>
+            <div class="modal-body p-0">
+                <app-groupe-show></app-groupe-show>
+            </div>
+        </div>
+    </div>
+</div>

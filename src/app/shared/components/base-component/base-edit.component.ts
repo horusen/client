@@ -11,14 +11,15 @@ import { BaseService } from "../../services/base.service";
 export class BaseEditComponent extends BaseCreateComponent implements OnInit {
   single: any;
 
-  constructor(protected service: BaseService) {
-    super(service);
+  constructor(protected service1: BaseService) {
+    super(service1);
   }
 
   ngOnInit() {
+    this.enableRetrieveSchema = false;
     super.ngOnInit();
 
-    this._subscription["single"] = this.service.singleData$.subscribe(
+    this._subscription["_single"] = this.service.singleData$.subscribe(
       (single) => (this.single = single)
     );
   }
@@ -45,5 +46,7 @@ export class BaseEditComponent extends BaseCreateComponent implements OnInit {
     if (callback) {
       callback();
     }
+
+    this.isFormOk = true;
   }
 }

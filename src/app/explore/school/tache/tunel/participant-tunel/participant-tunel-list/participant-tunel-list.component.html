@@ -1,0 +1,18 @@
+<h6 class="text-center tx-facebook">
+    {{ 'listeDesParticipants' | translate }}
+</h6>
+
+<div class="row">
+    <div class="col-12 p-0">
+        <ul class="list-group" *ngIf="participantTunelService.data.length && !loading">
+            <li class="list-group-item" *ngFor="let participant of participantTunelService.data">
+                <img [src]="participant.photo" class="border rounded-circle" [alt]="participant.nom_complet"
+                    style="width: 40px">
+                <span class="ml-2">{{ participant.nom_complet }}</span>
+            </li>
+        </ul>
+
+        <app-loading *ngIf="loading"></app-loading>
+        <app-missing-data *ngIf="!participantTunelService.data.length && !loading"></app-missing-data>
+    </div>
+</div>

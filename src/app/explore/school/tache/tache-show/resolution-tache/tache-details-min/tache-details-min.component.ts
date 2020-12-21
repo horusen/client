@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseSingleComponent } from "src/app/shared/components/base-component/base-single.component";
+import { AffectationTacheService } from "../../../affectation-tache/affectation-tache.service";
 import { TacheService } from "../../../tache.service";
 
 @Component({
@@ -17,9 +18,12 @@ export class TacheDetailsMinComponent
     groupe: false,
     fichier: false,
   };
+
+  public affectationTache: any;
   constructor(
     public tacheService: TacheService,
     public route: ActivatedRoute,
+    public affectationTacheService: AffectationTacheService,
     public router: Router
   ) {
     super(tacheService, route);
@@ -27,6 +31,12 @@ export class TacheDetailsMinComponent
 
   ngOnInit(): void {
     super.ngOnInit();
+
+    this._subscription[
+      "affectationTache"
+    ] = this.affectationTacheService.singleData$.subscribe((affectation) => {
+      this.affectationTache = affectation;
+    });
 
     const fragment = this.route.snapshot.fragment;
     switch (fragment) {

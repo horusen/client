@@ -25,11 +25,9 @@ export class ImageHandlerService extends FileHandler {
   // Allow to compress image by 75%
   compressImage(file: File, compressionPercentage: number = 75) {
     // compress image
-    if (this.checkImage(file)) {
-      let size = (file.size * compressionPercentage) / 100;
-      this._ngxPicaService.compressImage(file, size);
-      return file;
-    }
+    let size = (file.size * compressionPercentage) / 100;
+    this._ngxPicaService.compressImage(file, size);
+    return file;
   }
 
   resizeImage(

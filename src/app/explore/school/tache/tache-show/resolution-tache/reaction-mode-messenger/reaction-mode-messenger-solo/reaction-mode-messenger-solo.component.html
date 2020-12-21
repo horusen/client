@@ -129,12 +129,10 @@
                 [autoClose]="'outside'"
                 [placement]="'bottom'"
                 [ngbPopover]="note"
-                [ngClass]="{'fas light-blue': reaction.note, 'fal dark-blue': !reaction.note}">
+                [ngClass]="{'fas light-blue': reaction.note, 'fal dark-blue': !reaction.note}"
+                *ngIf="parentUrl == 'suivie'">
             </i>
-            <!-- Note -->
-            <ng-template #note>
-                <app-note-reaction-tache [reaction]="reaction" *ngIf="reaction"></app-note-reaction-tache>
-            </ng-template>
+
 
             <!-- Indexer -->
             <i class="fa-link reaction__icone-action "
@@ -145,3 +143,8 @@
         </div>
     </div>
 </div>
+
+<!-- Note -->
+<ng-template #note>
+    <app-note-reaction-tache [reaction]="reaction" *ngIf="reaction"></app-note-reaction-tache>
+</ng-template>

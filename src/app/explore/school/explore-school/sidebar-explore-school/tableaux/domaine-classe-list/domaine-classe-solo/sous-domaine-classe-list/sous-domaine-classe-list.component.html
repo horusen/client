@@ -3,10 +3,12 @@
     <nav class="nav flex-column  " *ngIf="!loading && data.length">
         <!-- element -->
         <div class="d-flex align-items-center justify-content-between "
-            *ngFor="let domaine of data; let i = index">
+            *ngFor="let sous_domaine of data; let i = index">
 
-            <!-- Titre du domaine -->
-            <a href="" class="nav-link tx-white">
+            <!-- Titre du sous_domaine -->
+            <a class="nav-link tx-white clickable"
+                [ngClass]="{'font-weight-bold text-primary': affectationTacheService.getFiltre('sous_domaines').includes(sous_domaine.id)}"
+                (click)="filtrerTache(sous_domaine.id)">
                 <i class="fad fa-dot-circle"
                     [ngClass]="{
                     'tx-violet': i == 0,
@@ -14,7 +16,7 @@
                     'tx-vert': i == 2,
                     'tx-jaune': i == 3
                 }"></i>
-                {{ domaine.libelle }}
+                {{ sous_domaine.libelle }}
             </a>
         </div>
     </nav>

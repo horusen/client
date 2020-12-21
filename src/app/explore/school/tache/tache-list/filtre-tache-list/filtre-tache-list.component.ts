@@ -1,9 +1,9 @@
-import { PeriodeService } from "./../../../periode/periode.service";
+import { LangueService } from "./../../../langue/langue.service";
 import { Component, OnInit } from "@angular/core";
 import { NiveauService } from "../../../niveau/niveau.service";
-import { TacheService } from "../../tache.service";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { AbstractBaseService } from "src/app/shared/services/abstract-base.service";
+import { AffectationTacheService } from "../../affectation-tache/affectation-tache.service";
 
 @Component({
   selector: "app-filtre-tache-list",
@@ -14,31 +14,34 @@ export class FiltreTacheListComponent extends BaseComponent implements OnInit {
   // Stock les données recuilli grace aux dependances
   public dependancies = {
     niveau: [],
-    periode: [],
+    langue: [],
   };
 
   // Stock les filtes selectionnés
   // selectedElement = {
-  //   periode: [],
+  //   langue: [],
   //   niveau: [],
   // };
 
   // local loading
   localLoading = {
-    periode: false,
+    langue: false,
     niveau: false,
   };
 
   constructor(
     public abstractBaseService: AbstractBaseService,
-    public tacheService: TacheService,
+    public affectationTacheService: AffectationTacheService,
     public niveauService: NiveauService,
-    public periodeService: PeriodeService
+    public langueService: LangueService
   ) {
     super(abstractBaseService);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getNiveau();
+    this.getLangue();
+  }
 
   getNiveau() {
     if (!this.niveauService.data.length) {
@@ -52,24 +55,19 @@ export class FiltreTacheListComponent extends BaseComponent implements OnInit {
     }
   }
 
-  getPeriode() {
-    if (!this.periodeService.data.length) {
-      this.localLoading.periode = true;
-      this._subscription["periode"] = this.periodeService
+  getLangue() {
+    if (!this.langueService.data.length) {
+      this.localLoading.langue = true;
+      this._subscription["langue"] = this.langueService
         .get()
         .subscribe((data) => {
-          this.dependancies.periode = data;
-          this.localLoading.periode = false;
+          this.dependancies.langue = data;
+          this.localLoading.langue = false;
         });
     }
   }
 
   applyFilter(element: string, element_id?: any) {
-    if (element_id == "null") {
-      if (this.tacheService.getFiltre(element).length)
-        this.tacheService.setFiltre(element, []);
-      return;
-    }
-    this.tacheService.setFiltre(element, [element_id]);
+    this.affectationTacheService.applyFilter(element, element_id);
   }
 }

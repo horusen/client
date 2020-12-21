@@ -1,0 +1,56 @@
+<div class="row row-xs mg-0 pd-0 clearfix p-0">
+    <!-- Liste des taches -->
+    <div class="col-lg-4 p-1">
+        <!-- Header -->
+        <div class="card">
+            <div class="row mg-t-10 mg-b-5">
+                <!-- titre de la tache -->
+                <div class="col-lg-10 float-right">
+                    <h3
+                        class="tx- tx-16 tx-primary italic mg-l-20 bold">
+                        <i class="fal fa-list"></i> {{ 'listeDeMesTaches' | translate }}
+                    </h3>
+                </div>
+
+                <!-- Boutton ajouter -->
+                <div class="col-lg-2  btn-demo">
+                    <i class="fad fa-exchange clickable tx-14 tx-primary bg-light "
+                        style="padding:6px; border-radius:50%"
+                        [ngbTooltip]="'faireUneNouvelleAffectation' | translate">
+                    </i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtre -->
+        <app-filtre-mes-taches [elementAFiltrer]="'mes-taches'"></app-filtre-mes-taches>
+
+        <!-- Taches -->
+        <div class="card-body p-0">
+            <div class="row row-xs mg-0 border-top pt-1 mt-1 pd-0 clearfix">
+                <ng-container *ngIf="mesTachesService.data.length && !loading">
+                    <!-- Tache -->
+                    <app-mes-taches-solo
+                        class="w-100"
+                        *ngFor="let tache of mesTachesService.data"
+                        [tache]="tache">
+                    </app-mes-taches-solo>
+                </ng-container>
+
+                <div class="row w-100">
+                    <div class="col-12">
+                        <app-loading *ngIf="loading" class="ml-5 mt-5"></app-loading>
+                        <app-missing-data *ngIf="!mesTachesService.data.length && !loading"></app-missing-data>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Details de la tache -->
+    <div class="col-lg-8 p-1 ">
+        <router-outlet></router-outlet>
+    </div>
+</div>

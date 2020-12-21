@@ -1,0 +1,74 @@
+<form class=" form mg-t-10" [formGroup]="form" (submit)="create()" *ngIf="form">
+    <!-- Rebondissement -->
+    <div class="bg-soft-primary p-2" *ngIf="rebondissement">
+        <div class="d-flex reaction">
+            <!-- Image profile -->
+            <div class="media-img">
+                <span class="avatar avatar-online">
+                    <img
+                        [src]="rebondissement.user.photo"
+                        class="img-fluid">
+                </span>
+            </div>
+            <!-- Reaction -->
+            <div class="w-100">
+                <!-- Icone -->
+                <div class="float-right ml-1 ">
+                    <span (click)="rebondissement = null" class="clickable"><i class="far fa-times"></i></span>
+                </div>
+
+                <div class="">
+                    <!-- Nom de l'utilsateur -->
+                    <h5 class="tx-13 text-left mb-0">
+                        <a href="" class="ml-2">{{ rebondissement.user.nom_complet }}</a>
+                    </h5>
+
+                    <!-- Message -->
+                    <div class="mb-0 tx-gray-600 p-1"
+                        style="color: #1a5276 ; border-bottom: 0px solid  rgb( 169, 204, 227 ) ">
+
+                        <p class="text-left ml-2 mb-0">{{ rebondissement.reaction }}</p>
+
+
+                        <!-- Date reaction -->
+                        <!-- <span class="small float-left tx-gray-400"
+                            style="color: #a93226;">
+                            {{reaction.created_at | date:'medium'}}
+                        </span> -->
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="input-group">
+        <span class="input-group-btn">
+            <!-- emoticone -->
+            <a type="role"
+                class="btn btn-sm btn-facebook rounded-circle mg-t-5"
+                [ngbTooltip]="'ajouterDesEmojis' | translate"
+                (click)="showEmojiPicker = !showEmojiPicker">
+                <i class=" fal fa-smile-beam tx-white "></i>
+            </a>
+
+            <emoji-mart class="emoji-mart"
+                set="apple" (emojiSelect)="addEmoji($event)" *ngIf="showEmojiPicker"
+                skin="3" title="Pick your emoji…"></emoji-mart>
+        </span>
+
+        <textarea type="text"
+            class="form-control"
+            required="required"
+            formControlName="reaction"
+            style="height: 40px">
+            </textarea>
+
+        <button class="input-group-text bg-primary" [disabled]="form.invalid" id="basic-addon6">
+            <i class=" tx-white bg-primary" style="padding:6px; border-radius: 50%;"
+                [ngClass]="{'fal fa-paper-plane': !loading, 'fas fa-circle-notch fa-spin': loading}"></i>
+        </button>
+    </div>
+</form>

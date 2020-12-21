@@ -1,0 +1,58 @@
+<div class="row row-xs  mg-0 pd-0 pd-y- bd-b" style="height: 620px;">
+    <!-- Sidebar -->
+    <div class="bg-light col-lg-3 p-1 " style="padding-left: 0px; padding-right:0px">
+        <div class="wrapper bg-light p-0 " id="settingSidebarScroll">
+            <div class="bd-b">
+                <!-- nav bar -->
+                <ul class="nav bg-light ">
+                    <!-- Enseignant -->
+                    <li class="nav-item">
+                        <a class="nav-link3 clickable active tx-yeto2"
+                            [routerLink]="['./']"
+                            [queryParams]="{'type_discussion': 'professeur'}"
+                            [ngClass]="{'font-weight-bold': activeComponent.professeur}">
+                            {{ 'PROFESSEURS' | translate }}
+                        </a>
+                    </li>
+
+                    <!-- Groupe -->
+                    <li class="nav-item">
+                        <a class="nav-link3 clickable active tx-yeto2"
+                            [ngClass]="{'font-weight-bold': activeComponent.groupe}"
+                            [routerLink]="['./']"
+                            [queryParams]="{'type_discussion': 'groupe'}">
+                            {{ 'GROUPES' | translate }}
+                        </a>
+                    </li>
+
+                    <!-- Enseignant -->
+                    <li class="nav-item">
+                        <a class="nav-link3 clickable active tx-yeto2"
+                            [routerLink]="['./']"
+                            [queryParams]="{'type_discussion': 'sous-reseaux'}"
+                            [ngClass]="{'font-weight-bold': activeComponent['sous-reseaux']}">
+                            {{ 'sousReseaux' | translate }}
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <!-- Nav content -->
+            <div class="tab-content">
+                <div class="tab-pane fade active show">
+                    <app-discussion-professeur-list *ngIf="activeComponent.professeur"></app-discussion-professeur-list>
+                    <app-discussion-groupe-list *ngIf="activeComponent.groupe"></app-discussion-groupe-list>
+                    <app-discussion-sous-reseaux-list *ngIf="activeComponent['sous-reseaux']">
+                    </app-discussion-sous-reseaux-list>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Reaction -->
+    <div class="col-lg-9 p-0 ">
+        <app-reaction-discussion></app-reaction-discussion>
+    </div>
+</div>

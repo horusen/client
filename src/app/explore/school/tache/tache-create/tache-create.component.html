@@ -1,7 +1,7 @@
 <form class="custom-placeholder" [formGroup]="form" *ngIf="isFormOk" (submit)="create()">
     <!-- Libelle -->
-    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
-        <div class="col-10">
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+        <div class="col-12">
             <!-- Label -->
             <label class="control-label"
                 for="libelle">
@@ -24,7 +24,7 @@
     <!-- Sous domaine, Niveau et langue -->
     <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
         <!-- Sous domaine -->
-        <div class="col-4 p-2">
+        <div class="col-6">
             <!-- Label -->
             <label class="control-label"
                 for="sous_domaine">
@@ -47,7 +47,7 @@
         </div>
 
         <!-- Niveau -->
-        <div class="col-4 p-2">
+        <div class="col-6">
             <!-- Label -->
             <label class="control-label"
                 for="niveau">
@@ -68,9 +68,11 @@
                 {{ 'veuillezChoisirLeNiveauDeLaTache' | translate }}.
             </div>
         </div>
+    </div>
 
+    <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
         <!-- Langue -->
-        <div class="col-4 p-2">
+        <div class="col-6">
             <!-- Label -->
             <label class="control-label"
                 for="langue">
@@ -91,12 +93,9 @@
                 {{ 'veuillezChoisirUneLanguePourVotreTache' | translate }}.
             </div>
         </div>
-    </div>
 
-    <!-- Période, matière et niveau de difficulté -->
-    <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
         <!-- S -->
-        <div class="col-4 p-2">
+        <div class="col-6">
             <!-- Label -->
             <label class="control-label"
                 for="confidentialite">
@@ -113,33 +112,13 @@
             </select>
 
         </div>
+    </div>
 
-        <!-- Periode -->
-        <div class="col-4 p-2">
-            <!-- Label -->
-            <label class="control-label"
-                for="periode">
-                {{ 'PERIODE' | translate }}
-            </label>
-
-            <angular2-multiselect
-                id="periode"
-                [data]="dependancies.periode"
-                [settings]="dropdownSettingsAlt.single"
-                formControlName="periode"
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'periode'), 'is-valid': isValid('periode')}"
-                class="form-control p-0 form-control-sm">
-            </angular2-multiselect>
-
-            <!-- Message d'erreur -->
-            <div *ngIf="shouldShowRequiredError('periode')"
-                class="invalid-feedback">
-                {{ 'veuillezChoisirUnePeriode' | translate }}.
-            </div>
-        </div>
+    <!-- Période, matière et niveau de difficulté -->
+    <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
 
         <!-- Niveau difficulte -->
-        <div class="col-4 p-2">
+        <div class="col-6">
             <!-- Label -->
             <label class="control-label"
                 for="niveau_difficulte">
@@ -160,12 +139,8 @@
                 {{ 'veuillezChoisirUnNiveauDeDifficulte' | translate }}.
             </div>
         </div>
-    </div>
 
-
-    <div class="formSep form-group d-flex justify-content-center pb-0 pt-3">
-        <!-- S -->
-        <div class="col-10">
+        <div class="col-6">
             <!-- Label -->
             <label class="control-label"
                 for="mot_cle">
@@ -193,14 +168,13 @@
             </div>
 
         </div>
-
-
-
     </div>
+
+
 
     <!-- Description -->
     <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
-        <div class="col-10">
+        <div class="col-12">
             <label class="control-label" for="description">{{ 'DESCRIPTION' | translate }}</label>
             <!-- <textarea name="description" maxlength="500" class="form-control  form-control-sm" cols="30" rows="3"
                 [formControlName]="'description'"
@@ -220,11 +194,12 @@
 
     <!-- Boutton validation -->
     <div class="d-flex justify-content-center">
-        <div class="col-10 text-right">
+        <div class="col-12 text-right">
             <!-- Boutton sumit -->
             <button class="btn btn-sm btn-primary mr-1"
                 type="submit"
                 [disabled]="form.invalid">
+                <i class="fad fa-circle-notch fa-spin" *ngIf="loading"></i>
                 {{ 'VALIDER' | translate }}
             </button>
 

@@ -1,0 +1,73 @@
+<div class="nav-tabs-top" *ngIf="single">
+    <div class="row m-0 bd-b bd-t">
+        <div class="p-0" [ngClass]="{'col-11': router.url.includes('sujet'), 'col-12': !router.url.includes('sujet')}">
+            <ul class="nav bg-white mg-0 pd-0 ">
+                <!-- Liste des sujets -->
+                <li class="nav-item mg-0 pd-0 ">
+                    <a class="nav-link3 "
+                        [routerLink]="['sujet']"
+                        [routerLinkActive]="'font-weight-bold'"
+                        style="padding: 5px 12px;">
+                        <i class="fal fa-users-class tx-12 bg-light tx-yeto "
+                            [routerLinkActive]="'fas'"
+                            style="padding:6px; border-radius:50%">
+                        </i>
+                        <span class="tx-yeto">
+                            {{ 'SUJETS' | translate }}
+                        </span>
+                    </a>
+                </li>
+
+                <!-- Membre -->
+                <li class="nav-item ">
+                    <a class="nav-link3 "
+                        [routerLinkActive]="'font-weight-bold'"
+                        [routerLink]="['membre']">
+                        <i class="fal fa-users tx-12 bg-light tx-yeto "
+                            [routerLinkActive]="'fas'"
+                            style="padding:6px; border-radius:50%">
+                        </i>
+                        <span class="tx-yeto">
+                            {{ 'MEMBRES' | translate }}
+                        </span>
+                    </a>
+                </li>
+
+                <!-- Discussion -->
+                <li class="nav-item ">
+                    <a class="nav-link3"
+                        [routerLinkActive]="'font-weight-bold'"
+                        [routerLink]="['discussion']">
+                        <i class="fal fa-comments-alt bg-light tx-yeto "
+                            [routerLinkActive]="'fas'"
+                            style="padding:6px; border-radius:50%">
+                        </i>
+                        <span class="tx-yeto">
+                            {{ 'DISCUSSION' | translate }}
+                        </span>
+                    </a>
+                </li>
+
+
+            </ul>
+        </div>
+        <div class="col-1 p-0 bg-white" *ngIf="router.url.includes('sujet')">
+            <!-- Boutton ajouter -->
+            <i class="fad fa-plus-circle clickable tx-14 mt-1 float-right tx-primary bg-light "
+                style="padding:6px; border-radius:50%"
+                (click)="helper.toggleModal('sujet-reseaux-create-modal')"
+                [ngbTooltip]="'ajouterUnSujet' | translate">
+            </i>
+        </div>
+    </div>
+    <!-- Tab list -->
+
+
+
+
+    <div class="tab-content">
+        <div class="tab-pane fade active show" id="explore_ecoles">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

@@ -31,7 +31,6 @@ export class CorrectionTacheListComponent
           });
       } else {
         this.correctionSevice.getCorrections(tache).subscribe(() => {
-          console.log(this.correctionSevice.data.length);
           this.loading = false;
         });
       }

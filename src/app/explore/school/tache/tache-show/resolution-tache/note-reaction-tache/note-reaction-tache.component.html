@@ -20,13 +20,13 @@
             <!-- Buttons -->
             <span class="float-right">
                 <!-- Edit button -->
-                <button
+                <span
                     *ngIf="!allowEdit && note"
                     (click)="allowEdit = true"
                     class="btn btn-primary rounded-circle pd-4"
                     style="font-size: 10px !important;">
                     <i class="far fa-pen"></i>
-                </button>
+                </span>
 
 
                 <!-- Submit button -->
@@ -57,11 +57,11 @@
     <div class="note-reaction__body">
         <div class="note-reaction__note">
             <!-- Note Input -->
-            <input class='form-control' type="number" [(ngModel)]="note" *ngIf="!note || allowEdit">
+            <input class='form-control mr-1' type="number" [(ngModel)]="note" *ngIf="!note || allowEdit">
 
             <!-- Note -->
             <span *ngIf="note && !allowEdit">{{ note + ' ' }}</span>
-            <span class="tx-danger">{{'/ 20'}}</span>
+            <span class="tx-facebook">{{'/ 20'}}</span>
         </div>
         <div *ngIf="showNoteError" class="invalid-feedback">
             {{ 'veuillezSaisirUneNotevalide' | translate }}

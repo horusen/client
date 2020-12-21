@@ -1,0 +1,18 @@
+<!-- Header -->
+<div class="card pd-y-10 pd-x-10 mg-b-10">
+    <h3 class="tx- tx-16 tx-primary italic mg-l-0 bold">
+        <i class="fad fa-users-class mr-2"></i>
+        <span *ngIf="showData.byClasse">{{  ('elevesDeLaClasse' | translate) + ': ' + classe.libelle  }}</span>
+        <span *ngIf="showData.byProfesseur">{{ 'listeDeVosEtudiants' | translate }}</span>
+
+        <!-- Boutton ajouter -->
+        <!-- <i class="fad fa-plus-circle clickable tx-14 float-right tx-primary bg-light "
+            style="padding:6px; border-radius:50%"
+            (click)="showGroupeCreateComponent()"
+            [ngbTooltip]="'creerUnGroupe' | translate">
+        </i> -->
+    </h3>
+</div>
+
+<app-eleve-list *ngIf="showData.byClasse"></app-eleve-list>
+<app-eleve-list-by-professeur *ngIf="showData.byProfesseur"></app-eleve-list-by-professeur>

@@ -1,4 +1,4 @@
-<div class="flex-fill pd-15 pl-1 bd-t bd-b">
+<div class="flex-fill pd-15 pl-1 sidebar-element-container bd-t bd-b">
     <div
         class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
         <span class="tx-10 tx-uppercase">
@@ -8,7 +8,9 @@
     <nav class="nav flex-column  " *ngIf="!loading && niveauDifficulteClasseService.data.length">
         <div class="d-flex align-items-center justify-content-between"
             *ngFor="let nd of niveauDifficulteClasseService.data$ | async; let i = index">
-            <a class="nav-link clickable tx-white">
+            <a class="nav-link clickable tx-white"
+                [ngClass]="{'font-weight-bold text-primary': affectationTacheService.getFiltre('niveaux_difficultes')?.includes(nd.id)}"
+                (click)="fitrer(nd.id)">
                 <i
                     class="fad fa-certificate"
                     [ngClass]="{

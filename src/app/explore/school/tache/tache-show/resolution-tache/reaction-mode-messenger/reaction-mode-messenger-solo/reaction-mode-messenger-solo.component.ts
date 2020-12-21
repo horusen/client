@@ -15,6 +15,7 @@ export class ReactionModeMessengerSoloComponent
   extends BaseComponent
   implements OnInit {
   @Input() reaction: any;
+  @Input() parentUrl: string;
   @Input() reversed: boolean = false;
   constructor(
     public reactionService: ReactionResolutionTacheService,

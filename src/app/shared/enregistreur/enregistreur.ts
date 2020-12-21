@@ -145,9 +145,6 @@ export class Enregistreur {
 
       this._debutEnregistrement = null;
       this._enregistreur = null;
-
-      console.log(this.file);
-      console.log(this.urlFile);
     }
   }
 
@@ -161,7 +158,6 @@ export class Enregistreur {
   }
 
   private _fromBlobToFile(theBlob: Blob, fileName: string, extension: string) {
-    console.log("from file to blob");
     let file = new File([theBlob], fileName, {
       type: extension,
       lastModified: Date.now(),

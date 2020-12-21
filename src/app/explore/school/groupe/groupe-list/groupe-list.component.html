@@ -1,0 +1,23 @@
+<div class="card-body p-2 bg-light bd-t">
+    <div class="row row-xs mg-0 pd-0 clearfix"
+        *ngIf="!loading && groupeService.data">
+        <div class="col-xs-12 col-sm-6 col-md-3"
+            *ngFor="let groupe of groupeService.data | paginate: {itemsPerPage: 8, currentPage: currentPage, id: 'groupe'}">
+            <app-groupe-solo [groupe]="groupe"></app-groupe-solo>
+        </div>
+
+        <!-- Pagination -->
+        <div class="col-12 mt-1 d-flex justify-content-center">
+            <pagination-controls
+                id="groupe"
+                (pageChange)="currentPage = $event"
+                autoHide="true"
+                previousLabel="{{ 'PRECEDENT' | translate }}"
+                nextLabel="{{ 'SUIVANT' | translate }}">
+            </pagination-controls>
+        </div>
+    </div>
+
+    <app-loading *ngIf="loading"></app-loading>
+    <app-missing-data *ngIf="!loading && !groupeService.data"></app-missing-data>
+</div>

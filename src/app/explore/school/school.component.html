@@ -3,28 +3,49 @@
         <div class="page-sidebar-inner">
             <div class="page-sidebar-menu ">
                 <ul class="navbar nav  " role="tablist">
+                    <!-- Explore -->
                     <li class="nav-item">
-                        <a class="nav-link active show tx-center" data-toggle="pill" href="#explore_school">
+                        <a class="nav-link  tx-center"
+                            [routerLink]="['./']"
+                            [routerLinkActive]="'active show'"
+                            [routerLinkActiveOptions]="{exact: true}">
                             <i class="fal fa-comments tx-20  tx-primary"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0">Explore.S</p>
-                        </a></li>
-
-                    <li class="nav-item tx-center ">
-                        <a class="nav-link " data-toggle="pill" href="#sites_groupes">
-                            <i class="fal fa-users-class tx-primary tx-20"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0">classes</p>
-                        </a></li>
-                    <li class="nav-item tx-center">
-                        <a class="nav-link  " data-toggle="pill" href="#groupes_inde">
-                            <i class="fal fa-users  tx-primary tx-20"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0">Groupes</p>
-                        </a></li>
-                    <li class="nav-item tx-center">
-                        <a class="nav-link " data-toggle="pill" href="#professeurs">
-                            <i class="fal fa-chalkboard-teacher  tx-20"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0 tx-center">Professeurs</p>
+                            <p class=" tx-primary tx-10 p-0 mb-0">{{ 'EXPLORER' | translate }}</p>
                         </a>
                     </li>
+
+                    <!-- Classe -->
+                    <li class="nav-item tx-center ">
+                        <a class="nav-link "
+                            [routerLink]="['classe']"
+                            [routerLinkActive]="'active show'">
+                            <i class="fal fa-users-class tx-primary tx-20"></i>
+                            <p class=" tx-primary tx-10 p-0 mb-0">{{ 'CLASSES' | translate }}</p>
+                        </a>
+                    </li>
+
+
+                    <!-- groupe independants -->
+                    <li class="nav-item tx-center">
+                        <a class="nav-link"
+                            [routerLink]="['groupe-independant']"
+                            [routerLinkActive]="'active show'">
+                            <i class="fal fa-users  tx-primary tx-20"></i>
+                            <p class=" tx-primary tx-10 p-0 mb-0">{{ 'GROUPES' | translate }}</p>
+                        </a>
+                    </li>
+
+                    <!-- Professeur -->
+                    <li class="nav-item tx-center">
+                        <a class="nav-link "
+                            [routerLink]="['professeur']"
+                            [routerLinkActive]="'active show'">
+                            <i class="fal fa-chalkboard-teacher tx-20"></i>
+                            <p class=" tx-primary tx-10 p-0 mb-0 tx-center">{{ 'PROFESSEURS' | translate }}</p>
+                        </a>
+                    </li>
+
+
                     <li class="nav-item tx-center">
                         <a class="nav-link " data-toggle="pill" href="#calendriers">
                             <i class="fal fa-calendar-alt  tx-primary tx-20"></i>
@@ -32,12 +53,17 @@
                         </a>
                     </li>
 
+                    <!-- Reseaux -->
                     <li class="nav-item tx-center">
-                        <a class="nav-link   tx-primary " data-toggle="pill" href="#explore_reseau">
+                        <a class="nav-link "
+                            [routerLink]="['reseaux']"
+                            [routerLinkActive]="'active show'">
                             <i class="fal fa-network-wired  tx-primary tx-20"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0">Réseau</p>
+                            <p class=" tx-primary tx-10 p-0 mb-0">{{ 'RESEAUX' | translate }}</p>
                         </a>
                     </li>
+
+
                     <li class="nav-item tx-center">
                         <a class="nav-link   tx-primary " data-toggle="pill" href="#explore_memoire">
                             <i class="fal fa-book  tx-primary tx-20"></i>
@@ -82,3 +108,13 @@
         </div>
     </div>
 </div>
+
+
+<app-modal-sidebar [configuration]="{name: 'tunel-create-modal', titre: 'creerUnTunel', icone:'comments-alt'}">
+    <app-tunel-create></app-tunel-create>
+</app-modal-sidebar>
+
+
+<app-modal-sidebar [configuration]="{name: 'reaction-tunel-modal', titre: 'TUNEL', icone:'comments-alt'}">
+    <app-reaction-tunel></app-reaction-tunel>
+</app-modal-sidebar>

@@ -1,0 +1,397 @@
+<div class="row row-xs clearfix  mg-0 pd-0 ">
+    <!-- Sidebar -->
+    <div class="col-2 p-0">
+        <app-sidebar-explore-reseaux></app-sidebar-explore-reseaux>
+    </div>
+
+    <!-- Content -->
+    <div class="col-lg-10 p-0 bg-white">
+        <!-- Header -->
+        <div class="row row-xs clearfix  mg-0 pd-0 ">
+            <div class="col-lg-1">
+                <div class="card-body collapse show  p-0" id="collapse1">
+                    <a role="button" class="btn btn-default mg-r-50" data-backdrop="false"
+                        data-toggle="modal" data-target="#m_modal_14"> <i
+                            class="fas fa-layer-plus tx-32 tx-yeto2 "></i></a>
+                    <div class="modal fade" id="m_modal_14" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel_14" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header p-1 ">
+                                    <h5 class="modal-title tx-facebook tx-16"
+                                        id="exampleModalLabel_4"> <i
+                                            class="fad fa-badge"></i> Objets Explorer</h5>
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true"><i
+                                                class="fad fa-times-circle mg-r-4 tx-facebook"></i></span>
+                                    </button>
+                                </div>
+                                <div class="modal-body mb-0 p-0"
+                                    style="padding-left:0px; padding-right:0px">
+                                    <div class="card">
+                                        <ul class="nav " id="pills-tab" role="tablist">
+                                            <li class="nav-item "><a class="nav-link "
+                                                    id="autres" data-toggle="pill"
+                                                    href="#prof_groupe">
+                                                    <i class="fad fa-users tx-primary"></i>
+                                                    <span
+                                                        class="tx-facebook">Groupes</span></a>
+                                            </li>
+                                            <li class="nav-item"><a class="nav-link "
+                                                    id="personal_chat_tab"
+                                                    data-toggle="pill"
+                                                    href="#prof_etudiants">
+                                                    <i
+                                                        class="fad fa-user-graduate tx-primary"></i><span
+                                                        class="tx-facebook">
+                                                        Etudiants</span></a></li>
+                                            <li class="nav-item"><a class="nav-link "
+                                                    id="autres" data-toggle="pill"
+                                                    href="#prof_enseignants">
+                                                    <i
+                                                        class="fad fa-user-tie tx-primary"></i><span
+                                                        class="tx-facebook">
+                                                        Professeurs</span></a></li>
+                                            <li class="nav-item "><a class="nav-link"
+                                                    id="autres" data-toggle="pill"
+                                                    href="#prof_reseaux">
+                                                    <i
+                                                        class="fad fa-network-wired tx-primary "></i><span
+                                                        class="tx-facebook">
+                                                        Réseaux</span></a></li>
+                                            <li class="nav-item "><a class="nav-link"
+                                                    id="autres" data-toggle="pill"
+                                                    href="#prof_exercices">
+                                                    <i
+                                                        class="fad fa-dumbbell tx-primary "></i><span
+                                                        class="tx-facebook">
+                                                        Excercices</span></a></li>
+                                            <li class="nav-item "><a class="nav-link"
+                                                    id="autres" data-toggle="pill"
+                                                    href="#prof_plans">
+                                                    <i
+                                                        class="fad fa-layer-group tx-primary "></i><span
+                                                        class="tx-facebook">
+                                                        Plans</span></a></li>
+                                            <li class="nav-item "><a class="nav-link"
+                                                    id="autres" data-toggle="pill"
+                                                    href="#prof_propositions">
+                                                    <i
+                                                        class="fad fa-recycle tx-primary "></i><span
+                                                        class="tx-facebook">
+                                                        Propositions</span></a></li>
+                                        </ul>
+                                        <div class="tab-content">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Send
+                                        message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-9">
+                <div class="form-group mg-t-5 mg-b-5 mg-l-60">
+                    <div class="input-group " style="width:600px">
+                        <span class="input-group-append"><a role="button"
+                                class="btn bg-yeto2"><i
+                                    class="fad fa-search  tx-white"></i></a></span>
+                        <input type="text" class="form-control pd-y-10  tx-white"
+                            placeholder="Recherches...">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="row mg-0 pd-0">
+            <div class="col-lg-9 p-0 ">
+                <router-outlet></router-outlet>
+            </div>
+
+
+            <div class="col-3 p-0">
+                <app-personal-assets></app-personal-assets>
+            </div>
+            <!-- <div class="bg-light col-lg-3 " style="padding-left: 0px; padding-right:0px">
+                <div class="" id="chatPeopleList">
+                    <div class="card bg-light  border-0 ">
+                        <ul class="nav  mg-t-5  nav-fill" id="pills-tab" role="tablist">
+                            <li class="nav-item"><a class="nav-link active show" id="group_chat_tab"
+                                    data-toggle="pill" href="#sous_domaine">
+                                    <i class="fad fa-users bg-white tx-facebook"
+                                        style="padding:6px; border-radius:50%"></i>Sous domaine</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" id="personal_chat_tab"
+                                    data-toggle="pill" href="#top_reseau">
+                                    <i class="fad fa-network-wired bg-white tx-facebook"
+                                        style="padding:6px; border-radius:50%"></i>Top</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="tab-content">
+
+                            <div class="tab-pane fade active show " id="sous_domaine">
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2">
+                                        <div class="avatar mg-l-5"><span
+                                                class="avatar-initial rounded-circle bg-primary op-6">DG</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">Design Group</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+
+                                </a>
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2">
+                                        <div class="avatar mg-l-5"><span
+                                                class="avatar-initial rounded-circle bg-danger op-6">UD</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">UI/UX Designers</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2">
+                                        <div class="avatar mg-l-5"><span
+                                                class="avatar-initial rounded-circle bg-warning op-6">FD</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">Front end Developers</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2">
+                                        <div class="avatar mg-l-5"><span
+                                                class="avatar-initial rounded-circle bg-teal op-6">RD</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">React Developers</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2">
+                                        <div class="avatar mg-l-5"><span
+                                                class="avatar-initial rounded-circle bg-success op-6">MG</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">Marketing Group</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2 mg-l-5">
+                                        <div class="avatar"><span
+                                                class="avatar-initial rounded-circle bg-warning op-6">FD</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">Front end Developers</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2 mg-l-5">
+                                        <div class="avatar"><span
+                                                class="avatar-initial rounded-circle bg-teal op-6">RD</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">React Developers</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2 mg-l-5">
+                                        <div class="avatar"><span
+                                                class="avatar-initial rounded-circle bg-success op-6">MG</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">Marketing Group</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="tab-pane fade " id="top_reseau">
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2">
+                                        <div class="avatar mg-l-5"><span
+                                                class="avatar-initial rounded-circle bg-primary op-6">DG
+                                                <i
+                                                    class="fas fa-network-wired tx-warning"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">Design Group</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2">
+                                        <div class="avatar mg-l-5"><span
+                                                class="avatar-initial rounded-circle bg-danger op-6">UD
+                                                <i
+                                                    class="fas fa-network-wired tx-warning"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">UI/UX Designers</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2">
+                                        <div class="avatar mg-l-5"><span
+                                                class="avatar-initial rounded-circle bg-warning op-6">FD
+                                                <i
+                                                    class="fas fa-network-wired tx-warning"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">Front end Developers</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2">
+                                        <div class="avatar mg-l-5"><span
+                                                class="avatar-initial rounded-circle bg-teal op-6">RD
+                                                <i
+                                                    class="fas fa-network-wired tx-warning"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">React Developers</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2">
+                                        <div class="avatar mg-l-5"><span
+                                                class="avatar-initial rounded-circle bg-success op-6">MG
+                                                <i
+                                                    class="fas fa-network-wired tx-warning"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">Marketing Group</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2 mg-l-5">
+                                        <div class="avatar"><span
+                                                class="avatar-initial rounded-circle bg-warning op-6">FD
+                                                <i
+                                                    class="fas fa-network-wired tx-warning"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">Front end Developers</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2 mg-l-5">
+                                        <div class="avatar"><span
+                                                class="avatar-initial rounded-circle bg-teal op-6">RD
+                                                <i
+                                                    class="fas fa-network-wired tx-warning"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">React Developers</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="media pd-y-10 bd-b">
+                                    <div class="mr-2 mg-l-5">
+                                        <div class="avatar"><span
+                                                class="avatar-initial rounded-circle bg-success op-6">MG
+                                                <i
+                                                    class="fas fa-network-wired tx-warning"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                                        <div class="d-inline-block">
+                                            <h6 class="mb-0 tx-13">Marketing Group</h6>
+                                            <p class="mb-0 tx-gray-600 tx-12">Congratulations
+                                                Friend...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div> -->
+        </div>
+    </div>
+</div>

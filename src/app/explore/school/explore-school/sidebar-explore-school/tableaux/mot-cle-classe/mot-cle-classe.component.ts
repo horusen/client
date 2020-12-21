@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AffectationTacheService } from "src/app/explore/school/tache/affectation-tache/affectation-tache.service";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { MotCleClasseService } from "./mot-cle-classe.service";
 
@@ -8,7 +9,10 @@ import { MotCleClasseService } from "./mot-cle-classe.service";
   styleUrls: ["./mot-cle-classe.component.scss"],
 })
 export class MotCleClasseComponent extends BaseComponent implements OnInit {
-  constructor(public motCleService: MotCleClasseService) {
+  constructor(
+    public motCleService: MotCleClasseService,
+    public affectationTacheService: AffectationTacheService
+  ) {
     super(motCleService);
   }
 
@@ -23,5 +27,9 @@ export class MotCleClasseComponent extends BaseComponent implements OnInit {
         this.loading = false;
       });
     }
+  }
+
+  filtrer(motCle: number) {
+    this.affectationTacheService.applyFilter("motCles", motCle);
   }
 }

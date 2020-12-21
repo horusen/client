@@ -5,7 +5,6 @@ import { TacheService } from "../tache.service";
 import { NiveauService } from "../../niveau/niveau.service";
 import { NiveauDifficulteService } from "../../niveau-difficulte/niveau-difficulte.service";
 import { MotCleService } from "../../mot-cle/mot-cle.service";
-import { PeriodeService } from "../../periode/periode.service";
 import { LangueService } from "../../langue/langue.service";
 import { BaseService } from "src/app/shared/services/base.service";
 
@@ -23,7 +22,6 @@ export class TacheCreateComponent
     public niveauService: NiveauService,
     public niveauDifficulteService: NiveauDifficulteService,
     public motCleService: MotCleService,
-    public periodeService: PeriodeService,
     public langueService: LangueService
   ) {
     super(tacheService);
@@ -34,7 +32,6 @@ export class TacheCreateComponent
     niveau_difficulte: [],
     langue: [],
     mot_cle: [],
-    periode: [],
   };
 
   dependanciesLoading = {
@@ -43,7 +40,6 @@ export class TacheCreateComponent
     niveau_difficulte: false,
     langue: false,
     mot_cle: false,
-    periode: false,
   };
 
   onMotCleCreate(mot_cle: any) {
@@ -64,7 +60,6 @@ export class TacheCreateComponent
     this.initForm(
       [
         "libelle",
-        "periode",
         "sous_domaine",
         "description",
         "langue",
@@ -87,7 +82,6 @@ export class TacheCreateComponent
     this._getDependancie("niveau_difficulte", this.niveauDifficulteService);
     this._getDependancie("langue", this.langueService);
     this._getDependancie("mot_cle", this.motCleService);
-    this._getDependancie("periode", this.periodeService);
   }
 
   private _getDependancie(dependancie: string, service: BaseService) {
@@ -106,14 +100,12 @@ export class TacheCreateComponent
         sous_domaine: this.formControl("sous_domaine").value[0].id,
         niveau: this.formControl("niveau").value[0].id,
         langue: this.formControl("langue").value[0].id,
-        periode: this.formControl("periode").value[0].id,
         niveau_difficulte: this.formControl("niveau_difficulte").value[0].id,
         ...this.helper.omitFieldInObject(this.form.value, [
           "mot_cles",
           "sous_domaine",
           "niveau",
           "langue",
-          "periode",
           "niveau_difficulte",
         ]),
       };
@@ -122,6 +114,7 @@ export class TacheCreateComponent
         this.initialiseForm();
         this.loading = false;
         this.helper.toggleModal("tache-create-modal");
+        this.helper.alertSuccess();
       });
     }
   }

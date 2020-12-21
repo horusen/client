@@ -36,6 +36,7 @@ export class CorrectionTacheCreateComponent
       this.loading = true;
       this.correctionService.add(this.form.value).subscribe(() => {
         this.loading = false;
+        // this.helper.alertSuccess();
         this.helper.toggleModal("correction-tache-create-modal");
       });
     }

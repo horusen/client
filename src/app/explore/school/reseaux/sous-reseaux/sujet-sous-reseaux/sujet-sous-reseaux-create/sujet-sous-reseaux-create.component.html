@@ -1,0 +1,43 @@
+<form class="custom-placeholder" [formGroup]="form" (submit)="create()">
+    <!-- Libelle -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+        <div class="col-10">
+            <!-- Label -->
+            <label class="control-label"
+                for="libelle">
+                {{ 'SUJET' | translate }}
+            </label>
+
+            <!-- Input -->
+            <input type="text"
+                class="form-control form-control-sm"
+                required
+                [formControlName]="'libelle'"
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'libelle'), 'is-valid': isValid('libelle')}">
+        </div>
+    </div>
+
+
+    <!-- Description -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+        <div class="col-10">
+            <label class="control-label" for="description">{{ 'DETAILS' | translate }}</label>
+            <textarea name="description" maxlength="500" class="form-control  form-control-sm" cols="30" rows="3"
+                [formControlName]="'description'"
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"></textarea>
+        </div>
+    </div>
+
+    <!-- Valider -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+        <div class="col-10">
+            <button class="btn btn-sm btn-facebook mb-3 float-right" [disabled]="form.invalid">
+                {{ 'VALIDER' | translate }}
+                <span *ngIf="loading">
+                    <i class="fas fa-circle-notch fa-spin"></i>
+                </span>
+            </button>
+        </div>
+    </div>
+
+</form>

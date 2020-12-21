@@ -8,15 +8,20 @@ import { BaseService } from "src/app/shared/services/base.service";
 })
 export class ReactionResolutionTacheService extends BaseService {
   public rebondissement$ = new Subject<any>();
+  affectationTache: any; // Stock la tache pour eviter de recuperer les reactions d'une même tâche plusieurs fois
 
   constructor() {
     super("tache/reaction");
   }
 
-  getReaction(tache: number) {
-    return this.factory
-      .get(`tache/${tache}/reaction`)
-      .pipe(tap(this.listResponseHandler()));
+  getReaction(affectation_tache: number) {
+    this.loading = true;
+    return this.factory.get(`tache/${affectation_tache}/reaction`).pipe(
+      tap({
+        ...this.listResponseHandler(),
+        complete: () => (this.loading = false),
+      })
+    );
   }
 
   add(elements: object) {

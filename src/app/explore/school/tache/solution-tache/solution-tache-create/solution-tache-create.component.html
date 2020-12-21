@@ -1,0 +1,27 @@
+<form class="custom-placeholder" [formGroup]="form" (submit)="create()">
+    <!-- Solution -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+        <div class="col-12">
+            <label class="control-label" for="solution">{{ 'SOLUTION' | translate }}</label>
+            <ckeditor
+                [editor]="Editor"
+                class=""
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'solution'), 'is-valid': isValid('solution')}"
+                formControlName="solution">
+            </ckeditor>
+            <div *ngIf="shouldShowRequiredError('solution')" class="invalid-feedback">
+                {{ 'saisissezVotreSolution' | translate }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Valider -->
+    <div class="col-lg-12 p-0 mt-2">
+        <button class="btn btn-sm btn-facebook mb-3 float-right">
+            {{ 'VALIDER' | translate }}
+            <span *ngIf="loading">
+                <i class="fas fa-circle-notch fa-spin"></i>
+            </span>
+        </button>
+    </div>
+</form>

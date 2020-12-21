@@ -1,0 +1,101 @@
+<div class="bd-b w-100 mg-b-1"
+    *ngIf="tache"
+    [routerLinkActive]="'border border-primary'">
+    <div class="d-flex ">
+        <!-- Icone -->
+        <div class="tx-20 pd-y-15 pd-x-10 bg-white">
+            <i class="fal fa-tasks-alt tx-primary"></i>
+        </div>
+        <div class="ml-3 mr-3 wd-100p">
+            <!-- date de soumission et libelle -->
+            <div class="mb-0 d-flex justify-content-between align-items-center">
+                <!-- Libelle -->
+                <a [routerLink]="['tache',tache.id]"
+                    class="tx-facebook tx-13"
+                    style="text-align: justify">
+                    {{  tache.libelle }}
+                </a>
+
+                <!-- Date d'affectation -->
+                <!-- <span class="tx-11">
+                    <i class="fad fa-calendar tx-primary"></i>
+                    {{ tache.affectation_groupe.created_at | date }}
+                </span> -->
+            </div>
+
+
+            <!-- Assets -->
+            <p class="tx-10 mg-t-10 mb-0 tx-gray ">
+                <!-- Sous domaine -->
+                <span class="mr-2" [ngbTooltip]="'sousDomaine' | translate">
+                    <i class="fad fa-layer-group tx-warning"></i> {{ tache.sous_domaine.libelle }}
+                </span>
+
+                <!-- Niveau difficulté -->
+                <span class="mr-2" [ngbTooltip]="'niveauDeDifficulte' | translate">
+                    <i class="fad fa-level-up tx-teal"></i>
+                    {{ tache.niveau_difficulte.libelle }}
+                </span>
+
+
+
+                <!-- voir les affectation -->
+                <span class="float-right" [ngbTooltip]="'voirLesAffectations' | translate"
+                    *ngIf="tache.has_affectation_groupe">
+                    <i class="fad fa-eye tx-primary clickable"
+                        *ngIf="!tache.mot_cles.length">
+                    </i>
+                </span>
+
+            </p>
+
+            <!-- mot cles -->
+            <p class="mb-1" *ngIf="tache.mot_cles.length">
+                <span class="tx-9 tx-facebook font-weight-bold">{{ 'motCles' | translate }}: </span>
+                <!-- Choisir de maniere aleatoir la couleur du badge:
+                                            * Pour cela on utilise l'unité de la valeur ascii correpondant à l'avant dernière lettre de la chaine de caractere 
+                                            * Dans le cas où la chaine de caractère ne possède qu'un seul caractère, on prend l'unité de la valeur ascii pour definir la couleur du bagde -->
+                <span
+                    class="badge mr-1  p-0 "
+                    *ngFor="let mc of tache.mot_cles; let i = index"
+                    [ngClass]="{
+                        'bgm-warning': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 1,
+                        'bgm-yellow': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 2,
+                        'bgm-primary': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 3,
+                        'bg-facebook': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 4,
+                        'bgm-blue': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 5,
+                        'bgm-mint': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 6,
+                        'bgm-success': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 7,
+                        'bgm-danger': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 8,
+                        'bgm-secondary': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 9,
+                        'bgm-indigo': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 0
+                    }">
+                    {{ '#' + mc  }}
+                </span>
+
+                <span class="float-right" [autoClose]="'outside'"
+                    *ngIf="tache.has_affectation_groupe"
+                    placement="bottom"
+                    [popoverTitle]="affectationTitre"
+                    [ngbPopover]="affectationBody">
+                    <i class="fad fa-eye tx-primary clickable"
+                        *ngIf="tache.mot_cles.length"></i>
+                </span>
+            </p>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- header -->
+<ng-template #affectationTitre>
+    <b class="text-center tx-facebook font-weight-bolder">
+        {{ 'listeDesAffectations' | translate }}
+    </b>
+</ng-template>
+
+<!-- Body -->
+<ng-template #affectationBody class="p-3">
+    <app-affectation-tache-list [tache]="tache"></app-affectation-tache-list>
+</ng-template>

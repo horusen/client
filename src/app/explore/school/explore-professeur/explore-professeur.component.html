@@ -1,0 +1,301 @@
+<div class="row row-xs clearfix  mg-0 pd-0 ">
+    <div class="col-lg-2">
+        <app-sidebar-explore-professeur></app-sidebar-explore-professeur>
+    </div>
+    <div class="col-lg-10 p-0 ">
+        <!-- Header -->
+        <div class="row row-xs clearfix  mg-0 pd-0 ">
+            <!-- Raccourcis explore -->
+            <div class="col-lg-1">
+                <div class="card-body collapse show  p-0" id="collapse1">
+                    <a role="button" class="btn btn-default mg-r-50"
+                        data-backdrop="false" data-toggle="modal"
+                        data-target="#m_modal_5"> <i
+                            class="fas fa-layer-plus tx-32 tx-facebook"></i></a>
+                    <div class="modal fade" id="m_modal_5" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel_4" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header p-1 ">
+                                    <h5 class="modal-title tx-facebook tx-16"
+                                        id="exampleModalLabel_4"> <i
+                                            class="fad fa-badge"></i> Objets Explorer
+                                    </h5>
+                                    <button type="button" class="close"
+                                        data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"><i
+                                                class="fad fa-times-circle mg-r-4 tx-facebook"></i></span>
+                                    </button>
+                                </div>
+                                <div class="modal-body mb-0 p-0"
+                                    style="padding-left:0px; padding-right:0px">
+                                    <div class="card">
+                                        <ul class="nav " id="pills-tab" role="tablist">
+                                            <li class="nav-item "><a class="nav-link "
+                                                    id="autres" data-toggle="pill"
+                                                    href="#prof_groupe">
+                                                    <i
+                                                        class="fad fa-users tx-primary"></i>
+                                                    <span
+                                                        class="tx-facebook">Groupes</span></a>
+                                            </li>
+                                            <li class="nav-item"><a class="nav-link "
+                                                    id="personal_chat_tab"
+                                                    data-toggle="pill"
+                                                    href="#prof_etudiants">
+                                                    <i
+                                                        class="fad fa-user-graduate tx-primary"></i><span
+                                                        class="tx-facebook">
+                                                        Etudiants</span></a></li>
+                                            <li class="nav-item"><a class="nav-link "
+                                                    id="autres" data-toggle="pill"
+                                                    href="#prof_enseignants">
+                                                    <i
+                                                        class="fad fa-user-tie tx-primary"></i><span
+                                                        class="tx-facebook">
+                                                        Professeurs</span></a></li>
+                                            <li class="nav-item "><a class="nav-link"
+                                                    id="autres" data-toggle="pill"
+                                                    href="#prof_reseaux">
+                                                    <i
+                                                        class="fad fa-network-wired tx-primary "></i><span
+                                                        class="tx-facebook">
+                                                        Réseaux</span></a></li>
+                                            <li class="nav-item "><a class="nav-link"
+                                                    id="autres" data-toggle="pill"
+                                                    href="#prof_exercices">
+                                                    <i
+                                                        class="fad fa-dumbbell tx-primary "></i><span
+                                                        class="tx-facebook">
+                                                        Excercices</span></a></li>
+                                            <li class="nav-item "><a class="nav-link"
+                                                    id="autres" data-toggle="pill"
+                                                    href="#prof_plans">
+                                                    <i
+                                                        class="fad fa-layer-group tx-primary "></i><span
+                                                        class="tx-facebook">
+                                                        Plans</span></a></li>
+                                            <li class="nav-item "><a class="nav-link"
+                                                    id="autres" data-toggle="pill"
+                                                    href="#prof_propositions">
+                                                    <i
+                                                        class="fad fa-recycle tx-primary "></i><span
+                                                        class="tx-facebook">
+                                                        Propositions</span></a></li>
+                                        </ul>
+                                        <div class="tab-content">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Send
+                                        message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+            </div>
+
+            <!-- Boutton recherche -->
+            <div class="col-lg-9">
+                <div class="form-group mg-t-5 mg-b-5 mg-l-60">
+                    <div class="input-group " style="width:600px">
+                        <span class="input-group-append"><a role="button"
+                                class="btn btn-facebook  "><i
+                                    class="fad fa-search  tx-white"></i></a></span>
+                        <input type="text" class="form-control pd-y-10  tx-white"
+                            placeholder="Recherches...">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Elements -->
+        <div class="card  bd-facebook mg-b-20">
+            <div class="nav-tabs-top">
+                <!-- Nav tabs -->
+                <ul class="nav bg-white bd-b bd-t mg-0 pd-0">
+                    <!-- Professeur -->
+                    <li class="nav-item mg-0 pd-0 ">
+                        <a class="nav-link3 tx-facebook"
+                            [routerLinkActiveOptions]="{exact: true}"
+                            [routerLinkActive]="'font-weight-bold'"
+                            [routerLink]="['./']"
+                            style="padding: 5px 12px;">
+                            <i class="fal fa-user-tie tx-12 bg-white tx-facebook "
+                                [routerLinkActive]="'fas'"
+                                [routerLinkActiveOptions]="{exact: true}"
+                                style="padding:6px; border-radius:50%">
+                            </i>
+
+                            {{ 'PROFESSEURS' | translate }}
+
+                        </a>
+                    </li>
+
+
+                    <!-- Classe -->
+                    <li class="nav-item ">
+                        <a class="nav-link3 tx-facebook"
+                            [routerLinkActive]="'font-weight-bold'"
+                            [routerLink]="['classe']"
+                            style="padding: 5px 12px;">
+                            <i class="fal fa-university tx-12 bg-white tx-facebook "
+                                [routerLinkActive]="'fas'"
+                                style="padding:6px; border-radius:50%">
+                            </i>
+
+                            {{ 'CLASSES' | translate }}
+
+                        </a>
+                    </li>
+
+                    <!-- Taches -->
+                    <li class="nav-item ">
+                        <a class="nav-link3 tx-facebook"
+                            [routerLinkActive]="'font-weight-bold'"
+                            [routerLink]="['tache']"
+                            style="padding: 5px 12px;">
+                            <i class="fal fa-tasks-alt bg-white tx-facebook "
+                                [routerLinkActive]="'fas'"
+                                style="padding:6px; border-radius:50%">
+                            </i>
+
+                            {{ 'TACHES' | translate }}
+
+                        </a>
+                    </li>
+
+                    <!-- Plans -->
+                    <li class="nav-item ">
+                        <a class="nav-link3 tx-facebook"
+                            [routerLinkActive]="'font-weight-bold'"
+                            [routerLink]="['plan']"
+                            style="padding: 5px 12px;">
+                            <i class="fal fa-layer-group bg-white tx-facebook "
+                                [routerLinkActive]="'fas'"
+                                style="padding:6px; border-radius:50%">
+                            </i>
+
+                            {{ 'PLANS' | translate }}
+
+                        </a>
+                    </li>
+
+
+                    <!-- Programmes -->
+                    <li class="nav-item ">
+                        <a class="nav-link3 tx-facebook"
+                            [routerLinkActive]="'font-weight-bold'"
+                            [routerLink]="['programme']"
+                            style="padding: 5px 12px;">
+                            <i class="fal fa-tasks bg-white tx-facebook "
+                                [routerLinkActive]="'fas'"
+                                style="padding:6px; border-radius:50%">
+                            </i>
+
+                            {{ 'PROGRAMMES' | translate }}
+
+                        </a>
+                    </li>
+
+                    <!-- Etudiants -->
+                    <li class="nav-item ">
+                        <a class="nav-link3 tx-facebook"
+                            [routerLinkActive]="'font-weight-bold'"
+                            [routerLink]="['etudiants']"
+                            style="padding: 5px 12px;">
+                            <i class="fal fa-user-graduate bg-white tx-facebook "
+                                [routerLinkActive]="'fas'"
+                                style="padding:6px; border-radius:50%">
+                            </i>
+
+                            {{ 'ETUDIANTS' | translate }}
+
+                        </a>
+                    </li>
+
+
+                    <!-- Groupes -->
+                    <li class="nav-item ">
+                        <a class="nav-link3 tx-facebook"
+                            [routerLinkActive]="'font-weight-bold'"
+                            [routerLink]="['groupe']"
+                            style="padding: 5px 12px;">
+                            <i class="fal fa-users-class bg-white tx-facebook "
+                                [routerLinkActive]="'fas'"
+                                style="padding:6px; border-radius:50%">
+                            </i>
+
+                            {{ 'GROUPES' | translate }}
+
+                        </a>
+                    </li>
+
+
+                    <!-- Calendrier -->
+                    <li class="nav-item ">
+                        <a class="nav-link3 tx-facebook"
+                            [routerLinkActive]="'font-weight-bold'"
+                            [routerLink]="['calendrier']"
+                            style="padding: 5px 12px;">
+                            <i class="fal fa-calendar-alt bg-white tx-facebook "
+                                [routerLinkActive]="'fas'"
+                                style="padding:6px; border-radius:50%">
+                            </i>
+
+                            {{ 'CALENDRIER' | translate }}
+
+                        </a>
+                    </li>
+
+
+                    <!-- Fichiers -->
+                    <li class="nav-item ">
+                        <a class="nav-link3 tx-facebook"
+                            [routerLinkActive]="'font-weight-bold'"
+                            [routerLink]="['fichier']"
+                            style="padding: 5px 12px;">
+                            <i class="fal fa-file-alt bg-white tx-facebook "
+                                [routerLinkActive]="'fas'"
+                                style="padding:6px; border-radius:50%"></i>
+
+                            {{'FICHIERS' | translate }}
+
+                        </a>
+                    </li>
+
+
+                    <!-- Explore -->
+                    <li class="nav-item mg-0 pd-0 ">
+                        <a class="nav-link3 tx-facebook"
+                            [routerLinkActive]="'font-weight-bold'"
+                            [routerLink]="['explore']"
+                            style="padding: 5px 12px;">
+                            <i class="fal fa-user-tie tx-12 bg-white tx-facebook "
+                                [routerLinkActive]="'fas'"
+                                style="padding:6px; border-radius:50%">
+                            </i>
+
+                            {{ 'EXPLORE' | translate }}
+
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <router-outlet></router-outlet>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

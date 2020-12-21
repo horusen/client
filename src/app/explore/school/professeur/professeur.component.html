@@ -1,0 +1,32 @@
+<!-- Header -->
+<div class="card">
+    <div class="row mg-t-10 mg-b-10">
+        <!-- Titre -->
+        <div class="col-11">
+            <h3 class="tx- tx-16 italic mg-l-20 bold"
+                [ngClass]="{'tx-primary': showData.byClasse, 'tx-yeto2': showData.byEtablissement}">
+                <i class="fal fa-list"></i>
+                {{ 'listeDesProfesseurs' | translate }}
+            </h3>
+        </div>
+
+        <!-- Boutton ajouter -->
+        <div class="col-lg-1 float-right btn-demo">
+            <a class="btn btn-oblong btn-light bd-0 btn-icon clickable"
+                [ngClass]="{'tx-primary': showData.byClasse, 'tx-yeto2': showData.byEtablissement}">
+                <i class="fad fa-plus-circle tx-14"
+                    [ngClass]="{'tx-primary': showData.byClasse, 'tx-yeto2': showData.byEtablissement}"
+                    style="padding:0px; border-radius:50%">
+                </i>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="card-body p-2 bg-light bd-t">
+    <app-professeur-list-by-classe *ngIf="showData.byClasse"></app-professeur-list-by-classe>
+    <app-professeur-list-by-etablissement *ngIf="showData.byEtablissement"></app-professeur-list-by-etablissement>
+</div>
