@@ -20,7 +20,7 @@ export class ProfesseurListMinComponent
 
   getData() {
     this.loading = true;
-    this.professeurService.initialise().subscribe(() => {
+    this.professeurService.getByUserClasse().subscribe(() => {
       this.loading = false;
     });
   }

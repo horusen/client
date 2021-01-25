@@ -12,11 +12,11 @@ export class SousReseauxShowComponent
   extends BaseSingleComponent
   implements OnInit {
   constructor(
-    public sousDomaine: SousDomaineService,
+    public sousDomaineService: SousDomaineService,
     public route: ActivatedRoute,
     public router: Router
   ) {
-    super(sousDomaine, route);
+    super(sousDomaineService, route);
   }
 
   ngOnInit(): void {

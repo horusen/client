@@ -14,7 +14,8 @@
 
                 <!-- Boutton ajouter -->
                 <div class="col-lg-2  btn-demo">
-                    <i class="fad fa-exchange clickable tx-14 tx-primary bg-light "
+                    <i class="fad fa-plus clickable tx-14 tx-primary bg-light "
+                        (click)="helper.toggleModal('tache-add-modal')"
                         style="padding:6px; border-radius:50%"
                         [ngbTooltip]="'faireUneNouvelleAffectation' | translate">
                     </i>
@@ -54,3 +55,8 @@
         <router-outlet></router-outlet>
     </div>
 </div>
+
+
+<app-modal [configuration]="{name: 'affecter-tache-modal', titre: 'ajouterUneNouvelleTache', icone: 'tasks-alt'}">
+    <app-tache-create></app-tache-create>
+</app-modal>

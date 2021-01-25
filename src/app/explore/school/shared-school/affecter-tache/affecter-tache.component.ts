@@ -10,6 +10,7 @@ import { TacheService } from "../../tache/tache.service";
 import { PeriodeService } from "../../periode/periode.service";
 import { EventEmitter } from "events";
 import { AffectationTacheService } from "../../tache/affectation-tache/affectation-tache.service";
+import { EleveService } from "../../eleve.service";
 
 @Component({
   selector: "app-affecter-tache",
@@ -32,7 +33,13 @@ export class AffecterTacheComponent
     cours: [],
     chapitres: [],
     taches: [],
+    eleves: [],
     periodes: [],
+    elementsDAffectation: [
+      { id: 1, libelle: "eleve" },
+      { id: 2, libelle: "groupe" },
+      { id: 3, libelle: "classe" },
+    ],
   };
 
   public dependanciesLoading = {
@@ -42,6 +49,7 @@ export class AffecterTacheComponent
     chapitre: false,
     tache: false,
     periode: false,
+    eleve: false,
   };
 
   constructor(
@@ -52,7 +60,8 @@ export class AffecterTacheComponent
     public classeService: ClasseService,
     public chapitreService: ChapitreService,
     public etablissementService: EtablissementService,
-    public periodeService: PeriodeService
+    public periodeService: PeriodeService,
+    public eleveService: EleveService
   ) {
     super(tacheService);
   }
@@ -89,6 +98,14 @@ export class AffecterTacheComponent
     });
   }
 
+  getEleve(classe: number) {
+    this.dependanciesLoading.eleve = true;
+    this.eleveService.getByClasse(classe).subscribe((eleves) => {
+      this.dependancies.eleves = eleves;
+      this.dependanciesLoading.eleve = false;
+    });
+  }
+
   getClasse() {
     this.dependanciesLoading.classe = true;
     this.classeService
@@ -118,6 +135,7 @@ export class AffecterTacheComponent
   initialiseForm() {
     this.form = this.fb.group({
       groupe: [this.groupe],
+      eleves: [this.groupe],
       classe: [this.classe],
       cours: [],
       periode: [[], Validators.required],
@@ -125,13 +143,31 @@ export class AffecterTacheComponent
       tache: [this.tache, Validators.required],
       debut: [null, Validators.required],
       fin: [null, Validators.required],
+      affecterA: [
+        [this.dependancies.elementsDAffectation[0]],
+        Validators.required,
+      ],
     });
 
     this.formValueComparer("debut", "fin", "verifierLesDates", true);
 
+    this.form.controls.affecterA.valueChanges.subscribe((element) => {
+      if (this.form.controls.classe.value) {
+        if (element[0].libelle == "eleve") {
+          this.getEleve(this.form.controls.classe.value[0].id);
+        } else if (element[0].libelle == "groupe") {
+          this.getGroupe(this.form.controls.classe.value[0].id);
+        }
+      }
+    });
+
     this.form.controls.classe.valueChanges.subscribe((classe) => {
       this.getCours(classe[0].id);
-      this.getGroupe(classe[0].id);
+      if (this.form.controls.affecterA.value[0].libelle == "groupe") {
+        this.getGroupe(classe[0].id);
+      } else if (this.form.controls.affecterA.value[0].libelle == "eleve") {
+        this.getEleve(classe[0].id);
+      }
     });
 
     this.form.controls.groupe.valueChanges.subscribe((groupe) => {
@@ -172,7 +208,14 @@ export class AffecterTacheComponent
   affecter() {
     this.loading = true;
     const data = {
-      groupe: this.getFormValue("groupe"),
+      groupe:
+        this.getFormValue("affecterA") == "groupe"
+          ? this.getFormValue("groupe")
+          : null,
+      eleves:
+        this.getFormValue("affecterA") == "eleve"
+          ? this.helper.idExtractor(this.formValue("eleves"))
+          : null,
       chapitre: this.getFormValue("chapitre"),
       tache: this.getFormValue("tache"),
       classe: this.getFormValue("classe"),
@@ -181,16 +224,18 @@ export class AffecterTacheComponent
       fin: this.form.controls.fin.value,
     };
 
-    this.affectationTacheService.add(data).subscribe((tache) => {
-      // On supprime la tache nouvelle affécté de la liste des taches qui peuvent
-      // être affecté à ce groupe
-      this.dependancies.taches = this.dependancies.taches.filter(
-        (item) => item.id != tache.id
-      );
+    this.affectationTacheService
+      .add(this.helper.omitNullValueInObject(data))
+      .subscribe((tache) => {
+        // On supprime la tache nouvelle affécté de la liste des taches qui peuvent
+        // être affecté à ce groupe
+        this.dependancies.taches = this.dependancies.taches.filter(
+          (item) => item.id != tache.id
+        );
 
-      this.loading = false;
-      this.initialiseForm();
-      this.helper.alertSuccess();
-    });
+        this.loading = false;
+        this.initialiseForm();
+        this.helper.alertSuccess();
+      });
   }
 }

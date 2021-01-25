@@ -1,24 +1,43 @@
 <!-- Header -->
-<div class="card">
-    <div class="row mg-t-10 mg-b-10">
+<div class="card" *ngIf="!router.url.includes('school/etablissement/annuaire')">
+    <div class="row mg-y-7 mx-0">
         <!-- Titre -->
-        <div class="col-11">
-            <h3 class="tx- tx-16 italic mg-l-20 bold"
-                [ngClass]="{'tx-primary': showData.byClasse, 'tx-yeto2': showData.byEtablissement}">
-                <i class="fal fa-list"></i>
-                {{ 'listeDesProfesseurs' | translate }}
-            </h3>
-        </div>
-
-        <!-- Boutton ajouter -->
-        <div class="col-lg-1 float-right btn-demo">
-            <a class="btn btn-oblong btn-light bd-0 btn-icon clickable"
-                [ngClass]="{'tx-primary': showData.byClasse, 'tx-yeto2': showData.byEtablissement}">
-                <i class="fad fa-plus-circle tx-14"
-                    [ngClass]="{'tx-primary': showData.byClasse, 'tx-yeto2': showData.byEtablissement}"
+        <div class="col-8">
+            <!-- <h3 class="tx- tx-16 tx-success italic mg-r-20 bold">
+                <i class="fad fa-users-class"></i>
+                {{ 'CLASSE' | translate }}
+            </h3> -->
+            <a class="btn btn-oblong btn-light tx-yeto2 float-left bd-0 btn-icon clickable">
+                <i class="fad fa-plus-circle tx-14 tx-yeto2"
                     style="padding:0px; border-radius:50%">
                 </i>
             </a>
+            <!-- <h3 class="tx- tx-16 tx-success italic mg-l-20 bold">
+                <i class="fad fa-users-class"></i>
+                {{ 'CLASSE' | translate }}
+            </h3> -->
+        </div>
+
+
+
+        <!-- Boutton ajouter -->
+        <div class="col-lg-4 float-right btn-demo">
+            <div class="form-group mg-b-5 ">
+                <div class="input-group w-100">
+                    <!--  -->
+                    <input
+                        #search
+                        type="text"
+                        [placeholder]="'RECHERCHER' | translate"
+                        class="form-control pd-y-8">
+
+                    <span class="">
+                        <button class="btn bg-light h-100 d-flex align-items-center" (click)="research(search.value)">
+                            <i class="fad fa-search tx-facebook"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -26,7 +45,9 @@
 
 
 
-<div class="card-body p-2 bg-light bd-t">
-    <app-professeur-list-by-classe *ngIf="showData.byClasse"></app-professeur-list-by-classe>
+<div class="card-body p-2 bg-light">
+    <app-professeur-list></app-professeur-list>
+    <!-- <app-professeur-list-by-classe *ngIf="showData.byClasse"></app-professeur-list-by-classe>
     <app-professeur-list-by-etablissement *ngIf="showData.byEtablissement"></app-professeur-list-by-etablissement>
+    <app-professeur-list-hors-etablissement *ngIf="showData.horsEtablissement"></app-professeur-list-hors-etablissement> -->
 </div>

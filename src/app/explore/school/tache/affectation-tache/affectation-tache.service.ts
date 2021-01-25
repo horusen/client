@@ -90,14 +90,7 @@ export class AffectationTacheService extends BaseService {
       .pipe(tap(this.listResponseHandler()));
   }
 
-  add(elements: {
-    tache: number;
-    chapitre: number;
-    classe: number;
-    groupe: number;
-    debut: Date;
-    fin: Date;
-  }) {
+  add(elements: any) {
     return this.factory.post(`tache/affectation`, elements).pipe(
       tap({
         next: (tache) => {

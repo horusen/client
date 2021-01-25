@@ -1,6 +1,29 @@
 <form class="custom-placeholder" [formGroup]="form" *ngIf="isFormOk" (submit)="affecter()">
     <!-- classe et groupe -->
     <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3" *ngIf="!classe && !groupe">
+        <!-- Element -->
+        <div class="col-6">
+            <!-- Label -->
+            <label class="control-label"
+                for="affecterA">
+                {{ 'ELEMENT' | translate }}
+            </label>
+
+            <angular2-multiselect
+                [data]="dependancies.elementsDAffectation"
+                [settings]="dropdownSettingsAlt.single"
+                formControlName="affecterA"
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'affecterA'), 'is-valid': isValid('affecterA')}"
+                class="form-control p-0 form-control-sm">
+            </angular2-multiselect>
+
+            <!-- Message d'erreur -->
+            <div *ngIf="shouldShowRequiredError('affecterA')"
+                class="invalid-feedback">
+                {{ 'veuillezChoisirUnElementAuquelAffecterLaTache' | translate }}.
+            </div>
+        </div>
+
         <!-- Classe -->
         <div class="col-6">
             <!-- Label -->
@@ -25,9 +48,51 @@
                 {{ 'VeuillezChoisirUneClasse' | translate }}.
             </div>
         </div>
+    </div>
+
+
+    <!-- groupe ou etudiant -->
+    <div class="formSep form-group p-form-group-3 d-flex pb-0 pt-3">
+        <!-- Eleve -->
+        <div class="col-12" *ngIf="formValue('affecterA')[0].libelle == 'eleve'">
+            <!-- Label -->
+            <label class="control-label"
+                for="classe">
+                {{ 'ELEVE' | translate }}
+                <!-- loading -->
+                <span *ngIf="dependanciesLoading.eleve"><i class="fas fa-circle-notch fa-spin"></i></span>
+            </label>
+
+            <angular2-multiselect
+                [data]="dependancies.eleves"
+                [settings]="dropdownSettingsAlt.multi"
+                formControlName="eleves"
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'eleves'), 'is-valid': isValid('eleves')}"
+                class="form-control p-0 form-control-sm">
+                <c-badge>
+                    <ng-template let-item="item">
+                        {{item.eleve_details.nom_complet}}
+                    </ng-template>
+                </c-badge>
+                <c-item>
+                    <ng-template let-item="item">
+                        <label style="color: #333;min-width: 150px;">{{item.eleve_details.nom_complet}}</label>
+                        <img [src]="item.eleve_details.photo"
+                            style="width: 30px;margin-right: 20px;" />
+                    </ng-template>
+                </c-item>
+            </angular2-multiselect>
+
+
+            <!-- Message d'erreur -->
+            <div *ngIf="shouldShowRequiredError('classe')"
+                class="invalid-feedback">
+                {{ 'VeuillezChoisirLesElevesAuxquelsAffecterLaTache' | translate }}.
+            </div>
+        </div>
 
         <!-- groupe -->
-        <div class="col-6">
+        <div class="col-6" *ngIf="formValue('affecterA')[0].libelle == 'groupe'">
             <!-- Label -->
             <label class="control-label"
                 for="groupe">
@@ -52,6 +117,8 @@
         </div>
 
     </div>
+
+
 
     <!-- Cours et chapitre -->
     <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3" *ngIf="!chapitre">

@@ -1,0 +1,78 @@
+<!-- Nav bar -->
+<div class="row row-xs clearfix  mg-0 pd-0 p-0">
+    <div class="col-lg-12">
+        <ul class="nav  mg-0 pd-0 bd-b">
+            <!-- classe -->
+            <li class="nav-item mg-0 pd-0 mg-t-6 ">
+                <a class="nav-link3 active show" [routerLinkActive]="'font-weight-bold'" [routerLink]="['classe']">
+                    <i class="fad fa-users-class tx-14 bg-light tx-yeto2 "
+                        style="padding:8px; border-radius:50%">
+                    </i>
+                    <span class="tx-yeto2">
+                        {{ 'CLASSES' | translate }}
+                    </span>
+                </a>
+            </li>
+
+            <!-- Professeur -->
+            <li class="nav-item mg-0 pd-0 mg-t-6">
+                <a class="nav-link3" [routerLinkActive]="'font-weight-bold'" [routerLink]="['professeur']">
+                    <i class="fad fa-user-tie tx-14 bg-light tx-yeto2 " style="padding:8px; border-radius:50%"></i>
+                    <span class="tx-yeto2">
+                        {{ "PROFESSEURS" | translate }}
+                    </span>
+                </a>
+            </li>
+
+            <!-- Eleves -->
+            <li class="nav-item mg-0 pd-0 mg-t-6">
+                <a class="nav-link3" [routerLinkActive]="'font-weight-bold'" [routerLink]="['eleve']">
+                    <i class="fad fa-user-graduate	 tx-14 bg-light tx-yeto2 "
+                        style="padding:8px; border-radius:50%">
+                    </i>
+                    <span class="tx-yeto2">
+                        {{ 'elevesOuEtudiants' | translate }}
+                    </span>
+                </a>
+            </li>
+
+            <!-- Groupes -->
+            <li class="nav-item mg-0 pd-0 mg-t-6 ">
+                <a class="nav-link3" [routerLinkActive]="'font-weight-bold'" [routerLink]="['groupes']">
+                    <i class="fad fa-user tx-14 bg-light tx-yeto2 " style="padding:8px; border-radius:50%"></i>
+                    <span class="tx-yeto2">
+                        {{ 'GROUPES' | translate }}
+                    </span>
+                </a>
+            </li>
+
+            <!-- administration -->
+            <li class="nav-item mg-0 pd-0 mg-t-6">
+                <a class="nav-link3 " [routerLinkActive]="'font-weight-bold'"
+                    [routerLink]="['structure']">
+                    <i class="fad fa-person-carry tx-14 bg-light tx-yeto2 "
+                        style="padding:8px; border-radius:50%">
+                    </i>
+                    <span class="tx-yeto2"> {{ 'ADMINISTRATION' | translate }}</span>
+                </a>
+            </li>
+
+            <!-- Parent d'élèves -->
+            <li class="nav-item mg-0 pd-0 mg-t-6 mr-4">
+                <a class="nav-link3 " [routerLinkActive]="'font-weight-bold'"
+                    [routerLink]="['parents-eleves']">
+                    <i class="fad fa-user-shield tx-14 bg-light tx-yeto2 "
+                        style="padding:8px; border-radius:50%">
+                    </i>
+                    <span class="tx-yeto2"> {{ 'parentDEleves' | translate }}</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<div class="tab-content">
+    <div class="tab-pane fade active show" id="explore_ecoles">
+        <router-outlet></router-outlet>
+    </div>
+</div>

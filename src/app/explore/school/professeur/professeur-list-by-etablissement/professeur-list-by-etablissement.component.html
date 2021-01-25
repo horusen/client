@@ -1,7 +1,43 @@
-<div class="row row-xs mg-l-0 mg-r-0">
-    <ng-container *ngIf="!loading && professeurService.data.length">
-        <div class="col-sm-6 col-xl-4" *ngFor="let professeur of professeurService.data">
+<ng-container *ngIf="!loading && professeurService.data.length">
+    <div class="row row-xs mg-l-0 mg-r-0">
+
+        <div class="col-sm-6 col-xl-3" *ngFor="let professeur of professeurService.data">
             <div class=" card mg-b-20 bg-light">
+                <div class="d-flex justify-content-end px-3">
+                    <div class="dropdown d-inline">
+                        <!-- Icone -->
+                        <i
+                            class="fas fa-caret-down mt-1 clickable float-left"
+                            id="dropdownMenuButton"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                        </i>
+
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <!-- changer confidentialite -->
+                            <a class="dropdown-item tx-primary clickable">
+                                {{'MODIFIER' | translate}} <i class="fad fa-edit float-right"></i>
+                            </a>
+
+
+                            <!-- supprimer membre -->
+                            <a class="dropdown-item tx-primary clickable">
+                                {{'SUPPRIMER' | translate}} <i class="fad fa-trash float-right"></i>
+                            </a>
+
+                            <!-- Tunel -->
+                            <a class="dropdown-item tx-primary clickable"
+                                [routerLink]="['./']"
+                                [queryParams]="{'type_discussion': 'correspondance', 'correspondant': professeur.professeur_details.id_inscription, 'modal': 'discussion-min'}">
+                                {{'CONTACTER' | translate}}
+                                <i class="fad fa-comments-alt float-right"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body text-center">
                     <!-- image -->
                     <p>
@@ -43,9 +79,8 @@
                 </div>
             </div>
         </div>
+    </div>
+</ng-container>
 
-    </ng-container>
-
-    <app-loading *ngIf="loading" class="w-100"></app-loading>
-    <app-missing-data *ngIf="!loading && !professeurService.data.length"></app-missing-data>
-</div>
+<app-loading *ngIf="loading" class="w-100"></app-loading>
+<app-missing-data *ngIf="!loading && !professeurService.data.length" class="w-100"></app-missing-data>

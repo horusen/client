@@ -14,7 +14,9 @@ export class ReactionCreateComponent
   extends BaseCreateComponent
   implements OnInit {
   @Input() type: string;
+  @Input() min: boolean = false;
   @Input() parentID: number;
+  showAllButtons: false;
   rebondissement: any;
   showEmojiPicker: boolean = false;
   constructor(

@@ -18,6 +18,8 @@
         </div>
     </div>
 
-    <app-loading *ngIf="loading"></app-loading>
+    <div class="my-5" *ngIf="loading">
+        <app-loading ></app-loading>
+    </div>
     <app-missing-data *ngIf="!loading && !groupeService.data"></app-missing-data>
 </div>

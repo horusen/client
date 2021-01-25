@@ -58,6 +58,14 @@ const routes: Routes = [
             (module) => module.FileManagerModule
           ),
       },
+      // Ancien groupe
+      {
+        path: "ancien-groupe",
+        loadChildren: () =>
+          import("../groupe/groupe.module").then(
+            (module) => module.GroupeModule
+          ),
+      },
 
       // Mes taches
       // {

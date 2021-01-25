@@ -15,6 +15,11 @@ import { ReactionCreateComponent } from "./reaction-create/reaction-create.compo
     ReactionCreateComponent,
   ],
   imports: [CommonModule, SharedModule, SharedSchoolModule],
-  exports: [ReactionComponent],
+  exports: [
+    ReactionComponent,
+    ReactionListComponent,
+    ReactionSoloComponent,
+    ReactionCreateComponent,
+  ],
 })
 export class ReactionModule {}

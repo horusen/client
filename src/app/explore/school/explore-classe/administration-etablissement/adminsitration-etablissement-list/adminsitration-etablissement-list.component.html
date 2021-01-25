@@ -1,0 +1,60 @@
+<div class="card">
+    <div class="row mx-0 mg-y-7">
+        <!-- Titre -->
+        <div class="col-8 d-flex">
+            <h3 class="tx- tx-16 tx-facebook italic mg-r-20 bold">
+                <i class="fad fa-school"></i>
+                {{ 'mesEtablissements' | translate }}
+            </h3>
+            <!-- <a class="btn btn-oblong btn-light tx-success float-left bd-0 btn-icon clickable" (click)="ajouterClasse()">
+                <i class="fad fa-plus-circle tx-14 tx-success"
+                    style="padding:0px; border-radius:50%">
+                </i>
+            </a> -->
+            <!-- <h3 class="tx- tx-16 tx-success italic mg-l-20 bold">c
+                <i class="fad fa-users-class"></i>
+                {{ 'CLASSE' | translate }}
+            </h3> -->
+        </div>
+    </div>
+
+</div>
+
+<ng-container *ngIf="!loading && etablissementService.data.length">
+    <div class="row row-xs mg-l-0 mg-r-0">
+        <div class="col-sm-6 col-xl-4" *ngFor="let etablissement of etablissementService.data">
+            <div class=" card mg-b-20 bg-light">
+                <div class="card-body text-center">
+                    <!-- Icone -->
+                    <i class="hidden-xs fas fa-users-class tx-40 tx-white bg-pink op-5"
+                        style="padding:10px; border-radius: 50%; ">
+                    </i>
+
+                    <!-- Libelle -->
+                    <h5 class="tx-warning tx-14 mt-2  bold">
+                        {{ etablissement.libelle }}
+                    </h5>
+
+
+                    <h5 class="tx-facebook tx-13">{{ etablissement.type.libelle }}</h5>
+
+                </div>
+                <div class=" card-footer bg-pink">
+                    <div class="card-body text-center p-0">
+                        <a class="link mr-2 tx-white tx-16 clickable"
+                            (click)="selectEtablissement(etablissement.id)"
+                            [routerLink]="[etablissement.id]">
+                            <i class="fal fa-eye tx-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<app-loading *ngIf="loading" class="w-100"></app-loading>
+<app-missing-data
+    *ngIf="!loading && !etablissementService.data.length"
+    class="w-100">
+</app-missing-data>

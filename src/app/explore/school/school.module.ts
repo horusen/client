@@ -6,17 +6,18 @@ import { Routes } from "@angular/router";
 import { SharedModule } from "src/app/shared/shared.module";
 import { TunelModule } from "./tache/tunel/tunel.module";
 
+
 const routes: Routes = [
   {
     path: "",
     component: SchoolComponent,
     children: [
-      // Classe
+      // Etablissement
       {
-        path: "classe",
+        path: "etablissement",
         loadChildren: () =>
           import("./explore-classe/explore-classe.module").then(
-            (module) => module.ExploreClasseModule
+            (module) => module.ExploreClasseModule // On a renommer classe en etablissement dans la vue
           ),
       },
 
@@ -65,7 +66,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [SchoolComponent],
+  declarations: [SchoolComponent, ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

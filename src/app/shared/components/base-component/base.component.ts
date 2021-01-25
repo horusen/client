@@ -56,14 +56,12 @@ export class BaseComponent implements OnDestroy {
       enableSearchFilter: true,
     },
     user: {
-      text: this.helper?.getTranslation("selctionnerLesMembres"),
       enableSearchFilter: true,
       primaryKey: "id_inscription",
       singleSelection: true,
       allowSearchFilter: true,
     },
     users: {
-      text: this.helper?.getTranslation("selctionnerLesMembres"),
       enableSearchFilter: true,
       primaryKey: "id_inscription",
       singleSelection: false,

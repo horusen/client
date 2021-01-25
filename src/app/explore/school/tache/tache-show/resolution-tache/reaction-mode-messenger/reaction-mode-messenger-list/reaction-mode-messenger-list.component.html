@@ -1,8 +1,8 @@
 <div class="chat-container scroll-11"
+    #scrollMe
+    [scrollTop]="scrollMe.scrollHeight"
     *ngIf="reactionService.data.length && !loading">
-    <div class="chat-body w-100 pd-20 bg-white"
-        #scrollMe
-        [scrollTop]="scrollMe.scrollHeight">
+    <div class="chat-body w-100 pd-20 bg-white">
         <!-- reaction -->
         <app-reaction-mode-messenger-solo
             *ngFor="let reaction of reactionService.data"

@@ -190,20 +190,6 @@
                     [ngClass]="{'fas light-blue': reaction.index, 'fal dark-blue': !reaction.index}">
                 </i>
 
-                <!-- Noter -->
-                <i class="fa-sort-numeric-up reaction__icone-action"
-                    [ngbTooltip]="'NOTER' | translate"
-                    [autoClose]="'outside'"
-                    [placement]="'bottom'"
-                    [ngbPopover]="note"
-                    [ngClass]="{'fas light-blue': reaction.note, 'fal dark-blue': !reaction.note}">
-                </i>
-                <!-- Note -->
-                <ng-template #note>
-                    <app-note-reaction-tache [reaction]="reaction"></app-note-reaction-tache>
-                </ng-template>
-
-
             </div>
         </div>
     </div>

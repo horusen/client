@@ -1,3 +1,4 @@
+import { SharedSchoolModule } from "./../shared-school/shared-school.module";
 import { SharedTacheModuleModule } from "./../tache/shared-tache-module/shared-tache-module.module";
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
@@ -35,6 +36,7 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     SharedTacheModuleModule,
+    SharedSchoolModule,
     RouterModule.forChild(routes),
   ],
   exports: [RouterModule],

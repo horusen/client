@@ -525,7 +525,8 @@
                                                                 <i
                                                                     class="fal fa-list"></i>
                                                                 Liste des
-                                                                Professeurs </h3>
+                                                                Professeurs
+                                                            </h3>
                                                         </div>
                                                         <div
                                                             class="col-lg-1 btn-demo">
@@ -896,7 +897,8 @@
                                                                 <i
                                                                     class="fal fa-list"></i>
                                                                 Liste des exercices
-                                                                ou des tâches </h3>
+                                                                ou des tâches
+                                                            </h3>
                                                         </div>
                                                         <div
                                                             class="col-lg-1 float-right btn-demo">
@@ -2806,6 +2808,7 @@
                     <a class="nav-link3"
                         style="padding: 5px 12px;"
                         [routerLink]="['professeur']"
+                        [queryParams]="{'by': 'user-class'}"
                         [routerLinkActive]="'active'">
                         <i class="fal fa-user-tie tx-12 bg-light tx-danger "
                             style="padding:6px; border-radius:50%">
@@ -2893,10 +2896,16 @@
 
                 <!-- Anciens groupes -->
                 <li class="nav-item ">
-                    <a class="nav-link3 " data-toggle="tab" href="#ancien_groupe">
+                    <a class="nav-link3 "
+                        [routerLink]="['ancien-groupe']"
+                        [routerLinkActive]="'active'">
                         <i class="fal fa-users bg-facebook tx-danger "
-                            style="padding:6px; border-radius:50%"></i><span
-                            class="tx-facebook"> Anciens Groupes</span></a>
+                            style="padding:6px; border-radius:50%">
+                        </i>
+                        <span class="tx-facebook">
+                            {{ 'anciensGroupes' | translate }}
+                        </span>
+                    </a>
                 </li>
             </ul>
 

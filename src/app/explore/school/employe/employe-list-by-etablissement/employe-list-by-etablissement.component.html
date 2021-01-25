@@ -1,0 +1,92 @@
+<ng-container *ngIf="!loading && employeService.data.length">
+    <!-- Recherecher -->
+    <div class="row row-xs mg-0 pd-0 mb-2 clearfix fade-in justify-content-end">
+        <div class="col-lg-4">
+            <div class="form-group mg-t-5 mg-b-5 ">
+                <div class="input-group w-100">
+                    <!--  -->
+                    <input
+                        type="text"
+                        [placeholder]="'RECHERCHER' | translate"
+                        class="form-control pd-y-10 rounded-border tx-white">
+
+                    <span class="">
+                        <a role="button" class="btn btn-facebook h-100 d-flex align-items-center rounded-circle ml-2">
+                            <i class="fad fa-search tx-white"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Liste des employés -->
+    <div class="row row-xs mg-0 pd-0 clearfix fade-in">
+        <div class="col-xs-12 col-sm-6 col-md-3" *ngFor="let employe of employeService.data">
+            <div class="card border">
+                <!-- Dropdown menu -->
+                <div class="d-flex justify-content-end px-3">
+                    <div class="dropdown d-inline">
+                        <!-- Icone -->
+                        <i
+                            class="fas fa-caret-down mt-1 clickable float-left"
+                            id="dropdownMenuButton"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                        </i>
+
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <!-- changer confidentialite -->
+                            <a class="dropdown-item tx-primary clickable">
+                                {{'MODIFIER' | translate}} <i class="fad fa-edit float-right"></i>
+                            </a>
+
+
+                            <!-- supprimer membre -->
+                            <a class="dropdown-item tx-primary clickable">
+                                {{'SUPPRIMER' | translate}} <i class="fad fa-trash float-right"></i>
+                            </a>
+
+                            <!-- Tunel -->
+                            <a class="dropdown-item tx-primary clickable"
+                                [routerLink]="['./']"
+                                [queryParams]="{'type_discussion': 'correspondance', 'correspondant': employe.employe_details.id, 'modal': 'discussion-min'}">
+                                {{'CONTACTER' | translate}}
+                                <i class="fad fa-comments-alt float-right"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-center pt-1 employe">
+                    <p>
+                        <img class=" img-fluid rounded-circle"
+                            [src]="employe.employe_details.photo"
+                            [alt]="employe.employe_details.nom_complet">
+
+                        <i class="fas fa-circle-notch fa-spin" style="position: absolute; right: 20px;"
+                            *ngIf="loading"></i>
+                    </p>
+
+                    <!-- Nom de l'etudiant -->
+                    <h4 class="tx-12 tx-bolder tx-primary">
+                        {{ employe.employe_details.nom_complet }}
+                    </h4>
+
+                    <!-- Type membre -->
+                    <span>
+                        {{ employe.fonction.libelle }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<div class="my-5">
+    <app-loading *ngIf="loading"></app-loading>
+</div>
+
+<app-missing-data *ngIf="!loading && !employeService.data.length"></app-missing-data>

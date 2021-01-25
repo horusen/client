@@ -6,6 +6,8 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { Routes } from "@angular/router";
 import { ProfesseurListByClasseComponent } from './professeur-list-by-classe/professeur-list-by-classe.component';
 import { ProfesseurListByEtablissementComponent } from './professeur-list-by-etablissement/professeur-list-by-etablissement.component';
+import { ProfesseurListHorsEtablissementComponent } from './professeur-list-hors-etablissement/professeur-list-hors-etablissement.component';
+import { ProfesseurListComponent } from './professeur-list/professeur-list.component';
 
 const routes: Routes = [
   {
@@ -15,7 +17,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ProfesseurComponent, ProfesseurListByClasseComponent, ProfesseurListByEtablissementComponent],
+  declarations: [ProfesseurComponent, ProfesseurListByClasseComponent, ProfesseurListByEtablissementComponent, ProfesseurListHorsEtablissementComponent, ProfesseurListComponent],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
   exports: [RouterModule],
 })

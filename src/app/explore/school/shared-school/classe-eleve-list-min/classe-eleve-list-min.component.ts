@@ -34,7 +34,5 @@ export class ClasseEleveListMinComponent
 
   afficherTunel(user: any) {
     this.tunelService.user = user.eleve_details;
-    console.log(this.auth.user.id_inscription);
-    console.log(user.eleve_details.id_inscription);
   }
 }

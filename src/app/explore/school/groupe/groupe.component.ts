@@ -13,6 +13,7 @@ export class GroupeComponent implements OnInit {
     byClasse: false,
     byProfesseur: false,
     byEtudiant: false,
+    byEtablissement: false,
     byGroupeIndependant: false,
   };
   showGroupeCreate: boolean = false;
@@ -34,6 +35,8 @@ export class GroupeComponent implements OnInit {
       this.showData.byClasse = true;
     } else if (this.router.url.includes("professeur")) {
       this.showData.byProfesseur = true;
+    } else if (this.router.url.includes("etablissement")) {
+      this.showData.byEtablissement = true;
     } else if (this.router.url.includes("groupe-independant")) {
       this.showData.byGroupeIndependant = true;
     } else {

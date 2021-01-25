@@ -46,7 +46,7 @@
                                     <a [routerLink]="['tache',affectation.id]"
                                         class="tx-facebook tx-13"
                                         style="text-align: justify">
-                                        {{  affectation.tache_details.libelle }}
+                                        {{ affectation.tache_details.libelle }}
                                     </a>
 
                                     <!-- Date d'affectation -->
@@ -60,7 +60,8 @@
                                 <!-- Assets -->
                                 <p class="tx-10 mg-t-10 mb-0 tx-gray ">
                                     <!-- Groupe -->
-                                    <span class="mr-2" [ngbTooltip]="'GROUPE' | translate">
+                                    <span class="mr-2" [ngbTooltip]="'GROUPE' | translate"
+                                        *ngIf="affectation.groupe_details">
                                         <i class="fad fa-users tx-teal"></i> {{ affectation.groupe_details.libelle }}
                                     </span>
 
@@ -107,7 +108,7 @@
                                         'bgm-secondary': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 9,
                                         'bgm-indigo': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 0
                                     }">
-                                        {{ '#' + mc  }}
+                                        {{ '#' + mc }}
                                     </span>
                                 </p>
 

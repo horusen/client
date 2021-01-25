@@ -25,8 +25,6 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/assets/font/css/all.css",
-              "src/assets/plugins/bootstrap/css/bootstrap.min.css",
               "src/assets/plugins/flag-icon/flag-icon.min.css",
               "src/assets/plugins/simple-line-icons/css/simple-line-icons.css",
               "src/assets/plugins/ionicons/css/ionicons.css",
@@ -40,11 +38,8 @@
             ],
 
             "scripts": [
-              "src/assets/plugins/jquery/jquery.min.js",
               "src/assets/plugins/jquery-ui/jquery-ui.js",
-              "src/assets/plugins/popper/popper.js",
               "src/assets/plugins/feather-icon/feather.min.js",
-              "src/assets/plugins/bootstrap/js/bootstrap.min.js",
               "src/assets/plugins/pace/pace.min.js",
               "src/assets/plugins/simpler-sidebar/jquery.simpler-sidebar.min.js",
               "src/assets/js/jquery.slimscroll.min.js",

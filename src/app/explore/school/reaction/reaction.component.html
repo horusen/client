@@ -39,7 +39,9 @@
                             'bg-info': (helper.parseInt(discussion.groupe.id.toString().charAt(discussion.groupe.id.toString().length - 1)) - 4 == 0) || ((helper.parseInt(discussion.groupe.id.toString().charAt(discussion.groupe.id.toString().length - 1)) + 5) - 4 == 0),
                             'bg-danger': (helper.parseInt(discussion.groupe.id.toString().charAt(discussion.groupe.id.toString().length - 1)) - 5 == 0) || ((helper.parseInt(discussion.groupe.id.toString().charAt(discussion.groupe.id.toString().length - 1)) + 5) - 5 == 0)
                         }">
-                                {{ discussion.groupe.libelle.split(' ')[0].charAt(0) + (discussion.groupe.libelle.split(' ')[1] ? discussion.groupe.libelle.split(' ')[1].charAt(0) : discussion.groupe.libelle.split(' ')[0].charAt(1))}}
+                                {{ discussion.groupe.libelle.split(' ')[0].charAt(0) +
+                                (discussion.groupe.libelle.split(' ')[1] ? discussion.groupe.libelle.split('
+                                ')[1].charAt(0) : discussion.groupe.libelle.split(' ')[0].charAt(1))}}
                             </span>
                         </div>
                     </div>
@@ -56,7 +58,7 @@
                 </a>
 
                 <!-- Sous réseaux header -->
-                <a class="media" *ngIf="type == 'discussion' && discussion.type == 3">
+                <a class="media" *ngIf="type == 'discussion' && (discussion.type == 3)">
                     <div class="mr-2">
                         <div class="avatar mg-l-5">
                             <span class="avatar-initial rounded-circle bg-primary op-6"
@@ -67,7 +69,9 @@
                             'bg-info': (helper.parseInt(discussion.sous_reseaux.id.toString().charAt(discussion.sous_reseaux.id.toString().length - 1)) - 4 == 0) || ((helper.parseInt(discussion.sous_reseaux.id.toString().charAt(discussion.sous_reseaux.id.toString().length - 1)) + 5) - 4 == 0),
                             'bg-danger': (helper.parseInt(discussion.sous_reseaux.id.toString().charAt(discussion.sous_reseaux.id.toString().length - 1)) - 5 == 0) || ((helper.parseInt(discussion.sous_reseaux.id.toString().charAt(discussion.sous_reseaux.id.toString().length - 1)) + 5) - 5 == 0)
                         }">
-                                {{ discussion.sous_reseaux.libelle.split(' ')[0].charAt(0) + (discussion.sous_reseaux.libelle.split(' ')[1] ? discussion.sous_reseaux.libelle.split(' ')[1].charAt(0) : discussion.sous_reseaux.libelle.split(' ')[0].charAt(1))}}
+                                {{ discussion.sous_reseaux.libelle.split(' ')[0].charAt(0) +
+                                (discussion.sous_reseaux.libelle.split(' ')[1] ? discussion.sous_reseaux.libelle.split('
+                                ')[1].charAt(0) : discussion.sous_reseaux.libelle.split(' ')[0].charAt(1))}}
                                 <i class="fas fa-network-wired tx-warning"></i>
                             </span>
                         </div>
@@ -76,6 +80,36 @@
                         <div class="d-inline-block">
                             <h6 class="mb-0 tx-13 tx-facebook">
                                 {{ discussion.sous_reseaux.libelle }}
+                            </h6>
+                            <p class="mb-0 tx-gray-600 tx-12">Congratulations Friend...</p>
+                        </div>
+                    </div>
+
+                </a>
+
+                <!-- Sujet header -->
+                <a class="media" *ngIf="type == 'discussion' && (discussion.type == 4)">
+                    <div class="mr-2">
+                        <div class="avatar mg-l-5">
+                            <span class="avatar-initial rounded-circle bg-primary op-6"
+                                [ngClass]="{
+                            'bg-primary': (helper.parseInt(discussion.sujet.id.toString().charAt(discussion.sujet.id.toString().length - 1)) - 1 == 0) || ((helper.parseInt(discussion.sujet.id.toString().charAt(discussion.sujet.id.toString().length - 1)) + 5) - 1 == 0) ,
+                            'bg-warning': (helper.parseInt(discussion.sujet.id.toString().charAt(discussion.sujet.id.toString().length - 1)) - 2 == 0 )|| ((helper.parseInt(discussion.sujet.id.toString().charAt(discussion.sujet.id.toString().length - 1)) + 5) - 2 == 0),
+                            'bg-success': (helper.parseInt(discussion.sujet.id.toString().charAt(discussion.sujet.id.toString().length - 1)) - 3 == 0) || ((helper.parseInt(discussion.sujet.id.toString().charAt(discussion.sujet.id.toString().length - 1)) + 5) - 3 == 0),
+                            'bg-info': (helper.parseInt(discussion.sujet.id.toString().charAt(discussion.sujet.id.toString().length - 1)) - 4 == 0) || ((helper.parseInt(discussion.sujet.id.toString().charAt(discussion.sujet.id.toString().length - 1)) + 5) - 4 == 0),
+                            'bg-danger': (helper.parseInt(discussion.sujet.id.toString().charAt(discussion.sujet.id.toString().length - 1)) - 5 == 0) || ((helper.parseInt(discussion.sujet.id.toString().charAt(discussion.sujet.id.toString().length - 1)) + 5) - 5 == 0)
+                        }">
+                                {{ discussion.sujet.libelle.split(' ')[0].charAt(0) +
+                                (discussion.sujet.libelle.split(' ')[1] ? discussion.sujet.libelle.split('
+                                ')[1].charAt(0) : discussion.sujet.libelle.split(' ')[0].charAt(1))}}
+                                <i class="fas fa-network-wired tx-warning"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                        <div class="d-inline-block">
+                            <h6 class="mb-0 tx-13 tx-facebook">
+                                {{ discussion.sujet.libelle }}
                             </h6>
                             <p class="mb-0 tx-gray-600 tx-12">Congratulations Friend...</p>
                         </div>
@@ -151,7 +185,7 @@
             <app-reaction-create [type]="type" [parentID]="parentID"></app-reaction-create>
 
 
-            <div class="mg-l-100">
+            <!-- <div class="mg-l-100">
                 <ul class="nav " id="pills-tab"
                     role="tablist">
                     <a class=" nav link tx-facebook tx-16 mg-r-100"
@@ -211,7 +245,7 @@
                     </a>
 
                 </ul>
-            </div>
+            </div> -->
 
         </div>
 

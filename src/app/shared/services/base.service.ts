@@ -65,14 +65,13 @@ export abstract class BaseService {
     this.helper = AppInjector.injector.get(Helper);
   }
 
-  initialise() {
+  initialise(emitData: boolean = true) {
     return this.factory.get(`${this.endPoint}/initialise`).pipe(
-      tap({
-        next: (data) => (this.data = data),
-        error: (error) => this.errorResponseHandler(error),
-      })
+      tap(emitData ? this.listResponseHandler() : this.onlyErrorResponseHandler())
     );
   }
+
+  
 
   search(word: string, fields: string[]) {
     return this.factory

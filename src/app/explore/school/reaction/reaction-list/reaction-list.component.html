@@ -1,14 +1,18 @@
 <div class="chat-container scroll-11">
     <ng-container *ngIf="reactionService.data.length && !loading">
         <div class="chat-body w-100 pd-20 bg-white"
+            [ngClass]="{'p-0' : minified}"
             #scrollMe
             [scrollTop]="scrollMe.scrollHeight">
             <!-- reaction -->
             <app-reaction-solo
                 *ngFor="let reaction of reactionService.data"
                 [reaction]="reaction"
+                [minified]="minified"
                 [reversed]="reaction.user?.id === auth.user?.id_inscription">
             </app-reaction-solo>
+
+
         </div>
     </ng-container>
 

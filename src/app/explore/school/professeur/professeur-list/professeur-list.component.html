@@ -1,0 +1,94 @@
+<ng-container *ngIf="!loading && professeurService.data.length">
+
+    <div class="row row-xs mg-l-0 mg-r-0">
+
+        <div class="col-sm-6 col-xl-3" *ngFor="let professeur of professeurService.data">
+            <div class=" card mg-b-20 bg-light">
+                <div class="d-flex justify-content-end px-3">
+                    <div class="dropdown d-inline">
+                        <!-- Icone -->
+                        <i
+                            class="fas fa-caret-down mt-1 clickable float-left"
+                            id="dropdownMenuButton"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                        </i>
+
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <!-- changer confidentialite -->
+                            <a class="dropdown-item tx-primary clickable">
+                                {{'MODIFIER' | translate}} <i class="fad fa-edit float-right"></i>
+                            </a>
+
+
+                            <!-- supprimer membre -->
+                            <a class="dropdown-item tx-primary clickable">
+                                {{'SUPPRIMER' | translate}} <i class="fad fa-trash float-right"></i>
+                            </a>
+
+                            <!-- Tunel -->
+                            <a class="dropdown-item tx-primary clickable"
+                                [routerLink]="['./']"
+                                [queryParams]="{'type_discussion': 'correspondance', 'correspondant': professeur.professeur_details.id_inscription, 'modal': 'discussion-min'}">
+                                {{'CONTACTER' | translate}}
+                                <i class="fad fa-comments-alt float-right"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                    <!-- image -->
+                    <p>
+                        <img class="img-fluid"
+                            [src]="professeur.professeur_details.photo"
+                            [alt]="professeur.professeur_details.nom_complet">
+                    </p>
+
+                    <!-- Nom professeur -->
+                    <h5 class="tx-danger tx-14  bold">
+                        {{ professeur.professeur_details.nom_complet }}
+                    </h5>
+
+                    <h5 class="tx-facebook tx-13" *ngIf="international">
+                        <i class="fad fa-globe-africa"></i>
+                        {{ professeur.pays?.libelle }}
+                    </h5>
+
+                    <h5 class="tx-facebook tx-13" *ngIf="!international">
+                        <span *ngFor="let domaine of professeur.domaines; let i = index">
+                            {{ domaine.libelle }}
+                            <span *ngIf="professeur.domaines.length > i + 1 && i < 1">,</span>
+                        </span>
+
+                        <span *ngIf="professeur.domaines.length > 2" class="ml-2" [ngbTooltip]="autresDomaines">+
+                            {{ professeur.domaines.length - 2 }}
+                        </span>
+
+                        <ng-template #autresDomaines *ngIf="professeur.domaines.length > 2">
+                            <span *ngFor="let domaine of professeur.domaines.slice(2); let i = index">
+                                {{ domaine.libelle }}
+                                <span *ngIf="professeur.domaines.length > i + 1 && i < 1">,</span>
+                            </span>
+                        </ng-template>
+                    </h5>
+                </div>
+
+                <div class=" card-footer bg-yeto2">
+                    <div class="card-body text-center p-0">
+                        <a class="link mr-2 tx-white tx-16 clickable">
+                            <i class="fal fa-eye"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<div class="my-5" *ngIf="loading">
+    <app-loading  class="w-100"></app-loading>
+</div>
+<app-missing-data *ngIf="!loading && !professeurService.data.length" class="w-100"></app-missing-data>

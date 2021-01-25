@@ -33,6 +33,20 @@ export class Helper {
     });
   }
 
+  getQueryParamsFromUrl(url: string) {
+    if (url.includes("?")) {
+      const queryParams = url.split("?")[1];
+      const queryParamsTable = queryParams.split("&");
+      const returnedObject = {};
+      queryParamsTable.forEach((element) => {
+        const queryParamsObject = element.split("=");
+        returnedObject[queryParamsObject[0]] = queryParamsObject[1];
+      });
+
+      return returnedObject;
+    }
+  }
+
   toggleModal(id: string): void {
     $("#" + id).modal("toggle");
   }

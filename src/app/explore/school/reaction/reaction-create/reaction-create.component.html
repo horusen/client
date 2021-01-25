@@ -51,9 +51,9 @@
     </div>
 
 
-    <div class="input-group">
+    <div class="input-group d-flex align-items-end" style="position: absolute; bottom: 0;">
         <ng-container *ngIf="!(enregistreurService.isRecording$ | async)">
-            <span class="input-group-btn">
+            <span class="input-group-btn" *ngIf="!min">
                 <!-- emoticone -->
                 <a type="role"
                     class="btn btn-sm btn-facebook rounded-circle mg-t-5"
@@ -88,6 +88,52 @@
                     (click)="enregistrer()"
                     [ngbTooltip]="'messageAudio' | translate">
                     <i class=" fal fa-microphone-alt  tx-white  "></i>
+                </a>
+            </span>
+
+            <span class="input-group-btn d-flex flex-column" *ngIf="min">
+                <ng-container *ngIf="showAllButtons">
+                    <!-- emoticone -->
+                    <a type="role"
+                        class="btn  btn-facebook rounded-circle mg-t-5"
+                        [ngbTooltip]="'ajouterDesEmojis' | translate"
+                        (click)="showEmojiPicker = !showEmojiPicker">
+                        <i class=" fal fa-smile-beam tx-white "></i>
+                    </a>
+
+                    <emoji-mart class="emoji-mart"
+                        set="apple" (emojiSelect)="addEmoji($event)" *ngIf="showEmojiPicker"
+                        skin="3" title="Pick your emoji…"></emoji-mart>
+
+                    <!-- Image upload -->
+                    <a class="btn  btn-success rounded-circle mg-t-5"
+                        [ngbTooltip]="'ajouterDesImages' | translate"
+                        (click)="imageUpload.click()">
+                        <i class=" fal fa-image  tx-white "></i>
+                    </a>
+
+                    <!-- Pdf upload -->
+                    <a class="btn  btn-warning rounded-circle mg-t-5 "
+                        [ngbTooltip]="'ajouterDesDocuments' | translate"
+                        (click)="documentUpload.click()">
+                        <i class=" fal fa-file-alt  tx-white ">
+                        </i>
+                    </a>
+
+
+                    <!-- Enregistrement audio -->
+                    <a type="role"
+                        class="btn   btn-danger rounded-circle mr-1 mg-t-5"
+                        (click)="enregistrer()"
+                        [ngbTooltip]="'messageAudio' | translate">
+                        <i class=" fal fa-microphone-alt  tx-white  "></i>
+                    </a>
+                </ng-container>
+                <!-- emoticone -->
+                <a type="role"
+                    (click)="showAllButtons=!showAllButtons"
+                    class="btn  btn-primary rounded-circle mt-1">
+                    <i class=" faf fa-ellipsis-h tx-white "></i>
                 </a>
             </span>
 

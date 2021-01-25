@@ -13,42 +13,13 @@ const routes: Routes = [
     path: "",
     component: SousReseauxComponent,
     children: [
-      {
-        path: "",
-        component: SousReseauxListComponent,
-      },
       // Show
       {
         path: ":id",
         component: SousReseauxShowComponent,
         children: [
-          // Redirection
           {
             path: "",
-            redirectTo: "sujet",
-          },
-
-          // Sujet
-          {
-            path: "sujet",
-            loadChildren: () =>
-              import("./sujet-sous-reseaux/sujet-sous-reseaux.module").then(
-                (module) => module.SujetSousReseauxModule
-              ),
-          },
-
-          // Membre
-          {
-            path: "membre",
-            loadChildren: () =>
-              import("./membre-sous-reseaux/membre-sous-reseaux.module").then(
-                (module) => module.MembreSousReseauxModule
-              ),
-          },
-
-          // Discussion
-          {
-            path: "discussion",
             loadChildren: () =>
               import(
                 "./discussion-sous-reseaux/discussion-sous-reseaux.module"

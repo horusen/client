@@ -1,9 +1,11 @@
 <!-- Header -->
-<div class="card pd-y-10 pd-x-10 mg-b-10">
+<div class="card pd-y-10 pd-x-10 mg-b-10" *ngIf="parentComponents.professeur || parentComponents.horsEtablissement || parentComponents.etablissement">
     <h3 class="tx- tx-16 tx-primary italic mg-l-0 bold">
         <i class="fad fa-users-class mr-2"></i>
-        <span *ngIf="showData.byClasse">{{  ('elevesDeLaClasse' | translate) + ': ' + classe.libelle  }}</span>
-        <span *ngIf="showData.byProfesseur">{{ 'listeDeVosEtudiants' | translate }}</span>
+        <!-- <span *ngIf="parentComponents.classe">{{ ('elevesDeLaClasse' | translate) + ': ' + classe.libelle }}</span> -->
+        <span *ngIf="parentComponents.professeur">{{ 'listeDeVosEtudiants' | translate }}</span>
+        <span *ngIf="parentComponents.etablissement || parentComponents.horsEtablissement">{{ 'listeDesEtudiants' |
+            translate }}</span>
 
         <!-- Boutton ajouter -->
         <!-- <i class="fad fa-plus-circle clickable tx-14 float-right tx-primary bg-light "
@@ -14,5 +16,7 @@
     </h3>
 </div>
 
-<app-eleve-list *ngIf="showData.byClasse"></app-eleve-list>
-<app-eleve-list-by-professeur *ngIf="showData.byProfesseur"></app-eleve-list-by-professeur>
+<app-eleve-list *ngIf="parentComponents.classe"></app-eleve-list>
+<app-eleve-list-by-etablissement *ngIf="parentComponents.etablissement"></app-eleve-list-by-etablissement>
+<app-eleve-list-hors-etablissement *ngIf="parentComponents.horsEtablissement"></app-eleve-list-hors-etablissement>
+<app-eleve-list-by-professeur *ngIf="parentComponents.professeur"></app-eleve-list-by-professeur>

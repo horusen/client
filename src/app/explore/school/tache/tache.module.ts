@@ -27,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [TacheComponent, TacheListComponent, TacheCreateComponent],
+  declarations: [TacheComponent, TacheListComponent],
   imports: [
     CommonModule,
     SharedModule,

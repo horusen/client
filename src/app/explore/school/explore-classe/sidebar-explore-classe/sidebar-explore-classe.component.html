@@ -1,54 +1,427 @@
-<div style="height: 100%" class="bg-yeto">
-    <div class="bd-b">
-        <div class="d-flex flex-row">
-            <a href="" class="tx-white mg-l-30 "
-                style="font-family: 'Tangerine'; text-align: center; font-size: 250%; vertical-align: middle; text-shadow: 0px 1px 0px">
+<div class="h-100">
+  <div class="d-flex flex-row bd-b bg-yeto2">
+    <a
+      href=""
+      class="tx-white mg-l-6"
+      style="
+        font-family: 'Tangerine';
+        text-align: center;
+        font-size: 220%;
+        vertical-align: middle;
+        text-shadow: 0px 1px 0px;
+      "
+    >
+      Etablissements
+      <!-- <span class="tx-yeto2"> administratives</span> -->
+    </a>
+  </div>
+  <div class="" style="background: #0277bd; height: 100%">
+    <ng-container
+      *ngIf="
+        etablissement &&
+        !router.url.includes('school/etablissement/administration')
+      "
+    >
+      <ul class="nav" id="pills-tab" role="tablist">
+        <!-- H. Interne -->
+        <li class="nav-item mg-0 pd-0 mg-t-10">
+          <a
+            class="nav-link3"
+            [ngClass]="{ 'show active': !showHierarchieExterne }"
+            data-toggle="tab"
+            href="#hinterne"
+          >
+            <i
+              class="fal fa-intersection mr-1 tx-12 bg-light tx-success-100"
+              style="padding: 6px; border-radius: 50%"
+            ></i>
+            <span class="tx-white">H. Internes </span>
+          </a>
+        </li>
 
-                Groupe par <span class="tx-yellow1"> classe</span></a>
-        </div>
-    </div>
+        <!-- H. Externe -->
+        <li class="nav-item mg-t-10">
+          <a
+            class="nav-link3"
+            [ngClass]="{ 'show active': showHierarchieExterne }"
+            data-toggle="tab"
+            href="#hexterne"
+          >
+            <i
+              class="fal fa-union mr-1 tx-12 bg-light tx-danger"
+              style="padding: 6px; border-radius: 50%"
+            ></i>
+            <span class="tx-white"> H. Externes</span>
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div
+          class="tab-pane fade"
+          [ngClass]="{ 'show active': !showHierarchieExterne }"
+          id="hinterne"
+        >
+          <div class="mg-t-0 mg-b-10 pd-0">
+            <div class="flex-fill pd-4 bd-t">
+              <nav class="nav flex-column">
+                <ng-container>
+                  <!-- Etablissement -->
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <!-- Libelle -->
+                    <a
+                      [routerLink]="[etablissement.id, 'administrateur']"
+                      [routerLinkActiveOptions]="{ exact: true }"
+                      [routerLinkActive]="'font-weight-bold tx-info'"
+                      class="nav-link tx-white"
+                    >
+                      <i class="fad fa-users tx-light"></i>
+                      {{ "ADMINISTRATEUR" | translate }}
+                    </a>
 
-    <div>
-        <!-- Filtre -->
-        <div class="form-group ">
-            <div class="input-group" style="padding-left:0px; padding-right:0px">
-                <select class="custom-select border-0 bg-yeto tx-white" id="inputGroupSelect04">
-                    <option selected> Niveau...</option>
-                    <option value="1">Comptabilité</option>
-                    <option value="2">Informatique</option>
-                    <option value="3">Environnement</option>
-                </select>
-                <select class="custom-select border-0 bg-yeto tx-white" id="inputGroupSelect02">
-                    <option selected> Domaines...</option>
-                    <option value="1">Comptabilité</option>
-                    <option value="2">Informatique</option>
-                    <option value="3">Environnement</option>
-                </select>
+                    <!-- Boutton action -->
+                    <a
+                      href=""
+                      data-toggle="tooltip"
+                      title=""
+                      data-original-title="Create Channel"
+                      ><i class="fal fa-plus tx-yellow"></i
+                    ></a>
+                  </div>
+
+                  <!-- Classe -->
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <a
+                      [routerLink]="[ etablissement.id,'classe']"
+                      [routerLinkActive]="'font-weight-bold tx-info'"
+                      class="nav-link tx-white"
+                    >
+                      <i class="fad fa-users-class tx-light"></i>
+                      {{ "CLASSES" | translate }}
+                    </a>
+
+                    <a
+                      href=""
+                      data-toggle="tooltip"
+                      title=""
+                      data-original-title="Create Channel"
+                      ><i class="fal fa-plus tx-yellow"></i
+                    ></a>
+                  </div>
+
+                  <!-- Professeurs -->
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <a
+                      [routerLink]="[etablissement.id,'hierarchie-interne', 'professeur']"
+                      [routerLinkActive]="'font-weight-bold tx-info'"
+                      class="nav-link tx-white"
+                    >
+                      <i class="fad fa-user-tie tx-light"></i>
+                      {{ "PROFESSEURS" | translate }}
+                    </a>
+
+                    <a
+                      href=""
+                      data-toggle="tooltip"
+                      title=""
+                      data-original-title="Create Channel"
+                      ><i class="fal fa-plus tx-yellow"></i
+                    ></a>
+                  </div>
+
+                  <!-- Parent d'eleves -->
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <a
+                      [routerLink]="[etablissement.id, 'parent-eleve']"
+                      [routerLinkActive]="'font-weight-bold tx-info'"
+                      class="nav-link tx-white"
+                    >
+                      <i class="fad fa-user-shield tx-light"></i>
+                      {{ "parentDEleves" | translate }}
+                    </a>
+                    <a
+                      href=""
+                      data-toggle="tooltip"
+                      title=""
+                      data-original-title="Create Channel"
+                    >
+                      <i class="fal fa-plus tx-yellow"></i>
+                    </a>
+                  </div>
+
+                  <!-- Eleves -->
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <a
+                      [routerLink]="[etablissement.id, 'eleve']"
+                      [routerLinkActive]="'font-weight-bold tx-info'"
+                      class="nav-link tx-white"
+                    >
+                      <i class="fad fa-user-graduate tx-light"></i>
+                      {{ "elevesEtEtudiants" | translate }}
+                    </a>
+                    <a
+                      href=""
+                      data-toggle="tooltip"
+                      title=""
+                      data-original-title="Create Channel"
+                    >
+                      <i class="fal fa-plus tx-yellow"></i>
+                    </a>
+                  </div>
+
+                   <!-- Etablissement Affilié -->
+                   <div
+                   class="d-flex align-items-center justify-content-between"
+                 >
+                   <a
+                     [routerLink]="[etablissement.id, '']"
+                     [routerLinkActive]="'font-weight-bold tx-info'"
+                     class="nav-link tx-white"
+                   >
+                     <i class="fad fa-user-graduate tx-light"></i>
+                     {{ "elevesEtEtudiants" | translate }}
+                   </a>
+                   <a
+                     href=""
+                     data-toggle="tooltip"
+                     title=""
+                     data-original-title="Create Channel"
+                   >
+                     <i class="fal fa-plus tx-yellow"></i>
+                   </a>
+                 </div>
+                </ng-container>
+              </nav>
             </div>
+          </div>
         </div>
 
-        <!-- Liste des classe -->
-        <div class=" mg-t-0 bd-b mg-b-10  pd-0  ">
+        <!-- Hierarchie externe -->
+        <div
+          class="tab-pane fade"
+          [ngClass]="{ 'show active': showHierarchieExterne }"
+          id="hexterne"
+        >
+          <div class="mg-t-0 mg-b-10 pd-0">
+            <div class="flex-fill pd-4 bd-t">
+              <nav class="nav flex-column">
+                <!-- Ministere -->
+                <div class="d-flex align-items-center justify-content-between">
+                  <!-- Libelle -->
+                  <a
+                    [routerLink]="['structure']"
+                    [queryParams]="{ 'type-etablissement': 1, affilie: false }"
+                    [routerLinkActive]="'font-weight-bold tx-info'"
+                    class="nav-link tx-white"
+                  >
+                    <i class="fad fa-landmark tx-light"></i>
+                    {{ "MINISTERE" | translate }}
+                  </a>
 
-            <app-classe-list-min></app-classe-list-min>
-
-            <div class="flex-fill pd-15 bd-t bd-b">
-                <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
-                    <span class="tx-10 tx-uppercase"> Récemment en explore</span>
+                  <!-- Boutton action -->
+                  <a
+                    href=""
+                    data-toggle="tooltip"
+                    title=""
+                    data-original-title="Create Channel"
+                    ><i class="fal fa-plus tx-yellow"></i
+                  ></a>
                 </div>
-                <nav class="nav flex-column  ">
-                    <div class="d-flex align-items-center justify-content-between ">
-                        <a href="" class="nav-link tx-white"><i
-                                class="fad fa-certificate tx-violet"></i> Mathématiques</a></div>
-                    <a href="" class="nav-link tx-white "><i class="fad fa-certificate tx-bleu"></i>
-                        Histoire</a>
-                    <a href="" class="nav-link tx-white"><i class="fad fa-certificate tx-vert"></i>
-                        Géographie</a>
-                    <a href="" class="nav-link tx-white"><i class="fad fa-certificate tx-jaune"></i>
-                        Littérature</a>
-                </nav>
-            </div>
 
+                <!-- Organisme scolaires -->
+                <div class="d-flex align-items-center justify-content-between">
+                  <a
+                    [routerLink]="['structure']"
+                    [queryParams]="{ 'type-etablissement': 2, affilie: false }"
+                    [routerLinkActive]="'font-weight-bold tx-info'"
+                    class="nav-link tx-white"
+                  >
+                    <i class="fad fa-hotel tx-light"></i>
+                    {{ "organismesScolaires" | translate }}
+                  </a>
+
+                  <a
+                    href=""
+                    data-toggle="tooltip"
+                    title=""
+                    data-original-title="Create Channel"
+                    ><i class="fal fa-plus tx-yellow"></i
+                  ></a>
+                </div>
+
+                <!-- Syndicats -->
+                <div class="d-flex align-items-center justify-content-between">
+                  <a
+                    [routerLink]="['structure']"
+                    [queryParams]="{ 'type-etablissement': 3, affilie: false }"
+                    [routerLinkActive]="'font-weight-bold tx-info'"
+                    class="nav-link tx-white"
+                  >
+                    <i class="fad fa-industry-alt tx-light"></i>
+                    {{ "SYNDICATS" | translate }}
+                  </a>
+
+                  <a
+                    href=""
+                    data-toggle="tooltip"
+                    title=""
+                    data-original-title="Create Channel"
+                    ><i class="fal fa-plus tx-yellow"></i
+                  ></a>
+                </div>
+
+                <!-- Inspection -->
+                <div class="d-flex align-items-center justify-content-between">
+                  <a
+                    [routerLink]="['structure']"
+                    [queryParams]="{ 'type-etablissement': 4, affilie: false }"
+                    [routerLinkActive]="'font-weight-bold tx-info'"
+                    class="nav-link tx-white"
+                  >
+                    <i class="fad fa-landmark-alt tx-light"></i>
+                    {{ "DIRECTIONS" | translate }}
+                  </a>
+                  <a
+                    href=""
+                    data-toggle="tooltip"
+                    title=""
+                    data-original-title="Create Channel"
+                  >
+                    <i class="fal fa-plus tx-yellow"></i>
+                  </a>
+                </div>
+
+                <!-- Direction -->
+                <div class="d-flex align-items-center justify-content-between">
+                  <a
+                    [routerLink]="['structure']"
+                    [queryParams]="{ 'type-etablissement': 5, affilie: false }"
+                    [routerLinkActive]="'font-weight-bold tx-info'"
+                    class="nav-link tx-white"
+                  >
+                    <i class="fad fa-gopuram tx-light"></i>
+                    {{ "DIRECTIONS" | translate }}
+                  </a>
+                  <a
+                    href=""
+                    data-toggle="tooltip"
+                    title=""
+                    data-original-title="Create Channel"
+                  >
+                    <i class="fal fa-plus tx-yellow"></i>
+                  </a>
+                </div>
+
+                <!-- Direction -->
+                <div class="d-flex align-items-center justify-content-between">
+                  <a
+                    [routerLink]="['structure']"
+                    [queryParams]="{ 'type-etablissement': 6, affilie: false }"
+                    [routerLinkActive]="'font-weight-bold tx-info'"
+                    class="nav-link tx-white"
+                  >
+                    <i class="fad fa-school tx-light"></i>
+                    {{ "ETABLISSEMENTS" | translate }}
+                  </a>
+                  <a
+                    href=""
+                    data-toggle="tooltip"
+                    title=""
+                    data-original-title="Create Channel"
+                  >
+                    <i class="fal fa-plus tx-yellow"></i>
+                  </a>
+                </div>
+
+                <!-- Professeurs -->
+                <div class="d-flex align-items-center justify-content-between">
+                  <a
+                    [routerLink]="['hierarchie-externe', 'professeur']"
+                    [routerLinkActive]="'font-weight-bold tx-info'"
+                    class="nav-link tx-white"
+                  >
+                    <i class="fad fa-user-tie tx-light"></i>
+                    {{ "autresProfesseurs" | translate }}
+                  </a>
+
+                  <a
+                    href=""
+                    data-toggle="tooltip"
+                    title=""
+                    data-original-title="Create Channel"
+                    ><i class="fal fa-plus tx-yellow"></i
+                  ></a>
+                </div>
+
+                <!-- Eleve -->
+                <div class="d-flex align-items-center justify-content-between">
+                  <a
+                    [routerLink]="['autres-eleves']"
+                    [routerLinkActive]="'font-weight-bold tx-info'"
+                    class="nav-link tx-white"
+                  >
+                    <i class="fad fa-user-graduate tx-light"></i>
+                    {{ "autresElevesOuEtudiants" | translate }}
+                  </a>
+                  <a
+                    href=""
+                    data-toggle="tooltip"
+                    title=""
+                    data-original-title="Create Channel"
+                  >
+                    <i class="fal fa-plus tx-yellow"></i>
+                  </a>
+                </div>
+
+                <!-- <div class="d-flex align-items-center justify-content-between ">
+                                  <a href="" class="nav-link tx-white"><i class="fad fa-star tx-danger"></i>
+                                      Directions</a>
+                                  <a href="" data-toggle="tooltip" title="" data-original-title="Create Channel"><i
+                                          class="fal fa-plus tx-yellow"></i></a>
+                              </div>
+              
+                              <div class="d-flex align-items-center justify-content-between ">
+                                  <a href="" class="nav-link tx-white"><i class="fad fa-star tx-purple"></i> Inspections
+                                  </a>
+                                  <a href="" data-toggle="tooltip" title="" data-original-title="Create Channel"><i
+                                          class="fal fa-plus tx-yellow"></i></a>
+                              </div>
+                              <div class="d-flex align-items-center justify-content-between ">
+                                  <a href="" class="nav-link tx-white"><i class="fad fa-star tx-purple"></i> Syndicales
+                                  </a>
+                                  <a href="" data-toggle="tooltip" title="" data-original-title="Create Channel"><i
+                                          class="fal fa-plus tx-yellow"></i></a>
+                              </div>
+                              <div class="d-flex align-items-center justify-content-between ">
+                                  <a href="" class="nav-link tx-white"><i class="fad fa-star tx-purple"></i> Organismes
+                                      Scolaires </a>
+                                  <a href="" data-toggle="tooltip" title="" data-original-title="Create Channel"><i
+                                          class="fal fa-plus tx-yellow"></i></a>
+                              </div>
+                              <div class="d-flex align-items-center justify-content-between ">
+                                  <a href="" class="nav-link tx-white"><i class="fad fa-star tx-orange"></i>
+                                      Ministères</a>
+                                  <a href="" data-toggle="tooltip" title="" data-original-title="Create Channel"><i
+                                          class="fal fa-plus tx-yellow"></i></a>
+                              </div> -->
+              </nav>
+            </div>
+          </div>
         </div>
+      </div>
+    </ng-container>
+
+    <div class="mg-t-0  mg-b-10 pd-0">
+      <app-sidebar-explore-classe-etablissement-list></app-sidebar-explore-classe-etablissement-list>
     </div>
+  </div>
 </div>

@@ -17,6 +17,7 @@ export class DiscussionService extends BaseService {
       correspondant: type_discussion == 1 ? discussion_object : null,
       groupe: type_discussion == 2 ? discussion_object : null,
       sous_reseaux: type_discussion == 3 ? discussion_object : null,
+      sujet: type_discussion == 4 ? discussion_object : null,
     };
 
     return this.factory

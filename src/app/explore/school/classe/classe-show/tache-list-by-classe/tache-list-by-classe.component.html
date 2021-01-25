@@ -1,0 +1,53 @@
+<div class="card-body p-2">
+    <!-- Liste des taches -->
+    <div class="row row-xs mg-0 pd-0 clearfix" *ngIf="!loading && data.length">
+        <div class="col-xs-12 col-sm-6 col-md-3"
+            *ngFor="let tache of data | paginate: {itemsPerPage: 8, id: 'tache-by-classe', currentPage: currentPage}">
+            <div class="card bg-light border">
+                <div class="card-body text-center">
+                    <!-- Dropdown menu -->
+
+                    <!-- Image tache -->
+                    <p>
+                        <i class="far fa-2x fa-tasks-alt"></i>
+                    </p>
+
+                    <!-- tache name -->
+                    <h4 class="tx-12 tx-bolder tx-primary">
+                        <span class="clickable" (click)="navigateTotache(tache.id)">
+                            {{ tache.tache_details.libelle }}
+                        </span>
+                    </h4>
+
+                    <!-- Periode -->
+                    <p class=" tx-12 tx-center tx-warning" [ngbTooltip]="'PERIODE' | translate">
+                        <span><i class="far fa-calendar-alt"></i></span>
+                        {{ tache.periode_details.libelle }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="col-12 mt-1 d-flex justify-content-center">
+            <pagination-controls
+                id="tache-by-classe"
+                (pageChange)="currentPage = $event"
+                autoHide="true"
+                previousLabel="{{ 'PRECEDENT' | translate }}"
+                nextLabel="{{ 'SUIVANT' | translate }}">
+            </pagination-controls>
+        </div>
+    </div>
+
+    <!-- loading -->
+    <div class="my-5" *ngIf="loading">
+        <app-loading ></app-loading>
+    </div>
+
+    <!-- Pas de donnéss -->
+    <app-missing-data
+        *ngIf="!loading && !data.length"
+        [message]="'pasDeTachePourCetteClasse' | translate">
+    </app-missing-data>
+</div>

@@ -1,0 +1,55 @@
+<!-- Header -->
+<div class="card">
+    <div class="row p-2 align-items-center mx-0">
+        <div class="col-11 p-1">
+            <h3 class="tx-10 mb-0 tx-warning italic  font-weight-bold">
+                <i class="fad fa-user-tie mr-2"></i>
+                {{ 'membresDeLAdministration' | translate }}
+            </h3>
+        </div>
+        <div class="col-lg-1 d-flex align-items-center">
+            <a class="btn btn-sm px-1  btn-light d-flex align-items-center justify-content-center tx-warning rounded-circle clickable"
+                (click)="ajouter()"
+                style="font-size: 10px;">
+                <i class="fad fa-plus-circle tx-10 tx-warning"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card-body p-2 bg-light bd-t">
+    <app-profil-list-by-hierarchie></app-profil-list-by-hierarchie>
+</div>
+
+
+<!-- Loading -->
+<ng-container *ngIf="loading">
+    <!-- Header -->
+    <div class="card">
+        <div class="row p-2 align-items-center mx-0">
+            <div class="col-11 p-1">
+                <h3 class="tx-10 mb-0 tx-warning italic  font-weight-bold">
+                    <i class="fad fa-user-tie mr-2"></i>
+                    {{ 'membresDeLAdministration' | translate }}
+                </h3>
+            </div>
+            <div class="col-lg-1 d-flex align-items-center">
+                <a class="btn btn-sm px-1  btn-light d-flex align-items-center justify-content-center tx-warning rounded-circle clickable"
+                    (click)="ajouter()"
+                    style="font-size: 10px;">
+                    <i class="fad fa-plus-circle tx-10 tx-warning"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-2 bg-light bd-t">
+        <app-loading></app-loading>
+    </div>
+</ng-container>
+
+<app-modal [configuration]="{titre: 'ajouterUnMembreALAdministration', name: 'profil-create-modal', icone: 'user-tie'}">
+    <app-profil-create *ngIf="addProfil"></app-profil-create>
+</app-modal>

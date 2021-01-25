@@ -5,35 +5,51 @@
             <div class="bd-b">
                 <!-- nav bar -->
                 <ul class="nav bg-light ">
-                    <!-- Enseignant -->
-                    <li class="nav-item">
-                        <a class="nav-link3 clickable active tx-yeto2"
-                            [routerLink]="['./']"
-                            [queryParams]="{'type_discussion': 'professeur'}"
-                            [ngClass]="{'font-weight-bold': activeComponent.professeur}">
-                            {{ 'PROFESSEURS' | translate }}
-                        </a>
-                    </li>
+                    <!-- Discussion explore professeur -->
+                    <ng-container *ngIf="parent == 'explore-professeur'">
+                        <!-- Enseignant -->
+                        <li class="nav-item">
+                            <a class="nav-link3 clickable active tx-yeto2"
+                                [routerLink]="['./']"
+                                [queryParams]="{'type_discussion': 'professeur'}"
+                                [ngClass]="{'font-weight-bold': activeComponent.professeur}">
+                                {{ 'PROFESSEURS' | translate }}
+                            </a>
+                        </li>
 
-                    <!-- Groupe -->
-                    <li class="nav-item">
-                        <a class="nav-link3 clickable active tx-yeto2"
-                            [ngClass]="{'font-weight-bold': activeComponent.groupe}"
-                            [routerLink]="['./']"
-                            [queryParams]="{'type_discussion': 'groupe'}">
-                            {{ 'GROUPES' | translate }}
-                        </a>
-                    </li>
+                        <!-- Groupe -->
+                        <li class="nav-item">
+                            <a class="nav-link3 clickable active tx-yeto2"
+                                [ngClass]="{'font-weight-bold': activeComponent.groupe}"
+                                [routerLink]="['./']"
+                                [queryParams]="{'type_discussion': 'groupe'}">
+                                {{ 'GROUPES' | translate }}
+                            </a>
+                        </li>
 
-                    <!-- Enseignant -->
-                    <li class="nav-item">
-                        <a class="nav-link3 clickable active tx-yeto2"
-                            [routerLink]="['./']"
-                            [queryParams]="{'type_discussion': 'sous-reseaux'}"
-                            [ngClass]="{'font-weight-bold': activeComponent['sous-reseaux']}">
-                            {{ 'sousReseaux' | translate }}
-                        </a>
-                    </li>
+                        <!-- Administration -->
+                        <li class="nav-item">
+                            <a class="nav-link3 clickable active tx-yeto2"
+                                [routerLink]="['./']"
+                                [queryParams]="{'type_discussion': 'membre-administration'}"
+                                [ngClass]="{'font-weight-bold': activeComponent['membre-administration']}">
+                                {{ 'ADMINISTRATION' | translate }}
+                            </a>
+                        </li>
+                    </ng-container>
+
+                    <!-- Discussion sous-reseaux -->
+                    <ng-container *ngIf="parent == 'sous-reseaux'">
+                        <!-- Sujet -->
+                        <li class="nav-item">
+                            <a class="nav-link3 clickable active tx-yeto2"
+                                [routerLink]="['./']"
+                                [queryParams]="{'type_discussion': 'sujet'}"
+                                [ngClass]="{'font-weight-bold': activeComponent['sujet']}">
+                                {{ 'SUJET' | translate }}
+                            </a>
+                        </li>
+                    </ng-container>
 
                 </ul>
             </div>
@@ -41,10 +57,25 @@
             <!-- Nav content -->
             <div class="tab-content">
                 <div class="tab-pane fade active show">
+                    <!-- Discussion professeur -->
                     <app-discussion-professeur-list *ngIf="activeComponent.professeur"></app-discussion-professeur-list>
-                    <app-discussion-groupe-list *ngIf="activeComponent.groupe"></app-discussion-groupe-list>
+
+                    <!-- Discussion groupe -->
+                    <app-discussion-groupe-list
+                        *ngIf="activeComponent.groupe">
+                    </app-discussion-groupe-list>
+
+                    <!-- Discussion sous-réseaux -->
                     <app-discussion-sous-reseaux-list *ngIf="activeComponent['sous-reseaux']">
                     </app-discussion-sous-reseaux-list>
+
+                    <!-- Discussion sous-réseaux -->
+                    <app-discussion-sujet-reseaux-list *ngIf="activeComponent.sujet">
+                    </app-discussion-sujet-reseaux-list>
+
+                    <!-- Discussion membre administration -->
+                    <app-discussion-profil-administration-list *ngIf="activeComponent['membre-administration']">
+                    </app-discussion-profil-administration-list>
                 </div>
             </div>
         </div>

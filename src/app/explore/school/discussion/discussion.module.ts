@@ -8,6 +8,8 @@ import { DiscussionGroupeListComponent } from "./discussion-groupe-list/discussi
 import { DiscussionSousReseauxListComponent } from "./discussion-sous-reseaux-list/discussion-sous-reseaux-list.component";
 import { ReactionDiscussionComponent } from "./reaction-discussion/reaction-discussion.component";
 import { ReactionModule } from "../reaction/reaction.module";
+import { DiscussionSujetReseauxListComponent } from "./discussion-sujet-reseaux-list/discussion-sujet-reseaux-list.component";
+import { DiscussionProfilAdministrationListComponent } from "./discussion-profil-administration-list/discussion-profil-administration-list.component";
 
 @NgModule({
   declarations: [
@@ -16,8 +18,10 @@ import { ReactionModule } from "../reaction/reaction.module";
     DiscussionGroupeListComponent,
     DiscussionSousReseauxListComponent,
     ReactionDiscussionComponent,
+    DiscussionSujetReseauxListComponent,
+    DiscussionProfilAdministrationListComponent,
   ],
   imports: [CommonModule, SharedModule, SharedSchoolModule, ReactionModule],
-  exports: [DiscussionComponent],
+  exports: [DiscussionComponent, ReactionDiscussionComponent],
 })
 export class DiscussionModule {}

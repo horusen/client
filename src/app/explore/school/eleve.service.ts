@@ -21,4 +21,24 @@ export class EleveService extends BaseService {
       .get(`professeur/eleve`)
       .pipe(tap(this.listResponseHandler()));
   }
+
+  getByEtablissement(etablissement: number) {
+    return this.factory
+      .get(`etablissement/${etablissement}/eleve`)
+      .pipe(tap(this.listResponseHandler()));
+  }
+
+  getHorsEtablissement(etablissement: number) {
+    return this.factory
+      .get(`etablissement/${etablissement}/eleve/not`)
+      .pipe(tap(this.listResponseHandler()));
+  }
+
+  getElevesInternationals(keyword?: string) {
+    return this.factory
+      .get(
+        keyword ? `eleve/international?query=${keyword}` : `eleve/international`
+      )
+      .pipe(tap(this.listResponseHandler()));
+  }
 }

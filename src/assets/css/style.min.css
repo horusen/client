@@ -5356,3 +5356,88 @@ img {
   background: white;
   color: #e74c3c;
 }
+
+
+.avatar2{
+  position:relative;
+  display:block;
+  width:70px;
+  height:70px;
+  white-space:nowrap;
+  vertical-align:bottom;
+  border-radius:50%;
+  background:white;
+  padding:6px
+  }
+  
+  
+  .avatar4{
+  position:relative;
+  display:block;
+  width:100px;
+  white-space:nowrap;
+  vertical-align:bottom;
+  border-radius:50%;
+  background:white;
+  padding:0px;
+  }
+  
+  .avatar6{
+  position:relative;
+  display:block;
+  width:100px;
+  white-space:nowrap;
+  vertical-align:bottom;
+  border-radius:50%;
+  background:RGB(127, 179, 213,0.2) ;
+  padding:6px;
+  }
+  .logo-ent{
+  position:relative;
+  display:block;
+  width:80px;
+  height:80px;
+  white-space:nowrap;
+  vertical-align:bottom;
+  border-radius:50%;
+  background:white;
+  padding:2px;
+  margin-left: auto;
+      margin-right: auto
+  }
+  
+  
+  
+  .avatar3{
+  position:relative;
+  display:block;
+  white-space:nowrap;
+  vertical-align:bottom;
+  border-radius:50%;
+  background: white;
+  padding:0px;
+  border-color: 1px solid #ffd700
+  }
+  .avatar4{
+  position:relative;
+  display:block;
+  width:70px;
+  height:60px;
+  white-space:nowrap;
+  vertical-align:bottom;
+  border-radius:50%;
+  background: white;
+  padding:4px;
+  border-color: 1px solid #ffd700
+  }
+  
+  .avatar1 i {
+      width: 6px;
+      height: 6px;
+      display: block;
+      border-radius: 50%;
+      right: 0;
+      top: 20px;
+      position: absolute;
+      border: 2px solid #fff;
+  }

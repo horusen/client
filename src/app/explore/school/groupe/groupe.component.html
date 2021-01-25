@@ -1,10 +1,11 @@
 <!-- Header -->
-<div class="card pd-y-10 pd-x-10 mg-b-10">
-    <h3 class="tx- tx-16 tx-primary italic mg-l-0 bold">
+<div class="card pd-y-10 pd-x-10 mg-b-10" [ngClass]="{'bg-yeto1': showData.byGroupeIndependant}" *ngIf="!router.url.includes('etablissement/classe')">
+    <h3 class="tx-primary tx-16 italic mg-l-0 bold" [ngClass]="{'text-white': showData.byGroupeIndependant}">
         <i class="fad fa-users mr-2"></i>
         <span *ngIf="showData.byClasse">{{ ('groupesDeLaClasse' | translate) + ': ' +classeService.singleData.libelle }}
         </span>
         <span *ngIf="showData.byEtudiant">{{ 'listeDesGroupesDeVotreClasse' | translate }}</span>
+        <span *ngIf="showData.byEtablissement">{{ 'listeDesGroupes' | translate }}</span>
         <span *ngIf="showData.byProfesseur">{{ 'listeDesGroupesSousVotreTutel' | translate }}</span>
         <span *ngIf="showData.byGroupeIndependant">{{ 'listeDesGroupesIndependants' | translate }}</span>
 
@@ -21,6 +22,7 @@
 <app-groupe-list *ngIf="showData.byEtudiant"></app-groupe-list>
 <app-groupe-classe-list *ngIf="showData.byClasse"></app-groupe-classe-list>
 <app-groupe-list-by-professeur *ngIf="showData.byProfesseur"></app-groupe-list-by-professeur>
+<app-groupe-list-by-etablissement *ngIf="showData.byEtablissement"></app-groupe-list-by-etablissement>
 <app-groupe-independant-list *ngIf="showData.byGroupeIndependant"></app-groupe-independant-list>
 
 <!-- Groupe create modal -->

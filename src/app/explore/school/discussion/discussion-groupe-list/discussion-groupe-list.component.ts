@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { EtablissementService } from "../../etablissement/etablissement.service";
 import { GroupeListComponent } from "../../groupe/groupe-list/groupe-list.component";
 import { GroupeService } from "../../groupe/groupe.service";
 import { DiscussionService } from "../discussion.service";
@@ -16,9 +17,11 @@ export class DiscussionGroupeListComponent
   constructor(
     public groupeService: GroupeService,
     public discussionService: DiscussionService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    public router: Router,
+    public etablissementService: EtablissementService
   ) {
-    super(groupeService);
+    super(groupeService, router, etablissementService);
   }
 
   ngOnInit() {
@@ -27,7 +30,6 @@ export class DiscussionGroupeListComponent
     this.route.queryParams.subscribe((params) => {
       if (params["groupe"]) {
         this.currentGroupe = params["groupe"];
-        console.log(this.currentGroupe);
       }
     });
   }

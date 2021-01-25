@@ -1,0 +1,32 @@
+<!-- Header -->
+<div class="card">
+    <div class="row mg-t-10 mg-b-10">
+        <!-- Titre -->
+        <div class="col-11">
+            <h3 class="tx- tx-16 tx-primary italic mg-l-20 bold">
+                <a class="float-left tx-primary mr-4" [routerLink]="[previousUrl]"
+                    [queryParams]="[router.url.split('?')[1]]">
+                    <i class="fas fa-arrow-circle-left "></i>
+                </a>
+
+                <i class="fal fa-users-crown"></i>
+                {{ 'membreAdministration' | translate }}
+            </h3>
+        </div>
+
+        <!-- Boutton ajouter -->
+        <div class="col-lg-1 float-right btn-demo">
+            <a class="btn btn-oblong btn-light tx-primary bd-0 btn-icon clickable">
+                <i class="fad fa-plus-circle tx-14 tx-primary"
+                    style="padding:0px; border-radius:50%">
+                </i>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card-body p-2 bg-light bd-t">
+    <app-employe-list-by-etablissement></app-employe-list-by-etablissement>
+</div>

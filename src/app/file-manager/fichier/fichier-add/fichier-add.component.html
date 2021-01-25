@@ -29,7 +29,22 @@
 
 
 
-<div>
+<form [formGroup]="form">
+    <!-- Pdf input -->
+    <!-- <input
+    type="file"
+    accept="application/pdf"
+    [hidden]="true"
+    #documentUpload
+    (change)="pdfFileProcess($event)"> -->
+
+    <!-- Image input -->
+    <input
+        type="file"
+        [hidden]="true"
+        accept="image/x-png,image/gif,image/jpeg"
+        #imageUpload
+        (change)="imageFileAdded($event)">
     <!-- Pdf input -->
     <input
         type="file"
@@ -39,10 +54,10 @@
         #documentUpload>
 
     <!-- Image input -->
-    <input
+    <!-- <input
         type="file"
-        (change)="imageFileAdded($event)"
-        [hidden]="true"
+        (change)="log('test')"
         accept="image/x-png,image/gif,image/jpeg"
-        #imageUpload>
-</div>
+        [hidden]="true"
+        #imageUpload> -->
+</form>

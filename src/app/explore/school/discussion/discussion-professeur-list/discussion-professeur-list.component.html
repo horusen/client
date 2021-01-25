@@ -3,7 +3,7 @@
         <a class="media clickable pd-10 bd-b"
             [ngClass]="{'border border-primary': user.id == currentProfesseur}"
             *ngFor="let user of professeurService.data"
-            (click)="checkDiscussion(user.id)">
+            (click)="checkDiscussion(user.professeur_details.id)">
             <div class="mr-2">
                 <span class="avatar3 ">
                     <div class="">

@@ -1,0 +1,71 @@
+<ng-container *ngIf="!loading && professeurService.data.length">
+    <!-- Recherecher -->
+    <div class="row row-xs mg-0 pd-0 mb-2 clearfix fade-in justify-content-end">
+        <div class="col-lg-4">
+            <div class="form-group mg-t-5 mg-b-5 ">
+                <div class="input-group w-100">
+                    <!--  -->
+                    <input
+                        type="text"
+                        [placeholder]="'RECHERCHER' | translate"
+                        class="form-control pd-y-10 rounded-border tx-white">
+
+                    <span class="">
+                        <a role="button" class="btn bg-yeto2 h-100 d-flex align-items-center rounded-circle ml-2">
+                            <i class="fad fa-search tx-white"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row row-xs mg-l-0 mg-r-0">
+
+        <div class="col-sm-6 col-xl-3" *ngFor="let professeur of professeurService.data">
+            <div class=" card mg-b-20 bg-light">
+                <div class="card-body text-center">
+                    <!-- image -->
+                    <p>
+                        <img class="img-fluid"
+                            [src]="professeur.professeur_details.photo"
+                            [alt]="professeur.professeur_details.nom_complet">
+                    </p>
+
+                    <!-- Nom professeur -->
+                    <h5 class="tx-danger tx-14  bold">
+                        {{ professeur.professeur_details.nom_complet }}
+                    </h5>
+
+                    <h5 class="tx-facebook tx-13">
+                        <span *ngFor="let domaine of professeur.domaines; let i = index">
+                            {{ domaine.libelle }}
+                            <span *ngIf="professeur.domaines.length > i + 1 && i < 1">,</span>
+                        </span>
+
+                        <span *ngIf="professeur.domaines.length > 2" class="ml-2" [ngbTooltip]="autresDomaines">+
+                            {{ professeur.domaines.length - 2 }}
+                        </span>
+
+                        <ng-template #autresDomaines *ngIf="professeur.domaines.length > 2">
+                            <span *ngFor="let domaine of professeur.domaines.slice(2); let i = index">
+                                {{ domaine.libelle }}
+                                <span *ngIf="professeur.domaines.length > i + 1 && i < 1">,</span>
+                            </span>
+                        </ng-template>
+                    </h5>
+                </div>
+
+                <div class=" card-footer bg-yeto2">
+                    <div class="card-body text-center p-0">
+                        <a class="link mr-2 tx-white tx-16 clickable">
+                            <i class="fal fa-eye"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<app-loading *ngIf="loading" class="w-100"></app-loading>
+<app-missing-data *ngIf="!loading && !professeurService.data.length" class="w-100"></app-missing-data>

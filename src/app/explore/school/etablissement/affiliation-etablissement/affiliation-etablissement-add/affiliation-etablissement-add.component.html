@@ -1,0 +1,79 @@
+<form class="custom-placeholder" [formGroup]="form" *ngIf="isFormOk" (submit)="create()">
+    <!-- typeEtablissement et etablissement -->
+    <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+        <!-- type etablissement -->
+        <div class="col-4">
+            <!-- Label -->
+            <label class="control-label"
+                for="typeEtablissement">
+                {{ 'typeEtablissement' | translate }}
+                <!-- loading -->
+                <span *ngIf="dependanciesLoading.typeEtablissement"><i class="fas fa-circle-notch fa-spin"></i></span>
+            </label>
+
+            <angular2-multiselect
+                [data]="dependancies.typeEtablissements"
+                [settings]="dropdownSettingsAlt.single"
+                (onSelect)="onSelectedTypeEtablissement($event)"
+                formControlName="typeEtablissement"
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'typeEtablissement'), 'is-valid': isValid('typeEtablissement')}"
+                class="form-control p-0 form-control-sm">
+            </angular2-multiselect>
+
+            <!-- Message d'erreur -->
+            <div *ngIf="shouldShowRequiredError('typeEtablissement')"
+                class="invalid-feedback">
+                {{ 'VeuillezChoisirUnTypeEtablissement' | translate }}.
+            </div>
+        </div>
+
+        <!-- etablissement -->
+        <div class="col-8">
+            <!-- Label -->
+            <label class="control-label"
+                for="etablissement">
+                {{ 'ETABLISSEMENT' | translate }}
+                <!-- loading -->
+                <span *ngIf="dependanciesLoading.etablissement"><i class="fas fa-circle-notch fa-spin"></i></span>
+            </label>
+
+            <angular2-multiselect
+                [data]="dependancies.etablissements"
+                [settings]="dropdownSettingsAlt.single"
+                formControlName="etablissement2"
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'etablissement2'), 'is-valid': isValid('etablissement2')}"
+                class="form-control p-0 form-control-sm">
+            </angular2-multiselect>
+
+            <!-- Message d'erreur -->
+            <div *ngIf="shouldShowRequiredError('etablissement2')"
+                class="invalid-feedback">
+                {{ 'veuillezChoisirUnEtablissement' | translate }}.
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- Boutton validation -->
+    <div class="d-flex justify-content-center">
+        <div class="col-12 text-right">
+            <button class="btn btn-sm btn-primary mr-1"
+                type="submit"
+                [disabled]="form.invalid">
+                {{ 'AFFECTER' | translate }}
+
+                <!-- ICONES -->
+                <span *ngIf="!loading"><i class="fad fa-exchange"></i></span>
+                <span *ngIf="loading"><i class="fas fa-circle-notch fa-spin"></i></span> <!-- Loading -->
+            </button>
+        </div>
+    </div>
+
+</form>
+
+
+
+
+<app-loading *ngIf="!isFormOk"></app-loading>

@@ -10,6 +10,18 @@ export class GroupeService extends BaseService {
     super("groupe");
   }
 
+  getByEtablissement(etablissement: number) {
+    return this.factory
+      .get(`etablissement/${etablissement}/groupe`)
+      .pipe(tap(this.onlyErrorResponseHandler()));
+  }
+
+  getAnciensGroupes(etablissement: number) {
+    return this.factory
+      .get(`etablissement/${etablissement}/groupe/ancien`)
+      .pipe(tap(this.listResponseHandler()));
+  }
+
   getByTache(tache: number) {
     return this.factory
       .get(`tache/${tache}/groupe`)

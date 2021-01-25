@@ -14,15 +14,16 @@
                         </a>
                     </li>
 
-                    <!-- Classe -->
+                    <!-- Etablissement -->
                     <li class="nav-item tx-center ">
                         <a class="nav-link "
-                            [routerLink]="['classe']"
+                            [routerLink]="['etablissement']"
                             [routerLinkActive]="'active show'">
-                            <i class="fal fa-users-class tx-primary tx-20"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0">{{ 'CLASSES' | translate }}</p>
+                            <i class="fal fa-bahai tx-primary tx-20"></i>
+                            <p class=" tx-primary tx-10 p-0 mb-0">{{ 'Echos' | translate }}</p>
                         </a>
                     </li>
+
 
 
                     <!-- groupe independants -->
@@ -101,8 +102,8 @@
     </div>
 
     <div class="page-content">
-        <div class="tab-content">
-            <div class="tab-pane fade active show " id="explore_school">
+        <div class="tab-content h-100">
+            <div class="tab-pane fade active show h-100 " id="explore_school">
                 <router-outlet></router-outlet>
             </div>
         </div>

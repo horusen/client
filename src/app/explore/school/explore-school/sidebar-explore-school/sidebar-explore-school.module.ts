@@ -9,7 +9,6 @@ import { MotCleClasseComponent } from "./tableaux/mot-cle-classe/mot-cle-classe.
 import { DomaineClasseListComponent } from "./tableaux/domaine-classe-list/domaine-classe-list.component";
 import { DomaineClasseSoloComponent } from "./tableaux/domaine-classe-list/domaine-classe-solo/domaine-classe-solo.component";
 import { SousDomaineClasseListComponent } from "./tableaux/domaine-classe-list/domaine-classe-solo/sous-domaine-classe-list/sous-domaine-classe-list.component";
-import { TunelModule } from "../../tache/tunel/tunel.module";
 import { SharedSchoolModule } from "../../shared-school/shared-school.module";
 
 @NgModule({

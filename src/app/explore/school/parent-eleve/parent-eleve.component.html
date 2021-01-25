@@ -1,0 +1,52 @@
+<!-- Header -->
+<div class="card">
+
+
+    <div class="row mg-y-7 mx-0">
+        <!-- Titre -->
+        <div class="col-8">
+            <!-- <h3 class="tx- tx-16 tx-success italic mg-r-20 bold">
+                <i class="fad fa-users-class"></i>
+                {{ 'CLASSE' | translate }}
+            </h3> -->
+            <a class="btn btn-oblong btn-light tx-purple float-left bd-0 btn-icon clickable">
+                <i class="fad fa-plus-circle tx-14 tx-purple"
+                    style="padding:0px; border-radius:50%">
+                </i>
+            </a>
+            <!-- <h3 class="tx- tx-16 tx-success italic mg-l-20 bold">
+                <i class="fad fa-users-class"></i>
+                {{ 'CLASSE' | translate }}
+            </h3> -->
+        </div>
+
+
+
+        <!-- Boutton ajouter -->
+        <div class="col-lg-4 float-right btn-demo">
+            <div class="form-group mg-b-5 ">
+                <div class="input-group w-100">
+                    <!--  -->
+                    <input
+                        #search
+                        type="text"
+                        [placeholder]="'RECHERCHER' | translate"
+                        class="form-control pd-y-8">
+
+                    <span class="">
+                        <button class="btn bg-light h-100 d-flex align-items-center">
+                            <i class="fad fa-search tx-facebook"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="card-body p-2 bg-light bd-t">
+    <app-parent-eleve-list-by-etablissement></app-parent-eleve-list-by-etablissement>
+</div>

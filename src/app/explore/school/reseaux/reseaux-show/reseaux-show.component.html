@@ -2,23 +2,14 @@
     style="box-shadow: none; border: 1px solid #f4f4f478"
     *ngIf="single && !loading">
     <!-- Header -->
-    <div class="tab-content">
+    <div class="tab-content h-100">
         <div class="bd-b">
-            <div class="row mg-t-10 mg-b-5">
+            <div class="row mg-t-10 h-100 mg-b-5">
                 <div class="col-lg-11">
                     <h3 class="tx- tx-16 tx-yeto2 italic mg-l-20 bold">
-                        <a class="mr-3"
-                            (click)="sousDomaineService.singleData = null"
-                            *ngIf="sousDomaineService.singleData"
-                            [routerLink]="['/', 'school', 'reseaux', single.id]">
-                            <i class="fad fa-chevron-circle-left"></i>
-                        </a>
-
-
-                        <i class="fal fa-network-wired"></i>
-
                         <!-- Header domaine -->
-                        <span *ngIf="!sousDomaineService.singleData">
+                        <span>
+                            <i class="fal fa-network-wired mr-2"></i>
                             <span class="font-weight-bold">
                                 {{ ('RESEAU' | translate)  }}
                             </span>
@@ -26,13 +17,6 @@
                         </span>
 
 
-                        <!-- Header sous domaine -->
-                        <span *ngIf="sousDomaineService.singleData">
-                            <span class="font-weight-bold">
-                                {{ ('sousReseau' | translate)  }}
-                            </span>
-                            {{ ': ' + sousDomaineService.singleData?.libelle }}
-                        </span>
                     </h3>
                 </div>
             </div>
@@ -41,7 +25,7 @@
 
 
         <!-- Content -->
-        <div class="card-body p-0">
+        <div class="card-body h-100 p-0">
             <router-outlet></router-outlet>
         </div>
     </div>

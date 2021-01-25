@@ -1,0 +1,53 @@
+<!-- Header -->
+<div class="card" *ngIf="etablissement">
+  <div class="row mx-0 mg-y-7">
+    <!-- boutton precedent -->
+    <div class="col-8">
+      <a
+        class="btn btn-oblong btn-light tx-pink float-left bd-0 btn-icon clickable"
+      >
+        <i
+          class="fad fa-arrow-left tx-14 tx-pink"
+          style="padding: 0px; border-radius: 50%"
+        >
+        </i>
+      </a>
+
+      <span class="ml-2">
+        <img
+          src="assets/images/xs/ministry.png"
+          alt="avatar"
+          style="height: 33px"
+        />
+        {{ etablissement.libelle }}
+      </span>
+    </div>
+
+    <!-- Recherche -->
+    <div class="col-lg-4 float-right btn-demo">
+      <div class="form-group mg-b-5">
+        <div class="input-group w-100">
+          <!--  -->
+          <input
+            #search
+            type="text"
+            [placeholder]="'RECHERCHER' | translate"
+            class="form-control pd-y-8"
+          />
+
+          <span class="">
+            <button
+              class="btn bg-light h-100 d-flex align-items-center"
+            >
+              <i class="fad fa-search tx-facebook"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-body p-2 bg-light">
+  <app-service-etablissement-list></app-service-etablissement-list>
+</div>

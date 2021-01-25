@@ -11,6 +11,7 @@ import { GroupeSoloComponent } from "./groupe-solo/groupe-solo.component";
 import { GroupeClasseListComponent } from "./groupe-classe-list/groupe-classe-list.component";
 import { GroupeListByProfesseurComponent } from "./groupe-list-by-professeur/groupe-list-by-professeur.component";
 import { GroupeIndependantListComponent } from "./groupe-independant-list/groupe-independant-list.component";
+import { GroupeListByEtablissementComponent } from './groupe-list-by-etablissement/groupe-list-by-etablissement.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,7 @@ const routes: Routes = [
     GroupeClasseListComponent,
     GroupeListByProfesseurComponent,
     GroupeIndependantListComponent,
+    GroupeListByEtablissementComponent,
   ],
   imports: [
     CommonModule,

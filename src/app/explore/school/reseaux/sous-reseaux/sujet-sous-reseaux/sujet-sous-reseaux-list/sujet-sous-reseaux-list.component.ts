@@ -24,6 +24,7 @@ export class SujetSousReseauxListComponent
     this._subscription[
       "sous_domaine"
     ] = this.sousDomaineService.singleData$.subscribe((sousDomaine) => {
+      console.log("sousDomaine");
       this.getData(sousDomaine.id);
     });
     // this.route.parent.params.subscribe((params) => {

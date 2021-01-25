@@ -21,16 +21,23 @@ export class FichierAddComponent extends BaseCreateComponent implements OnInit {
   ngOnInit(): void {
     this.enableRetrieveSchema = false;
     super.ngOnInit();
+
+    this.form = this.fb.group({});
   }
 
   imageFileAdded(event: any) {
-    let file = event.target.files[0];
+    console.log("test");
+    const file = event.target.files[0];
     this.fileProcess(file, "image");
   }
 
   documentFileAdded(event: any) {
     let file = event.target.files[0];
     this.fileProcess(file, "image");
+  }
+
+  log(text: string) {
+    console.log(text);
   }
 
   fileProcess(file: File, type: string) {

@@ -1,6 +1,6 @@
-<form class="custom-placeholder" [formGroup]="form" (submit)="create()">
+<form class="custom-placeholder row" [formGroup]="form" (submit)="create()">
     <!-- Libelle -->
-    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <div class="formSep form-group col-12 d-flex justify-content-center pb-0 pt-2">
         <div class="col-12 p-0">
             <!-- Label -->
             <label class="control-label"
@@ -19,8 +19,9 @@
 
 
     <!-- Description -->
-    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3" *ngIf="configuration.hasDescription">
-        <div class="col-10">
+    <div class="formSep form-group col-12  d-flex justify-content-center pb-0 pt-3"
+        *ngIf="configuration.hasDescription">
+        <div class="col-12 p-0  ">
             <label class="control-label" for="description">{{ 'DESCRIPTION' | translate }}</label>
             <textarea name="description" maxlength="500" class="form-control  form-control-sm" cols="30" rows="3"
                 [formControlName]="'description'"
@@ -29,7 +30,7 @@
     </div>
 
     <!-- Valider -->
-    <div class="col-lg-12 p-0 mt-2">
+    <div class="col-12 mt-2">
         <button class="btn btn-sm btn-facebook mb-3 float-right">
             {{ 'VALIDER' | translate }}
             <span *ngIf="loading">
