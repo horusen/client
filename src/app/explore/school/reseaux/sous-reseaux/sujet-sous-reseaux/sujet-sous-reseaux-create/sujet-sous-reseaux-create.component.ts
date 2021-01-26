@@ -27,7 +27,7 @@ export class SujetSousReseauxCreateComponent
     this._subscription[
       "sous_domaine"
     ] = this.sousDomaineService.singleData$.subscribe((sousDomaine) => {
-      this.valuePatcher("sous_domaine", sousDomaine.id);
+      this.formValuePatcher("sous_domaine", sousDomaine.id);
     });
   }
 

@@ -221,7 +221,7 @@ export class BaseCreateComponent
     }
   }
 
-  valuePatcher(field: string, value: any) {
+  formValuePatcher(field: string, value: any) {
     // if (this.schema.hasOwnProperty(field)) {
     this.form.controls[field].patchValue(value);
     // } else {
@@ -232,7 +232,7 @@ export class BaseCreateComponent
   valuesPatcher(fields: string[], values: any[]) {
     let counter = 0;
     fields.forEach((field) => {
-      this.valuePatcher(field, values[counter]);
+      this.formValuePatcher(field, values[counter]);
       counter++;
     });
   }

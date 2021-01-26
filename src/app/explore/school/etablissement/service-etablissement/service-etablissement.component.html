@@ -1,9 +1,17 @@
 <!-- Header -->
 <div class="card" *ngIf="etablissement">
-  <div class="row mx-0 mg-y-7">
+  <div class="row mx-0 mg-y-7 p-0">
     <!-- boutton precedent -->
-    <div class="col-8">
+    <div class="col-7">
       <a
+        [routerLink]="[
+          'school',
+          'etablissement',
+          'type',
+          etablissement.type,
+          'etablissement',
+          etablissement.id
+        ]"
         class="btn btn-oblong btn-light tx-pink float-left bd-0 btn-icon clickable"
       >
         <i
@@ -24,7 +32,7 @@
     </div>
 
     <!-- Recherche -->
-    <div class="col-lg-4 float-right btn-demo">
+    <div class="col-lg-4 p-0 float-right btn-demo">
       <div class="form-group mg-b-5">
         <div class="input-group w-100">
           <!--  -->
@@ -36,18 +44,44 @@
           />
 
           <span class="">
-            <button
-              class="btn bg-light h-100 d-flex align-items-center"
-            >
+            <button class="btn bg-light h-100 d-flex align-items-center">
               <i class="fad fa-search tx-facebook"></i>
             </button>
           </span>
         </div>
       </div>
     </div>
+
+    <div class="col-1 p-0">
+      <a
+        (click)="createService()"
+        class="btn btn-oblong float-right btn-light tx-pink float-left bd-0 btn-icon clickable"
+      >
+        <i
+          class="fad fa-plus tx-14 tx-pink"
+          style="padding: 0px; border-radius: 50%"
+        >
+        </i>
+      </a>
+    </div>
   </div>
 </div>
 
 <div class="card-body p-2 bg-light">
+  <h4 class="text-center my-2" style="font-family: 'Raleway', sans-serif">
+    <i class="far fa-building tx-pink"></i> {{ "listeDesServices" | translate }}
+  </h4>
   <app-service-etablissement-list></app-service-etablissement-list>
 </div>
+
+<app-modal
+  [configuration]="{
+    name: 'service-etablissement-create-modal',
+    icone: 'users',
+    titre: 'ajouterUnNouveauServiceDansLEtablissement'
+  }"
+>
+  <app-service-etablissement-create
+    *ngIf="onCreateService"
+  ></app-service-etablissement-create>
+</app-modal>

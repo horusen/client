@@ -62,7 +62,7 @@ export class ReactionModeMessengerCreateComponent
 
   initialiseForm() {
     this.initForm(["affectation_tache"], [], () => {
-      this.valuePatcher("affectation_tache", this.affectationTache.id);
+      this.formValuePatcher("affectation_tache", this.affectationTache.id);
 
       this.formData = new FormData();
     });
@@ -70,7 +70,7 @@ export class ReactionModeMessengerCreateComponent
 
   addEmoji(event) {
     const text = `${this.form.controls.reaction.value}${event.emoji.native}`;
-    this.valuePatcher("reaction", text);
+    this.formValuePatcher("reaction", text);
   }
 
   enregistrer() {
@@ -104,7 +104,7 @@ export class ReactionModeMessengerCreateComponent
   create() {
     if (this.form.controls.reaction.value || this.formData.has("file")) {
       this.loading = true;
-      this.valuePatcher(
+      this.formValuePatcher(
         "rebondissement",
         this.rebondissement ? this.rebondissement.id : null
       );

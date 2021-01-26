@@ -28,7 +28,7 @@ export class SolutionTacheCreateComponent
     this._subscription[
       "affectation"
     ] = this.affectationService.singleData$.subscribe((affectation) => {
-      this.valuePatcher("affectation_tache", affectation.id);
+      this.formValuePatcher("affectation_tache", affectation.id);
     });
   }
 

@@ -36,7 +36,7 @@ export class MembreGroupeAddComponent
     this._subscription["groupe"] = this.groupeService.singleData$.subscribe(
       (groupe) => {
         this.getNonMembre(groupe.id);
-        this.valuePatcher("groupe", groupe.id);
+        this.formValuePatcher("groupe", groupe.id);
       }
     );
   }

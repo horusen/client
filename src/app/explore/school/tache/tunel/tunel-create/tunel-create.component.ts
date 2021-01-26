@@ -86,7 +86,7 @@ export class TunelCreateComponent
     this.form.controls.affectation_tache.valueChanges.subscribe(
       (affectation) => {
         this.getMembres(affectation[0].groupe_details.id);
-        this.valuePatcher("membres", "");
+        this.formValuePatcher("membres", "");
       }
     );
 

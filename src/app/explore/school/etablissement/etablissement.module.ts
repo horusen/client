@@ -19,11 +19,15 @@ const routes: Routes = [
     component: EtablissementShowComponent,
     children: [
       {
-        path: "",
+        path: "service",
         loadChildren: () =>
-          import("./../employe/employe.module").then(
-            (module) => module.EmployeModule
+          import("./service-etablissement/service-etablissement.module").then(
+            (module) => module.ServiceEtablissementModule
           ),
+      },
+      {
+        path: "",
+        redirectTo: "service",
       },
     ],
   },

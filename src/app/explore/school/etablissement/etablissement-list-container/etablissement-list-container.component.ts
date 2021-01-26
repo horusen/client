@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { EtablissementService } from "../etablissement.service";
+import { TypeEtablissementService } from "../type-etablissement/type-etablissement.service";
 
 @Component({
   selector: "app-etablissement-list-container",
@@ -12,10 +13,12 @@ export class EtablissementListContainerComponent
   extends BaseComponent
   implements OnInit {
   showHeader: boolean = true;
+  typeEtablissement: any;
   constructor(
     public route: ActivatedRoute,
     public router: Router,
-    public etablissementService: EtablissementService
+    public etablissementService: EtablissementService,
+    public typeEtablissementService: TypeEtablissementService
   ) {
     super(etablissementService);
   }
@@ -24,6 +27,14 @@ export class EtablissementListContainerComponent
     this.route.queryParams.subscribe((params) => {
       this.showHeader = !(params["international"] == "true");
     });
+
+    if (this.router.url.includes("school/etablissement/type")) {
+      this._subscription[
+        "type_etablissement"
+      ] = this.typeEtablissementService.singleData$.subscribe((item) => {
+        this.typeEtablissement = item;
+      });
+    }
 
     console.log(this.router.url);
   }

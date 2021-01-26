@@ -27,7 +27,7 @@ export class RemarqueSolutionTacheCreateComponent
 
     this._subscription["solution"] = this.solutionService.singleData$.subscribe(
       (solution) => {
-        this.valuePatcher("solution", solution.id);
+        this.formValuePatcher("solution", solution.id);
       }
     );
   }

@@ -71,7 +71,7 @@ export class TacheCreateComponent
         // Ajout des autres champs
         this.addControl("mot_cles", null, false);
 
-        this.valuePatcher("confidentialite", 1);
+        this.formValuePatcher("confidentialite", 1);
       }
     );
   }

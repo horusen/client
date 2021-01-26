@@ -1,0 +1,6 @@
+<!-- chargement -->
+<div class="my-5" *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+
+<router-outlet *ngIf="!loading && single"></router-outlet>

@@ -21,6 +21,12 @@ export class EtablissementService extends BaseService {
     );
   }
 
+  getAffiliatedToUserByType(type: number) {
+    return this.factory
+      .get(`type/${type}/etablissement/affiliated`)
+      .pipe(tap(this.listResponseHandler()));
+  }
+
   getEtablissementsAffilies(keyword?: string) {
     return this.factory
       .get(

@@ -27,7 +27,7 @@ export class CorrectionTacheCreateComponent
 
   initialiseForm() {
     this.initForm(["libelle", "tache", "description"], [], () => {
-      this.valuePatcher("tache", this.tache.id);
+      this.formValuePatcher("tache", this.tache.id);
     });
   }
 

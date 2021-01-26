@@ -1,4 +1,6 @@
 {
     "prettier.printWidth": 500,
-    "editor.tabSize": 8
+    "editor.tabSize": 8,
+    "editor.wordWrapColumn": 1600,
+    "diffEditor.wordWrap": "off"
 }

@@ -55,7 +55,7 @@ export class FiltreMesTachesComponent
     // Domaines
     if (params.hasOwnProperty("domaines"))
       this.getDomaines(() => {
-        this.valuePatcher("domaines", [
+        this.formValuePatcher("domaines", [
           this.helper.findValueInArrayByID(
             this.domaineService.data,
             params["domaines"]
@@ -66,7 +66,7 @@ export class FiltreMesTachesComponent
     // niveau_difficultes
     if (params.hasOwnProperty("niveau_difficultes"))
       this.getNiveauDifficultes(() => {
-        this.valuePatcher("niveau_difficultes", [
+        this.formValuePatcher("niveau_difficultes", [
           this.helper.findValueInArrayByID(
             this.niveauDifficulteService.data,
             params["niveau_difficultes"]
@@ -77,7 +77,7 @@ export class FiltreMesTachesComponent
     // niveaux
     if (params.hasOwnProperty("niveaux"))
       this.getNiveaux(() => {
-        this.valuePatcher("niveaux", [
+        this.formValuePatcher("niveaux", [
           this.helper.findValueInArrayByID(
             this.niveauService.data,
             params["niveaux"]
@@ -88,7 +88,7 @@ export class FiltreMesTachesComponent
     // langues
     if (params.hasOwnProperty("langues"))
       this.getLangues(() => {
-        this.valuePatcher("langues", [
+        this.formValuePatcher("langues", [
           this.helper.findValueInArrayByID(
             this.langueService.data,
             params["langues"]
@@ -99,7 +99,7 @@ export class FiltreMesTachesComponent
     // sous_domaines
     if (params.hasOwnProperty("sous_domaines"))
       this.getSousDomaines(() => {
-        this.valuePatcher("sous_domaines", [
+        this.formValuePatcher("sous_domaines", [
           this.helper.findValueInArrayByID(
             this.sousDomaineService.data,
             params["sous_domaines"]
@@ -110,7 +110,7 @@ export class FiltreMesTachesComponent
     // mot_cles
     if (params.hasOwnProperty("mot_cles"))
       this.getSousDomaines(() => {
-        this.valuePatcher("mot_cles", [
+        this.formValuePatcher("mot_cles", [
           this.helper.findValueInArrayByID(
             this.motCleService.data,
             params["mot_cles"]

@@ -60,7 +60,7 @@ export class ReactionSujetReseauxCreateComponent
 
   initialiseForm() {
     this.initForm(["sujet"], [], () => {
-      this.valuePatcher("sujet", this.sujet.id);
+      this.formValuePatcher("sujet", this.sujet.id);
 
       this.formData = new FormData();
     });
@@ -68,7 +68,7 @@ export class ReactionSujetReseauxCreateComponent
 
   addEmoji(event) {
     const text = `${this.form.controls.reaction.value}${event.emoji.native}`;
-    this.valuePatcher("reaction", text);
+    this.formValuePatcher("reaction", text);
   }
 
   enregistrer() {
@@ -102,7 +102,7 @@ export class ReactionSujetReseauxCreateComponent
   create() {
     if (this.form.controls.reaction.value || this.formData.has("file")) {
       this.loading = true;
-      this.valuePatcher(
+      this.formValuePatcher(
         "rebondissement",
         this.rebondissement ? this.rebondissement.id : null
       );

@@ -15,25 +15,13 @@ const routes: Routes = [
     path: "",
     component: ExploreClasseComponent,
     children: [
-      // type etablissement
       {
-        path: "",
+        path: "type",
         loadChildren: () =>
           import(
             "./../etablissement/type-etablissement/type-etablissement.module"
           ).then((module) => module.TypeEtablissementModule),
       },
-      {
-        path: 'type',
-        redirectTo: ""
-      },
-
-      // etablissement list
-      {
-        path: 'type/:id',
-        loadChildren: () => import('./../etablissement/etablissement.module').then(module => module.EtablissementModule)
-      },
-
 
       // Administration
       {
@@ -60,6 +48,12 @@ const routes: Routes = [
           import(
             "./../etablissement/hierarchie-etablissement/hierarchie-etablissement.module"
           ).then((module) => module.HierarchieEtablissementModule),
+      },
+
+      // type etablissement
+      {
+        path: "",
+        redirectTo: "type",
       },
 
       // {

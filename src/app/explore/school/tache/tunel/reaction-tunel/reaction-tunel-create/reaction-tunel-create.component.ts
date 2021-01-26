@@ -49,7 +49,7 @@ export class ReactionTunelCreateComponent
 
   initialiseForm() {
     this.initForm(["tunel", "reaction"], [], () => {
-      this.valuePatcher("tunel", this.tunel.id);
+      this.formValuePatcher("tunel", this.tunel.id);
     });
 
     this.formData = new FormData();
@@ -57,7 +57,7 @@ export class ReactionTunelCreateComponent
 
   addEmoji(event: any) {
     const text = `${this.form.controls.reaction.value}${event.emoji.native}`;
-    this.valuePatcher("reaction", text);
+    this.formValuePatcher("reaction", text);
   }
 
   create() {
@@ -65,7 +65,7 @@ export class ReactionTunelCreateComponent
       this.loading = true;
 
       // Rebondissement set
-      this.valuePatcher(
+      this.formValuePatcher(
         "rebondissement",
         this.rebondissement ? this.rebondissement.id : null
       );
