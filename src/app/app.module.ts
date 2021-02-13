@@ -9,10 +9,12 @@ import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
 import { AppInjector } from "./shared/services/app-injector.service";
 import { SharedModule } from "./shared/shared.module";
+import { AuthentificationModule } from "./authentification/authentification.module";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    AuthentificationModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

@@ -1,60 +1,81 @@
+<!-- Header -->
 <div class="card">
-    <div class="row mx-0 mg-y-7">
-        <!-- Titre -->
-        <div class="col-8 d-flex">
-            <h3 class="tx- tx-16 tx-facebook italic mg-r-20 bold">
-                <i class="fad fa-school"></i>
-                {{ 'mesEtablissements' | translate }}
-            </h3>
-            <!-- <a class="btn btn-oblong btn-light tx-success float-left bd-0 btn-icon clickable" (click)="ajouterClasse()">
-                <i class="fad fa-plus-circle tx-14 tx-success"
-                    style="padding:0px; border-radius:50%">
-                </i>
-            </a> -->
-            <!-- <h3 class="tx- tx-16 tx-success italic mg-l-20 bold">c
-                <i class="fad fa-users-class"></i>
-                {{ 'CLASSE' | translate }}
-            </h3> -->
-        </div>
+  <div class="row mx-0 mg-y-7">
+    <!-- Titre -->
+    <div class="col-8">
+      <span class="ml-2">
+        <img
+             src="assets/images/xs/ecole.png"
+             alt="avatar"
+             style="height: 33px" />
+        {{ "mesEtablissments" | translate }}
+      </span>
     </div>
-
+  </div>
 </div>
 
-<ng-container *ngIf="!loading && etablissementService.data.length">
-    <div class="row row-xs mg-l-0 mg-r-0">
-        <div class="col-sm-6 col-xl-4" *ngFor="let etablissement of etablissementService.data">
-            <div class=" card mg-b-20 bg-light">
-                <div class="card-body text-center">
-                    <!-- Icone -->
-                    <i class="hidden-xs fas fa-users-class tx-40 tx-white bg-pink op-5"
-                        style="padding:10px; border-radius: 50%; ">
-                    </i>
+<div class="card-body p-2 bg-light">
+  <ng-container *ngIf="!loading && etablissementService.data.length">
+    <div class="row m-0 p-0">
+      <div
+           class="col-sm-6 col-xl-3"
+           *ngFor="let etablissement of etablissementService.data">
+        <div class="card mg-b-20">
+          <div class="avatar4">
+            <p>
+              <img
+                   class=""
+                   src="assets/images/xs/ministry.png"
+                   *ngIf="etablissement.type.id === 1"
+                   alt="avatar" />
+              <img
+                   class=""
+                   src="assets/images/xs/ia.png"
+                   *ngIf="etablissement.type.id === 2"
+                   alt="avatar" />
+              <img
+                   class=""
+                   src="assets/images/xs/ie.png"
+                   *ngIf="etablissement.type.id === 3"
+                   alt="avatar" />
+              <img
+                   class=""
+                   src="assets/images/xs/direction.png"
+                   *ngIf="etablissement.type.id === 4"
+                   alt="avatar" />
+              <img
+                   class=""
+                   src="assets/images/xs/syndicales.png"
+                   *ngIf="etablissement.type.id === 5"
+                   alt="avatar" />
+              <img
+                   class=""
+                   src="assets/images/xs/organisme.png"
+                   *ngIf="etablissement.type.id === 6"
+                   alt="avatar" />
 
-                    <!-- Libelle -->
-                    <h5 class="tx-warning tx-14 mt-2  bold">
-                        {{ etablissement.libelle }}
-                    </h5>
-
-
-                    <h5 class="tx-facebook tx-13">{{ etablissement.type.libelle }}</h5>
-
-                </div>
-                <div class=" card-footer bg-pink">
-                    <div class="card-body text-center p-0">
-                        <a class="link mr-2 tx-white tx-16 clickable"
-                            (click)="selectEtablissement(etablissement.id)"
-                            [routerLink]="[etablissement.id]">
-                            <i class="fal fa-eye tx-white"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+              <img
+                   class=""
+                   src="assets/images/xs/etablissement.png"
+                   *ngIf="etablissement.type.id === 7"
+                   alt="avatar" />
+            </p>
+          </div>
+          <div class="card-body text-center p-0 mg-t-5 bg-light">
+            <h5 class="tx-ether4 tx-13 tx-medium mg-y-15 d-block bold">
+              <a class="tx-ether4" [routerLink]="[1]">{{
+                etablissement.libelle
+                }}</a>
+            </h5>
+          </div>
         </div>
+      </div>
     </div>
-</ng-container>
+  </ng-container>
 
-<app-loading *ngIf="loading" class="w-100"></app-loading>
-<app-missing-data
-    *ngIf="!loading && !etablissementService.data.length"
-    class="w-100">
-</app-missing-data>
+  <app-loading *ngIf="loading" class="w-100"></app-loading>
+  <app-missing-data
+                    *ngIf="!loading && !etablissementService.data.length"
+                    class="w-100">
+  </app-missing-data>
+</div>

@@ -1,32 +1,81 @@
 <!-- Header -->
-<div class="card">
-    <div class="row mg-t-10 mg-b-10">
-        <!-- Titre -->
-        <div class="col-11">
-            <h3 class="tx- tx-16 tx-primary italic mg-l-20 bold">
-                <a class="float-left tx-primary mr-4" [routerLink]="[previousUrl]"
-                    [queryParams]="[router.url.split('?')[1]]">
-                    <i class="fas fa-arrow-circle-left "></i>
-                </a>
+<div class="card" *ngIf="service && etablissement">
+  <div class="row mx-0 mg-y-7 p-0">
+    <!-- boutton precedent -->
+    <div class="col-8">
+      <a
+        [routerLink]="[
+          'school',
+          'etablissement',
+          'type',
+          etablissement.type,
+          'etablissement',
+          etablissement.id,
+          'service'
+        ]"
+        class="btn btn-oblong btn-light tx-pink float-left bd-0 btn-icon clickable"
+      >
+        <i
+          class="fad fa-arrow-left tx-14 tx-pink"
+          style="padding: 0px; border-radius: 50%"
+        >
+        </i>
+      </a>
 
-                <i class="fal fa-users-crown"></i>
-                {{ 'membreAdministration' | translate }}
-            </h3>
-        </div>
-
-        <!-- Boutton ajouter -->
-        <div class="col-lg-1 float-right btn-demo">
-            <a class="btn btn-oblong btn-light tx-primary bd-0 btn-icon clickable">
-                <i class="fad fa-plus-circle tx-14 tx-primary"
-                    style="padding:0px; border-radius:50%">
-                </i>
-            </a>
-        </div>
+      <span class="ml-2">
+        <img
+          src="assets/images/xs/ministry.png"
+          alt="avatar"
+          style="height: 33px"
+        />
+        {{ service.libelle }}
+      </span>
     </div>
+
+    <!-- Recherche -->
+    <div class="col-lg-4 float-right btn-demo">
+      <div class="form-group mg-b-5">
+        <div class="input-group w-100">
+          <!--  -->
+          <input
+            #search
+            type="text"
+            [placeholder]="'RECHERCHER' | translate"
+            class="form-control pd-y-8"
+          />
+
+          <span class="">
+            <button class="btn bg-light h-100 d-flex align-items-center">
+              <i class="fad fa-search tx-facebook"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<div class="card-body p-2 bg-light">
+  <h4 class="text-center my-2" style="font-family: 'Raleway', sans-serif">
+    <i class="far fa-building tx-pink"></i> {{ "listeDesEmployes" | translate }}
 
-
-<div class="card-body p-2 bg-light bd-t">
-    <app-employe-list-by-etablissement></app-employe-list-by-etablissement>
+    <span class="ml-2">
+      <i
+        class="fad fa-plus-circle tx-15 tx-pink clickable"
+        (click)="addEmploye()"
+      ></i>
+    </span>
+  </h4>
+  <app-employe-list-by-etablissement></app-employe-list-by-etablissement>
 </div>
+
+<app-modal
+  [configuration]="{
+    name: 'employe-create-modal',
+    icone: 'user-tie',
+    titre: 'ajouterUnEmployeDansUnService',
+    taille: router.url.includes('service') ? 'md' : 'lg'
+  }"
+>
+  <app-employe-create *ngIf="onAddEmploye"></app-employe-create>
+</app-modal>

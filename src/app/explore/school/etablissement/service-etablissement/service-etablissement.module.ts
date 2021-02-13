@@ -6,6 +6,7 @@ import { ServiceEtablissementComponent } from "./service-etablissement.component
 import { ServiceEtablissementListComponent } from "./service-etablissement-list/service-etablissement-list.component";
 import { ServiceEtablissementCreateComponent } from "./service-etablissement-create/service-etablissement-create.component";
 import { ServiceEtablissementShowComponent } from "./service-etablissement-show/service-etablissement-show.component";
+import { ServiceEtablissementEditComponent } from './service-etablissement-edit/service-etablissement-edit.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,7 @@ const routes: Routes = [
     ServiceEtablissementListComponent,
     ServiceEtablissementCreateComponent,
     ServiceEtablissementShowComponent,
+    ServiceEtablissementEditComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
   exports: [RouterModule],

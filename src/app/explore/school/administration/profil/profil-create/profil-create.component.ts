@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { BaseCreateComponent } from "src/app/shared/components/base-component/base-create.component";
 import { EtablissementService } from "../../../etablissement/etablissement.service";
 import { UserService } from "../../../user/user.service";
-import { FonctionService } from "../../fonction/fonction.service";
+import { FonctionService } from "../../../fonction/fonction.service";
 import { ProfilService } from "../profil.service";
 
 @Component({

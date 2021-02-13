@@ -18,8 +18,7 @@
   <div class="" style="background: #0277bd; height: 100%">
     <ng-container
       *ngIf="
-        etablissement &&
-        !router.url.includes('school/etablissement/administration')
+        etablissement && !router.url.includes('school/echo/administration')
       "
     >
       <ul class="nav" id="pills-tab" role="tablist">
@@ -95,7 +94,7 @@
                     class="d-flex align-items-center justify-content-between"
                   >
                     <a
-                      [routerLink]="[ etablissement.id,'classe']"
+                      [routerLink]="[etablissement.id, 'classe']"
                       [routerLinkActive]="'font-weight-bold tx-info'"
                       class="nav-link tx-white"
                     >
@@ -117,7 +116,11 @@
                     class="d-flex align-items-center justify-content-between"
                   >
                     <a
-                      [routerLink]="[etablissement.id,'hierarchie-interne', 'professeur']"
+                      [routerLink]="[
+                        etablissement.id,
+                        'hierarchie-interne',
+                        'professeur'
+                      ]"
                       [routerLinkActive]="'font-weight-bold tx-info'"
                       class="nav-link tx-white"
                     >
@@ -178,27 +181,27 @@
                     </a>
                   </div>
 
-                   <!-- Etablissement Affilié -->
-                   <div
-                   class="d-flex align-items-center justify-content-between"
-                 >
-                   <a
-                     [routerLink]="[etablissement.id, '']"
-                     [routerLinkActive]="'font-weight-bold tx-info'"
-                     class="nav-link tx-white"
-                   >
-                     <i class="fad fa-user-graduate tx-light"></i>
-                     {{ "elevesEtEtudiants" | translate }}
-                   </a>
-                   <a
-                     href=""
-                     data-toggle="tooltip"
-                     title=""
-                     data-original-title="Create Channel"
-                   >
-                     <i class="fal fa-plus tx-yellow"></i>
-                   </a>
-                 </div>
+                  <!-- Etablissement Affilié -->
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <a
+                      [routerLink]="[etablissement.id, '']"
+                      [routerLinkActive]="'font-weight-bold tx-info'"
+                      class="nav-link tx-white"
+                    >
+                      <i class="fad fa-user-graduate tx-light"></i>
+                      {{ "elevesEtEtudiants" | translate }}
+                    </a>
+                    <a
+                      href=""
+                      data-toggle="tooltip"
+                      title=""
+                      data-original-title="Create Channel"
+                    >
+                      <i class="fal fa-plus tx-yellow"></i>
+                    </a>
+                  </div>
                 </ng-container>
               </nav>
             </div>
@@ -420,7 +423,7 @@
       </div>
     </ng-container>
 
-    <div class="mg-t-0  mg-b-10 pd-0">
+    <div class="mg-t-0 mg-b-10 pd-0">
       <app-sidebar-explore-classe-etablissement-list></app-sidebar-explore-classe-etablissement-list>
     </div>
   </div>

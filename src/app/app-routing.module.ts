@@ -1,5 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { ConnexionComponent } from "./authentification/connexion/connexion.component";
+import { InscriptionComponent } from "./authentification/inscription/inscription.component";
 
 const routes: Routes = [
   {
@@ -9,6 +11,15 @@ const routes: Routes = [
         (module) => module.SchoolModule
       ),
   },
+  {
+    path: "connexion",
+    component: ConnexionComponent
+  },
+  {
+    path: "inscription",
+    component: InscriptionComponent
+  },
+
   { path: "**", redirectTo: "school" },
 ];
 

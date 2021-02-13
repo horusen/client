@@ -17,6 +17,7 @@ export class CommonCreateComponent
     endpoint: null,
     name: null,
     hasDescription: false,
+    submitButtonClass: "",
   };
 
   @Input() extraFields: any;
@@ -56,9 +57,7 @@ export class CommonCreateComponent
           this.form.reset();
         },
         () => {},
-        () => {
-          
-        }
+        () => {}
       );
   }
 }

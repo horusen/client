@@ -53,6 +53,7 @@ export class ServiceEtablissementCreateComponent
   }
 
   create() {
+    this.loading = true;
     const data = {
       domaines: this.helper.idExtractor(this.formValue("domaines")),
       ...this.helper.omitFieldInObject(this.form.value, ["domaines"]),

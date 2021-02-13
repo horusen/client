@@ -46,9 +46,7 @@ export class EleveComponent extends BaseComponent implements OnInit {
       ? (this.parentComponents["professeur"] = true)
       : null;
 
-    (this.router.url.includes("etablissement")) &&
-    !this.router.url.includes("international=true") &&
-    !this.router.url.includes("autres-eleves")
+    this.router.url.includes("echo")
       ? (this.parentComponents["etablissement"] = true)
       : null;
 
@@ -56,7 +54,7 @@ export class EleveComponent extends BaseComponent implements OnInit {
       ? (this.parentComponents["horsEtablissement"] = true)
       : null;
 
-    (this.router.url.includes("classe")) || this.router.url.includes("annuaire")
+    this.router.url.includes("classe") || this.router.url.includes("annuaire")
       ? (this.parentComponents["classe"] = true)
       : null;
 

@@ -1,6 +1,16 @@
 {
-    "prettier.printWidth": 500,
-    "editor.tabSize": 8,
-    "editor.wordWrapColumn": 1600,
-    "diffEditor.wordWrap": "off"
+  "prettier.printWidth": 150,
+  "editor.tabSize": 6,
+"editor.wordWrapColumn": 160,
+  "workbench.colorCustomizations": {
+        "statusBar.background": "#691d7c",
+        "statusBar.foreground": "#ffffff",
+        "statusBarItem.hoverBackground": "#7a3c8a"
+},
+  "html.format.wrapLineLength": 150,
+"editor.rulers": [
+    150
+],
+"html.format.wrapAttributes": "preserve-aligned",
+"prettier.tabWidth": 4
 }

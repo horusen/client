@@ -4,25 +4,87 @@
 >
   <div class="col-sm-6 col-xl-3" *ngFor="let service of serviceService.data">
     <div class="card mg-b-20 bg-light">
-      <!-- image avatar -->
-      <div class="avatar4">
-        <p>
-          <img class=" " src="assets/images/xs/serv6.png" alt="avatar" />
-        </p>
+      <div class="d-flex justify-content-between">
+        <!-- image avatar -->
+        <div class="avatar4">
+          <p>
+            <img class=" " src="assets/images/xs/serv6.png" alt="avatar" />
+          </p>
+        </div>
+
+        <!-- Dropdown options -->
+        <div class="dropdown d-inline float-right mr-2 mt-1">
+          <!-- Icone -->
+          <i
+            class="fas fa-caret-down mt-1 clickable float-left"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+          </i>
+
+          <div
+            class="dropdown-menu dropdown-menu-left"
+            aria-labelledby="dropdownMenuButton"
+          >
+            <!-- modifier membre -->
+            <a
+              class="dropdown-item tx-primary clickable"
+              (click)="modifier(service)"
+            >
+              {{ "MODIFIER" | translate }}
+              <i class="fad fa-edit float-right"></i>
+            </a>
+            <!-- supprimer membre -->
+            <!-- <a
+              class="dropdown-item tx-primary clickable"
+              (click)="delete(admin.id)"
+            >
+              {{ "SUPPRIMER" | translate }}
+              <i class="fad fa-trash float-right"></i>
+            </a> -->
+
+            <!-- Tunel -->
+            <!-- <a
+              class="dropdown-item tx-primary clickable"
+              [routerLink]="['./']"
+              [queryParams]="{
+                type_discussion: 'correspondance',
+                correspondant: admin.admin_details.id_inscription,
+                modal: 'discussion-min'
+              }"
+            >
+              {{ "CONTACTER" | translate }}
+              <i class="fad fa-comments-alt float-right"></i>
+            </a> -->
+          </div>
+        </div>
       </div>
 
       <!-- Content -->
       <div class="card-body text-center p-0 mg-t-5 bg-white">
         <!-- Libelle -->
-        <h5 class="tx-yeto2 tx-13 tx-medium mg-y-15 d-block bold">
-          {{ service.libelle }}
+        <h5 class="tx-13 tx-medium mg-y-15 d-block bold">
+          <a class="tx-yeto2" [routerLink]="[service.id]">{{
+            service.libelle
+          }}</a>
         </h5>
 
         <!-- Assets -->
         <div class="like-comm mg-t-5 mg-b-5">
-          <a href="" class="link mr-2 tx-ether4 tx-11"
-            ><i class="fad fa-comments"></i> Contacts</a
+          <a
+            [routerLink]="['./']"
+            [queryParams]="{
+              type_discussion: 'service_etablissement',
+              service_etablissement: service.id,
+              modal: 'discussion-min'
+            }"
+            class="link mr-2 tx-ether4 tx-11"
           >
+            <i class="fad fa-comments"></i>
+            Contacts
+          </a>
           <a href="" class="link mr-2 tx-ether4 tx-11"
             ><i class="fad fa-users"></i>{{ service.nombre_employe }}</a
           >

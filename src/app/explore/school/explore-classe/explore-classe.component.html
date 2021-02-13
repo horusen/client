@@ -1,73 +1,70 @@
+<!-- Content -->
 <div class="row row-xs clearfix mg-0 pd-0">
+  <!-- Logo -->
   <div class="col-lg-2 bd-b" style="background: #eaf2f8">
     <a
-      href=""
-      class="tx-ether4 mg-l-30"
-      style="
+       href=""
+       class="tx-ether4 mg-l-30"
+       style="
         font-family: 'Tangerine';
         text-align: center;
         font-size: 250%;
         vertical-align: middle;
         text-shadow: 0px 1px 0px;
-      "
-    >
-      Echos<span class="tx-yellow1"> </span
-    ></a>
+      ">
+      Echos<span class="tx-yellow1"> </span></a>
   </div>
+
+  <!-- Header  -->
   <div class="col-lg-10" style="background: #eaf2f8">
     <ul class="nav mg-0 bd-b pd-10">
+      <!-- Administration -->
       <li class="nav-item mg-0 pd-0">
         <a
-          class="nav-link3 active show"
-          data-toggle="tab"
-          href="#tableau_groupes"
-          style="padding: 5px 12px"
-        >
+           class="nav-link3 active show"
+           [routerLink]="['administration']"
+           style="padding: 5px 12px">
           <i
-            class="fal fa-users-cog tx-12 bg-light tx-ether4"
-            style="padding: 6px; border-radius: 50%"
-          ></i>
-          <span class="tx-ether4">Administrations </span></a
-        >
+             class="fal fa-users-cog tx-12 bg-light tx-ether4"
+             style="padding: 6px; border-radius: 50%"></i>
+          <span class="tx-ether4">{{ "ADMINISTRATION" | translate }} </span></a>
       </li>
+
+      <!-- Hierarchie -->
       <li class="nav-item">
         <a class="nav-link3" data-toggle="tab" href="#classe_groupes">
           <i
-            class="fal fa-sitemap tx-12 bg-light tx-ether4"
-            style="padding: 6px; border-radius: 50%"
-          ></i>
-          <span class="tx-ether4"> Hiérarchies</span></a
-        >
+             class="fal fa-sitemap tx-12 bg-light tx-ether4"
+             style="padding: 6px; border-radius: 50%"></i>
+          <span class="tx-ether4"> Hiérarchies</span></a>
       </li>
 
+      <!-- Annuaire -->
       <li class="nav-item">
         <a class="nav-link3" data-toggle="tab" href="#mon annuaire">
           <i
-            class="fal fa-book bg-light tx-ether4"
-            style="padding: 6px; border-radius: 50%"
-          ></i
-          ><span class="tx-ether4"> Annuaires</span></a
-        >
+             class="fal fa-book bg-light tx-ether4"
+             style="padding: 6px; border-radius: 50%"></i><span class="tx-ether4"> Annuaires</span></a>
       </li>
+
+      <!-- Mon explore -->
       <li class="nav-item">
         <a class="nav-link3" data-toggle="tab" href="#calendrier_groupes">
           <i
-            class="fal fa-comments bg-light tx-ether4"
-            style="padding: 6px; border-radius: 50%"
-          ></i
-          ><span class="tx-ether4"> Mon Explore</span></a
-        >
+             class="fal fa-comments bg-light tx-ether4"
+             style="padding: 6px; border-radius: 50%"></i><span class="tx-ether4"> Mon Explore</span></a>
       </li>
+
+      <!-- Notification -->
       <li class="nav-item">
         <a class="nav-link3" data-toggle="tab" href="#calendrier_groupes">
           <i
-            class="fal fa-bells bg-light tx-warning"
-            style="padding: 6px; border-radius: 50%"
-          ></i
-        ></a>
+             class="fal fa-bells bg-light tx-warning"
+             style="padding: 6px; border-radius: 50%"></i></a>
       </li>
     </ul>
   </div>
+
   <div class="col-lg-9 p-0">
     <div class="nav-tabs-top">
       <router-outlet></router-outlet>
@@ -80,19 +77,15 @@
           <ul class="nav bd-b pd-12 mg-t-2">
             <li class="nav-item">
               <a
-                class="mr-3 active tx-ether4 tx-14"
-                data-toggle="tab"
-                href="#description_theme"
-                ><i class="fad fa-circle tx-ether4"></i> Récents</a
-              >
+                 class="mr-3 active tx-ether4 tx-14"
+                 data-toggle="tab"
+                 href="#description_theme"><i class="fad fa-circle tx-ether4"></i> Récents</a>
             </li>
             <li class="nav-item">
               <a
-                class="tx-ether4 tx-14"
-                data-toggle="tab"
-                href="#activite_memoire"
-                ><i class="fad fa-circle tx-ether4 mr-2"></i> Favoris</a
-              >
+                 class="tx-ether4 tx-14"
+                 data-toggle="tab"
+                 href="#activite_memoire"><i class="fad fa-circle tx-ether4 mr-2"></i> Favoris</a>
             </li>
           </ul>
           <div class="tab-content">
@@ -103,440 +96,319 @@
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar9.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar9.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-ether4 bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-ether4 bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar7.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar7.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-success-100 bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-success-100 bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar5.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar5.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-danger bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-danger bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar3.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar3.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-ether4 bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-ether4 bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar2.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar2.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-success-100 bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-success-100 bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar1.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar1.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-danger bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-danger bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar7.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar7.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-success-100 bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-success-100 bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar5.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar5.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-danger bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-danger bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar3.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar3.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-ether4 bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-ether4 bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar2.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar2.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-success-100 bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-success-100 bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar1.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar1.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-danger bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-danger bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                 </ul>
@@ -549,440 +421,319 @@
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar9.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar9.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-ether4 bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-ether4 bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar7.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar7.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-success-100 bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-success-100 bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar5.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar5.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-danger bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-danger bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar3.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar3.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-ether4 bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-ether4 bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar2.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar2.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-success-100 bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-success-100 bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar1.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar1.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-danger bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-danger bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar7.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar7.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-success-100 bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-success-100 bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar5.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar5.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-danger bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-danger bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar3.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar3.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-ether4 bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-ether4 bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar2.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar2.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-success-100 bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-success-100 bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                   <li class="list-group-item d-flex pd-sm-x-10 bd-b bg-light">
                     <div class="mr-2 mg-l-0">
                       <div class="avatar d-block">
                         <img
-                          class="avatar2"
-                          src="assets/images/xs/avatar1.jpg"
-                          alt="avatar"
-                        />
+                             class="avatar2"
+                             src="assets/images/xs/avatar1.jpg"
+                             alt="avatar" />
                       </div>
                     </div>
                     <div class="pd-sm-l-10">
                       <p class="tx-ether mg-b-0">
                         Fortuné Alain Junior BACKOULAS
                       </p>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-calendar-alt tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
-                      <span class="tx-12 mg-b-0 tx-gray-500"
-                        ><i
-                          class="fad fa-comments tx-yeto3"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-calendar-alt tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
+                      <span class="tx-12 mg-b-0 tx-gray-500"><i
+                           class="fad fa-comments tx-yeto3"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                       <span class="tx-12 mg-b-0 tx-gray-500">
-                        Pas disponible</span
-                      >
+                        Pas disponible</span>
                     </div>
                     <div class="mg-l-auto text-right">
                       <p class="mg-b-0 tx-dar"><small>28/12/2020</small></p>
-                      <span class="tx-10 tx-success-100 mg-b-0"
-                        ><i
-                          class="fal fa-bell-on tx-danger bg-white"
-                          style="padding: 4px; border-radius: 50%"
-                        ></i
-                      ></span>
+                      <span class="tx-10 tx-success-100 mg-b-0"><i
+                           class="fal fa-bell-on tx-danger bg-white"
+                           style="padding: 4px; border-radius: 50%"></i></span>
                     </div>
                   </li>
                 </ul>
@@ -999,3 +750,5 @@
     <!-- </div> -->
   </div>
 </div>
+
+<app-discussion-min></app-discussion-min>

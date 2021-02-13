@@ -33,28 +33,25 @@ export class ProfesseurListComponent extends BaseComponent implements OnInit {
       this.getByUserClasse();
     } else if (this.router.url.includes("school/professeur")) {
       this.getAutresDeMemeEtablissement();
-    } else if (
-      this.router.url.includes("school/etablissement/hierarchie-interne")
-    ) {
+    } else if (this.router.url.includes("school/echo/hierarchie-interne")) {
       this.getByEtablissement(this.etablissementService.etablissement.id);
-    } else if (
-      this.router.url.includes("school/etablissement/hierarchie-externe")
-    ) {
+    } else if (this.router.url.includes("school/echo/hierarchie-externe")) {
       this.getHorsEtablissementMemePays(
         this.etablissementService.etablissement.id
       );
-    } else if (this.router.url.includes("school/etablissement/annuaire")) {
+    } else if (this.router.url.includes("school/echo/annuaire")) {
       this.getAll();
     } else if (
-      this.router.url.includes("school/etablissement") && /\d/.test(this.router.url) 
+      this.router.url.includes("school/echo") &&
+      /\d/.test(this.router.url)
     ) {
       this.etablissementService.singleData$.subscribe((etablissement) => {
         console.log("etablissement");
         this.getByEtablissement(etablissement.id);
       });
-  } else if (this.router.url.includes("school/etablissement/class")) {
-    this.getByClasse();
-  }
+    } else if (this.router.url.includes("school/echo/class")) {
+      this.getByClasse();
+    }
     // this.route.queryParams.subscribe((params) => {
     //   if (params["international"] == "true") {
     //     this.getProfesseurInternationals();
@@ -74,12 +71,12 @@ export class ProfesseurListComponent extends BaseComponent implements OnInit {
   }
 
   getByClasse(keyword: string = "") {
-    this.classeService.singleData$.subscribe(classe => {
+    this.classeService.singleData$.subscribe((classe) => {
       this.loading = true;
       this.professeurService.getByClasse(classe.id, keyword).subscribe(() => {
         this.loading = false;
-      })
-    })
+      });
+    });
   }
 
   getAll(keyword: string = "") {

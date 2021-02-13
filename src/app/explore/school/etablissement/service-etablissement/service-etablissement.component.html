@@ -2,13 +2,13 @@
 <div class="card" *ngIf="etablissement">
   <div class="row mx-0 mg-y-7 p-0">
     <!-- boutton precedent -->
-    <div class="col-7">
+    <div class="col-8">
       <a
         [routerLink]="[
           'school',
           'etablissement',
           'type',
-          etablissement.type,
+          etablissement.type.id,
           'etablissement',
           etablissement.id
         ]"
@@ -32,7 +32,7 @@
     </div>
 
     <!-- Recherche -->
-    <div class="col-lg-4 p-0 float-right btn-demo">
+    <div class="col-lg-4 float-right btn-demo">
       <div class="form-group mg-b-5">
         <div class="input-group w-100">
           <!--  -->
@@ -51,29 +51,22 @@
         </div>
       </div>
     </div>
-
-    <div class="col-1 p-0">
-      <a
-        (click)="createService()"
-        class="btn btn-oblong float-right btn-light tx-pink float-left bd-0 btn-icon clickable"
-      >
-        <i
-          class="fad fa-plus tx-14 tx-pink"
-          style="padding: 0px; border-radius: 50%"
-        >
-        </i>
-      </a>
-    </div>
   </div>
 </div>
 
 <div class="card-body p-2 bg-light">
   <h4 class="text-center my-2" style="font-family: 'Raleway', sans-serif">
-    <i class="far fa-building tx-pink"></i> {{ "listeDesServices" | translate }}
+    <!-- <i class="far fa-building tx-pink"></i> -->
+    {{ "listeDesServices" | translate }}
+
+    <span class="ml-2">
+      <i class="fad fa-plus-circle tx-15 tx-pink" (click)="createService()"></i>
+    </span>
   </h4>
   <app-service-etablissement-list></app-service-etablissement-list>
 </div>
 
+<!-- Service etablissement add -->
 <app-modal
   [configuration]="{
     name: 'service-etablissement-create-modal',
@@ -84,4 +77,15 @@
   <app-service-etablissement-create
     *ngIf="onCreateService"
   ></app-service-etablissement-create>
+</app-modal>
+
+<!-- Service etablissement edit -->
+<app-modal
+  [configuration]="{
+    name: 'service-etablissement-edit-modal',
+    icone: 'users',
+    titre: 'modificationService'
+  }"
+>
+  <app-service-etablissement-edit></app-service-etablissement-edit>
 </app-modal>

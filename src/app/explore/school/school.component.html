@@ -1,101 +1,1073 @@
+<!-- Header -->
+<div class="row row-xs clearfix mg-0 pd-0 bd-b p-0 mg-t-6">
+    <!-- logo -->
+    <div class="col-lg-2">
+        <div class="d-flex flex-row">
+            <a href=""
+               class="tx-white tx-26 tx-bolder"
+               style="
+                    font-family: 'Tangerine';
+                    text-align: center;
+                    vertical-align: middle;
+                    text-shadow: 0px 1px 0px;
+                    ">
+                <p class="tx-ether4">
+                    <!-- <img class="avatar4" src="assets/images/xs/explore.png" alt="avatar">-->
+                    <i
+                       class="fad fa-solar-system tx-ether4"
+                       style="padding: 6px; border-radius: 50%"></i>
+                    Explore.S<U class="tx-ether">chool</U>
+                </p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Raccourcie -->
+    <div class="col-lg-1">
+        <div class="card-body collapse show p-0" id="collapse1">
+            <a
+               role="button"
+               class="btn btn-default mg-r-50"
+               data-backdrop="false"
+               data-toggle="modal"
+               data-target="#m_modal_40">
+                <i class="fas fa-layer-plus tx-32 tx-ether4"></i></a>
+            <div
+                 class="modal fade"
+                 id="m_modal_40"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-labelledby="exampleModalLabel_40"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content modal-lg2">
+                        <div class="modal-header p-1">
+                            <h5
+                                class="modal-title tx-facebook tx-16"
+                                id="exampleModalLabel_4">
+                                <i class="fad fa-badge"></i> Objets Explorer
+                            </h5>
+                            <button type="button" class="close closemodal">
+                                <span aria-hidden="true"><i class="fad fa-times-circle mg-r-4 tx-facebook"></i></span>
+                            </button>
+                        </div>
+                        <div
+                             class="modal-body mb-0 p-0"
+                             style="padding-left: 0px; padding-right: 0px">
+                            <div class="card">
+                                <ul class="nav" id="pills-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a
+                                           class="nav-link"
+                                           id="autres"
+                                           data-toggle="pill"
+                                           href="#creer_groupes">
+                                            <i class="fad fa-users-class tx-ether3"></i>
+                                            <span class="tx-ether3">Classes</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a
+                                           class="nav-link"
+                                           id="personal_chat_tab"
+                                           data-toggle="pill"
+                                           href="#creer_etudiant">
+                                            <i class="fad fa-user-graduate tx-ether3"></i><span class="tx-ether3"> Etudiants</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a
+                                           class="nav-link"
+                                           id="autres"
+                                           data-toggle="pill"
+                                           href="#creer_professeurs">
+                                            <i class="fad fa-user-tie tx-ether3"></i><span class="tx-ether3"> Professeurs</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a
+                                           class="nav-link"
+                                           id="autres"
+                                           data-toggle="pill"
+                                           href="#creer_groupes">
+                                            <i class="fad fa-users tx-ether3"></i>
+                                            <span class="tx-ether3">Groupes</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a
+                                           class="nav-link"
+                                           id="autres"
+                                           data-toggle="pill"
+                                           href="#creer_exercices">
+                                            <i class="fad fa-dumbbell tx-ether3"></i><span class="tx-ether3"> Tâches</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a
+                                           class="nav-link"
+                                           id="autres"
+                                           data-toggle="pill"
+                                           href="#creer_reseaux">
+                                            <i class="fad fa-network-wired tx-ether3"></i><span class="tx-ether3"> Hiérarchies</span></a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade" id="creer_groupes">
+                                        <div class="card">
+                                            <div class="row row-xs clearfix mg-0 pd-0 mg-t-10 mg-b-5">
+                                                <div class="col-lg-11 text-left">
+                                                    <h3 class="tx- tx-16 tx-primary italic bold">
+                                                        <i class="fal fa-list"></i> Liste des groupes
+                                                    </h3>
+                                                </div>
+                                                <div class="col-lg-1 btn-demo">
+                                                    <i
+                                                       class="fad fa-plus-circle tx-14 tx-primary bg-light float-right"
+                                                       style="padding: 6px; border-radius: 50%"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group bd-b p-0">
+                                            <div
+                                                 class="input-group"
+                                                 style="
+                          padding-left: 0px;
+                          padding-right: 0px;
+                          border-radius: 0;
+                        ">
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Classes...</option>
+                                                    <option value="1">Individuelle</option>
+                                                    <option value="2">Groupe</option>
+                                                    <option value="3">Assistée</option>
+                                                </select>
+
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Niveau...</option>
+                                                    <option value="1">Revision</option>
+                                                    <option value="1">Facile</option>
+                                                    <option value="2">Moyen</option>
+                                                    <option value="3">Difficile</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Type de groupe...</option>
+                                                    <option value="1">Individuelle</option>
+                                                    <option value="2">Groupe</option>
+                                                    <option value="3">Assistée</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Domaines...</option>
+                                                    <option value="1">Individuelle</option>
+                                                    <option value="2">Groupe</option>
+                                                    <option value="3">Assistée</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Sous domaines...</option>
+                                                    <option value="1">Individuelle</option>
+                                                    <option value="2">Groupe</option>
+                                                    <option value="3">Assistée</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div class="row row-xs mg-l-0 mg-r-0">
+                                                <div class="col-lg-6">
+                                                    <div class="card mg-b-0">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tx-30 pd-y-25 pd-x-20 bg-light">
+                                                                <i class="fad fa-tasks-alt"></i>
+                                                            </div>
+                                                            <div class="ml-3 mr-3 wd-100p">
+                                                                <h6
+                                                                    class="tx-facebook tx-13"
+                                                                    style="text-align: justify">
+                                                                    Résoudre les équations du second degré et de
+                                                                    troisième degré. Résoudre les équations du
+                                                                    second degré et de troisième degré
+                                                                </h6>
+                                                                <p class="tx-10 mg-t-10 mg-b-5 tx-gray">
+                                                                    <i
+                                                                       class="fal fa-layer-group tx-warning mr-2"></i><i
+                                                                       class="fal fa-calendar-alt tx-teal mr-2"></i>
+                                                                    <i class="fal fa-users tx-primary mr-2"></i>
+                                                                    <i
+                                                                       class="fal fa-user-tie tx-success-100 mr-2"></i><i
+                                                                       class="fal fa-user-slash tx-danger mr-2"></i>
+                                                                    Mot clé : Equation, Inéquation
+                                                                </p>
+                                                                <div class="progress progress-xs op-5">
+                                                                    <div
+                                                                         class="progress-bar bg-secondary w-25"
+                                                                         role="progressbar"
+                                                                         aria-valuenow="50"
+                                                                         aria-valuemin="0"
+                                                                         aria-valuemax="100"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="card mg-b-0">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tx-30 pd-y-25 pd-x-20 bg-light">
+                                                                <i class="fad fa-tasks-alt"></i>
+                                                            </div>
+                                                            <div class="ml-3 mr-3 wd-100p">
+                                                                <h6
+                                                                    class="tx-facebook tx-13"
+                                                                    style="text-align: justify">
+                                                                    Résoudre les équations du second degré et de
+                                                                    troisième degré. Résoudre les équations du
+                                                                    second degré et de troisième degré
+                                                                </h6>
+                                                                <p class="tx-10 mg-t-10 mg-b-5 tx-gray">
+                                                                    <i
+                                                                       class="fal fa-layer-group tx-warning mr-2"></i><i
+                                                                       class="fal fa-calendar-alt tx-teal mr-2"></i>
+                                                                    <i class="fal fa-users tx-primary mr-2"></i>
+                                                                    <i
+                                                                       class="fal fa-user-tie tx-success-100 mr-2"></i><i
+                                                                       class="fal fa-user-slash tx-danger mr-2"></i>
+                                                                    Mot clé : Equation, Inéquation
+                                                                </p>
+                                                                <div class="progress progress-xs op-5">
+                                                                    <div
+                                                                         class="progress-bar bg-secondary w-25"
+                                                                         role="progressbar"
+                                                                         aria-valuenow="50"
+                                                                         aria-valuemin="0"
+                                                                         aria-valuemax="100"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="creer_etudiant">
+                                        <div class="card">
+                                            <div class="row row-xs clearfix mg-0 pd-0 mg-t-10 mg-b-5">
+                                                <div class="col-lg-11 text-left">
+                                                    <h3 class="tx- tx-16 tx-primary italic bold">
+                                                        <i class="fal fa-list"></i> Liste des Etudiants
+                                                    </h3>
+                                                </div>
+                                                <div class="col-lg-1 btn-demo">
+                                                    <i
+                                                       class="fad fa-plus-circle tx-14 tx-primary bg-light float-right"
+                                                       style="padding: 6px; border-radius: 50%"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group bd-b p-0">
+                                            <div
+                                                 class="input-group"
+                                                 style="
+                          padding-left: 0px;
+                          padding-right: 0px;
+                          border-radius: 0;
+                        ">
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect04">
+                                                    <option selected>Classes...</option>
+                                                    <option value="1">Période de vacances</option>
+                                                    <option value="1">Période de congés</option>
+                                                    <option value="2">Période scolaire</option>
+                                                    <option value="3">Période week end</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Niveau...</option>
+                                                    <option value="1">Revision</option>
+                                                    <option value="1">Facile</option>
+                                                    <option value="2">Moyen</option>
+                                                    <option value="3">Difficile</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Organisation...</option>
+                                                    <option value="1">Individuelle</option>
+                                                    <option value="2">Groupe</option>
+                                                    <option value="3">Assistée</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Domaines...</option>
+                                                    <option value="1">Individuelle</option>
+                                                    <option value="2">Groupe</option>
+                                                    <option value="3">Assistée</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Cours...</option>
+                                                    <option value="1">Individuelle</option>
+                                                    <option value="2">Groupe</option>
+                                                    <option value="3">Assistée</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div class="row row-xs mg-l-0 mg-r-0">
+                                                <div class="col-sm-6 col-xl-3">
+                                                    <div class="card mg-b-20 bg-light">
+                                                        <div class="card-body text-center p-0">
+                                                            <i
+                                                               class="hidden-xs fal fa-user-graduate tx-40 tx-facebook bg-light op-7"
+                                                               style="padding: 10px; border-radius: 50%"></i>
+                                                            <h5 class="tx-gray tx-14">
+                                                                Backoulas Fortuné Alain Junior
+                                                            </h5>
+                                                            <h5 class="tx-facebook tx-13">Formation</h5>
+                                                        </div>
+                                                        <div class="card-footer bg-light">
+                                                            <div class="card-body text-center p-0">
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fal fa-user-graduate"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fal fa-users"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fad fa-clipboard"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fad fa-users"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fad fa-user-slash"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xl-3">
+                                                    <div class="card mg-b-20 bg-light">
+                                                        <div class="card-body text-center p-0">
+                                                            <i
+                                                               class="hidden-xs fal fa-user-graduate tx-40 tx-facebook bg-light op-7"
+                                                               style="padding: 10px; border-radius: 50%"></i>
+                                                            <h5 class="tx-gray tx-14">Adama Sidibé</h5>
+                                                            <h5 class="tx-facebook tx-13">Formation</h5>
+                                                        </div>
+                                                        <div class="card-footer bg-light">
+                                                            <div class="card-body text-center p-0">
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fal fa-user-graduate"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fal fa-users"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fad fa-clipboard"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fad fa-users"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fad fa-user-slash"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="creer_professeurs">
+                                        <div class="card">
+                                            <div class="row row-xs clearfix mg-0 pd-0 mg-t-10 mg-b-5">
+                                                <div class="col-lg-11 text-left">
+                                                    <h3 class="tx- tx-16 tx-primary italic bold">
+                                                        <i class="fal fa-list"></i> Liste des Professeurs
+                                                    </h3>
+                                                </div>
+                                                <div class="col-lg-1 btn-demo">
+                                                    <i
+                                                       class="fad fa-plus-circle tx-14 tx-primary bg-light float-right"
+                                                       style="padding: 6px; border-radius: 50%"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group bd-b p-0">
+                                            <div
+                                                 class="input-group"
+                                                 style="
+                          padding-left: 0px;
+                          padding-right: 0px;
+                          border-radius: 0;
+                        ">
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect04">
+                                                    <option selected>Classes...</option>
+                                                    <option value="1">Période de vacances</option>
+                                                    <option value="1">Période de congés</option>
+                                                    <option value="2">Période scolaire</option>
+                                                    <option value="3">Période week end</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Niveau...</option>
+                                                    <option value="1">Revision</option>
+                                                    <option value="1">Facile</option>
+                                                    <option value="2">Moyen</option>
+                                                    <option value="3">Difficile</option>
+                                                </select>
+
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Domaines...</option>
+                                                    <option value="1">Individuelle</option>
+                                                    <option value="2">Groupe</option>
+                                                    <option value="3">Assistée</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Cours...</option>
+                                                    <option value="1">Individuelle</option>
+                                                    <option value="2">Groupe</option>
+                                                    <option value="3">Assistée</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div class="row row-xs mg-l-0 mg-r-0">
+                                                <div class="col-sm-6 col-xl-3">
+                                                    <div class="card mg-b-20 bg-light">
+                                                        <div class="card-body text-center p-0">
+                                                            <i
+                                                               class="hidden-xs fal fa-user-tie tx-40 tx-facebook bg-light op-7"
+                                                               style="padding: 10px; border-radius: 50%"></i>
+                                                            <h5 class="tx-gray tx-14">
+                                                                Backoulas Fortuné Alain Junior
+                                                            </h5>
+                                                            <h5 class="tx-facebook tx-13">Formations</h5>
+                                                        </div>
+                                                        <div class="card-footer bg-light">
+                                                            <div class="card-body text-center p-0">
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fal fa-user-tie"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fal fa-users"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fad fa-clipboard"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fad fa-users"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fad fa-user-slash"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xl-3">
+                                                    <div class="card mg-b-20 bg-light">
+                                                        <div class="card-body text-center p-0">
+                                                            <i
+                                                               class="hidden-xs fal fa-user-tie tx-40 tx-facebook bg-light op-7"
+                                                               style="padding: 10px; border-radius: 50%"></i>
+                                                            <h5 class="tx-gray tx-14">Adama Sidibé</h5>
+                                                            <h5 class="tx-facebook tx-13">Formations</h5>
+                                                        </div>
+                                                        <div class="card-footer bg-light">
+                                                            <div class="card-body text-center p-0">
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fal fa-user-tie"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fal fa-users"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fad fa-clipboard"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fad fa-users"></i>
+                                                                </a>
+                                                                <a href="" class="link mr-2 tx-facebook tx-16"><i class="fad fa-user-slash"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="creer_reseaux">
+                                        <div class="card">
+                                            <div class="row row-xs clearfix mg-0 pd-0 mg-t-10 mg-b-5">
+                                                <div class="col-lg-11 text-left">
+                                                    <h3 class="tx- tx-16 tx-primary italic bold">
+                                                        <i class="fal fa-list"></i> Liste des réseaux
+                                                    </h3>
+                                                </div>
+                                                <div class="col-lg-1 btn-demo">
+                                                    <i
+                                                       class="fad fa-plus-circle tx-14 tx-primary bg-light float-right"
+                                                       style="padding: 6px; border-radius: 50%"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group bd-b p-0">
+                                            <div
+                                                 class="input-group"
+                                                 style="
+                          padding-left: 0px;
+                          padding-right: 0px;
+                          border-radius: 0;
+                        ">
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect04">
+                                                    <option selected>Type de réseau...</option>
+                                                    <option value="1">Période de vacances</option>
+                                                    <option value="1">Période de congés</option>
+                                                    <option value="2">Période scolaire</option>
+                                                    <option value="3">Période week end</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Niveau...</option>
+                                                    <option value="1">Revision</option>
+                                                    <option value="1">Facile</option>
+                                                    <option value="2">Moyen</option>
+                                                    <option value="3">Difficile</option>
+                                                </select>
+
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Domaines...</option>
+                                                    <option value="1">Individuelle</option>
+                                                    <option value="2">Groupe</option>
+                                                    <option value="3">Assistée</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Sous domaines...</option>
+                                                    <option value="1">Individuelle</option>
+                                                    <option value="2">Groupe</option>
+                                                    <option value="3">Assistée</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div class="row row-xs mg-l-0 mg-r-0">
+                                                <div class="col-lg-6">
+                                                    <div class="card mg-b-20">
+                                                        <div class="d-flex align-items-center">
+                                                            <div
+                                                                 class="tx-30 pd-y-25 pd-x-20 bg-light tx-warning">
+                                                                <i class="fad fa-network-wired"></i>
+                                                            </div>
+                                                            <div class="ml-3 mr-3 wd-100p">
+                                                                <h6
+                                                                    class="tx-facebook"
+                                                                    style="text-align: center">
+                                                                    Nom du nouveau réseau Nom du nouveau réseau
+                                                                    Nom du nouveau réseau
+                                                                </h6>
+                                                                <h6
+                                                                    class="tx-light tx-12"
+                                                                    style="text-align: center">
+                                                                    Domaines : Mathématiques, Physiques, Chimies
+                                                                </h6>
+                                                                <div class="text-left">
+                                                                    <i
+                                                                       class="fal fa-layer-group tx-warning mr-2"></i><i
+                                                                       class="fal fa-calendar-alt tx-teal mr-2"></i>
+                                                                    <i class="fal fa-users tx-primary mr-2"></i>
+                                                                    <i
+                                                                       class="fal fa-user-tie tx-success-100 mr-2"></i><i
+                                                                       class="fal fa-user-slash tx-danger mr-2"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="card mg-b-20">
+                                                        <div class="d-flex align-items-center">
+                                                            <div
+                                                                 class="tx-30 pd-y-25 pd-x-20 bg-light tx-warning">
+                                                                <i class="fad fa-network-wired"></i>
+                                                            </div>
+                                                            <div class="ml-3 mr-3 wd-100p">
+                                                                <h6
+                                                                    class="tx-facebook"
+                                                                    style="text-align: center">
+                                                                    Nom du nouveau réseau Nom du nouveau réseau
+                                                                    Nom du nouveau réseau
+                                                                </h6>
+                                                                <h6
+                                                                    class="tx-light tx-12"
+                                                                    style="text-align: center">
+                                                                    Domaines : Mathématiques, Physiques, Chimies
+                                                                </h6>
+                                                                <div class="text-left">
+                                                                    <i
+                                                                       class="fal fa-layer-group tx-warning mr-2"></i><i
+                                                                       class="fal fa-calendar-alt tx-teal mr-2"></i>
+                                                                    <i class="fal fa-users tx-primary mr-2"></i>
+                                                                    <i
+                                                                       class="fal fa-user-tie tx-success-100 mr-2"></i><i
+                                                                       class="fal fa-user-slash tx-danger mr-2"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="creer_exercices">
+                                        <div class="card">
+                                            <div class="row mg-t-10 mg-b-5">
+                                                <div class="col-lg-11 text-left">
+                                                    <h3 class="tx- tx-16 tx-primary italic mg-l-20 bold">
+                                                        <i class="fal fa-list"></i> Liste des exercices ou
+                                                        des tâches
+                                                    </h3>
+                                                </div>
+                                                <div class="col-lg-1 float-right btn-demo">
+                                                    <i
+                                                       class="fad fa-plus-circle tx-14 tx-primary bg-light"
+                                                       style="padding: 6px; border-radius: 50%"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group bd-b p-0">
+                                            <div
+                                                 class="input-group"
+                                                 style="
+                                                        padding-left: 0px;
+                                                        padding-right: 0px;
+                                                        border-radius: 0;
+                                                        ">
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect04">
+                                                    <option selected>Classes...</option>
+                                                    <option value="1">Période de vacances</option>
+                                                    <option value="1">Période de congés</option>
+                                                    <option value="2">Période scolaire</option>
+                                                    <option value="3">Période week end</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Niveau...</option>
+                                                    <option value="1">Revision</option>
+                                                    <option value="1">Facile</option>
+                                                    <option value="2">Moyen</option>
+                                                    <option value="3">Difficile</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Organisation...</option>
+                                                    <option value="1">Individuelle</option>
+                                                    <option value="2">Groupe</option>
+                                                    <option value="3">Assistée</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Domaines...</option>
+                                                    <option value="1">Individuelle</option>
+                                                    <option value="2">Groupe</option>
+                                                    <option value="3">Assistée</option>
+                                                </select>
+                                                <select
+                                                        class="custom-select border-0 bg-light tx-yeto2"
+                                                        id="inputGroupSelect02">
+                                                    <option selected>Sous domaines...</option>
+                                                    <option value="1">Individuelle</option>
+                                                    <option value="2">Groupe</option>
+                                                    <option value="3">Assistée</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div class="row row-xs mg-l-0 mg-r-0">
+                                                <div class="col-lg-6">
+                                                    <div class="card mg-b-20">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tx-30 pd-y-25 pd-x-50 bg-light">
+                                                                <i class="fad fa-tasks-alt"></i>
+                                                            </div>
+                                                            <div class="ml-3 mr-3 wd-100p">
+                                                                <h6
+                                                                    class="tx-facebook tx-13"
+                                                                    style="text-align: justify">
+                                                                    Résoudre les équations du second degré et de
+                                                                    troisième degré. Résoudre les équations du
+                                                                    second degré et de troisième degré
+                                                                </h6>
+                                                                <p class="tx-10 mg-t-10 mg-b-5 tx-gray">
+                                                                    <i
+                                                                       class="fal fa-layer-group tx-warning mr-2"></i><i
+                                                                       class="fal fa-calendar-alt tx-teal mr-2"></i>
+                                                                    <i class="fal fa-users tx-primary mr-2"></i>
+                                                                    <i
+                                                                       class="fal fa-user-tie tx-success-100 mr-2"></i>
+                                                                    Mot clé : Equation, Inéquation
+                                                                </p>
+                                                                <div class="progress progress-xs op-5">
+                                                                    <div
+                                                                         class="progress-bar bg-secondary w-25"
+                                                                         role="progressbar"
+                                                                         aria-valuenow="50"
+                                                                         aria-valuemin="0"
+                                                                         aria-valuemax="100"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="card mg-b-20">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tx-30 pd-y-25 pd-x-50 bg-light">
+                                                                <i class="fad fa-tasks-alt"></i>
+                                                            </div>
+                                                            <div class="ml-3 mr-3 wd-100p">
+                                                                <h6
+                                                                    class="tx-facebook tx-13"
+                                                                    style="text-align: justify">
+                                                                    Résoudre les équations du second degré et de
+                                                                    troisième degré. Résoudre les équations du
+                                                                    second degré et de troisième degré
+                                                                </h6>
+                                                                <p class="tx-10 mg-t-10 mg-b-5 tx-gray">
+                                                                    <i
+                                                                       class="fal fa-layer-group tx-warning mr-2"></i><i
+                                                                       class="fal fa-calendar-alt tx-teal mr-2"></i>
+                                                                    <i class="fal fa-users tx-primary mr-2"></i>
+                                                                    <i
+                                                                       class="fal fa-user-tie tx-success-100 mr-2"></i>
+                                                                    Mot clé : Equation, Inéquation
+                                                                </p>
+                                                                <div class="progress progress-xs op-5">
+                                                                    <div
+                                                                         class="progress-bar bg-danger w-50"
+                                                                         role="progressbar"
+                                                                         aria-valuenow="50"
+                                                                         aria-valuemin="0"
+                                                                         aria-valuemax="100"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="card mg-b-20">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tx-30 pd-y-25 pd-x-50 bg-light">
+                                                                <i class="fad fa-tasks-alt"></i>
+                                                            </div>
+                                                            <div class="ml-3 mr-3 wd-100p">
+                                                                <h6
+                                                                    class="tx-facebook tx-13"
+                                                                    style="text-align: justify">
+                                                                    Résoudre les équations du second degré et de
+                                                                    troisième degré. Résoudre les équations du
+                                                                    second degré et de troisième degré
+                                                                </h6>
+                                                                <p class="tx-10 mg-t-10 mg-b-5 tx-gray">
+                                                                    <i
+                                                                       class="fal fa-layer-group tx-warning mr-2"></i><i
+                                                                       class="fal fa-calendar-alt tx-teal mr-2"></i>
+                                                                    <i class="fal fa-users tx-primary mr-2"></i>
+                                                                    <i
+                                                                       class="fal fa-user-tie tx-success-100 mr-2"></i>
+                                                                    Mot clé : Equation, Inéquation
+                                                                </p>
+                                                                <div class="progress progress-xs op-5">
+                                                                    <div
+                                                                         class="progress-bar bg-primary w-75"
+                                                                         role="progressbar"
+                                                                         aria-valuenow="50"
+                                                                         aria-valuemin="0"
+                                                                         aria-valuemax="100"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="card mg-b-20">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tx-30 pd-y-25 pd-x-50 bg-light">
+                                                                <i class="fad fa-tasks-alt"></i>
+                                                            </div>
+                                                            <div class="ml-3 mr-3 wd-100p">
+                                                                <h6
+                                                                    class="tx-facebook tx-13"
+                                                                    style="text-align: justify">
+                                                                    Résoudre les équations du second degré et de
+                                                                    troisième degré. Résoudre les équations du
+                                                                    second degré et de troisième degré
+                                                                </h6>
+                                                                <p class="tx-10 mg-t-10 mg-b-5 tx-gray">
+                                                                    <i
+                                                                       class="fal fa-layer-group tx-warning mr-2"></i><i
+                                                                       class="fal fa-calendar-alt tx-teal mr-2"></i>
+                                                                    <i class="fal fa-users tx-primary mr-2"></i>
+                                                                    <i
+                                                                       class="fal fa-user-tie tx-success-100 mr-2"></i>
+                                                                    Mot clé : Equation, Inéquation
+                                                                </p>
+                                                                <div class="progress progress-xs op-5">
+                                                                    <div
+                                                                         class="progress-bar bg-warning w-100"
+                                                                         role="progressbar"
+                                                                         aria-valuenow="50"
+                                                                         aria-valuemin="0"
+                                                                         aria-valuemax="100"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                    type="button"
+                                    class="btn btn-secondary closemodal"
+                                    data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 tx-center bg-white">
+        <div class="row row-xs clearfix mg-0 pd-0">
+            <div class="col-lg-3">
+                <div class="d-flex flex-row mg-t-6">
+                    <div class="profiles">
+                        <img
+                             class="rounded-circle ml-4"
+                             src="assets/images/xs/avatar7.jpg"
+                             alt="avatar"
+                             width="30" />
+                        <img
+                             class="rounded-circle"
+                             src="assets/images/xs/avatar6.jpg"
+                             alt="avatar"
+                             width="30" />
+                        <img
+                             class="rounded-circle"
+                             src="assets/images/xs/avatar5.jpg"
+                             alt="avatar"
+                             width="30" />
+                        <img
+                             class="rounded-circle"
+                             src="assets/images/xs/avatar4.jpg"
+                             alt="avatar"
+                             width="30" />
+                        <img
+                             class="rounded-circle"
+                             src="assets/images/xs/avatar3.jpg"
+                             alt="avatar"
+                             width="30" />
+                    </div>
+                    <div class="avatar mg-l-10">
+                        <span class="avatar-initial rounded-circle bg-gray op-4 tx-danger">2</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group mg-t-5 mg-b-5 mg-l-40">
+                    <div class="input-group" style="width: 500px">
+                        <span class="input-group-append"><a role="button" class="btn btn-light"><i class="fad fa-search tx-ether3"></i></a></span>
+                        <input
+                               type="text"
+                               class="form-control pd-y-10 tx-white"
+                               placeholder="Recherche..." />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="card-body p-0">
+                    <ul class="nav mg-0 pd-0 mg-t-6">
+                        <li class="nav-item">
+                            <a class="nav-link3" class="nav-link"
+                               [routerLink]="['echo']"
+                               [routerLinkActive]="'active show'">
+                                <span class="tx-ether4">
+                                    <i
+                                       class="fal fa-bahai tx-ether4 bg-gray-100"
+                                       style="padding: 6px; border-radius: 50%"></i>
+                                    Echos</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                               class="nav-link3"
+                               data-toggle="tab"
+                               href="#calendriers_memoires"><span class="tx-primary">
+                                    <i
+                                       class="fal fa-tasks-alt tx-ether bg-gray-100"
+                                       style="padding: 6px; border-radius: 50%"></i> </span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link3" data-toggle="tab" href="#soutenance_memoire"><span class="tx-primary">
+                                    <i
+                                       class="fal fa-reply-all tx-ether bg-gray-100"
+                                       style="padding: 6px; border-radius: 50%"></i> </span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link3" data-toggle="tab" href="#lab_brain"><span class="tx-primary">
+                                    <i
+                                       class="fal fa-users bg-gray-100 tx-ether"
+                                       style="padding: 6px; border-radius: 50%"></i> </span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link3 clickable" (click)="deconnexion()"><span class="tx-warning">
+                                    <i
+                                       class="fal fa-door-open bg-gray-100 tx-ether"
+                                       style="padding: 6px; border-radius: 50%"></i> </span></a>
+                        </li>
+                        <!-- <li class="nav-item ">
+  <a class="nav-link3 " data-toggle="tab" href="#suivi_memmoires"><span class="tx-primary">
+  <i class="fad fa-question-circle bg-gray-100 tx-sidebar" style="padding:6px; border-radius:50%"></i> </span></a>
+  </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="page-container">
     <div class="page-sidebar bg-white">
         <div class="page-sidebar-inner">
-            <div class="page-sidebar-menu ">
-                <ul class="navbar nav  " role="tablist">
+            <div class="page-sidebar-menu">
+                <ul class="navbar nav" role="tablist">
+                    <!-- Administration -->
+                    <li class="nav-item tx-center">
+                        <a
+                           class="nav-link"
+                           [routerLink]="['administration']"
+                           [routerLinkActive]="'active show'">
+                            <i class="fal fa-cogs tx-primary tx-20"></i>
+                            <p class="tx-primary tx-10 p-0 mb-0">{{ "ADMINISTRATION" | translate }}</p>
+                        </a>
+                    </li>
+
                     <!-- Explore -->
                     <li class="nav-item">
-                        <a class="nav-link  tx-center"
-                            [routerLink]="['./']"
-                            [routerLinkActive]="'active show'"
-                            [routerLinkActiveOptions]="{exact: true}">
-                            <i class="fal fa-comments tx-20  tx-primary"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0">{{ 'EXPLORER' | translate }}</p>
+                        <a
+                           class="nav-link tx-center"
+                           [routerLink]="['./']"
+                           [routerLinkActive]="'active show'"
+                           [routerLinkActiveOptions]="{ exact: true }">
+                            <i class="fal fa-comments tx-20 tx-primary"></i>
+                            <p class="tx-primary tx-10 p-0 mb-0">
+                                {{ "EXPLORER" | translate }}
+                            </p>
                         </a>
                     </li>
-
-                    <!-- Etablissement -->
-                    <li class="nav-item tx-center ">
-                        <a class="nav-link "
-                            [routerLink]="['etablissement']"
-                            [routerLinkActive]="'active show'">
-                            <i class="fal fa-bahai tx-primary tx-20"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0">{{ 'Echos' | translate }}</p>
-                        </a>
-                    </li>
-
 
 
                     <!-- groupe independants -->
                     <li class="nav-item tx-center">
-                        <a class="nav-link"
-                            [routerLink]="['groupe-independant']"
-                            [routerLinkActive]="'active show'">
-                            <i class="fal fa-users  tx-primary tx-20"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0">{{ 'GROUPES' | translate }}</p>
+                        <a
+                           class="nav-link"
+                           [routerLink]="['groupe-independant']"
+                           [routerLinkActive]="'active show'">
+                            <i class="fal fa-users tx-primary tx-20"></i>
+                            <p class="tx-primary tx-10 p-0 mb-0">
+                                {{ "GROUPES" | translate }}
+                            </p>
                         </a>
                     </li>
 
                     <!-- Professeur -->
                     <li class="nav-item tx-center">
-                        <a class="nav-link "
-                            [routerLink]="['professeur']"
-                            [routerLinkActive]="'active show'">
+                        <a
+                           class="nav-link"
+                           [routerLink]="['professeur']"
+                           [routerLinkActive]="'active show'">
                             <i class="fal fa-chalkboard-teacher tx-20"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0 tx-center">{{ 'PROFESSEURS' | translate }}</p>
+                            <p class="tx-primary tx-10 p-0 mb-0 tx-center">
+                                {{ "PROFESSEURS" | translate }}
+                            </p>
                         </a>
                     </li>
 
-
                     <li class="nav-item tx-center">
-                        <a class="nav-link " data-toggle="pill" href="#calendriers">
-                            <i class="fal fa-calendar-alt  tx-primary tx-20"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0 tx-center">Calendrier</p>
+                        <a class="nav-link" data-toggle="pill" href="#calendriers">
+                            <i class="fal fa-calendar-alt tx-primary tx-20"></i>
+                            <p class="tx-primary tx-10 p-0 mb-0 tx-center">Calendrier</p>
                         </a>
                     </li>
 
                     <!-- Reseaux -->
                     <li class="nav-item tx-center">
-                        <a class="nav-link "
-                            [routerLink]="['reseaux']"
-                            [routerLinkActive]="'active show'">
-                            <i class="fal fa-network-wired  tx-primary tx-20"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0">{{ 'RESEAUX' | translate }}</p>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-item tx-center">
-                        <a class="nav-link   tx-primary " data-toggle="pill" href="#explore_memoire">
-                            <i class="fal fa-book  tx-primary tx-20"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0">Mémoires</p>
-                        </a>
-                    </li>
-                    <li class="nav-item tx-center">
-                        <a class="nav-link   tx-primary " data-toggle="pill" href="#explore_these">
-                            <i class="fal fa-atlas  tx-primary tx-20"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0">Thèses</p>
-                        </a>
-                    </li>
-                    <li class="nav-item tx-center">
-                        <a class="nav-link   tx-primary " data-toggle="pill" href="#notes">
-                            <i class="fal fa-pencil-paintbrush  tx-primary tx-20"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0">Notes</p>
-                        </a>
-                    </li>
-                    <li class="nav-item tx-center">
-                        <a class="nav-link  tx- tx-primary mg-b-60 " data-toggle="pill" href="#figes">
-                            <i class="fal fa-times-circle  tx-20"></i>
-                            <p class=" tx-primary tx-10 p-0 mb-0">Figés</p>
+                        <a
+                           class="nav-link"
+                           [routerLink]="['reseaux']"
+                           [routerLinkActive]="'active show'">
+                            <i class="fal fa-network-wired tx-primary tx-20"></i>
+                            <p class="tx-primary tx-10 p-0 mb-0">
+                                {{ "RESEAUX" | translate }}
+                            </p>
                         </a>
                     </li>
 
                     <li class="nav-item tx-center">
-                        <a class="nav-link  " data-toggle="pill" href="#">
+                        <a
+                           class="nav-link tx-primary"
+                           data-toggle="pill"
+                           href="#explore_memoire">
+                            <i class="fal fa-book tx-primary tx-20"></i>
+                            <p class="tx-primary tx-10 p-0 mb-0">Mémoires</p>
+                        </a>
+                    </li>
+                    <li class="nav-item tx-center">
+                        <a
+                           class="nav-link tx-primary"
+                           data-toggle="pill"
+                           href="#explore_these">
+                            <i class="fal fa-atlas tx-primary tx-20"></i>
+                            <p class="tx-primary tx-10 p-0 mb-0">Thèses</p>
+                        </a>
+                    </li>
+                    <li class="nav-item tx-center">
+                        <a class="nav-link tx-primary" data-toggle="pill" href="#notes">
+                            <i class="fal fa-pencil-paintbrush tx-primary tx-20"></i>
+                            <p class="tx-primary tx-10 p-0 mb-0">Notes</p>
+                        </a>
+                    </li>
+                    <li class="nav-item tx-center">
+                        <a
+                           class="nav-link tx- tx-primary mg-b-60"
+                           data-toggle="pill"
+                           href="#figes">
+                            <i class="fal fa-times-circle tx-20"></i>
+                            <p class="tx-primary tx-10 p-0 mb-0">Figés</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item tx-center">
+                        <a class="nav-link" data-toggle="pill" href="#">
                             <i class="fad fa-th tx-10 tx-facebook tx-30"></i>
                         </a>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -103,19 +1075,27 @@
 
     <div class="page-content">
         <div class="tab-content h-100">
-            <div class="tab-pane fade active show h-100 " id="explore_school">
+            <div class="tab-pane fade active show h-100" id="explore_school">
                 <router-outlet></router-outlet>
             </div>
         </div>
     </div>
 </div>
 
-
-<app-modal-sidebar [configuration]="{name: 'tunel-create-modal', titre: 'creerUnTunel', icone:'comments-alt'}">
+<app-modal-sidebar
+                   [configuration]="{
+    name: 'tunel-create-modal',
+    titre: 'creerUnTunel',
+    icone: 'comments-alt'
+  }">
     <app-tunel-create></app-tunel-create>
 </app-modal-sidebar>
 
-
-<app-modal-sidebar [configuration]="{name: 'reaction-tunel-modal', titre: 'TUNEL', icone:'comments-alt'}">
+<app-modal-sidebar
+                   [configuration]="{
+    name: 'reaction-tunel-modal',
+    titre: 'TUNEL',
+    icone: 'comments-alt'
+  }">
     <app-reaction-tunel></app-reaction-tunel>
 </app-modal-sidebar>

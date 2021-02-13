@@ -10,7 +10,7 @@ export class DomaineService extends BaseService {
     super("domaine");
   }
 
-  get(emit: boolean = false) {
+  get(emit: boolean = true) {
     return this.factory.get(`${this.endPoint}`).pipe(
       tap({
         next: emit ? (data) => (this.data = data) : null,

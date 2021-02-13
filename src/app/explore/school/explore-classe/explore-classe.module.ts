@@ -23,14 +23,6 @@ const routes: Routes = [
           ).then((module) => module.TypeEtablissementModule),
       },
 
-      // Administration
-      {
-        path: "administration",
-        loadChildren: () =>
-          import(
-            "./administration-etablissement/administration-etablissement.module"
-          ).then((module) => module.AdministrationEtablissementModule),
-      },
 
       // Administration
       {

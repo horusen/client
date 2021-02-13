@@ -67,6 +67,39 @@ const routes: Routes = [
                 (module) => module.EleveModule
               ),
           },
+
+          // Administrateur
+          {
+            path: "administrateur",
+            loadChildren: () =>
+              import(
+                "./../../etablissement/admin-etablissement/admin-etablissement.module"
+              ).then((module) => module.AdminEtablissementModule),
+          },
+
+          // Service
+          {
+            path: "service",
+            loadChildren: () =>
+              import(
+                "./../../etablissement/service-etablissement/service-etablissement.module"
+              ).then((module) => module.ServiceEtablissementModule),
+          },
+
+          // Explore
+          {
+            path: "explore",
+            loadChildren: () =>
+              import(
+                "./../../discussion/discussion.module"
+              ).then((module) => module.DiscussionModule),
+          },
+
+          // Redirection
+          {
+            path: "",
+            redirectTo: "classe",
+          },
         ],
       },
     ],

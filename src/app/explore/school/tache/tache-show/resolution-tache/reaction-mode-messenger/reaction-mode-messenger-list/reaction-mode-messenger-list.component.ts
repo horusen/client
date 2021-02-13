@@ -2,7 +2,7 @@ import { ReactionResolutionTacheService } from "./../../resolution-tache/reactio
 import { Component, OnInit } from "@angular/core";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { TacheService } from "../../../../tache.service";
-import { AuthService } from "src/app/shared/services/auth.service";
+import { AuthService } from "src/app/authentification/auth.service";
 import { AffectationTacheService } from "../../../../affectation-tache/affectation-tache.service";
 import { ActivatedRoute, Router } from "@angular/router";
 

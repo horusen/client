@@ -25,7 +25,7 @@ export class EtablissementListComponent
   }
 
   ngOnInit(): void {
-    if (this.router.url.includes("school/etablissement/type")) {
+    if (this.router.url.includes("school/echo/type")) {
       this._subscription[
         "type"
       ] = this.typeEtablissementService.singleData$.subscribe((type) => {

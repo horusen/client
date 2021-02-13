@@ -10,6 +10,15 @@ import { ReactionDiscussionComponent } from "./reaction-discussion/reaction-disc
 import { ReactionModule } from "../reaction/reaction.module";
 import { DiscussionSujetReseauxListComponent } from "./discussion-sujet-reseaux-list/discussion-sujet-reseaux-list.component";
 import { DiscussionProfilAdministrationListComponent } from "./discussion-profil-administration-list/discussion-profil-administration-list.component";
+import { DernieresDiscussionsComponent } from './dernieres-discussions/dernieres-discussions.component';
+import { RouterModule, Routes } from "@angular/router";
+
+const routes: Routes  = [
+  {
+    path: "",
+    component: DiscussionComponent,
+  },
+];
 
 @NgModule({
   declarations: [
@@ -20,8 +29,9 @@ import { DiscussionProfilAdministrationListComponent } from "./discussion-profil
     ReactionDiscussionComponent,
     DiscussionSujetReseauxListComponent,
     DiscussionProfilAdministrationListComponent,
+    DernieresDiscussionsComponent,
   ],
-  imports: [CommonModule, SharedModule, SharedSchoolModule, ReactionModule],
-  exports: [DiscussionComponent, ReactionDiscussionComponent],
+  imports: [CommonModule, SharedModule, SharedSchoolModule, ReactionModule, RouterModule.forChild(routes)],
+  exports: [DiscussionComponent, ReactionDiscussionComponent, RouterModule],
 })
 export class DiscussionModule {}

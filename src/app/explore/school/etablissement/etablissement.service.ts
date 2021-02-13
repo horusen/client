@@ -92,4 +92,8 @@ export class EtablissementService extends BaseService {
       .post(`type/${type}/${this.endPoint}/international/search`, { keyword })
       .pipe(tap(this.listResponseHandler()));
   }
+
+  getCurrentUserPrivilege(etablissement: number) {
+    return this.factory.get(`${this.endPoint}/${etablissement}/privilege`);
+  }
 }

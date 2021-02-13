@@ -1,85 +1,103 @@
 <!-- Header -->
 <div class="card">
-    <div class="row mx-0 mg-y-7">
-        <!-- Titre -->
-        <div class="col-8">
-            <!-- <h3 class="tx- tx-16 tx-success italic mg-r-20 bold">
+  <div class="row mx-0 mg-y-7">
+    <!-- Titre -->
+    <div class="col-8">
+      <!-- <h3 class="tx- tx-16 tx-success italic mg-r-20 bold">
                 <i class="fad fa-users-class"></i>
                 {{ 'CLASSE' | translate }}
             </h3> -->
-            <a class="btn btn-oblong btn-light tx-primary float-left bd-0 btn-icon clickable" (click)="ajouterClasse()">
-                <i class="fad fa-plus-circle tx-14 tx-success"
-                    style="padding:0px; border-radius:50%">
-                </i>
-            </a>
-            <!-- <h3 class="tx- tx-16 tx-success italic mg-l-20 bold">
+      <a
+        class="btn btn-oblong btn-light tx-primary float-left bd-0 btn-icon clickable"
+        (click)="ajouterClasse()"
+      >
+        <i
+          class="fad fa-plus-circle tx-14 tx-success"
+          style="padding: 0px; border-radius: 50%"
+        >
+        </i>
+      </a>
+      <!-- <h3 class="tx- tx-16 tx-success italic mg-l-20 bold">
                 <i class="fad fa-users-class"></i>
                 {{ 'CLASSE' | translate }}
             </h3> -->
-        </div>
+    </div>
 
-        <!-- Boutton ajouter -->
-        <div class="col-lg-4 float-right btn-demo">
-            <div class="form-group mg-b-5 ">
-                <div class="input-group w-100">
-                    <!--  -->
-                    <input
-                        #search
-                        type="text"
-                        [placeholder]="'RECHERCHER' | translate"
-                        class="form-control pd-y-8">
+    <!-- Boutton ajouter -->
+    <div class="col-lg-4 float-right btn-demo">
+      <div class="form-group mg-b-5">
+        <div class="input-group w-100">
+          <!--  -->
+          <input
+            #search
+            type="text"
+            [placeholder]="'RECHERCHER' | translate"
+            class="form-control pd-y-8"
+          />
 
-                    <span class="">
-                        <button class="btn bg-light h-100 d-flex align-items-center">
-                            <i class="fad fa-search tx-facebook"></i>
-                        </button>
-                    </span>
-                </div>
-            </div>
+          <span class="">
+            <button class="btn bg-light h-100 d-flex align-items-center">
+              <i class="fad fa-search tx-facebook"></i>
+            </button>
+          </span>
         </div>
-    </div>  
+      </div>
+    </div>
+  </div>
 </div>
-
-
 
 <div class="card-body p-2 bg-light bd-t">
-    <app-classe-list-by-professeur *ngIf="router.url.includes('school/professeur/classe')"></app-classe-list-by-professeur>
-    <app-classe-list-by-etablissement *ngIf="router.url.includes('school/etablissement') || router.url.includes('school/etablissement')"></app-classe-list-by-etablissement>
+  <app-classe-list-by-professeur
+    *ngIf="router.url.includes('school/professeur/classe')"
+  ></app-classe-list-by-professeur>
+  <app-classe-list-by-etablissement
+    *ngIf="
+      router.url.includes('school/echo/administration') ||
+      router.url.includes('school/etablissement')
+    "
+  ></app-classe-list-by-etablissement>
 </div>
 
-<div class="modal animated bounceInDown"
-    id="classe-show-modal"
-    tabindex="-1"
-    role="dialog"
-    data-backdrop="static"
-    aria-labelledby="classe-show-modal"
-    aria-hidden="true">
-    <div [class]="'modal-dialog modal-lg'" role=" document">
-        <div class="modal-content p-0">
-            <div class="modal-header ">
-                <h5 class="modal-title" id="exampleModalLabel_5">
-                    <i class="fad fa-users-class"></i>
-                    {{ "detailsDeLaClasse" | translate }}
-                </h5>
-                <a [routerLink]="['../']">
-                    <button
-                        type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close">
-                        <span aria-hidden="true"><i class="ion-ios-close-empty"></i></span>
-                    </button>
-                </a>
-
-            </div>
-            <div class="modal-body p-0">
-                <router-outlet></router-outlet>
-            </div>
-        </div>
+<div
+  class="modal animated bounceInDown"
+  id="classe-show-modal"
+  tabindex="-1"
+  role="dialog"
+  data-backdrop="static"
+  aria-labelledby="classe-show-modal"
+  aria-hidden="true"
+>
+  <div [class]="'modal-dialog modal-lg'" role=" document">
+    <div class="modal-content p-0">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel_5">
+          <i class="fad fa-users-class"></i>
+          {{ "detailsDeLaClasse" | translate }}
+        </h5>
+        <a [routerLink]="['../']">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true"><i class="ion-ios-close-empty"></i></span>
+          </button>
+        </a>
+      </div>
+      <div class="modal-body p-0">
+        <router-outlet></router-outlet>
+      </div>
     </div>
+  </div>
 </div>
 
-
-<app-modal [configuration]="{name:'classe-add-modal', titre:'ajouterUneClasse', icone:'users-class'}">
-    <app-classe-add *ngIf="addClasse"></app-classe-add>
+<app-modal
+  [configuration]="{
+    name: 'classe-add-modal',
+    titre: 'ajouterUneClasse',
+    icone: 'users-class'
+  }"
+>
+  <app-classe-add *ngIf="addClasse"></app-classe-add>
 </app-modal>

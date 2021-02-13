@@ -1,7 +1,7 @@
 import { tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { BaseService } from "src/app/shared/services/base.service";
-import { AuthService } from "src/app/shared/services/auth.service";
+import { AuthService } from "src/app/authentification/auth.service";
 
 @Injectable({
   providedIn: "root",

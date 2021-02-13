@@ -8,6 +8,7 @@ import { EtablissementShowComponent } from "./etablissement-show/etablissement-s
 import { SharedEtablissementModule } from "./shared-etablissement/shared-etablissement.module";
 import { EtablissementComponent } from "./etablissement.component";
 import { EtablissementListContainerComponent } from "./etablissement-list-container/etablissement-list-container.component";
+import { AdministrateurEtablissementComponent } from "./administrateur-etablissement/administrateur-etablissement.component";
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
     EtablissementComponent,
     EtablissementShowComponent,
     EtablissementListContainerComponent,
+    AdministrateurEtablissementComponent,
   ],
   imports: [
     CommonModule,

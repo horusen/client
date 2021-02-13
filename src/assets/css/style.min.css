@@ -5357,87 +5357,106 @@ img {
   color: #e74c3c;
 }
 
+.avatar2 {
+  position: relative;
+  display: block;
+  width: 70px;
+  height: 70px;
+  white-space: nowrap;
+  vertical-align: bottom;
+  border-radius: 50%;
+  background: white;
+  padding: 6px;
+}
 
-.avatar2{
-  position:relative;
-  display:block;
-  width:70px;
-  height:70px;
-  white-space:nowrap;
-  vertical-align:bottom;
-  border-radius:50%;
-  background:white;
-  padding:6px
-  }
-  
-  
-  .avatar4{
-  position:relative;
-  display:block;
-  width:100px;
-  white-space:nowrap;
-  vertical-align:bottom;
-  border-radius:50%;
-  background:white;
-  padding:0px;
-  }
-  
-  .avatar6{
-  position:relative;
-  display:block;
-  width:100px;
-  white-space:nowrap;
-  vertical-align:bottom;
-  border-radius:50%;
-  background:RGB(127, 179, 213,0.2) ;
-  padding:6px;
-  }
-  .logo-ent{
-  position:relative;
-  display:block;
-  width:80px;
-  height:80px;
-  white-space:nowrap;
-  vertical-align:bottom;
-  border-radius:50%;
-  background:white;
-  padding:2px;
+.avatar4 {
+  position: relative;
+  display: block;
+  width: 100px;
+  white-space: nowrap;
+  vertical-align: bottom;
+  border-radius: 50%;
+  background: white;
+  padding: 0px;
+}
+
+.avatar6 {
+  position: relative;
+  display: block;
+  width: 100px;
+  white-space: nowrap;
+  vertical-align: bottom;
+  border-radius: 50%;
+  background: RGB(127, 179, 213, 0.2);
+  padding: 6px;
+}
+.logo-ent {
+  position: relative;
+  display: block;
+  width: 80px;
+  height: 80px;
+  white-space: nowrap;
+  vertical-align: bottom;
+  border-radius: 50%;
+  background: white;
+  padding: 2px;
   margin-left: auto;
-      margin-right: auto
-  }
-  
-  
-  
-  .avatar3{
-  position:relative;
-  display:block;
-  white-space:nowrap;
-  vertical-align:bottom;
-  border-radius:50%;
+  margin-right: auto;
+}
+
+.avatar3 {
+  position: relative;
+  display: block;
+  white-space: nowrap;
+  vertical-align: bottom;
+  border-radius: 50%;
   background: white;
-  padding:0px;
-  border-color: 1px solid #ffd700
-  }
-  .avatar4{
-  position:relative;
-  display:block;
-  width:70px;
-  height:60px;
-  white-space:nowrap;
-  vertical-align:bottom;
-  border-radius:50%;
+  padding: 0px;
+  border-color: 1px solid #ffd700;
+}
+.avatar4 {
+  position: relative;
+  display: block;
+  width: 70px;
+  height: 60px;
+  white-space: nowrap;
+  vertical-align: bottom;
+  border-radius: 50%;
   background: white;
-  padding:4px;
-  border-color: 1px solid #ffd700
-  }
-  
-  .avatar1 i {
-      width: 6px;
-      height: 6px;
-      display: block;
-      border-radius: 50%;
-      right: 0;
-      top: 20px;
-      position: absolute;
-      border: 2px solid #fff;
-  }
+  padding: 4px;
+  border-color: 1px solid #ffd700;
+}
+
+.avatar1 i {
+  width: 6px;
+  height: 6px;
+  display: block;
+  border-radius: 50%;
+  right: 0;
+  top: 20px;
+  position: absolute;
+  border: 2px solid #fff;
+}
+
+.card-icon-ether {
+  color: #426c85 !important;
+  background: rgba(131, 145, 146, 0.1) !important;
+}
+.tx-yeto {
+  color: #012a56 !important;
+}
+.tx-ether {
+  color: #0d47a1 !important;
+}
+.tx-ether1 {
+  color: #448aff !important;
+}
+.tx-ether2 {
+  color: #95a5a6 !important;
+}
+.tx-ether3 {
+  color: #6893b0 !important;
+}
+.tx-ether4 {
+  color: #566573 !important;
+}

@@ -1,39 +1,44 @@
-<div class="row row-xs  mg-0 pd-0 pd-y- bd-b" style="height: 620px;">
+<div class="row row-xs mg-0 pd-0 pd-y- bd-b" style="height: 620px">
     <!-- Sidebar -->
-    <div class="bg-light col-lg-3 p-1 " style="padding-left: 0px; padding-right:0px">
-        <div class="wrapper bg-light p-0 " id="settingSidebarScroll">
+    <div class="bg-light col-lg-3 p-1" style="padding-left: 0px; padding-right: 0px">
+        <div class="wrapper bg-light p-0" id="settingSidebarScroll">
             <div class="bd-b">
                 <!-- nav bar -->
-                <ul class="nav bg-light ">
+                <ul class="nav bg-light">
                     <!-- Discussion explore professeur -->
                     <ng-container *ngIf="parent == 'explore-professeur'">
                         <!-- Enseignant -->
                         <li class="nav-item">
-                            <a class="nav-link3 clickable active tx-yeto2"
-                                [routerLink]="['./']"
-                                [queryParams]="{'type_discussion': 'professeur'}"
-                                [ngClass]="{'font-weight-bold': activeComponent.professeur}">
-                                {{ 'PROFESSEURS' | translate }}
+                            <a
+                               class="nav-link3 clickable active tx-yeto2"
+                               [routerLink]="['./']"
+                               [queryParams]="{ type_discussion: 'professeur' }"
+                               [ngClass]="{ 'font-weight-bold': activeComponent.professeur }">
+                                {{ "PROFESSEURS" | translate }}
                             </a>
                         </li>
 
                         <!-- Groupe -->
                         <li class="nav-item">
-                            <a class="nav-link3 clickable active tx-yeto2"
-                                [ngClass]="{'font-weight-bold': activeComponent.groupe}"
-                                [routerLink]="['./']"
-                                [queryParams]="{'type_discussion': 'groupe'}">
-                                {{ 'GROUPES' | translate }}
+                            <a
+                               class="nav-link3 clickable active tx-yeto2"
+                               [ngClass]="{ 'font-weight-bold': activeComponent.groupe }"
+                               [routerLink]="['./']"
+                               [queryParams]="{ type_discussion: 'groupe' }">
+                                {{ "GROUPES" | translate }}
                             </a>
                         </li>
 
                         <!-- Administration -->
                         <li class="nav-item">
-                            <a class="nav-link3 clickable active tx-yeto2"
-                                [routerLink]="['./']"
-                                [queryParams]="{'type_discussion': 'membre-administration'}"
-                                [ngClass]="{'font-weight-bold': activeComponent['membre-administration']}">
-                                {{ 'ADMINISTRATION' | translate }}
+                            <a
+                               class="nav-link3 clickable active tx-yeto2"
+                               [routerLink]="['./']"
+                               [queryParams]="{ type_discussion: 'membre-administration' }"
+                               [ngClass]="{
+                  'font-weight-bold': activeComponent['membre-administration']
+                }">
+                                {{ "ADMINISTRATION" | translate }}
                             </a>
                         </li>
                     </ng-container>
@@ -42,15 +47,15 @@
                     <ng-container *ngIf="parent == 'sous-reseaux'">
                         <!-- Sujet -->
                         <li class="nav-item">
-                            <a class="nav-link3 clickable active tx-yeto2"
-                                [routerLink]="['./']"
-                                [queryParams]="{'type_discussion': 'sujet'}"
-                                [ngClass]="{'font-weight-bold': activeComponent['sujet']}">
-                                {{ 'SUJET' | translate }}
+                            <a
+                               class="nav-link3 clickable active tx-yeto2"
+                               [routerLink]="['./']"
+                               [queryParams]="{ type_discussion: 'sujet' }"
+                               [ngClass]="{ 'font-weight-bold': activeComponent['sujet'] }">
+                                {{ "SUJET" | translate }}
                             </a>
                         </li>
                     </ng-container>
-
                 </ul>
             </div>
 
@@ -61,12 +66,12 @@
                     <app-discussion-professeur-list *ngIf="activeComponent.professeur"></app-discussion-professeur-list>
 
                     <!-- Discussion groupe -->
-                    <app-discussion-groupe-list
-                        *ngIf="activeComponent.groupe">
+                    <app-discussion-groupe-list *ngIf="activeComponent.groupe">
                     </app-discussion-groupe-list>
 
                     <!-- Discussion sous-réseaux -->
-                    <app-discussion-sous-reseaux-list *ngIf="activeComponent['sous-reseaux']">
+                    <app-discussion-sous-reseaux-list
+                                                      *ngIf="activeComponent['sous-reseaux']">
                     </app-discussion-sous-reseaux-list>
 
                     <!-- Discussion sous-réseaux -->
@@ -76,14 +81,16 @@
                     <!-- Discussion membre administration -->
                     <app-discussion-profil-administration-list *ngIf="activeComponent['membre-administration']">
                     </app-discussion-profil-administration-list>
+
+
+                    <app-dernieres-discussions [type]="type"></app-dernieres-discussions>
                 </div>
             </div>
         </div>
     </div>
 
-
     <!-- Reaction -->
-    <div class="col-lg-9 p-0 ">
+    <div class="col-lg-9 p-0">
         <app-reaction-discussion></app-reaction-discussion>
     </div>
 </div>

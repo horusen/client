@@ -1,7 +1,7 @@
 import { AppInjector } from "./app-injector.service";
 import { tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, ReplaySubject } from "rxjs";
+import { BehaviorSubject, ReplaySubject, Subject } from "rxjs";
 import { Factory } from "./factory";
 import { Helper } from "./helper";
 
@@ -20,8 +20,8 @@ export abstract class BaseService {
   public data$ = new ReplaySubject<any[]>(1);
   public loading$ = new BehaviorSubject(false);
   public schema$ = new ReplaySubject<string[]>(1);
-  public lastItemcreated$ = new ReplaySubject<any>(1);
-  public lastItemDeleted$ = new ReplaySubject<any>(1);
+  public lastItemcreated$ = new Subject<any>();
+  public lastItemDeleted$ = new Subject<any>();
 
   set data(data: any[]) {
     this._data = data;
@@ -66,12 +66,16 @@ export abstract class BaseService {
   }
 
   initialise(emitData: boolean = true) {
-    return this.factory.get(`${this.endPoint}/initialise`).pipe(
-      tap(emitData ? this.listResponseHandler() : this.onlyErrorResponseHandler())
-    );
+    return this.factory
+      .get(`${this.endPoint}/initialise`)
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
   }
-
-  
 
   search(word: string, fields: string[]) {
     return this.factory

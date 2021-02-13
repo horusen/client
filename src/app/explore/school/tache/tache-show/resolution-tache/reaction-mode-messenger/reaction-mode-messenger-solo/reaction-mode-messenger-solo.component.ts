@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { ImageViewerService } from "src/app/shared/image-viewer/image-viewer.service";
 import { Fichier } from "src/app/shared/models/fichier.model";
-import { AuthService } from "src/app/shared/services/auth.service";
+import { AuthService } from "src/app/authentification/auth.service";
 import { ImageHandlerService } from "src/app/shared/services/image-handler.service";
 import { ReactionResolutionTacheService } from "../../resolution-tache/reaction-resolution-tache.service";
 

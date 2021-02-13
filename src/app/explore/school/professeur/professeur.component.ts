@@ -46,21 +46,15 @@ export class ProfesseurComponent
       this.getByUserClasse(keyword);
     } else if (this.router.url.includes("school/professeur")) {
       this.getAutresDeMemeEtablissement(keyword);
-    } else if (
-      this.router.url.includes("school/etablissement/hierarchie-interne")
-    ) {
+    } else if (this.router.url.includes("school/echo/hierarchie-interne")) {
       this.getByEtablissement(this.etablissementService.etablissement.id);
-    } else if (
-      this.router.url.includes("school/etablissement/hierarchie-externe")
-    ) {
+    } else if (this.router.url.includes("school/echo/hierarchie-externe")) {
       this.getHorsEtablissementMemePays(
         this.etablissementService.etablissement.id
       );
-    } else if (this.router.url.includes("school/etablissement/annuaire")) {
+    } else if (this.router.url.includes("school/echo/annuaire")) {
       this.getAll(keyword);
-    } else if (
-      this.router.url.includes("school/etablissement/administration")
-    ) {
+    } else if (this.router.url.includes("school/echo/administration")) {
       this.etablissementService.singleData$.subscribe((etablissement) => {
         console.log("etablissement");
         this.getByEtablissement(etablissement.id);

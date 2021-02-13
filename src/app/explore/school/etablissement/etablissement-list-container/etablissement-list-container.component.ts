@@ -28,7 +28,7 @@ export class EtablissementListContainerComponent
       this.showHeader = !(params["international"] == "true");
     });
 
-    if (this.router.url.includes("school/etablissement/type")) {
+    if (this.router.url.includes("school/echo/type")) {
       this._subscription[
         "type_etablissement"
       ] = this.typeEtablissementService.singleData$.subscribe((item) => {

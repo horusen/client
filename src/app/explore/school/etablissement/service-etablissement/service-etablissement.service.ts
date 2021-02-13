@@ -10,9 +10,11 @@ export class ServiceEtablissementService extends BaseService {
     super("etablissement/service");
   }
 
-  getByEtablissement(etablissement: number) {
+  getByEtablissement(etablissement: number, emit: boolean = true) {
     return this.factory
       .get(`etablissement/${etablissement}/service`)
-      .pipe(tap(this.listResponseHandler()));
+      .pipe(
+        tap(emit ? this.listResponseHandler() : this.onlyErrorResponseHandler())
+      );
   }
 }

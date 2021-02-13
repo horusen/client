@@ -25,7 +25,11 @@ export class GroupeListByEtablissementComponent
       this.data.unshift(groupe);
     });
 
-    this.getData(this.etablissementService.etablissement.id);
+    this._subscription[
+      "etablissement"
+    ] = this.etablissementService.singleData$.subscribe((etablissement) => {
+      this.getData(etablissement.id);
+    });
   }
 
   getData(etablissement: number) {

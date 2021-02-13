@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from "@angular/core";
+import { Subscription } from "rxjs";
 import { AppInjector } from "../../services/app-injector.service";
-import { AuthService } from "../../services/auth.service";
+import { AuthService } from "../../../authentification/auth.service";
 import { BaseService } from "../../services/base.service";
 import { Helper } from "../../services/helper";
 
@@ -83,7 +84,7 @@ export class BaseComponent implements OnDestroy {
 
   unsubscribe(subscriptions: {}) {
     Object.keys(subscriptions).forEach((_subscription) => {
-      if (subscriptions[_subscription]) {
+      if (subscriptions[_subscription] instanceof Subscription) {
         subscriptions[_subscription].unsubscribe();
       }
     });

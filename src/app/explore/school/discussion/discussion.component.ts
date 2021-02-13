@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
+import { AuthService } from "src/app/authentification/auth.service";
 import { DiscussionService } from "./discussion.service";
 
 @Component({
@@ -9,6 +10,7 @@ import { DiscussionService } from "./discussion.service";
   styleUrls: ["./discussion.component.scss"],
 })
 export class DiscussionComponent extends BaseComponent implements OnInit {
+  type: string;
   @Input() parent: string = "";
   discussion: any;
   activeComponent = {
@@ -21,7 +23,8 @@ export class DiscussionComponent extends BaseComponent implements OnInit {
   constructor(
     public discussionService: DiscussionService,
     public route: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    public auth: AuthService
   ) {
     super(discussionService);
   }
@@ -55,8 +58,25 @@ export class DiscussionComponent extends BaseComponent implements OnInit {
         params["type_discussion"] == "sujet" && params["sujet"]
           ? this.checkDiscussion(4, +params["sujet"])
           : null;
+
+        params["type_discussion"] == "etablissement" && params["etablissement"]
+          ? this.checkDiscussion(
+              5,
+              +params["etablissement"],
+              this.auth.user.id_inscription
+            )
+          : null;
+
+        params["type_discussion"] == "service_etablissement" &&
+        params["service_etablissement"]
+          ? this.checkDiscussion(6, +params["service_etablissement"])
+          : null;
       }
     });
+
+    if (this.router.url.includes("school/echo/administration")) {
+      this.type = "etablissement";
+    }
 
     if (
       this.parent == "sous-reseaux" &&
@@ -75,9 +95,13 @@ export class DiscussionComponent extends BaseComponent implements OnInit {
     );
   }
 
-  checkDiscussion(type_discussion: number, idTypeDiscussion: number) {
+  checkDiscussion(
+    type_discussion: number,
+    idTypeDiscussion: number,
+    correspondant?: number
+  ) {
     this.discussionService
-      .getDiscussion(type_discussion, idTypeDiscussion)
+      .getDiscussion(type_discussion, idTypeDiscussion, correspondant)
       .subscribe();
   }
 

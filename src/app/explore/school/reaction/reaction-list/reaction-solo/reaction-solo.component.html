@@ -1,3 +1,4 @@
+<!-- Non minified version -->
 <div class="d-flex mg-b-30" [ngClass]="{'flex-row-reverse': reversed}" *ngIf="reaction && !minified">
     <!-- Image de profile -->
     <div class="media-img" [ngClass]="{'ml-3': reversed, 'mr-3': !reversed}">
@@ -25,7 +26,7 @@
 
         <!-- rebondissement -->
         <div class="d-flex align-items-center" [ngClass]="{'flex-row-reverse': reversed}"
-            *ngIf="reaction.rebondissement">
+             *ngIf="reaction.rebondissement">
             <!-- Bande de couleur -->
             <div class="tx-30 pd-y-20 pd-x-2 bg-soft-primary">
             </div>
@@ -41,25 +42,25 @@
                 <div class="p-0" *ngIf="reaction.rebondissement?.file">
                     <!-- Audio -->
                     <audio controls
-                        class="audio-chat"
-                        *ngIf="helper.checkExtension(reaction.rebondissement?.file?.path, 'mp3')">
+                           class="audio-chat"
+                           *ngIf="helper.checkExtension(reaction.rebondissement?.file?.path, 'mp3')">
                         <source [src]="reaction.rebondissement?.file?.path">
                     </audio>
 
                     <!-- Document -->
                     <div class="p-3 bg-white bd clickable"
-                        *ngIf="helper.checkExtensions(reaction.rebondissement?.file?.path, ['pdf', 'PDF'])">
+                         *ngIf="helper.checkExtensions(reaction.rebondissement?.file?.path, ['pdf', 'PDF'])">
                         <i class="fad fa-file-alt"></i> {{ reaction.rebondissement?.file.name }}
                         <i class="fad fa-download float-right ml-5 mt-1"></i>
                     </div>
 
                     <!-- image -->
                     <img [src]="reaction.file?.path"
-                        (click)="afficherImage(reaction.file)"
-                        class="img-chat"
-                        [ngClass]="{'float-right': reversed}"
-                        [alt]="reaction.user.nom_complet + '_image'"
-                        *ngIf="helper.checkExtensions(reaction.rebondissement?.file.path, imageHandlerService.acceptedImageExtension)">
+                         (click)="afficherImage(reaction.file)"
+                         class="img-chat"
+                         [ngClass]="{'float-right': reversed}"
+                         [alt]="reaction.user.nom_complet + '_image'"
+                         *ngIf="helper.checkExtensions(reaction.rebondissement?.file.path, imageHandlerService.acceptedImageExtension)">
                 </div>
             </div>
         </div>
@@ -84,33 +85,33 @@
 
             <!-- reaction -->
             <p class="mb-0 mg-l-10 bg-light reaction" *ngIf="reaction.reaction"
-                [ngClass]="{'mg-r-10': reversed, 'mg-l-10': !reversed}">
+               [ngClass]="{'mg-r-10': reversed, 'mg-l-10': !reversed}">
                 {{ reaction?.reaction }}
             </p>
 
             <div class="p-0" *ngIf="reaction.file" [ngClass]="{'mg-r-10': reversed, 'mg-l-10': !reversed}">
                 <!-- Audio -->
                 <audio controls
-                    class="audio-chat"
-                    *ngIf="helper.checkExtension(reaction.file?.path, 'mp3')">
+                       class="audio-chat"
+                       *ngIf="helper.checkExtension(reaction.file?.path, 'mp3')">
                     <source [src]="reaction.file?.path">
                 </audio>
 
                 <!-- Document -->
                 <div class="p-3 bg-white bd clickable"
-                    (click)="download(reaction.file.id)"
-                    *ngIf="helper.checkExtensions(reaction.file?.path, ['pdf', 'PDF'])">
+                     (click)="download(reaction.file.id)"
+                     *ngIf="helper.checkExtensions(reaction.file?.path, ['pdf', 'PDF'])">
                     <i class="fad fa-file-pdf"></i> {{ reaction.file.name }}
                     <i class="fad fa-download float-right ml-5 mt-1"></i>
                 </div>
 
                 <!-- image -->
                 <img [src]="reaction.file?.path"
-                    (click)="afficherImage(reaction.file)"
-                    class="img-chat"
-                    [ngClass]="{'float-right': reversed}"
-                    [alt]="reaction.user.nom_complet + '_image'"
-                    *ngIf="helper.checkExtensions(reaction.file.path, imageHandlerService.acceptedImageExtension)">
+                     (click)="afficherImage(reaction.file)"
+                     class="img-chat"
+                     [ngClass]="{'float-right': reversed}"
+                     [alt]="reaction.user.nom_complet + '_image'"
+                     *ngIf="helper.checkExtensions(reaction.file.path, imageHandlerService.acceptedImageExtension)">
             </div>
         </div>
 
@@ -121,12 +122,14 @@
 
             <!-- Rebondir -->
             <i class="fal fa-comments reaction__icone-action" [ngbTooltip]="'REBONDIR' | translate"
-                (click)="rebondir()"></i>
+               (click)="rebondir()"></i>
 
         </div>
     </div>
 </div>
 
+
+<!-- minified version -->
 <div class="d-flex mg-b-20" [ngClass]="{'flex-row-reverse': reversed}" *ngIf="reaction && minified">
     <!-- Image de profile -->
     <div class="media-img" [ngClass]="{'ml-2': reversed, 'mr-2': !reversed}">
@@ -154,7 +157,7 @@
 
         <!-- rebondissement -->
         <div class="d-flex align-items-center mb-1" [ngClass]="{'flex-row-reverse': reversed}"
-            *ngIf="reaction.rebondissement">
+             *ngIf="reaction.rebondissement">
             <!-- Bande de couleur -->
             <div class="tx-30 pd-y-15 pd-x-2 bg-soft-primary">
             </div>
@@ -191,7 +194,7 @@
 
             <!-- reaction -->
             <p class="mb-0 mg-l-5 bg-light tx-13 reaction" *ngIf="reaction.reaction"
-                [ngClass]="{'mg-r-5': reversed, 'mg-l-5': !reversed}">
+               [ngClass]="{'mg-r-5': reversed, 'mg-l-5': !reversed}">
                 {{ reaction?.reaction }}
             </p>
 
@@ -204,7 +207,7 @@
 
             <!-- Rebondir -->
             <i class="fal fa-comments reaction__icone-action" [ngbTooltip]="'REBONDIR' | translate"
-                (click)="rebondir()"></i>
+               (click)="rebondir()"></i>
 
         </div>
     </div>

@@ -14,7 +14,7 @@ export class TokenStorage {
   }
 
   public getUser(): any {
-    return JSON.parse(localStorage.getItem("user"));
+    return localStorage.getItem("user");
   }
 
   public getTokenPayload(token: string) {
@@ -36,7 +36,7 @@ export class TokenStorage {
   }
 
   private setUser(user: any): void {
-    localStorage.setItem("user", JSON.parse(user));
+    localStorage.setItem("user", user);
   }
 
   public clear(): void {

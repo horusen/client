@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseSingleComponent } from "src/app/shared/components/base-component/base-single.component";
+import { AuthService } from "src/app/authentification/auth.service";
 import { EtablissementService } from "../../../etablissement/etablissement.service";
 
 @Component({
@@ -14,17 +15,35 @@ export class AdminsitrationEtablissementShowComponent
   constructor(
     public etablissementService: EtablissementService,
     public route: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    public auth: AuthService
   ) {
     super(etablissementService, route);
   }
 
   ngOnInit(): void {
-    this.enableFetchDataFromURL = true;
-    super.ngOnInit();
+    this.route.params.subscribe((param) => {
+      this.loading = true;
+      let etablissement = this.helper.parseInt(param["id"]);
 
-    if (!this.router.url.includes("classe")) {
-      this.router.navigate(["classe"], { relativeTo: this.route });
-    }
+      this.getPrivilege(etablissement).subscribe((privilege) => {
+        if (privilege.isAdmin || privilege.isChargerCom) {
+          this.getEtablissement(etablissement).subscribe(() => {
+            this.loading = false;
+          });
+        } else {
+          this.router.navigate(["school", "echo"]);
+        }
+      });
+    });
+    super.ngOnInit();
+  }
+
+  getPrivilege(etablissement: number) {
+    return this.etablissementService.getCurrentUserPrivilege(etablissement);
+  }
+
+  getEtablissement(etablissement: number) {
+    return this.etablissementService.getSingle(etablissement);
   }
 }
