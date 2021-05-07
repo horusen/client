@@ -1,12 +1,12 @@
 <div class=" p-0 mg-b-10 mg-t-7">
     <div class="row row-xs  mg-0 pd-0 " *ngIf="data.length && !loading">
         <div class="col-sm-6 col-xl-3"
-            *ngFor="let groupe of data | paginate: {itemsPerPage: 8, id:'groupe', currentPage: currentPage}; let i = index">
+             *ngFor="let groupe of data | paginate: {itemsPerPage: 8, id:'groupe', currentPage: currentPage}; let i = index">
             <div class="card mg-b-20">
                 <!-- Image  -->
                 <div class="card ">
                     <img src="https://via.placeholder.com/500x500"
-                        class="card-img-top img-fluid wd-100p" alt="">
+                         class="card-img-top img-fluid wd-100p" alt="">
                 </div>
 
 
@@ -14,7 +14,7 @@
                     <!-- Libelle groupe -->
                     <h5 class=" tx-13 tx-medium mg-y-15 d-block bold">
                         <a [routerLink]="[groupe.id]"
-                            [ngClass]="{
+                           [ngClass]="{
                                     'texte-success': helper.parseInt(i.toString().slice(-1)) == 1,
                                     'texte-secondary': helper.parseInt(i.toString().slice(-1)) == 2,
                                     'texte-warning': helper.parseInt(i.toString().slice(-1)) == 3,
@@ -34,24 +34,24 @@
                     <div class="like-comm mg-t-10 mg-b-10">
                         <!-- Membres -->
                         <a [routerLink]="[groupe.id]"
-                            [fragment]="'membre'"
-                            class="link mr-2 tx-primary tx-11">
+                           [fragment]="'membre'"
+                           class="link mr-2 tx-primary tx-11">
                             <i class="fad fa-users"></i>
                             {{ 'MEMBRES' | translate }}
                         </a>
 
                         <!-- Taches -->
                         <a [routerLink]="[groupe.id]"
-                            [fragment]="'tache'"
-                            class="link mr-2 tx-primary tx-11">'
+                           [fragment]="'tache'"
+                           class="link mr-2 tx-primary tx-11">'
                             <i class="fad fa-file-edit"></i>
                             {{ 'TACHES' | translate }}
                         </a>
 
                         <!-- DETAILS -->
                         <a [routerLink]="[groupe.id]"
-                            [fragment]="'details'"
-                            class="link mr-2 tx-primary tx-11">
+                           [fragment]="'details'"
+                           class="link mr-2 tx-primary tx-11">
                             <i class="fad fa-info-circle"></i>
                             {{ 'INFOS' | translate }}
                         </a>
@@ -63,11 +63,11 @@
         <!-- Pagination -->
         <div class="col-12 mt-1 d-flex justify-content-center">
             <pagination-controls
-                id="groupe"
-                (pageChange)="currentPage = $event"
-                autoHide="true"
-                previousLabel="{{ 'PRECEDENT' | translate }}"
-                nextLabel="{{ 'SUIVANT' | translate }}">
+                                 id="groupe"
+                                 (pageChange)="currentPage = $event"
+                                 autoHide="true"
+                                 previousLabel="{{ 'PRECEDENT' | translate }}"
+                                 nextLabel="{{ 'SUIVANT' | translate }}">
             </pagination-controls>
         </div>
     </div>

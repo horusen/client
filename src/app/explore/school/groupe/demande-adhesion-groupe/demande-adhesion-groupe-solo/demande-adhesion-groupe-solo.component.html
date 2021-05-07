@@ -1,0 +1,25 @@
+<div class="border p-2 d-flex justify-content-between align-items-center" *ngIf="demande">
+  <div>
+    <img class="rounded-circle" [src]="demande.user.photo.path" [alt]="demande.user.nom_complet">
+    <span class="font-weight-bold ml-2 mt-2">
+      {{ demande.user.nom_complet }}
+    </span>
+  </div>
+
+
+  <div class="">
+    <ng-container *ngIf="!loading">
+      <button class="btn btn-sm btn-success mr-1" (click)="accepterDemande()">
+        <i class="fas fa-check"></i>
+      </button>
+
+      <button class="btn btn-sm btn-danger" (click)="refuserDemande()">
+        <i class="fas fa-times"></i>
+      </button>
+    </ng-container>
+
+    <span *ngIf="loading">
+      <i class="fad fa-circle-notch fa-spin"></i>
+    </span>
+  </div>
+</div>

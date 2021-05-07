@@ -1,9 +1,6 @@
-<div
-  class="row row-xs clearfix mg-0 pd-0 mg-t-20"
-  *ngIf="serviceService.data.length && !loading"
->
-  <div class="col-sm-6 col-xl-3" *ngFor="let service of serviceService.data">
-    <div class="card mg-b-20 bg-light">
+<div class="row row-xs clearfix mg-0 pd-0 mg-t-20" *ngIf="serviceService.data.length && !loading">
+  <div class="p-2" [ngClass]="{'col-3': !minified, 'col-4': minified}" *ngFor="let service of serviceService.data">
+    <div class="card mg-b-20 bg-light" [ngClass]="{'active': rla.isActive}">
       <div class="d-flex justify-content-between">
         <!-- image avatar -->
         <div class="avatar4">
@@ -15,35 +12,21 @@
         <!-- Dropdown options -->
         <div class="dropdown d-inline float-right mr-2 mt-1">
           <!-- Icone -->
-          <i
-            class="fas fa-caret-down mt-1 clickable float-left"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
+          <i class="fas fa-caret-down mt-1 clickable float-left" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
           </i>
 
-          <div
-            class="dropdown-menu dropdown-menu-left"
-            aria-labelledby="dropdownMenuButton"
-          >
+          <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
             <!-- modifier membre -->
-            <a
-              class="dropdown-item tx-primary clickable"
-              (click)="modifier(service)"
-            >
+            <a class="dropdown-item tx-primary clickable" [routerLink]="['./']" [fragment]="'edit-service'" (click)="modifier(service)">
               {{ "MODIFIER" | translate }}
               <i class="fad fa-edit float-right"></i>
             </a>
             <!-- supprimer membre -->
-            <!-- <a
-              class="dropdown-item tx-primary clickable"
-              (click)="delete(admin.id)"
-            >
+            <a class="dropdown-item tx-primary clickable" [routerLink]="['./']" (click)="supprimer(service)">
               {{ "SUPPRIMER" | translate }}
               <i class="fad fa-trash float-right"></i>
-            </a> -->
+            </a>
 
             <!-- Tunel -->
             <!-- <a
@@ -66,31 +49,24 @@
       <div class="card-body text-center p-0 mg-t-5 bg-white">
         <!-- Libelle -->
         <h5 class="tx-13 tx-medium mg-y-15 d-block bold">
-          <a class="tx-yeto2" [routerLink]="[service.id]">{{
+          <a class="tx-yeto2" [routerLink]="[service.id]" routerLinkActive="active" #rla="routerLinkActive">{{
             service.libelle
-          }}</a>
+            }}</a>
         </h5>
 
         <!-- Assets -->
         <div class="like-comm mg-t-5 mg-b-5">
-          <a
-            [routerLink]="['./']"
-            [queryParams]="{
+          <a [routerLink]="['./']" [queryParams]="{
               type_discussion: 'service_etablissement',
               service_etablissement: service.id,
               modal: 'discussion-min'
-            }"
-            class="link mr-2 tx-ether4 tx-11"
-          >
+            }" class="link mr-2 tx-ether4 tx-11">
             <i class="fad fa-comments"></i>
             Contacts
           </a>
-          <a href="" class="link mr-2 tx-ether4 tx-11"
-            ><i class="fad fa-users"></i>{{ service.nombre_employe }}</a
-          >
-          <a href="" class="link mr-2 tx-ether4 tx-11"
-            ><i class="fad fa-info-circle"></i> Infos</a
-          >
+          <a href="" class="link mr-2 tx-ether4 tx-11"><i class="fad fa-users"></i>{{ service.nombre_employe }}</a>
+          <a [routerLink]="[service.id]" routerLinkActive="active" #rla="routerLinkActive" class="link mr-2 tx-ether4 tx-11"><i
+                class="fad fa-info-circle"></i> Infos</a>
         </div>
       </div>
     </div>

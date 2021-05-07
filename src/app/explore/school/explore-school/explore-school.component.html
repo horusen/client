@@ -1,138 +1,93 @@
-<div class="row row-xs clearfix mg-0 pd-0">
-    <div class="col-2">
-        <app-sidebar-explore-school></app-sidebar-explore-school>
-    </div>
-    <div class="col-10">
-        <div class="nav-tabs-top">
-            <ul class="nav bg-white mg-0 pd-0 bd-b bd-t">
-                <!-- Explore -->
-                <li class="nav-item mg-0 pd-0 ">
-                    <a class="nav-link3"
-                       style="padding: 5px 12px;"
-                       [routerLink]="['./']"
-                       [routerLinkActive]="'active'"
-                       [routerLinkActiveOptions]="{exact: true}">
-                        <i class="fal fa-comments tx-12 bg-light tx-purple "
-                           style="padding:6px; border-radius:50%">
-                        </i>
-                        <span class="tx-facebook">
-                            {{ 'EXPLORE' | translate }}
-                        </span>
-                    </a>
-                </li>
+<div class="row row-xs clearfix h-100 mg-0 pd-0">
+  <!-- Sidebar -->
+  <div class="col-2 h-100 p-0 sidebar" [ngClass]="{'sidebar-collapsed': sidebarCollapsed}">
+    <app-sidebar-explore-school></app-sidebar-explore-school>
+  </div>
+
+  <!-- Main content -->
+  <div [ngClass]="{'col-10 p-0': !sidebarCollapsed, 'col-12 p-0': sidebarCollapsed}">
+    <div class="nav-tabs-top h-100">
+      <ul class="nav bg-white mg-0 pd-0 bd-b bd-t">
+        <!-- Explore -->
+        <li class="nav-item mg-0 pd-0 ">
+          <a class="nav-link3" style="padding: 5px 12px;" [routerLink]="['./']" [routerLinkActive]="'active'"
+              [routerLinkActiveOptions]="{exact: true}">
+            <i class="fal fa-comments tx-12 bg-light tx-purple " style="padding:6px; border-radius:50%">
+            </i>
+            <span class="tx-facebook">
+              {{ 'EXPLORE' | translate }}
+            </span>
+          </a>
+        </li>
 
 
-                <!-- Professeur -->
-                <li class="nav-item mg-0 pd-0 ">
-                    <a class="nav-link3"
-                       style="padding: 5px 12px;"
-                       [routerLink]="['professeur']"
-                       [queryParams]="{'by': 'user-class'}"
-                       [routerLinkActive]="'active'">
-                        <i class="fal fa-user-tie tx-12 bg-light tx-danger "
-                           style="padding:6px; border-radius:50%">
-                        </i>
-                        <span class="tx-facebook">
-                            {{ 'PROFESSEUR' | translate }}
-                        </span>
-                    </a>
-                </li>
+        <!-- Professeur -->
+        <li class="nav-item mg-0 pd-0 ">
+          <a class="nav-link3" style="padding: 5px 12px;" [routerLink]="['professeur']" [queryParams]="{'by': 'user-class'}"
+              [routerLinkActive]="'active'">
+            <i class="fal fa-user-tie tx-12 bg-light tx-danger " style="padding:6px; border-radius:50%">
+            </i>
+            <span class="tx-facebook">
+              {{ 'PROFESSEUR' | translate }}
+            </span>
+          </a>
+        </li>
 
 
-                <!-- Groupe -->
-                <li class="nav-item ">
-                    <a class="nav-link3 "
-                       [routerLink]="['groupe']"
-                       [routerLinkActive]="'active'">
-                        <i class="fal fa-users bg-light tx-jaune "
-                           style="padding:6px; border-radius:50%">
-                        </i>
-                        <span class="tx-facebook">
-                            {{ 'GROUPES' | translate }}
-                        </span>
-                    </a>
-                </li>
-
-                <!-- Calendrier -->
-                <li class="nav-item ">
-                    <a class="nav-link3" data-toggle="tab"
-                       href="#calendrier_taches">
-                        <i class="fal fa-calendar-alt bg-light tx-primary "
-                           style="padding:6px; border-radius:50%"></i><span
-                              class="tx-facebook"> Calendriers</span></a>
-                </li>
-
-                <!-- Mes taches -->
-                <li class="nav-item ">
-                    <a class="nav-link3 "
-                       [routerLink]="['mes-taches']"
-                       [routerLinkActive]="'active'">
-                        <i class="fal fa-tasks-alt bg-light tx-success-100 "
-                           style="padding:6px; border-radius:50%">
-                        </i>
-                        <span class="tx-facebook">
-                            {{ 'TACHES' | translate }}
-                        </span>
-                    </a>
-                </li>
-
-                <!-- Suivis -->
-                <li class="nav-item ">
-                    <a class="nav-link3 "
-                       [routerLink]="['suivie']"
-                       [routerLinkActive]="'active'">
-                        <i class="fal fa-history bg-light tx-indigo "
-                           style="padding:6px; border-radius:50%">
-                        </i>
-                        <span class="tx-facebook">
-                            {{ 'SUIVIS' | translate }}
-                        </span>
-                    </a>
-                </li>
-
-                <!-- Plan -->
-                <li class="nav-item ">
-                    <a class="nav-link3" data-toggle="tab" href="#le_plan">
-                        <i class="fal fa-layer-group bg-light tx-orange "
-                           style="padding:6px; border-radius:50%"></i><span
-                              class="tx-facebook"> Plans</span></a>
-                </li>
-
-                <!-- Documents -->
-                <li class="nav-item ">
-                    <a class="nav-link3 "
-                       [routerLink]="['document']"
-                       [routerLinkActive]="'active'">
-                        <i class="fal fa-file-alt bg-light tx-purple "
-                           style="padding:6px; border-radius:50%">
-                        </i>
-                        <span class="tx-facebook">
-                            {{ 'DOCUMENTS' | translate }}
-                        </span>
-                    </a>
-                </li>
+        <!-- Groupe -->
+        <li class="nav-item ">
+          <a class="nav-link3 " [routerLink]="['groupe']" [routerLinkActive]="'active'">
+            <i class="fal fa-users bg-light tx-jaune " style="padding:6px; border-radius:50%">
+            </i>
+            <span class="tx-facebook">
+              {{ 'GROUPES' | translate }}
+            </span>
+          </a>
+        </li>
 
 
-                <!-- Anciens groupes -->
-                <li class="nav-item ">
-                    <a class="nav-link3 "
-                       [routerLink]="['ancien-groupe']"
-                       [routerLinkActive]="'active'">
-                        <i class="fal fa-users bg-facebook tx-danger "
-                           style="padding:6px; border-radius:50%">
-                        </i>
-                        <span class="tx-facebook">
-                            {{ 'anciensGroupes' | translate }}
-                        </span>
-                    </a>
-                </li>
-            </ul>
+        <!-- Mes taches -->
+        <li class="nav-item ">
+          <a class="nav-link3 " [routerLink]="['mes-taches']" [routerLinkActive]="'active'">
+            <i class="fal fa-tasks-alt bg-light tx-success-100 " style="padding:6px; border-radius:50%">
+            </i>
+            <span class="tx-facebook">
+              {{ 'TACHES' | translate }}
+            </span>
+          </a>
+        </li>
 
-            <div class="tab-content">
-                <div class="tab-pane fade active show" id="explore_ecoles">
-                    <router-outlet></router-outlet>
-                </div>
-            </div>
+
+
+        <!-- Documents -->
+        <li class="nav-item ">
+          <a class="nav-link3 " [routerLink]="['document']" [routerLinkActive]="'active'">
+            <i class="fal fa-file-alt bg-light tx-purple " style="padding:6px; border-radius:50%">
+            </i>
+            <span class="tx-facebook">
+              {{ 'DOCUMENTS' | translate }}
+            </span>
+          </a>
+        </li>
+
+
+        <!-- Anciens groupes -->
+        <li class="nav-item ">
+          <a class="nav-link3 " [routerLink]="['ancien-groupe']" [routerLinkActive]="'active'">
+            <i class="fal fa-user-times tx-facebook bg-light " style="padding:6px; border-radius:50%">
+            </i>
+            <span class="tx-facebook">
+              {{ 'anciensGroupes' | translate }}
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane h-100 fade active show" id="explore_ecoles">
+          <router-outlet></router-outlet>
         </div>
+      </div>
     </div>
+  </div>
 </div>

@@ -1,0 +1,171 @@
+<form class="custom-placeholder" [formGroup]="form" *ngIf="isFormOk" (submit)="create()">
+
+
+  <!-- Libelle -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <div class="col-7">
+      <!-- Label -->
+      <label class="control-label" for="libelle">
+        {{ 'LIBELLE' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text" class="form-control form-control-sm" required [formControlName]="'libelle'"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'libelle'), 'is-valid': isValid('libelle')}">
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('libelle')" class="invalid-feedback">
+        {{ 'veuillezSaisirLeLibelle' |translate }}.</div>
+    </div>
+
+    <!-- Code -->
+    <div class="col-3">
+      <!-- Label -->
+      <label class="control-label" for="code">
+        {{ 'CODE' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text" class="form-control form-control-sm" required [formControlName]="'code'"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'type'), 'is-valid': isValid('type')}">
+
+    </div>
+  </div>
+
+  <!-- Code et langue -->
+  <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+
+    <!-- langue -->
+    <div class="col-5">
+      <!-- Label -->
+      <label class="control-label" for="domaine">
+        {{ 'TYPE' | translate }}
+        <i class="fas fa-circle-notch fa-spin" *ngIf="dependanciesLoading.type"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.type" [settings]="dropdownSettingsAlt.single" formControlName="type"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'type'), 'is-valid': isValid('type')}"
+          class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('type')" class="invalid-feedback">
+        {{ 'selectionnerLeTypeDuProgramme' | translate }}.
+      </div>
+    </div>
+
+    <!-- langue -->
+    <div class="col-5">
+      <!-- Label -->
+      <label class="control-label" for="domaine">
+        {{ 'LANGUE' | translate }}
+        <i class="fas fa-circle-notch fa-spin" *ngIf="dependanciesLoading.langue"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.langue" [settings]="dropdownSettingsAlt.single"
+          formControlName="langue"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'langue'), 'is-valid': isValid('langue')}"
+          class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('langue')" class="invalid-feedback">
+        {{ 'selectionnerUneLangue' | translate }}.
+      </div>
+    </div>
+  </div>
+
+  <!-- Domaine et niveau -->
+  <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+    <!-- Domaine -->
+    <div class="col-5">
+      <!-- Label -->
+      <label class="control-label" for="domaine">
+        {{ 'DOMAINE' | translate }}
+        <i class="fas fa-circle-notch fa-spin" *ngIf="dependanciesLoading.domaine"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.domaine" [settings]="dropdownSettingsAlt.single"
+          formControlName="domaine"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'domaine'), 'is-valid': isValid('domaine')}"
+          class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('domaine')" class="invalid-feedback">
+        {{ 'selectionnerUnDomaine' | translate }}.
+      </div>
+    </div>
+
+    <!-- Niveau -->
+    <div class="col-5">
+      <!-- Label -->
+      <label class="control-label" for="niveau">
+        {{ 'NIVEAU' | translate }}
+        <i class="fas fa-circle-notch fa-spin" *ngIf="dependanciesLoading.niveau"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.niveau" [settings]="dropdownSettingsAlt.single"
+          formControlName="niveau"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'niveau'), 'is-valid': isValid('niveau')}"
+          class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('niveau')" class="invalid-feedback">
+        {{ 'selectionnerUnNiveau' | translate }}.
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Description -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <div class="col-10">
+      <label class="control-label" for="description">{{ 'DESCRIPTION' | translate }}</label>
+      <ckeditor [editor]="Editor" class=""
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
+          formControlName="description">
+      </ckeditor>
+      <div *ngIf="shouldShowRequiredError('description')" class="invalid-feedback">
+        {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Condition admission -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <div class="col-10">
+      <label class="control-label" for="condition_admission">{{ 'conditionDAdmission' | translate }}</label>
+      <ckeditor [editor]="Editor" class="" formControlName="condition_admission">
+      </ckeditor>
+    </div>
+  </div>
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-10 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1" type="submit">
+        {{ 'VALIDER' | translate }}
+        <i class="fas fa-circle-notch fa-spin" *ngIf="loading"></i>
+      </button>
+    </div>
+  </div>
+  <!-- <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+        <div class="col-10">
+            <label class="control-label" for="libelle">Orientation</label>
+            <textarea name="orientation" maxlength="200" class="form-control  form-control-sm" cols="30" rows="3"
+                [formControlName]="'orientation'"
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'orientation'), 'is-valid': isValid('orientation')}"></textarea>
+            <small>{{editForm.get('orientation').value?.length}}/200</small>
+            <div *ngIf="shouldShowRequiredError('orientation')" class="invalid-feedback">veillez saisir l'orientation.
+            </div>
+        </div>
+    </div> -->
+</form>
+
+<app-loading *ngIf="!isFormOk"></app-loading>

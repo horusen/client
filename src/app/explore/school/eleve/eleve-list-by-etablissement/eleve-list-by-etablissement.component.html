@@ -1,45 +1,21 @@
 <ng-container *ngIf="!loading && eleveService.data.length">
-    <!-- Recherecher -->
-    <div class="row row-xs mg-0 pd-0 mb-2 clearfix fade-in justify-content-end">
-        <div class="col-lg-4">
-            <div class="form-group mg-t-5 mg-b-5 ">
-                <div class="input-group w-100">
-                    <!--  -->
-                    <input
-                        type="text"
-                        [placeholder]="'RECHERCHER' | translate"
-                        class="form-control pd-y-10 rounded-border tx-white">
-
-                    <span class="">
-                        <a role="button" class="btn btn-facebook h-100 d-flex align-items-center rounded-circle ml-2">
-                            <i class="fad fa-search tx-white"></i>
-                        </a>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Liste des employés -->
     <div class="row row-xs mg-0 pd-0 clearfix fade-in">
-        <div class="col-xs-12 col-sm-6 col-md-3" *ngFor="let eleve of eleveService.data">
+        <div class="col-xs-12 col-sm-6 col-md-2" *ngFor="let eleve of eleveService.data">
             <div class="card border">
                 <!-- Dropdown menu -->
                 <div class="d-flex justify-content-end px-3">
                     <div class="dropdown d-inline">
                         <!-- Icone -->
-                        <i
-                            class="fas fa-caret-down mt-1 clickable float-left"
-                            id="dropdownMenuButton"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
+                        <i class="fas fa-caret-down mt-1 clickable float-left" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                         </i>
 
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <!-- changer confidentialite -->
-                            <a class="dropdown-item tx-primary clickable">[]
+                            <a class="dropdown-item tx-primary clickable">
                                 {{'MODIFIER' | translate}} <i class="fad fa-edit float-right"></i>
                             </a>
 
@@ -50,7 +26,8 @@
                             </a>
 
                             <!-- Tunel -->
-                            <a class="dropdown-item tx-primary clickable">
+                            <a class="dropdown-item tx-primary" [routerLink]="['./']"
+                                [queryParams]="{'type_discussion': 'correspondance', 'correspondant': eleve.eleve_details.id_inscription, 'modal': 'discussion-min'}">
                                 {{'CONTACTER' | translate}} <i class="fad fa-comments-alt float-right"></i>
                             </a>
 
@@ -59,15 +36,12 @@
                 </div>
                 <div class="card-body text-center pt-1 eleve">
                     <p>
-                        <img class=" img-fluid rounded-circle"
-                            [src]="eleve.eleve_details.photo"
-                            [alt]="eleve.eleve_details.nom_complet">
+                        <img class=" img-fluid rounded-circle" [src]="eleve.eleve_details.photo" [alt]="eleve.eleve_details.nom_complet">
 
-                        <i class="fas fa-circle-notch fa-spin" style="position: absolute; right: 20px;"
-                            *ngIf="loading"></i>
+                        <i class="fas fa-circle-notch fa-spin" style="position: absolute; right: 20px;" *ngIf="loading"></i>
                     </p>
 
-                    <!-- Nom de l'etudiant -->
+                    <!-- Nom de l'eleve -->
                     <h4 class="tx-12 tx-bolder tx-primary">
                         {{ eleve.eleve_details.nom_complet }}
                     </h4>

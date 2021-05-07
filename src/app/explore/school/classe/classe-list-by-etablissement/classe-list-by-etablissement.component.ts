@@ -26,7 +26,7 @@ export class ClasseListByEtablissementComponent
         this.getData(params["etablissement"]);
       }
     });
-    
+
     this.etablissementService.singleData$.subscribe(etablissement => {
       this.getData(etablissement.id)
     })
@@ -34,8 +34,7 @@ export class ClasseListByEtablissementComponent
 
   getData(etablissement: number) {
     this.loading = true;
-    this.classeService.getByEtablissement(etablissement).subscribe((data) => {
-      this.data = data;
+    this.classeService.getByEtablissement(etablissement).subscribe(() => {
       this.loading = false;
     });
   }

@@ -1,0 +1,82 @@
+<div class=" flex-1 m-2 " *ngIf="single && !loading">
+  <!-- header -->
+  <!-- libelle -->
+  <h3 class="mt-4 text-center">
+    <i class="fad fa-scroll"></i> {{single.libelle}} ({{ single.code }})
+  </h3>
+
+
+  <!-- Contenu -->
+  <div class="card-body  scrollable   scroll-11">
+    <!-- Autres informations -->
+    <div class="row m-0 py-3">
+      <div class="col-12 d-flex justify-content-between">
+        <!-- type -->
+        <div class="flex-1 mx-1 text-center">
+          <h6>{{ 'TYPE' | translate }}</h6>
+          <span class="badge  card-2 badge-pill  badge-info tx-16"><i class="fad fa-calendar-alt"></i>
+            {{single.type.libelle | titlecase}}</span>
+        </div>
+
+        <!-- Niveau -->
+        <div class="flex-1 mx-1 text-center">
+          <h6>{{ 'NIVEAU' | translate }}</h6>
+          <span class="badge  card-2 badge-pill  badge-info tx-16"><i class="fad fa-calendar-alt"></i>
+            {{single.niveau.libelle | titlecase}}</span>
+        </div>
+
+        <!-- Domaine -->
+        <div class="flex-1 mx-1 text-center">
+          <h6>{{ 'DOMAINE' | translate }}</h6>
+          <span class="badge  card-2 badge-pill  badge-info tx-16"><i class="fad fa-calendar-alt"></i>
+            {{single.domaine.libelle | titlecase}}</span>
+        </div>
+
+        <!-- Langue -->
+        <div class="flex-1 mx-1 text-center">
+          <h6>{{ 'LANGUE' | translate}}</h6>
+          <span class="badge  card-2 badge-pill  badge-info tx-16"><i class="fad fa-calendar-alt"></i>
+            {{single.langue.libelle | titlecase}}</span>
+        </div>
+      </div>
+    </div>
+    <ul ngbNav #nav="ngbNav" class="nav-tabs border-top sticky-top  nav-fill" [destroyOnHide]="false">
+
+      <li [ngbNavItem]="1">
+        <a ngbNavLink class="tx-16">Description</a>
+        <ng-template ngbNavContent>
+          <div class="p-3 bg-white">
+            <p class="remove-all-styles" [innerHtml]="single.description">
+            </p>
+          </div>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink class="tx-16">{{ 'conditionDAdmission' | translate }}</a>
+        <ng-template ngbNavContent>
+          <div class="p-3 bg-white">
+            <p class="remove-all-styles" [innerHtml]="single.condition_admission">
+            </p>
+          </div>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="3">
+        <a ngbNavLink class="tx-16">{{ 'FORMATION' | translate }}</a>
+        <ng-template ngbNavContent>
+          <div class="p-3 bg-white">
+            <router-outlet></router-outlet>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
+
+  </div>
+</div>
+
+
+<div class="my-5" *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+
+<app-missing-data *ngIf="!single && !loading"></app-missing-data>

@@ -1,0 +1,247 @@
+<form class="custom-placeholder" [formGroup]="form" *ngIf="isFormOk" (submit)="create()">
+  <!-- Image -->
+  <div class="row justify-content-center">
+    <div class="d-flex users-icon bg-light clickable align-items-center justify-content-center border rounded-circle"
+        (click)="file.click()">
+      <span class="icone">
+        <i class="fad  fa-school" *ngIf="!imageUrl"></i>
+        <img [src]="imageUrl" *ngIf="imageUrl">
+
+      </span>
+
+      <span class="cam-icon tx-primary"><i class="fad fa-camera"></i></span>
+      <div class="text border-top tx-primary"><i class="fas fa-pen"></i> Changer </div>
+      <input type="file" hidden #file (change)="onFileChanged($event.target.files, 'logo')">
+    </div>
+
+    <!-- Label -->
+    <label class="control-label col-12 tx-center " for="libelle">
+      {{ 'photoDeLEtablissement' | translate }}
+    </label>
+
+  </div>
+
+
+  <!-- Libelle et cigle -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <!-- Libelle -->
+    <div class="col-8">
+      <!-- Label -->
+      <label class="control-label" for="libelle">
+        {{ 'LIBELLE' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text" class="form-control form-control-sm" required [formControlName]="'libelle'"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'libelle'), 'is-valid': isValid('libelle')}">
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('libelle')" class="invalid-feedback">
+        {{ 'veuillezSaisirLeLibelle' |translate }}.</div>
+    </div>
+
+    <!-- Cigle -->
+    <div class="col-4">
+      <!-- Label -->
+      <label class="control-label" for="cigle">
+        {{ 'CIGLE' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text" class="form-control form-control-sm" required [formControlName]="'cigle'"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'cigle'), 'is-valid': isValid('cigle')}">
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('cigle')" class="invalid-feedback">
+        {{ 'veuillezSaisirLeCigle' |translate }}.</div>
+    </div>
+  </div>
+
+  <!-- Type et etablissement mère -->
+  <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+    <!-- Type -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label" for="type">
+        {{ 'TYPE' | translate }}
+      </label>
+
+      <angular2-multiselect [data]="dependancies.type" [settings]="dropdownSettingsAlt.single" formControlName="type"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'type'), 'is-valid': isValid('type')}"
+          class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('type')" class="invalid-feedback">
+        {{ 'veuillezChoisirLeTypeDeLEtablissement' | translate }}.
+      </div>
+    </div>
+
+    <!-- Etablissement mère -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label" for="etablissement_mere">
+        {{ 'etablissementMere' | translate }}
+      </label>
+
+      <angular2-multiselect [data]="dependancies.etablissement" [settings]="dropdownSettingsAlt.single"
+          formControlName="etablissement_mere"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'etablissement_mere'), 'is-valid': isValid('etablissement_mere')}"
+          class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
+    </div>
+  </div>
+
+
+  <!-- Date, Ninea et couleur -->
+  <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+    <!-- Date -->
+    <div class="col-4">
+      <!-- Label -->
+      <label for="type" class="label-template-form">
+        {{ 'dateDeCreation' | translate }}
+      </label>
+
+      <!-- Date picker -->
+      <div class="input-group mb-2">
+        <input [dpDayPicker]="configCalendrier.day" [theme]="'dp-material'" formControlName="date_creation_physique"
+            class="form-control form-control-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text  bg-light"><i class="fal fa-calendar"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('date_creation_physique')" class="invalid-feedback">
+        {{ 'veuillezChoisirUneDate' | translate }}.
+      </div>
+    </div>
+
+    <!-- Ninea -->
+    <div class="col-4">
+      <!-- Label -->
+      <label class="control-label" for="ninea">
+        {{ 'NINEA' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text" class="form-control form-control-sm" required [formControlName]="'ninea'"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'ninea'), 'is-valid': isValid('ninea')}">
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('ninea')" class="invalid-feedback">
+        {{ 'veuillezRenseignerLeNineaDeLEtablissement' |translate }}.</div>
+    </div>
+
+
+    <!-- couleur -->
+    <div class="col-4">
+      <!-- Label -->
+      <label class="control-label" for="couleur">
+        {{ 'COULEUR' | translate }}
+      </label>
+
+      <input [value]="formValue('couleur')" [style.background]="formValue('couleur')"
+          class="form-control form-control-sm" (colorPickerChange)="formValuePatcher('couleur', $event)"
+          cpPosition="auto" [(colorPicker)]="color" formControlName="couleur" />
+
+    </div>
+  </div>
+
+  <!-- Slogan et website -->
+  <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+
+    <!-- Slogan -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label" for="slogan">
+        {{ 'SLOGAN' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text" class="form-control form-control-sm" [formControlName]="'slogan'">
+    </div>
+
+    <!-- Url -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label" for="slogan">
+        {{ 'siteWeb' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="url" class="form-control form-control-sm" placeholder="https://example.com"
+          [formControlName]="'url'">
+    </div>
+  </div>
+
+
+  <!-- Symbole emblem -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <!-- labele -->
+      <label class="control-label d-flex align-items-center" for="description">
+        {{ 'SYMBOLE' | translate }}
+
+        <!-- Boutton ajouter symbole -->
+        <span style="font-size: 7px;" class="ml-2 p-1">
+          <input type="file" (change)="onFileChanged($event.target.files, 'symbole')">
+        </span>
+
+
+      </label>
+
+      <ckeditor [editor]="Editor" class="" formControlName="description_symbole">
+      </ckeditor>
+    </div>
+  </div>
+
+
+  <!-- Description -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <label class="control-label" for="description">{{ 'DESCRIPTION' | translate }}</label>
+      <!-- <textarea name="description" maxlength="500" class="form-control  form-control-sm" cols="30" rows="3"
+                [formControlName]="'description'"
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"></textarea> -->
+      <ckeditor [editor]="Editor" class=""
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
+          formControlName="description">
+      </ckeditor>
+      <div *ngIf="shouldShowRequiredError('description')" class="invalid-feedback">
+        {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Etablissement affiliés -->
+  <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label" for="etablissement_mere">
+        {{ 'etablissementsAffilies' | translate }}
+      </label>
+
+      <angular2-multiselect [data]="dependancies.etablissement" [settings]="dropdownSettingsAlt.multi"
+          formControlName="etablissements_affilies" class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
+    </div>
+  </div>
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-12 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1" type="submit" [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin" *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+    </div>
+  </div>
+</form>
+
+<div class="my-5" *ngIf="!isFormOk">
+  <app-loading></app-loading>
+</div>

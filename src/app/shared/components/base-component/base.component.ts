@@ -47,6 +47,7 @@ export class BaseComponent implements OnDestroy {
       singleSelection: true,
       labelKey: "libelle",
       enableSearchFilter: true,
+      disabled: false,
     },
     multi: {
       singleSelection: false,
@@ -61,6 +62,7 @@ export class BaseComponent implements OnDestroy {
       primaryKey: "id_inscription",
       singleSelection: true,
       allowSearchFilter: true,
+      disabled: false,
     },
     users: {
       enableSearchFilter: true,

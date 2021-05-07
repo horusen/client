@@ -19,9 +19,11 @@ export class EleveListByEtablissementComponent
   }
 
   ngOnInit(): void {
-    this._subscription[ 'etablissement'] = this.etablissementService.singleData$.subscribe(etablissement => {
+    this._subscription[
+      "etablissement"
+    ] = this.etablissementService.singleData$.subscribe((etablissement) => {
       this.getData(etablissement.id);
-    })
+    });
   }
 
   getData(etablissement: number) {

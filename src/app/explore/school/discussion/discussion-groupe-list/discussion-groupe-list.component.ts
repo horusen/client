@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { ClasseService } from "../../classe/classe.service";
 import { EtablissementService } from "../../etablissement/etablissement.service";
 import { GroupeListComponent } from "../../groupe/groupe-list/groupe-list.component";
 import { GroupeService } from "../../groupe/groupe.service";
@@ -19,9 +20,10 @@ export class DiscussionGroupeListComponent
     public discussionService: DiscussionService,
     public route: ActivatedRoute,
     public router: Router,
-    public etablissementService: EtablissementService
+    public etablissementService: EtablissementService,
+    public classeService: ClasseService
   ) {
-    super(groupeService, router, etablissementService);
+    super(groupeService, router, etablissementService, classeService, route);
   }
 
   ngOnInit() {

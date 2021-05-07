@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BaseEditComponent } from "src/app/shared/components/base-component/base-edit.component";
 import { DomaineService } from "../../../domaine/domaine.service";
 import { EtablissementService } from "../../etablissement.service";
@@ -20,7 +20,8 @@ export class ServiceEtablissementEditComponent
     public serviceService: ServiceEtablissementService,
     public domaineService: DomaineService,
     public etablissementService: EtablissementService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    public router: Router
   ) {
     super(serviceService);
   }
@@ -60,6 +61,8 @@ export class ServiceEtablissementEditComponent
     this.serviceService.update(this.single.id, data).subscribe(() => {
       this.loading = false;
       this.helper.toggleModal("service-etablissement-edit-modal");
+      this.router.navigate(["./"], { relativeTo: this.route });
+      this.helper.toastSuccess();
     });
   }
 }

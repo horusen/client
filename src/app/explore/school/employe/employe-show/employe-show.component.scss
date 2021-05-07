@@ -1,0 +1,373 @@
+// Colors
+$gradient-inside: #347878;
+$gradient-outside: #012345;
+$tab-bg: #fdfdfd;
+$tab-hover-bg: darken($tab-bg, 2.5%);
+$tab-hover-shadow: darken($tab-hover-bg, 10%);
+$unchecked-tab-bg: darken($tab-hover-bg, 2.5%);
+$unchecked-tab-shadow: darken($unchecked-tab-bg, 10%);
+$checked-tab-bg: $tab-bg;
+$tab-content-bg: $tab-bg;
+$icon-color: rgba(0, 15, 30, 0.8);
+$heading-color: rgba(0, 0, 0, 0.6);
+$text-color: rgba(0, 0, 0, 0.75);
+$btn-color: rgba(0, 0, 0, 0.25);
+$active-color: $icon-color;
+// Fonts & Sizes
+$body-font: "Roboto Condensed", "Arial narrow", sans-serif;
+$tab-height: 54px;
+$card-width: 100%;
+// $card-height: ($card-width * 1.5) - $tab-height;
+$icon-size: $tab-height / 2.5;
+$p-size: $card-width / 25;
+$corner-radius: 5px;
+$animation-duration: 0.5s; // Base timing for transitions, etc.
+$tab-qty: 4; // The number of navigation tabs
+$slider-length: 7; // The number of items in the slider on Tab 2
+$navdot-size: 12px; // Size of the selector dots for the slider on Tab 2
+
+///////////////////////
+//  PAGE FORMATTING  //
+///////////////////////
+
+// h3,
+// h5 {
+//   font-weight: bold;
+//   margin-top: 8px;
+//   margin-bottom: 4px;
+//   text-align: center;
+//   color: $heading-color;
+//   text-transform: uppercase;
+// }
+
+hr {
+  background: linear-gradient(
+    to right,
+    rgba(64, 64, 64, 0),
+    rgba(64, 96, 96, 0.5),
+    rgba(64, 64, 64, 0)
+  );
+  border: 0;
+  height: 1px;
+  width: auto;
+  margin-bottom: 15px;
+}
+
+p {
+  color: $text-color;
+  font-size: $p-size;
+  line-height: $p-size * 1.5;
+  padding: 0;
+  text-align: justify;
+  &:first-letter {
+    // paragraph indent
+    margin-left: 5%;
+  }
+}
+
+///////////////////////////
+//  TAB CARD FORMATTING  //
+///////////////////////////
+.card {
+  position: relative;
+  margin: auto;
+  width: $card-width;
+  // Invisible scrollbar - only if '$card-height' isn't set to 'auto'
+  // Background image overlay
+}
+
+.navicon {
+  font-size: $icon-size;
+  padding: auto;
+}
+
+// Tab Formatting
+.tab-wrapper {
+  background-color: $tab-content-bg;
+  border-radius: $corner-radius;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-wrap: wrap;
+  max-width: $card-width;
+  position: relative;
+}
+
+.tab {
+  display: none; // Hides the radio buttons
+  user-select: none;
+  @for $i from 1 through $tab-qty {
+    &:checked:nth-of-type(#{$i}) ~ .tab__copy:nth-of-type(#{$i}) {
+      height: 550px;
+      transition: $animation-duration all ease-in;
+      transform: translateY(0);
+      opacity: 1;
+      position: relative;
+      z-index: 2;
+      background: #fff;
+    }
+  }
+  // Adds corner radii for the first and last tabs, but not the middle tab
+  &:first-of-type + a label {
+    // Round the top-left corder
+    border-top-left-radius: $corner-radius;
+  }
+  &:not(:first-of-type):not(:last-of-type) + a label {
+    border-radius: 0;
+  }
+  &:last-of-type + a label {
+    // Round the top-right corner
+    border-top-right-radius: $corner-radius;
+  }
+  // Disregard hover & cursor effects for currently checked tab
+  + a.active {
+    background-color: $checked-tab-bg;
+    box-shadow: none;
+    cursor: default;
+    &:hover {
+      background-color: $checked-tab-bg;
+      box-shadow: none;
+      // border-bottom: none;
+    }
+  }
+
+  + a {
+    transition: $animation-duration / 2 all ease;
+    flex-grow: 1; // Makes the tabs fit the width of the card
+    position: relative;
+    z-index: 3;
+    cursor: pointer;
+    display: block;
+    color: $icon-color;
+    text-align: center;
+    background-color: $unchecked-tab-bg;
+    user-select: none;
+    height: $tab-height;
+    padding-top: 15px;
+    box-shadow: 0 1px 1px $unchecked-tab-shadow inset;
+    // border-bottom: 1px solid #777;
+    &:hover {
+      transition: $animation-duration / 2 all ease;
+      background-color: $tab-hover-bg;
+      box-shadow: 0 -2px 3px $tab-hover-shadow inset;
+    }
+  }
+  // text on the card itself
+  &__copy {
+    transform: translateY(3px);
+    padding: 10px 10px;
+    overflow: auto;
+    position: absolute;
+    width: 100%;
+    // height: $card-height;
+    z-index: 1;
+    opacity: 0;
+  }
+}
+
+// Top edge blur present during overflow
+.tab-wrapper::before {
+  // background: linear-gradient(to top, hsla(0, 0, 255, 0.1), $tab-bg 100%);
+  content: "";
+  margin-top: -25px;
+  position: relative;
+  z-index: 3;
+  width: $card-width;
+  height: 24px;
+  top: $tab-height + 25px;
+}
+
+// Bottom edge blur present during overflow
+.tab-wrapper::after {
+  background: linear-gradient(to bottom, hsla(0, 0, 255, 0.1), $tab-bg 100%);
+  content: "";
+  margin-top: -24px;
+  position: relative;
+  z-index: 3;
+  width: $card-width;
+  height: 24px;
+  border-radius: 0 0 $corner-radius $corner-radius;
+}
+
+/////////////////////////////////
+//  FORMATTING FOR THE SLIDER  //
+/////////////////////////////////
+.slide-wrapper {
+  // Contains the slider and the navdots
+  height: 265px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  padding: 0;
+  flex-flow: row nowrap;
+  align-items: flex-end;
+  justify-content: center;
+  // Left edge blur for the slider (disabled for now - not crazy about the gradient)
+  &::before {
+    //background: linear-gradient(to left, rgba(253, 253, 253, 0), $tab-bg 100%);
+    content: "";
+    margin-top: -20px;
+    position: fixed;
+    z-index: 3;
+    width: 50px;
+    height: 250px;
+    left: 0;
+  }
+  // Right edge blur for the slider (disabled for now - not crazy about the gradient)
+  &::after {
+    //background: linear-gradient(to right, rgba(253, 253, 253, 0), $tab-bg 100%);
+    content: "";
+    margin-top: -20px;
+    position: fixed;
+    z-index: 3;
+    width: 48px;
+    height: 250px;
+    right: 0;
+  }
+}
+
+.navdot {
+  font-size: $navdot-size;
+}
+
+.slide {
+  display: none; // Hides the radio buttons for the slide selectors
+  z-index: 1;
+  &:checked + a label {
+    color: $active-color; // Changes the color of the navdot for the active slide
+    @for $i from 0 to $slider-length {
+      // Moves the slide reel along
+      &:nth-of-type(#{$i + 1}) {
+        ~ .slide__reel {
+          left: -100% * $i;
+        }
+      }
+    }
+    &:hover {
+      color: $active-color;
+      cursor: default;
+    }
+  }
+  // selector buttons for the different slides
+  + a label {
+    transition: $animation-duration all linear;
+    cursor: pointer;
+    display: inline-block;
+    color: $btn-color;
+    margin-left: 8px;
+    margin-right: 8px;
+    z-index: 1;
+    &:hover {
+      transition: $animation-duration all linear;
+      color: lighten($active-color, 30%);
+    }
+  }
+  &__reel {
+    transition: $animation-duration * 2 all ease-out;
+    position: absolute;
+    width: 100% * $slider-length;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    z-index: 0;
+  }
+  &__content {
+    margin-top: 10px;
+    margin-bottom: 0;
+    width: auto;
+    height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+  }
+}
+
+#bug,
+#plug {
+  transition: $animation-duration color ease-in;
+  position: relative;
+  display: inline-block;
+  font-size: 0.8rem;
+  color: lighten($text-color, 80%);
+  text-decoration: none;
+  padding-top: 10px;
+  &:hover {
+    transition: $animation-duration color ease-out;
+    color: $tab-hover-bg;
+    > .fa {
+      transform: rotate(360deg);
+      transition: $animation-duration * 2 transform ease-out;
+    }
+  }
+}
+
+/////////////////////
+//  MEDIA QUERIES  //
+/////////////////////
+// Because IE can go die in a fire...
+@media (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  // Used to detect an IE user agent
+  #bug,
+  #plug,
+  .card > * {
+    display: none;
+  }
+  .card::after {
+    width: $card-width;
+    letter-spacing: 1.2px;
+    font-size: 2rem;
+    color: #fa7a55;
+    font-weight: bold;
+    content: "INTERNET EXPLORER IS NOT SUPPORTED. GET A REAL BROWSER";
+  }
+}
+
+/* IN CASE ANYONE CARES, THE FEW ERRORS THAT CSS-LINT PICKS UP ON IN THE COMPLIED CSS ARE MOSTLY ABOUT VENDOR PREFIXING AND CAN PROBABLY BE IGNORED */
+
+.h-625 {
+  height: 625px;
+}
+
+.users-icon {
+  position: relative;
+  width: 150px;
+  height: 140px;
+
+  img {
+    width: 150px;
+    height: 140px;
+    border-radius: 50%;
+  }
+
+  .icone i {
+    font-size: 75px;
+  }
+
+  .cam-icon {
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    font-size: 20px;
+  }
+
+  .text {
+    position: absolute;
+    bottom: 2px;
+    font-size: 10px;
+    width: 70%;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    text-align: center;
+    display: none;
+  }
+
+  &:hover {
+    > .text {
+      display: inline-block;
+    }
+
+    > .cam-icon {
+      display: none;
+    }
+  }
+}

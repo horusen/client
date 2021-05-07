@@ -1,3 +1,4 @@
+import { ProfesseurModule } from "./../professeur/professeur.module";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { SharedModule } from "src/app/shared/shared.module";
@@ -9,6 +10,12 @@ import { ClasseAddComponent } from "./classe-add/classe-add.component";
 import { ClasseShowComponent } from "./classe-show/classe-show.component";
 import { ClasseShowDetailsComponent } from "./classe-show/classe-show-details/classe-show-details.component";
 import { TacheListByClasseComponent } from "./classe-show/tache-list-by-classe/tache-list-by-classe.component";
+import { ClasseListComponent } from "./classe-list/classe-list.component";
+import { ClasseEditComponent } from "./classe-edit/classe-edit.component";
+import { ClasseStatsComponent } from "./classe-stats/classe-stats.component";
+import { ClasseShowEleveComponent } from "./classe-show/classe-show-eleve/classe-show-eleve.component";
+import { ClasseShowGroupeComponent } from "./classe-show/classe-show-groupe/classe-show-groupe.component";
+import { ClasseShowProfesseurComponent } from "./classe-show/classe-show-professeur/classe-show-professeur.component";
 
 const routes: Routes = [
   {
@@ -16,46 +23,21 @@ const routes: Routes = [
     component: ClasseComponent,
     children: [
       {
+        path: "stats",
+        component: ClasseStatsComponent,
+      },
+      {
         path: ":id",
         component: ClasseShowComponent,
         children: [
-          // Classe details
           { path: "", component: ClasseShowDetailsComponent },
-    
-          // Tache
-          { path: "tache", component: TacheListByClasseComponent },
-    
-          // Eleve
-          {
-            path: "eleve",
-            loadChildren: () =>
-              import("./../eleve/eleve.module").then(
-                (module) => module.EleveModule
-              ),
-          },
-    
-          // Groupe
-          {
-            path: "groupe",
-            loadChildren: () =>
-              import("./../groupe/groupe.module").then(
-                (module) => module.GroupeModule
-              ),
-          },
-    
-          // Professeur
-          {
-            path: "professeur",
-            loadChildren: () =>
-              import("./../professeur/professeur.module").then(
-                (module) => module.ProfesseurModule
-              ),
-          },
+          { path: "groupes", component: ClasseShowGroupeComponent },
+          { path: "eleves", component: ClasseShowEleveComponent },
+          { path: "professeurs", component: ClasseShowProfesseurComponent },
         ],
       },
-    ]
+    ],
   },
-  
 ];
 
 @NgModule({
@@ -67,6 +49,12 @@ const routes: Routes = [
     ClasseShowComponent,
     ClasseShowDetailsComponent,
     TacheListByClasseComponent,
+    ClasseListComponent,
+    ClasseEditComponent,
+    ClasseStatsComponent,
+    ClasseShowEleveComponent,
+    ClasseShowGroupeComponent,
+    ClasseShowProfesseurComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
   exports: [RouterModule],

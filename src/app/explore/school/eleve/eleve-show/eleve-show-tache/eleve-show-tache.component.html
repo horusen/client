@@ -1,0 +1,58 @@
+<!-- Titre -->
+<h4 class="text-center">{{ 'TACHES' | translate }}</h4>
+
+<!-- Liste des taches -->
+<div class="collapse show" id="activityLog2">
+  <!-- Elements -->
+  <div class="activity bd-b" *ngIf="affectationTacheService.data.length && !loading">
+    <a class="time-item card-list" [routerLink]="['/school', 'tache', 'tache', item.id]" *ngFor="let item of affectationTacheService.data">
+      <!-- Icone -->
+      <i class="fa fa-tasks bg-soft-primary"></i>
+
+      <!-- Info -->
+      <div class="item-info ">
+        <!-- Nom tache et date d'affectation -->
+        <div class="d-flex justify-content-between align-items-center">
+          <!-- Nom tache -->
+          <h6 class="tx-dark tx-rubik tx-13 mb-0">{{ item.tache_details.libelle }}</h6>
+
+          <!-- Date d'affectation -->
+          <span class="small">{{ item.created_at | date }}</span>
+        </div>
+
+        <!-- Description tache -->
+        <p class="mt-2 tx-12" [innerHTML]="helper.strcut(item.tache_details.description, 120)"></p>
+
+        <!-- Mot clé -->
+        <div>
+          <ng-container *ngFor="let mc of item.tache_details.mot_cles; let i = index">
+            <span class="badge " *ngIf="i < 4" [ngClass]="{
+              'bgm-warning': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 1,
+              'bgm-yellow': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 2,
+              'bgm-primary': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 3,
+              'bg-facebook': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 4,
+              'bgm-blue': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 5,
+              'bgm-mint': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 6,
+              'bgm-success': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 7,
+              'bgm-danger': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 8,
+              'bgm-secondary': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 9,
+              'bgm-indigo': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 0
+            }">
+              {{ '#' + mc }}
+            </span>
+          </ng-container>
+
+          <span *ngIf="item.tache_details.mot_cles > 5"> +{{ item.tache_details.mot_cles.length - 5 }}</span>
+
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Loading -->
+  <div class="my-5" *ngIf="loading">
+    <app-loading></app-loading>
+  </div>
+
+  <app-missing-data *ngIf="!loading && !affectationTacheService.data.length"></app-missing-data>
+</div>

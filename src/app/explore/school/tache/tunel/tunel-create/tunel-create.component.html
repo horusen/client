@@ -1,116 +1,95 @@
 <form class="custom-placeholder" [formGroup]="form" *ngIf="isFormOk" (submit)="create()">
-    <!-- Libelle -->
-    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
-        <div class="col-12">
-            <!-- Label -->
-            <label class=" tx-facebook"
-                for="libelle">
-                {{ 'LIBELLE' | translate }}
-            </label>
+  <!-- Libelle -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <div class="col-12">
+      <!-- Label -->
+      <label class=" tx-facebook" for="libelle">
+        {{ 'LIBELLE' | translate }}
+      </label>
 
-            <!-- Input -->
-            <input type="text"
-                class="form-control form-control-sm"
-                required
-                [formControlName]="'libelle'"
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'libelle'), 'is-valid': isValid('libelle')}">
+      <!-- Input -->
+      <input type="text" class="form-control form-control-sm" required [formControlName]="'libelle'"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'libelle'), 'is-valid': isValid('libelle')}">
 
-            <!-- MEssage d'erreur -->
-            <div *ngIf="shouldShowRequiredError('libelle')" class="invalid-feedback">
-                {{ 'veuillezSaisirLeLibelle' |translate }}.</div>
-        </div>
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('libelle')" class="invalid-feedback">
+        {{ 'veuillezSaisirLeLibelle' |translate }}.</div>
     </div>
+  </div>
 
-    <!-- Tache -->
-    <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
-        <div class="col-12">
-            <!-- Label -->
-            <label class=" tx-facebook"
-                for="affectation_tache">
-                {{ 'TACHE' | translate }}
-                <i class="fad fa-circle-notch fa-spin" *ngIf="loadingDependancies.affectation_tache"></i>
-            </label>
+  <!-- Tache -->
+  <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <!-- Label -->
+      <label class=" tx-facebook" for="affectation_tache">
+        {{ 'TACHE' | translate }}
+        <i class="fad fa-circle-notch fa-spin" *ngIf="loadingDependancies.affectation_tache"></i>
+      </label>
 
-            <angular2-multiselect
-                [data]="dependancies.affectation_taches"
-                [settings]="dropdownSettingsAlt.single"
-                formControlName="affectation_tache"
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'affectation_tache'), 'is-valid': isValid('affectation_tache')}"
-                class="form-control p-0 form-control-sm">
-
-                <c-badge>
-                    <ng-template let-item="item">
-                        {{item.tache_details.libelle}}
-                    </ng-template>
-
-
-                </c-badge>
-                <c-item>
-                    <ng-template let-item="item">
-                        <label
-                            style="color: #333;min-width: 150px;">{{item.tache_details.libelle}}</label>
-                    </ng-template>
-                </c-item>
-
-            </angular2-multiselect>
-
-            <!-- Message d'erreur -->
-            <div *ngIf="shouldShowRequiredError('affectation_tache')"
-                class="invalid-feedback">
-                {{ 'veuillezChoisirLeSousDomaineDeLaTache' | translate }}.
-            </div>
+      <ng-multiselect-dropdown [data]="dependancies.affectation_taches" [settings]="dropdownSettings.single" formControlName="affectation_tache"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'affectation_tache'), 'is-valid': isValid('affectation_tache')}"
+          class="form-control p-0 form-control-sm">
+      </ng-multiselect-dropdown>
+      <ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+        <div style="padding:1px 10px;margin-right:10px;right:2px;top:-2px">
+          <label style="color: #333;min-width: 130px;" [ngStyle]="{ 'color': getItems[id].isDisabled? 'lightgrey':''}">
+            {{getItems[id].tache_details.libelle}}
+          </label>
         </div>
-    </div>
-
-
-
-    <!-- Membres -->
-    <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
-        <div class="col-12">
-            <!-- Label -->
-            <label class=" tx-facebook"
-                for="affectation_tache">
-                {{ 'autresMembres' | translate }}
-                <i class="fad fa-circle-notch fa-spin" *ngIf="loadingDependancies.membre"></i>
-            </label>
-
-            <angular2-multiselect
-                [data]="dependancies.membres"
-                [settings]="dropdownSettingsAlt.users"
-                formControlName="membres"
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'membres'), 'is-valid': isValid('membres')}"
-                class="form-control p-0 form-control-sm">
-                <c-badge>
-                    <ng-template let-item="item">
-                        {{item.nom_complet}}
-                    </ng-template>
-                </c-badge>
-                <c-item>
-                    <ng-template let-item="item">
-                        <label
-                            style="color: #333;min-width: 150px;">{{item.nom_complet}}</label>
-                        <img [src]="item.photo"
-                            style="width: 30px;margin-right: 20px;" />
-                    </ng-template>
-                </c-item>
-            </angular2-multiselect>
+      </ng-template>
+      <ng-template #optionSelectedTemplate let-option="option" let-id="id">
+        <div>
+          {{option}}
         </div>
+      </ng-template>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('affectation_tache')" class="invalid-feedback">
+        {{ 'veuillezChoisirLeSousDomaineDeLaTache' | translate }}.
+      </div>
     </div>
+  </div>
 
 
-    <!-- Boutton validation -->
-    <div class="d-flex justify-content-center">
-        <div class="col-12 text-right">
-            <!-- Boutton sumit -->
-            <button class="btn btn-sm btn-primary mr-1"
-                type="submit"
-                [disabled]="form.invalid">
-                {{ 'VALIDER' | translate }}
-                <i class="fad fa-circle-notch fa-spin" *ngIf="loading"></i>
-            </button>
 
-        </div>
+  <!-- Membres -->
+  <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <!-- Label -->
+      <label class=" tx-facebook" for="affectation_tache">
+        {{ 'autresMembres' | translate }}
+        <i class="fad fa-circle-notch fa-spin" *ngIf="loadingDependancies.membre"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.membres" [settings]="dropdownSettingsAlt.users" formControlName="membres"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'membres'), 'is-valid': isValid('membres')}" class="form-control p-0 form-control-sm">
+        <c-badge>
+          <ng-template let-item="item">
+            {{item.nom_complet}}
+          </ng-template>
+        </c-badge>
+        <c-item>
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.nom_complet}}</label>
+            <img [src]="item.photo" style="width: 30px;margin-right: 20px;" />
+          </ng-template>
+        </c-item>
+      </angular2-multiselect>
     </div>
+  </div>
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-12 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1" type="submit" [disabled]="form.invalid">
+        {{ 'VALIDER' | translate }}
+        <i class="fad fa-circle-notch fa-spin" *ngIf="loading"></i>
+      </button>
+
+    </div>
+  </div>
 
 </form>
 

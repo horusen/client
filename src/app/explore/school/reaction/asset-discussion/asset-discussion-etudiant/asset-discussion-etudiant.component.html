@@ -1,0 +1,63 @@
+<!-- Container -->
+<div class="at-container" *ngIf="eleveService.data.length && !loading">
+  <!-- Grid -->
+  <div class="at-grid bg-light" [attr.data-column]="4">
+    <!-- Column -->
+    <div class="at-column " [class.active]="rla.isActive"
+        *ngFor="let eleve of eleveService.data | paginate: {itemsPerPage: 8, id: 'tache-by-classe', currentPage: currentPage}">
+      <!-- User -->
+      <div class="at-user">
+        <!-- Image -->
+        <div class="at-user__avatar">
+          <img [src]="eleve.eleve_details.photo?.path" />
+        </div>
+
+        <!-- Nom -->
+        <div class="at-user__name">{{ eleve.eleve_details.nom_complet }}</div>
+
+        <!-- Classe -->
+        <div class="at-user__title">{{ eleve.classe_details.libelle }}</div>
+
+        <!-- Icone -->
+        <ul class="at-social bd-t bg-light">
+          <!-- Details -->
+          <li class="at-social__item my-2">
+            <a [routerLink]="[eleve.id]" [routerLinkActive]="'active'" #rla="routerLinkActive">
+              <i class="fas fa-eye" [routerLinkActive]="'active'"></i>
+            </a>
+          </li>
+
+          <!-- Modifier -->
+          <li class="at-social__item my-2">
+            <a routerLink="">
+              <i class="fas fa-edit"></i>
+            </a>
+          </li>
+
+
+          <!-- supprimer -->
+          <li class="at-social__item my-2">
+            <a routerLink="">
+              <i class="fas fa-trash-alt"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="col-12 mt-1 d-flex justify-content-center">
+    <pagination-controls id="tache-by-classe" (pageChange)="currentPage = $event" autoHide="true" previousLabel="{{ 'PRECEDENT' | translate }}"
+        nextLabel="{{ 'SUIVANT' | translate }}">
+    </pagination-controls>
+  </div>
+</div>
+
+
+
+<div class="py-5">
+  <app-loading *ngIf="loading"></app-loading>
+</div>
+
+<app-missing-data *ngIf="!loading && !eleveService.data"></app-missing-data>

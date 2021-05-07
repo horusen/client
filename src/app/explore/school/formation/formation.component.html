@@ -1,0 +1,75 @@
+<div class="row mx-0  px-2 justify-content-between align-items-center bd-b  slide-in-top" *ngIf="!programmeUrlRegex.test(router.url)">
+  <!-- Titre -->
+  <h3 class="tx- tx-20 tx-info italic mg-l-20 my-3 bold">
+    <!-- boutton precedent -->
+    <a [routerLink]="['./']" *ngIf="router.url.match(programmeUrlRegex)">
+      <i class="fal tx-info fa-caret-circle-left mr-2"></i>
+    </a>
+    <i class="fad fa-chalkboard-teacher"></i>
+    {{ 'FORMATION' | translate }}
+  </h3>
+
+  <!-- Action -->
+  <div class="d-flex justfiy-content-between align-items-center">
+    <a class="my-2  tx-primary mr-4" [routerLink]="['./']" [fragment]="'create'">
+      <i class=" fad fa-plus-circle"></i> {{ 'AJOUTER' | translate }}
+    </a>
+
+    <!-- Statistique -->
+    <a [routerLink]="['stats']" class="my-2  tx-warning mr-4 clickable">
+      <i class="fad fa-chart-bar"></i> {{ 'STATISTIQUES' | translate }}
+    </a>
+
+
+    <span class="my-2  tx-success mr-4 clickable" (click)="helper.toggleModal('filter-groupe-modal')">
+      <i class="fad fa-filter"></i> {{ 'FILTRE' | translate }}
+    </span>
+    <div class="form-group mt-2 mb-3" style="position: relative;">
+      <div class="input-group w-100">
+        <!--  -->
+        <input #search type="text" [placeholder]="'RECHERCHER' | translate" class="form-control pd-y-8" />
+
+        <span class="">
+          <button class="btn border bg-light h-100 d-flex align-items-center" [disabled]="!search.value" (click)="research(search.value)">
+            <i class="fad fa-search tx-facebook"></i>
+          </button>
+        </span>
+      </div>
+
+      <span class="tx-10 tx-danger clickable" style="position: absolute;" *ngIf="searchActive" (click)="annulerRecherche(); search.value = ''">
+        <i class="fal fa-times-circle"></i>
+        {{ 'annulerLaRecherche' | translate}}
+      </span>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="card-body row mx-0 p-2 h-100">
+  <div [ngClass]="{'col-12 p-0': !showDetails, 'col-8 pl-0': showDetails}">
+    <app-formation-list [minified]="showDetails"></app-formation-list>
+  </div>
+
+  <div class="col-4 pr-0 mt-1 outlet" [ngStyle]="{'opacity': showDetails ? 1 : 0}">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+
+
+
+
+
+<app-modal [configuration]=" {name: 'formation-create-modal' , titre: 'creerUneFormation' , icone: 'chalkboard-teacher' }"
+    (closed)="router.navigate(['./'], {relativeTo: route})">
+  <app-formation-create *ngIf="addFormation"></app-formation-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{name: 'formation-edit-modal', titre: 'modifierLesDetailsDeLaFormation', icone: 'chalkboard-teacher'}"
+    (closed)="router.navigate(['./'], {relativeTo: route})">
+  <app-formation-edit *ngIf="editFormation"></app-formation-edit>
+</app-modal>

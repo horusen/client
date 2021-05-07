@@ -28,9 +28,8 @@ export class ReactionTunelListComponent
 
   getData(tunel: number) {
     this.loading = true;
-    this.reactionTunelService.get(tunel).subscribe(() => {
+    this.reactionTunelService.getData(tunel).subscribe(() => {
       this.loading = false;
-      console.log(this.reactionTunelService.data[0]);
     });
   }
 }

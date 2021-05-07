@@ -26,7 +26,7 @@ export class MembreGroupeListComponent extends BaseComponent implements OnInit {
 
   getData(groupe: number) {
     this.loading = true;
-    this.membreGroupeService.get(groupe).subscribe(() => {
+    this.membreGroupeService.getByGroupe(groupe).subscribe(() => {
       this.loading = false;
     });
   }

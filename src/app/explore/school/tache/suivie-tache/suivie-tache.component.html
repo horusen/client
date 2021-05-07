@@ -1,7 +1,82 @@
-<app-suivie-tache-list (showAffectationTacheCreate)="affecterTache = true"></app-suivie-tache-list>
+<div class="row row-xs mg-0 pd-0 clearfix p-0">
+  <!-- Liste des taches -->
+  <div class="col-lg-4 p-1">
+    <!-- Header -->
+    <div class="card">
+      <div class="row mg-t-10 mg-b-5">
+        <!-- titre de la affectation -->
+        <div class="col-lg-10 float-right">
+          <h3 class="tx- tx-16 tx-primary italic mg-l-20 bold">
+            <i class="fal fa-list"></i> {{ 'listeDestachesAssigneesParVous' | translate }}
+          </h3>
+        </div>
+
+        <!-- Boutton ajouter -->
+        <div class="col-lg-2  btn-demo">
+          <a routerLink="./"
+             fragment="affecter-tache">
+            <i class="fad fa-exchange clickable tx-14 tx-primary bg-light "
+               style="padding:6px; border-radius:50%"
+               [ngbTooltip]="'affecterUneTache' | translate">
+            </i>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Filtre et Recherche -->
+    <div class="bd-b">
+      <!-- nav bar -->
+      <ul class="nav bg-light">
+        <li class="nav-item d-flex justify-content-between align-items-baseline px-2 w-100 mb-1">
+          <span class="my-2 font-weight-bold tx-primary mr-4 clickable"
+                (click)="helper.toggleModal('filter-groupe-modal')">
+            <i class="fad fa-filter"></i> {{ 'FILTRE' | translate }}
+          </span>
+
+          <!-- Recherche -->
+          <div class="form-group mt-1 mb-0"
+               style="position: relative; width: 70%;">
+            <div class="input-group w-100">
+              <!--  -->
+              <input #search
+                     type="text"
+                     style="height: 30px"
+                     [placeholder]="'RECHERCHER' | translate"
+                     class="form-control form-control-sm pd-y-8" />
+
+              <span class="">
+                <button class="btn border btn-sm bg-light h-100 d-flex align-items-center">
+                  <i class="fad fa-search tx-facebook"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Taches -->
+    <div class="card-body p-0">
+      <div class="row row-xs mg-0 pd-0 clearfix">
+        <app-suivie-tache-list></app-suivie-tache-list>
+      </div>
+    </div>
+
+  </div>
 
 
-<app-modal-sidebar
-    [configuration]="{name: 'affectation-tache-create-modal', titre: 'affecterUneTache', icone: 'exchange'}">
-    <app-affecter-tache *ngIf="affecterTache"></app-affecter-tache>
-</app-modal-sidebar>
+  <!-- Details de la affectation -->
+  <div class="col-lg-8 p-1 ">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+
+
+<!-- Modal affectation tache -->
+<app-modal [configuration]="{name: 'affectation-tache-modal', titre: 'affecterUneTache', icone: 'exchange'}"
+           (closed)="router.navigate(['./'], {relativeTo: route})">
+  <app-affecter-tache *ngIf="affecterTache"></app-affecter-tache>
+</app-modal>

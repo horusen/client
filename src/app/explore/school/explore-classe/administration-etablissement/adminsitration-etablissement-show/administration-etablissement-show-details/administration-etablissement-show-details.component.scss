@@ -1,0 +1,31 @@
+.details-etablissement {
+  &__logo {
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+    // border-radius: 50%;
+    border: 3px solid #85e6b3;
+  }
+
+  &__libelle {
+    font-family: fantasy;
+  }
+
+  &__description {
+    padding: 12px 28px;
+  }
+}
+
+.left,
+.right {
+  position: absolute;
+  width: 50px;
+  top: 0;
+  bottom: 0;
+  background: white;
+  opacity: 0.5;
+}
+
+.right {
+  right: 0;
+}

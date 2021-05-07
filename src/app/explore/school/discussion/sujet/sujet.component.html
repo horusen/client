@@ -1,0 +1,49 @@
+<div class="wrapper bg-light p-0" id="settingSidebarScroll">
+  <div class="bd-b">
+    <!-- nav bar -->
+    <ul class="nav bg-light">
+      <li class="nav-item d-flex justify-content-between align-items-baseline w-100 mb-1">
+        <a class="nav-link3 active font-weight-bold tx-yeto2">
+          {{ "SUJETS" | translate }}
+          <span class="ml-1 clickable tx-10" (click)="helper.toggleModal('sujet-create-modal')"><i
+                class="fad fa-plus-circle"></i></span>
+        </a>
+
+
+        <!-- Recherche -->
+        <div class="form-group mt-1 mb-0" style="position: relative; width: 70%;" [hidden]="!sujetService.data.length">
+          <div class="input-group w-100">
+            <!--  -->
+            <input #search type="text" style="height: 30px" [placeholder]="'RECHERCHER' | translate"
+                class="form-control form-control-sm pd-y-8" />
+
+            <span class="">
+              <button class="btn border btn-sm bg-light h-100 d-flex align-items-center"
+                  (click)="research(search.value)">
+                <i class="fad fa-search tx-facebook"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Nav content -->
+  <div class="tab-content">
+    <div class="tab-pane fade active show">
+      <app-sujet-list></app-sujet-list>
+    </div>
+  </div>
+</div>
+
+
+<app-modal-sidebar [configuration]="{name: 'sujet-create-modal', titre: 'ajouterUnNouveauSujet', icone: 'newspaper'}">
+  <app-sujet-create></app-sujet-create>
+</app-modal-sidebar>
+
+
+<app-modal-sidebar
+    [configuration]="{name: 'sujet-edit-modal', titre: 'modifierLesInformationsSurUnSujet', icone: 'newspaper'}">
+  <app-sujet-edit></app-sujet-edit>
+</app-modal-sidebar>

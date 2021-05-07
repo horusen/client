@@ -1,6 +1,7 @@
 import { tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { BaseService } from "src/app/shared/services/base.service";
+import { Params } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -13,6 +14,12 @@ export class FichierService extends BaseService {
 
   download(fichier: number) {
     return this.factory.get(`download/${fichier}`);
+  }
+
+  getByDiscussion(discussion: number, params?: Params) {
+    return this.factory
+      .get(`discussion/${discussion}/fichier`, { params })
+      .pipe(tap(this.listResponseHandler()));
   }
 
   selectFichier(fichier: any) {

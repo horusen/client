@@ -1,25 +1,18 @@
-<div class="chat-container scroll-11">
+<div class="chat-container scroll-11 " #scrollMe [scrollTop]="scrollMe.scrollHeight">
   <ng-container *ngIf="reactionService.data.length && !loading">
-    <div
-         class="chat-body w-100 pd-20 bg-white"
-         [ngClass]="{ 'p-0': minified }"
-         #scrollMe
-         [scrollTop]="scrollMe.scrollHeight">
+    <div class="chat-body w-100 pd-20 bg-white " [ngClass]="{ 'p-0': minified }">
       <!-- reaction -->
-      <app-reaction-solo
-                         *ngFor="let reaction of reactionService.data"
-                         [reaction]="reaction"
-                         [minified]="minified"
-                         [reversed]="reaction.user?.id === auth.user?.id_inscription
-                          || (chargerComService.data.includes(reaction.user.id) && chargerComService.data.includes(auth.user.id_inscription))">
+      <app-reaction-solo *ngFor="let reaction of reactionService.data"
+          [etablissement]="isChargerCommunication(reaction.user?.id_inscription) ? etablissementService.singleData : null" [reaction]="reaction"
+          [minified]="minified"
+          [reversed]="reaction.user?.id_inscription === auth.user?.id_inscription || isChargerCommunication(reaction.user?.id_inscription)">
       </app-reaction-solo>
     </div>
   </ng-container>
 
   <app-loading class="w-100 mt-5" *ngIf="loading"></app-loading>
-  <app-missing-data
-                    class="w-100 h-100 pt-5"
-                    *ngIf="!reactionService.data.length && !loading"
-                    [message]="'aucuneReaction' | translate">
+  <app-missing-data class="w-100 h-100 pt-5" *ngIf="!reactionService.data.length && !loading" [message]="'aucuneReaction' | translate">
   </app-missing-data>
+
+
 </div>

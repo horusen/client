@@ -11,7 +11,6 @@ export class SchoolComponent implements OnInit {
 
   ngOnInit(): void {}
 
-
   deconnexion() {
     this.authService.deconnexion().subscribe();
   }

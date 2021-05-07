@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { EtablissementService } from "../../etablissement.service";
 import { ServiceEtablissementService } from "../service-etablissement.service";
@@ -11,6 +11,7 @@ import { ServiceEtablissementService } from "../service-etablissement.service";
 export class ServiceEtablissementListComponent
   extends BaseComponent
   implements OnInit {
+  @Input() minified: boolean = false;
   constructor(
     public serviceService: ServiceEtablissementService,
     public etablissementService: EtablissementService
@@ -35,13 +36,13 @@ export class ServiceEtablissementListComponent
 
   modifier(service: any) {
     this.serviceService.singleData = service;
-    this.helper.toggleModal("service-etablissement-edit-modal");
   }
 
   supprimer(service: any) {
     this.helper.alertConfirmation(() => {
       this.loading = true;
       this.serviceService.delete(service.id).subscribe(() => {
+        this.helper.toastSuccess();
         this.loading = false;
       });
     });

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Params } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { TacheService } from "../tache.service";
 
@@ -9,7 +9,6 @@ import { TacheService } from "../tache.service";
   styleUrls: ["./tache-list.component.scss"],
 })
 export class TacheListComponent extends BaseComponent implements OnInit {
-  @Output() showTacheCreate = new EventEmitter();
   filtre: {} = {};
   constructor(
     public tacheService: TacheService,
@@ -19,26 +18,15 @@ export class TacheListComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._subscription["loading"] = this.tacheService.loading$.subscribe(
-      (loading) => (this.loading = loading)
-    );
-    this.route.queryParams.subscribe((params) => {
-      Object.keys(params).forEach((key) => {
-        this.filtre[key] = params[key].split(",");
-      });
-      this.getData();
+    this.route.queryParams.subscribe((queryParams) => {
+      this.getData(queryParams);
     });
   }
 
-  getData() {
+  getData(params: Params) {
     this.loading = true;
-    this.tacheService.initialise().subscribe(() => {
+    this.tacheService.initialise(true, params).subscribe(() => {
       this.loading = false;
     });
-  }
-
-  showTacheCreateComponent() {
-    this.showTacheCreate.emit();
-    this.helper.toggleModal("tache-create-modal");
   }
 }

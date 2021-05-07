@@ -26,7 +26,6 @@ export class FichierAddComponent extends BaseCreateComponent implements OnInit {
   }
 
   imageFileAdded(event: any) {
-    console.log("test");
     const file = event.target.files[0];
     this.fileProcess(file, "image");
   }

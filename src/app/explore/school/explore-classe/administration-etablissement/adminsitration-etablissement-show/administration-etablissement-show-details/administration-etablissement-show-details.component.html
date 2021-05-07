@@ -1,0 +1,26 @@
+<ng-container *ngIf="single">
+  <!-- image etablissement -->
+  <div class="row p-0 m-0 details-etablissement">
+    <!-- Logo -->
+    <div class="col-12 p-0 d-flex justify-content-center">
+      <span class="">
+        <img [src]="single.logo?.path"
+             [alt]="single.libelle"
+             class="details-etablissement__logo">
+      </span>
+    </div>
+
+    <!-- Libelle -->
+    <div class="col-12">
+      <h2 class="text-center details-etablissement__libelle"> {{ single.libelle }} </h2>
+    </div>
+
+    <!-- decription -->
+    <div class="col-12">
+      <p class="details-etablissement__description"
+         [innerHTML]="single.description">
+      </p>
+    </div>
+  </div>
+  <!--  -->
+</ng-container>

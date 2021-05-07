@@ -2,26 +2,18 @@
     <div class="col-12">
         <div class="form-group rounded-circle mg-t-5 mg-b-5 w-100">
             <div class="input-group">
-                <input
-                    type="text"
-                    #search
-                    [placeholder]="('RECHERCHER' | translate) + '...'"
-                    class="form-control pd-y-10 mr-2"
+                <input type="text" #search [placeholder]="('RECHERCHER' | translate) + '...'" class="form-control pd-y-10 mr-2"
                     style="border-radius: 15px;">
 
                 <!-- Boutton valider -->
                 <span class="input-group-append">
                     <!-- Rechercher -->
-                    <a role="button"
-                        (click)="chercher(search.value)"
-                        class="btn rounded-circle bg-yeto2 d-flex align-items-center">
+                    <a role="button" (click)="chercher(search.value)" class="btn rounded-circle bg-yeto2 d-flex align-items-center">
                         <i class="fad fa-search tx-white"></i>
                     </a>
 
                     <!-- Annuler recherche -->
-                    <a role="button"
-                        (click)="chercher('')"
-                        class="btn rounded-circle bg-danger d-flex align-items-center">
+                    <a role="button" (click)="chercher('')" class="btn rounded-circle bg-danger d-flex align-items-center">
                         <i class="fad fa-time tx-white"></i>
                     </a>
                 </span>
@@ -35,15 +27,12 @@
             <div class="card border">
                 <div class="card-body text-center eleve">
                     <p>
-                        <img class=" img-fluid rounded-circle"
-                            [src]="eleve.photo"
-                            [alt]="eleve.nom_complet">
+                        <img class=" img-fluid rounded-circle" [src]="eleve.photo" [alt]="eleve.nom_complet">
 
-                        <i class="fas fa-circle-notch fa-spin" style="position: absolute; right: 20px;"
-                            *ngIf="loading"></i>
+                        <i class="fas fa-circle-notch fa-spin" style="position: absolute; right: 20px;" *ngIf="loading"></i>
                     </p>
 
-                    <!-- Nom de l'etudiant -->
+                    <!-- Nom de l'eleve -->
                     <h4 class="tx-12 tx-bolder tx-primary">
                         {{ eleve.nom_complet }}
                     </h4>

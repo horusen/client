@@ -1,125 +1,98 @@
 <form class=" form mg-t-10" [formGroup]="form" (submit)="create()" *ngIf="form">
-    <!-- Rebondissement -->
-    <div class="bg-soft-primary p-2" *ngIf="rebondissement">
-        <div class="d-flex reaction">
-            <!-- Image profile -->
-            <div class="media-img">
-                <span class="avatar avatar-online">
-                    <img
-                        [src]="rebondissement.user.photo"
-                        class="img-fluid">
-                </span>
-            </div>
-            <!-- Reaction -->
-            <div class="w-100">
-                <!-- Icone -->
-                <div class="float-right ml-1 ">
-                    <span (click)="rebondissement = null" class="clickable"><i class="far fa-times"></i></span>
-                </div>
+  <!-- Rebondissement -->
+  <div class="bg-soft-primary p-2" *ngIf="rebondissement">
+    <div class="d-flex reaction">
+      <!-- Image profile -->
+      <div class="media-img">
+        <span class="avatar avatar-online">
+          <img [src]="rebondissement.user.photo_min?.path" class="img-fluid">
+        </span>
+      </div>
+      <!-- Reaction -->
+      <div class="w-100">
+        <!-- Icone -->
+        <div class="float-right ml-1 ">
+          <span (click)="rebondissement = null" class="clickable"><i class="far fa-times"></i></span>
+        </div>
 
-                <div class="">
-                    <!-- Nom de l'utilsateur -->
-                    <h5 class="tx-13 text-left mb-0">
-                        <a href="" class="ml-2">{{ rebondissement.user.nom_complet }}</a>
-                    </h5>
+        <div class="">
+          <!-- Nom de l'utilsateur -->
+          <h5 class="tx-13 text-left mb-0">
+            <a href="" class="ml-2">{{ rebondissement.user.nom_complet }}</a>
+          </h5>
 
-                    <!-- Message -->
-                    <div class="mb-0 tx-gray-600 p-1"
-                        style="color: #1a5276 ; border-bottom: 0px solid  rgb( 169, 204, 227 ) ">
+          <!-- Message -->
+          <div class="mb-0 tx-gray-600 p-1" style="color: #1a5276 ; border-bottom: 0px solid  rgb( 169, 204, 227 ) ">
 
-                        <p class="text-left ml-2">{{ rebondissement.reaction }}</p>
+            <p class="text-left ml-2">{{ rebondissement.reaction }}</p>
 
-                        <audio controls
-                            *ngIf="!rebondissement.reaction
+            <audio controls *ngIf="!rebondissement.reaction
                                     && rebondissement.file
                                     && helper.checkExtension(rebondissement.file.path, 'mp3')">
-                            <source [src]="rebondissement.file.path">
-                        </audio>
+              <source [src]="rebondissement.file.path">
+            </audio>
 
 
-                        <!-- Date reaction -->
-                        <!-- <span class="small float-left tx-gray-400"
+            <!-- Date reaction -->
+            <!-- <span class="small float-left tx-gray-400"
                             style="color: #a93226;">
                             {{reaction.created_at | date:'medium'}}
                         </span> -->
-                    </div>
-                </div>
-
-
-            </div>
+          </div>
         </div>
+
+
+      </div>
     </div>
-    <div class="publisher publisher-multi mg-b-20">
-        <div class="flexbox bd p-2">
-            <!-- image profile de l'utilisateur connécté -->
-            <span class="">
-                <img
-                    class="avatar2"
-                    [src]="auth.user.photo"
-                    [alt]="auth.user.nom_complet">
-            </span>
+  </div>
+  <div class="publisher publisher-multi mg-b-10">
+    <div class="flexbox bd p-2">
+      <!-- image profile de l'utilisateur connécté -->
+      <span class="">
+        <img class="avatar2" [src]="auth.user.photo_min?.path" [alt]="auth.user.nom_complet">
+      </span>
 
-            <!-- Champs de saisi -->
-            <textarea
-                class="publisher-input auto-expand mg-t-10 pd-l-15"
-                rows="3"
-                formControlName="reaction"
-                [placeholder]="'saisirDuTexte' | translate"></textarea>
-        </div>
-
-        <!-- Icone -->
-        <div class="flexbox p-2 bg-light">
-            <div class="gap-items mg-t-5">
-                <!-- Emoji -->
-                <a class="publisher-btn clickable"
-                    [ngbTooltip]="'ajouterDesEmojis' | translate"
-                    (click)="showEmojiPicker = !showEmojiPicker">
-                    <i class=" fa fa-smile-beam"></i>
-                </a>
-                <emoji-mart class="emoji-mart"
-                    set="apple" (emojiSelect)="addEmoji($event)" *ngIf="showEmojiPicker"
-                    skin="3" title="Pick your emoji…"></emoji-mart>
-
-
-                <!-- Image upload -->
-                <a class="publisher-btn clickable"
-                    [ngbTooltip]="'ajouterDesImages' | translate"
-                    (click)="imageUpload.click()">
-                    <i class=" fa fa-image"></i>
-                </a>
-
-                <!-- Pdf upload -->
-                <a class="publisher-btn clickable "
-                    [ngbTooltip]="'ajouterDesDocuments' | translate"
-                    (click)="documentUpload.click()">
-                    <i class=" fa fa-file-alt ">
-                    </i>
-                </a>
-            </div>
-
-
-            <!-- Boutton valider -->
-            <button class="btn btn-sm btn-custom-primary" type="submit" [disabled]="loading">
-                {{ 'VALIDER' | translate }}
-                <i class="fas fa-circle-notch fa-spin" *ngIf="loading"></i>
-            </button>
-        </div>
+      <!-- Champs de saisi -->
+      <textarea class="publisher-input auto-expand mg-t-10 pd-l-15" rows="3" formControlName="reaction"
+          [placeholder]="'saisirDuTexte' | translate"></textarea>
     </div>
 
+    <!-- Icone -->
+    <div class="flexbox p-2 bg-light">
+      <div class="gap-items mg-t-5">
+        <!-- Emoji -->
+        <a class="publisher-btn clickable" [ngbTooltip]="'ajouterDesEmojis' | translate" (click)="showEmojiPicker = !showEmojiPicker">
+          <i class=" fa fa-smile-beam"></i>
+        </a>
+        <emoji-mart class="emoji-mart" set="apple" (emojiSelect)="addEmoji($event)" *ngIf="showEmojiPicker" skin="3" title="Pick your emoji…">
+        </emoji-mart>
 
-    <!-- Pdf input -->
-    <input
-        type="file"
-        accept="application/pdf"
-        [hidden]="true"
-        #documentUpload
-        (change)="pdfFileProcess($event)">
 
-    <!-- Image input -->
-    <input
-        type="file"
-        [hidden]="true"
-        accept="image/x-png,image/gif,image/jpeg"
-        #imageUpload
-        (change)="imageFileProcess($event)">
+        <!-- Image upload -->
+        <a class="publisher-btn clickable" [ngbTooltip]="'ajouterDesImages' | translate" (click)="imageUpload.click()">
+          <i class=" fa fa-image"></i>
+        </a>
+
+        <!-- Pdf upload -->
+        <a class="publisher-btn clickable " [ngbTooltip]="'ajouterDesDocuments' | translate" (click)="documentUpload.click()">
+          <i class=" fa fa-file-alt ">
+          </i>
+        </a>
+      </div>
+
+
+      <!-- Boutton valider -->
+      <button class="btn btn-sm btn-custom-primary" type="submit" [disabled]="loading">
+        {{ 'VALIDER' | translate }}
+        <i class="fas fa-circle-notch fa-spin" *ngIf="loading"></i>
+      </button>
+    </div>
+  </div>
+
+
+  <!-- Pdf input -->
+  <input type="file" accept="application/pdf" [hidden]="true" #documentUpload (change)="pdfFileProcess($event)">
+
+  <!-- Image input -->
+  <input type="file" [hidden]="true" accept="image/x-png,image/gif,image/jpeg,,image/jpg" #imageUpload (change)="imageFileProcess($event)">
 </form>

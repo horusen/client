@@ -7,11 +7,24 @@ import { EmployeListByEtablissementComponent } from "./employe-list-by-etablisse
 import { EmployeCreateComponent } from "./employe-create/employe-create.component";
 import { Routes } from "@angular/router";
 import { EmployeListByTypeEtablissementComponent } from "./employe-list-by-type-etablissement/employe-list-by-type-etablissement.component";
+import { EmloyeEditComponent } from "./emloye-edit/emloye-edit.component";
+import { EmployeStatsComponent } from "./employe-stats/employe-stats.component";
+import { EmployeShowComponent } from "./employe-show/employe-show.component";
 
 const routes: Routes = [
   {
     path: "",
     component: EmployeComponent,
+    children: [
+      {
+        path: "statistiques",
+        component: EmployeStatsComponent,
+      },
+      {
+        path: ":id",
+        component: EmployeShowComponent,
+      },
+    ],
   },
 ];
 
@@ -21,6 +34,9 @@ const routes: Routes = [
     EmployeListByEtablissementComponent,
     EmployeCreateComponent,
     EmployeListByTypeEtablissementComponent,
+    EmloyeEditComponent,
+    EmployeStatsComponent,
+    EmployeShowComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
   exports: [RouterModule],

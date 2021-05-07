@@ -20,7 +20,7 @@ export class EleveListByProfesseurComponent
 
   getData() {
     this.loading = true;
-    this.eleveService.getByUserAsProfesseur().subscribe(() => {
+    this.eleveService.getByCurrentUserAsProfesseur().subscribe(() => {
       this.loading = false;
     });
   }

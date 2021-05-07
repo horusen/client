@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { EtablissementService } from "../../etablissement/etablissement.service";
 import { ParentEleveService } from "../parent-eleve.service";
@@ -11,6 +11,7 @@ import { ParentEleveService } from "../parent-eleve.service";
 export class ParentEleveListByEtablissementComponent
   extends BaseComponent
   implements OnInit {
+  @Input() minified = false;
   constructor(
     public parentEleveService: ParentEleveService,
     public etablissementService: EtablissementService
@@ -19,9 +20,11 @@ export class ParentEleveListByEtablissementComponent
   }
 
   ngOnInit(): void {
-    this._subscription['etablissement'] = this.etablissementService.singleData$.subscribe(etablissement => {
+    this._subscription[
+      "etablissement"
+    ] = this.etablissementService.singleData$.subscribe((etablissement) => {
       this.getData(etablissement.id);
-    })
+    });
   }
 
   getData(etablissement: number) {

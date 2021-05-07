@@ -9,27 +9,38 @@ import { TokenStorage } from "./token-storage.service";
 export class Factory {
   public baseUrl = "http://localhost:8000/api";
   private _headers = {
-    'Authorization': `Bearer ${this._tokenStorage.getAccessToken()}`,
+    Authorization: `Bearer ${this._tokenStorage.getAccessToken()}`,
   };
 
   constructor(public http: HttpClient, public _tokenStorage: TokenStorage) {}
 
   public get(endPoint: string, options?: object): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/${endPoint}`, {
-      headers: { 'Authorization': `Bearer ${this._tokenStorage.getAccessToken()}` },
+      headers: {
+        Authorization: `Bearer ${this._tokenStorage.getAccessToken()}`,
+      },
       ...options,
     });
   }
 
   public post(endPoint: string, data: {}, options?: object): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/${endPoint}`, data, {
-      headers:  { 'Authorization': `Bearer ${this._tokenStorage.getAccessToken()}` },
+      headers: {
+        Authorization: `Bearer ${this._tokenStorage.getAccessToken()}`,
+      },
       ...options,
     });
   }
 
   public put(endPoint: string, elements: {}, options?: any): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}/${endPoint}`, elements, {
+      headers: this._headers,
+      ...options,
+    });
+  }
+
+  public patch(endPoint: string, elements: {}, options?: any): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}/${endPoint}`, elements, {
       headers: this._headers,
       ...options,
     });

@@ -1,0 +1,33 @@
+@import url("../../../../assets/scss/_variables.scss");
+
+.explore-reseaux {
+  &__sidebar {
+    position: relative;
+    transition: all 04s;
+  }
+
+  &__sidebar-content {
+    // transition: all 0.3s;
+  }
+
+  &__collapse-button {
+    display: inline-block;
+    height: min-content;
+    position: absolute;
+    top: 0;
+    right: -20px;
+    z-index: 100;
+    padding: 6px;
+    background-color: #f8f9fa;
+    color: #845e08;
+    border: none;
+  }
+}
+
+.w-0 {
+  max-width: 0 !important;
+}
+
+.op-0 {
+  opacity: 0 !important;
+}

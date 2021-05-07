@@ -1,187 +1,193 @@
 <h2 class="my-5 w-100 tx-center">Inscription</h2>
-<div class="row justify-content-center h-100 align-items-center">
-      <form class="custom-placeholder" [formGroup]="form" *ngIf="form" (submit)="inscription()">
-            <!-- Prenom et nom -->
-            <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-6">
-                  <!-- prenom -->
-                  <div class="col-6">
-                        <!-- Label -->
-                        <label class="control-label"
-                               for="prenom">
-                              {{ 'EMAIL' | translate }}
-                        </label>
+<form class="custom-placeholder row m-0 p-0 justify-content-center h-100 align-items-center" [formGroup]="form" *ngIf="form" (submit)="inscription()">
+      <!-- Prenom et nom -->
+      <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-10 ">
+            <!-- prenom -->
+            <div class="col-6">
+                  <!-- Label -->
+                  <label class="control-label"
+                         for="prenom">
+                        {{ 'PRENOM' | translate }}
+                  </label>
 
-                        <!-- Input -->
-                        <input type="prenom"
-                               class="form-control form-control-sm"
-                               required
-                               [formControlName]="'prenom'"
-                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'prenom'), 'is-valid': isValid('prenom')}">
+                  <!-- Input -->
+                  <input type="prenom"
+                         class="form-control form-control-sm"
+                         required
+                         [formControlName]="'prenom'"
+                         [ngClass]="{'is-invalid': shouldShowRequiredError( 'prenom'), 'is-valid': isValid('prenom')}">
 
-                        <!-- MEssage d'erreur -->
-                        <div *ngIf="shouldShowRequiredError('prenom')" class="invalid-feedback">
-                              {{ 'veuillezSasirVotreEmail' |translate }}.</div>
-                  </div>
-
-                  <!-- Nom -->
-                  <div class="col-6">
-                        <!-- Label -->
-                        <label class="control-label"
-                               for="nom">
-                              {{ 'NOM' | translate }}
-                        </label>
-
-                        <!-- Input -->
-                        <input type="nom"
-                               class="form-control form-control-sm"
-                               required
-                               [formControlName]="'nom'"
-                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'nom'), 'is-valid': isValid('nom')}">
-
-                        <!-- MEssage d'erreur -->
-                        <div *ngIf="shouldShowRequiredError('nom')" class="invalid-feedback">
-                              {{ 'veuillezSasirVotreEmail' |translate }}.</div>
-                  </div>
-
+                  <!-- MEssage d'erreur -->
+                  <div *ngIf="shouldShowRequiredError('prenom')" class="invalid-feedback">
+                        {{ 'veuillezSasirVotreEmail' |translate }}.</div>
             </div>
 
+            <!-- Nom -->
+            <div class="col-6">
+                  <!-- Label -->
+                  <label class="control-label"
+                         for="nom">
+                        {{ 'NOM' | translate }}
+                  </label>
+
+                  <!-- Input -->
+                  <input type="nom"
+                         class="form-control form-control-sm"
+                         required
+                         [formControlName]="'nom'"
+                         [ngClass]="{'is-invalid': shouldShowRequiredError( 'nom'), 'is-valid': isValid('nom')}">
+
+                  <!-- MEssage d'erreur -->
+                  <div *ngIf="shouldShowRequiredError('nom')" class="invalid-feedback">
+                        {{ 'veuillezSasirVotreEmail' |translate }}.</div>
+            </div>
+
+      </div>
 
 
 
-            <!-- Date de naissance et sexe -->
-            <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-6">
-                  <!-- Date de naissance -->
-                  <div class="col-6">
-                        <!-- Label -->
-                        <label for="type"
-                               class="label-template-form">
-                              {{ 'dateDeNaissance' | translate }}
-                        </label>
+      <!-- Date de naissance et sexe -->
+      <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-10">
+            <!-- Date de naissance -->
+            <div class="col-6">
+                  <!-- Label -->
+                  <label for="type"
+                         class="label-template-form">
+                        {{ 'dateDeNaissance' | translate }}
+                  </label>
 
-                        <!-- Date picker -->
-                        <div class="input-group mb-2">
-                              <input [dpDayPicker]="configCalendrier.day" [theme]="'dp-material'"
-                                     formControlName="date_naissance" class="form-control ">
-                              <div class="input-group-prepend">
-                                    <div class="input-group-text  bg-light"><i class="fal fa-calendar"></i>
-                                    </div>
+                  <!-- Date picker -->
+                  <div class="input-group mb-2">
+                        <input [dpDayPicker]="configCalendrier.day" [theme]="'dp-material'"
+                               formControlName="date_naissance" class="form-control ">
+                        <div class="input-group-prepend">
+                              <div class="input-group-text  bg-light"><i class="fal fa-calendar"></i>
                               </div>
                         </div>
-
-                        <!-- Message d'erreur -->
-                        <div *ngIf="shouldShowRequiredError('date_naissance')"
-                             class="invalid-feedback">
-                              {{ 'veuillezChoisirUneDateDebut' | translate }}.
-                        </div>
                   </div>
 
-                  <!-- Sexe -->
-                  <div class="col-6">
-                        <!-- Label -->
-                        <label class="control-label"
-                               for="sexe">
-                              {{ 'EMAIL' | translate }}
-                        </label>
-
-                        <select (change)="selectFormHandler($event)">
-                              <option value="homme">Homme</option>
-                              <option value="femme">Femme</option>
-                        </select>
-
-                        <!-- Input -->
-                        <input type="sexe"
-                               class="form-control form-control-sm"
-                               required
-                               [formControlName]="'sexe'"
-                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'sexe'), 'is-valid': isValid('sexe')}">
-
-                        <!-- MEssage d'erreur -->
-                        <div *ngIf="shouldShowRequiredError('sexe')" class="invalid-feedback">
-                              {{ 'veuillezSasirVotreEmail' |translate }}.</div>
+                  <!-- Message d'erreur -->
+                  <div *ngIf="shouldShowRequiredError('date_naissance')"
+                       class="invalid-feedback">
+                        {{ 'veuillezChoisirUneDateDebut' | translate }}.
                   </div>
             </div>
 
+            <!-- Sexe -->
+            <div class="col-6">
+                  <!-- Label -->
+                  <label class="control-label"
+                         for="sexe">
+                        {{ 'SEXE' | translate }}
+                  </label>
+
+                  <select (change)="selectFormHandler($event)" class="form-control">
+                        <option value="homme" selected>Homme</option>
+                        <option value="femme">Femme</option>
+                  </select>
 
 
-
-
-            <!-- love -->
-            <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-6">
-                  <div class="col-6">
-                        <label class="form-label" for="customFile">Photo</label>
-                        <input type="file"
-                               (change)="fileHand"
-                               class="form-control"
-                               id="customFile"
-                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'love'), 'is-valid': isValid('love')}" />
-
-
-                        <!-- MEssage d'erreur -->
-                        <div *ngIf="shouldShowRequiredError('love')" class="invalid-feedback">
-                              {{ 'veuillezSasirVotreEmail' |translate }}.</div>
-                  </div>
+                  <!-- MEssage d'erreur -->
+                  <div *ngIf="shouldShowRequiredError('sexe')" class="invalid-feedback">
+                        {{ 'veuillezSasirVotreEmail' |translate }}.</div>
             </div>
+      </div>
 
-            <!-- Emal -->
-            <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-6">
-                  <div class="col-12">
-                        <!-- Label -->
-                        <label class="control-label"
-                               for="email">
-                              {{ 'EMAIL' | translate }}
-                        </label>
 
-                        <!-- Input -->
-                        <input type="email"
-                               class="form-control form-control-sm"
-                               required
-                               [formControlName]="'email'"
-                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'email'), 'is-valid': isValid('email')}">
 
-                        <!-- MEssage d'erreur -->
-                        <div *ngIf="shouldShowRequiredError('email')" class="invalid-feedback">
-                              {{ 'veuillezSasirVotreEmail' |translate }}.</div>
-                  </div>
+
+      <!-- photo -->
+      <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-10 ">
+            <!-- photo -->
+            <div class="col-6">
+                  <label class="form-label" for="customFile">Photo</label>
+                  <input type="file"
+                         (change)="onFileChanged($event)"
+                         accept="image"
+                         class="form-control"
+                         id="customFile" />
+
             </div>
 
 
+            <!-- email -->
+            <div class="col-6">
+                  <!-- Label -->
+                  <label class="control-label"
+                         for="email">
+                        {{ 'EMAIL' | translate }}
+                  </label>
+
+                  <!-- Input -->
+                  <input type="email"
+                         class="form-control form-control-sm"
+                         required
+                         [formControlName]="'email'"
+                         [ngClass]="{'is-invalid': shouldShowRequiredError( 'email'), 'is-valid': isValid('email')}">
+
+                  <!-- MEssage d'erreur -->
+                  <div *ngIf="shouldShowRequiredError('email')" class="invalid-feedback">
+                        {{ 'veuillezSasirVotreEmail' |translate }}.</div>
+            </div>
+      </div>
+
+
+      <!-- Mot de passe -->
+      <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-10">
             <!-- Mot de passe -->
-            <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
-                  <div class="col-12">
-                        <!-- Label -->
-                        <label class="control-label"
-                               for="libelle">
-                              {{ 'motDePasse' | translate }}
-                        </label>
+            <div class="col-6">
+                  <!-- Label -->
+                  <label class="control-label"
+                         for="libelle">
+                        {{ 'motDePasse' | translate }}
+                  </label>
 
-                        <!-- Input -->
-                        <input type="password"
-                               class="form-control form-control-sm"
-                               required
-                               [formControlName]="'password'"
-                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'password'), 'is-valid': isValid('password')}">
+                  <!-- Input -->
+                  <input type="password"
+                         class="form-control form-control-sm"
+                         required
+                         [formControlName]="'password'"
+                         [ngClass]="{'is-invalid': shouldShowRequiredError( 'password'), 'is-valid': isValid('password')}">
 
-                        <!-- MEssage d'erreur -->
-                        <div *ngIf="shouldShowRequiredError('password')" class="invalid-feedback">
-                              {{ 'veuillezSaisirVotreMotDePasse' |translate }}.</div>
-                  </div>
+                  <!-- MEssage d'erreur -->
+                  <div *ngIf="shouldShowRequiredError('password')" class="invalid-feedback">
+                        {{ 'veuillezSaisirVotreMotDePasse' |translate }}.</div>
             </div>
 
+            <!-- Confirmation mot de passe -->
+            <div class="col-6">
+                  <!-- Label -->
+                  <label class="control-label"
+                         for="libelle">
+                        {{ 'confirmationMotDePasse' | translate }}
+                  </label>
 
+                  <!-- Input -->
+                  <input type="password"
+                         class="form-control form-control-sm"
+                         required
+                         [formControlName]="'password_confirmation'"
+                         [ngClass]="{'is-invalid': shouldShowRequiredError( 'password_confirmation'), 'is-valid': isValid('password_confirmation')}">
 
-
-            <!-- Boutton validation -->
-            <div class="d-flex justify-content-center">
-                  <div class="col-12 text-right">
-                        <!-- Boutton sumit -->
-                        <button class="btn btn-sm btn-primary mr-1"
-                                type="submit"
-                                [disabled]="form.invalid">
-                              <i class="fad fa-circle-notch fa-spin" *ngIf="loading"></i>
-                              {{ 'VALIDER' | translate }}
-                        </button>
-                  </div>
+                  <!-- MEssage d'erreur -->
+                  <div *ngIf="shouldShowRequiredError('password_confirmation')" class="invalid-feedback">
+                        {{ 'veuillezSaisirVotreMotDePasse' |translate }}.</div>
             </div>
+      </div>
 
-      </form>
-</div>
+
+
+
+      <!-- Boutton validation -->
+      <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-10">
+            <div class=" col-12 text-right">
+                  <!-- Boutton sumit -->
+                  <button class="btn btn-sm btn-primary mr-1"
+                          type="submit">
+                        <i class="fad fa-circle-notch fa-spin" *ngIf="loading"></i>
+                        {{ 'VALIDER' | translate }}
+                  </button>
+            </div>
+      </div>
+
+</form>

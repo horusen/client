@@ -74,9 +74,17 @@ export class AffecterTacheComponent
     this.getData();
   }
 
-  getTache(groupe: number) {
+  getTacheByGroupe(groupe: number) {
     this.dependanciesLoading.tache = true;
     this.tacheService.getTacheNonAffecteAuGroupe(groupe).subscribe((taches) => {
+      this.dependancies.taches = taches;
+      this.dependanciesLoading.tache = false;
+    });
+  }
+
+  getTache() {
+    this.dependanciesLoading.tache = true;
+    this.tacheService.initialise(false).subscribe((taches) => {
       this.dependancies.taches = taches;
       this.dependanciesLoading.tache = false;
     });
@@ -109,7 +117,7 @@ export class AffecterTacheComponent
   getClasse() {
     this.dependanciesLoading.classe = true;
     this.classeService
-      .getByEtablissement(this.etablissementService.etablissement.id)
+      .getByEtablissement(this.auth.selectedProfile.profil.etablissement, false)
       .subscribe((classes) => {
         this.dependancies.classes = classes;
         this.dependanciesLoading.classe = false;
@@ -135,11 +143,11 @@ export class AffecterTacheComponent
   initialiseForm() {
     this.form = this.fb.group({
       groupe: [this.groupe],
-      eleves: [this.groupe],
-      classe: [this.classe],
+      eleves: [],
+      classe: [],
       cours: [],
       periode: [[], Validators.required],
-      chapitre: [this.chapitre, Validators.required],
+      chapitre: [this.chapitre],
       tache: [this.tache, Validators.required],
       debut: [null, Validators.required],
       fin: [null, Validators.required],
@@ -149,8 +157,14 @@ export class AffecterTacheComponent
       ],
     });
 
-    this.formValueComparer("debut", "fin", "verifierLesDates", true);
+    if (this.groupe) {
+      this.formValuePatcher("affecterA", [
+        this.dependancies.elementsDAffectation[1],
+      ]);
+    }
 
+    this.formValueComparer("debut", "fin", "verifierLesDates", true);
+    // Element
     this.form.controls.affecterA.valueChanges.subscribe((element) => {
       if (this.form.controls.classe.value) {
         if (element[0].libelle == "eleve") {
@@ -161,19 +175,23 @@ export class AffecterTacheComponent
       }
     });
 
+    // Classe
     this.form.controls.classe.valueChanges.subscribe((classe) => {
       this.getCours(classe[0].id);
       if (this.form.controls.affecterA.value[0].libelle == "groupe") {
         this.getGroupe(classe[0].id);
       } else if (this.form.controls.affecterA.value[0].libelle == "eleve") {
         this.getEleve(classe[0].id);
+        this.getTache();
       }
     });
 
+    // Groupe
     this.form.controls.groupe.valueChanges.subscribe((groupe) => {
-      this.getTache(groupe[0].id);
+      this.getTacheByGroupe(groupe[0].id);
     });
 
+    // Cours
     this.form.controls.cours.valueChanges.subscribe((cours) => {
       this.getChapitre(cours[0].id);
     });
@@ -191,7 +209,7 @@ export class AffecterTacheComponent
     }
 
     if (this.groupe) {
-      this.getTache(this.groupe);
+      this.getTacheByGroupe(this.groupe);
     }
 
     this.getPeriode();

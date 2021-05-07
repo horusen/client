@@ -67,6 +67,7 @@ const routes: Routes = [
           ),
       },
 
+
       // Mes taches
       // {
       //   path: "mes-taches",
@@ -89,4 +90,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class ExploreSchoolModule {}
+export class ExploreSchoolModule { }

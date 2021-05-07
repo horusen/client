@@ -11,15 +11,6 @@ const routes: Routes = [
     path: "",
     component: ExploreProfesseurComponent,
     children: [
-      // professeur
-      {
-        path: "",
-        loadChildren: () =>
-          import("./../professeur/professeur.module").then(
-            (module) => module.ProfesseurModule
-          ),
-      },
-
       // Classe
       {
         path: "classe",
@@ -33,14 +24,23 @@ const routes: Routes = [
       {
         path: "tache",
         loadChildren: () =>
+          import("./../tache/tache.module").then(
+            (module) => module.TacheModule
+          ),
+      },
+
+      // Suivie tache
+      {
+        path: "suivie",
+        loadChildren: () =>
           import("./../tache/suivie-tache/suivie-tache.module").then(
             (module) => module.SuivieTacheModule
           ),
       },
 
-      // Etudiant
+      // Eleve
       {
-        path: "etudiants",
+        path: "eleves",
         loadChildren: () =>
           import("./../eleve/eleve.module").then(
             (module) => module.EleveModule
@@ -81,6 +81,15 @@ const routes: Routes = [
           import(
             "./discussion-explore-professeur/discussion-explore-professeur.module"
           ).then((module) => module.DiscussionExploreProfesseurModule),
+      },
+
+      // professeur
+      {
+        path: "",
+        loadChildren: () =>
+          import("./../professeur/professeur.module").then(
+            (module) => module.ProfesseurModule
+          ),
       },
     ],
   },

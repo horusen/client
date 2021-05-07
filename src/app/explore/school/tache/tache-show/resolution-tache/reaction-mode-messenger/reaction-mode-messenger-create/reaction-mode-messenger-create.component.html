@@ -1,143 +1,113 @@
-<form class=" form mg-t-10" [formGroup]="form" (submit)="create()" *ngIf="form">
-    <!-- Rebondissement -->
-    <div class="bg-soft-primary p-2" *ngIf="rebondissement">
-        <div class="d-flex reaction">
-            <!-- Image profile -->
-            <div class="media-img">
-                <span class="avatar avatar-online">
-                    <img
-                        [src]="rebondissement.user.photo"
-                        class="img-fluid">
-                </span>
-            </div>
-            <!-- Reaction -->
-            <div class="w-100">
-                <!-- Icone -->
-                <div class="float-right ml-1 ">
-                    <span (click)="rebondissement = null" class="clickable"><i class="far fa-times"></i></span>
-                </div>
+<form class=" form mg-t-30" [formGroup]="form" (submit)="create()" *ngIf="form">
+  <!-- Rebondissement -->
+  <div class="bg-soft-primary p-2" *ngIf="rebondissement">
+    <div class="d-flex reaction">
+      <!-- Image profile -->
+      <div class="media-img">
+        <span class="avatar avatar-online">
+          <img [src]="rebondissement.user.photo" class="img-fluid">
+        </span>
+      </div>
+      <!-- Reaction -->
+      <div class="w-100">
+        <!-- Icone -->
+        <div class="float-right ml-1 ">
+          <span (click)="rebondissement = null" class="clickable"><i class="far fa-times"></i></span>
+        </div>
 
-                <div class="">
-                    <!-- Nom de l'utilsateur -->
-                    <h5 class="tx-13 text-left mb-0">
-                        <a href="" class="ml-2">{{ rebondissement.user.nom_complet }}</a>
-                    </h5>
+        <div class="">
+          <!-- Nom de l'utilsateur -->
+          <h5 class="tx-13 text-left mb-0">
+            <a href="" class="ml-2">{{ rebondissement.user.nom_complet }}</a>
+          </h5>
 
-                    <!-- Message -->
-                    <div class="mb-0 tx-gray-600 p-1"
-                        style="color: #1a5276 ; border-bottom: 0px solid  rgb( 169, 204, 227 ) ">
+          <!-- Message -->
+          <div class="mb-0 tx-gray-600 p-1" style="color: #1a5276 ; border-bottom: 0px solid  rgb( 169, 204, 227 ) ">
 
-                        <p class="text-left ml-2">{{ rebondissement.reaction }}</p>
+            <p class="text-left ml-2">{{ rebondissement.reaction }}</p>
 
-                        <audio controls
-                            *ngIf="!rebondissement.reaction
+            <audio controls *ngIf="!rebondissement.reaction
                                     && rebondissement.file
                                     && helper.checkExtension(rebondissement.file.path, 'mp3')">
-                            <source [src]="rebondissement.file.path">
-                        </audio>
+              <source [src]="rebondissement.file.path">
+            </audio>
 
 
-                        <!-- Date reaction -->
-                        <!-- <span class="small float-left tx-gray-400"
+            <!-- Date reaction -->
+            <!-- <span class="small float-left tx-gray-400"
                             style="color: #a93226;">
                             {{reaction.created_at | date:'medium'}}
                         </span> -->
-                    </div>
-                </div>
-
-
-            </div>
+          </div>
         </div>
+
+
+      </div>
     </div>
+  </div>
 
 
-    <div class="input-group">
-        <ng-container *ngIf="!(enregistreurService.isRecording$ | async)">
-            <span class="input-group-btn">
-                <!-- emoticone -->
-                <a type="role"
-                    class="btn btn-sm btn-facebook rounded-circle mg-t-5"
-                    [ngbTooltip]="'ajouterDesEmojis' | translate"
-                    (click)="showEmojiPicker = !showEmojiPicker">
-                    <i class=" fal fa-smile-beam tx-white "></i>
-                </a>
+  <div class="input-group">
+    <ng-container *ngIf="!(enregistreurService.isRecording$ | async)">
+      <span class="input-group-btn">
+        <!-- emoticone -->
+        <a type="role" class="btn btn-sm btn-facebook rounded-circle mg-t-5" [ngbTooltip]="'ajouterDesEmojis' | translate"
+            (click)="showEmojiPicker = !showEmojiPicker">
+          <i class=" fal fa-smile-beam tx-white "></i>
+        </a>
 
-                <emoji-mart class="emoji-mart"
-                    set="apple" (emojiSelect)="addEmoji($event)" *ngIf="showEmojiPicker"
-                    skin="3" title="Pick your emoji…"></emoji-mart>
+        <emoji-mart class="emoji-mart" set="apple" (emojiSelect)="addEmoji($event)" *ngIf="showEmojiPicker" skin="3" title="Pick your emoji…">
+        </emoji-mart>
 
-                <!-- Image upload -->
-                <a class="btn btn-sm btn-success rounded-circle mg-t-5"
-                    [ngbTooltip]="'ajouterDesImages' | translate"
-                    (click)="imageUpload.click()">
-                    <i class=" fal fa-image  tx-white "></i>
-                </a>
+        <!-- Image upload -->
+        <a class="btn btn-sm btn-success rounded-circle mg-t-5" [ngbTooltip]="'ajouterDesImages' | translate" (click)="imageUpload.click()">
+          <i class=" fal fa-image  tx-white "></i>
+        </a>
 
-                <!-- Pdf upload -->
-                <a class="btn btn-sm btn-warning rounded-circle mg-t-5 "
-                    [ngbTooltip]="'ajouterDesDocuments' | translate"
-                    (click)="documentUpload.click()">
-                    <i class=" fal fa-file-alt  tx-white ">
-                    </i>
-                </a>
+        <!-- Pdf upload -->
+        <a class="btn btn-sm btn-warning rounded-circle mg-t-5 " [ngbTooltip]="'ajouterDesDocuments' | translate" (click)="documentUpload.click()">
+          <i class=" fal fa-file-alt  tx-white ">
+          </i>
+        </a>
 
 
-                <!-- Enregistrement audio -->
-                <a type="role"
-                    class="btn btn-sm  btn-danger rounded-circle mr-1 mg-t-5"
-                    (click)="enregistrer()"
-                    [ngbTooltip]="'messageAudio' | translate">
-                    <i class=" fal fa-microphone-alt  tx-white  "></i>
-                </a>
-            </span>
+        <!-- Enregistrement audio -->
+        <a type="role" class="btn btn-sm  btn-danger rounded-circle mr-1 mg-t-5" (click)="enregistrer()" [ngbTooltip]="'messageAudio' | translate">
+          <i class=" fal fa-microphone-alt  tx-white  "></i>
+        </a>
+      </span>
 
-            <textarea type="text"
-                class="form-control"
-                required="required"
-                formControlName="reaction"
-                style="height: 40px">
+      <textarea type="text" class="form-control" required="required" formControlName="reaction" style="height: 40px">
             </textarea>
-            <button class="input-group-text bg-primary" [disabled]="form.invalid" id="basic-addon6">
-                <i class=" tx-white bg-primary" style="padding:6px; border-radius: 50%;"
-                    [ngClass]="{'fal fa-paper-plane': !loading, 'fas fa-circle-notch fa-spin': loading}"></i>
-            </button>
-        </ng-container>
+      <button class="input-group-text bg-primary" [disabled]="form.invalid" id="basic-addon6">
+        <i class=" tx-white bg-primary" style="padding:6px; border-radius: 50%;"
+            [ngClass]="{'fal fa-paper-plane': !loading, 'fas fa-circle-notch fa-spin': loading}"></i>
+      </button>
+    </ng-container>
 
-        <div class="row w-100" *ngIf="enregistreurService.isRecording$ | async">
-            <div class="col-12">
+    <div class="row w-100" *ngIf="enregistreurService.isRecording$ | async">
+      <div class="col-12">
 
-                <div class="w-100">
-                    <div class="alert-info p-2 mb-0 rounded">
-                        <div>
-                            <button class="rec-button">Recording</button>
-                            <span class="ml-2">{{ enregistreurService.dureeEnregistrement$ | async }}</span>
-                            <span class="float-right">
-                                <button class="btn btn-success btn-sm" (click)="stopEnregistrer()"
-                                    type="button">Stop</button>
-                                <button class="btn btn-danger btn-sm" (click)="annulerEnregistrement()"
-                                    type="button">Annuler</button>
-                            </span>
+        <div class="w-100">
+          <div class="alert-info p-2 mb-0 rounded">
+            <div>
+              <button class="rec-button">Recording</button>
+              <span class="ml-2">{{ enregistreurService.dureeEnregistrement$ | async }}</span>
+              <span class="float-right">
+                <button class="btn btn-success btn-sm" (click)="stopEnregistrer()" type="button">Stop</button>
+                <button class="btn btn-danger btn-sm" (click)="annulerEnregistrement()" type="button">Annuler</button>
+              </span>
 
-                        </div>
-                    </div>
-                </div>
             </div>
+          </div>
         </div>
-
-        <!-- Pdf input -->
-        <input
-            type="file"
-            accept="application/pdf"
-            [hidden]="true"
-            #documentUpload
-            (change)="pdfFileProcess($event)">
-
-        <!-- Image input -->
-        <input
-            type="file"
-            [hidden]="true"
-            accept="image/x-png,image/gif,image/jpeg"
-            #imageUpload
-            (change)="imageFileProcess($event)">
+      </div>
     </div>
+
+    <!-- Pdf input -->
+    <input type="file" accept="application/pdf" [hidden]="true" #documentUpload (change)="pdfFileProcess($event)">
+
+    <!-- Image input -->
+    <input type="file" [hidden]="true" accept="image/x-png,image/gif,image/jpeg" #imageUpload (change)="imageFileProcess($event)">
+  </div>
 </form>

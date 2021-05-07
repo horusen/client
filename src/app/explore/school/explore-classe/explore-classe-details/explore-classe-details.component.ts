@@ -21,7 +21,6 @@ export class ExploreClasseDetailsComponent
   ngOnInit(): void {
     super.ngOnInit();
     this.route.params.subscribe((params) => {
-      console.log(params);
       this.getClasse(+params["id"]);
     });
   }

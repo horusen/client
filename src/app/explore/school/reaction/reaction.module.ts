@@ -6,6 +6,7 @@ import { SharedSchoolModule } from "../shared-school/shared-school.module";
 import { ReactionListComponent } from "./reaction-list/reaction-list.component";
 import { ReactionSoloComponent } from "./reaction-list/reaction-solo/reaction-solo.component";
 import { ReactionCreateComponent } from "./reaction-create/reaction-create.component";
+import { AssetDiscussionModule } from "../discussion/asset-discussion/asset-discussion.module";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,12 @@ import { ReactionCreateComponent } from "./reaction-create/reaction-create.compo
     ReactionSoloComponent,
     ReactionCreateComponent,
   ],
-  imports: [CommonModule, SharedModule, SharedSchoolModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    SharedSchoolModule,
+    AssetDiscussionModule,
+  ],
   exports: [
     ReactionComponent,
     ReactionListComponent,

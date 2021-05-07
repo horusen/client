@@ -1,4 +1,8 @@
 .classe-min {
   max-height: 315px;
-  overflow: auto;
+  overflow: hidden;
+
+  &:hover {
+    overflow: auto;
+  }
 }

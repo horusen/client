@@ -1,0 +1,69 @@
+<div class="page-sidebar h-100 bg-white">
+  <div class="page-sidebar-inner h-100">
+    <div class="page-sidebar-menu  d-flex flex-row-reverse justify-content-center h-100">
+      <ul class="navbar nav" role="tablist">
+        <!-- Administration -->
+        <li class="nav-item tx-center">
+          <a class="nav-link" [routerLink]="['administration']" [routerLinkActive]="'active show'">
+            <i class="fal fa-cogs tx-primary tx-20"></i>
+            <p class="tx-primary tx-10 p-0 mb-0">{{ "ADMIN" | translate }}</p>
+          </a>
+        </li>
+
+        <!-- Explore -->
+        <li class="nav-item" *ngIf="authService.selectedProfile.type === 'eleve'">
+          <a class="nav-link tx-center" [routerLink]="['./']" [routerLinkActive]="'active show'" [routerLinkActiveOptions]="{ exact: true }">
+            <i class="fal fa-comments tx-20 tx-primary"></i>
+            <p class="tx-primary tx-10 p-0 mb-0">
+              {{ "EXPLORER" | translate }}
+            </p>
+          </a>
+        </li>
+
+
+        <!-- groupe independants -->
+        <li class="nav-item tx-center">
+          <a class="nav-link" [routerLink]="['groupe-independant']" [routerLinkActive]="'active show'">
+            <i class="fal fa-users tx-primary tx-20"></i>
+            <p class="tx-primary tx-10 p-0 mb-0">
+              {{ "GROUPES" | translate }}
+            </p>
+          </a>
+        </li>
+
+        <!-- Professeur -->
+        <li class="nav-item tx-center" *ngIf="authService.selectedProfile.type === 'professeur'">
+          <a class="nav-link" [routerLink]="['professeur']" [routerLinkActive]="'active show'">
+            <i class="fal fa-chalkboard-teacher tx-20"></i>
+            <p class="tx-primary tx-10 p-0 mb-0 tx-center">
+              {{ "PROFESSEURS" | translate }}
+            </p>
+          </a>
+        </li>
+
+        <!-- Reseaux -->
+        <li class="nav-item tx-center">
+          <a class="nav-link" [routerLink]="['reseaux']" [routerLinkActive]="'active show'">
+            <i class="fal fa-network-wired tx-primary tx-20"></i>
+            <p class="tx-primary tx-10 p-0 mb-0">
+              {{ "RESEAUX" | translate }}
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item tx-center">
+          <a class="nav-link tx- tx-primary mg-b-60" data-toggle="pill" href="#figes">
+            <i class="fal fa-times-circle tx-20"></i>
+            <p class="tx-primary tx-10 p-0 mb-0">Figés</p>
+          </a>
+        </li>
+
+        <li class="nav-item tx-center">
+          <a class="nav-link" data-toggle="pill" href="#">
+            <i class="fad fa-th tx-10 tx-facebook tx-30"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

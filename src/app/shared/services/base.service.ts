@@ -4,6 +4,8 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, ReplaySubject, Subject } from "rxjs";
 import { Factory } from "./factory";
 import { Helper } from "./helper";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Params } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -65,9 +67,9 @@ export abstract class BaseService {
     this.helper = AppInjector.injector.get(Helper);
   }
 
-  initialise(emitData: boolean = true) {
+  initialise(emitData: boolean = true, params?: Params) {
     return this.factory
-      .get(`${this.endPoint}/initialise`)
+      .get(`${this.endPoint}/initialise`, { params })
       .pipe(
         tap(
           emitData
@@ -83,13 +85,16 @@ export abstract class BaseService {
       .pipe(tap(this.listResponseHandler()));
   }
 
-  get(params?: any) {
-    return this.factory.get(`${this.endPoint}`).pipe(
-      tap({
-        next: (data) => (this.data = data),
-        error: (error) => this.errorResponseHandler(error),
-      })
-    );
+  get(emitData: boolean = true, params?: Params) {
+    return this.factory
+      .get(`${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
   }
 
   latest() {
@@ -130,6 +135,16 @@ export abstract class BaseService {
         error: (error) => this.errorResponseHandler(error),
       })
     );
+  }
+
+  setFieldInSingleData(field: string, value: any) {
+    this._singleData[field] = value;
+    this.singleData$.next(this._singleData);
+  }
+
+  setFieldInRowData(index: number, field: string, value: any) {
+    this.data[index][field] = value;
+    this.data$.next(this.data);
   }
 
   update(id: number, data: {}) {
@@ -194,8 +209,18 @@ export abstract class BaseService {
     }
   }
 
-  errorResponseHandler(error: any) {
-    this.helper.alertDanger(error);
+  errorResponseHandler(error: HttpErrorResponse) {
+    const errorMessage = error.error.error;
+    if (typeof errorMessage === "object") {
+      Object.keys(errorMessage).forEach((key) => {
+        this.helper.toastDanger(
+          `${errorMessage[key]}`,
+          `Erreur Serveur : ${error.status}`
+        );
+      });
+    } else {
+      this.helper.toastDanger(errorMessage, "Erreur Serveur");
+    }
   }
 
   listResponseHandler = () => {
@@ -204,6 +229,10 @@ export abstract class BaseService {
       error: (error) => this.errorResponseHandler(error),
     };
   };
+
+  emitSingleData() {
+    this.singleData$.next(this._singleData);
+  }
 
   onlyErrorResponseHandler = () => {
     return {

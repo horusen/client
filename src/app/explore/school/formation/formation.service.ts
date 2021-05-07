@@ -10,9 +10,21 @@ export class FormationService extends BaseService {
     super("formation");
   }
 
-  getByEtablissements(etablissement: number) {
+  getByEtablissement(etablissement: number, params?: any) {
     return this.factory
-      .get(`etablissement/${etablissement}/formation`)
+      .get(`etablissement/${etablissement}/formation`, { params })
+      .pipe(tap(this.listResponseHandler()));
+  }
+
+  getStatsByEtablissement(etablissement: number, params?: any) {
+    return this.factory
+      .get(`etablissement/${etablissement}/formation/stats`, { params })
+      .pipe(tap(this.onlyErrorResponseHandler()));
+  }
+
+  getByProgramme(programme: number, params?: any) {
+    return this.factory
+      .get(`programme/${programme}/formation`, { params })
       .pipe(tap(this.listResponseHandler()));
   }
 }

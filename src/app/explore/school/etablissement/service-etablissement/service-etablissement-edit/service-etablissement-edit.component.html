@@ -1,13 +1,6 @@
-<form
-  class="custom-placeholder row"
-  [formGroup]="form"
-  *ngIf="form"
-  (submit)="edit()"
->
+<form class="custom-placeholder row" [formGroup]="form" *ngIf="form" (submit)="edit()">
   <!-- Libelle -->
-  <div
-    class="formSep form-group col-12 d-flex justify-content-center pb-0 pt-2"
-  >
+  <div class="formSep form-group col-12 d-flex justify-content-center pb-0 pt-2">
     <div class="col-10 p-0">
       <!-- Label -->
       <label class="control-label" for="libelle">
@@ -15,23 +8,15 @@
       </label>
 
       <!-- Input -->
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        required
-        [formControlName]="'libelle'"
-        [ngClass]="{
+      <input type="text" class="form-control form-control-sm" required [formControlName]="'libelle'" [ngClass]="{
           'is-invalid': shouldShowRequiredError('libelle'),
           'is-valid': isValid('libelle')
-        }"
-      />
+        }" />
     </div>
   </div>
 
   <!-- domaine -->
-  <div
-    class="formSep form-group p-form-group-3 col-12 p-0 d-flex justify-content-center pb-0 pt-3"
-  >
+  <div class="formSep form-group p-form-group-3 col-12 p-0 d-flex justify-content-center pb-0 pt-3">
     <div class="col-10">
       <!-- Label -->
       <label class="control-label" for="domaine">
@@ -41,16 +26,10 @@
         <i class="fad fa-circle-notch fa-spin" *ngIf="domaineLoading"></i>
       </label>
 
-      <angular2-multiselect
-        [data]="domaines"
-        [settings]="dropdownSettingsAlt.multi"
-        formControlName="domaines"
-        [ngClass]="{
+      <angular2-multiselect [data]="domaines" [settings]="dropdownSettingsAlt.multi" formControlName="domaines" [ngClass]="{
           'is-invalid': shouldShowRequiredError('domaines'),
           'is-valid': isValid('domaines')
-        }"
-        class="form-control p-0 form-control-sm"
-      >
+        }" class="form-control p-0 form-control-sm">
       </angular2-multiselect>
 
       <!-- Message d'erreur -->
@@ -61,31 +40,21 @@
   </div>
 
   <!-- Description -->
-  <div
-    class="formSep form-group col-12 d-flex row m-0 p-0 justify-content-center pb-0 pt-3"
-  >
+  <div class="formSep form-group col-12 d-flex row m-0 p-0 justify-content-center pb-0 pt-3">
     <div class="col-10">
       <label class="control-label" for="description">{{
         "DESCRIPTION" | translate
-      }}</label>
-      <ckeditor
-        [editor]="Editor"
-        class=""
-        [ngClass]="{
+        }}</label>
+      <ckeditor [editor]="Editor" class="" [ngClass]="{
           'is-invalid': shouldShowRequiredError('description'),
           'is-valid': isValid('description')
-        }"
-        formControlName="description"
-      >
+        }" formControlName="description">
       </ckeditor>
     </div>
 
     <!-- Valider -->
     <div class="col-10 mt-2">
-      <button
-        class="btn btn-sm btn-pink mb-3 float-right"
-        [disabled]="form.invalid"
-      >
+      <button class="btn btn-sm btn-pink mb-3 float-right" [disabled]="form.invalid">
         {{ "VALIDER" | translate }}
         <span *ngIf="loading">
           <i class="fas fa-circle-notch fa-spin"></i>

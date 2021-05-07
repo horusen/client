@@ -1,0 +1,90 @@
+<div class="w-100 sujet-container">
+  <div *ngIf="!loading && sujetService.data.length">
+    <div class="media clickable pd-y-10 pr-2 bd-b sujet-box"
+        [ngClass]="{'border border-primary bg-soft-primary': sujet.id == discussionService.singleData?.sujet?.id}"
+        *ngFor="let sujet of sujetService.data; let i=index">
+
+      <!-- Icone -->
+      <div class="mr-2">
+        <div class="avatar mg-l-5">
+          <span class="avatar-initial rounded-circle bg-primary op-6" [ngClass]="{
+                          'bg-primary': (helper.parseInt(i.toString().charAt(i.toString().length - 1)) - 1 == 0) || ((helper.parseInt(i.toString().charAt(i.toString().length - 1)) + 5) - 1 == 0) ,
+                          'bg-warning': (helper.parseInt(i.toString().charAt(i.toString().length - 1)) - 2 == 0 )|| ((helper.parseInt(i.toString().charAt(i.toString().length - 1)) + 5) - 2 == 0),
+                          'bg-success': (helper.parseInt(i.toString().charAt(i.toString().length - 1)) - 3 == 0) || ((helper.parseInt(i.toString().charAt(i.toString().length - 1)) + 5) - 3 == 0),
+                          'bg-info': (helper.parseInt(i.toString().charAt(i.toString().length - 1)) - 4 == 0) || ((helper.parseInt(i.toString().charAt(i.toString().length - 1)) + 5) - 4 == 0),
+                          'bg-danger': (helper.parseInt(i.toString().charAt(i.toString().length - 1)) - 5 == 0) || ((helper.parseInt(i.toString().charAt(i.toString().length - 1)) + 5) - 5 == 0)
+                      }">
+            {{ sujet.libelle.split(' ')[0].charAt(0) + (sujet.libelle.split(' ')[1] ? sujet.libelle.split('
+            ')[1].charAt(0) : sujet.libelle.split(' ')[0].charAt(1))}}
+          </span>
+        </div>
+      </div>
+
+      <!-- Element -->
+      <div class="d-flex justify-content-between wd-100p">
+        <div class="d-inline-block w-100">
+          <!-- Libelle -->
+          <div class="mb-0 tx-13  d-flex justify-content-between align-items-start"
+              [ngClass]="{'font-weight-bold': sujet.id == currentsujet}">
+            <a class="tx-facebook" [routerLink]="['./']"
+                [queryParams]="{'type_discussion': 'groupe', 'sujet': sujet.id}">
+              {{ sujet.libelle}}
+              <span *ngIf="sujet.etat == 0" [ngbTooltip]="'FERMER' | translate">
+                <i class="fad fa-comment-slash tx-danger"></i>
+              </span>
+            </a>
+
+            <!-- Option -->
+            <div class="dropdown d-inline float-right">
+              <!-- Icone -->
+              <i class="fas fa-ellipsis-h mt-1 clickable " id="dropdownMenuButton" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+              </i>
+
+
+              <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                <!-- changer confidentialite -->
+                <a class="dropdown-item tx-primary py-2 d-flex justify-content-between align-items-center clickable"
+                    (click)="fermerSujet(sujet.id)" *ngIf="sujet.etat == 1">
+                  {{'FERMER' | translate}} <i class="fal tx-13 fa-door-closed float-right"></i>
+                </a>
+
+                <a class="dropdown-item tx-primary py-2 d-flex justify-content-between align-items-center clickable"
+                    (click)="reouvrirSujet(sujet.id)" *ngIf="sujet.etat == 0">
+                  {{'REOUVRIR' | translate}} <i class="fal tx-13 fa-door-open float-right"></i>
+                </a>
+
+                <!-- changer confidentialite -->
+                <a class="dropdown-item tx-primary py-2 bd-t d-flex justify-content-between align-items-center clickable"
+                    (click)="edit(sujet)">
+                  {{'MODIFIER' | translate}} <i class="fal tx-13 fa-edit float-right"></i>
+                </a>
+
+                <!-- supprimer membre
+                <a class="dropdown-item tx-primary clickable">
+                  {{'SUPPRIMER' | translate}} <i class="fad fa-trash float-right"></i>
+                </a> -->
+
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Derniere reaction -->
+          <p class="mb-0 tx-gray-600 tx-12" *ngIf="sujet.derniereReaction">
+            <span class="font-weight-bold">
+              {{sujet.derniereReaction.user.id_inscription == auth.id_inscription
+              ? ('VOUS' | translate) :
+              helper.strcut(sujet.derniereReaction.user.nom_complet, 50) }}
+            </span> :
+            {{ helper.strcut(sujet.derniereReaction.reaction, 90) }}
+
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-loading *ngIf="loading"></app-loading>
+  <app-missing-data *ngIf="!loading && !sujetService.data.length"></app-missing-data>
+</div>

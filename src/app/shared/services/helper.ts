@@ -8,6 +8,7 @@ import {
   ActivatedRouteSnapshot,
   ActivatedRoute,
 } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 declare var $;
 
@@ -21,6 +22,7 @@ export class Helper {
     // public toastr: ToastrManager,
     private translate: TranslateService,
     private router: Router,
+    private toastr: ToastrService,
     private _ngxPicaService: NgxPicaService,
     private _route: ActivatedRoute
   ) {}
@@ -30,6 +32,15 @@ export class Helper {
       queryParams: queryParams,
       fragment: fragment,
       relativeTo: this._route,
+    });
+  }
+
+  reloadPage(path: string[], queryParams?: {}, fragment?: string) {
+    this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
+      this.router.navigate(path, {
+        queryParams: queryParams,
+        fragment: fragment,
+      });
     });
   }
 
@@ -51,6 +62,10 @@ export class Helper {
     $("#" + id).modal("toggle");
   }
 
+  showModal(id: string): void {
+    $("#" + id).modal("show");
+  }
+
   idExtractor(data: any[], idField: string = "id"): number[] {
     let returned: number[] = [];
     data.forEach((element) => {
@@ -69,16 +84,33 @@ export class Helper {
   }
 
   alertDanger(word: string = "ERREUR"): void {
-    // Swal.fire(word, "", "error");
-    // Swal.fire({ ...options });
+    Swal.fire({
+      icon: "error",
+      title: "Erreur depuis le server",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
 
-  toastSuccess(word: string = "effectueAvecSucces"): void {
-    // this.toastr.successToastr(this.getTranslation(word));
+  toastSuccess(word?: string): void {
+    if (!word)
+      this.translate
+        .get("effectueAvecSucces")
+        .subscribe((translatedWord) => (word = translatedWord));
+
+    this.toastr.success(word);
   }
 
-  toastDanger(word: string = "ERREUR"): void {
-    // this.toastr.errorToastr(this.getTranslation(word));
+  toastDanger(word?: string, titre?: string): void {
+    if (!word)
+      this.translate
+        .get("ERREUR")
+        .subscribe((translatedWord) => (word = translatedWord));
+
+    this.toastr.error(word, titre, {
+      closeButton: true,
+      disableTimeOut: true,
+    });
   }
 
   getTranslation(word: string) {
@@ -130,8 +162,14 @@ export class Helper {
     });
   }
 
+  fromHtmlStringToText(htmlString: string) {
+    return new DOMParser().parseFromString(htmlString, "text/html")
+      .documentElement.textContent;
+  }
+
   // Permet d'afficher un nombre bien defini de caractere dans un texte
   strcut(text: string, wordCount: number) {
+    text = this.fromHtmlStringToText(text);
     // if text's length lower than wordCound(nbre of word we want), simply return the text
     if (text.length < wordCount) {
       return text;
@@ -141,14 +179,27 @@ export class Helper {
     return `${text.substring(0, wordCount)}...`;
   }
 
-  omitFieldInObject(obj: {}, omitKeys: string[]) {
-    return Object.keys(obj).reduce((result, key) => {
-      if (!omitKeys.includes(key)) {
-        result[key] = obj[key];
-      }
-      return result;
-    }, {});
+  omitFieldInObject(obj: {}, omitKeys: string[]): {} {
+    if (Object.keys(obj).length) {
+      return Object.keys(obj).reduce((result, key) => {
+        if (!omitKeys.includes(key)) {
+          result[key] = obj[key];
+        }
+        return result;
+      }, {});
+    }
+
+    return {};
   }
+
+  // omitValueInArray(array: any[], omittedValues: any[]) {
+  //   let newArray = [];
+  //   array.forEach(item => {
+  //     if(!omittedValues.includes(item)) {
+  //       newArray.push(item);
+  //     }
+  //   })
+  // }
 
   omitNullValueInObject(obj: {}) {
     let newObject = {};
@@ -164,8 +215,10 @@ export class Helper {
   omitEmptyArraysInObject(obj: {}) {
     let newObject = {};
     Object.keys(obj).forEach((key) => {
-      if (obj[key] && obj[key].length) {
-        newObject[key] = obj[key];
+      if (obj[key]) {
+        if (obj[key] instanceof Array) {
+          if (obj[key].length) newObject[key] = obj[key];
+        } else newObject[key] = obj[key];
       }
     });
 
@@ -211,6 +264,49 @@ export class Helper {
       return true;
     }
     return false;
+  }
+
+  ArrayObjectMapField(array: any[], field: string): any[] {
+    return array.map((item: any) => item[field]);
+  }
+
+  appendObjectToQueryParams(
+    route: ActivatedRoute,
+    object: object,
+    omittedParams?: string[]
+  ): void {
+    let queryParams: any;
+    route.queryParams.subscribe((query) => (queryParams = query));
+    this.router.navigate(["./"], {
+      queryParams: {
+        ...object,
+        ...this.omitFieldInObject(queryParams, omittedParams),
+      },
+      relativeTo: route,
+    });
+  }
+
+  getLastUrlFragment(url: string): string {
+    const urlWithoutQueryParams = url.split("?")[0];
+    const fragmentedUrl = urlWithoutQueryParams.split("/");
+    return fragmentedUrl[fragmentedUrl.length - 1];
+  }
+
+  convertObjectToQueryParamsUrl(object: object) {
+    let queryParams: string = "";
+    let index: number = 0;
+    object = this.omitEmptyArraysInObject(object);
+    object = this.omitNullValueInObject(object);
+    Object.keys(object).forEach((key) => {
+      if (object[key] instanceof Array) {
+        queryParams += `${index > 0 ? "&" : ""}${key}=${object[key].join(",")}`;
+      } else {
+        queryParams += `${index > 0 ? "&" : ""}${key}=${object[key]}`;
+      }
+      index += 1;
+    });
+
+    return queryParams;
   }
 
   checkExtensions(filename: string, extensions: string[]): boolean {

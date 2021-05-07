@@ -1,9 +1,10 @@
 import { UrlService } from "./../../../../shared/service/url.service";
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { EtablissementService } from "../etablissement.service";
 import { TypeEtablissementService } from "../type-etablissement/type-etablissement.service";
+import { AuthService } from "src/app/authentification/auth.service";
 
 @Component({
   selector: "app-etablissement-list",
@@ -17,6 +18,7 @@ export class EtablissementListComponent
   constructor(
     public etablissementService: EtablissementService,
     public route: ActivatedRoute,
+    public auth: AuthService,
     public urlService: UrlService,
     public router: Router,
     public typeEtablissementService: TypeEtablissementService
@@ -25,42 +27,20 @@ export class EtablissementListComponent
   }
 
   ngOnInit(): void {
-    if (this.router.url.includes("school/echo/type")) {
+    this.route.queryParams.subscribe((queryParams) => {
+      this.getData(queryParams);
+    });
+  }
+
+  getData(queryParams: Params) {
+    // Echo
+    if (this.router.url.match(/school\/echo\/type\/[0-9]+\/etablissement/)) {
       this._subscription[
         "type"
       ] = this.typeEtablissementService.singleData$.subscribe((type) => {
-        this.getAffiliatedToUserByType(type.id);
+        this.getByType(type.id, queryParams);
       });
     }
-    // this._subscription[
-    //   "loading"
-    // ] = this.etablissementService.loading$.subscribe((loading) => {
-    //   this.loading = loading;
-    // });
-
-    // this.route.queryParams.subscribe((params) => {
-    //   if (Object.keys(params).length) {
-    //     if (params["affilie"] == "true") {
-    //       params["type-etablissement"]
-    //         ? this.getEtablissementAffilieByType(params["type-etablissement"])
-    //         : this.getEtablissementAffilie();
-    //     } else {
-    //       if (params["international"] && params["international"] == "true") {
-    //         params["type-etablissement"]
-    //           ? this.getEtablissementsInternationalesByType(
-    //               params["type-etablissement"]
-    //             )
-    //           : null;
-    //       } else {
-    //         params["type-etablissement"]
-    //           ? this.getByType(params["type-etablissement"])
-    //           : null;
-    //       }
-    //     }
-    //   } else {
-    //     this.get();
-    //   }
-    // });
   }
 
   getAffiliatedToUserByType(type: number) {
@@ -81,20 +61,27 @@ export class EtablissementListComponent
     this.urlService.previousUrl = this.router.url;
   }
 
-  search(keyword: string) {
-    if (this.router.url.includes("annuaire")) {
-      this.getEtablissementsInternationalesByType(
-        this.helper.getQueryParamsFromUrl(this.router.url)[
-          "type-etablissement"
-        ],
-        keyword
-      );
-    } else if (this.router.url.includes("hierarchie")) {
-      this.getEtablissementAffilie(keyword);
-    }
+  // search(keyword: string) {
+  //   if (this.router.url.includes("annuaire")) {
+  //     this.getEtablissementsInternationalesByType(
+  //       this.helper.getQueryParamsFromUrl(this.router.url)[
+  //         "type-etablissement"
+  //       ],
+  //       keyword
+  //     );
+  //   } else if (this.router.url.includes("hierarchie")) {
+  //     this.getEtablissementAffilie(keyword);
+  //   }
+  // }
+
+  getByType(type: number, queryParams: Params) {
+    this.loading = true;
+    this.etablissementService.getByType(type, queryParams).subscribe(() => {
+      this.loading = false;
+    });
   }
 
-  getByType(type: number, keyword: string = "") {
+  getNonAffilieByType(type: number, keyword: string = "") {
     this.loading = true;
     this.etablissementService
       .getEtablissementsNonAffiliesByType(type)
@@ -112,17 +99,7 @@ export class EtablissementListComponent
       });
   }
 
-  getEtablissementAffilie(keyword: string = "") {
-    this.loading = true;
-    this.etablissementService
-      .getEtablissementsAffilies(keyword)
-      .subscribe(() => {
-        this.loading = false;
-      });
-  }
-
   getEtablissementsInternationalesByType(type: number, keyword: string = "") {
-    console.log(keyword);
     this.type = type;
     this.loading = true;
     this.etablissementService

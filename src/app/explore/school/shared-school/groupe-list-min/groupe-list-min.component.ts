@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { Helper } from "src/app/shared/services/helper";
-import { GroupeMinService } from "./groupe-min.service";
+import { GroupeService } from "../../groupe/groupe.service";
 
 @Component({
   selector: "app-groupe-list-min",
@@ -10,7 +10,7 @@ import { GroupeMinService } from "./groupe-min.service";
 })
 export class GroupeListMinComponent extends BaseComponent implements OnInit {
   @Input() styleLight: boolean = true; // Permet d'adapter la couleur du texte en fonction de l'élèment parent
-  constructor(public groupeService: GroupeMinService, public helper: Helper) {
+  constructor(public groupeService: GroupeService, public helper: Helper) {
     super(groupeService);
   }
 
@@ -19,11 +19,10 @@ export class GroupeListMinComponent extends BaseComponent implements OnInit {
   }
 
   getData() {
-    if (!this.groupeService.data.length) {
-      this.loading = true;
-      this.groupeService.initialise().subscribe(() => {
-        this.loading = false;
-      });
-    }
+    this.loading = true;
+    this.groupeService.get().subscribe((data) => {
+      this.data = data;
+      this.loading = false;
+    });
   }
 }

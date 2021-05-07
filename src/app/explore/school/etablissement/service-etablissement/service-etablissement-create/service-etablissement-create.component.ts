@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BaseCreateComponent } from "src/app/shared/components/base-component/base-create.component";
 import { DomaineService } from "../../../domaine/domaine.service";
 import { EtablissementService } from "../../etablissement.service";
@@ -18,7 +19,9 @@ export class ServiceEtablissementCreateComponent
   constructor(
     public serviceService: ServiceEtablissementService,
     public domaineService: DomaineService,
-    public etablissementService: EtablissementService
+    public etablissementService: EtablissementService,
+    public router: Router,
+    public route: ActivatedRoute
   ) {
     super(serviceService);
   }
@@ -61,7 +64,9 @@ export class ServiceEtablissementCreateComponent
 
     this.serviceService.add(data).subscribe(() => {
       this.loading = false;
+      this.router.navigate(["./"], { relativeTo: this.route });
       this.helper.toggleModal("service-etablissement-create-modal");
+      this.helper.alertSuccess();
       this.initForm();
     });
   }

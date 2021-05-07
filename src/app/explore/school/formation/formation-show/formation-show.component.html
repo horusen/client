@@ -1,0 +1,51 @@
+<div class="">
+  <div class="card">
+    <!-- Nav tabs -->
+    <div class="tab-wrapper">
+
+      <!-- Details -->
+      <input checked="" class="tab" id="tab1" name="nav" type="radio" />
+      <a [routerLink]="['./']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+        <label for="tab1">
+          <span class="navicon fa fa-info-circle"></span>
+        </label>
+      </a>
+
+      <!-- Condition  de participation -->
+      <input class="tab" id="tab2" name="nav" type="radio" />
+      <a [routerLink]="['condition-participation']" routerLinkActive="active">
+        <label for="tab2">
+          <span class="navicon fa fa-file-certificate"></span>
+        </label>
+      </a>
+
+
+      <!-- Objectifs -->
+      <input class="tab" id="tab3" name="nav" type="radio" />
+      <a [routerLink]="['objectifs']" routerLinkActive="active">
+        <label for="tab3">
+          <span class="navicon fa fa-crosshairs"></span>
+        </label>
+      </a>
+
+
+
+
+      <div class="tab__copy scroll-11">
+        <router-outlet></router-outlet>
+      </div>
+      <!-- <div class="tab__copy" id="second_what">
+        <app-eleve-show-groupe></app-eleve-show-groupe>
+      </div>
+      <div class="tab__copy" id="third_how">
+        <app-eleve-show-tache></app-eleve-show-tache>
+      </div>
+
+      <div class="tab__copy" id="fourth">
+        <app-eleve-show-parent></app-eleve-show-parent>
+      </div> -->
+
+
+    </div>
+  </div>
+</div>

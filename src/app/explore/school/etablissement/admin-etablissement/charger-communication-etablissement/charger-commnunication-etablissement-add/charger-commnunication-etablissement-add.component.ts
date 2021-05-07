@@ -77,11 +77,12 @@ export class ChargerCommnunicationEtablissementAddComponent
 
       // Delete new ChargerComs in Non chargerComs array
       const chargerComIDs = chargerComs.map(
-        (chargerCom) => chargerCom.chargerCom_details.id_inscription
+        (chargerCom) => chargerCom.charger_com_details.id_inscription
       );
       this.nonChargerCom = this.nonChargerCom.filter((item) =>
         chargerComIDs.includes(item.id_inscription)
       );
+      this.helper.toastSuccess();
       this.formValuePatcher("chargerComs", []);
       this.helper.toggleModal("charger-com-etablissement-add-modal");
     });

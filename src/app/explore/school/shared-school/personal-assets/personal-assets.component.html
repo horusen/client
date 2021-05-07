@@ -4,11 +4,8 @@
         <ul class="nav  mg-t-5  nav-fill">
             <!-- Mes groupes -->
             <li class="nav-item">
-                <a class="nav-link clickable"
-                    (click)="activateComponent('groupe')"
-                    [ngClass]="{'font-weight-bold': activeComponent.groupe}">
-                    <i class="fad fa-users bg-white tx-primary"
-                        style="padding:6px; border-radius:50%">
+                <a class="nav-link clickable" (click)="activateComponent('groupe')" [ngClass]="{'font-weight-bold': activeComponent.groupe}">
+                    <i class="fad fa-users bg-white tx-primary" style="padding:6px; border-radius:50%">
                     </i>
                 </a>
             </li>
@@ -16,33 +13,25 @@
 
             <!-- Ma classe -->
             <li class="nav-item">
-                <a class="nav-link clickable"
-                    (click)="activateComponent('classe')"
-                    [ngClass]="{'font-weight-bold': activeComponent.classe}">
-                    <i class="fad fa-user-graduate bg-white tx-primary "
-                        style="padding:6px; border-radius:50%">
+                <a class="nav-link clickable" (click)="activateComponent('classe')" [ngClass]="{'font-weight-bold': activeComponent.classe}">
+                    <i class="fad fa-user-graduate bg-white tx-primary " style="padding:6px; border-radius:50%">
                     </i>
                 </a>
             </li>
 
             <!-- mes professeurs -->
             <li class="nav-item">
-                <a class="nav-link clickable"
-                    (click)="activateComponent('professeur')"
-                    [ngClass]="{'font-weight-bold': activeComponent.professeur}">
-                    <i class="fad fa-user-tie bg-white tx-primary"
-                        style="padding:6px; border-radius:50%">
+                <a class="nav-link clickable" (click)="activateComponent('professeur')" [ngClass]="{'font-weight-bold': activeComponent.professeur}">
+                    <i class="fad fa-user-tie bg-white tx-primary" style="padding:6px; border-radius:50%">
                     </i>
                 </a>
             </li>
 
             <!-- Mon reseaux -->
             <li class="nav-item">
-                <a class="nav-link clickable"
-                    (click)="activateComponent('sousReseaux')"
+                <a class="nav-link clickable" (click)="activateComponent('sousReseaux')"
                     [ngClass]="{'font-weight-bold': activeComponent.sousReseaux}">
-                    <i class="fad fa-network-wired bg-white tx-primary"
-                        style="padding:6px; border-radius:50%">
+                    <i class="fad fa-network-wired bg-white tx-primary" style="padding:6px; border-radius:50%">
                     </i>
                 </a>
             </li>

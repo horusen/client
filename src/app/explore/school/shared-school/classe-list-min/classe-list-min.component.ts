@@ -9,10 +9,7 @@ import { EtablissementService } from "../../etablissement/etablissement.service"
   styleUrls: ["./classe-list-min.component.scss"],
 })
 export class ClasseListMinComponent extends BaseComponent implements OnInit {
-  constructor(
-    public classeService: ClasseService,
-    public etablissementService: EtablissementService
-  ) {
+  constructor(public classeService: ClasseService) {
     super(classeService);
   }
 
@@ -27,11 +24,9 @@ export class ClasseListMinComponent extends BaseComponent implements OnInit {
 
   getData() {
     this.loading = true;
-    this.classeService
-      .getByEtablissement(this.etablissementService.etablissement.id)
-      .subscribe((data) => {
-        this.data = data;
-        this.loading = false;
-      });
+    this.classeService.getByCurrentUserAsProfesseur().subscribe((data) => {
+      this.data = data;
+      this.loading = false;
+    });
   }
 }

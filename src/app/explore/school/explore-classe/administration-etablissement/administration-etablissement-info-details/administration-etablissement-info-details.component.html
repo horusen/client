@@ -1,0 +1,138 @@
+<div class="nav-tabs-top h-100">
+  <ul class="nav bg-white mg-0 pd-0 bd-b bd-t">
+    <!-- Details -->
+    <li class="nav-item mg-0 pd-0 ">
+      <a class="nav-link3" style="padding: 5px 20px;" [routerLink]="['./']" [routerLinkActive]="'font-weight-bolder'"
+          [routerLinkActiveOptions]="{exact: true}">
+        <i class="fal fa-info tx-12 bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+        </i>
+        <span class="tx-yeto2">
+          {{ 'DETAILS' | translate }}
+        </span>
+      </a>
+    </li>
+
+
+    <!-- Programme -->
+    <li class="nav-item mg-0 pd-0 ">
+      <a class="nav-link3" style="padding: 5px 20px;" [routerLink]="['programme']" [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-scroll tx-12 bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+        </i>
+        <span class="tx-yeto2">
+          {{ 'PROGRAMMES' | translate }}
+        </span>
+      </a>
+    </li>
+
+
+    <!-- Formation -->
+    <li class="nav-item ">
+      <a class="nav-link3 " style="padding: 5px 20px;" [routerLink]="['formation']" [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-chalkboard-teacher bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+        </i>
+        <span class="tx-yeto2">
+          {{ 'FORMATIONS' | translate }}
+        </span>
+      </a>
+    </li>
+
+    <!-- Classe -->
+    <li class="nav-item ">
+      <a class="nav-link3 " style="padding: 5px 20px;" style="padding: 5px 20px;" [routerLink]="['classe']" [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-users-class bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+        </i>
+        <span class="tx-yeto2">
+          {{ 'CLASSES' | translate }}
+        </span>
+      </a>
+    </li>
+
+    <!-- Professeur -->
+    <li class="nav-item ">
+      <a class="nav-link3 " style="padding: 5px 20px;" [routerLink]="['professeur']" [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-user-tie bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+        </i>
+        <span class="tx-yeto2">
+          {{ 'PROFESSEURS' | translate }}
+        </span>
+      </a>
+    </li>
+
+    <!-- Eleve -->
+    <li class="nav-item ">
+      <a class="nav-link3 " style="padding: 5px 20px;" [routerLink]="['eleve']" [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-user-graduate bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+        </i>
+        <span class="tx-yeto2">
+          {{ 'ELEVES' | translate }}
+        </span>
+      </a>
+    </li>
+
+    <!-- Groupe -->
+    <li class="nav-item ">
+      <a class="nav-link3 " style="padding: 5px 20px;" [routerLink]="['groupes']" [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-users bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+        </i>
+        <span class="tx-yeto2">
+          {{ 'GROUPES' | translate }}
+        </span>
+      </a>
+    </li>
+
+
+    <!-- Parent -->
+    <li class="nav-item ">
+      <a class="nav-link3 " style="padding: 5px 30px;" [routerLink]="['parents-eleves']" [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-user-shield bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+        </i>
+        <span class="tx-yeto2">
+          {{ 'PARENTS' | translate }}
+        </span>
+      </a>
+    </li>
+
+
+
+
+    <!-- Plus -->
+    <li class="nav-item ">
+      <a class="nav-link3 dropdown dropleft d-inline" style="padding: 5px 20px;">
+        <i class="fal fa-ellipsis-h mt-1 bg-light tx-yeto2 " style="padding:8px; border-radius:50%" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+        </i>
+
+        <div class="dropdown-menu p-0" style="border-radius: 3px;" aria-labelledby="dropdownMenuButton">
+          <!-- Employe -->
+          <a class="dropdown-item clickable tx-light tx-14 py-2 tx-yeto2" [routerLink]="['structure']" [routerLinkActive]="'font-weight-bolder'">
+            <i class="fad fa-edit float-left mr-2 tx-yeto2"></i> {{'EMPLOYES' | translate}}
+          </a>
+
+
+          <!-- Service -->
+          <a class="dropdown-item clickable tx-light tx-14 py-2 tx-yeto2" [routerLink]="['service']" [routerLinkActive]="'font-weight-bolder'">
+            <i class="fad fa-building float-left mr-2 tx-yeto2"></i> {{'SERVICES' | translate}}
+          </a>
+
+          <!-- Adminitration -->
+          <a class="dropdown-item clickable tx-light tx-14 py-2 tx-yeto2" [routerLink]="['administrateur']" [routerLinkActive]="'font-weight-bolder'">
+            <i class="fad fa-user-tie float-left mr-2 tx-yeto2"></i> {{'ADMINISTRATEURS' | translate}}
+          </a>
+
+          <!-- Explore -->
+          <a class="dropdown-item clickable tx-light tx-14 py-2 tx-yeto2" [routerLink]="['explore']" [routerLinkActive]="'font-weight-bolder'">
+            <i class="fad fa-comments-alt float-left mr-2 tx-yeto2"></i> {{'EXPLORE' | translate}}
+          </a>
+
+        </div>
+      </a>
+    </li>
+
+  </ul>
+
+  <div class="tab-content">
+    <div class="h-100">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

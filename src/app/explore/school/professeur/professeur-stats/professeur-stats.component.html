@@ -1,0 +1,140 @@
+<!-- Header -->
+<h4 class="card-header-title">
+  {{ 'STATISTIQUES' | translate }}
+</h4>
+
+<!-- constant stats -->
+<div class="row">
+  <ng-container *ngIf="!constantStatistiquesLoading && constantStatistiques">
+    <!-- TOTAL  Homme -->
+    <div class="col-6">
+      <div class="card mg-b-20">
+        <div class="card-body">
+          <div class="media d-inline-flex">
+            <div>
+              <span class="tx-uppercase tx-10 mg-b-10">{{ 'HOMME' | translate }}</span>
+              <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-primary">
+                {{ constantStatistiques.total_homme }}
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total femme -->
+    <div class="col-6">
+      <div class="card mg-b-20">
+        <div class="card-body">
+          <div class="media d-inline-flex">
+            <div>
+              <span class="tx-uppercase tx-10 mg-b-10">{{ 'FEMME' | translate}}</span>
+              <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-success">{{ constantStatistiques.total_femme }}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Total-->
+    <div class="col-6">
+      <div class="card mg-b-20">
+        <div class="card-body">
+          <div class="media d-inline-flex">
+            <div>
+              <span class="tx-uppercase tx-10 mg-b-10">{{ 'TOTAL' | translate}}</span>
+              <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-warning">
+                {{ constantStatistiques.total }}
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Moyenne par classe-->
+    <div class="col-6">
+      <div class="card mg-b-20">
+        <div class="card-body">
+          <div class="media d-inline-flex">
+            <div>
+              <span class="tx-uppercase tx-10 mg-b-10">{{ 'moyenneProfesseurParClasse' | translate}}</span>
+              <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark">
+                {{ constantStatistiques.moyenne_professeur_par_classe }}
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="col-12" *ngIf="constantStatistiquesLoading">
+    <app-loading></app-loading>
+  </div>
+</div>
+
+
+<!-- Autres stats -->
+<div class="card mg-b-20">
+  <!-- Header -->
+  <div class="card-header">
+    <!-- Main header -->
+    <h4 class="card-header-title">
+      {{ 'STATISTIQUES' | translate }}
+    </h4>
+
+  </div>
+
+
+  <div class="card-body p-0 pd-0 collapse show" id="newUsers">
+    <div class="table-responsive">
+      <table class="table table-hover mg-0">
+        <thead class="tx-10 tx-uppercase">
+          <tr>
+            <th class="font-weight-bold">{{ 'nombreDeProfesseursParDomaine' | translate }}:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="data?.length && !loading">
+            <tr *ngFor="let item of data; let i = index">
+              <td class="d-flex align-items-center pd-y-10-force">
+                <div class="mr-2">
+                  <span class="wd-40 ht-40 mg-r-10 d-flex align-items-center justify-content-center rounded" [ngClass]="{
+                    'bgm2-success': i.toString().slice(-1) == 1,
+                    'bgm2-warning': i.toString().slice(-1)  == 2,
+                    'bgm2-indigo': i.toString().slice(-1) == 3,
+                    'bg-facebook': i.toString().slice(-1) == 4,
+                    'bgm2-blue': i.toString().slice(-1) == 5,
+                    'bgm2-mint': i.toString().slice(-1) == 6,
+                    'bgm2-yellow': i.toString().slice(-1) == 7,
+                    'bgm2-danger': i.toString().slice(-1) == 8,
+                    'bgm2-secondary': i.toString().slice(-1) == 9,
+                    'bgm2-primary': i.toString().slice(-1) == 0
+                  }">
+                    <i class="far fa-boxes" alt=""></i>
+                  </span>
+
+                </div>
+                <div class="d-block">
+                  <a href="" class="my-0 mt-1 tx-13">{{ item.domaine }}</a>
+                </div>
+              </td>
+              <td class="tx-right align-middle">
+                <a href="" class="tx-rubik badge badge-light border tx-dark">{{ item.total }}</a>
+              </td>
+            </tr>
+          </ng-container>
+
+          <tr class="w-100" *ngIf="loading || !loading && !data?.length">
+            <td colspan="5">
+              <app-loading *ngIf="loading"></app-loading>
+              <app-missing-data *ngIf="!loading && !data?.length"></app-missing-data>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

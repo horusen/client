@@ -1,0 +1,154 @@
+<div class="row row-xs clearfix mg-0 pd-0 bd-b  pd-t-6" style="height: 60px">
+  <!-- logo -->
+  <div class="col-lg-2">
+    <div class="d-flex flex-row">
+      <a href="" class="tx-white tx-26 tx-bolder" style="
+                                                        font-family: 'Tangerine';
+                                                        text-align: center;
+                                                        vertical-align: middle;
+                                                        text-shadow: 0px 1px 0px;
+                                                      ">
+        <p class="tx-ether4">
+          <!-- <img class="avatar4" src="assets/images/xs/explore.png" alt="avatar">-->
+          <i class="fad fa-solar-system tx-ether4" style="padding: 6px; border-radius: 50%"></i>
+          Explore.S<U class="tx-ether">chool</U>
+        </p>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-1" *ngIf="router.url.match('school/tache') || router.url.match('school/professeur')">
+    <app-sidebar-collapse-button></app-sidebar-collapse-button>
+  </div>
+
+  <!-- Photo online user -->
+  <div class="col-lg-9  tx-center bg-white">
+    <div class="row row-xs clearfix mg-0 pd-0">
+      <div class="col-lg-3">
+        <div class="d-flex flex-row mg-t-6">
+          <div class="profiles">
+            <img class="rounded-circle ml-4" src="assets/images/xs/avatar7.jpg" alt="avatar" width="30" />
+            <img class="rounded-circle" src="assets/images/xs/avatar6.jpg" alt="avatar" width="30" />
+            <img class="rounded-circle" src="assets/images/xs/avatar5.jpg" alt="avatar" width="30" />
+            <img class="rounded-circle" src="assets/images/xs/avatar4.jpg" alt="avatar" width="30" />
+            <img class="rounded-circle" src="assets/images/xs/avatar3.jpg" alt="avatar" width="30" />
+          </div>
+          <div class="avatar mg-l-10">
+            <span class="avatar-initial rounded-circle bg-gray op-4 tx-danger">2</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group mg-t-5 mg-b-5 mg-l-40">
+          <div class="input-group" style="width: 500px">
+            <span class="input-group-append"><a role="button" class="btn btn-light"><i class="fad fa-search tx-ether3"></i></a></span>
+            <input type="text" class="form-control pd-y-10 tx-white" placeholder="Recherche..." />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3">
+        <div class="card-body header-right d-flex justify-content-between align-items-center p-0">
+          <ul class="nav mg-0 pd-0 mg-t-6 header-right">
+            <li class="nav-item">
+              <a class="nav-link3" class="nav-link p-1" [routerLink]="['echo']" [routerLinkActive]="'active show'">
+                <span class="tx-ether4">
+                  <i class="fal fa-bahai tx-ether4 bg-gray-100" style="padding: 6px; border-radius: 50%"></i>
+                  Echos</span></a>
+            </li>
+
+
+            <!-- Boutton notification -->
+            <li class="nav-item">
+              <a class="nav-link3" [ngbTooltip]="'NOTIFICATION' | translate" data-toggle="tab" href="#calendriers_memoires"><span class="tx-primary">
+                  <i class="fal fa-bell tx-ether bg-gray-100" style="padding: 6px; border-radius: 50%"></i>
+                </span></a>
+            </li>
+
+            <!-- Boutton Partage -->
+            <li class="nav-item">
+              <a class="nav-link3" [ngbTooltip]="'PARTAGES' | translate" data-toggle="tab" href="#soutenance_memoire"><span class="tx-primary">
+                  <i class="fal fa-reply-all tx-ether bg-gray-100" style="padding: 6px; border-radius: 50%"></i>
+                </span></a>
+            </li>
+
+
+            <!-- Boutton Portail -->
+            <li class="nav-item">
+              <a class="nav-link3 clickable" [ngbTooltip]="'PORTAIL' | translate" (click)="deconnexion()"><span class="tx-warning">
+                  <i class="fal fa-door-open bg-gray-100 tx-ether" style="padding: 6px; border-radius: 50%"></i>
+                </span></a>
+            </li>
+
+            <!-- Changer profil -->
+            <!-- <li class="nav-item" *ngIf="authService.profiles.length > 1">
+              <a class="nav-link3" data-toggle="tab" href="#lab_brain" [ngbPopover]="profilePopOver" placement="bottom">
+                <img class="rounded-circle" src="assets/images/xs/avatar7.jpg" alt="avatar" width="30" />
+
+              </a>
+
+            </li> -->
+
+            <!-- <li class="nav-item ">
+  <a class="nav-link3 " data-toggle="tab" href="#suivi_memmoires"><span class="tx-primary">
+  <i class="fad fa-question-circle bg-gray-100 tx-sidebar" style="padding:6px; border-radius:50%"></i> </span></a>
+  </li> -->
+          </ul>
+
+
+          <div class="list-inline-item dropdown mr-1">
+            <!-- Dropdown toggle -->
+            <a href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <span class="select-profile"></span>
+              <img src="assets/images/avatar-placeholder.png" class="img-fluid wd-35 ht-35 rounded-circle" alt="" *ngIf="!authService.user.photo_min">
+              <img [src]="authService.user.photo_min.path" *ngIf="authService.user.photo_min" class="img-fluid wd-35 ht-35 rounded-circle" alt="">
+            </a>
+
+            <!-- Dropdown Menu -->
+            <div class="dropdown-menu dropdown-menu-right dropdown-profile shadow-2" style="opacity: 1;">
+              <div class="user-profile-area">
+                <div class="user-profile-heading mb-0">
+                  <div class="profile-thumbnail">
+                    <img src="assets/images/avatar-placeholder.png" class="img-fluid wd-35 ht-35 rounded-circle" alt=""
+                        *ngIf="!authService.user.photo_min">
+                    <img [src]="authService.user.photo_min.path" *ngIf="authService.user.photo_min" class="img-fluid wd-35 ht-35 rounded-circle"
+                        alt="">
+                  </div>
+
+                  <!-- Profile information -->
+                  <div class="profile-text">
+                    <h6>{{ authService.user.nom_complet }}</h6>
+                    <span>
+                      @{{ authService.selectedProfile.type | translate }} -
+                      {{ authService.selectedProfile.profil.etablissement_details.libelle }}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="dropdown-divider mt-0"></div>
+                <div class="tx-10 tx-light mt-2 ml-4">Se connecter en tant que</div>
+                <app-profile></app-profile>
+                <div class="dropdown-divider"></div>
+
+                <a href="" class="dropdown-item"><i class="icon-envelope" aria-hidden="true"></i> Messages <span
+                      class="badge badge-success ft-right mg-t-3">10+</span></a>
+                <a href="" class="dropdown-item"><i class="icon-settings" aria-hidden="true"></i> settings</a>
+                <a href="" class="dropdown-item"><i class="icon-share" aria-hidden="true"></i> My Activity <span
+                      class="badge badge-warning ft-right mg-t-3">5+</span></a>
+                <a href="" class="dropdown-item"><i class="icon-cloud-download" aria-hidden="true"></i> My Download
+                  <span class="badge badge-success ft-right mg-t-3">10+</span></a>
+                <a href="" class="dropdown-item"><i class="icon-heart" aria-hidden="true"></i> Support</a>
+
+                <!-- Deconnexion -->
+                <a class="dropdown-item clickable" (click)="deconnexion()">
+                  <i class="icon-power" aria-hidden="true"></i>
+                  {{ 'DECONNEXION' | translate}}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

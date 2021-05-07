@@ -1,6 +1,7 @@
 import { tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { BaseService } from "src/app/shared/services/base.service";
+import { Params } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -73,6 +74,12 @@ export class TacheService extends BaseService {
     );
   }
 
+  getByCreation(user: number, params: Params) {
+    return this.factory
+      .get(`user/${user}/tache`, { params })
+      .pipe(tap(this.listResponseHandler()));
+  }
+
   getByChapitre(chapitre: number) {
     return this.factory
       .get(`chapitre/${chapitre}/tache`)
@@ -98,5 +105,11 @@ export class TacheService extends BaseService {
     }
 
     this.setFiltre(element, [element_id]);
+  }
+
+  getTacheMemeCategorie(tache: number) {
+    return this.factory
+      .get(`tache/${tache}/meme-categorie`)
+      .pipe(tap(this.onlyErrorResponseHandler()));
   }
 }

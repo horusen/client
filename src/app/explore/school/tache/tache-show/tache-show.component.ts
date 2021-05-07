@@ -24,14 +24,29 @@ export class TacheShowComponent extends BaseSingleComponent implements OnInit {
     super.ngOnInit();
     this.route.params.subscribe((params) => {
       if (params["id"]) {
-        this.getTache(params["id"]);
+        this.getAffectationTache(params["id"]);
       }
     });
+
+    this.affectationTacheService.singleData$.subscribe(() => {});
 
     this.afficherDetailsUniquement = this.router.url.includes("mes-taches");
   }
 
-  getTache(affectation_tache: number) {
+  getData(tache: number) {
+    if (this.router.url.includes("suivie")) {
+    } else {
+    }
+  }
+
+  getTache(tache: number) {
+    this.loading = true;
+    this.tacheService.getSingle(tache).subscribe(() => {
+      this.loading = false;
+    });
+  }
+
+  getAffectationTache(affectation_tache: number) {
     this.loading = true;
     this.affectationTacheService
       .getSingle(affectation_tache)

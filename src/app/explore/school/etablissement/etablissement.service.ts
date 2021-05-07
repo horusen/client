@@ -1,6 +1,7 @@
 import { tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { BaseService } from "src/app/shared/services/base.service";
+import { Params } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -27,13 +28,15 @@ export class EtablissementService extends BaseService {
       .pipe(tap(this.listResponseHandler()));
   }
 
-  getEtablissementsAffilies(keyword?: string) {
+  getEtablissementsAffilies(etablissement: number, params: Params) {
     return this.factory
-      .get(
-        keyword
-          ? `${this.endPoint}/${this.etablissement.id}/affiliations?query=${keyword}`
-          : `${this.endPoint}/${this.etablissement.id}/affiliations`
-      )
+      .get(`${this.endPoint}/${etablissement}/affiliations`, { params })
+      .pipe(tap(this.listResponseHandler()));
+  }
+
+  getByType(type: number, params: Params) {
+    return this.factory
+      .get(`type-etablissement/${type}/etablissement`, { params })
       .pipe(tap(this.listResponseHandler()));
   }
 
@@ -70,6 +73,12 @@ export class EtablissementService extends BaseService {
     );
   }
 
+  getByUser(user: number, params?: Params) {
+    return this.factory
+      .get(`user/${user}/etablissement/affilie`, { params })
+      .pipe(tap(this.listResponseHandler()));
+  }
+
   getEtablissementsInternationalesByType(type: number, keyword?: string) {
     this.typeEtablissement = type;
     return this.factory
@@ -81,9 +90,9 @@ export class EtablissementService extends BaseService {
       .pipe(tap(this.listResponseHandler()));
   }
 
-  getEtablissementsWhereUserIsAdmin() {
+  getEtablissementsWhereUserIsAdminOrChargerCom() {
     return this.factory
-      .get(`${this.endPoint}/admin/user`)
+      .get(`${this.endPoint}/admin-or-charger-com/user`)
       .pipe(tap(this.listResponseHandler()));
   }
 

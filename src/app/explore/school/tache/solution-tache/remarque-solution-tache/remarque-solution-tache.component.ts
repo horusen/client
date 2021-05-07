@@ -41,7 +41,7 @@ export class RemarqueSolutionTacheComponent
 
   getRemarque(solution: number) {
     this.loading = true;
-    this.remarqueService.get(solution).subscribe(() => {
+    this.remarqueService.getBySolution(solution).subscribe(() => {
       this.loading = false;
     });
   }

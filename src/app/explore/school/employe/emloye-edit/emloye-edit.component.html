@@ -1,0 +1,155 @@
+<form class="custom-placeholder row"
+      [formGroup]="form"
+      *ngIf="form"
+      (submit)="update()">
+  <!-- Service -->
+  <div class="formSep form-group p-form-group-3 p-0 col-6 d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label"
+             for="domaine">
+        {{ "SERVICE" | translate }}
+
+        <!-- loading -->
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.service"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.services"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="service"
+                            [ngClass]="{
+          'is-invalid': shouldShowRequiredError('service'),
+          'is-valid': isValid('service')
+        }"
+                            class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('service')"
+           class="invalid-feedback">
+        {{ "veuillezChoisirAuMoinsUnDomaine" | translate }}.
+      </div>
+    </div>
+  </div>
+
+  <!-- User -->
+  <div class="formSep form-group col-6 p-form-group-3 p-0 d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label"
+             for="employe">
+        {{ "UTILISATEUR" | translate }}
+
+        <!-- loading -->
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.user">
+        </i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.user"
+                            [settings]="dropdownSettingsAlt.user"
+                            formControlName="employe"
+                            [ngClass]="{
+                              'is-invalid': shouldShowRequiredError('employe'),
+                              'is-valid': isValid('employe')
+                            }"
+                            class="form-control p-0 form-control-sm">
+        <c-badge>
+          <ng-template let-item="item">
+            {{ item.nom_complet }}
+          </ng-template>
+        </c-badge>
+        <c-item>
+          <ng-template let-item="item">
+            <label style="color: #333; min-width: 150px">{{
+              item.nom_complet
+              }}</label>
+            <img [src]="item.photo_min?.path"
+                 style="width: 30px; margin-right: 20px"
+                 class="float-right border border-warning" />
+          </ng-template>
+        </c-item>
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('employe')"
+           class="invalid-feedback">
+        {{ "veuillezChoisirAuMoinsUnDomaine" | translate }}.
+      </div>
+    </div>
+  </div>
+
+  <!-- Fonction -->
+  <div class="formSep form-group p-form-group-3 col-12 p-0 d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label"
+             for="domaine">
+        {{ "FONCTION" | translate }}
+
+        <!-- loading -->
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.fonction"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.fonction"
+                            [settings]="dropdownSettingsAlt.multi"
+                            formControlName="fonctions"
+                            [ngClass]="{
+          'is-invalid': shouldShowRequiredError('fonctions'),
+          'is-valid': isValid('fonctions')
+        }"
+                            class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
+      <!-- Boutton crée -->
+      <div class="col-12 p-0">
+        <span class="clickable tx-pink"
+              [autoClose]="'outside'"
+              placement="bottom"
+              [popoverTitle]="fonctionCreateTitle"
+              [ngbPopover]="fonctionCreate">
+          {{ "AJOUTER" | translate }} <i class="fal fa-plus-circle"></i>
+        </span>
+      </div>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('fonctions')"
+           class="invalid-feedback">
+        {{ "veuillezChoisirAuMoinsUnDomaine" | translate }}.
+      </div>
+    </div>
+  </div>
+
+  <div class="formSep form-group col-12 d-flex justify-content-center pb-0 pt-3">
+    <!-- Valider -->
+    <div class="col-12 p-0 mt-2">
+      <button class="btn btn-sm btn-pink mb-3 float-right"
+              [disabled]="form.invalid">
+        {{ "VALIDER" | translate }}
+        <span *ngIf="loading">
+          <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+      </button>
+    </div>
+  </div>
+</form>
+
+<!-- header -->
+<ng-template #fonctionCreateTitle>
+  <b class="text-center tx-pink font-weight-bolder">
+    {{ "ajouterUneFonction" | translate }}
+  </b>
+</ng-template>
+
+<!-- Body -->
+<ng-template #fonctionCreate
+             class="p-3">
+  <app-common-create (itemCreated)="onFonctionCreate($event)"
+                     [configuration]="{name: 'fonction',
+                        endpoint: 'administration/fonction',
+                        hasDescription: false,
+                        submitButtonClass: 'bg-pink tx-white'}
+    ">
+  </app-common-create>
+</ng-template>

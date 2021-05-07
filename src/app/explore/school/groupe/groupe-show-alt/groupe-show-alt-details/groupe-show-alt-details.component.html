@@ -1,0 +1,58 @@
+<ng-container *ngIf="single && !loading">
+  <!-- Image -->
+  <div class="row justify-content-center mx-0 mt-3">
+    <div class="d-flex users-icon bg-light align-items-center justify-content-center border rounded-circle" *ngIf="!single.image?.path">
+      <span class="icone">
+        <i class="fad  fa-users"></i>
+      </span>
+    </div>
+    <img [src]="single.image?.path" *ngIf="single.image?.path">
+  </div>
+
+  <!-- Libelle -->
+  <h3 class="text-center pt-3 pb-2">{{ single.libelle }}</h3>
+
+  <ul class="list-group-flush p-0 w-100">
+    <!-- Type -->
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span class="font-weight-bolder">
+        <i class="fad fa-boxes"></i> {{ 'typeDeGroupe' | translate }}:
+      </span>
+
+      {{ single.type.libelle | titlecase}}
+    </li>
+
+
+    <!-- Confidentialie -->
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span class="font-weight-bolder">
+        <i class="fad fa-lock"></i> {{ "CONFIDENTIALITE" | translate }}:
+      </span>
+      {{ single.confidentialite.libelle | titlecase}}
+    </li>
+
+    <!-- Nombre de membres -->
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span class="font-weight-bolder">
+        <i class="fad fa-users-class"></i> {{ 'nombreDeMembres' | translate }}:
+      </span>
+      {{ single.nombre_membres }}
+    </li>
+
+
+    <!-- Créer par -->
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span class="font-weight-bolder">
+        <i class="fad fa-user"></i> {{ 'creePar' | translate }}:
+      </span>
+      {{ single.user?.nom_complet }}
+    </li>
+
+
+
+  </ul>
+</ng-container>
+
+<div *ngIf="loading" class="my-5">
+  <app-loading *ngIf="loading"></app-loading>
+</div>

@@ -1,4 +1,4 @@
-<div class="card border-0" style="height: 620px">
+<div class="card border-0" style="height: 620px; ">
   <div class="row row-xs mg-0 pd-0 clearfix">
     <!-- Header -->
     <div class="col-lg-12 p-0">
@@ -6,10 +6,7 @@
         <!-- Correspondant header -->
         <a class="media" *ngIf="type == 'discussion' && discussion.type == 1">
           <div class="avatar d-block mr-2 ml-1">
-            <img
-                 class="avatar"
-                 [src]="discussion.correspondant.photo"
-                 [alt]="discussion.correspondant.nom_complet" />
+            <img class="avatar" [src]="discussion.correspondant.photo_min?.path" [alt]="discussion.correspondant.nom_complet" />
           </div>
           <div class="d-flex justify-content-between mg-t-6 mg-b-5 wd-100p">
             <div class="d-inline-block">
@@ -27,9 +24,7 @@
         <a class="media" *ngIf="type == 'discussion' && discussion.type == 2">
           <div class="mr-2">
             <div class="avatar mg-l-5">
-              <span
-                    class="avatar-initial rounded-circle bg-primary op-6"
-                    [ngClass]="{
+              <span class="avatar-initial rounded-circle bg-primary op-6" [ngClass]="{
                   'bg-primary':
                     helper.parseInt(
                       discussion.groupe.id
@@ -128,9 +123,7 @@
               <h6 class="mb-0 tx-13 tx-facebook">
                 {{ discussion.groupe.libelle }}
               </h6>
-              <p
-                 class="mb-0 tx-gray-600 tx-12"
-                 [innerHTML]="helper.strcut(discussion.groupe.description, 150)"></p>
+              <p class="mb-0 tx-gray-600 tx-12" [innerHTML]="helper.strcut(discussion.groupe.description, 170)"></p>
             </div>
           </div>
         </a>
@@ -139,9 +132,7 @@
         <a class="media" *ngIf="type == 'discussion' && discussion.type == 3">
           <div class="mr-2">
             <div class="avatar mg-l-5">
-              <span
-                    class="avatar-initial rounded-circle bg-primary op-6"
-                    [ngClass]="{
+              <span class="avatar-initial rounded-circle bg-primary op-6" [ngClass]="{
                   'bg-primary':
                     helper.parseInt(
                       discussion.sous_reseaux.id
@@ -270,9 +261,7 @@
         <a class="media" *ngIf="type == 'discussion' && discussion.type == 4">
           <div class="mr-2">
             <div class="avatar mg-l-5">
-              <span
-                    class="avatar-initial rounded-circle bg-primary op-6"
-                    [ngClass]="{
+              <span class="avatar-initial rounded-circle bg-primary op-6" [ngClass]="{
                   'bg-primary':
                     helper.parseInt(
                       discussion.sujet.id
@@ -363,7 +352,7 @@
                 .charAt(0)
                 : discussion.sujet.libelle.split(" ")[0].charAt(1))
                 }}
-                <i class="fas fa-network-wired tx-warning"></i>
+                <!-- <i class="fas fa-network-wired tx-warning"></i> -->
               </span>
             </div>
           </div>
@@ -372,7 +361,9 @@
               <h6 class="mb-0 tx-13 tx-facebook">
                 {{ discussion.sujet.libelle }}
               </h6>
-              <p class="mb-0 tx-gray-600 tx-12">Congratulations Friend...</p>
+              <read-more class="mb-0 tx-gray-600 tx-12" [maxLength]="180" [text]="discussion.sujet.description">
+              </read-more>
+              <span></span>
             </div>
           </div>
         </a>
@@ -380,13 +371,12 @@
         <!-- Etablissement header -->
         <a class="media" *ngIf="type == 'discussion' && discussion.type == 5">
           <div class="mr-2">
-           <span class="avatar3 ">
-                    <div class="">
-                        <img class="avatar3"
-                             [src]="discussion.correspondant_etablissement.photo"
-                             [alt]="discussion.correspondant_etablissement.nom_complet">
-                    </div>
-                </span>
+            <span class="avatar3 ">
+              <div class="">
+                <img class="avatar3" [src]="discussion.correspondant_etablissement.photo_min?.path"
+                    [alt]="discussion.correspondant_etablissement.nom_complet">
+              </div>
+            </span>
           </div>
           <div class="d-flex justify-content-between mg-t-7 wd-100p">
             <div class="d-inline-block">
@@ -405,129 +395,133 @@
           </div>
         </a>
 
-        <!-- bar header -->
+        <!-- List des assets -->
         <div class="row row-xs mg-0 pd-0 clearfix bd-t bg-white bd-b">
-          <div class="col-lg-12 mg-l-0">
-            <div class="collapse show" id="collapse10">
-              <ul class="nav bd-b">
-                <li class="nav-item">
-                  <a class="mg-r-10" data-toggle="tab" href="#">
-                    <i
-                       class="fal fa-phone-volume tx-facebook"
-                       style="padding: 4px; border-radius: 50%"></i>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                     class="mg-r-10"
-                     data-toggle="tab"
-                     href="#professeur_explore">
-                    <i
-                       class="fal fa-video tx-facebook"
-                       style="padding: 4px; border-radius: 50%"></i>
-                  </a>
-                </li>
+          <!-- Assets non professeur -->
+          <div class="col-lg-12 mg-l-0" *ngIf="typeDiscussion !== 'professeur'">
+            <ul class="nav bd-b">
+              <li class="nav-item">
+                <a class="mg-r-10" data-toggle="tab" href="#">
+                  <i class="fal fa-phone-volume tx-facebook" style="padding: 4px; border-radius: 50%"></i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="mg-r-10" data-toggle="tab" href="#professeur_explore">
+                  <i class="fal fa-video tx-facebook" style="padding: 4px; border-radius: 50%"></i>
+                </a>
+              </li>
 
-                <li class="nav-item">
-                  <a class="mg-r-10" data-toggle="tab" href="#">
-                    <i
-                       class="fal fa-users tx-facebook"
-                       style="padding: 4px; border-radius: 50%"></i>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="mg-r-10" data-toggle="tab" href="#">
-                    <i
-                       class="fal fa-box-alt tx-facebook"
-                       style="padding: 4px; border-radius: 50%"></i>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="mg-r-10" data-toggle="tab" href="#">
-                    <i class="fal fa-link tx-facebook"></i></a>
-                </li>
-              </ul>
-            </div>
+              <li class="nav-item">
+                <a class="mg-r-10" data-toggle="tab" href="#">
+                  <i class="fal fa-users tx-facebook" style="padding: 4px; border-radius: 50%"></i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="mg-r-10" data-toggle="tab" href="#">
+                  <i class="fal fa-box-alt tx-facebook" style="padding: 4px; border-radius: 50%"></i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="mg-r-10" data-toggle="tab" href="#">
+                  <i class="fal fa-link tx-facebook"></i></a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Assets discussion professeur -->
+          <div class="col-lg-12 mg-l-0" *ngIf="typeDiscussion === 'professeur'">
+            <ul class="nav bd-b">
+              <!-- Fichiers partagés -->
+              <li class="nav-item">
+                <a class="mg-r-10" [routerLink]="['./']" [routerLinkActive]="'active'" [queryParams]="{
+                      type_discussion: typeDiscussion,
+                       correspondant:discussion.correspondant.id_inscription,
+                        asset: 'fichier'}" [ngbTooltip]="'fichiersPartages' | translate">
+                  <i class="fal fa-file-alt tx-facebook" style="padding: 4px; border-radius: 50%"></i>
+                </a>
+              </li>
+
+              <!-- Groupes partagés -->
+              <li class="nav-item">
+                <a class="mg-r-10" [routerLink]="['./']" [routerLinkActive]="'active'" [queryParams]="{
+                      type_discussion: typeDiscussion,
+                       correspondant:discussion.correspondant.id_inscription,
+                        asset: 'groupe'}" [ngbTooltip]="'groupesPartages' | translate">
+                  <i class="fal fa-users tx-facebook" style="padding: 4px; border-radius: 50%"></i>
+                </a>
+              </li>
+
+              <!-- Tache crée -->
+              <li class="nav-item">
+                <a class="mg-r-10" [routerLink]="['./']" [routerLinkActive]="'active'" [queryParams]="{
+                      type_discussion: typeDiscussion,
+                       correspondant:discussion.correspondant.id_inscription,
+                        asset: 'tache'}" [ngbTooltip]="'tacheCreeParVotreCorrespondant' | translate">
+                  <i class="fal fa-tasks-alt tx-facebook" style="padding: 4px; border-radius: 50%"></i>
+                </a>
+              </li>
+
+
+              <!-- Etablissement -->
+              <li class="nav-item">
+                <a class="mg-r-10" [routerLink]="['./']" [routerLinkActive]="'active'" [queryParams]="{
+                      type_discussion: typeDiscussion,
+                       correspondant:discussion.correspondant.id_inscription,
+                        asset: 'etablissement'
+                      }" [ngbTooltip]="'etablissementsDeVotreCorrespondant' | translate">
+                  <i class="fal fa-school tx-facebook" style="padding: 4px; border-radius: 50%"></i>
+                </a>
+              </li>
+
+
+              <!-- Etudiants -->
+              <li class="nav-item">
+                <a class="mg-r-10" [routerLink]="['./']" [routerLinkActive]="'active'" [queryParams]="{
+                      type_discussion: typeDiscussion,
+                       correspondant:discussion.correspondant.id_inscription,
+                        asset: 'etudiant'}" [ngbTooltip]="'etudiantsDeVotreCorrespondant' | translate">
+                  <i class="fal fa-user-graduate tx-facebook" style="padding: 4px; border-radius: 50%"></i>
+                </a>
+              </li>
+
+              <!-- Corrections -->
+              <li class="nav-item">
+                <a class="mg-r-10" [routerLink]="['./']" [routerLinkActive]="'active'" [queryParams]="{
+                      type_discussion: typeDiscussion,
+                       correspondant:discussion.correspondant.id_inscription,
+                        asset: 'correction'}" [ngbTooltip]="'correctionsDeVotreCorrespondant' | translate">
+                  <i class="fal fa-file-certificate tx-facebook" style="padding: 4px; border-radius: 50%"></i>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Reaction -->
-    <div class="col-lg-12" style="background-image: url(assets/images/0.png)">
-      <!-- Liste des réactions -->
-      <div class="chat-box-right">
-        <app-reaction-list
-                           [type]="type"
-                           [parentID]="parentID"></app-reaction-list>
-      </div>
-
-      <!-- Reaction create -->
-      <app-reaction-create
-                           [type]="type"
-                           [parentID]="parentID"></app-reaction-create>
-
-      <!-- <div class="mg-l-100">
-                <ul class="nav " id="pills-tab"
-                    role="tablist">
-                    <a class=" nav link tx-facebook tx-16 mg-r-100"
-                        id="" href="" data-toggle="pill"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class=" fad fa-archway bg-gray-100"
-                            style="padding:6px; border-radius:50%"></i>
-                    </a>
-
-
-
-                    <a class=" active show tx-facebook mg-r-5"
-                        data-toggle="pill" href="#">
-                        <span class="tx-16">
-                            <i class="fad fa-container-storage bg-gray-100 "
-                                style="padding:6px; border-radius:50%"></i>
-                        </span>
-                    </a>
-                    <a class=" active show tx-facebook mg-r-5"
-                        data-toggle="pill" href="#">
-                        <span class="tx-16">
-                            <i class="fal fa-archive bg-gray-100 "
-                                style="padding:6px; border-radius:50%"></i>
-                        </span>
-                    </a>
-                    <a class=" tx-facebook mg-r-5"
-                        data-toggle="pill" href="#">
-                        <span class="tx-16"><i
-                                class="fad fa-shopping-cart bg-gray-100 "
-                                style="padding:6px; border-radius:50%"></i></span>
-                    </a>
-                    <a class=" tx-facebook mg-r-5"
-                        data-toggle="pill" href="#">
-                        <span class="tx-16"><i
-                                class="fal fa-indent bg-gray-100 "
-                                style="padding:6px; border-radius:50%"></i></span>
-                    </a>
-                    <a class=" tx-facebook mg-r-5"
-                        data-toggle="pill" href="#">
-                        <span class="tx-16"><i
-                                class="fad fa-retweet bg-gray-100 "
-                                style="padding:6px; border-radius:50%"></i></span>
-                    </a>
-
-                    <a class=" tx-facebook mg-r-5 "
-                        data-toggle="pill" href="#">
-                        <span class="tx-16"><i
-                                class="fal fa-lightbulb-on bg-gray-100 "
-                                style="padding:6px; border-radius:50%"></i></span>
-                    </a>
-                    <a class=" tx-facebook mg-r-5"
-                        data-toggle="pill" href="#">
-                        <span class="tx-18"><i
-                                class="fad fa-file-alt bg-gray-100 "
-                                style="padding:6px; border-radius:50%"></i></span>
-                    </a>
-
-                </ul>
-            </div> -->
-    </div>
   </div>
+
+  <!-- Reaction -->
+  <div style="position: relative">
+    <div class="row row-xs mg-0 pd-0 clearfix">
+      <div class="col-lg-12" style="background-image: url(assets/images/0.png)">
+        <!-- Liste des réactions -->
+        <div class="chat-box-right">
+          <app-reaction-list [type]="type"></app-reaction-list>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reaction create -->
+    <div class="row row-xs mg-0 pd-0 clearfix">
+      <div class="col-12" *ngIf="!(discussion.sujet && discussion.sujet.etat == 0)">
+        <app-reaction-create [type]="type" [parentID]="parentID"></app-reaction-create>
+      </div>
+    </div>
+
+    <!-- Assets -->
+    <app-overlay *ngIf="displayAssets" (closed)="displayAssets=false">
+      <app-asset-discussion></app-asset-discussion>
+    </app-overlay>
+  </div>
+
 </div>

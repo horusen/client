@@ -1,65 +1,82 @@
 <!-- Header -->
-<div class="card pd-y-10 pd-x-10 mg-b-10" [ngClass]="{'bg-yeto1': showData.byGroupeIndependant}" *ngIf="!router.url.includes('etablissement/classe')">
-    <h3 class="tx-primary tx-16 italic mg-l-0 bold" [ngClass]="{'text-white': showData.byGroupeIndependant}">
-        <i class="fad fa-users mr-2"></i>
-        <span *ngIf="showData.byClasse">{{ ('groupesDeLaClasse' | translate) + ': ' +classeService.singleData.libelle }}
-        </span>
-        <span *ngIf="showData.byEtudiant">{{ 'listeDesGroupesDeVotreClasse' | translate }}</span>
-        <span *ngIf="showData.byEtablissement">{{ 'listeDesGroupes' | translate }}</span>
-        <span *ngIf="showData.byProfesseur">{{ 'listeDesGroupesSousVotreTutel' | translate }}</span>
-        <span *ngIf="showData.byGroupeIndependant">{{ 'listeDesGroupesIndependants' | translate }}</span>
+<div class="row mx-0  px-2 justify-content-between align-items-center slide-in-top">
+  <!-- Titre -->
+  <h3 class="tx- tx-20 tx-info italic mg-l-20 my-3 bold">
+    <!-- boutton precedent -->
+    <a [routerLink]="['./']" *ngIf="router.url.includes('eleve/')">
+      <i class="fal tx-info fa-caret-circle-left mr-2"></i>
+    </a>
+    <i class="fad fa-users-crown"></i>
+    {{ 'GROUPE' | translate }}
+  </h3>
 
-        <!-- Boutton ajouter -->
-        <i class="fad fa-plus-circle clickable tx-14 float-right tx-primary bg-light "
-            style="padding:6px; border-radius:50%"
-            (click)="showGroupeCreateComponent()"
-            [ngbTooltip]="'creerUnGroupe' | translate">
-        </i>
-    </h3>
+  <!-- Action -->
+  <div class="d-flex justfiy-content-between align-items-center">
+    <!-- Ajouter -->
+    <a class="my-2  tx-primary mr-4" [routerLink]="['./']" [fragment]="'add-groupe'">
+      <i class=" fad fa-plus-circle"></i> {{ 'AJOUTER' | translate }}
+    </a>
+
+
+    <!-- Statistique -->
+    <a class="my-2  tx-warning mr-4" [routerLink]="['statistiques']">
+      <i class=" fad fa-chart-bar"></i> {{ 'STATISTIQUES' | translate }}
+    </a>
+
+    <!-- Filtrer -->
+    <span class="my-2  tx-success mr-4 clickable" (click)="helper.toggleModal('filter-groupe-modal')">
+      <i class="fad fa-filter"></i> {{ 'FILTRE' | translate }}
+    </span>
+
+
+    <!-- Recherche -->
+    <div class="form-group mt-2 mb-3" style="position: relative;">
+      <div class="input-group w-100">
+        <!--  -->
+        <input #search type="text" [placeholder]="'RECHERCHER' | translate" class="form-control pd-y-8" />
+
+        <span class="">
+          <button class="btn border  h-100 d-flex align-items-center" [disabled]="!search.value" (click)="research(search.value)">
+            <i class="fad fa-search tx-facebook"></i>
+          </button>
+        </span>
+      </div>
+
+      <span class="tx-10 tx-danger clickable" style="position: absolute;" *ngIf="searchActive" (click)="annulerRecherche(); search.value = ''">
+        <i class="fal fa-times-circle"></i>
+        {{ 'annulerLaRecherche' | translate}}
+      </span>
+    </div>
+  </div>
 </div>
 
-<!-- Liste des groupes -->
-<app-groupe-list *ngIf="showData.byEtudiant"></app-groupe-list>
-<app-groupe-classe-list *ngIf="showData.byClasse"></app-groupe-classe-list>
-<app-groupe-list-by-professeur *ngIf="showData.byProfesseur"></app-groupe-list-by-professeur>
-<app-groupe-list-by-etablissement *ngIf="showData.byEtablissement"></app-groupe-list-by-etablissement>
-<app-groupe-independant-list *ngIf="showData.byGroupeIndependant"></app-groupe-independant-list>
+<!-- Content -->
+<div class="row mx-0 p-0 ">
+  <!-- Liste des groupes -->
+  <div [ngClass]="{'col-12': !showDetails, 'col-8': showDetails}">
+    <app-groupe-list [displayBy]="displayBy" [minified]="showDetails"></app-groupe-list>
+  </div>
+
+  <!-- Statistiques -->
+  <div class="col-4 p-0" *ngIf="showDetails">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<app-modal-sidebar [configuration]="{name: 'filter-groupe-modal', titre: 'FILTRE', icone: 'filter'}">
+  <app-filter-groupe></app-filter-groupe>
+</app-modal-sidebar>
 
 <!-- Groupe create modal -->
-<app-modal
-    [configuration]="{name: 'groupe-create-modal', titre: (this.showData.byGroupeIndependant ? 'creerUnGroupeIndependant' : 'creerUnGroupe'), icone: 'users'}">
-    <app-groupe-create *ngIf="showGroupeCreate"></app-groupe-create>
+<app-modal (closed)="router.navigate(['./'], {relativeTo: route})"
+    [configuration]="
+           {name: 'groupe-create-modal', titre: (this.displayBy=='groupesIndependants' ? 'creerUnGroupeIndependant' : 'creerUnGroupe'), icone: 'users'}">
+  <app-groupe-create *ngIf="addGroupe" [displayBy]="displayBy"></app-groupe-create>
 </app-modal>
 
-<!-- Groupe show modal -->
-<div class="modal animated bounceInDown"
-    id="groupe-show-modal"
-    tabindex="-1"
-    role="dialog"
-    data-backdrop="static"
-    aria-labelledby="groupe-show-modal"
-    aria-hidden="true">
-    <div [class]="'modal-dialog modal-lg'" role=" document">
-        <div class="modal-content p-0">
-            <div class="modal-header ">
-                <h5 class="modal-title" id="exampleModalLabel_5">
-                    <i class="fad fa-users"></i>
-                    {{ "GROUPE" | translate }}
-                </h5>
-                <a [routerLink]="['../']">
-                    <button
-                        type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close">
-                        <span aria-hidden="true"><i class="ion-ios-close-empty"></i></span>
-                    </button>
-                </a>
 
-            </div>
-            <div class="modal-body p-0">
-                <app-groupe-show></app-groupe-show>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Groupe edit modal -->
+<app-modal (closed)="router.navigate(['./'], {relativeTo: route})"
+    [configuration]="{name: 'groupe-edit-modal', titre: 'modifierLesDetailsDuGroupe', icone: 'users'}">
+  <app-groupe-edit *ngIf="editGroupe"></app-groupe-edit>
+</app-modal>

@@ -1,156 +1,76 @@
-<a [routerLink]="[groupe.id]">
-    <div class="image-flip">
-        <div class="mainflip flip-0">
-            <!-- face avant -->
-            <div class="frontside">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <!-- Image groupe -->
-                        <p>
-                            <img class=" img-fluid"
-                                src="assets/images/xs/avatar14.png"
-                                alt="avatar">
-                        </p>
-
-                        <!-- groupe name -->
-                        <h4 class="tx-12 tx-bolder tx-primary">
-                            {{ groupe.libelle }} <i class="fad fa-lock" *ngIf="groupe.confidentialite.id == 2 "></i>
-                        </h4>
+<div class="card bg-white p-2 rounded px-3">
+  <!-- Libelle -->
+  <div class="mg-t-2 bd-b d-flex justify-content-between p-3 pb-2">
+    <a [routerLink]="[groupe.id]" class="tx-facebook">
+      <i class="fad fa-users-crown"></i>
+      {{ groupe.libelle }}
+    </a>
 
 
-                        <p class=" tx-12 tx-warning">
-                            <span *ngFor="let domaine of groupe.domaines; let i = index">
-                                <span *ngIf="i < 2">
-                                    {{ domaine.libelle }}
-                                    <span *ngIf="groupe.domaines.length > i + 1 && i < 1">,</span>
-                                </span>
-                            </span>
-                            <span *ngIf="groupe.domaines.length > 2" class="ml-2">+
-                                {{ groupe.domaines.length - 2 }}</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
+    <div class="d-flex justify-content-end">
+      <div class="dropdown d-inline">
+        <!-- Icone -->
+        <i class="fas fa-ellipsis-h mt-1 clickable " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </i>
 
-            <!-- face arriere -->
-            <div class="backside w-100">
-                <div class="card">
-                    <div class="card-body text-center mt-4">
-                        <div class="row row-xs mg-0 pd-0 clearfix">
-                            <div class="table-responsive">
-                                <table class="table  table-hover table-responsive-sm mb-0 ">
-                                    <tbody>
-                                        <!-- Confidentialie -->
-                                        <tr>
-                                            <!-- Icone -->
-                                            <td>
-                                                <a>
-                                                    <i class="fas fa-door-closed tx-purple"></i>
-                                                </a>
-                                            </td>
 
-                                            <!-- value -->
-                                            <td class=" bd-b bg-white text-left ">
-                                                <div class=" from">
-                                                    <p class="mg-0">
-                                                        <a>
-                                                            {{ (groupe.confidentialite.libelle ) | translate }}
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            </td>
-                                        </tr>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <!-- changer confidentialite -->
+          <a class="dropdown-item tx-primary clickable" [routerLink]="['./']" [fragment]="'edit-groupe'" (click)="modifier()">
+            {{'MODIFIER' | translate}} <i class="fad fa-edit float-right"></i>
+          </a>
 
-                                        <!-- Créateur -->
-                                        <tr>
-                                            <td>
-                                                <a>
-                                                    <i class="fas fa-user-tie tx-jaune"></i>
-                                                </a>
-                                            </td>
-                                            <td
-                                                class=" bg-white text-left ">
-                                                <div
-                                                    class=" from">
-                                                    <p
-                                                        class="mg-0">
-                                                        <a> {{ groupe.user.nom_complet }}</a>
-                                                    </p>
-                                                </div>
-                                            </td>
-                                        </tr>
 
-                                        <!-- Nombre membre -->
-                                        <tr>
-                                            <td>
-                                                <a href=""><i
-                                                        class="fas fa-users tx-primary"></i></a>
-                                            </td>
-                                            <td
-                                                class=" bd-b bg-white text-left">
-                                                <div
-                                                    class=" from">
-                                                    <p
-                                                        class="mg-0">
-                                                        <a>
-                                                            {{ groupe.nombre_membres }}</a>
-                                                    </p>
-                                                </div>
-                                            </td>
-                                        </tr>
+          <!-- supprimer membre -->
+          <a class="dropdown-item tx-primary clickable" [routerLink]="['./']" (click)="supprimer()">
+            {{'SUPPRIMER' | translate}} <i class="fad fa-trash float-right"></i>
+          </a>
 
-                                        <!-- Nombre membre -->
-                                        <tr>
-                                            <td>
-                                                <a href=""><i
-                                                        class="fas fa-tasks-alt tx-primary"></i></a>
-                                            </td>
-                                            <td
-                                                class=" bd-b bg-white text-left">
-                                                <div
-                                                    class=" from">
-                                                    <p
-                                                        class="mg-0">
-                                                        <a>
-                                                            {{ groupe.nombre_taches }}</a>
-                                                    </p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <!-- 
-                                <div
-                                    class=" card-footer bg-white">
-                                    <div
-                                        class="card-body text-center p-0">
-                                        <a href=""
-                                            class="link mr-2 tx-primary tx-11"><i
-                                                class="fal fa-users"></i>
-                                        </a>
-                                        <a href=""
-                                            class="link mr-2 tx-primary tx-11"><i
-                                                class="fal fa-comments"></i>
-                                        </a>
-                                        <a href=""
-                                            class="link mr-2 tx-primary tx-11"><i
-                                                class="fad fa-tasks-alt"></i>
-                                        </a>
-                                        <a href=""
-                                            class="link mr-2 tx-primary tx-11"><i
-                                                class="fad fa-share-alt"></i>
-                                        </a>
-                                        <a href=""
-                                            class="link mr-2 tx-primary tx-12"><i
-                                                class="fad fa-sign-in-alt"></i>
-                                        </a>
-                                    </div>
-                                </div> -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
+      </div>
     </div>
-</a>
+    <!-- <span>
+      <i class="far fa-ellipsis-h"></i>
+    </span> -->
+  </div>
+
+  <!-- Description du groupe -->
+  <!-- <p class=" text-justify bd-b mg-0 mg-b-4 groupe__description" [innerHTML]="helper.strcut(groupe.description, 200)">
+  </p> -->
+
+
+  <div class="d-flex justify-content-between mg-t-4 ">
+    <div class="d-flex flex-row align-items-center">
+      <div class="profiles">
+        <a [routerLink]="[groupe.id]">
+          <i class="fal fa-eye mr-2 bg-white tx-light " style="padding:6px; border-radius:50%"></i>
+        </a>
+
+        <a [routerLink]="[groupe.id, 'tache']" *ngIf="router.url.includes('tache')">
+          <i class="fal fa-tasks-alt mr-2 bg-white tx-light" style="padding:6px; border-radius:50%"></i>
+        </a>
+
+        <a [routerLink]="[groupe.id, 'explore']" *ngIf="!router.url.includes('tache')">
+          <i class="fal fa-comments-alt mr-2 bg-white tx-light" style="padding:6px; border-radius:50%"></i>
+        </a>
+
+
+        <span *ngFor="let membre of groupe.five_first_membres" [ngbTooltip]="membre.membre_details.nom_complet">
+          <img class="rounded-circle ml-2" [src]="membre.membre_details?.photo?.path" alt="avatar" width="30">
+        </span>
+
+        <!-- <img class="rounded-circle" src="assets/images/xs/avatar6.jpg" alt="avatar" width="30">
+        <img class="rounded-circle" src="assets/images/xs/avatar5.jpg" alt="avatar" width="30">
+        <img class="rounded-circle" src="assets/images/xs/avatar4.jpg" alt="avatar" width="30">
+        <img class="rounded-circle" src="assets/images/xs/avatar3.jpg" alt="avatar" width="30"> -->
+        <!-- <img class="rounded-circle" src="assets/images/xs/avatar2.jpg" alt="avatar" width="30">
+        <img class="rounded-circle" src="assets/images/xs/avatar1.jpg" alt="avatar" width="30"> -->
+      </div>
+      <span class="badge badge-pill badge-light bg-light tx-warning mg-l-20 " *ngIf="groupe.nombre_membres > 5">
+        + {{ groupe.nombre_membres - 5 }}
+      </span>
+
+    </div>
+  </div>
+</div>

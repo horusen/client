@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { keyframes } from "@angular/animations";
+import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { NgxPicaService } from "@digitalascetic/ngx-pica";
 import { BaseCreateComponent } from "src/app/shared/components/base-component/base-create.component";
 import { ClasseService } from "../../classe/classe.service";
 import { ConfidentialiteService } from "../../confidentialite/confidentialite.service";
@@ -14,7 +16,9 @@ import { GroupeService } from "../groupe.service";
 export class GroupeCreateComponent
   extends BaseCreateComponent
   implements OnInit {
-  groupeIndependant: boolean = false;
+  @Input() displayBy: string;
+  imageUrl: any;
+
   dependancies = {
     domaines: [],
     classes: [],
@@ -31,16 +35,14 @@ export class GroupeCreateComponent
     public domaineService: DomaineService,
     public classeService: ClasseService,
     public confidentialiteService: ConfidentialiteService,
-    public router: Router
+    public router: Router,
+    public ngxPicaService: NgxPicaService
   ) {
     super(groupeService);
   }
 
   ngOnInit(): void {
     super.ngOnInit();
-
-    this.groupeIndependant = this.router.url.includes("groupe-independant");
-
     this._subscription["schema"] = this.groupeService.schema$.subscribe(() => {
       this.initialiseForm();
     });
@@ -56,19 +58,45 @@ export class GroupeCreateComponent
       ["libelle", "confidentialite", "type", "description", "etat"],
       [],
       () => {
-        this.valuesPatcher(
-          ["confidentialite", "type", "etat"],
-          [
-            this.dependancies.confidentialites[0],
-            this.groupeIndependant ? 2 : 1,
-            1,
-          ]
-        );
+        this.valuesPatcher(["etat"], [1]);
 
-        this.groupeIndependant ? null : this.addControl("classe", [], true);
+        switch (this.displayBy) {
+          case "professeur":
+            this.formValuePatcher("type", 4);
+            break;
+          case "groupesIndependants":
+            this.formValuePatcher("type", 2);
+            break;
+          default:
+            this.formValuePatcher("type", 1);
+            break;
+        }
+
+        this.displayBy == "classe" ? this.addControl("classe", [], true) : null;
         this.addControl("domaines", [], true);
       }
     );
+  }
+
+  onFileChanged(event) {
+    let image = event.target.files[0];
+
+    let reader = new FileReader();
+    reader.readAsDataURL(image);
+    reader.onload = () => {
+      this.imageUrl = reader.result;
+    };
+    this.formData.append("image", image);
+    this.ngxPicaService
+      .resizeImage(image, 35, 35)
+      .subscribe((imageRetailler) => {
+        this.formData.append(
+          "image_min",
+          new File([imageRetailler], imageRetailler.name, {
+            type: imageRetailler.type,
+          })
+        );
+      });
   }
 
   subscribeToDependancies() {
@@ -78,10 +106,11 @@ export class GroupeCreateComponent
     );
 
     // classe
-    this._subscription["classe"] = this.classeService.data$.subscribe(
-      (data) => (this.dependancies.classes = data)
-    );
-
+    if (this.displayBy == "classe") {
+      this._subscription["classe"] = this.classeService.data$.subscribe(
+        (data) => (this.dependancies.classes = data)
+      );
+    }
     // confidentialite
     this._subscription[
       "confidentialie"
@@ -97,7 +126,7 @@ export class GroupeCreateComponent
       this.dependanciesLoading.domaine = false;
     });
 
-    if (!this.groupeIndependant) {
+    if (this.displayBy == "classe") {
       // Classe
       this.dependanciesLoading.classe = true;
       this.classeService.get().subscribe(() => {
@@ -118,7 +147,8 @@ export class GroupeCreateComponent
       const data = {
         domaines: this.helper.idExtractor(this.formValue("domaines")),
         confidentialite: this.formValue("confidentialite")[0].id,
-        classe: this.groupeIndependant ? null : this.formValue("classe")[0].id,
+        classe:
+          this.displayBy == "classe" ? this.formValue("classe")[0].id : null,
         ...this.helper.omitFieldInObject(this.form.value, [
           "domaines",
           "classe",
@@ -126,21 +156,42 @@ export class GroupeCreateComponent
         ]),
       };
 
-      this.groupeService
-        .add(this.helper.omitNullValueInObject(data))
-        .subscribe(() => {
-          this.loading = false;
+      Object.keys(data).forEach((key) => {
+        if (data[key]) {
+          this.formData.append(key, data[key]);
+        }
+      });
 
+      this.groupeService.add(this.formData).subscribe(
+        () => {
           // Form reset
-          this.form.reset();
-          this.valuesPatcher(
-            ["confidentialite", "type", "etat"],
-            [this.dependancies.confidentialites[0], 1, 1]
-          );
+          this.initialiseForm();
+          // this.form.reset();
+          // this.valuesPatcher(
+          //   ["confidentialite", "etat"],
+          //   [this.dependancies.confidentialites[0], 1]
+          // );
+
+          // switch (this.displayBy) {
+          //   case "professeur":
+          //     this.formValuePatcher("type", 4);
+          //     break;
+          //   case "groupesIndependants":
+          //     this.formValuePatcher("type", 2);
+          //     break;
+          //   default:
+          //     this.formValuePatcher("type", 1);
+          //     break;
+          // }
 
           this.helper.toggleModal("groupe-create-modal");
           this.helper.alertSuccess();
-        });
+        },
+        () => {},
+        () => {
+          this.loading = false;
+        }
+      );
     }
   }
 }

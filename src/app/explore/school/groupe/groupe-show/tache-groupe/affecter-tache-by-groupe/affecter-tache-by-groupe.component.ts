@@ -14,7 +14,9 @@ export class AffecterTacheByGroupeComponent implements OnInit {
 
   ngOnInit(): void {
     this.groupeSubcription = this.groupeService.singleData$.subscribe(
-      (groupe) => (this.groupe = groupe)
+      (groupe) => {
+        this.groupe = groupe;
+      }
     );
   }
 }

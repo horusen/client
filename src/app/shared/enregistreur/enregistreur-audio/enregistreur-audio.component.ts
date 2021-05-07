@@ -17,6 +17,5 @@ export class EnregistreurAudioComponent extends Enregistreur implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.type);
   }
 }

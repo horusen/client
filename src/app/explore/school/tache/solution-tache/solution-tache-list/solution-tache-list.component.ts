@@ -52,7 +52,7 @@ export class SolutionTacheListComponent
 
   getByAffectation(affectationTache: number) {
     this.loading = true;
-    this.solutionService.get(affectationTache).subscribe(() => {
+    this.solutionService.getByTache(affectationTache).subscribe(() => {
       this.loading = false;
     });
   }

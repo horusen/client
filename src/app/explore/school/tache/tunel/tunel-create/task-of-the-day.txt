@@ -1,0 +1,24 @@
+* Gérer la liste des personnes se trouvant dans le header
+* Changer le 2 en plus
+* Drag n Drop  des taches
+* Faire descendre le boutton collapse-sidebar
+
+
+
+* Explore professeur
+ * Voir les fichiers partagées
+ * Voir les groupes partagées
+ * Voir les taches qu'il a créer
+ * Voir la liste de ses etablissements
+ * voir la liste des ses etudiants
+ * Voir ses corrections
+
+
+Gérer les tunels
+
+
+Régler le problème du chargement aprés la modification des query params dans discussion
+Rajouter la recherche dans les assets
+Revoir l'affichage de groupe
+Gérer le conflit entre les deux dossiers de asset discussion
+Revoir le style des assets

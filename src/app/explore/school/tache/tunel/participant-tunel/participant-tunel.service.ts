@@ -11,7 +11,7 @@ export class ParticipantTunelService extends BaseService {
     super("tache/tunel/participant");
   }
 
-  get(tunel: number) {
+  getData(tunel: number) {
     return this.factory.get(`tache/tunel/${tunel}/participant`).pipe(
       tap({
         next: (data) => {

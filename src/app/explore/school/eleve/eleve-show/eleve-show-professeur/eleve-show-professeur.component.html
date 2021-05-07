@@ -1,0 +1,49 @@
+<!-- Titre -->
+<h4 class="text-center">{{ 'PROFESSEURS' | translate }}</h4>
+
+<!-- Liste des professeurs -->
+<div class="row row-xs w-100 mx-0">
+  <ng-container *ngIf="professeurService.data.length && !loading">
+    <div class="table-responsive" *ngIf="!loading && professeurService.data.length">
+      <table class="table table-hover mg-0">
+        <tbody>
+          <tr *ngFor="let professeur of professeurService.data; let i = index">
+            <td class="d-flex pd-y-10-force">
+              <!-- Image user -->
+              <div class="avatar mr-2">
+                <img [src]="professeur.professeur_details.photo" class="img-fluid wd-35 ht-35 rounded-circle" alt="">
+              </div>
+
+              <div class="d-block">
+                <a href="" class="my-0 mt-1 tx-15">{{ professeur.professeur_details.nom_complet }}</a>
+                <!-- <p class="tx-12 tx-gray-500 mg-0">New Jersey, UK</p> -->
+              </div>
+            </td>
+            <td class="tx-right align-middle">
+              <a href="" class="btn btn-sm btn-label-primary" [ngClass]="{
+                'btn-label-success': i.toString().slice(-1) == 1,
+                'btn-label-warning': i.toString().slice(-1)  == 2,
+                'btn-label-indigo': i.toString().slice(-1) == 3,
+                'btn-label-facebook': i.toString().slice(-1) == 4,
+                'btn-label-teal': i.toString().slice(-1) == 5,
+                'btn-label-pink': i.toString().slice(-1) == 6,
+                'btn-label-purple': i.toString().slice(-1) == 7,
+                'btn-label-danger': i.toString().slice(-1) == 8,
+                'btn-label-secondary': i.toString().slice(-1) == 9,
+                'btn-label-primary': i.toString().slice(-1) == 0
+              }">{{ 'CONTACTER' | translate }}</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+
+  <!-- Loading -->
+  <div class="my-5 col-12" *ngIf="loading">
+    <app-loading></app-loading>
+  </div>
+
+  <!-- No Data handling -->
+  <app-missing-data class="col-12" *ngIf="!professeurService.data.length && !loading"></app-missing-data>
+</div>

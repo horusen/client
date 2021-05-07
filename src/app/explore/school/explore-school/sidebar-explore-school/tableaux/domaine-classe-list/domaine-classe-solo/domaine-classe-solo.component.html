@@ -1,31 +1,25 @@
-<div *ngIf="domaine"
-    class="d-flex align-items-center justify-content-between ">
+<div *ngIf="domaine" class="d-flex align-items-center justify-content-between ">
 
-    <!-- Titre du domaine -->
-    <a href="" class="nav-link tx-white">
-        <i class="fad fa-star"
-            [ngClass]="{
+  <!-- Titre du domaine -->
+  <a href="" class="nav-link tx-white">
+    <i class="fad fa-star" [ngClass]="{
             'tx-violet': index == 0,
             'tx-bleu': index == 1,
             'tx-vert': index == 2,
             'tx-jaune': index == 3
         }"></i>
-        {{ domaine.libelle }}
-    </a>
+    {{ domaine.libelle }}
+  </a>
 
-    <!-- Boutton voir les sous domaine -->
-    <a class="clickable"
-        (click)="afficherSousDomaines = !afficherSousDomaines"
-        [ngbTooltip]="'voirLesSousDomaines' | translate">
-        <i class="fal tx-yellow" [ngClass]="{
+  <!-- Boutton voir les sous domaine -->
+  <a class="clickable" (click)="afficherSousDomaines = !afficherSousDomaines" [ngbTooltip]="'voirLesSousDomaines' | translate">
+    <i class="fal tx-yellow" [ngClass]="{
             'fa-caret-down': !afficherSousDomaines,
             'fa-caret-up': afficherSousDomaines
         }"></i>
-    </a>
+  </a>
 
 </div>
 
-<app-sous-domaine-classe-list
-    *ngIf="afficherSousDomaines && domaine"
-    [domaine]="domaine.id">
+<app-sous-domaine-classe-list *ngIf="afficherSousDomaines && domaine" [domaine]="domaine.id">
 </app-sous-domaine-classe-list>

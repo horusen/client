@@ -1,38 +1,32 @@
-<div class="card border-0 ">
-    <div class="tab-content">
-        <div class="card bg-light  border-0 p-0  ">
-            <ul class="nav">
-                <!-- Details -->
-                <li class="nav-item">
-                    <a class="nav-link  tx-yeto2 mg-t-2 mr-30"
-                        [routerLink]="['details']"
-                        [routerLinkActive]="'active'"
-                        [routerLinkActiveOptions]="{exact: true}">
-                        {{ 'TACHE' | translate }}
-                    </a>
-                </li>
+<div class=" border-0 ">
+  <div class="tab-content">
+    <div class="bd-b bg-light  border-0 p-0  ">
+      <ul class="nav">
+        <!-- Details -->
+        <li class="nav-item">
+          <a class="nav-link  tx-yeto2 mg-t-2 mr-30" [routerLink]="['details']" [routerLinkActive]="'active'"
+              [routerLinkActiveOptions]="{exact: true}">
+            {{ 'TACHE' | translate }}
+          </a>
+        </li>
 
-                <!-- Correction -->
-                <li class="nav-item">
-                    <a class="nav-link tx-yeto2 mg-t-2"
-                        [routerLinkActive]="'active'"
-                        [routerLink]="['correction']">
-                        {{ 'CORRECTION' | translate }}
-                    </a>
-                </li>
+        <!-- Correction -->
+        <li class="nav-item">
+          <a class="nav-link tx-yeto2 mg-t-2" [routerLinkActive]="'active'" [routerLink]="['correction']">
+            {{ 'CORRECTION' | translate }}
+          </a>
+        </li>
 
-                <!-- Dans la même catégorie -->
-                <li class="nav-item">
-                    <a class="nav-link tx-yeto2 mg-t-2"
-                        [routerLinkActive]="'active'"
-                        [routerLink]="['related']">
-                        {{ 'dansLaMemeCategorie' | translate }}
-                    </a>
-                </li>
+        <!-- Dans la même catégorie -->
+        <li class="nav-item">
+          <a class="nav-link tx-yeto2 mg-t-2" [routerLinkActive]="'active'" [routerLink]="['related']">
+            {{ 'dansLaMemeCategorie' | translate }}
+          </a>
+        </li>
 
-            </ul>
-        </div>
-
-        <router-outlet></router-outlet>
+      </ul>
     </div>
+
+    <router-outlet></router-outlet>
+  </div>
 </div>

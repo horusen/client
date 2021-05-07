@@ -5,7 +5,7 @@ import { GroupeTacheListComponent } from "../tache-show/tache-details/groupe-tac
 import { SharedModule } from "src/app/shared/shared.module";
 import { NoteReactionTacheComponent } from "../tache-show/resolution-tache/note-reaction-tache/note-reaction-tache.component";
 import { FiltreTacheListComponent } from "../tache-list/filtre-tache-list/filtre-tache-list.component";
-import { FiltreMesTachesComponent } from "../../mes-taches/mes-taches-list/filtre-mes-taches/filtre-mes-taches.component";
+
 import { TacheCreateComponent } from "../tache-create/tache-create.component";
 
 @NgModule({
@@ -14,7 +14,6 @@ import { TacheCreateComponent } from "../tache-create/tache-create.component";
     CorrectionTacheListComponent,
     NoteReactionTacheComponent,
     FiltreTacheListComponent,
-    FiltreMesTachesComponent,
     TacheCreateComponent,
   ],
   imports: [CommonModule, SharedModule],
@@ -23,7 +22,6 @@ import { TacheCreateComponent } from "../tache-create/tache-create.component";
     CorrectionTacheListComponent,
     NoteReactionTacheComponent,
     FiltreTacheListComponent,
-    FiltreMesTachesComponent,
     TacheCreateComponent,
   ],
 })

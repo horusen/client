@@ -29,6 +29,7 @@ export class TunelCreateComponent
       singleSelection: true,
       labelKey: "libelle",
       enableSearchFilter: true,
+      disabled: false,
     },
     multi: {
       singleSelection: false,
@@ -44,6 +45,7 @@ export class TunelCreateComponent
       primaryKey: "id_inscription",
       singleSelection: true,
       allowSearchFilter: true,
+      disabled: false,
     },
     users: {
       text: this.helper?.getTranslation("selctionnerLesMembres"),

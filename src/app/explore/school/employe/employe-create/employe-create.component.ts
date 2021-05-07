@@ -6,7 +6,7 @@ import { UserService } from "../../user/user.service";
 import { EmployeService } from "../employe.service";
 import { EtablissementService } from "../../etablissement/etablissement.service";
 import { ServiceEtablissementService } from "../../etablissement/service-etablissement/service-etablissement.service";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-employe-create",
@@ -30,12 +30,13 @@ export class EmployeCreateComponent
     user: false,
   };
   constructor(
-    public userService: UserService,
     public employeService: EmployeService,
     public fonctionService: FonctionService,
-    public etablissementService: EtablissementService,
     public serviceEtablissementService: ServiceEtablissementService,
-    public router: Router
+    public router: Router,
+    public route: ActivatedRoute,
+    public userService?: UserService,
+    public etablissementService?: EtablissementService
   ) {
     super(employeService);
   }
@@ -51,7 +52,7 @@ export class EmployeCreateComponent
     this.getDependancies();
   }
 
-  initForm() {
+  initForm(employe?: any) {
     this.form = this.fb.group({
       employe: [null, Validators.required],
       fonctions: [null, Validators.required],
@@ -64,7 +65,7 @@ export class EmployeCreateComponent
     });
   }
 
-  getDependancies() {
+  getDependancies(employe?: any) {
     this.getFonctions();
   }
 
@@ -114,7 +115,7 @@ export class EmployeCreateComponent
   }
 
   onFonctionCreate(event) {
-    this.fonctionService.unshiftItemInData(event.item);
+    this.dependancies.fonction.unshift(event.item);
   }
 
   create() {
@@ -134,6 +135,7 @@ export class EmployeCreateComponent
       this.loading = false;
       this.initForm();
       this.helper.alertSuccess();
+      this.router.navigate(["./"], { relativeTo: this.route });
       this.helper.toggleModal("employe-create-modal");
     });
   }

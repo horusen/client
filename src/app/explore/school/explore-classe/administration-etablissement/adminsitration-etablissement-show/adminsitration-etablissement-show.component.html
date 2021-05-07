@@ -1,164 +1,179 @@
 <ng-container *ngIf="!loading && single">
-    <!-- Header -->
-    <div class="card">
+  <div class="row m-0">
+    <!-- Sidebar -->
+    <div class="col-2 sidebar  p-0" [ngClass]="{'sidebar-collapsed': collapseSideBar}">
+
+
+
+      <!-- Logo -->
+      <div class="bd-b">
+        <div class="d-flex flex-row">
+
+          <a href="" class="tx-white mg-l-30 "
+              style="font-family: 'Tangerine'; text-align: center; font-size: 250%; vertical-align: middle; text-shadow: 0px 1px 0px ;">
+
+            <span class="tx-yellow1">A<U>dmin</U> </span> Etablissement</a>
+
+        </div>
+      </div>
+
+      <!-- Side nav bar -->
+      <div class=" mg-t-0 bd-b mg-b-10  pd-0   ">
+        <div class="flex-fill pd-15 bd-t bd-b">
+          <!-- Titre nav -->
+          <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
+            <span class="tx-10 tx-uppercase sidebar__title"> {{ 'listeDesElements' | translate }}</span>
+          </div>
+
+          <!-- Nav bar -->
+          <nav class="nav flex-column sidebar__nav ">
+            <a class="nav-link sidebar__nav-item text-white " [routerLinkActive]="'sidebar__nav-item-active'"
+                [routerLinkActiveOptions]="{exact: true}" [routerLink]="['./']">
+              <i class="fad fa-info-circle mr-2">
+              </i>
+              <span class="">
+                {{ "DETAILS" | translate }}
+              </span>
+            </a>
+
+
+            <!-- PROGRAMME -->
+
+            <a class="nav-link sidebar__nav-item text-white " [routerLinkActive]="'sidebar__nav-item-active'" [routerLink]="['programme']">
+              <i class="fad mr-2 fa-server  ">
+              </i>
+              <span class="">
+                {{ "PROGRAMMES" | translate }}
+              </span>
+            </a>
+
+
+            <!-- FORMATION -->
+
+            <a class="nav-link sidebar__nav-item text-white " [routerLinkActive]="'sidebar__nav-item-active'" [routerLink]="['formation']">
+              <i class="fad mr-2 fa-graduation-cap  ">
+              </i>
+              <span class="">
+                {{ "FORMATIONS" | translate }}
+              </span>
+            </a>
+
+
+            <!-- classe -->
+
+            <a class="nav-link sidebar__nav-item text-white " [routerLinkActive]="'sidebar__nav-item-active'" [routerLink]="['classe']">
+              <i class="fad mr-2 fa-users-class  ">
+              </i>
+              <span class="">
+                {{ "CLASSES" | translate }}
+              </span>
+            </a>
+
+
+            <!-- Professeur -->
+
+            <a class="nav-link sidebar__nav-item text-white" [routerLinkActive]="'sidebar__nav-item-active'" [routerLink]="['professeur']">
+              <i class="fad mr-2 fa-user-tie  "></i>
+              <span class="">
+                {{ "PROFESSEURS" | translate }}
+              </span>
+            </a>
+
+
+            <!-- Eleves -->
+
+            <a class="nav-link sidebar__nav-item text-white" [routerLinkActive]="'sidebar__nav-item-active'" [routerLink]="['eleve']">
+              <i class="fad mr-2 fa-user-graduate  ">
+              </i>
+              <span class="">
+                {{ "elevesOuEtudiants" | translate }}
+              </span>
+            </a>
+
+
+            <!-- Groupes -->
+
+            <a class="nav-link sidebar__nav-item text-white" [routerLinkActive]="'sidebar__nav-item-active'" [routerLink]="['groupes']">
+              <i class="fad mr-2 fa-user  "></i>
+              <span class="">
+                {{ "GROUPES" | translate }}
+              </span>
+            </a>
+
+
+            <!-- Parent d'élèves -->
+
+            <a class="nav-link sidebar__nav-item text-white" [routerLinkActive]="'sidebar__nav-item-active'" [routerLink]="['parents-eleves']">
+              <i class="fad mr-2 fa-user-shield  ">
+              </i>
+              <span class=""> {{ "parentDEleves" | translate }}</span>
+            </a>
+
+
+            <!-- employes -->
+
+            <a class="nav-link sidebar__nav-item text-white" [routerLinkActive]="'sidebar__nav-item-active'" [routerLink]="['structure']">
+              <i class="fad mr-2 fa-person-carry  ">
+              </i>
+              <span class=""> {{ "EMPLOYES" | translate }}</span>
+            </a>
+
+
+            <!-- Service -->
+
+            <a class="nav-link sidebar__nav-item text-white" [routerLinkActive]="'sidebar__nav-item-active'" [routerLink]="['service']">
+              <i class="fad mr-2 fa-building  ">
+              </i>
+              <span class=""> {{ "SERVICES" | translate }}</span>
+            </a>
+
+
+            <!-- Administrateur -->
+
+            <a class="nav-link sidebar__nav-item text-white" [routerLinkActive]="'sidebar__nav-item-active'" [routerLink]="['administrateur']">
+              <i class="fad mr-2 fa-user-tie  ">
+              </i>
+              <span class=""> {{ "ADMINISTRATEURS" | translate }}</span>
+            </a>
+
+
+            <!-- Explore -->
+            <li class="nav-item mg-0 pd-0 mg-t-6" *ngIf="single.user_status.includes('admin') || single.user_status.includes('charger_com')">
+              <a class="nav-link sidebar__nav-item text-white" [routerLinkActive]="'sidebar__nav-item-active'" [routerLink]="['explore']"
+                  [queryParams]="{'type_discussion': 'etablissement'}">
+                <i class="fad mr-2 fa-comments-alt  ">
+                </i>
+                <span class=""> {{ "EXPLORE" | translate }}</span>
+              </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="col p-0" [ngClass]="{'col-10': !collapseSideBar, 'col-12': collapseSideBar}">
+      <!-- Header -->
+      <div class="card">
         <div class="row mx-0 mg-y-7">
-            <!-- Titre -->
-            <div class="col-8">
-                <span class="ml-2">
-                    <img
-                         src="assets/images/xs/ecole.png"
-                         alt="avatar"
-                         style="height: 33px" />
-                    {{ single.libelle | translate }}
-                </span>
-            </div>
+          <!-- Titre -->
+          <div class="col-8">
+            <span class="ml-2">
+              <img src="assets/images/xs/ecole.png" alt="avatar" style="height: 33px" />
+              {{ single.libelle | translate }}
+            </span>
+          </div>
         </div>
-    </div>
-    <!-- Nav bar -->
-    <div class="row row-xs clearfix mg-0 pd-0 p-0">
-        <div class="col-lg-12">
-            <ul class="nav mg-0 pd-0 bd-b">
-                <!-- classe -->
-                <li class="nav-item mg-0 pd-0 mg-t-6">
-                    <a
-                       class="nav-link3 active show"
-                       [routerLinkActive]="'font-weight-bold'"
-                       [routerLink]="['classe']">
-                        <i
-                           class="fad fa-users-class tx-14 bg-light tx-yeto2"
-                           style="padding: 8px; border-radius: 50%">
-                        </i>
-                        <span class="tx-yeto2">
-                            {{ "CLASSES" | translate }}
-                        </span>
-                    </a>
-                </li>
+      </div>
 
-                <!-- Professeur -->
-                <li class="nav-item mg-0 pd-0 mg-t-6">
-                    <a
-                       class="nav-link3"
-                       [routerLinkActive]="'font-weight-bold'"
-                       [routerLink]="['professeur']">
-                        <i
-                           class="fad fa-user-tie tx-14 bg-light tx-yeto2"
-                           style="padding: 8px; border-radius: 50%"></i>
-                        <span class="tx-yeto2">
-                            {{ "PROFESSEURS" | translate }}
-                        </span>
-                    </a>
-                </li>
-
-                <!-- Eleves -->
-                <li class="nav-item mg-0 pd-0 mg-t-6">
-                    <a
-                       class="nav-link3"
-                       [routerLinkActive]="'font-weight-bold'"
-                       [routerLink]="['eleve']">
-                        <i
-                           class="fad fa-user-graduate tx-14 bg-light tx-yeto2"
-                           style="padding: 8px; border-radius: 50%">
-                        </i>
-                        <span class="tx-yeto2">
-                            {{ "elevesOuEtudiants" | translate }}
-                        </span>
-                    </a>
-                </li>
-
-                <!-- Groupes -->
-                <li class="nav-item mg-0 pd-0 mg-t-6">
-                    <a
-                       class="nav-link3"
-                       [routerLinkActive]="'font-weight-bold'"
-                       [routerLink]="['groupes']">
-                        <i
-                           class="fad fa-user tx-14 bg-light tx-yeto2"
-                           style="padding: 8px; border-radius: 50%"></i>
-                        <span class="tx-yeto2">
-                            {{ "GROUPES" | translate }}
-                        </span>
-                    </a>
-                </li>
-
-                <!-- Parent d'élèves -->
-                <li class="nav-item mg-0 pd-0 mg-t-6">
-                    <a
-                       class="nav-link3"
-                       [routerLinkActive]="'font-weight-bold'"
-                       [routerLink]="['parents-eleves']">
-                        <i
-                           class="fad fa-user-shield tx-14 bg-light tx-yeto2"
-                           style="padding: 8px; border-radius: 50%">
-                        </i>
-                        <span class="tx-yeto2"> {{ "parentDEleves" | translate }}</span>
-                    </a>
-                </li>
-
-                <!-- employes -->
-                <li class="nav-item mg-0 pd-0 mg-t-6">
-                    <a
-                       class="nav-link3"
-                       [routerLinkActive]="'font-weight-bold'"
-                       [routerLink]="['structure']">
-                        <i
-                           class="fad fa-person-carry tx-14 bg-light tx-yeto2"
-                           style="padding: 8px; border-radius: 50%">
-                        </i>
-                        <span class="tx-yeto2"> {{ "EMPLOYES" | translate }}</span>
-                    </a>
-                </li>
-
-                <!-- employes -->
-                <li class="nav-item mg-0 pd-0 mg-t-6">
-                    <a
-                       class="nav-link3"
-                       [routerLinkActive]="'font-weight-bold'"
-                       [routerLink]="['service']">
-                        <i
-                           class="fad fa-building tx-14 bg-light tx-yeto2"
-                           style="padding: 8px; border-radius: 50%">
-                        </i>
-                        <span class="tx-yeto2"> {{ "SERVICES" | translate }}</span>
-                    </a>
-                </li>
-
-                <!-- Administrateur -->
-                <li class="nav-item mg-0 pd-0 mg-t-6">
-                    <a
-                       class="nav-link3"
-                       [routerLinkActive]="'font-weight-bold'"
-                       [routerLink]="['administrateur']">
-                        <i
-                           class="fad fa-user-tie tx-14 bg-light tx-yeto2"
-                           style="padding: 8px; border-radius: 50%">
-                        </i>
-                        <span class="tx-yeto2"> {{ "ADMINISTRATEURS" | translate }}</span>
-                    </a>
-                </li>
-
-                <!-- Explore -->
-                <li class="nav-item mg-0 pd-0 mg-t-6">
-                    <a
-                       class="nav-link3"
-                       [routerLinkActive]="'font-weight-bold'"
-                       [routerLink]="['explore']">
-                        <i
-                           class="fad fa-comments-alt tx-14 bg-light tx-yeto2"
-                           style="padding: 8px; border-radius: 50%">
-                        </i>
-                        <span class="tx-yeto2"> {{ "EXPLORE" | translate }}</span>
-                    </a>
-                </li>
-            </ul>
+      <div class="tab-content">
+        <div class="tab-pane fade show active bg-light " id="explore_ecoles">
+          <router-outlet></router-outlet>
         </div>
+      </div>
     </div>
-    <div class="tab-content">
-        <div class="tab-pane fade active show" id="explore_ecoles">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
+  </div>
 </ng-container>
 
 <div class="my-5" *ngIf="loading">
-    <app-loading></app-loading>
+  <app-loading></app-loading>
 </div>

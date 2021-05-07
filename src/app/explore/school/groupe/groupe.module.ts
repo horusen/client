@@ -6,23 +6,96 @@ import { GroupeListComponent } from "./groupe-list/groupe-list.component";
 import { Routes } from "@angular/router";
 import { SharedModule } from "src/app/shared/shared.module";
 import { GroupeCreateComponent } from "./groupe-create/groupe-create.component";
-import { GroupeShowModule } from "./groupe-show/groupe-show.module";
-import { GroupeSoloComponent } from "./groupe-solo/groupe-solo.component";
 import { GroupeClasseListComponent } from "./groupe-classe-list/groupe-classe-list.component";
 import { GroupeListByProfesseurComponent } from "./groupe-list-by-professeur/groupe-list-by-professeur.component";
 import { GroupeIndependantListComponent } from "./groupe-independant-list/groupe-independant-list.component";
-import { GroupeListByEtablissementComponent } from './groupe-list-by-etablissement/groupe-list-by-etablissement.component';
+import { GroupeListByEtablissementComponent } from "./groupe-list-by-etablissement/groupe-list-by-etablissement.component";
+import { GroupeShowComponent } from "./groupe-show/groupe-show.component";
+import { GroupeDetailsComponent } from "./groupe-show/groupe-details/groupe-details.component";
+import { GroupeEditComponent } from "./groupe-edit/groupe-edit.component";
+import { FilterGroupeComponent } from "./filter-groupe/filter-groupe.component";
+import { DemandeAdhesionGroupeComponent } from "./demande-adhesion-groupe/demande-adhesion-groupe.component";
+import { DemandeAdhesionGroupeSoloComponent } from "./demande-adhesion-groupe/demande-adhesion-groupe-solo/demande-adhesion-groupe-solo.component";
+import { GroupeStatsComponent } from "./groupe-stats/groupe-stats.component";
+import { GroupeShowAltComponent } from "./groupe-show-alt/groupe-show-alt.component";
+import { GroupeShowAltDetailsComponent } from "./groupe-show-alt/groupe-show-alt-details/groupe-show-alt-details.component";
+import { GroupeShowAltMembreComponent } from "./groupe-show-alt/groupe-show-alt-membre/groupe-show-alt-membre.component";
 
 const routes: Routes = [
   {
     path: "",
     component: GroupeComponent,
+    children: [
+      {
+        path: "statistiques",
+        component: GroupeStatsComponent,
+      },
+      // show
+      {
+        path: ":id",
+        component: GroupeShowAltComponent,
+        children: [
+          {
+            path: "",
+            component: GroupeShowAltDetailsComponent,
+          },
+          {
+            path: "membres",
+            loadChildren: () =>
+              import("./groupe-show/membre-groupe/membre-groupe.module").then(
+                (module) => module.MembreGroupeModule
+              ),
+          },
+          // {
+          //   path: "tache",
+          //   loadChildren: () =>
+          //     import("./groupe-show/tache-groupe/tache-groupe.module").then(
+          //       (module) => module.TacheGroupeModule
+          //     ),
+          // },
+          // {
+          //   path: "tribune",
+          //   loadChildren: () =>
+          //     import("./../discussion/discussion.module").then(
+          //       (module) => module.DiscussionModule
+          //     ),
+          // },
+        ],
+      },
+    ],
   },
-  // show
-  {
-    path: ":id",
-    component: GroupeComponent,
-  },
+
+  // {
+  //   path: ":id",
+  //   component: GroupeShowComponent,
+  //   children: [
+  //     {
+  //       path: "",
+  //       component: GroupeDetailsComponent,
+  //     },
+  //     {
+  //       path: "membre",
+  //       loadChildren: () =>
+  //         import("./groupe-show/membre-groupe/membre-groupe.module").then(
+  //           (module) => module.MembreGroupeModule
+  //         ),
+  //     },
+  //     {
+  //       path: "tache",
+  //       loadChildren: () =>
+  //         import("./groupe-show/tache-groupe/tache-groupe.module").then(
+  //           (module) => module.TacheGroupeModule
+  //         ),
+  //     },
+  //     {
+  //       path: "tribune",
+  //       loadChildren: () =>
+  //         import("./../discussion/discussion.module").then(
+  //           (module) => module.DiscussionModule
+  //         ),
+  //     },
+  //   ],
+  // },
   // {
   //   path: "details",
   //   loadChildren: () =>
@@ -36,19 +109,23 @@ const routes: Routes = [
   declarations: [
     GroupeComponent,
     GroupeListComponent,
-    GroupeSoloComponent,
     GroupeCreateComponent,
     GroupeClasseListComponent,
     GroupeListByProfesseurComponent,
     GroupeIndependantListComponent,
     GroupeListByEtablissementComponent,
+    GroupeShowComponent,
+    GroupeDetailsComponent,
+    GroupeEditComponent,
+    FilterGroupeComponent,
+    DemandeAdhesionGroupeComponent,
+    DemandeAdhesionGroupeSoloComponent,
+    GroupeStatsComponent,
+    GroupeShowAltComponent,
+    GroupeShowAltDetailsComponent,
+    GroupeShowAltMembreComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule.forChild(routes),
-    GroupeShowModule,
-  ],
+  imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class GroupeModule {}

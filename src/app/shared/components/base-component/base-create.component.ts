@@ -1,3 +1,4 @@
+import { TranslateService } from "@ngx-translate/core";
 import { BaseComponent } from "./base.component";
 
 import { Component, OnDestroy, OnInit } from "@angular/core";
@@ -47,11 +48,13 @@ export class BaseCreateComponent
   };
 
   public fb: FormBuilder;
+  public translate: TranslateService;
 
   /* CONSTRUCTOR */
   constructor(public service: BaseService) {
     super(service);
     this.fb = AppInjector.injector.get(FormBuilder);
+    this.translate = AppInjector.injector.get(TranslateService);
   }
 
   /* ONINIT */
@@ -249,5 +252,17 @@ export class BaseCreateComponent
     if (control.touched) {
       return control.valid;
     }
+  }
+
+  fillFormData(object: object) {
+    Object.keys(object).forEach((key) => {
+      this.formData.append(key, object[key]);
+    });
+  }
+
+  formInvalidError() {
+    this.translate.get("formulaireNonValide").subscribe((translatedWord) => {
+      this.helper.toastDanger(translatedWord);
+    });
   }
 }

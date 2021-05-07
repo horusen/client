@@ -1,412 +1,63 @@
-<!-- Modal -->
-<div
-     [class]="'modal fade right'"
-     [id]="'discussion-min-modal'"
-     tabindex="-1"
-     role="dialog"
-     data-backdrop="static"
-     aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content scroll-9" *ngIf="discussion">
-      <div class="modal-header m-0 row p-0 pt-2">
-        <!-- Header -->
-        <div class="col-lg-12 p-0">
-          <div class="border-0 pd-2 bg-light">
-            <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-label="Close">
-              <a [routerLink]="[router.url.split('?')[0]]"><span aria-hidden="true">&times;</span></a>
-            </button>
+<div class="tunel scroll-9">
+  <!-- header -->
+  <div class="tunel__header">
+    <div class="tunel__correspondant">
+      <img src="https://www.nautiljon.com/images/description/00/48/1606668100762_image.jpg" class="tunel__correspondant-image">
 
-            <!-- Correspondance etabissement header -->
-            <a class="media" *ngIf="discussion.type == 5">
-              <div class="avatar d-block mr-2 ml-1">
-                <img
-                     class="avatar"
-                     [src]="
-                    discussion.etablissement.logo ||
-                    'assets/images/xs/ministry.png'
-                  "
-                     [alt]="discussion.etablissement.libelle" />
-              </div>
-              <div class="d-flex justify-content-between mg-t-6 mg-b-5 wd-100p">
-                <div class="d-inline-block">
-                  <h6 class="mb-0 tx-13 tx-primary">
-                    {{ discussion.etablissement.libelle }}
-                  </h6>
-                  <p class="mb-0 tx-gray-600 tx-12">
-                    Professeur en Mathématiques Appliquées
-                  </p>
-                </div>
-              </div>
-            </a>
-
-            <!-- Correspondance service etabissement header -->
-            <a class="media" *ngIf="discussion.type == 6">
-              <div class="avatar d-block mr-2 ml-1">
-                <img
-                     class="avatar"
-                     [src]="'assets/images/xs/ministry.png'"
-                     [alt]="discussion.service_etablissement.libelle" />
-              </div>
-              <div class="d-flex justify-content-between mg-t-6 mg-b-5 wd-100p">
-                <div class="d-inline-block">
-                  <h6 class="mb-0 tx-13 tx-primary">
-                    {{ discussion.service_etablissement.libelle }}
-                  </h6>
-                  <p class="mb-0 tx-gray-600 tx-12">
-                    Professeur en Mathématiques Appliquées
-                  </p>
-                </div>
-              </div>
-            </a>
-
-            <!-- Correspondant header -->
-            <a class="media" *ngIf="discussion.type == 1">
-              <div class="avatar d-block mr-2 ml-1">
-                <img
-                     class="avatar"
-                     [src]="discussion.correspondant.photo"
-                     [alt]="discussion.correspondant.nom_complet" />
-              </div>
-              <div class="d-flex justify-content-between mg-t-6 mg-b-5 wd-100p">
-                <div class="d-inline-block">
-                  <h6 class="mb-0 tx-13 tx-primary">
-                    {{ discussion.correspondant.nom_complet }}
-                  </h6>
-                  <p class="mb-0 tx-gray-600 tx-12">
-                    Professeur en Mathématiques Appliquées
-                  </p>
-                </div>
-              </div>
-            </a>
-
-            <!-- Groupe header -->
-            <a class="media" *ngIf="discussion.type == 2">
-              <div class="mr-2">
-                <div class="avatar mg-l-5">
-                  <span
-                        class="avatar-initial rounded-circle bg-primary op-6"
-                        [ngClass]="{
-                      'bg-primary':
-                        helper.parseInt(
-                          discussion.groupe.id
-                            .toString()
-                            .charAt(discussion.groupe.id.toString().length - 1)
-                        ) -
-                          1 ==
-                          0 ||
-                        helper.parseInt(
-                          discussion.groupe.id
-                            .toString()
-                            .charAt(discussion.groupe.id.toString().length - 1)
-                        ) +
-                          5 -
-                          1 ==
-                          0,
-                      'bg-warning':
-                        helper.parseInt(
-                          discussion.groupe.id
-                            .toString()
-                            .charAt(discussion.groupe.id.toString().length - 1)
-                        ) -
-                          2 ==
-                          0 ||
-                        helper.parseInt(
-                          discussion.groupe.id
-                            .toString()
-                            .charAt(discussion.groupe.id.toString().length - 1)
-                        ) +
-                          5 -
-                          2 ==
-                          0,
-                      'bg-success':
-                        helper.parseInt(
-                          discussion.groupe.id
-                            .toString()
-                            .charAt(discussion.groupe.id.toString().length - 1)
-                        ) -
-                          3 ==
-                          0 ||
-                        helper.parseInt(
-                          discussion.groupe.id
-                            .toString()
-                            .charAt(discussion.groupe.id.toString().length - 1)
-                        ) +
-                          5 -
-                          3 ==
-                          0,
-                      'bg-info':
-                        helper.parseInt(
-                          discussion.groupe.id
-                            .toString()
-                            .charAt(discussion.groupe.id.toString().length - 1)
-                        ) -
-                          4 ==
-                          0 ||
-                        helper.parseInt(
-                          discussion.groupe.id
-                            .toString()
-                            .charAt(discussion.groupe.id.toString().length - 1)
-                        ) +
-                          5 -
-                          4 ==
-                          0,
-                      'bg-danger':
-                        helper.parseInt(
-                          discussion.groupe.id
-                            .toString()
-                            .charAt(discussion.groupe.id.toString().length - 1)
-                        ) -
-                          5 ==
-                          0 ||
-                        helper.parseInt(
-                          discussion.groupe.id
-                            .toString()
-                            .charAt(discussion.groupe.id.toString().length - 1)
-                        ) +
-                          5 -
-                          5 ==
-                          0
-                    }">
-                    {{
-                    discussion.groupe.libelle.split(" ")[0].charAt(0) +
-                    (discussion.groupe.libelle.split(" ")[1]
-                    ? discussion.groupe.libelle
-                    .split(
-                    "
-                    "
-                    )[1]
-                    .charAt(0)
-                    : discussion.groupe.libelle.split(" ")[0].charAt(1))
-                    }}
-                  </span>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between mg-t-7 wd-100p">
-                <div class="d-inline-block">
-                  <h6 class="mb-0 tx-13 tx-facebook">
-                    {{ discussion.groupe.libelle }}
-                  </h6>
-                  <p
-                     class="mb-0 tx-gray-600 tx-12"
-                     [innerHTML]="
-                      helper.strcut(discussion.groupe.description, 150)
-                    "></p>
-                </div>
-              </div>
-            </a>
-
-            <!-- Sous réseaux header -->
-            <a class="media" *ngIf="discussion.type == 3">
-              <div class="mr-2">
-                <div class="avatar mg-l-5">
-                  <span
-                        class="avatar-initial rounded-circle bg-primary op-6"
-                        [ngClass]="{
-                      'bg-primary':
-                        helper.parseInt(
-                          discussion.sous_reseaux.id
-                            .toString()
-                            .charAt(
-                              discussion.sous_reseaux.id.toString().length - 1
-                            )
-                        ) -
-                          1 ==
-                          0 ||
-                        helper.parseInt(
-                          discussion.sous_reseaux.id
-                            .toString()
-                            .charAt(
-                              discussion.sous_reseaux.id.toString().length - 1
-                            )
-                        ) +
-                          5 -
-                          1 ==
-                          0,
-                      'bg-warning':
-                        helper.parseInt(
-                          discussion.sous_reseaux.id
-                            .toString()
-                            .charAt(
-                              discussion.sous_reseaux.id.toString().length - 1
-                            )
-                        ) -
-                          2 ==
-                          0 ||
-                        helper.parseInt(
-                          discussion.sous_reseaux.id
-                            .toString()
-                            .charAt(
-                              discussion.sous_reseaux.id.toString().length - 1
-                            )
-                        ) +
-                          5 -
-                          2 ==
-                          0,
-                      'bg-success':
-                        helper.parseInt(
-                          discussion.sous_reseaux.id
-                            .toString()
-                            .charAt(
-                              discussion.sous_reseaux.id.toString().length - 1
-                            )
-                        ) -
-                          3 ==
-                          0 ||
-                        helper.parseInt(
-                          discussion.sous_reseaux.id
-                            .toString()
-                            .charAt(
-                              discussion.sous_reseaux.id.toString().length - 1
-                            )
-                        ) +
-                          5 -
-                          3 ==
-                          0,
-                      'bg-info':
-                        helper.parseInt(
-                          discussion.sous_reseaux.id
-                            .toString()
-                            .charAt(
-                              discussion.sous_reseaux.id.toString().length - 1
-                            )
-                        ) -
-                          4 ==
-                          0 ||
-                        helper.parseInt(
-                          discussion.sous_reseaux.id
-                            .toString()
-                            .charAt(
-                              discussion.sous_reseaux.id.toString().length - 1
-                            )
-                        ) +
-                          5 -
-                          4 ==
-                          0,
-                      'bg-danger':
-                        helper.parseInt(
-                          discussion.sous_reseaux.id
-                            .toString()
-                            .charAt(
-                              discussion.sous_reseaux.id.toString().length - 1
-                            )
-                        ) -
-                          5 ==
-                          0 ||
-                        helper.parseInt(
-                          discussion.sous_reseaux.id
-                            .toString()
-                            .charAt(
-                              discussion.sous_reseaux.id.toString().length - 1
-                            )
-                        ) +
-                          5 -
-                          5 ==
-                          0
-                    }">
-                    {{
-                    discussion.sous_reseaux.libelle.split(" ")[0].charAt(0) +
-                    (discussion.sous_reseaux.libelle.split(" ")[1]
-                    ? discussion.sous_reseaux.libelle
-                    .split(" ")[1]
-                    .charAt(0)
-                    : discussion.sous_reseaux.libelle
-                    .split(" ")[0]
-                    .charAt(1))
-                    }}
-                    <i class="fas fa-network-wired tx-warning"></i>
-                  </span>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between mg-t-7 wd-100p">
-                <div class="d-inline-block">
-                  <h6 class="mb-0 tx-13 tx-facebook">
-                    {{ discussion.sous_reseaux.libelle }}
-                  </h6>
-                  <p class="mb-0 tx-gray-600 tx-12">
-                    Congratulations Friend...
-                  </p>
-                </div>
-              </div>
-            </a>
-
-            <!-- bar header -->
-            <div class="row row-xs mg-0 pd-0 clearfix bd-t bg-white bd-b">
-              <div class="col-lg-12 mg-l-0">
-                <div class="collapse show" id="collapse10">
-                  <ul class="nav bd-b">
-                    <li class="nav-item">
-                      <a class="mg-r-10" data-toggle="tab" href="#">
-                        <i
-                           class="fal fa-phone-volume tx-facebook"
-                           style="padding: 4px; border-radius: 50%"></i>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a
-                         class="mg-r-10"
-                         data-toggle="tab"
-                         href="#professeur_explore">
-                        <i
-                           class="fal fa-video tx-facebook"
-                           style="padding: 4px; border-radius: 50%"></i>
-                      </a>
-                    </li>
-
-                    <li class="nav-item">
-                      <a class="mg-r-10" data-toggle="tab" href="#">
-                        <i
-                           class="fal fa-users tx-facebook"
-                           style="padding: 4px; border-radius: 50%"></i>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="mg-r-10" data-toggle="tab" href="#">
-                        <i
-                           class="fal fa-box-alt tx-facebook"
-                           style="padding: 4px; border-radius: 50%"></i>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="mg-r-10" data-toggle="tab" href="#">
-                        <i class="fal fa-link tx-facebook"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="tunel__correspondant-name">
+        <h4 class="tunel__correspondant-name--main">
+          Satoru Gojo
+        </h4>
+        <span class="tunel__correspondant-name--sub">
+          @Exorcicte dans la ville de Kyoto
+        </span>
       </div>
 
-      <div class="modal-body p-2">
-        <div class="row row-xs mg-0 pd-0 clearfix">
-          <!-- Reaction -->
-          <div
-               class="col-lg-12"
-               style="background-image: url(assets/images/0.png)">
-            <!-- Liste des réactions -->
-            <div class="chat-box-right">
-              <app-reaction-list
-                                 [type]="'discussion'"
-                                 [parentID]="discussion.id"></app-reaction-list>
-            </div>
-
-            <!-- Reaction create -->
-            <app-reaction-create
-                                 [type]="'discussion'"
-                                 [min]="true"
-                                 [parentID]="discussion.id">
-            </app-reaction-create>
-          </div>
-        </div>
+      <div class="tunel__correspondant-button">
+        <i class="fad fa-times-circle"></i>
       </div>
-      <!-- modal-content -->
     </div>
-    <!-- modal-dialog -->
   </div>
-  <!-- modal -->
+
+  <!-- Navigation -->
+  <ul class="tunel__navigation">
+    <a href="#" class="tunel__navigation-item  tunel__navigation-item--active">
+      <i class="fas fa-comment"></i>
+    </a>
+    <a href="#" class="tunel__navigation-item">
+      <i class="fal fa-users"></i>
+    </a>
+
+    <a href="#" class="tunel__navigation-item">
+      <i class="fal fa-file-alt"></i>
+    </a>
+  </ul>
+
+  <!-- Body -->
+  <div class="tunel__body">
+    <div class="tunel__messages ">
+
+      <div class="tunel__message tunel__message--initial">
+        <div class="tunel__message-arrow"></div>
+        <div class="tunel__message-text">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi tempora, placeat quod explicabo dolorum ?
+        </div>
+      </div>
+
+      <div class="tunel__message tunel__message--reverse">
+        <div class="tunel__message-arrow"></div>
+        <div class="tunel__message-text">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi tempora, placeat quod explicabo dolorum ?
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message typing -->
+  <div class="tunel__message-typebox">
+    <input type="text" class="tunel__message-input" placeholder="Ecrivez votre commentaire...">
+    <button class="tunel__button">
+      <i class="fad fa-paper-plane"></i>
+    </button>
+  </div>
 </div>

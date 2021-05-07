@@ -5,11 +5,7 @@
             <div class="d-flex justify-content-end px-3">
                 <div class="dropdown d-inline">
                     <!-- Icone -->
-                    <i
-                        class="fas fa-caret-down mt-1 clickable float-left"
-                        id="dropdownMenuButton"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
+                    <i class="fas fa-caret-down mt-1 clickable float-left" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                     </i>
 
@@ -36,15 +32,12 @@
             </div>
             <div class="card-body text-center pt-1 profil">
                 <p>
-                    <img class=" img-fluid rounded-circle"
-                        [src]="profil.personne_details.photo"
-                        [alt]="profil.personne_details.nom_complet">
+                    <img class=" img-fluid rounded-circle" [src]="profil.personne_details.photo" [alt]="profil.personne_details.nom_complet">
 
-                    <i class="fas fa-circle-notch fa-spin" style="position: absolute; right: 20px;"
-                        *ngIf="loading"></i>
+                    <i class="fas fa-circle-notch fa-spin" style="position: absolute; right: 20px;" *ngIf="loading"></i>
                 </p>
 
-                <!-- Nom de l'etudiant -->
+                <!-- Nom de l'eleve -->
                 <h4 class="tx-12 tx-bolder tx-primary">
                     {{ profil.personne_details.nom_complet }}
                 </h4>

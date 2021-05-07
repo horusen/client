@@ -1,141 +1,46 @@
 <div class="row row-xs clearfix mg-0 pd-0">
-    <div class="col-lg-2 bg-yeto1">
-        <!-- Logo -->
-        <div class="bd-b">
-            <div class="d-flex flex-row">
-                <a href="" class="tx-white mg-l-30 "
-                   style="font-family: 'Tangerine'; text-align: center; font-size: 250%; vertical-align: middle; text-shadow: 0px 1px 0px">
+  <!-- Sidebar -->
+  <div class="col-lg-2 sidebar bg-yeto1" [ngClass]="{'sidebar-collapsed': sidebarCollapsed}">
+    <app-sidebar-explore-groupe></app-sidebar-explore-groupe>
+  </div>
 
-                    Groupes<span class="tx-yellow1"> indépendants</span></a>
-            </div>
-        </div>
 
-        <!-- Sidebar -->
-        <app-sidebar-explore-groupe></app-sidebar-explore-groupe>
 
+
+  <!-- Main content -->
+  <div class="" [ngClass]="{'col-10': !sidebarCollapsed, 'col-12': sidebarCollapsed}">
+    <!-- Content -->
+    <div class="row row-xs clearfix mg-0 pd-0 p-0">
+      <div class="col-lg-12 p-0">
+        <ul class="nav mg-0 pd-0 bd-b bg-yeto1">
+          <!-- Groupe -->
+          <li class="nav-item mg-0 pd-0 mg-t-6">
+            <a class="nav-link3 active show" [routerLinkActive]="'font-weight-bold'" [routerLink]="['./']" [routerLinkActiveOptions]="{exact: true}">
+              <i class="fal fa-users-crown tx-14 bg-yeto2 tx-white" [routerLinkActive]="'font-weight-bold'" style="padding: 8px; border-radius: 50%">
+              </i>
+              <span class="tx-white">
+                {{ "groupesIndependants" | translate }}
+              </span>
+            </a>
+          </li>
+
+          <!-- Explore -->
+          <li class="nav-item mg-0 pd-0 mg-t-6">
+            <a class="nav-link3" [routerLinkActive]="'font-weight-bold'" [routerLink]="['tribune']"
+                [queryParams]="{type_discussion: 'groupe-independant'}">
+              <i class="fal fa-comment-lines tx-14 bg-yeto2 tx-white" [routerLinkActive]="'font-weight-bold'"
+                  style="padding: 8px; border-radius: 50%">
+              </i>
+              <span class="tx-white"> {{ "TRIBUNE" | translate }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="col-lg-10">
-        <!-- header -->
-        <div class="row row-xs clearfix bg-white  mg-0 pd-0 ">
-            <div class="col-lg-1">
-                <div class="card-body collapse show  p-0" id="collapse1">
-                    <a role="button" class="btn btn-default mg-r-50"
-                       data-backdrop="false" data-toggle="modal"
-                       data-target="#m_modal_4"> <i
-                           class="fas fa-layer-plus tx-32 tx-facebook"></i></a>
-                    <div class="modal fade" id="m_modal_4" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel_4" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header p-1 ">
-                                    <h5 class="modal-title tx-facebook tx-16"
-                                        id="exampleModalLabel_4"> <i
-                                           class="fad fa-badge"></i> Objets Explorer
-                                    </h5>
-                                    <button type="button" class="close"
-                                            data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true"><i
-                                               class="fad fa-times-circle mg-r-4 tx-facebook"></i></span>
-                                    </button>
-                                </div>
-                                <div class="modal-body mb-0 p-0"
-                                     style="padding-left:0px; padding-right:0px">
-                                    <div class="card">
-                                        <ul class="nav " id="pills-tab" role="tablist">
-                                            <li class="nav-item "><a class="nav-link "
-                                                   id="autres" data-toggle="pill"
-                                                   href="#etablissement">
-                                                    <i
-                                                       class="fad fa-users tx-primary"></i>
-                                                    <span
-                                                          class="tx-facebook">Groupes</span></a>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link "
-                                                   id="personal_chat_tab"
-                                                   data-toggle="pill"
-                                                   href="#hierarchie">
-                                                    <i
-                                                       class="fad fa-user-graduate tx-primary"></i><span
-                                                          class="tx-facebook">
-                                                        Etudiants</span></a></li>
-                                            <li class="nav-item"><a class="nav-link "
-                                                   id="autres" data-toggle="pill"
-                                                   href="#services">
-                                                    <i
-                                                       class="fad fa-user-tie tx-primary"></i><span
-                                                          class="tx-facebook">
-                                                        Professeurs</span></a></li>
-                                            <li class="nav-item "><a class="nav-link"
-                                                   id="autres" data-toggle="pill"
-                                                   href="#reglementation">
-                                                    <i
-                                                       class="fad fa-network-wired tx-primary "></i><span
-                                                          class="tx-facebook">
-                                                        Réseaux</span></a></li>
-                                            <li class="nav-item "><a class="nav-link"
-                                                   id="autres" data-toggle="pill"
-                                                   href="#exercices">
-                                                    <i
-                                                       class="fad fa-dumbbell tx-primary "></i><span
-                                                          class="tx-facebook">
-                                                        Excercices</span></a></li>
-                                            <li class="nav-item "><a class="nav-link"
-                                                   id="autres" data-toggle="pill"
-                                                   href="#reglementation">
-                                                    <i
-                                                       class="fad fa-layer-group tx-primary "></i><span
-                                                          class="tx-facebook">
-                                                        Plans</span></a></li>
-                                            <li class="nav-item "><a class="nav-link"
-                                                   id="autres" data-toggle="pill"
-                                                   href="#propositions">
-                                                    <i
-                                                       class="fad fa-recycle tx-primary "></i><span
-                                                          class="tx-facebook">
-                                                        Propositions</span></a></li>
-                                        </ul>
-                                        <div class="tab-content">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Send
-                                        message</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2">
-            </div>
-            <div class="col-lg-9">
-                <div class="form-group mg-t-5 mg-b-5 mg-l-60">
-                    <div class="input-group " style="width:600px">
-                        <span class="input-group-append"><a role="button"
-                               class="btn btn-facebook  "><i
-                                   class="fad fa-search  tx-white"></i></a></span>
-                        <input type="text" class="form-control pd-y-10  tx-white"
-                               placeholder="Recherches...">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Content -->
-        <div class="row mg-0 pd-0">
-            <div class="col-lg-9 p-0 ">
-                <router-outlet></router-outlet>
-            </div>
-
-
-            <div class="bg-gray col-lg-3 " style="padding-left: 0px; padding-right:0px">
-                <app-personal-assets></app-personal-assets>
-            </div>
-        </div>
-
+    <div class="tab-content">
+      <div class="tab-pane fade active show" id="explore_ecoles">
+        <router-outlet></router-outlet>
+      </div>
     </div>
+  </div>
 </div>

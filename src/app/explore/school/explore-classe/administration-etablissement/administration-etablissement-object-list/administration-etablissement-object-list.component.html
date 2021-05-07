@@ -1,0 +1,119 @@
+<div class="row m-3" *ngIf="single && !loading">
+  <!-- DETAILS -->
+  <div class="col-4">
+    <div class="brand-card m-3 ">
+      <a class="brand-card-header border hover--border-teal bg-light tx-teal" [routerLink]="['details']">
+        <i class="fad fa-info-circle mr-2"></i> {{ 'DETAILS' | translate }}
+      </a>
+    </div>
+  </div>
+
+  <!-- Programme -->
+  <div class="col-4">
+    <div class="brand-card m-3 ">
+      <a class="brand-card-header border hover--border-warning bg-light tx-warning" [routerLink]="['details','programme']">
+        <i class="fad fa-scroll mr-2"></i> {{ 'PROGRAMMES' | translate }}
+      </a>
+    </div>
+  </div>
+
+  <!-- Formation -->
+  <div class="col-4">
+    <div class="brand-card m-3 ">
+      <a class="brand-card-header border tx-twitter hover--border-twitter bg-light " [routerLink]="['details','formation']">
+        <i class="fad fa-chalkboard-teacher mr-2"></i> {{ 'FORMATIONS' | translate }}
+      </a>
+    </div>
+  </div>
+
+  <!-- Classe -->
+  <div class="col-4">
+    <div class="brand-card m-3">
+      <a class="brand-card-header tx-dribbble border hover--border-dribbble  bg-light" [routerLink]="['details','classe']">
+        <i class="fad fa-users-class mr-2"></i> {{ 'CLASSES' | translate }}
+      </a>
+    </div>
+  </div>
+
+
+  <!-- PROFESSEURS -->
+  <div class="col-4">
+    <div class="brand-card m-3">
+      <a class="brand-card-header border hover--border-teal tx-teal bg-light " [routerLink]="['details','professeur']">
+        <i class="fad fa-user-tie mr-2"></i> {{ 'PROFESSEURS' | translate }}
+      </a>
+    </div>
+  </div>
+
+  <!-- ELEVES -->
+  <div class="col-4">
+    <div class="brand-card m-3">
+      <a class="brand-card-header border hover--border-warning tx-warning bg-light" [routerLink]="['details','eleve']">
+        <i class="fad fa-user-graduate mr-2"></i> {{ 'ELEVES' | translate }}
+      </a>
+    </div>
+  </div>
+
+  <!-- GROUPE -->
+  <div class="col-4">
+    <div class="brand-card m-3">
+      <a class="brand-card-header border hover--border-facebook tx-facebook bg-light" [routerLink]="['details','groupes']">
+        <i class="fad fa-users mr-2"></i> {{ 'GROUPES' | translate }}
+      </a>
+    </div>
+  </div>
+
+  <!-- PARENT -->
+  <div class="col-4">
+    <div class="brand-card m-3">
+      <a class="brand-card-header border hover--border-dribbble tx-dribbble bg-light" [routerLink]="['details','parents-eleves']">
+        <i class="fad fa-user-shield mr-2"></i> {{ 'PARENTS' | translate }}
+      </a>
+    </div>
+  </div>
+
+  <!-- EMPLOYE -->
+  <div class="col-4">
+    <div class="brand-card m-3">
+      <a class="brand-card-header border hover--border-teal border tx-teal bg-light" [routerLink]="['details','structure']">
+        <i class="fad fa-person-carry mr-2"></i> {{ 'EMPLOYES' | translate }}
+      </a>
+    </div>
+  </div>
+
+
+  <!-- SERVICES -->
+  <div class="col-4">
+    <a class="brand-card m-3">
+      <div class="brand-card-header border hover--border-indigo bg-light texte-indigo bg-light" [routerLink]="['details','services']">
+        <i class="fad fa-building mr-2"></i> {{ 'SERVICES' | translate }}
+      </div>
+    </a>
+  </div>
+
+  <!-- ADMINISTRATEUR -->
+  <div class="col-4">
+    <a class="brand-card m-3">
+      <div class="brand-card-header border hover--border-facebook tx-facebook bg-light" [routerLink]="['details','administrateur']">
+        <i class="fad fa-user-tie mr-2"></i> {{ 'ADMINISTRATEURS' | translate }}
+      </div>
+    </a>
+  </div>
+
+
+  <!-- EXPLORE -->
+  <div class="col-4">
+    <a class="brand-card m-3">
+      <div class="brand-card-header border hover--border-dribbble tx-dribbble bg-light" [routerLink]="['details','explore']">
+        <i class="fad fa-user-tie mr-2"></i> {{ 'EXPLORE' | translate }}
+      </div>
+    </a>
+  </div>
+
+
+</div>
+
+
+<div class="my-5" *ngIf="loading">
+  <app-loading></app-loading>
+</div>

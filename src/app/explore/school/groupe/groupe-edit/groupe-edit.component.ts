@@ -3,6 +3,7 @@ import { GroupeService } from "src/app/explore/school/groupe/groupe.service";
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { BaseEditComponent } from "src/app/shared/components/base-component/base-edit.component";
 import { DomaineService } from "../../domaine/domaine.service";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-groupe-edit",
@@ -23,13 +24,20 @@ export class GroupeEditComponent extends BaseEditComponent implements OnInit {
   constructor(
     public groupeService: GroupeService,
     public domaineService: DomaineService,
-    public confidentialiteService: ConfidentialiteService
+    public confidentialiteService: ConfidentialiteService,
+    public route: ActivatedRoute,
+    public router: Router
   ) {
     super(groupeService);
   }
 
   ngOnInit(): void {
     super.ngOnInit();
+
+    if (!this.groupeService.singleData) {
+      this.router.navigate(["./"], { relativeTo: this.route });
+      this.helper.toggleModal("groupe-edit-modal");
+    }
 
     this._subscription["single"] = this.groupeService.singleData$.subscribe(
       () => {
@@ -45,21 +53,16 @@ export class GroupeEditComponent extends BaseEditComponent implements OnInit {
   initialiseForm() {
     this.initFormWithData(
       this.single,
-      [
-        "libelle",
-        "confidentialite",
-        "type",
-        "description",
-        "etat",
-        "domaines",
-        "classe",
-      ],
-      [],
+      ["libelle", "confidentialite", "type", "description", "etat", "domaines"],
+      ["classe"],
       () => {
+        this.addControl("classe", [this.single.classe]);
         this.valuesPatcher(
-          ["confidentialite", "classe"],
-          [[this.single.confidentialite], [this.single.classe]]
+          ["confidentialite"],
+          [[this.single.confidentialite]]
         );
+
+        this.isFormOk = true;
       }
     );
   }

@@ -1,217 +1,181 @@
 <form class="custom-placeholder" [formGroup]="form" *ngIf="isFormOk" (submit)="create()">
-    <!-- Libelle -->
-    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
-        <div class="col-12">
-            <!-- Label -->
-            <label class="control-label"
-                for="libelle">
-                {{ 'LIBELLE' | translate }}
-            </label>
+  <!-- Libelle -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label" for="libelle">
+        {{ 'LIBELLE' | translate }}
+      </label>
 
-            <!-- Input -->
-            <input type="text"
-                class="form-control form-control-sm"
-                required
-                [formControlName]="'libelle'"
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'libelle'), 'is-valid': isValid('libelle')}">
+      <!-- Input -->
+      <input type="text" class="form-control form-control-sm" required [formControlName]="'libelle'"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'libelle'), 'is-valid': isValid('libelle')}">
 
-            <!-- MEssage d'erreur -->
-            <div *ngIf="shouldShowRequiredError('libelle')" class="invalid-feedback">
-                {{ 'veuillezSaisirLeLibelle' |translate }}.</div>
-        </div>
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('libelle')" class="invalid-feedback">
+        {{ 'veuillezSaisirLeLibelle' |translate }}.</div>
+    </div>
+  </div>
+
+  <!-- Sous domaine, Niveau et langue -->
+  <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+    <!-- Sous domaine -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label" for="sous_domaine">
+        {{ 'sousDomaine' | translate }}
+      </label>
+
+      <angular2-multiselect [data]="dependancies.sous_domaine" [settings]="dropdownSettingsAlt.single"
+          formControlName="sous_domaine"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'sous_domaine'), 'is-valid': isValid('sous_domaine')}"
+          class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('sous_domaine')" class="invalid-feedback">
+        {{ 'veuillezChoisirLeSousDomaineDeLaTache' | translate }}.
+      </div>
     </div>
 
-    <!-- Sous domaine, Niveau et langue -->
-    <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
-        <!-- Sous domaine -->
-        <div class="col-6">
-            <!-- Label -->
-            <label class="control-label"
-                for="sous_domaine">
-                {{ 'sousDomaine' | translate }}
-            </label>
+    <!-- Niveau -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label" for="niveau">
+        {{ 'NIVEAU' | translate }}
+      </label>
 
-            <angular2-multiselect
-                [data]="dependancies.sous_domaine"
-                [settings]="dropdownSettingsAlt.single"
-                formControlName="sous_domaine"
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'sous_domaine'), 'is-valid': isValid('sous_domaine')}"
-                class="form-control p-0 form-control-sm">
-            </angular2-multiselect>
+      <angular2-multiselect [data]="dependancies.niveau" [settings]="dropdownSettingsAlt.single"
+          formControlName="niveau"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'niveau'), 'is-valid': isValid('niveau')}"
+          class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
 
-            <!-- Message d'erreur -->
-            <div *ngIf="shouldShowRequiredError('sous_domaine')"
-                class="invalid-feedback">
-                {{ 'veuillezChoisirLeSousDomaineDeLaTache' | translate }}.
-            </div>
-        </div>
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('niveau')" class="invalid-feedback">
+        {{ 'veuillezChoisirLeNiveauDeLaTache' | translate }}.
+      </div>
+    </div>
+  </div>
 
-        <!-- Niveau -->
-        <div class="col-6">
-            <!-- Label -->
-            <label class="control-label"
-                for="niveau">
-                {{ 'NIVEAU' | translate }}
-            </label>
+  <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+    <!-- Langue -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label" for="langue">
+        {{ 'LANGUE' | translate }}
+      </label>
 
-            <angular2-multiselect
-                [data]="dependancies.niveau"
-                [settings]="dropdownSettingsAlt.single"
-                formControlName="niveau"
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'niveau'), 'is-valid': isValid('niveau')}"
-                class="form-control p-0 form-control-sm">
-            </angular2-multiselect>
+      <angular2-multiselect [data]="dependancies.langue" [settings]="dropdownSettingsAlt.single"
+          formControlName="langue"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'langue'), 'is-valid': isValid('langue')}"
+          class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
 
-            <!-- Message d'erreur -->
-            <div *ngIf="shouldShowRequiredError('niveau')"
-                class="invalid-feedback">
-                {{ 'veuillezChoisirLeNiveauDeLaTache' | translate }}.
-            </div>
-        </div>
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('langue')" class="invalid-feedback">
+        {{ 'veuillezChoisirUneLanguePourVotreTache' | translate }}.
+      </div>
     </div>
 
-    <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
-        <!-- Langue -->
-        <div class="col-6">
-            <!-- Label -->
-            <label class="control-label"
-                for="langue">
-                {{ 'LANGUE' | translate }}
-            </label>
+    <!-- S -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label" for="confidentialite">
+        {{ 'CONFIDENTIALITE' | translate }}
+      </label>
 
-            <angular2-multiselect
-                [data]="dependancies.langue"
-                [settings]="dropdownSettingsAlt.single"
-                formControlName="langue"
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'langue'), 'is-valid': isValid('langue')}"
-                class="form-control p-0 form-control-sm">
-            </angular2-multiselect>
+      <select class="form-control form-control-sm" required [formControlName]="'confidentialite'"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'confidentialite'), 'is-valid': isValid('confidentialite')}"
+          required>
+        <option [value]="1">{{'PUBLIC' | translate}}</option>
+        <option [value]="2">{{'PRIVEE' | translate}}</option>
+      </select>
 
-            <!-- Message d'erreur -->
-            <div *ngIf="shouldShowRequiredError('langue')"
-                class="invalid-feedback">
-                {{ 'veuillezChoisirUneLanguePourVotreTache' | translate }}.
-            </div>
-        </div>
+    </div>
+  </div>
 
-        <!-- S -->
-        <div class="col-6">
-            <!-- Label -->
-            <label class="control-label"
-                for="confidentialite">
-                {{ 'CONFIDENTIALITE' | translate }}
-            </label>
+  <!-- Période, matière et niveau de difficulté -->
+  <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
 
-            <select class="form-control form-control-sm"
-                required
-                [formControlName]="'confidentialite'"
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'confidentialite'), 'is-valid': isValid('confidentialite')}"
-                required>
-                <option [value]="1">{{'PUBLIC' | translate}}</option>
-                <option [value]="2">{{'PRIVEE' | translate}}</option>
-            </select>
+    <!-- Niveau difficulte -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label" for="niveau_difficulte">
+        {{ 'niveauDifficulte' | translate }}
+      </label>
 
-        </div>
+      <angular2-multiselect [data]="dependancies.niveau_difficulte" [settings]="dropdownSettingsAlt.single"
+          formControlName="niveau_difficulte"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'niveau_difficulte'), 'is-valid': isValid('niveau_difficulte')}"
+          class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('niveau_difficulte')" class="invalid-feedback">
+        {{ 'veuillezChoisirUnNiveauDeDifficulte' | translate }}.
+      </div>
     </div>
 
-    <!-- Période, matière et niveau de difficulté -->
-    <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label" for="mot_cle">
+        {{ 'motCles' | translate }}
+      </label>
 
-        <!-- Niveau difficulte -->
-        <div class="col-6">
-            <!-- Label -->
-            <label class="control-label"
-                for="niveau_difficulte">
-                {{ 'niveauDifficulte' | translate }}
-            </label>
+      <angular2-multiselect id="cle" [data]="dependancies.mot_cle" [settings]="dropdownSettingsAlt.multi"
+          formControlName="mot_cles"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'mot_cles'), 'is-valid': isValid('mot_cles')}"
+          class=" form-control p-0 form-control-sm">
+      </angular2-multiselect>
 
-            <angular2-multiselect
-                [data]="dependancies.niveau_difficulte"
-                [settings]="dropdownSettingsAlt.single"
-                formControlName="niveau_difficulte"
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'niveau_difficulte'), 'is-valid': isValid('niveau_difficulte')}"
-                class="form-control p-0 form-control-sm">
-            </angular2-multiselect>
+      <!-- Boutton ajouter motCle -->
+      <div class="col-12 p-0">
+        <span class="clickable text-primary" [autoClose]="'outside'" placement="bottom"
+            [popoverTitle]="titreMotCleCreate" [ngbPopover]="motCleCreate">
+          {{ 'AJOUTER' | translate }} <i class="fal fa-plus-circle"></i>
+        </span>
+      </div>
 
-            <!-- Message d'erreur -->
-            <div *ngIf="shouldShowRequiredError('niveau_difficulte')"
-                class="invalid-feedback">
-                {{ 'veuillezChoisirUnNiveauDeDifficulte' | translate }}.
-            </div>
-        </div>
-
-        <div class="col-6">
-            <!-- Label -->
-            <label class="control-label"
-                for="mot_cle">
-                {{ 'motCles' | translate }}
-            </label>
-
-            <angular2-multiselect
-                id="cle"
-                [data]="dependancies.mot_cle"
-                [settings]="dropdownSettingsAlt.multi"
-                formControlName="mot_cles"
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'mot_cles'), 'is-valid': isValid('mot_cles')}"
-                class=" form-control p-0 form-control-sm">
-            </angular2-multiselect>
-
-            <!-- Boutton ajouter motCle -->
-            <div class="col-12 p-0">
-                <span class="clickable text-primary"
-                    [autoClose]="'outside'"
-                    placement="bottom"
-                    [popoverTitle]="titreMotCleCreate"
-                    [ngbPopover]="motCleCreate">
-                    {{ 'AJOUTER' | translate }} <i class="fal fa-plus-circle"></i>
-                </span>
-            </div>
-
-        </div>
     </div>
+  </div>
 
 
 
-    <!-- Description -->
-    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
-        <div class="col-12">
-            <label class="control-label" for="description">{{ 'DESCRIPTION' | translate }}</label>
-            <!-- <textarea name="description" maxlength="500" class="form-control  form-control-sm" cols="30" rows="3"
+  <!-- Description -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <label class="control-label" for="description">{{ 'DESCRIPTION' | translate }}</label>
+      <!-- <textarea name="description" maxlength="500" class="form-control  form-control-sm" cols="30" rows="3"
                 [formControlName]="'description'"
                 [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"></textarea> -->
-            <ckeditor
-                [editor]="Editor"
-                class=""
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
-                formControlName="description">
-            </ckeditor>
-            <div *ngIf="shouldShowRequiredError('description')" class="invalid-feedback">
-                {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
-            </div>
-        </div>
+      <ckeditor [editor]="Editor" class=""
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
+          formControlName="description">
+      </ckeditor>
+      <div *ngIf="shouldShowRequiredError('description')" class="invalid-feedback">
+        {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
+      </div>
     </div>
+  </div>
 
 
-    <!-- Boutton validation -->
-    <div class="d-flex justify-content-center">
-        <div class="col-12 text-right">
-            <!-- Boutton sumit -->
-            <button class="btn btn-sm btn-primary mr-1"
-                type="submit"
-                [disabled]="form.invalid">
-                <i class="fad fa-circle-notch fa-spin" *ngIf="loading"></i>
-                {{ 'VALIDER' | translate }}
-            </button>
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-12 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1" type="submit" [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin" *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
 
-            <!-- Bouton reset -->
-            <button class="btn btn-sm border btn-link"
-                type="button"
-                (click)="initialiseForm()">
-                {{ 'REINITIALISER' | translate }}
-            </button>
-        </div>
+      <!-- Bouton reset -->
+      <button class="btn btn-sm border btn-link" type="button" (click)="initialiseForm()">
+        {{ 'REINITIALISER' | translate }}
+      </button>
     </div>
-    <!-- <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+  </div>
+  <!-- <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
         <div class="col-10">
             <label class="control-label" for="libelle">Orientation</label>
             <textarea name="orientation" maxlength="200" class="form-control  form-control-sm" cols="30" rows="3"
@@ -231,15 +195,14 @@
 <!-- Popover motCLe -->
 <!-- header -->
 <ng-template #titreMotCleCreate>
-    <b class="text-center tx-facebook font-weight-bolder">
-        {{ 'ajouterUnMotCle' | translate }}
-    </b>
+  <b class="text-center tx-facebook font-weight-bolder">
+    {{ 'ajouterUnMotCle' | translate }}
+  </b>
 </ng-template>
 
 <!-- Body -->
 <ng-template #motCleCreate class="p-3">
-    <app-common-create
-        (itemCreated)="onMotCleCreate($event)"
-        [configuration]="{name: 'mot_cle', endpoint: 'mot-cle', hasDescription: false}">
-    </app-common-create>
+  <app-common-create (itemCreated)="onMotCleCreate($event)"
+      [configuration]="{name: 'mot_cle', endpoint: 'mot-cle', hasDescription: false}">
+  </app-common-create>
 </ng-template>

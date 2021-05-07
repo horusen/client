@@ -13,6 +13,7 @@ import { ReactionService } from "../../reaction.service";
 })
 export class ReactionSoloComponent extends BaseComponent implements OnInit {
   @Input() reaction: any;
+  @Input() etablissement: any;
   @Input() parentUrl: string;
   @Input() minified: boolean = false;
   @Input() reversed: boolean = false;

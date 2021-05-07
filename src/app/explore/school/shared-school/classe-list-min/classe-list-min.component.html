@@ -1,35 +1,54 @@
-<div class="flex-fill pd-15 bd-t bd-b classe-min">
+<div class="flex-fill pd-15 py-0 classe-min">
     <!-- Header -->
     <div class="d-flex align-items-center  justify-content-between pd-x-10 mg-b-10">
         <span class="tx-10 tx-uppercase tx-white"> {{ 'listeDesClasses' | translate }} </span>
     </div>
+
+    <!-- liste des classe -->
     <nav class="nav flex-column  " *ngIf="data.length && !loading">
-        <div class="d-flex align-items-center justify-content-between "
-            *ngFor="let classe of data; let i = index">
-            <a class="nav-link tx-white" [routerLink]="[classe.id]">
-                <i class="fad fa-star " [ngClass]="{
-                    'texte-warning': helper.parseInt(i.toString().slice(-1)) == 1,
-                    'texte-yellow': helper.parseInt(i.toString().slice(-1)) == 2,
-                    'texte-success': helper.parseInt(i.toString().slice(-1)) == 3,
-                    'tx-facebook': helper.parseInt(i.toString().slice(-1)) == 4,
-                    'texte-blue': helper.parseInt(i.toString().slice(-1)) == 5,
-                    'texte-mint': helper.parseInt(i.toString().slice(-1)) == 6,
-                    'texte-primary': helper.parseInt(i.toString().slice(-1)) == 7,
-                    'texte-danger': helper.parseInt(i.toString().slice(-1)) == 8,
-                    'texte-secondary': helper.parseInt(i.toString().slice(-1)) == 9,
-                    'texte-indigo': helper.parseInt(i.toString().slice(-1)) == 0
-                }">
-                </i>
-                {{ classe.libelle }}
+        <div *ngIf="!loading && classeService.data.length">
+            <a class="media pd-10 bd-b" *ngFor="let classe of classeService.data; let i = index">
+                <!-- Icone -->
+                <div class="mr-2 mt-2">
+                    <span class="">
+                        <i class="fad fa-users-class" [ngClass]="{
+                            'texte-warning': helper.parseInt(i.toString().slice(-1)) == 1,
+                            'texte-yellow': helper.parseInt(i.toString().slice(-1)) == 2,
+                            'texte-success': helper.parseInt(i.toString().slice(-1)) == 3,
+                            'tx-facebook': helper.parseInt(i.toString().slice(-1)) == 4,
+                            'texte-blue': helper.parseInt(i.toString().slice(-1)) == 5,
+                            'texte-mint': helper.parseInt(i.toString().slice(-1)) == 6,
+                            'texte-primary': helper.parseInt(i.toString().slice(-1)) == 7,
+                            'texte-danger': helper.parseInt(i.toString().slice(-1)) == 8,
+                            'texte-secondary': helper.parseInt(i.toString().slice(-1)) == 9,
+                            'texte-indigo': helper.parseInt(i.toString().slice(-1)) == 0
+                        }"></i>
+                    </span>
+                </div>
+
+                <!-- Data -->
+                <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                    <div class="d-inline-block w-100">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-0 tx-13 tx-white">
+                                {{ classe.libelle }}
+                            </h6>
+                        </div>
+
+                        <p class="mb-0 tx-gray tx-12">{{ classe.etablissement.libelle }}</p>
+                    </div>
+                </div>
+
             </a>
 
-            <a [routerLink]="[classe.id]">
-                <i class="fal fa-eye tx-yellow"></i>
-            </a>
+
+            <app-loading *ngIf="loading"></app-loading>
+            <app-missing-data *ngIf="!loading && !classeService.data.length"></app-missing-data>
         </div>
-
     </nav>
 
-    <app-loading *ngIf="loading"></app-loading>
+    <div class="my-2" *ngIf="loading">
+        <app-loading></app-loading>
+    </div>
     <app-missing-data *ngIf="!data.length && !loading"></app-missing-data>
 </div>

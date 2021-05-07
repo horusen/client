@@ -64,7 +64,7 @@ export class ProfilCreateComponent
     this.initForm(
       ["fonction", "hierarchie", "personne", "etablissement"],
       [],
-      () => {}
+      () => { }
     );
   }
 
@@ -76,7 +76,6 @@ export class ProfilCreateComponent
   }
 
   onFonctionCreated(event: any) {
-    console.log(event);
     this.fonctionService.unshiftItemInData(event.item);
   }
 

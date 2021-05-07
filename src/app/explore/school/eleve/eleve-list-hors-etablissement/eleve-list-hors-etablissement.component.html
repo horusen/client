@@ -5,10 +5,7 @@
             <div class="form-group mg-t-5 mg-b-5 ">
                 <div class="input-group w-100">
                     <!--  -->
-                    <input
-                        type="text"
-                        [placeholder]="'RECHERCHER' | translate"
-                        class="form-control pd-y-10 rounded-border tx-white">
+                    <input type="text" [placeholder]="'RECHERCHER' | translate" class="form-control pd-y-10 rounded-border tx-white">
 
                     <span class="">
                         <a role="button" class="btn btn-facebook h-100 d-flex align-items-center rounded-circle ml-2">
@@ -28,11 +25,7 @@
                 <div class="d-flex justify-content-end px-3">
                     <div class="dropdown d-inline">
                         <!-- Icone -->
-                        <i
-                            class="fas fa-caret-down mt-1 clickable float-left"
-                            id="dropdownMenuButton"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
+                        <i class="fas fa-caret-down mt-1 clickable float-left" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                         </i>
 
@@ -59,15 +52,12 @@
                 </div>
                 <div class="card-body text-center pt-1 eleve">
                     <p>
-                        <img class=" img-fluid rounded-circle"
-                            [src]="eleve.eleve_details.photo"
-                            [alt]="eleve.eleve_details.nom_complet">
+                        <img class=" img-fluid rounded-circle" [src]="eleve.eleve_details.photo" [alt]="eleve.eleve_details.nom_complet">
 
-                        <i class="fas fa-circle-notch fa-spin" style="position: absolute; right: 20px;"
-                            *ngIf="loading"></i>
+                        <i class="fas fa-circle-notch fa-spin" style="position: absolute; right: 20px;" *ngIf="loading"></i>
                     </p>
 
-                    <!-- Nom de l'etudiant -->
+                    <!-- Nom de l'eleve -->
                     <h4 class="tx-12 tx-bolder tx-primary">
                         {{ eleve.eleve_details.nom_complet }}
                     </h4>

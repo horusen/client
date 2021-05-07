@@ -1,73 +1,49 @@
-<!-- Nav bar -->
-<ng-container *ngIf="single && !loading">
-    <div class="row row-xs clearfix  mg-0 pd-0 p-0">
-        <div class="col-lg-12">
-            <ul class="nav  mg-0 pd-0 bd-b">
-                <!-- DEtails -->
-                <li class="nav-item mg-0 pd-0 mg-t-6 ">
-                    <a class="nav-link3 active show" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'font-weight-bold'" [routerLink]="['./']">
-                        <i class="fad fa-info-circle tx-14 bg-light tx-primary "
-                            style="padding:8px; border-radius:50%">
-                        </i>
-                        <span class="tx-primary">
-                            {{ 'DETAILS' | translate }}
-                        </span>
-                    </a>
-                </li>
-    
-                <!-- ELeve -->
-                <li class="nav-item mg-0 pd-0 mg-t-6">
-                    <a class="nav-link3" [routerLinkActive]="'font-weight-bold'" [routerLink]="['eleve']">
-                        <i class="fad fa-user-graduate	 tx-14 bg-light tx-primary "
-                            style="padding:8px; border-radius:50%">
-                        </i>
-                        <span class="tx-primary">
-                            {{ 'elevesOuEtudiants' | translate }}
-                        </span>
-                    </a>
-                </li>
-    
-                <!-- Groupe -->
-                <li class="nav-item mg-0 pd-0 mg-t-6 ">
-                    <a class="nav-link3" [routerLinkActive]="'font-weight-bold'" [routerLink]="['groupe']">
-                        <i class="fad fa-user tx-14 bg-light tx-primary " style="padding:8px; border-radius:50%"></i>
-                        <span class="tx-primary">
-                            {{ 'GROUPES' | translate }}
-                        </span>
-                    </a>
-                </li>
-    
-                <!-- Professeur -->
-                <li class="nav-item mg-0 pd-0 mg-t-6">
-                    <a class="nav-link3" [routerLinkActive]="'font-weight-bold'" [routerLink]="['professeur']">
-                        <i class="fad fa-user-tie tx-14 bg-light tx-primary " style="padding:8px; border-radius:50%"></i>
-                        <span class="tx-primary">
-                            {{ "PROFESSEURS" | translate }}
-                        </span>
-                    </a>
-                </li>
-    
-                <!-- Tache -->
-                <li class="nav-item mg-0 pd-0 mg-t-6">
-                    <a class="nav-link3 " [routerLinkActive]="'font-weight-bold'"
-                        [routerLink]="['tache']">
-                        <i class="fad fa-tasks-alt tx-14 bg-light tx-primary "
-                            style="padding:8px; border-radius:50%">
-                        </i>
-                        <span class="tx-primary"> {{ 'TACHE' | translate }}</span>
-                    </a>
-                </li>
-    
-            </ul>
-        </div>
-    </div>
-    <div class="tab-content">
-        <div class="tab-pane fade active show" id="explore_ecoles">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
-</ng-container>
+<div class="">
+  <div class="card">
+    <!-- Nav tabs -->
+    <div class="tab-wrapper">
 
-<div class="my-5" *ngIf="loading">
-    <app-loading ></app-loading>
+      <!-- Details -->
+      <input checked="" class="tab" id="tab1" name="nav" type="radio" />
+      <a [routerLink]="['./']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+        <label for="tab1">
+          <span class="navicon fa fa-info-circle"></span>
+        </label>
+      </a>
+
+      <!-- Eleves -->
+      <input class="tab" id="tab2" name="nav" type="radio" />
+      <a [routerLink]="['eleves']" routerLinkActive="active">
+        <label for="tab2">
+          <span class="navicon fa fa-users-class"></span>
+        </label>
+      </a>
+
+
+      <!-- Groupe -->
+      <input class="tab" id="tab3" name="nav" type="radio" />
+      <a [routerLink]="['groupes']" routerLinkActive="active">
+        <label for="tab3">
+          <span class="navicon fa fa-users"></span>
+        </label>
+      </a>
+
+
+      <!-- Professeur -->
+      <input class="tab" id="tab3" name="nav" type="radio" />
+      <a [routerLink]="['professeurs']" routerLinkActive="active">
+        <label for="tab3">
+          <span class="navicon fa fa-user-tie"></span>
+        </label>
+      </a>
+
+
+
+      <div class="tab__copy scroll-11">
+        <router-outlet></router-outlet>
+      </div>
+
+
+    </div>
+  </div>
 </div>

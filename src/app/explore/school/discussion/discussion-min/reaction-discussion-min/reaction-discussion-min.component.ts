@@ -24,8 +24,8 @@ export class ReactionDiscussionMinComponent
   ngOnInit(): void {
     this._subscription[
       "discussion"
-    ] = this.discussionService.singleData$.subscribe(
-      (discussion) => (this.discussion = discussion)
-    );
+    ] = this.discussionService.singleData$.subscribe((discussion) => {
+      this.discussion = discussion;
+    });
   }
 }

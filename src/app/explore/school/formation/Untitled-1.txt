@@ -1,0 +1,40 @@
+* Rajouter photo dans classe
+* Changer l'élèment audio par defaut de HTML
+
+
+
+
+
+* Footer => Copiez et modifier celui de metrical
+* Footer => rajouter les icones des personnes avec qui l'utilisateur partage des tunels
+
+
+
+
+(DONE) Changer le boutton du modal min en fleche de direction *************
+(DONE) Ouvrir et fermer le sidebar dans chaque module
+(DONE) Header =>, changer l'icone de tasks-alt en bell
+(DONE) Header => Ajouter des  tooltips dans les bouttons
+(DONE) Header => Mettre le profil du user a l'extreme droite
+(DONE) Admin => changer l'interface
+(DONE) Admin => Ne pas oublier les animations
+(DONE) Admin => Ajouter une barre pour créer tous les objets à partir de l'interface globale
+
+
+
+(DONE)Explore etablissement => changer les couleurs dans admin-etablissement-list-object
+(DONE) Explore tache => enlever les menus qui n'ont pas lieu d'être
+(DONE) Definir les droits d'accés sur les differents module
+(DONE) Header corriger l'affichage du profile
+(DONE) Explore tache => corriger tous les bugs
+  (DONE) Revoir tunel
+  (DONE) sidebar: Revoir éleve
+  (DONE) Revoir anciens groupe
+
+
+* Groupe show => changer l'affichage
+
+* Explore tache => revoir les affichages (hauteurs des élements)
+* Sidebar global => Supprimer le comportement du hover des élèments
+
+

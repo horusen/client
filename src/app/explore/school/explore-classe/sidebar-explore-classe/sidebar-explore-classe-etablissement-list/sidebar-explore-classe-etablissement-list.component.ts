@@ -11,7 +11,7 @@ export class SidebarExploreClasseEtablissementListComponent extends BaseComponen
 
   constructor(public etablissementService: EtablissementService) {
     super(etablissementService);
-   }
+  }
 
   ngOnInit(): void {
     this.getData();
@@ -20,7 +20,6 @@ export class SidebarExploreClasseEtablissementListComponent extends BaseComponen
   getData() {
     this.loading = true;
     this.etablissementService.initialise().subscribe((data) => {
-      console.log(data.length)
       this.data = data;
       this.loading = false;
     })

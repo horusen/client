@@ -1,5 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@ctrl/ngx-emoji-mart/picker";
+@import "~ngx-toastr/toastr";
+
+.row {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  text-align: justify;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important;
+}
+
+// [class^="col"] {
+//   transition: all 0.5s;
+// }
+
+.sidebar {
+  transition: all 0.2s ease-in-out;
+}
+.sidebar-collapsed {
+  max-width: 0;
+  opacity: 0;
+  overflow: clip;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+[class^="col"] {
+  transition: all 0.2s ease-in-out !important;
+}
+
+.body {
+  height: 100vh;
+}
 
 .clickable {
   cursor: pointer;
@@ -428,6 +467,56 @@ input:focus,
   color: white !important;
 }
 
+.bgm2-primary {
+  background: #5d78ff !important;
+  color: white;
+}
+
+.bgm2-danger {
+  background: #c0392b !important;
+  color: white;
+}
+
+.bgm2-blue {
+  background: #154360 !important;
+  color: white !important;
+}
+
+.bgm2-orange {
+  background: #d35400 !important;
+  color: white !important;
+}
+
+.bgm2-success {
+  background: #34bfa3 !important;
+  color: white !important;
+}
+
+.bgm2-warning {
+  background: #eac459 !important;
+  color: white !important;
+}
+
+.bgm2-info {
+  background: #36a2f5 !important;
+  color: white !important;
+}
+
+.bgm2-mint {
+  background: #26f8cb !important;
+  color: white !important;
+}
+
+.bgm2-indigo {
+  background: #de08e6 !important;
+  color: white !important;
+}
+
+.bgm2-yellow {
+  background: #d7e608 !important;
+  color: white !important;
+}
+
 .texte-primary {
   color: #5d78ff;
 }
@@ -470,7 +559,7 @@ input:focus,
 
 // Side bar
 .sidebar-element-container {
-  max-height: 240px;
+  height: 33%;
   overflow: hidden;
   &:hover {
     overflow: auto;
@@ -489,4 +578,130 @@ input:focus,
 
 .scroll-sidebar::-webkit-scrollbar-thumb {
   background: rgb(1, 42, 86, 0.8) !important;
+}
+
+.groupe-container {
+  padding: 10px;
+  font-family: "Roboto", sans-serif;
+
+  & > * > * {
+    font-family: "Times New Roman", Times, serif;
+  }
+}
+
+.badge-outline-info {
+  border: 1px solid #17a2b8 !important;
+  color: #17a2b8;
+}
+
+.fieldset {
+  border: 1px solid #17a2b8 !important;
+  position: relative;
+  padding: 15px 10px;
+
+  h4 {
+    position: absolute;
+    top: -10px;
+    background-color: white;
+    z-index: 2;
+    color: #17a2b8 !important;
+  }
+}
+
+.border-dribbble {
+  border: 1px solid #ea4c8a;
+}
+
+.border-twitter {
+  border: 1px solid #00aced;
+}
+
+.border-flickr {
+  border: 1px solid #ff0084;
+}
+
+.border-facebook {
+  border: 1px solid #3b5998;
+}
+
+.border-google-plus {
+  border: 1px solid #d34836;
+}
+
+.border-instagram {
+  border: 1px solid #da2e76;
+}
+
+.border-teal {
+  border: 1px solid #00b297;
+}
+
+.border-linkedin {
+  border: 1px solid #4875b4;
+}
+
+.border-pinterest {
+  border: 1px solid #c51f26;
+}
+
+.border-youtube {
+  border: 1px solid #f70000;
+}
+
+.hover {
+  &--border-dribbble:hover {
+    border: 1px solid #ea4c8a !important;
+  }
+
+  &--border-twitter:hover {
+    border: 1px solid #00aced !important;
+  }
+
+  &--border-flickr:hover {
+    border: 1px solid #ff0084 !important;
+  }
+
+  &--border-facebook:hover {
+    border: 1px solid #3b5998 !important;
+  }
+
+  &--border-google-plus:hover {
+    border: 1px solid #d34836 !important;
+  }
+
+  &--border-instagram:hover {
+    border: 1px solid #da2e76 !important;
+  }
+
+  &--border-teal:hover {
+    border: 1px solid #00b297 !important;
+  }
+
+  &--border-linkedin:hover {
+    border: 1px solid #4875b4 !important;
+  }
+
+  &--border-pinterest:hover {
+    border: 1px solid #c51f26 !important;
+  }
+
+  &--border-youtube:hover {
+    border: 1px solid #f70000 !important;
+  }
+
+  &--border-primary:hover {
+    border: 1px solid #0866c6 !important;
+  }
+
+  &--border-indigo:hover {
+    border: 1px solid #de08e6 !important;
+  }
+
+  &--border-warning:hover {
+    border: 1px solid #eac459 !important;
+  }
+}
+
+.h-33p {
+  height: 33%;
 }

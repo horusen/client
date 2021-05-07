@@ -20,7 +20,7 @@ export class GroupeListByProfesseurComponent
 
   getData() {
     this.loading = true;
-    this.groupeService.getByUserAsProfesseur().subscribe(() => {
+    this.groupeService.getGroupeProfesseurByUserAsProfesseur().subscribe(() => {
       this.loading = false;
     });
   }

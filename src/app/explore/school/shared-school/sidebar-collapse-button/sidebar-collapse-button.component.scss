@@ -1,0 +1,13 @@
+.collapse-button {
+  position: absolute;
+  top: 8px;
+  left: 37px;
+  z-index: 1000;
+  display: inline-block;
+  cursor: pointer;
+
+  .fa-caret-right {
+    position: absolute;
+    left: 10px;
+  }
+}

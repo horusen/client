@@ -1,11 +1,13 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { AuthGuard } from "./authentification/auth.guard";
 import { ConnexionComponent } from "./authentification/connexion/connexion.component";
 import { InscriptionComponent } from "./authentification/inscription/inscription.component";
 
 const routes: Routes = [
   {
     path: "school",
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import("./explore/school/school.module").then(
         (module) => module.SchoolModule
@@ -27,4 +29,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

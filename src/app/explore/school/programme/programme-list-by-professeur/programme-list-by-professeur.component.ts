@@ -20,7 +20,7 @@ export class ProgrammeListByProfesseurComponent
 
   getData() {
     this.loading = true;
-    this.programmeService.getByUserAsProfesseur().subscribe(() => {
+    this.programmeService.getByCurrentUserAsProfesseur().subscribe(() => {
       this.loading = false;
     });
   }

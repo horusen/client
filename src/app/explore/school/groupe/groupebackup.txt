@@ -1,0 +1,33 @@
+ <!-- Titre -->
+      <div class="col-8">
+        <a class="btn btn-oblong btn-light tx-primary float-left bd-0 btn-icon clickable"
+            *ngIf="displayBy!='groupesIndependants'" [ngbTooltip]="'creerUnGroupe' | translate"
+            (click)="showGroupeCreateComponent()">
+          <i class="fad fa-plus-circle tx-14 tx-primary" style="padding: 0px; border-radius: 50%">
+          </i>
+        </a>
+        <h3 class="tx- tx-16 mt-2 tx-primay italic mg-l-20 bold" *ngIf="displayBy == 'groupesIndependants'">
+          <i class="fad fa-users-class mr-1"></i>
+          <span>{{ 'listeDesGroupesIndependants' | translate }}</span>
+
+          <i class="fal fa-plus-circle clickable ml-3" (click)="showGroupeCreateComponent()"></i>
+        </h3>
+      </div>
+
+      <!-- Boutton ajouter -->
+      <div class="col-lg-4 float-right btn-demo">
+
+
+        <div class="form-group mg-b-5">
+          <div class="input-group w-100">
+            <!--  -->
+            <input #search type="text" [placeholder]="'RECHERCHER' | translate" class="form-control pd-y-8" />
+
+            <span class="">
+              <button class="btn bg-light h-100 d-flex align-items-center">
+                <i class="fad fa-search tx-facebook"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>

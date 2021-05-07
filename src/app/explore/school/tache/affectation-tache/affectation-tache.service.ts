@@ -116,6 +116,12 @@ export class AffectationTacheService extends BaseService {
     this.setFiltre(element, [element_id]);
   }
 
+  getByEleve(eleve: number, params?: any) {
+    return this.factory
+      .get(`eleve/${eleve}/affectation`, { params })
+      .pipe(tap(this.listResponseHandler()));
+  }
+
   getByUser(user: number) {
     return this.factory
       .get(`user/${user}/affectation-tache`)

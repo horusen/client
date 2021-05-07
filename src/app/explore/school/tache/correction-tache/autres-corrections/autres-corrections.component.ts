@@ -28,7 +28,7 @@ export class AutresCorrectionsComponent
     this.correctionTacheService
       .getAutresCorrections(tache, correction)
       .subscribe(() => {
-        this.loading = true;
+        this.loading = false;
       });
   }
 }

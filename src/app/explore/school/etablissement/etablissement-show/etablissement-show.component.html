@@ -1,4 +1,170 @@
-<router-outlet *ngIf="single && !loading"></router-outlet>
+<ng-container *ngIf="!loading && single">
+  <div class="row m-0">
+    <div class="col-12 p-0">
+      <!-- Header -->
+      <div class="card">
+        <div class="row mx-0 mg-y-7">
+          <!-- Titre -->
+          <div class="col-8 d-flex align-items-center">
+            <a class="back-button border rounded-circle tx-pink float-left mr-2" [routerLink]="['../']">
+              <i class="fad fa-arrow-left "></i>
+            </a>
+
+            <span class="ml-2">
+              <img src="assets/images/xs/ecole.png" alt="avatar" style="height: 33px" />
+              {{ single.libelle | translate }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="nav-tabs-top">
+        <ul class="nav bg-white mg-0 pb-2 pd-0 bd-b bd-t">
+          <!-- Details -->
+          <li class="nav-item mg-0 pd-0 ">
+            <a class="nav-link3" style="padding: 5px 12px;" [routerLink]="['./']" [routerLinkActive]="'active'"
+                [routerLinkActiveOptions]="{exact: true}">
+              <i [routerLinkActive]="'fas'" [routerLinkActiveOptions]="{exact: true}" class="fal fa-info-circle tx-12 bg-light tx-yeto2 "
+                  style="padding:6px; border-radius:50%">
+              </i>
+              <span class="tx-facebook">
+                {{ 'DETAILS' | translate }}
+              </span>
+            </a>
+          </li>
+
+
+          <!-- Programme -->
+          <li class="nav-item mg-0 pd-0 ">
+            <a class="nav-link3" style="padding: 5px 12px;" [routerLink]="['programme']" [routerLinkActive]="'active'">
+              <i [routerLinkActive]="'fas'" class="fal fa-server tx-12 bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+              </i>
+              <span class="tx-facebook">
+                {{ 'PROGRAMMES' | translate }}
+              </span>
+            </a>
+          </li>
+
+
+          <!-- Formation -->
+          <li class="nav-item ">
+            <a class="nav-link3 " [routerLink]="['formation']" [routerLinkActive]="'active'">
+              <i [routerLinkActive]="'fas'" class="fal fa-graduation-cap bg-light tx-yeto2" style="padding:6px; border-radius:50%">
+              </i>
+              <span class="tx-facebook">
+                {{ 'FORMATIONS' | translate }}
+              </span>
+            </a>
+          </li>
+
+          <!-- Classe -->
+          <li class="nav-item ">
+            <a class="nav-link3 " [routerLink]="['classe']" [routerLinkActive]="'active'">
+              <i [routerLinkActive]="'fas'" class="fal fa-users-class bg-light tx-yeto2" style="padding:6px; border-radius:50%">
+              </i>
+              <span class="tx-facebook">
+                {{ 'CLASSES' | translate }}
+              </span>
+            </a>
+          </li>
+
+
+          <!-- Professeur -->
+          <li class="nav-item ">
+            <a class="nav-link3 " [routerLink]="['professeur']" [routerLinkActive]="'active'">
+              <i [routerLinkActive]="'fas'" class="fal fa-user-tie bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+              </i>
+              <span class="tx-facebook">
+                {{ 'PROFESSEURS' | translate }}
+              </span>
+            </a>
+          </li>
+
+          <!-- Eleve -->
+          <li class="nav-item ">
+            <a class="nav-link3 " [routerLink]="['eleve']" [routerLinkActive]="'active'">
+              <i [routerLinkActive]="'fas'" class="fal fa-user-graduate bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+              </i>
+              <span class="tx-facebook">
+                {{ 'elevesOuEtudiants' | translate }}
+              </span>
+            </a>
+          </li>
+
+
+          <!-- Parent -->
+          <li class="nav-item ">
+            <a class="nav-link3 " [routerLink]="['parents-eleves']" [routerLinkActive]="'active'">
+              <i [routerLinkActive]="'fas'" class="fal fa-user-shield bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+              </i>
+              <span class="tx-facebook">
+                {{ 'parentDEleves' | translate }}
+              </span>
+            </a>
+          </li>
+
+
+
+          <!-- Employe -->
+          <li class="nav-item ">
+            <a class="nav-link3 " [routerLink]="['structure']" [routerLinkActive]="'active'">
+              <i [routerLinkActive]="'fas'" class="fal fa-person-carry bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+              </i>
+              <span class="tx-facebook">
+                {{ 'EMPLOYES' | translate }}
+              </span>
+            </a>
+          </li>
+
+
+          <!-- Services -->
+          <li class="nav-item ">
+            <a class="nav-link3 " [routerLink]="['service']" [routerLinkActive]="'active'">
+              <i [routerLinkActive]="'fas'" class="fal fa-building bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+              </i>
+              <span class="tx-facebook">
+                {{ 'SERVICES' | translate }}
+              </span>
+            </a>
+          </li>
+
+          <!-- Etablissement affilié -->
+          <li class="nav-item ">
+            <a class="nav-link3 " [routerLink]="['etablissements-affilies']" [routerLinkActive]="'active'">
+              <i [routerLinkActive]="'fas'" class="fal fa-sitemap bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+              </i>
+              <span class="tx-facebook">
+                {{ 'etablissementsAffilies' | translate }}
+              </span>
+            </a>
+          </li>
+
+          <!-- Contacter -->
+          <li class="nav-item ">
+            <a class="nav-link3 " [routerLink]="[urlLastItem]" [queryParams]="{
+                type_discussion: 'etablissement',
+                correspondant: auth.user.id_inscription,
+                etablissement: single.id,
+                modal: 'discussion-min'}">
+              <i class="fal fa-comments-alt bg-light tx-yeto2 " style="padding:6px; border-radius:50%">
+              </i>
+              <span class="tx-facebook">
+                {{ 'CONTACTER' | translate }}
+              </span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane fade active show" id="explore_ecoles">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
 
 <div class="my-5" *ngIf="loading">
   <app-loading></app-loading>

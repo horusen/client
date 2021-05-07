@@ -1,6 +1,7 @@
 import { tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { BaseService } from "src/app/shared/services/base.service";
+import { Params } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -26,6 +27,12 @@ export class CorrectionTacheService extends BaseService {
         error: (error) => this.errorResponseHandler(error),
       })
     );
+  }
+
+  getByCreator(user: number, params?: Params) {
+    return this.factory
+      .get(`user/${user}/corrections`, { params })
+      .pipe(tap(this.listResponseHandler()));
   }
 
   getAutresCorrections(tache: number, correction: number) {

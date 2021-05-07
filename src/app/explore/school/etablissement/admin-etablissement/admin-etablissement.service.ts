@@ -15,4 +15,18 @@ export class AdminEtablissementService extends BaseService {
       .get(`etablissement/${etablissement}/administrateur`)
       .pipe(tap(this.listResponseHandler()));
   }
+
+  add(elements: object) {
+    return this.factory.post(this.endPoint, elements).pipe(
+      tap({
+        next: (response) => {
+          this._data = [...response, ...this._data];
+          this.data$.next(this._data);
+        },
+        error: (error) => {
+          this.errorResponseHandler(error);
+        },
+      })
+    );
+  }
 }

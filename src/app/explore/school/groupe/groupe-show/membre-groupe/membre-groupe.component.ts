@@ -1,5 +1,7 @@
+import { Subscription } from "rxjs";
 import { Component, OnInit } from "@angular/core";
 import { Helper } from "src/app/shared/services/helper";
+import { GroupeService } from "../../groupe.service";
 
 @Component({
   selector: "app-membre-groupe",
@@ -8,7 +10,13 @@ import { Helper } from "src/app/shared/services/helper";
 })
 export class MembreGroupeComponent implements OnInit {
   activeAddComponent: boolean = false;
-  constructor(public helper: Helper) {}
+  groupeSubscription: Subscription;
+  groupe: any;
+  constructor(public helper: Helper, public groupeService: GroupeService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.groupeSubscription = this.groupeService.singleData$.subscribe(
+      (groupe) => (this.groupe = groupe)
+    );
+  }
 }

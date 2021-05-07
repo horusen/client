@@ -1,28 +1,26 @@
 <div class="sl-item p-0" *ngIf="correctionSevice.data.length">
-    <!-- Icone -->
-    <div class="sl-left">
-        <span
-            class="wd-40 ht-40 card-icon-gris d-flex align-items-center justify-content-center rounded-circle hidden-xs op3">
-            <i class="fal fa-file-search tx-16 tx-primary"></i></span>
-    </div>
+  <!-- Icone -->
+  <div class="sl-left">
+    <span class="wd-40 ht-40 card-icon-gris d-flex align-items-center justify-content-center rounded-circle hidden-xs op3">
+      <i class="fal fa-file-search tx-16 tx-primary"></i></span>
+  </div>
 
 
-    <div class="sl-right">
-        <!-- Titre -->
-        <div>
-            <span class="tx-gray-600 tx-16">
-                {{ 'CORRECTIONS' | translate }}
-            </span>
-        </div>
-        <!-- Liste des solution -->
-        <div class="bg-bluelight1 pd-y-10 p-2">
-            <span class="badge badge-pill badge-light bg-white"
-                *ngFor="let solution of correctionSevice.data">
-                <a class="tx-pink font-weight-bold" [routerLink]="['correction', solution.id]">
-                    {{ solution.libelle }}
-                </a>
-            </span>
-        </div>
+  <div class="sl-right">
+    <!-- Titre -->
+    <div>
+      <span class="tx-gray-600 tx-16">
+        {{ 'CORRECTIONS' | translate }}
+      </span>
     </div>
-    <hr>
+    <!-- Liste des solution -->
+    <div class="bg-bluelight1 pd-y-10 p-2">
+      <span class="badge badge-pill badge-light bg-white" *ngFor="let solution of correctionSevice.data">
+        <a class="tx-pink font-weight-bold" [routerLink]="['..','correction', solution.id]">
+          {{ solution.libelle }}
+        </a>
+      </span>
+    </div>
+  </div>
+  <hr>
 </div>

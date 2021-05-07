@@ -27,4 +27,14 @@ export class UserService extends BaseService {
       .get(`etablissement/${etablissement}/charger-com/not`)
       .pipe(tap(this.onlyErrorResponseHandler()));
   }
+
+  getNonProfesseurOnEtablissement(etablissement: number) {
+    return this.factory
+      .get(`etablissement/${etablissement}/professeur/not`)
+      .pipe(tap(this.listResponseHandler()));
+  }
+
+  getByNotInClasse(classe: number) {
+    return this.factory.get(`classe/${classe}/eleve/not`);
+  }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { EtablissementService } from "../../../etablissement/etablissement.service";
 
@@ -9,8 +10,13 @@ import { EtablissementService } from "../../../etablissement/etablissement.servi
 })
 export class AdminsitrationEtablissementListComponent
   extends BaseComponent
-  implements OnInit {
-  constructor(public etablissementService: EtablissementService) {
+  implements OnInit, AfterViewInit {
+  addEtablissement: boolean = false;
+  constructor(
+    public etablissementService: EtablissementService,
+    public route: ActivatedRoute,
+    public router: Router
+  ) {
     super(etablissementService);
   }
 
@@ -18,16 +24,21 @@ export class AdminsitrationEtablissementListComponent
     this.getData();
   }
 
-  getData() {
+  ngAfterViewInit() {
+    this.route.fragment.subscribe((fragment) => {
+      if (fragment == "create-etablissement") {
+        this.addEtablissement = true;
+        this.helper.toggleModal("etablissement-create-modal");
+      }
+    });
+  }
+
+  getData(): void {
     this.loading = true;
     this.etablissementService
-      .getEtablissementsWhereUserIsAdmin()
+      .getEtablissementsWhereUserIsAdminOrChargerCom()
       .subscribe(() => {
         this.loading = false;
       });
   }
-
-  // selectEtablissement(etablissement: number) {
-  //   this.etablissementService.getSingle(etablissement);
-  // }
 }

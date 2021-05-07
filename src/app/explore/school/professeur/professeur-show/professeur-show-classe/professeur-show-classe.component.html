@@ -1,0 +1,58 @@
+<!-- Titre -->
+<h4 class="text-center tx-rubik">{{ 'CLASSES' | translate }}</h4>
+
+<!-- Liste des classes -->
+<div class="collapse show" id="activityLog2">
+  <!-- Elements -->
+  <div class="activity bd-b" *ngIf="classeService.data.length && !loading">
+    <a class="time-item card-list" [routerLink]="['../', '../', '../', 'classe', item.id]" *ngFor="let item of classeService.data">
+      <!-- Icone -->
+      <i class="fa fa-users-class bg-soft-warning"></i>
+
+      <!-- Info -->
+      <div class="item-info ">
+        <!-- Nom  et date création de la classe -->
+        <div class="d-flex justify-content-between align-items-center">
+          <!-- Nom classe -->
+          <h6 class="tx-dark tx-rubik tx-13 mb-0">{{ item.libelle }}</h6>
+
+          <!-- Date de création -->
+          <span class="small">{{ item.created_at | date }}</span>
+        </div>
+
+        <!-- Description classe -->
+        <p class="mt-2 tx-12" [innerHTML]="helper.strcut(item.description, 120)"></p>
+
+        <!-- Mot clé -->
+        <div>
+          <ng-container *ngFor="let mc of item.mot_cles; let i = index">
+            <span class="badge mr-1 " *ngIf="i < 3" [ngClass]="{
+              'bgm-warning': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 1,
+              'bgm-yellow': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 2,
+              'bgm-primary': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 3,
+              'bg-facebook': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 4,
+              'bgm-blue': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 5,
+              'bgm-mint': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 6,
+              'bgm-success': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 7,
+              'bgm-danger': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 8,
+              'bgm-secondary': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 9,
+              'bgm-indigo': helper.parseInt(mc.charCodeAt(mc.length ? mc.length - 2 : 0).toString().slice(-1)) == 0
+            }">
+              {{ '#' + mc }}
+            </span>
+          </ng-container>
+
+          <span *ngIf="item.mot_cles >= 3"> +{{ item.mot_cles.length - 3 }}</span>
+
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Loading -->
+  <div class="my-5" *ngIf="loading">
+    <app-loading></app-loading>
+  </div>
+
+  <app-missing-data *ngIf="!loading && !classeService.data.length"></app-missing-data>
+</div>

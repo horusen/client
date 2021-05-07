@@ -6,7 +6,6 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
 import { NgxPicaModule } from "@digitalascetic/ngx-pica";
-import { ToastrModule } from "ng6-toastr-notifications";
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DpDatePickerModule } from "ng2-date-picker";
@@ -23,6 +22,10 @@ import { PageLoadingComponent } from "./components/page-loading/page-loading.com
 import { CommonCreateComponent } from "./components/common-component/common-create/common-create.component";
 import { OverlayComponent } from "./components/overlay/overlay.component";
 import { ModalSidebarComponent } from "./components/modal-sidebar/modal-sidebar.component";
+import { ProfileComponent } from "../profile/profile/profile.component";
+import { VoirPlusDirective } from "./directive/voir-plus.directive";
+import { ReadMoreComponent } from "./components/read-more.component";
+import { ColorPickerModule } from "ngx-color-picker";
 @NgModule({
   declarations: [
     ModalComponent,
@@ -33,10 +36,12 @@ import { ModalSidebarComponent } from "./components/modal-sidebar/modal-sidebar.
     PageLoadingComponent,
     OverlayComponent,
     ModalSidebarComponent,
+    ProfileComponent,
+    VoirPlusDirective,
+    ReadMoreComponent,
   ],
   imports: [
     // BrowserModule,
-    ToastrModule,
     CommonModule,
     MatTooltipModule,
     AngularMultiSelectModule,
@@ -52,6 +57,7 @@ import { ModalSidebarComponent } from "./components/modal-sidebar/modal-sidebar.
     NgbModule,
     TranslateModule.forChild(),
     PickerModule,
+    ColorPickerModule,
   ],
   exports: [
     MatTooltipModule,
@@ -68,7 +74,6 @@ import { ModalSidebarComponent } from "./components/modal-sidebar/modal-sidebar.
     NgbModule,
     TranslateModule,
     PickerModule,
-    ToastrModule,
     OverlayComponent,
     ModalComponent,
     CommonCreateComponent,
@@ -77,6 +82,9 @@ import { ModalSidebarComponent } from "./components/modal-sidebar/modal-sidebar.
     LoadingComponent,
     MissingDataComponent,
     PageLoadingComponent,
+    ProfileComponent,
+    ReadMoreComponent,
+    ColorPickerModule,
   ],
 })
 export class SharedModule {}

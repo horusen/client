@@ -12,6 +12,13 @@ const routes: Routes = [
     component: ExploreGroupeComponent,
     children: [
       {
+        path: "tribune",
+        loadChildren: () =>
+          import("./../discussion/discussion.module").then(
+            (module) => module.DiscussionModule
+          ),
+      },
+      {
         path: "",
         loadChildren: () =>
           import("./../groupe/groupe.module").then(

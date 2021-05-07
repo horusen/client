@@ -1,24 +1,24 @@
-<ng-container *ngIf="!loading && data.length">
+<ng-container *ngIf="!loading && classeService.data.length">
     <!-- Liste des classe -->
     <div class="row row-xs mg-l-0 mg-r-0">
-        <div class="col-sm-6 col-xl-3" *ngFor="let classe of data">
+        <div class="col-sm-6 col-xl-3" *ngFor="let classe of classeService.data">
             <div class=" card mg-b-20 bg-light">
                 <div class="card-body text-center">
                     <!-- Icone -->
                     <i class="hidden-xs fas fa-users-class tx-40 tx-white bg-primary op-5"
-                        style="padding:10px; border-radius: 50%; border: 1px solid blue 0,5;">
+                       style="padding:10px; border-radius: 50%; border: 1px solid blue 0,5;">
                     </i>
 
                     <!-- Libelle -->
                     <h5 class=" tx-14 mt-2  bold">
                         <a class="tx-warning" [routerLink]="[classe.id]">
-                          {{ classe.libelle }}
+                            {{ classe.libelle }}
                         </a>
                     </h5>
 
 
                     <h5 class="tx-primary tx-13">
-                        <i class="fad fa-graduation-cap"></i>  {{ classe.formation.libelle }}
+                        <i class="fad fa-graduation-cap"></i> {{ classe.formation.libelle }}
                     </h5>
 
                 </div>
@@ -38,7 +38,5 @@
 <div class="my-5" *ngIf="loading">
     <app-loading class="w-100"></app-loading>
 </div>
-<app-missing-data
-    *ngIf="!loading && !data.length"
-    class="w-100">
+<app-missing-data *ngIf="!loading && !classeService.data.length" class="w-100">
 </app-missing-data>

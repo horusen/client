@@ -1,16 +1,12 @@
 {
-  "prettier.printWidth": 150,
-  "editor.tabSize": 6,
-"editor.wordWrapColumn": 160,
-  "workbench.colorCustomizations": {
-        "statusBar.background": "#691d7c",
-        "statusBar.foreground": "#ffffff",
-        "statusBarItem.hoverBackground": "#7a3c8a"
-},
-  "html.format.wrapLineLength": 150,
-"editor.rulers": [
-    150
-],
-"html.format.wrapAttributes": "preserve-aligned",
-"prettier.tabWidth": 4
+    "prettier.printWidth": 120,
+    "prettier.tabWidth": 4,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 120,
+    "html.format.wrapAttributesIndentSize": 4,
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "prettier.useTabs": true,
+    "angular.enable-experimental-ivy-prompt": false
+
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, Input, OnInit } from "@angular/core";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { ClasseService } from "../../classe/classe.service";
 import { EtablissementService } from "../../etablissement/etablissement.service";
@@ -12,6 +12,8 @@ import { ProfesseurService } from "../professeur.service";
 })
 export class ProfesseurListComponent extends BaseComponent implements OnInit {
   international: boolean = false;
+  @Input() minified: boolean = false;
+  adminRouteRegex = /school\/administration\/info\/[0-9]+\/details\/professeur/;
   constructor(
     public professeurService: ProfesseurService,
     public route?: ActivatedRoute,
@@ -23,99 +25,134 @@ export class ProfesseurListComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._subscription["loading"] = this.professeurService.loading$.subscribe(
-      (loading) => {
-        this.loading = loading;
-      }
-    );
+    if (this.route.snapshot.queryParams["filter"]) {
+      this.getData(this.route.snapshot.queryParams["filter"]);
+    } else {
+      this.getData();
+    }
 
-    if (this.router.url.includes("school/explore")) {
+    this.route.queryParams.subscribe((queryParams) => {
+      if (queryParams.filter) {
+        this.getData(queryParams.filter);
+      }
+    });
+  }
+
+  getProfesseurInternationals(params?: Params) {
+    this.international = true;
+    this.loading = true;
+    this.professeurService
+      .getProfesseursInternationals(params)
+      .subscribe(() => {
+        this.loading = false;
+      });
+  }
+
+  getData(params?: Params) {
+    if (this.router.url.includes("school/tache")) {
       this.getByUserClasse();
-    } else if (this.router.url.includes("school/professeur")) {
-      this.getAutresDeMemeEtablissement();
-    } else if (this.router.url.includes("school/echo/hierarchie-interne")) {
-      this.getByEtablissement(this.etablissementService.etablissement.id);
+    }
+    // Liste des professeurs du même etablissement
+    else if (this.router.url.match(/school\/professeur/)) {
+      this.getProfesseursDeMemesEtablissements(params);
+    }
+    // etablissement show
+    else if (this.router.url.includes("school/echo")) {
+      this.getAll(params);
+    }
+
+    // Echo
+    else if (this.router.url.includes("school/echo/professeur")) {
+      this.etablissementService.singleData$.subscribe((etablissement) => {
+        this.getByEtablissement(etablissement.id, params);
+      });
     } else if (this.router.url.includes("school/echo/hierarchie-externe")) {
       this.getHorsEtablissementMemePays(
         this.etablissementService.etablissement.id
       );
     } else if (this.router.url.includes("school/echo/annuaire")) {
-      this.getAll();
-    } else if (
-      this.router.url.includes("school/echo") &&
-      /\d/.test(this.router.url)
+      this.getAll(params);
+    }
+    // Get by etablissement
+    else if (
+      this.router.url.match(/school\/administration\/[0-9]+\/professeur/) ||
+      this.router.url.match(
+        /school\/administration\/info\/[0-9]+\/details\/professeur/
+      )
     ) {
       this.etablissementService.singleData$.subscribe((etablissement) => {
-        console.log("etablissement");
-        this.getByEtablissement(etablissement.id);
+        this.getByEtablissement(etablissement.id, params);
       });
-    } else if (this.router.url.includes("school/echo/class")) {
-      this.getByClasse();
     }
-    // this.route.queryParams.subscribe((params) => {
-    //   if (params["international"] == "true") {
-    //     this.getProfesseurInternationals();
-    //   } else if (params["by"] && params["by"] == "user-class") {
-    //   }
-    // });
-  }
-
-  getProfesseurInternationals(keyword: string = "") {
-    this.international = true;
-    this.loading = true;
-    this.professeurService
-      .getProfesseursInternationals(keyword)
-      .subscribe(() => {
-        this.loading = false;
+    // Liste des professeurs par classe
+    else if (this.router.url.match(/classe\/[0-9]+\/professeur/)) {
+      this.classeService.singleData$.subscribe((etablissement) => {
+        this.getByClasse(params);
       });
+    }
   }
 
-  getByClasse(keyword: string = "") {
+  getByClasse(params?: Params) {
     this.classeService.singleData$.subscribe((classe) => {
       this.loading = true;
-      this.professeurService.getByClasse(classe.id, keyword).subscribe(() => {
+      this.professeurService.getByClasse(classe.id, params).subscribe(() => {
         this.loading = false;
       });
     });
   }
 
-  getAll(keyword: string = "") {
+  delete(professeur: number) {
+    this.helper.alertConfirmation(() => {
+      this.loading = true;
+      this.professeurService.delete(professeur).subscribe(() => {
+        this.loading = false;
+        this.helper.alertSuccess();
+      });
+    });
+  }
+
+  getAll(params?: Params) {
     this.loading = true;
-    this.professeurService.get(keyword).subscribe(() => {
+    this.professeurService.get(true, params).subscribe(() => {
       this.loading = false;
     });
   }
 
-  getHorsEtablissementMemePays(etablissement: number, keyword: string = "") {
+  getHorsEtablissementMemePays(etablissement: number, params?: Params) {
     this.loading = true;
     this.professeurService
-      .getHorsEtablissementMemePays(etablissement, keyword)
+      .getHorsEtablissementMemePays(etablissement, params)
       .subscribe(() => {
         this.loading = false;
       });
   }
 
-  getByEtablissement(etablissement: number, keyword: string = "") {
+  getByEtablissement(etablissement: number, params?: Params) {
     this.loading = true;
     this.professeurService
-      .getByEtablissement(etablissement, keyword)
+      .getByEtablissement(etablissement, params)
       .subscribe(() => {
         this.loading = false;
       });
   }
 
-  getAutresDeMemeEtablissement(keyword: string = "") {
+  getProfesseursDeMemesEtablissements(params?: Params) {
     this.loading = true;
     this.professeurService
-      .getAutresDeMemesEtablissements(keyword)
+      .getProfesseursDeMemesEtablissements(params)
       .subscribe(() => {
         this.loading = false;
       });
   }
-  getByUserClasse(keyword: string = "") {
+
+  getByUserClasse(params?: Params) {
     this.loading = true;
-    this.professeurService.getByUserClasse(keyword).subscribe(() => {
+    this.professeurService.getByUserClasse(params).subscribe(() => {
       this.loading = false;
     });
+  }
+
+  modifier(professeur: any) {
+    this.professeurService.singleData = professeur;
   }
 }

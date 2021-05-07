@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
-import { AuthService } from "src/app/authentification/auth.service";
+import { ChargerCommunicationEtablissementService } from "../etablissement/admin-etablissement/charger-communication-etablissement/charger-communication-etablissement.service";
+import { EtablissementService } from "../etablissement/etablissement.service";
 import { DiscussionService } from "./discussion.service";
 
 @Component({
@@ -9,22 +10,31 @@ import { DiscussionService } from "./discussion.service";
   templateUrl: "./discussion.component.html",
   styleUrls: ["./discussion.component.scss"],
 })
-export class DiscussionComponent extends BaseComponent implements OnInit {
-  type: string;
-  @Input() parent: string = "";
-  discussion: any;
-  activeComponent = {
-    professeur: this.parent == "explore-professeur", // est actif par défaut dans la section explore-professeur
-    groupe: false,
-    "sous-reseaux": false,
-    sujet: this.parent == "sous-reseaux",
-    "membre-administration": false,
+export class DiscussionComponent
+  extends BaseComponent
+  implements OnInit, OnDestroy {
+  modulePathsRegex = {
+    // Regex correspondant aux differents modules qui utilise discussion
+    // Son but est d'afficher sujet ou dernières discussion suivant le module approprié
+    "explore-professeur": new RegExp("school/professeur/explore"),
+    "administration-etablissement": new RegExp(
+      "school/administration/[0-9]+/explore"
+    ),
+    groupe: new RegExp("./tribune"),
+    "explore-reseaux": new RegExp("school/reseaux/[0-9]+/sous-reseau/[0-9]+"),
   };
+
+  @Input() parent: string = "";
+  type_discussion: any;
+  discussion: any;
+  displayAssets: boolean = true;
+
   constructor(
     public discussionService: DiscussionService,
     public route: ActivatedRoute,
     public router: Router,
-    public auth: AuthService
+    public chargerComService: ChargerCommunicationEtablissementService,
+    public etablissementService: EtablissementService
   ) {
     super(discussionService);
   }
@@ -32,67 +42,14 @@ export class DiscussionComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       if (params["type_discussion"]) {
-        this.activateComponent(params["type_discussion"]);
-
-        // get Discussion
-
-        params["type_discussion"] == "correspondance" && params["correspondant"]
-          ? this.checkDiscussion(1, params["correspondant"])
-          : null;
-
-        params["type_discussion"] == "membre-administration" &&
-        params["membre-administration"]
-          ? this.checkDiscussion(1, params["membre-administration"])
-          : null;
-
-        params["type_discussion"] == "professeur" && params["professeur"]
-          ? this.checkDiscussion(1, params["professeur"])
-          : null;
-
-        params["type_discussion"] == "groupe" && params["groupe"]
-          ? this.checkDiscussion(2, params["groupe"])
-          : null;
-        params["type_discussion"] == "sous-reseaux" && params["sous-reseaux"]
-          ? this.checkDiscussion(3, params["sous-reseaux"])
-          : null;
-        params["type_discussion"] == "sujet" && params["sujet"]
-          ? this.checkDiscussion(4, +params["sujet"])
-          : null;
-
-        params["type_discussion"] == "etablissement" && params["etablissement"]
-          ? this.checkDiscussion(
-              5,
-              +params["etablissement"],
-              this.auth.user.id_inscription
-            )
-          : null;
-
-        params["type_discussion"] == "service_etablissement" &&
-        params["service_etablissement"]
-          ? this.checkDiscussion(6, +params["service_etablissement"])
-          : null;
+        this.checkDiscussionByQueryParams(params);
       }
     });
+  }
 
-    if (this.router.url.includes("school/echo/administration")) {
-      this.type = "etablissement";
-    }
-
-    if (
-      this.parent == "sous-reseaux" &&
-      !this.router.url.includes("type-discussion")
-    ) {
-      this.router.navigate(["./"], {
-        queryParams: { type_discussion: "sujet" },
-        relativeTo: this.route,
-      });
-    }
-
-    this._subscription[
-      "discussion"
-    ] = this.discussionService.singleData$.subscribe(
-      (discussion) => (this.discussion = discussion)
-    );
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.discussionService.singleData = null;
   }
 
   checkDiscussion(
@@ -102,19 +59,68 @@ export class DiscussionComponent extends BaseComponent implements OnInit {
   ) {
     this.discussionService
       .getDiscussion(type_discussion, idTypeDiscussion, correspondant)
-      .subscribe();
+      .subscribe((discussion) => {});
   }
 
-  resetComponent() {
-    Object.keys(this.activeComponent).forEach((item) => {
-      this.activeComponent[item] = false;
-    });
-  }
-
-  activateComponent(component: string) {
-    if (this.activeComponent.hasOwnProperty(component)) {
-      this.resetComponent();
-      this.activeComponent[component] = true;
+  checkDiscussionByQueryParams(params: any) {
+    // Correspondance
+    if (
+      (params["type_discussion"] == "correspondance" ||
+        params["type_discussion"] == "professeur") &&
+      params["correspondant"]
+    ) {
+      this.type_discussion = "correspondance";
+      this.checkDiscussion(1, params["correspondant"]);
+    }
+    // membre administration
+    else if (
+      params["type_discussion"] == "membre-administration" &&
+      params["membre-administration"]
+    ) {
+      this.checkDiscussion(1, params["membre-administration"]);
+      this.type_discussion = "correspondance";
+    } else if (
+      params["type_discussion"] == "professeur" &&
+      params["professeur"]
+    ) {
+      this.type_discussion = "professeur";
+      this.checkDiscussion(1, params["professeur"]);
+    } else if (
+      (params["type_discussion"] == "groupe" ||
+        params["type_discussion"] == "groupe-professeur" ||
+        params["type_discussion"] == "groupe-independant") &&
+      params["groupe"]
+    ) {
+      this.type_discussion = "groupe";
+      this.checkDiscussion(4, params["sujet"]);
+    } else if (
+      params["type_discussion"] == "sous-reseaux" &&
+      params["sous-reseaux"]
+    ) {
+      this.type_discussion = "sous-reseau";
+      this.checkDiscussion(3, params["sous-reseaux"]);
+    } else if (params["type_discussion"] == "sujet" && params["sujet"]) {
+      this.type_discussion == "sujet";
+      this.checkDiscussion(4, +params["sujet"]);
+    }
+    // Discussion etablissement
+    else if (
+      params["type_discussion"].includes("etablissement") &&
+      params["etablissement"]
+    ) {
+      this.type_discussion = "etablissement";
+      this.checkDiscussion(
+        5,
+        +params["etablissement"],
+        +params["correspondant"]
+      );
+    } else if (
+      params["type_discussion"] == "service_etablissement" &&
+      params["service_etablissement"]
+    ) {
+      this.checkDiscussion(6, +params["service_etablissement"]);
+    } else if (params["type_discussion"] == "groupe" && params["sujet"]) {
+      this.checkDiscussion(4, +params["sujet"]);
     }
   }
 }

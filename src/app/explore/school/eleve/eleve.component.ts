@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { ClasseService } from "../classe/classe.service";
 import { EleveService } from "../eleve.service";
@@ -12,11 +12,22 @@ import { EleveService } from "../eleve.service";
 export class EleveComponent extends BaseComponent implements OnInit {
   classe: any;
   international: boolean = false;
+  showDetails: boolean = false;
   public parentComponents = {
-    professeur: false,
+    eleve: false,
     etablissement: false,
     horsEtablissement: false,
     classe: false,
+  };
+
+  addEleve: boolean = false;
+  editEleve: boolean = false;
+  searchActive: boolean;
+  @ViewChild("search") searchFied: ElementRef;
+
+  path = {
+    administration_etablissement: /school\/administration\/[0-9]+\/eleve/,
+    classe: /classe\/[0-9]+\/eleve/,
   };
 
   constructor(
@@ -29,24 +40,23 @@ export class EleveComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Object.'professeur's(this.parentComponents).forEach(('professeur') => {
-    //   if('professeur' == 'etablissement') {
-
-    //   }
-    //   this.router.url.includes('professeur')
-    //     ? (this.parentComponents['professeur'] = true)
-    //     : null;
-    // });
+    this.shouldShowDetails(this.router);
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.shouldShowDetails(this.router);
+        // this.showDetails = !!this.router.url.match(/classe\//);
+      }
+    });
 
     this.route.queryParams.subscribe((params) => {
       this.international = params["international"] == "true";
     });
 
-    this.router.url.includes("professeur")
-      ? (this.parentComponents["professeur"] = true)
+    this.router.url.includes("eleve")
+      ? (this.parentComponents["eleve"] = true)
       : null;
 
-    this.router.url.includes("echo")
+    this.router.url.includes("administration")
       ? (this.parentComponents["etablissement"] = true)
       : null;
 
@@ -64,6 +74,49 @@ export class EleveComponent extends BaseComponent implements OnInit {
           this.classe = classe;
         }
       );
+    }
+  }
+
+  ngAfterViewInit() {
+    this.route.fragment.subscribe((fragment) => {
+      if (fragment == "add-eleve") {
+        this.ajouter();
+      }
+    });
+
+    this.route.queryParams.subscribe((query) => {
+      this.searchActive = !!query.keyword;
+
+      if (query.keyword) {
+        if (!this.searchFied.nativeElement.value) {
+          this.searchFied.nativeElement.value = query.keyword;
+        }
+      }
+    });
+  }
+
+  ajouter() {
+    this.addEleve = true;
+    this.helper.toggleModal("eleve-add-modal");
+  }
+
+  research(keyword: string) {
+    if (keyword) {
+      this.helper.appendObjectToQueryParams(this.route, { keyword }, [
+        "keyword",
+      ]);
+    }
+  }
+
+  annulerRecherche() {
+    this.helper.appendObjectToQueryParams(this.route, {}, ["keyword"]);
+  }
+
+  shouldShowDetails(router: Router) {
+    if (router.url.match(/eleve\//)) {
+      this.showDetails = true;
+    } else {
+      this.showDetails = false;
     }
   }
 }

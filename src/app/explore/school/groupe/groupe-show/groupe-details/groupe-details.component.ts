@@ -22,6 +22,12 @@ export class GroupeDetailsComponent
 
   ngOnInit(): void {
     super.ngOnInit();
+
+    this._subscription["loading"] = this.groupeService.loading$.subscribe(
+      (loading) => {
+        this.loading = loading;
+      }
+    );
   }
 
   delete() {

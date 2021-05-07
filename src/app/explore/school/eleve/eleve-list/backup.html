@@ -1,0 +1,65 @@
+<ng-container *ngIf="eleveService.data.length && !loading">
+
+  <div class="row row-xs mg-0 pd-0 clearfix fade-in">
+    <!-- List -->
+    <div class="col-xs-12 col-sm-6 col-md-3"
+        *ngFor="let eleve of eleveService.data | paginate: { itemsPerPage: 12, currentPage: currentPage, id: 'eleve'}">
+      <div class="card border">
+        <div class="card-body text-center eleve">
+          <p>
+            <img class="img-fluid rounded-circle" [src]="eleve.eleve_details.photo_min?.path" [alt]="eleve.eleve_details.nom_complet" />
+
+            <i class="fas fa-circle-notch fa-spin" style="position: absolute; right: 20px" *ngIf="loading"></i>
+          </p>
+
+          <!-- Nom de l'eleve -->
+          <h4 class="tx-12 tx-bolder tx-primary">
+            {{ eleve.eleve_details.nom_complet }}
+          </h4>
+
+          <!-- Pays -->
+          <!-- Type membre -->
+          <span *ngIf="international">
+            <i class="fad fa-globe-africa"></i>
+            {{ eleve.pays?.libelle }}
+          </span>
+
+          <span class="d-flex justify-content-around">
+            <span>
+              <a class="text-primary" (click)="helper.toggleModal('classe-show-modal')" [routerLink]="['./']" [queryParams]="{
+                  type_discussion: 'correspondance',
+                  correspondant: eleve.eleve_details.id_inscription,
+                  modal: 'discussion-min'
+                }">
+                <i class="fad fa-comments-alt clickable"></i></a>
+            </span>
+          </span>
+
+          <!-- Type membre -->
+          <!-- <span class="badge radius-none tx-12"
+                    style="min-width: 90px;"
+                    [ngClass]="{
+                            'bg-soft-success':eleve.type_membre_details.id == 1,
+                            'bg-soft-warning':eleve.type_membre_details.id == 2,
+                            'bg-soft-primary':eleve.type_membre_details.id == 3
+                         }">
+                    <i class="fal fa-user"></i>
+                    {{ eleve.type_membre_details.libelle | translate }}
+                </span> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="col-12 mt-3 d-flex justify-content-center">
+      <pagination-controls id="eleve" (pageChange)="currentPage = $event" autoHide="true" previousLabel="{{ 'PRECEDENT' | translate }}"
+          nextLabel="{{ 'SUIVANT' | translate }}">
+      </pagination-controls>
+    </div>
+  </div>
+</ng-container>
+
+<div class="my-5" *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+<app-missing-data *ngIf="!loading && !eleveService.data.length"></app-missing-data>

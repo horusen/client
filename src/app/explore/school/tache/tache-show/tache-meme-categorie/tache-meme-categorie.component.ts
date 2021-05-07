@@ -17,14 +17,14 @@ export class TacheMemeCategorieComponent
   ngOnInit(): void {
     this._subscription["tache"] = this.tacheService.singleData$.subscribe(
       (tache) => {
-        this.getData(tache.affectation_groupe.chapitre_details.id);
+        this.getData(tache.id);
       }
     );
   }
 
   getData(chapitre: number) {
     this.loading = true;
-    this.tacheService.getByChapitre(chapitre).subscribe((taches) => {
+    this.tacheService.getTacheMemeCategorie(chapitre).subscribe((taches) => {
       this.data = taches;
       this.loading = false;
     });

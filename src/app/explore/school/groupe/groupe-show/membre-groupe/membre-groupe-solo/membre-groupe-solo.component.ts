@@ -11,6 +11,7 @@ import { MembreGroupeService } from "../membre-groupe.service";
 })
 export class MembreGroupeSoloComponent extends BaseComponent implements OnInit {
   @Input() membership: any;
+  @Input() index: any;
   groupe: any;
   constructor(
     public groupeService: GroupeService,

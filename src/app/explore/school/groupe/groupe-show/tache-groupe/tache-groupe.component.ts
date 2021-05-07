@@ -7,7 +7,7 @@ import { Component, OnInit } from "@angular/core";
 })
 export class TacheGroupeComponent implements OnInit {
   affecterTache: boolean = false; // Permet d'activer le component d'affectation entre groupe et tache
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

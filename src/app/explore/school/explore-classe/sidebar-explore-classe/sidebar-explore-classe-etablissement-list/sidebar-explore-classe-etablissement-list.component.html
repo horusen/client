@@ -1,22 +1,21 @@
-<div class="flex-fill pd-15 bd-t" *ngIf="data.length || loading">
+<div class="flex-fill pd-15 bd-t"
+     *ngIf="data.length || loading">
   <!-- header -->
-  <div
-    class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10"
-  >
+  <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
     <span class="tx-10 tx-uppercase tx-white">
       {{ "mesEtablissements" | translate }}
     </span>
   </div>
 
   <!-- List -->
-  <nav class="nav flex-column" *ngIf="data.length && !loading">
-    <div
-      class="d-flex align-items-center justify-content-between"
-      *ngFor="let etablissement of data; let i = index"
-    >
-      <a [routerLink]="[etablissement.id]" class="nav-link tx-white"
-	[routerLinkActive]="'font-weight-bolder tx-yeto2'"
-	><i class="fad fa-certificate" 	[ngClass]="{
+  <nav class="nav flex-column"
+       *ngIf="data.length && !loading">
+    <div class="d-flex align-items-center justify-content-between"
+         *ngFor="let etablissement of data; let i = index">
+      <a [routerLink]="[etablissement.id]"
+         class="nav-link tx-white"
+         [routerLinkActive]="'font-weight-bolder tx-yeto2'"><i class="fad fa-certificate"
+           [ngClass]="{
 		'texte-success': helper.parseInt(i.toString().slice(-1)) == 1,
 		'texte-secondary': helper.parseInt(i.toString().slice(-1)) == 2,
 		'texte-warning': helper.parseInt(i.toString().slice(-1)) == 3,
@@ -28,12 +27,13 @@
 		'texte-yellow': helper.parseInt(i.toString().slice(-1)) == 9,
 		'texte-indigo': helper.parseInt(i.toString().slice(-1)) == 0
 	    }"></i>
-	{{ etablissement.libelle }}
+        {{ etablissement.libelle }}
       </a>
     </div>
   </nav>
 
-  <div class="my-5" *ngIf="loading">
+  <div class="my-5"
+       *ngIf="loading">
     <app-loading></app-loading>
   </div>
 </div>

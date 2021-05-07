@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BaseCreateComponent } from "src/app/shared/components/base-component/base-create.component";
 import { EtablissementService } from "../../etablissement/etablissement.service";
 import { FormationService } from "../../formation/formation.service";
@@ -15,7 +16,9 @@ export class ClasseAddComponent extends BaseCreateComponent implements OnInit {
   constructor(
     public classeService: ClasseService,
     public formationService: FormationService,
-    public etablissementService: EtablissementService
+    public etablissementService: EtablissementService,
+    public router: Router,
+    public route: ActivatedRoute
   ) {
     super(classeService);
   }
@@ -36,6 +39,8 @@ export class ClasseAddComponent extends BaseCreateComponent implements OnInit {
             "fin",
             "laDateDeDebutEstSuperieurALaDateDeFin"
           );
+
+          this.isFormOk = true;
         }
       );
     });
@@ -44,7 +49,7 @@ export class ClasseAddComponent extends BaseCreateComponent implements OnInit {
   getFormations() {
     this.formationLoading = true;
     this.formationService
-      .getByEtablissements(this.etablissementService.etablissement.id)
+      .getByEtablissement(this.etablissementService.singleData.id)
       .subscribe((data) => {
         this.formations = data;
         this.formationLoading = false;
@@ -61,7 +66,8 @@ export class ClasseAddComponent extends BaseCreateComponent implements OnInit {
       this.classeService.add(data).subscribe(() => {
         this.loading = false;
         this.form.reset();
-        this.helper.toggleModal("classe-add-modal");
+        this.router.navigate(["./"], { relativeTo: this.route });
+        this.helper.toastSuccess();
       });
     }
   }

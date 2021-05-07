@@ -6,7 +6,7 @@ import { Injectable } from "@angular/core";
 })
 export class TokenStorage {
   public getAccessToken(): string {
-    return <string>localStorage.getItem("access_token");
+    return <string>localStorage.getItem("accessToken");
   }
 
   public getRefreshToken(): string {
@@ -14,34 +14,39 @@ export class TokenStorage {
   }
 
   public getUser(): any {
-    return localStorage.getItem("user");
+    return JSON.parse(localStorage.getItem("user"));
+  }
+
+  public getSelectedProfile(): any {
+    return JSON.parse(localStorage.getItem("selected-profile"));
+  }
+
+  public getProfiles(): any {
+    return JSON.parse(localStorage.getItem("profiles"));
   }
 
   public getTokenPayload(token: string) {
     const payload = token.split(".")[1];
   }
 
-  public save(user: any, accessToken: string, refreshToken: string) {
-    this.setUser(user);
-    this.setAccessToken(accessToken);
-    this.setRefreshToken(refreshToken);
+  public changeSelectedProfile(profile: any) {
+    localStorage.setItem("selected-profile", JSON.stringify(profile));
   }
 
-  private setAccessToken(token: string): void {
-    localStorage.setItem("access_token", token);
-  }
-
-  private setRefreshToken(token: string): void {
-    localStorage.setItem("refresh_token", token);
-  }
-
-  private setUser(user: any): void {
-    localStorage.setItem("user", user);
+  public save(token: any) {
+    localStorage.setItem("user", JSON.stringify(token.user));
+    localStorage.setItem("accessToken", token.access_token);
+    localStorage.setItem("profiles", JSON.stringify(token.profiles));
+    localStorage.setItem("profileCount", token.profilesCount);
+    localStorage.setItem("refreshToken", token.refresh_token);
   }
 
   public clear(): void {
     localStorage.removeItem("access_token");
     localStorage.removeItem("user");
     localStorage.removeItem("refresh_token");
+    localStorage.removeItem("profiles");
+    localStorage.removeItem("profilesCount");
+    localStorage.removeItem("selected-profile");
   }
 }

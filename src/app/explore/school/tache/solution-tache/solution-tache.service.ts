@@ -12,7 +12,7 @@ export class SolutionTacheService extends BaseService {
     super("tache/solution");
   }
 
-  get(affectationTache: number) {
+  getByTache(affectationTache: number) {
     return this.factory
       .get(`tache/${affectationTache}/solution`)
       .pipe(tap(this.listResponseHandler()));

@@ -1,96 +1,18 @@
-<div class="row row-xs mg-0 pd-0 pd-y- bd-b" style="height: 620px">
-    <!-- Sidebar -->
-    <div class="bg-light col-lg-3 p-1" style="padding-left: 0px; padding-right: 0px">
-        <div class="wrapper bg-light p-0" id="settingSidebarScroll">
-            <div class="bd-b">
-                <!-- nav bar -->
-                <ul class="nav bg-light">
-                    <!-- Discussion explore professeur -->
-                    <ng-container *ngIf="parent == 'explore-professeur'">
-                        <!-- Enseignant -->
-                        <li class="nav-item">
-                            <a
-                               class="nav-link3 clickable active tx-yeto2"
-                               [routerLink]="['./']"
-                               [queryParams]="{ type_discussion: 'professeur' }"
-                               [ngClass]="{ 'font-weight-bold': activeComponent.professeur }">
-                                {{ "PROFESSEURS" | translate }}
-                            </a>
-                        </li>
+<div class="row row-xs mg-0 pd-0 pd-y- bd-b" style="position: relative;">
+  <!-- Sidebar -->
+  <div class="bg-light col-lg-3 p-1" style="padding-left: 0px; padding-right: 0px">
+    <app-dernieres-discussions *ngIf="router.url.match(modulePathsRegex['explore-professeur'])
+        || router.url.match(modulePathsRegex['administration-etablissement']) ">
+    </app-dernieres-discussions>
 
-                        <!-- Groupe -->
-                        <li class="nav-item">
-                            <a
-                               class="nav-link3 clickable active tx-yeto2"
-                               [ngClass]="{ 'font-weight-bold': activeComponent.groupe }"
-                               [routerLink]="['./']"
-                               [queryParams]="{ type_discussion: 'groupe' }">
-                                {{ "GROUPES" | translate }}
-                            </a>
-                        </li>
+    <app-sujet *ngIf="router.url.match(modulePathsRegex['groupe'])
+    || router.url.match(modulePathsRegex['explore-reseaux']) "></app-sujet>
+  </div>
 
-                        <!-- Administration -->
-                        <li class="nav-item">
-                            <a
-                               class="nav-link3 clickable active tx-yeto2"
-                               [routerLink]="['./']"
-                               [queryParams]="{ type_discussion: 'membre-administration' }"
-                               [ngClass]="{
-                  'font-weight-bold': activeComponent['membre-administration']
-                }">
-                                {{ "ADMINISTRATION" | translate }}
-                            </a>
-                        </li>
-                    </ng-container>
-
-                    <!-- Discussion sous-reseaux -->
-                    <ng-container *ngIf="parent == 'sous-reseaux'">
-                        <!-- Sujet -->
-                        <li class="nav-item">
-                            <a
-                               class="nav-link3 clickable active tx-yeto2"
-                               [routerLink]="['./']"
-                               [queryParams]="{ type_discussion: 'sujet' }"
-                               [ngClass]="{ 'font-weight-bold': activeComponent['sujet'] }">
-                                {{ "SUJET" | translate }}
-                            </a>
-                        </li>
-                    </ng-container>
-                </ul>
-            </div>
-
-            <!-- Nav content -->
-            <div class="tab-content">
-                <div class="tab-pane fade active show">
-                    <!-- Discussion professeur -->
-                    <app-discussion-professeur-list *ngIf="activeComponent.professeur"></app-discussion-professeur-list>
-
-                    <!-- Discussion groupe -->
-                    <app-discussion-groupe-list *ngIf="activeComponent.groupe">
-                    </app-discussion-groupe-list>
-
-                    <!-- Discussion sous-réseaux -->
-                    <app-discussion-sous-reseaux-list
-                                                      *ngIf="activeComponent['sous-reseaux']">
-                    </app-discussion-sous-reseaux-list>
-
-                    <!-- Discussion sous-réseaux -->
-                    <app-discussion-sujet-reseaux-list *ngIf="activeComponent.sujet">
-                    </app-discussion-sujet-reseaux-list>
-
-                    <!-- Discussion membre administration -->
-                    <app-discussion-profil-administration-list *ngIf="activeComponent['membre-administration']">
-                    </app-discussion-profil-administration-list>
+  <!-- Reaction -->
+  <div class="col-lg-9 p-0">
+    <app-reaction-discussion></app-reaction-discussion>
+  </div>
 
 
-                    <app-dernieres-discussions [type]="type"></app-dernieres-discussions>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Reaction -->
-    <div class="col-lg-9 p-0">
-        <app-reaction-discussion></app-reaction-discussion>
-    </div>
 </div>

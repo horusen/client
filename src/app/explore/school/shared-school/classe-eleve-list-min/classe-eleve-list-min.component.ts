@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { AuthService } from "src/app/authentification/auth.service";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
+import { EleveService } from "../../eleve.service";
 import { TunelService } from "../../tache/tunel/tunel.service";
-import { ClasseEleveService } from "./classe-eleve.service";
 
 @Component({
   selector: "app-classe-eleve-list-min",
@@ -13,23 +14,32 @@ export class ClasseEleveListMinComponent
   implements OnInit {
   @Input() styleLight: boolean = true; // Permet d'adapter la couleur du texte en fonction de l'élèment parent
   constructor(
-    public classeEleveService: ClasseEleveService,
+    public eleveService: EleveService,
+    public auth: AuthService,
     public tunelService: TunelService
   ) {
-    super(classeEleveService);
+    super(eleveService);
   }
 
   ngOnInit(): void {
     this.getData();
   }
 
+  showEleve(eleve: number) {
+    this.eleveService.loading = true;
+    this.eleveService.getSingle(eleve).subscribe(() => {
+      this.eleveService.loading = false;
+    });
+  }
+
   getData() {
-    if (!this.classeEleveService.data.length) {
-      this.loading = true;
-      this.classeEleveService.initialise().subscribe(() => {
+    this.loading = true;
+    this.eleveService
+      .getEleveDuMemeClasse(this.auth.selectedProfile.profil.id)
+      .subscribe((data) => {
+        this.data = data;
         this.loading = false;
       });
-    }
   }
 
   afficherTunel(user: any) {

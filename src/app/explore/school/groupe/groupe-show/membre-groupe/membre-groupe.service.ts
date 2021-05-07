@@ -10,7 +10,7 @@ export class MembreGroupeService extends BaseService {
     super("groupe/membre");
   }
 
-  get(groupe: number) {
+  getByGroupe(groupe: number) {
     return this.factory
       .get(`groupe/${groupe}/membre`)
       .pipe(tap(this.listResponseHandler()));
@@ -36,7 +36,15 @@ export class MembreGroupeService extends BaseService {
   }
 
   getNonMembreDansClasse(groupe: number) {
-    return this.factory.get(`classe/groupe/${groupe}/non-membre`);
+    return this.factory.get(`groupe/${groupe}/non-membre/classe`);
+  }
+
+  getNonMembreProfesseur(groupe: number) {
+    return this.factory.get(`groupe/${groupe}/non-membre/professeur`);
+  }
+
+  getNonMembreGroupeIndependant(groupe: number) {
+    return this.factory.get(`groupe/independant/${groupe}/non-membre`);
   }
 
   deleteMembre(groupe: number, membre: number) {

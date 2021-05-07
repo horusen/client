@@ -1,32 +1,144 @@
-<div class="w-100 pd-t-15">
-    <div *ngIf="!loading && dernieresDiscussionService.data.length">
-        <a class="media clickable pd-10 bd-b"
-           [ngClass]="{'border border-primary': discussion.id == idCurrentObject}"
-           *ngFor="let discussion of dernieresDiscussionService.data"
-           (click)="checkDiscussion(discussion.etablissement.id, discussion.correspondant_etablissement.id_inscription)">
-            <div class="mr-2">
-                <span class="avatar3 ">
-                    <div class="">
-                        <img class="avatar3"
-                             [src]="discussion.correspondant_etablissement.photo"
-                             [alt]="discussion.correspondant_etablissement.nom_complet">
-                    </div>
-                </span>
-            </div>
-            <div class="d-flex justify-content-between mg-t-7 wd-100p">
+<div class="wrapper bg-light p-0"
+     id="settingSidebarScroll">
+  <div class="bd-b">
+    <!-- nav bar -->
+    <ul class="nav bg-light">
+      <!-- Discussion explore professeur -->
+      <ng-container *ngIf="router.url.includes('school/professeur')">
+        <!-- Enseignant -->
+        <li class="nav-item">
+          <a class="nav-link3 clickable active tx-yeto2"
+             [routerLink]="['./']"
+             [queryParams]="{ type_discussion: 'professeur' }"
+             [routerLinkActive]="'font-weight-bolder'">
+            {{ "PROFESSEURS" | translate }}
+          </a>
+        </li>
+
+        <!-- Administration -->
+        <li class="nav-item">
+          <a class="nav-link3 clickable active tx-yeto2"
+             [routerLink]="['./']"
+             [queryParams]="{ type_discussion: 'administration' }"
+             [routerLinkActive]="'font-weight-bolder'">
+            {{ "ADMINISTRATION" | translate }}
+          </a>
+        </li>
+
+        <!-- Autre -->
+        <!-- <li class="nav-item">
+          <a class="nav-link3 clickable active tx-yeto2" [routerLink]="['./']"
+              [queryParams]="{ type_discussion: 'autres' }" [routerLinkActive]="'font-weight-bolder'">
+            {{ "AUTRES" | translate }}
+          </a>
+        </li> -->
+      </ng-container>
+
+
+      <!-- Discussion etablissement -->
+      <ng-container *ngIf="router.url.includes('school/administration')">
+        <!-- Interne -->
+        <li class="nav-item">
+          <a class="nav-link3 clickable active tx-yeto2 font-weight-bolder"
+             [routerLink]="['./']"
+             [queryParams]="{ type_discussion: 'etablissement-interne' }"
+             [routerLinkActive]="'font-weight-bolder'">
+            {{ "INTERNE" | translate }}
+          </a>
+        </li>
+
+        <!-- Externe -->
+        <li class="nav-item">
+          <a class="nav-link3 clickable active tx-yeto2"
+             [routerLink]="['./']"
+             [queryParams]="{ type_discussion: 'etablissement-externe' }"
+             [routerLinkActive]="'font-weight-bolder'">
+            {{ "EXTERNE" | translate }}
+          </a>
+        </li>
+      </ng-container>
+
+    </ul>
+  </div>
+
+  <!-- Nav content -->
+  <div class="tab-content">
+    <div class="tab-pane fade active show">
+
+      <div class="w-100 dernieres-discussions">
+        <div *ngIf="!loading && discussionService.data.length">
+          <!-- Discussion etablissement -->
+          <ng-container *ngIf="type_discussion.includes('etablissement')">
+            <!-- Correspondant -->
+            <a class="media clickable pd-10 bd-b discussion-box"
+               [routerLink]="['./']"
+               [queryParams]="{
+                  type_discussion: type_discussion,
+                  etablissement: discussion.etablissement.id,
+                  correspondant: discussion.correspondant_etablissement.id_inscription
+                }"
+               [ngClass]="{'border border-primary bg-soft-primary': discussion.id == discussionService.singleData?.id}"
+               *ngFor="let discussion of discussionService.data">
+              <!-- Photo correspondant -->
+              <div class="mr-2">
+                <img class="avatar3"
+                     [src]="discussion.correspondant_etablissement.photo_min?.path"
+                     [alt]="discussion.correspondant_etablissement.nom_complet">
+              </div>
+
+              <!-- Nom et derniere reaction -->
+              <div class="d-flex justify-content-between mg-t-7 wd-100p">
                 <div class="d-inline-block w-100">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="mb-0 tx-13 tx-facebook"
-                            [ngClass]="{'font-weight-bold': discussion.correspondant_etablissement.id_inscription == idCurrentObject}">
-                            {{ discussion.correspondant_etablissement.nom_complet }}</h6>
-                    </div>
-                    <p class="mb-0 tx-gray tx-12">{{ discussion.derniereReaction.reaction }}</p>
+                  <!-- Nom du correspondant -->
+                  <div class="d-flex justify-content-between">
+                    <h6 class="mb-0 tx-13 tx-facebook"
+                        [ngClass]="{'font-weight-bold': discussion.id == discussionService.singleData?.id}">
+                      {{ discussion.correspondant_etablissement.nom_complet }}</h6>
+                  </div>
+
+                  <!-- Derniere reaction -->
+                  <p class="mb-0 tx-gray tx-12">{{ discussion.derniereReaction?.reaction }}</p>
                 </div>
-            </div>
+              </div>
 
-        </a>
+            </a>
+          </ng-container>
+
+          <!-- Explore professeur -->
+          <ng-container *ngIf="type_discussion == 'professeur'">
+            <a class="media discussion-box clickable pd-10 bd-b"
+               [routerLink]="['./']"
+               [queryParams]="{type_discussion: 'professeur', correspondant: discussion.correspondant.id_inscription}"
+               [ngClass]="{'border border-primary bg-soft-primary': discussion.id == discussionService.singleData?.id}"
+               *ngFor="let discussion of discussionService.data">
+              <!-- Image -->
+              <div class="mr-2">
+                <img class="avatar3"
+                     [src]="discussion.correspondant.photo_min.path"
+                     [alt]="discussion.correspondant.nom_complet">
+              </div>
+
+              <!-- information personnel -->
+              <div class="d-flex justify-content-between mg-t-7 wd-100p">
+                <div class="d-inline-block w-100">
+                  <div class="d-flex justify-content-between">
+                    <h6 class="mb-0 tx-13 tx-facebook"
+                        [ngClass]="{'font-weight-bold': discussion.id == discussionService.singleData?.id}">
+                      {{ discussion.correspondant.nom_complet }}
+                    </h6>
+                  </div>
+                  <p class="mb-0 tx-gray tx-12">{{ discussion.derniereReaction?.reaction }}</p>
+                </div>
+              </div>
+
+            </a>
+          </ng-container>
+        </div>
+
+        <app-loading *ngIf="loading"></app-loading>
+        <app-missing-data *ngIf="!loading && !discussionService.data.length"></app-missing-data>
+      </div>
+
     </div>
-
-    <app-loading *ngIf="loading"></app-loading>
-    <app-missing-data *ngIf="!loading && !dernieresDiscussionService.data.length"></app-missing-data>
+  </div>
 </div>

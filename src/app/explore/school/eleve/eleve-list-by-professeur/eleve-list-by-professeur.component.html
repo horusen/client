@@ -3,15 +3,12 @@
         <div class="card border">
             <div class="card-body text-center eleve">
                 <p>
-                    <img class=" img-fluid rounded-circle"
-                        [src]="eleve.eleve_details.photo"
-                        [alt]="eleve.eleve_details.nom_complet">
+                    <img class=" img-fluid rounded-circle" [src]="eleve.eleve_details.photo" [alt]="eleve.eleve_details.nom_complet">
 
-                    <i class="fas fa-circle-notch fa-spin" style="position: absolute; right: 20px;"
-                        *ngIf="loading"></i>
+                    <i class="fas fa-circle-notch fa-spin" style="position: absolute; right: 20px;" *ngIf="loading"></i>
                 </p>
 
-                <!-- Nom de l'etudiant -->
+                <!-- Nom de l'eleve -->
                 <h4 class="tx-12 tx-bolder tx-primary">
                     {{ eleve.eleve_details.nom_complet }}
                 </h4>

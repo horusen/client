@@ -12,7 +12,7 @@ export class ReactionTunelService extends BaseService {
     super("tache/tunel/reaction");
   }
 
-  get(tunel: number) {
+  getData(tunel: number) {
     return this.factory
       .get(`tache/tunel/${tunel}/reaction`)
       .pipe(tap(this.listResponseHandler()));

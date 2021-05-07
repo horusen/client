@@ -61,7 +61,6 @@ export class ReactionCreateComponent
       const typeReaction = 1;
       this.addControl("type_reaction", typeReaction, true);
       this.formData = new FormData();
-      console.log(this.form.value);
     });
   }
 

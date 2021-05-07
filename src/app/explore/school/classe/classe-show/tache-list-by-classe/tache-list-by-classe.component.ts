@@ -21,10 +21,14 @@ export class TacheListByClasseComponent
   }
 
   ngOnInit(): void {
-    this.getData()
+    this._subscription['classe'] = this.classeService.singleData$.subscribe(classe => {
+      this.getData(classe.id);
+    })
   }
 
-  getData() {
+  getData(classe: number) {
+    this.affectationTacheService.setFiltre('classe', [classe])
+
     this.loading = true;
     this.affectationTacheService.get().subscribe((data) => {
       this.data = data;

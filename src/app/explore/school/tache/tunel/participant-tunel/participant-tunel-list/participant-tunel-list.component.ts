@@ -28,7 +28,7 @@ export class ParticipantTunelListComponent
 
   getData(tunel: number) {
     this.loading = true;
-    this.participantTunelService.get(tunel).subscribe((participants) => {
+    this.participantTunelService.getData(tunel).subscribe((participants) => {
       this.loading = false;
     });
   }

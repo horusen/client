@@ -1,0 +1,38 @@
+<!-- Header -->
+<div class="card">
+  <div class="row mx-0 justify-content-between mg-y-7 mx-2">
+    <!-- Titre -->
+    <div class="ml-2">
+      <img src="assets/images/xs/ecole.png" alt="image-etablissement" style="height: 33px" />
+      {{ "mesEtablissments" | translate }}
+    </div>
+
+    <!-- Boutton ajouter -->
+    <div>
+      <a class="btn btn-oblong btn-light tx-primary float-left bd-0 btn-icon clickable" (click)="ajouterEtablissement()">
+        <i class="fad fa-plus-circle tx-14 tx-yeto2" style="padding: 0px; border-radius: 50%">
+        </i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="row bg-light">
+  <!-- Etablissement list -->
+  <div class="col-3  p-0">
+    <app-adminsitration-etablissement-list></app-adminsitration-etablissement-list>
+  </div>
+
+  <!-- Etablissement details -->
+  <div class="col-9 py-3 pt-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+
+
+
+<app-modal [configuration]="{name: 'etablissement-create-modal', titre: 'ajouterUnEtablissement', icone: 'school'}"
+    (closed)="closeAjouterEtablissement()">
+  <app-etablissement-create *ngIf="addEtablissement"></app-etablissement-create>
+</app-modal>

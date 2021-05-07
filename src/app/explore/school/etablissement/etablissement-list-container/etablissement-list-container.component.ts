@@ -35,8 +35,6 @@ export class EtablissementListContainerComponent
         this.typeEtablissement = item;
       });
     }
-
-    console.log(this.router.url);
   }
 
   research(keyword: string) {
@@ -64,14 +62,14 @@ export class EtablissementListContainerComponent
       });
   }
 
-  getEtablissementAffilie(keyword: string = "") {
-    this.loading = true;
-    this.etablissementService
-      .getEtablissementsAffilies(keyword)
-      .subscribe(() => {
-        this.loading = false;
-      });
-  }
+  // getEtablissementAffilie(keyword: string = "") {
+  //   this.loading = true;
+  //   this.etablissementService
+  //     .getEtablissementsAffilies(keyword)
+  //     .subscribe(() => {
+  //       this.loading = false;
+  //     });
+  // }
 
   getEtablissementsInternationalesByType(type: number, keyword: string = "") {
     this.loading = true;

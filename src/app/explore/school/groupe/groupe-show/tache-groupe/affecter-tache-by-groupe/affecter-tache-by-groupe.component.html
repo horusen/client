@@ -1,4 +1,2 @@
-<app-affecter-tache
-    [groupe]="groupe.id"
-    [classe]="groupe.classe.id">
+<app-affecter-tache *ngIf="groupe" [groupe]="groupe.id" [classe]="groupe.classe.id">
 </app-affecter-tache>

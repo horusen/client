@@ -1,0 +1,74 @@
+<div class="row m-0 p-0 fade-in-top" *ngIf="!loading && formationService.data.length">
+  <div class="" [ngClass]="{'col-3': !minified, 'col-4 p-1': minified}" *ngFor="let formation of formationService.data">
+    <div class="card border card-formation card-1 mg-b-20" [ngClass]="{'active': rla.isActive}">
+      <!-- Header -->
+      <!-- <div class="card-header border-0 d-flex justify-content-between border-0 py-1">
+        <span class="badge card-2 badge-pill mg-t-10 tx-12 badge-danger" *ngIf="formation?.nb_eleve_wo_classe">
+          {{formation.nb_eleve_wo_classe | shortNumber}}
+          <i class="fas fa-exclamation"></i>
+        </span>
+      </div> -->
+
+      <!-- Body -->
+      <div class="card-body text-center">
+        <!-- Icone formation -->
+        <i class="hidden-xs tx-40 tx-primary fal fa-chalkboard-teacher tx-50 tx-primary bg-light rounded-circle p-2">
+        </i>
+
+        <!-- Libelle formatiom -->
+        <h5 class="tx-facebook tx-15 tx-medium mb-0  d-block">{{formation.libelle | titlecase}} </h5>
+
+        <!-- Boutton d'action -->
+
+        <div class="icones scale-in-center">
+          <!-- details -->
+          <button class="btn btn-link link px-1 ">
+            <a [routerLink]="[formation.id]" routerLinkActive="active" #rla="routerLinkActive">
+              <i class="fas fa-info-circle tx-primary tx-14 bg-light rounded-circle p-2 "></i>
+            </a>
+          </button>
+
+          <!-- Modifier -->
+          <a class="btn btn-link link px-1 " [routerLink]="['./']" [fragment]="'edit'" (click)="modifier(formation)">
+            <i class="fas fa-edit tx-primary tx-14 bg-light rounded-circle p-2 "></i>
+          </a>
+
+          <!-- Supprimer -->
+          <button class="btn btn-link link px-1 " (click)="supprimerFormation(formation.id)">
+            <i class="fas fa-trash tx-primary tx-14 bg-light rounded-circle p-2 "></i>
+          </button>
+
+          <!-- partager -->
+          <button class="btn btn-link link px-1 ">
+            <i class="fas fa-share-alt tx-primary tx-14 bg-light rounded-circle p-2 "></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class=" card-footer px-0">
+        <div class="row m-0 p-0 col-12">
+          <div class="col-12 d-flex mb-2 justify-content-between">
+            <span class="badge flex-1 card-2 badge-pill  badge-info mx-1 tx-12"><i class="fad fa-calendar-alt"></i>
+              {{formation.programme_semaine | titlecase}}</span>
+            <span class="badge flex-1 card-2 badge-pill  badge-info mx-1 tx-12"><i class="fad fa-user"></i>
+              {{formation.organisation_cours | titlecase}}</span>
+          </div>
+          <div class="col-12 d-flex mb-2 justify-content-between">
+            <span class="badge flex-1  card-2 badge-pill  badge-info mx-1" style="font-size: 12px; white-space: break-spaces;"><i
+                  class="fad fa-sun"></i>
+              {{formation.temporalite_cours}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="my-5" *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+
+
+<app-missing-data *ngIf="!loading && !formationService.data.length"></app-missing-data>

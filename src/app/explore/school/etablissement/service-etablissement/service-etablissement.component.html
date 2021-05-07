@@ -1,91 +1,80 @@
-<!-- Header -->
-<div class="card" *ngIf="etablissement">
-  <div class="row mx-0 mg-y-7 p-0">
-    <!-- boutton precedent -->
-    <div class="col-8">
-      <a
-        [routerLink]="[
-          'school',
-          'etablissement',
-          'type',
-          etablissement.type.id,
-          'etablissement',
-          etablissement.id
-        ]"
-        class="btn btn-oblong btn-light tx-pink float-left bd-0 btn-icon clickable"
-      >
-        <i
-          class="fad fa-arrow-left tx-14 tx-pink"
-          style="padding: 0px; border-radius: 50%"
-        >
-        </i>
-      </a>
+<div class="row mx-0 bd-b  px-2 justify-content-between align-items-center slide-in-top">
+  <!-- Titre -->
+  <h3 class="tx- tx-20 tx-info italic mg-l-20 my-3 bold">
 
-      <span class="ml-2">
-        <img
-          src="assets/images/xs/ministry.png"
-          alt="avatar"
-          style="height: 33px"
-        />
-        {{ etablissement.libelle }}
-      </span>
-    </div>
+    <i class="fad fa-building"></i>
+    {{ 'SERVICE' | translate }}
+  </h3>
+
+  <!-- Action -->
+  <div class="d-flex justfiy-content-between align-items-center">
+    <!-- Ajouter -->
+    <a class="my-2  tx-primary mr-4" [routerLink]="['./']" [fragment]="'add-service'">
+      <i class=" fad fa-plus-circle"></i> {{ 'AJOUTER' | translate }}
+    </a>
+
+
+    <!-- Statistiques -->
+    <a class="my-2  tx-warning mr-4" [routerLink]="['statistiques']">
+      <i class=" fad fa-chart-bar"></i> {{ 'STATISTIQUES' | translate }}
+    </a>
+
+    <!-- Filter -->
+    <span class="my-2  tx-success mr-4 clickable" (click)="helper.toggleModal('filter-groupe-modal')">
+      <i class="fad fa-filter"></i> {{ 'FILTRE' | translate }}
+    </span>
 
     <!-- Recherche -->
-    <div class="col-lg-4 float-right btn-demo">
-      <div class="form-group mg-b-5">
-        <div class="input-group w-100">
-          <!--  -->
-          <input
-            #search
-            type="text"
-            [placeholder]="'RECHERCHER' | translate"
-            class="form-control pd-y-8"
-          />
+    <div class="form-group mt-2 mb-3" style="position: relative;">
+      <div class="input-group w-100">
+        <!--  -->
+        <input #search type="text" [placeholder]="'RECHERCHER' | translate" class="form-control pd-y-8" />
 
-          <span class="">
-            <button class="btn bg-light h-100 d-flex align-items-center">
-              <i class="fad fa-search tx-facebook"></i>
-            </button>
-          </span>
-        </div>
+        <span class="">
+          <button class="btn border bg-light h-100 d-flex align-items-center" [disabled]="!search.value" (click)="research(search.value)">
+            <i class="fad fa-search tx-facebook"></i>
+          </button>
+        </span>
       </div>
+
+      <span class="tx-10 tx-danger clickable" style="position: absolute;" *ngIf="searchActive" (click)="annulerRecherche(); search.value = ''">
+        <i class="fal fa-times-circle"></i>
+        {{ 'annulerLaRecherche' | translate}}
+      </span>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="card-body p-2">
+  <div class="row">
+    <!-- Liste des services -->
+    <div [ngClass]="{'col-12': !showDetails, 'col-8': showDetails}">
+      <app-service-etablissement-list [minified]="showDetails"></app-service-etablissement-list>
+    </div>
+
+    <!-- Statistiques et details -->
+    <div class="col-4 p-0" *ngIf="showDetails">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
 
-<div class="card-body p-2 bg-light">
-  <h4 class="text-center my-2" style="font-family: 'Raleway', sans-serif">
-    <!-- <i class="far fa-building tx-pink"></i> -->
-    {{ "listeDesServices" | translate }}
-
-    <span class="ml-2">
-      <i class="fad fa-plus-circle tx-15 tx-pink" (click)="createService()"></i>
-    </span>
-  </h4>
-  <app-service-etablissement-list></app-service-etablissement-list>
-</div>
-
 <!-- Service etablissement add -->
-<app-modal
-  [configuration]="{
-    name: 'service-etablissement-create-modal',
-    icone: 'users',
-    titre: 'ajouterUnNouveauServiceDansLEtablissement'
-  }"
->
-  <app-service-etablissement-create
-    *ngIf="onCreateService"
-  ></app-service-etablissement-create>
+<app-modal (closed)="router.navigate(['./'], { relativeTo: route })" [configuration]="{
+            name: 'service-etablissement-create-modal',
+            icone: 'building',
+            titre: 'ajouterUnNouveauServiceDansLEtablissement'
+          }">
+  <app-service-etablissement-create *ngIf="addService"></app-service-etablissement-create>
 </app-modal>
 
 <!-- Service etablissement edit -->
-<app-modal
-  [configuration]="{
-    name: 'service-etablissement-edit-modal',
-    icone: 'users',
-    titre: 'modificationService'
-  }"
->
-  <app-service-etablissement-edit></app-service-etablissement-edit>
+<app-modal (closed)="router.navigate(['./'], { relativeTo: route })" [configuration]="{
+              name: 'service-etablissement-edit-modal',
+              icone: 'users',
+              titre: 'modificationService'
+            }">
+  <app-service-etablissement-edit *ngIf="editService"></app-service-etablissement-edit>
 </app-modal>

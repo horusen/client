@@ -83,6 +83,7 @@ export class AdminEtablissementAddComponent
         adminIDs.includes(item.id_inscription)
       );
       this.formValuePatcher("admins", []);
+      this.helper.toastSuccess();
       this.helper.toggleModal("admin-etablissement-add-modal");
     });
   }

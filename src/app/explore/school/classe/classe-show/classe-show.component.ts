@@ -22,14 +22,14 @@ export class ClasseShowComponent extends BaseSingleComponent implements OnInit {
 
     this._subscription["classe"] = this.classeService.singleData$.subscribe(
       () => {
-        this.helper.toggleModal("classe-show-modal");
+        this.helper.showModal("classe-show-modal");
       }
     );
 
-    this.route.queryParams.subscribe((params) => {
-      if (!params.modal) {
-        this.helper.toggleModal("classe-show-modal");
-      }
-    });
+    // this.route.queryParams.subscribe((params) => {
+    //   if (!params.modal) {
+    //     this.helper.toggleModal("classe-show-modal");
+    //   }
+    // });
   }
 }

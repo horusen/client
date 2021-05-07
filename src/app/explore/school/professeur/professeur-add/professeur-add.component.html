@@ -1,0 +1,83 @@
+<form class="custom-placeholder" [formGroup]="form" (submit)="add()">
+  <!-- Professeur -->
+  <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label" for="professeur">
+        {{ 'PROFESSEUR' | translate }}
+
+        <!-- loading -->
+        <i class="fad fa-circle-notch fa-spin" *ngIf="loadingProfilesProfesseurs"></i>
+      </label>
+
+      <angular2-multiselect [data]="profilesProfesseur" [settings]="dropdownSettingsAlt.single"
+          formControlName="professeur"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'professeur'), 'is-valid': isValid('professeur')}"
+          class="form-control p-0 form-control-sm">
+        <c-badge>
+          <ng-template let-item="item">
+            {{item.nom_complet}}
+          </ng-template>
+        </c-badge>
+        <c-item>
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.nom_complet}}</label>
+            <img [src]="item?.photo_min?.path" class="float-right rounded-circle border border-warning"
+                style="width: 30px;margin-right: 20px;" />
+          </ng-template>
+        </c-item>
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('professeur')" class="invalid-feedback">
+        {{ 'veuillezChoisirLeSousDomaineDeLaTache' | translate }}.
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Domaines -->
+  <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label" for="domaines">
+        {{ 'DOMAINE' | translate }}
+
+        <!-- loading -->
+        <i class="fad fa-circle-notch fa-spin" *ngIf="domaineLoading"></i>
+      </label>
+
+      <angular2-multiselect [data]="domaines" [settings]="dropdownSettingsAlt.multi" formControlName="domaines"
+          [ngClass]="{'is-invalid': shouldShowRequiredError( 'domaines'), 'is-valid': isValid('domaines')}"
+          class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('domaines')" class="invalid-feedback">
+        {{ 'veuillezChoisirLedomaineDeLaTache' | translate }}.
+      </div>
+    </div>
+  </div>
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-12 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1" type="submit" [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin" *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+    </div>
+  </div>
+  <!-- <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+          <div class="col-10">
+              <label class="control-label" for="libelle">Orientation</label>
+              <textarea name="orientation" maxlength="200" class="form-control  form-control-sm" cols="30" rows="3"
+                  [formControlName]="'orientation'"
+                  [ngClass]="{'is-invalid': shouldShowRequiredError( 'orientation'), 'is-valid': isValid('orientation')}"></textarea>
+              <small>{{editForm.get('orientation').value?.length}}/200</small>
+              <div *ngIf="shouldShowRequiredError('orientation')" class="invalid-feedback">veillez saisir l'orientation.
+              </div>
+          </div>
+      </div> -->
+</form>

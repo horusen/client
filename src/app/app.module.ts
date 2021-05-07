@@ -10,6 +10,9 @@ import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
 import { AppInjector } from "./shared/services/app-injector.service";
 import { SharedModule } from "./shared/shared.module";
 import { AuthentificationModule } from "./authentification/authentification.module";
+import { NgxPicaModule } from "@digitalascetic/ngx-pica";
+import { ToastrModule } from "ngx-toastr";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +22,9 @@ import { AuthentificationModule } from "./authentification/authentification.modu
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
+    NgxPicaModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     SweetAlert2Module.forRoot(),
     TranslateModule.forRoot({
       defaultLanguage: "fr",

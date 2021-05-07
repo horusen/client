@@ -21,12 +21,12 @@ export class HierarchieEtablissementComponent implements OnInit {
     this.helper.toggleModal("affiliation-add-modal");
   }
 
-  getEtablissementAffilie(keyword: string = "") {
-    this.etablissementService.loading = true;
-    this.etablissementService
-      .getEtablissementsAffilies(keyword)
-      .subscribe(() => {
-        this.etablissementService.loading = false;
-      });
-  }
+  // getEtablissementAffilie(keyword: string = "") {
+  //   this.etablissementService.loading = true;
+  //   this.etablissementService
+  //     .getEtablissementsAffilies(keyword)
+  //     .subscribe(() => {
+  //       this.etablissementService.loading = false;
+  //     });
+  // }
 }

@@ -11,7 +11,7 @@ export class RemarqueSolutionTacheService extends BaseService {
     super("tache/solution/remarque");
   }
 
-  get(solution: number) {
+  getBySolution(solution: number) {
     return this.factory.get(`tache/solution/${solution}/remarque`).pipe(
       tap({
         next: (remarque) => (this.singleData = remarque),

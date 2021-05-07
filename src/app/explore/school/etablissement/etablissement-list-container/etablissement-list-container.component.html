@@ -1,32 +1,16 @@
 <!-- Header -->
-<div
-  class="card"
-  *ngIf="router.url.includes('school/echo/type') && typeEtablissement"
->
+<div class="card" *ngIf="router.url.includes('school/echo/type') && typeEtablissement">
   <div class="row mx-0 mg-y-7">
     <!-- Titre -->
     <div class="col-8">
-      <!-- <h3 class="tx- tx-16 tx-success italic mg-r-20 bold">
-                <i class="fad fa-users-class"></i>
-                {{ 'CLASSE' | translate }}
-            </h3> -->
-      <a
-        class="btn btn-oblong btn-light tx-pink float-left bd-0 btn-icon clickable"
-        [routerLink]="['/', 'school', 'etablissement', 'type']"
-      >
-        <i
-          class="fad fa-arrow-left tx-14 tx-pink"
-          style="padding: 0px; border-radius: 50%"
-        >
+
+      <a class="btn btn-oblong btn-light tx-pink float-left bd-0 btn-icon clickable" [routerLink]="['/', 'school', 'echo', 'type']">
+        <i class="fad fa-arrow-left tx-14 tx-pink" style="padding: 0px; border-radius: 50%">
         </i>
       </a>
 
       <span class="ml-2">
-        <img
-          src="assets/images/xs/ministry.png"
-          alt="avatar"
-          style="height: 33px"
-        />
+        <img src="assets/images/xs/ministry.png" alt="avatar" style="height: 33px" />
         {{ typeEtablissement.libelle }}
       </span>
     </div>
@@ -36,18 +20,10 @@
       <div class="form-group mg-b-5">
         <div class="input-group w-100">
           <!--  -->
-          <input
-            #search
-            type="text"
-            [placeholder]="'RECHERCHER' | translate"
-            class="form-control pd-y-8"
-          />
+          <input #search type="text" [placeholder]="'RECHERCHER' | translate" class="form-control pd-y-8" />
 
           <span class="">
-            <button
-              class="btn bg-light h-100 d-flex align-items-center"
-              (click)="research(search.value)"
-            >
+            <button class="btn bg-light h-100 d-flex align-items-center" (click)="research(search.value)">
               <i class="fad fa-search tx-facebook"></i>
             </button>
           </span>

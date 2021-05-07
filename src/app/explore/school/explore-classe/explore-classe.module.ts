@@ -15,6 +15,7 @@ const routes: Routes = [
     path: "",
     component: ExploreClasseComponent,
     children: [
+      // etablissement
       {
         path: "type",
         loadChildren: () =>
@@ -23,14 +24,49 @@ const routes: Routes = [
           ).then((module) => module.TypeEtablissementModule),
       },
 
+      // Professeur
+      {
+        path: "professeur",
+        loadChildren: () =>
+          import("./../professeur/professeur.module").then(
+            (module) => module.ProfesseurModule
+          ),
+      },
 
-      // Administration
+      // Eleve
+      {
+        path: "eleves",
+        loadChildren: () =>
+          import("./../eleve/eleve.module").then(
+            (module) => module.EleveModule
+          ),
+      },
+
+      // Parent
+      {
+        path: "parents-eleves",
+        loadChildren: () =>
+          import("./../parent-eleve/parent-eleve.module").then(
+            (module) => module.ParentEleveModule
+          ),
+      },
+
+      // Annuaire
       {
         path: "annuaire",
         loadChildren: () =>
           import("./../annuaire/annuaire.module").then(
             (module) => module.AnnuaireModule
           ),
+      },
+
+      // Administration
+      {
+        path: "administration",
+        loadChildren: () =>
+          import(
+            "./administration-etablissement/administration-etablissement.module"
+          ).then((module) => module.AdministrationEtablissementModule),
       },
 
       // Hierarchie

@@ -1,3 +1,4 @@
+import { FichierSoloComponent } from "./../../../file-manager/fichier/fichier-solo/fichier-solo.component";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { AffecterTacheComponent } from "./affecter-tache/affecter-tache.component";
@@ -11,7 +12,12 @@ import { ReseauListMinComponent } from "./reseau-list-min/reseau-list-min.compon
 import { ClasseListMinComponent } from "./classe-list-min/classe-list-min.component";
 import { DomaineListMinComponent } from "./domaine-list-min/domaine-list-min.component";
 import { ReseauxListComponent } from "../reseaux/reseaux-list/reseaux-list.component";
-import { SousReseauxListMinComponent } from './sous-reseaux-list-min/sous-reseaux-list-min.component';
+import { SousReseauxListMinComponent } from "./sous-reseaux-list-min/sous-reseaux-list-min.component";
+import { MesGroupesIndependantsComponent } from "../groupe/mes-groupes-independants/mes-groupes-independants.component";
+import { StatsComponent } from "./stats/stats.component";
+import { SidebarCollapseButtonComponent } from "./sidebar-collapse-button/sidebar-collapse-button.component";
+import { EleveShowDetailsComponent } from "../eleve/eleve-show/eleve-show-details/eleve-show-details.component";
+import { GroupeSoloComponent } from "../groupe/groupe-solo/groupe-solo.component";
 
 @NgModule({
   declarations: [
@@ -25,6 +31,12 @@ import { SousReseauxListMinComponent } from './sous-reseaux-list-min/sous-reseau
     DomaineListMinComponent,
     ReseauxListComponent,
     SousReseauxListMinComponent,
+    MesGroupesIndependantsComponent,
+    StatsComponent,
+    SidebarCollapseButtonComponent,
+    EleveShowDetailsComponent,
+    FichierSoloComponent,
+    GroupeSoloComponent,
   ],
   imports: [CommonModule, SharedModule, TunelModule],
   exports: [
@@ -35,6 +47,11 @@ import { SousReseauxListMinComponent } from './sous-reseaux-list-min/sous-reseau
     ClasseListMinComponent,
     DomaineListMinComponent,
     ReseauxListComponent,
+    MesGroupesIndependantsComponent,
+    SidebarCollapseButtonComponent,
+    EleveShowDetailsComponent,
+    FichierSoloComponent,
+    GroupeSoloComponent,
   ],
 })
 export class SharedSchoolModule {}

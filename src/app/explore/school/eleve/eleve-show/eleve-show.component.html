@@ -1,0 +1,60 @@
+<div class="">
+  <div class="card mt-2">
+    <!-- Nav tabs -->
+    <div class="tab-wrapper">
+
+      <!-- Details -->
+      <input checked="" class="tab" id="tab1" name="nav" type="radio" />
+      <a [routerLink]="['./']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+        <label for="tab1">
+          <span class="navicon fa fa-info-circle"></span>
+        </label>
+      </a>
+
+      <!-- Groupes -->
+      <input class="tab" id="tab2" name="nav" type="radio" />
+      <a [routerLink]="['groupes']" routerLinkActive="active">
+        <label for="tab2">
+          <span class="navicon fa fa-users"></span>
+        </label>
+      </a>
+
+
+      <!-- Taches -->
+      <input class="tab" id="tab3" name="nav" type="radio" />
+      <a [routerLink]="['taches']" routerLinkActive="active">
+        <label for="tab3">
+          <span class="navicon fa fa-tasks"></span>
+        </label>
+      </a>
+
+
+      <!-- Parents -->
+      <input class="tab" id="tab4" name="nav" type="radio" />
+      <a [routerLink]="['parents']" routerLinkActive="active">
+        <label for="tab4">
+          <span class="navicon fa fa-fw fa-user-shield"></span>
+        </label>
+      </a>
+
+
+
+      <div class="tab__copy scroll-11">
+        <router-outlet></router-outlet>
+        <!-- <app-eleve-show-details></app-eleve-show-details> -->
+      </div>
+      <!-- <div class="tab__copy" id="second_what">
+        <app-eleve-show-groupe></app-eleve-show-groupe>
+      </div>
+      <div class="tab__copy" id="third_how">
+        <app-eleve-show-tache></app-eleve-show-tache>
+      </div>
+
+      <div class="tab__copy" id="fourth">
+        <app-eleve-show-parent></app-eleve-show-parent>
+      </div> -->
+
+
+    </div>
+  </div>
+</div>

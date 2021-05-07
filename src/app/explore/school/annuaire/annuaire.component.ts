@@ -28,7 +28,7 @@ export class AnnuaireComponent extends BaseComponent implements OnInit {
     public eleveService: EleveService,
     public professeurService: ProfesseurService
   ) {
-    super(etablissementService)
+    super(etablissementService);
   }
 
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class AnnuaireComponent extends BaseComponent implements OnInit {
     this.paysService.get().subscribe((pays) => {
       this.pays = pays;
       this.loadingPays = false;
-    } )
+    });
   }
 
   research(keyword: string) {
@@ -70,7 +70,6 @@ export class AnnuaireComponent extends BaseComponent implements OnInit {
     } else {
       this.getEtablissementsInternationalesByType(keyword);
     }
-    // console.log(keyword);
     // this.typeElementSelected == "etablissement"
     //   ? this.getEtablissementsInternationalesByType(keyword)
     //   : null;
@@ -98,11 +97,9 @@ export class AnnuaireComponent extends BaseComponent implements OnInit {
 
   getProfesseursInternationals(keyword: string) {
     this.professeurService.loading = true;
-    this.professeurService
-      .getProfesseursInternationals(keyword)
-      .subscribe(() => {
-        this.professeurService.loading = false;
-      });
+    this.professeurService.getProfesseursInternationals().subscribe(() => {
+      this.professeurService.loading = false;
+    });
   }
 
   getElevesInternationals(keyword: string) {

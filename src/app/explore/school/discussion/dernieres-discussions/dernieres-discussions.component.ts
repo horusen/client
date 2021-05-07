@@ -1,9 +1,11 @@
+import { ReactionService } from "./../../reaction/reaction.service";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { BaseComponent } from "./../../../../shared/components/base-component/base.component";
-import { Input } from "@angular/core";
 import { Component, OnInit } from "@angular/core";
-import { DernieresDiscussionsService } from "./dernieres-discussions.service";
 import { EtablissementService } from "../../etablissement/etablissement.service";
 import { DiscussionService } from "../discussion.service";
+import { ProfesseurService } from "../../professeur/professeur.service";
+import { AuthService } from "src/app/authentification/auth.service";
 
 @Component({
   selector: "app-dernieres-discussions",
@@ -13,38 +15,134 @@ import { DiscussionService } from "../discussion.service";
 export class DernieresDiscussionsComponent
   extends BaseComponent
   implements OnInit {
-  @Input() type: string;
-  idCurrentObject: number;
+  type_discussion: string;
+  modulePathsRegex = {
+    // Regex correspondant aux differents modules qui utilise dernieres discussiob
+    // Son but est de selectionner par defaut l'onglet appropprié
+    "explore-professeur": new RegExp("school/professeur/explore"),
+    "administration-etablissement": new RegExp(
+      "school/administration/[0-9]+/explore"
+    ),
+  };
   constructor(
-    public dernieresDiscussionService: DernieresDiscussionsService,
+    public discussionService: DiscussionService,
     public etablissementService: EtablissementService,
-    public discussionService: DiscussionService
+    public professeurService: ProfesseurService,
+    public reactionService: ReactionService,
+    public auth: AuthService,
+    public route: ActivatedRoute,
+    public router: Router
   ) {
-    super(dernieresDiscussionService);
+    super(discussionService);
   }
 
   ngOnInit(): void {
-    if (this.type == "etablissement") {
-      this.getByEtablissement();
+    // derniers Discussion recupéré depuis discussion
+    this.route.queryParams.subscribe((queryParams) => {
+      // Selection un onglet par defaut si besoin
+      if (!queryParams.type_discussion) {
+        this.selectDefaultTab();
+      }
+
+      // Recuperations des données depuis le server
+      if (queryParams.type_discussion != this.type_discussion) {
+        this.getData(queryParams.type_discussion);
+      }
+    });
+
+    this._subscription[
+      "reaction"
+    ] = this.reactionService.lastItemcreated$.subscribe((reaction) => {
+      const indexDiscussion = this.discussionService.findIndexItemInDataByID(
+        this.discussionService.singleData.id
+      );
+      this.discussionService.data[indexDiscussion].derniereReaction = reaction;
+    });
+  }
+  // Permet de selectionner un onglet par defaut
+  selectDefaultTab() {
+    if (this.router.url.match(this.modulePathsRegex["explore-professeur"])) {
+      this.router.navigate(["./"], {
+        queryParams: { type_discussion: "professeur" },
+        relativeTo: this.route.parent,
+      });
+    } else if (
+      this.router.url.match(
+        this.modulePathsRegex["administration-etablissement"]
+      )
+    ) {
+      this.router.navigate(["./"], {
+        queryParams: { type_discussion: "correspondance-interne" },
+        relativeTo: this.route.parent,
+      });
     }
   }
 
-  checkDiscussion(discussionObject: number, correspondant?: number) {
-    let idType: number;
-    idType = this.type == "etablissement" ? 5 : null;
-    this.discussionService
-      .getDiscussion(idType, discussionObject, correspondant)
-      .subscribe();
+  getData(type_discussion: string) {
+    // Discussion type etablissement
+    if (type_discussion === "etablissement") {
+      this.router.navigate(["./"], {
+        relativeTo: this.route,
+        queryParams: { type_discussion: "etablissement-interne" },
+      });
+    }
+    // Discussion type professeur
+    else if (type_discussion == "professeur") {
+      this.type_discussion = "professeur";
+      this.getByProfesseur();
+    }
+    // Discussion type employé
+    else if (type_discussion == "administration") {
+      this.type_discussion = "administration";
+      this.getByMembreAdministration();
+    }
+    // Discussion type etablissement
+    else if (
+      type_discussion.split("-")[0] == "etablissement" &&
+      (type_discussion.split("-")[1] === "interne" ||
+        type_discussion.split("-")[1] === "externe")
+    ) {
+      this.type_discussion = type_discussion;
+      this.getByEtablissement(type_discussion.split("-")[1]);
+    }
   }
 
-  getByEtablissement() {
+  getByProfesseur() {
+    this.loading = true;
+    this.discussionService.getDernieresDiscussionsProfesseur().subscribe(() => {
+      this.loading = false;
+    });
+  }
+
+  getByMembreAdministration() {
+    this.loading = true;
+    this.discussionService
+      .getDernieresDiscussionsAdministration(
+        this.auth.selectedProfile.etablissement
+      )
+      .subscribe(() => {
+        this.loading = false;
+      });
+  }
+
+  getByEtablissement(positionnement: string) {
     this.etablissementService.singleData$.subscribe((etablissement) => {
       this.loading = true;
-      this.dernieresDiscussionService
-        .getDernierDiscussion(this.type, etablissement.id)
+      this.discussionService
+        .getDernieresDiscussionsEtablissement(etablissement.id, positionnement)
         .subscribe(() => {
           this.loading = false;
         });
     });
   }
+  // getByEtablissementExterne() {
+  //   this.etablissementService.singleData$.subscribe((etablissement) => {
+  //     this.loading = true;
+  //     this.discussionService
+  //       .getDernieresDiscussionsExternesEtablissement(etablissement.id)
+  //       .subscribe(() => {
+  //         this.loading = false;
+  //       });
+  //   });
+  // }
 }

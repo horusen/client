@@ -5,6 +5,15 @@ import { TacheGroupeListComponent } from "./tache-groupe-list/tache-groupe-list.
 import { SharedModule } from "src/app/shared/shared.module";
 import { AffecterTacheByGroupeComponent } from "./affecter-tache-by-groupe/affecter-tache-by-groupe.component";
 import { SharedSchoolModule } from "../../../shared-school/shared-school.module";
+import { RouterModule, Routes } from "@angular/router";
+
+const routes: Routes = [
+  {
+    path: "",
+    component: TacheGroupeComponent,
+  },
+];
+
 
 @NgModule({
   declarations: [
@@ -12,7 +21,7 @@ import { SharedSchoolModule } from "../../../shared-school/shared-school.module"
     TacheGroupeListComponent,
     AffecterTacheByGroupeComponent,
   ],
-  imports: [CommonModule, SharedModule, SharedSchoolModule],
-  exports: [TacheGroupeComponent],
+  imports: [CommonModule, SharedModule, SharedSchoolModule, RouterModule.forChild(routes)],
+  exports: [TacheGroupeComponent, RouterModule],
 })
-export class TacheGroupeModule {}
+export class TacheGroupeModule { }

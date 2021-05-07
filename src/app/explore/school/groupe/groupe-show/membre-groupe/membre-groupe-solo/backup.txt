@@ -1,0 +1,131 @@
+<div class="image-flip">
+  <div class="mainflip flip-0">
+    <!-- face avant -->
+    <div class="frontside">
+      <div class="card">
+        <div class="card-body text-center">
+          <!-- <div class="text-right">
+                        <span *ngIf="membership.membre_details.id  == 1">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                        </span>
+                    </div> -->
+          <!-- Image -->
+          <p>
+            <img class=" img-fluid" [src]="membership.membre_details.photo?.path" [alt]="membership.membre_details.nom_complet">
+
+            <i class="fas fa-circle-notch fa-spin" style="position: absolute; right: 20px;" *ngIf="loading"></i>
+          </p>
+
+          <!-- Nom de l'eleve -->
+          <h4 class="tx-12 tx-bolder tx-primary">
+            {{ membership.membre_details.nom_complet }}
+          </h4>
+
+          <!-- Type membre -->
+          <span class="badge radius-none tx-12" style="min-width: 90px;" [ngClass]="{
+                            'bg-soft-success':membership.type_membre_details.id == 1,
+                            'bg-soft-warning':membership.type_membre_details.id == 2,
+                            'bg-soft-primary':membership.type_membre_details.id == 3
+                         }">
+            <i class="fal fa-user"></i>
+            {{ membership.type_membre_details.libelle | translate }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backside -->
+    <div class="backside">
+      <div class="card">
+        <!-- Dropdown menu -->
+        <div class="d-flex justify-content-start px-3">
+          <div class="dropdown d-inline"
+              *ngIf="!loading && membership.groupe_details.user_type_membre == 1 && membership.type_membre !=1 && membership.membre_details.id != auth.user.id_inscription">
+            <!-- Icone -->
+            <i class="fas fa-caret-down mt-1 clickable float-left" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            </i>
+
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <!-- changer confidentialite -->
+              <a class="dropdown-item clickable" (click)="changerPrivilege()">
+                {{'changerPrivilege' | translate}} <i class="far fa-users-crown"></i>
+              </a>
+
+
+              <!-- supprimer membre -->
+              <a class="dropdown-item clickable" (click)="supprimer()">
+                {{'SUPPRIMER' | translate}} <i class="far fa-trash"></i>
+              </a>
+
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center mt-2 pt-0">
+
+          <div class="row row-xs mg-0 pd-0 clearfix">
+            <div class="table-responsive">
+              <table class="table  table-hover table-responsive-sm mb-0 ">
+                <tbody>
+                  <!-- Date naissance -->
+                  <tr [ngbTooltip]="'dateNaissance' | translate">
+                    <td>
+                      <a href=""><i class="fas fa-calendar tx-purple"></i></a>
+                    </td>
+                    <td class=" bd-b bg-white text-left ">
+                      <div class=" from">
+                        <p class="mg-0">
+                          <a>{{ membership.membre_details.date_naissance | date }}</a>
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- IDCAM -->
+                  <tr [ngbTooltip]="'IDCAM' | translate">
+                    <td>
+                      <a href="">
+                        <i class="fas fa-user tx-danger"></i>
+                      </a>
+                    </td>
+                    <td class=" bd-b bg-white text-left">
+                      <div class=" from">
+                        <p class="mg-0">
+                          <a> {{ membership.membre_details.idcam }}</a>
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- EMail -->
+                  <tr>
+                    <td>
+                      <a href=""><i class="fas fa-at tx-jaune"></i></a>
+                    </td>
+                    <td class=" bg-white text-left ">
+                      <div class=" from">
+                        <p class="mg-0">
+                          <a>{{ membership.membre_details.email }}</a>
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+
+
+                </tbody>
+              </table>
+
+              <a href="https://www.fiverr.com/share/qb8D02" class="btn   btn-sm rounded-circle">
+                <p class="tx-facebook mb-0">
+                  Profile.me </p>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -35,25 +35,20 @@ export class ImageViewerComponent implements OnInit, OnDestroy {
   }
 
   // next() {
-  //   console.log(this.index);
-  //   console.log(this.data);
+  //   
 
   //   if (this.index < this.data.length - 1) {
   //     this.index++;
   //     this.src = this.data[this.index].fichier_joint.path;
-  //     console.log("next ok");
   //   }
 
-  //   console.log("next");
   // }
 
   // previous() {
   //   if (this.index > 0) {
   //     this.index--;
   //     this.src = this.data[this.index].fichier_joint.path;
-  //     console.log("previous ok");
   //   }
 
-  //   console.log("previous");
   // }
 }

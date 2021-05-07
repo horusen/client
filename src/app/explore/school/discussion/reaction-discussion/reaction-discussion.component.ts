@@ -20,8 +20,10 @@ export class ReactionDiscussionComponent
     this._subscription[
       "discussion"
     ] = this.discussionService.singleData$.subscribe((discussion) => {
-      this.discussion = discussion;
-      this.reafficherReaction();
+      if (discussion) {
+        this.discussion = discussion;
+        this.reafficherReaction();
+      }
     });
   }
 

@@ -1,0 +1,61 @@
+<ng-container *ngIf="!loading && programmeService.data.length">
+  <div class="row m-0 p-0">
+    <div class="col-sm-6 col-xl-3" *ngFor="let programme of programmeService.data">
+      <div class="card card-programme card-1 mg-b-20 border">
+        <div class="card-body text-center">
+          <!-- icone -->
+          <i class="hidden-xs fal fa-scroll tx-40 tx-primary " style="padding:10px; border-radius: 50%; "></i>
+
+          <!-- libelle -->
+          <h5 class="tx-facebook tx-16 tx-medium mb-0  d-block">{{programme.libelle }}</h5>
+
+          <!-- type et niveau -->
+          <span class="tx-warning tx-1 tx-bold tx-medium  d-block">
+            {{programme.type?.libelle}} / {{programme.niveau?.libelle }}
+          </span>
+
+          <!-- Button action -->
+          <div class="like-comm mg-t-10">
+            <!-- Edit -->
+            <a class="link btn btn-link btn-sm px-1  tx-gray-600 tx-11" [routerLink]="[programme.id]">
+              <i class="fal fa-eye"></i>
+              {{ 'DETAILS' | translate }}
+            </a>
+
+            <!-- Edit -->
+            <a class="link btn btn-link btn-sm px-1  tx-gray-600 tx-11" [routerLink]="['./']" [fragment]="'edit'" (click)="modifier(programme)">
+              <i class="fal fa-exchange"></i>
+              {{ 'MODIFIER' | translate }}
+            </a>
+
+            <!-- Delete -->
+            <button class="link btn btn-link btn-link-danger btn-sm px-1  tx-gray-500 tx-11" (click)="supprimer(programme.id)">
+              <i class="fal fa-trash-alt"></i>
+              {{ 'SUPPRIMER' | translate }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer justify-content-around">
+          <!-- Domaine -->
+          <span class="badge card-2 tx-12 badge-pill  badge-info"><i class="fad fa-boxes"></i>
+            {{programme.domaine?.libelle }}
+          </span>
+
+          <!-- Langue -->
+          <span class="badge card-2 tx-12 badge-pill  badge-info"><i class="fad fa-language"></i>
+            {{programme.langue?.libelle }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+
+<div class="my-5" *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+
+<app-missing-data *ngIf="!loading && !programmeService.data.length"></app-missing-data>

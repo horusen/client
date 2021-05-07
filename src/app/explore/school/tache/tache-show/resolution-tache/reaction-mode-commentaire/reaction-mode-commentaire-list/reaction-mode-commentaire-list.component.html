@@ -1,19 +1,13 @@
-<div class="reaction__container scroll-11"
-    style="max-height: 550px;"
-    #scrollMe
-    [scrollTop]="scrollMe.scrollHeight">
-    <div class="col-12 p-0" *ngIf="reactionService.data.length && !loading">
-        <app-reaction-mode-commentaire-solo
-            *ngFor="let reaction of reactionService.data"
-            [reversed]="reaction.user?.id === auth.user?.id_inscription"
-            [reaction]="reaction">
-        </app-reaction-mode-commentaire-solo>
-    </div>
+<div class="reaction__container scroll-11" style="max-height: 345px;" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+  <div class="col-12 p-0" *ngIf="reactionService.data.length && !loading">
+    <app-reaction-mode-commentaire-solo *ngFor="let reaction of reactionService.data"
+        [reversed]="reaction.user?.id_inscription === auth.user?.id_inscription" [reaction]="reaction">
+    </app-reaction-mode-commentaire-solo>
+  </div>
 
-    <div class="col-12">
-        <app-loading *ngIf="loading" class="w-100"></app-loading>
-        <app-missing-data *ngIf="!reactionService.data.length && !loading"
-            [message]="'aucuneReaction' | translate">
-        </app-missing-data>
-    </div>
+  <div class="col-12">
+    <app-loading *ngIf="loading" class="w-100"></app-loading>
+    <app-missing-data *ngIf="!reactionService.data.length && !loading" [message]="'aucuneReaction' | translate">
+    </app-missing-data>
+  </div>
 </div>
