@@ -9,8 +9,8 @@ import { TunelModule } from "./tache/tunel/tunel.module";
 import { DiscussionMinModule } from "./discussion/discussion-min/discussion-min.module";
 import { SharedSchoolModule } from "./shared-school/shared-school.module";
 import { ProfesseurGuard } from "./professeur.guard";
-import { HeaderComponent } from './header/header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { HeaderComponent } from "./header/header.component";
+import { SidebarComponent } from "./sidebar/sidebar.component";
 
 const routes: Routes = [
   {

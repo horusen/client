@@ -1,11 +1,12 @@
+import { DemandeAdhesionGroupeSoloComponent } from "./../groupe/demande-adhesion-groupe/demande-adhesion-groupe-solo/demande-adhesion-groupe-solo.component";
+import { DemandeAdhesionGroupeComponent } from "./../groupe/demande-adhesion-groupe/demande-adhesion-groupe.component";
 import { FichierSoloComponent } from "./../../../file-manager/fichier/fichier-solo/fichier-solo.component";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { AffecterTacheComponent } from "./affecter-tache/affecter-tache.component";
 import { SharedModule } from "src/app/shared/shared.module";
 import { PersonalAssetsComponent } from "./personal-assets/personal-assets.component";
-import { ClasseEleveListMinComponent } from "./classe-eleve-list-min/classe-eleve-list-min.component";
-import { TunelModule } from "../tache/tunel/tunel.module";
+// import { TunelModule } from "../tache/tunel/tunel.module";
 import { GroupeListMinComponent } from "./groupe-list-min/groupe-list-min.component";
 import { ProfesseurListMinComponent } from "./professeur-list-min/professeur-list-min.component";
 import { ReseauListMinComponent } from "./reseau-list-min/reseau-list-min.component";
@@ -18,6 +19,7 @@ import { StatsComponent } from "./stats/stats.component";
 import { SidebarCollapseButtonComponent } from "./sidebar-collapse-button/sidebar-collapse-button.component";
 import { EleveShowDetailsComponent } from "../eleve/eleve-show/eleve-show-details/eleve-show-details.component";
 import { GroupeSoloComponent } from "../groupe/groupe-solo/groupe-solo.component";
+import { ChangerPrivilegeMembreGroupeeComponent } from "../groupe/groupe-show/membre-groupe/changer-privilege-membre-groupee/changer-privilege-membre-groupee.component";
 
 @NgModule({
   declarations: [
@@ -25,7 +27,6 @@ import { GroupeSoloComponent } from "../groupe/groupe-solo/groupe-solo.component
     PersonalAssetsComponent,
     ProfesseurListMinComponent,
     ReseauListMinComponent,
-    ClasseEleveListMinComponent,
     GroupeListMinComponent,
     ClasseListMinComponent,
     DomaineListMinComponent,
@@ -37,11 +38,13 @@ import { GroupeSoloComponent } from "../groupe/groupe-solo/groupe-solo.component
     EleveShowDetailsComponent,
     FichierSoloComponent,
     GroupeSoloComponent,
+    ChangerPrivilegeMembreGroupeeComponent,
+    DemandeAdhesionGroupeComponent,
+    DemandeAdhesionGroupeSoloComponent,
   ],
-  imports: [CommonModule, SharedModule, TunelModule],
+  imports: [CommonModule, SharedModule],
   exports: [
     AffecterTacheComponent,
-    ClasseEleveListMinComponent,
     GroupeListMinComponent,
     PersonalAssetsComponent,
     ClasseListMinComponent,
@@ -52,6 +55,8 @@ import { GroupeSoloComponent } from "../groupe/groupe-solo/groupe-solo.component
     EleveShowDetailsComponent,
     FichierSoloComponent,
     GroupeSoloComponent,
+    ChangerPrivilegeMembreGroupeeComponent,
+    DemandeAdhesionGroupeComponent,
   ],
 })
 export class SharedSchoolModule {}

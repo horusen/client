@@ -10,7 +10,8 @@ import { AffectationTacheService } from "../affectation-tache.service";
 })
 export class AffectationTacheListComponent
   extends BaseComponent
-  implements OnInit {
+  implements OnInit
+{
   @Output() showAffectationTacheCreate = new EventEmitter();
   constructor(
     public affectationTacheService: AffectationTacheService,
@@ -23,7 +24,7 @@ export class AffectationTacheListComponent
     this.route.queryParams.subscribe((params) => {
       this.paramsToFiltre(params);
       this.affectationTacheService.checkIfHasFiltre();
-      this.getData();
+      // this.getData();
     });
     this.getData();
   }
@@ -57,9 +58,8 @@ export class AffectationTacheListComponent
   paramsToFiltre(params: object): void {
     this.affectationTacheService.resetFiltre();
     Object.keys(this.urlParamsSerializer(params)).forEach((key) => {
-      this.affectationTacheService._filtre[key] = this.urlParamsSerializer(
-        params
-      )[key];
+      this.affectationTacheService._filtre[key] =
+        this.urlParamsSerializer(params)[key];
     });
 
     this.affectationTacheService.checkIfHasFiltre();

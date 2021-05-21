@@ -11,7 +11,8 @@ import { TunelService } from "../../tache/tunel/tunel.service";
 })
 export class ClasseEleveListMinComponent
   extends BaseComponent
-  implements OnInit {
+  implements OnInit
+{
   @Input() styleLight: boolean = true; // Permet d'adapter la couleur du texte en fonction de l'élèment parent
   constructor(
     public eleveService: EleveService,

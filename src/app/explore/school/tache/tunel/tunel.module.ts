@@ -10,7 +10,11 @@ import { ReactionTunelCreateComponent } from "./reaction-tunel/reaction-tunel-cr
 import { ReactionTunelSoloComponent } from "./reaction-tunel/reaction-tunel-solo/reaction-tunel-solo.component";
 import { ParticipantTunelComponent } from "./participant-tunel/participant-tunel.component";
 import { ParticipantTunelListComponent } from "./participant-tunel/participant-tunel-list/participant-tunel-list.component";
+import { SharedSchoolModule } from "../../shared-school/shared-school.module";
 import { TunelListMinComponent } from "./tunel-list-min/tunel-list-min.component";
+import { FichierTunelComponent } from "./fichier-tunel/fichier-tunel.component";
+import { ParticipantTunelAddComponent } from './participant-tunel/participant-tunel-add/participant-tunel-add.component';
+import { ReactionTunelEmptyComponent } from './reaction-tunel/reaction-tunel-empty/reaction-tunel-empty.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +28,11 @@ import { TunelListMinComponent } from "./tunel-list-min/tunel-list-min.component
     ParticipantTunelComponent,
     ParticipantTunelListComponent,
     TunelListMinComponent,
+    FichierTunelComponent,
+    ParticipantTunelAddComponent,
+    ReactionTunelEmptyComponent,
   ],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, SharedSchoolModule],
   exports: [
     TunelComponent,
     TunelCreateComponent,

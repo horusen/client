@@ -13,6 +13,7 @@ import { PasswordFichierService } from "../password-fichier/password-fichier.ser
 export class FichierSoloComponent implements OnInit {
   @Input() fichier: any;
   @Input() dossier: any;
+  @Input() select: boolean = true;
 
   public loading: boolean = false;
   public checked: boolean = false;
@@ -23,7 +24,9 @@ export class FichierSoloComponent implements OnInit {
     public dossierService: DossierService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.fichier);
+  }
 
   download() {
     this.loading = true;

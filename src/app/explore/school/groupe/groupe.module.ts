@@ -14,12 +14,11 @@ import { GroupeShowComponent } from "./groupe-show/groupe-show.component";
 import { GroupeDetailsComponent } from "./groupe-show/groupe-details/groupe-details.component";
 import { GroupeEditComponent } from "./groupe-edit/groupe-edit.component";
 import { FilterGroupeComponent } from "./filter-groupe/filter-groupe.component";
-import { DemandeAdhesionGroupeComponent } from "./demande-adhesion-groupe/demande-adhesion-groupe.component";
-import { DemandeAdhesionGroupeSoloComponent } from "./demande-adhesion-groupe/demande-adhesion-groupe-solo/demande-adhesion-groupe-solo.component";
 import { GroupeStatsComponent } from "./groupe-stats/groupe-stats.component";
 import { GroupeShowAltComponent } from "./groupe-show-alt/groupe-show-alt.component";
 import { GroupeShowAltDetailsComponent } from "./groupe-show-alt/groupe-show-alt-details/groupe-show-alt-details.component";
 import { GroupeShowAltMembreComponent } from "./groupe-show-alt/groupe-show-alt-membre/groupe-show-alt-membre.component";
+import { SharedSchoolModule } from "../shared-school/shared-school.module";
 
 const routes: Routes = [
   {
@@ -118,14 +117,17 @@ const routes: Routes = [
     GroupeDetailsComponent,
     GroupeEditComponent,
     FilterGroupeComponent,
-    DemandeAdhesionGroupeComponent,
-    DemandeAdhesionGroupeSoloComponent,
     GroupeStatsComponent,
     GroupeShowAltComponent,
     GroupeShowAltDetailsComponent,
     GroupeShowAltMembreComponent,
   ],
-  imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    SharedModule,
+    SharedSchoolModule,
+    RouterModule.forChild(routes),
+  ],
   exports: [RouterModule],
 })
 export class GroupeModule {}

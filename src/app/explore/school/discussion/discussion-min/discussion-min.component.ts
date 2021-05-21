@@ -13,7 +13,12 @@ import { DiscussionService } from "../discussion.service";
 })
 export class DiscussionMinComponent
   extends DiscussionComponent
-  implements OnInit, AfterViewInit {
+  implements OnInit, AfterViewInit
+{
+  showReactions = {
+    tunel: false,
+    discussion: false,
+  };
   constructor(
     public discussionService: DiscussionService,
     public route: ActivatedRoute,
@@ -38,8 +43,22 @@ export class DiscussionMinComponent
   ngAfterViewInit() {
     this.route.queryParams.subscribe((params) => {
       if (params["modal"] && params["modal"] == "discussion-min") {
-        this.helper.toggleModal("discussion-min-modal");
+        this.helper.showModal("discussion-min-modal");
       }
+
+      if (params["type_discussion"]) {
+        this.resetShowReaction();
+        params["type_discussion"] === "tunel"
+          ? (this.showReactions.tunel = true)
+          : (this.showReactions.discussion = true);
+        console.log(this.showReactions);
+      }
+    });
+  }
+
+  resetShowReaction() {
+    Object.keys(this.showReactions).forEach((key) => {
+      this.showReactions[key] = false;
     });
   }
 }

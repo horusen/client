@@ -3,6 +3,7 @@ import { BaseCreateComponent } from "src/app/shared/components/base-component/ba
 import { EnregistreurAudioService } from "src/app/shared/enregistreur/enregistreur-audio.service";
 import { DocumentHandlerService } from "src/app/shared/services/document-handle.service";
 import { ImageHandlerService } from "src/app/shared/services/image-handler.service";
+import { DiscussionService } from "../../discussion/discussion.service";
 import { ReactionService } from "../reaction.service";
 
 @Component({
@@ -12,15 +13,17 @@ import { ReactionService } from "../reaction.service";
 })
 export class ReactionCreateComponent
   extends BaseCreateComponent
-  implements OnInit {
+  implements OnInit
+{
   @Input() type: string;
   @Input() min: boolean = false;
-  @Input() parentID: number;
+  parentID: number;
   showAllButtons: false;
   rebondissement: any;
   showEmojiPicker: boolean = false;
   constructor(
     public reactionService: ReactionService,
+    public discussionService: DiscussionService,
     public enregistreurService: EnregistreurAudioService,
     public imageService: ImageHandlerService,
     public documentService: DocumentHandlerService
@@ -37,6 +40,14 @@ export class ReactionCreateComponent
       }
     );
 
+    // Subscription to discussion
+    if (this.type === "discussion") {
+      this._subscription["discussion"] =
+        this.discussionService.singleData$.subscribe(
+          (discussion) => (this.parentID = discussion.id)
+        );
+    }
+
     // Subscribe to enregitreurService
     this._subscription["file"] = this.enregistreurService.file$.subscribe(
       (file) => {
@@ -46,11 +57,10 @@ export class ReactionCreateComponent
     );
 
     // Subscribe to rebondissement
-    this._subscription[
-      "rebondissement"
-    ] = this.reactionService.rebondissement$.subscribe((rebondissement) => {
-      this.rebondissement = rebondissement;
-    });
+    this._subscription["rebondissement"] =
+      this.reactionService.rebondissement$.subscribe((rebondissement) => {
+        this.rebondissement = rebondissement;
+      });
   }
 
   initialiseForm() {

@@ -1,74 +1,83 @@
-<form class=" form mg-t-10" [formGroup]="form" (submit)="create()" *ngIf="form">
-    <!-- Rebondissement -->
-    <div class="bg-soft-primary p-2" *ngIf="rebondissement">
-        <div class="d-flex reaction">
-            <!-- Image profile -->
-            <div class="media-img">
-                <span class="avatar avatar-online">
-                    <img
-                        [src]="rebondissement.user.photo"
-                        class="img-fluid">
-                </span>
-            </div>
-            <!-- Reaction -->
-            <div class="w-100">
-                <!-- Icone -->
-                <div class="float-right ml-1 ">
-                    <span (click)="rebondissement = null" class="clickable"><i class="far fa-times"></i></span>
-                </div>
+<div class="tunel__message-typebox ">
+  <!-- #region Rebondissement -->
+  <div class="tunel__message-rebondissement" *ngIf="rebondissement">
+    <!-- Close button -->
+    <span class="tunel__message-rebondissement-close-button" (click)="rebondissement = null"><i class="fad fa-times-circle"></i></span>
 
-                <div class="">
-                    <!-- Nom de l'utilsateur -->
-                    <h5 class="tx-13 text-left mb-0">
-                        <a href="" class="ml-2">{{ rebondissement.user.nom_complet }}</a>
-                    </h5>
+    <!-- Rebondissement user -->
+    <div class="tunel__message-rebondissement-user font-weight-bolder">{{ rebondissement.user.nom_complet }}</div>
 
-                    <!-- Message -->
-                    <div class="mb-0 tx-gray-600 p-1"
-                        style="color: #1a5276 ; border-bottom: 0px solid  rgb( 169, 204, 227 ) ">
+    <!-- Rebondissement reaction -->
+    {{ rebondissement.reaction }}
+  </div>
+  <!-- #endregion rebondissement -->
 
-                        <p class="text-left ml-2 mb-0">{{ rebondissement.reaction }}</p>
+  <!-- Display when not recording -->
+  <form [formGroup]="form" (submit)="create()" class="tunel__form" *ngIf="form && !(enregistreurService.isRecording$ | async)">
+    <a class="tunel__emoticone" type="button" (click)="showEmojiPicker = !showEmojiPicker">
+      <i class="fad fa-smile"></i>
+    </a>
+
+    <input type="text" class="tunel__message-input" formControlName="reaction" placeholder="Ecrivez votre commentaire...">
+    <button class="tunel__button tunel__button--send">
+      <i class="fad fa-paper-plane"></i>
+    </button>
 
 
-                        <!-- Date reaction -->
-                        <!-- <span class="small float-left tx-gray-400"
-                            style="color: #a93226;">
-                            {{reaction.created_at | date:'medium'}}
-                        </span> -->
-                    </div>
-                </div>
+    <!-- Boutton options -->
+    <input id="more-options" #optionsButton class="tunel__options-input" type="checkbox" hidden>
+    <label for="more-options" class="tunel__button tunel__button--more">
+      <i class="fas fa-ellipsis-h"></i>
+    </label>
 
 
-            </div>
-        </div>
+    <emoji-mart class="emoji-mart" set="apple" (emojiSelect)="addEmoji($event)" *ngIf="showEmojiPicker" skin="1"
+        [title]="'choisirUnEmoji' | translate">
+    </emoji-mart>
+
+    <div class="tunel__option-buttons">
+      <!-- Image Select -->
+      <button class="tunel__button tunel__button--option tunel__button--option--image" (click)="imageUpload.click()">
+        <i class="fas fa-image"></i>
+      </button>
+
+      <!-- Document select -->
+      <button class="tunel__button tunel__button--option tunel__button--option--fichier" (click)="documentUpload.click()">
+        <i class="fas fa-file-pdf"></i>
+      </button>
+
+      <!-- Audio record -->
+      <button class="tunel__button tunel__button--option tunel__button--option--record" (click)="enregistrer()">
+        <i class="fas fa-microphone-alt"></i>
+      </button>
     </div>
 
 
-    <div class="input-group">
-        <span class="input-group-btn">
-            <!-- emoticone -->
-            <a type="role"
-                class="btn btn-sm btn-facebook rounded-circle mg-t-5"
-                [ngbTooltip]="'ajouterDesEmojis' | translate"
-                (click)="showEmojiPicker = !showEmojiPicker">
-                <i class=" fal fa-smile-beam tx-white "></i>
-            </a>
+    <!-- Pdf input -->
+    <input type="file" accept="application/pdf" [hidden]="true" #documentUpload (change)="pdfFileProcess($event)">
 
-            <emoji-mart class="emoji-mart"
-                set="apple" (emojiSelect)="addEmoji($event)" *ngIf="showEmojiPicker"
-                skin="3" title="Pick your emoji…"></emoji-mart>
-        </span>
+    <!-- Image input -->
+    <input type="file" [hidden]="true" accept="image/x-png,image/gif,image/jpeg" #imageUpload (change)="imageFileProcess($event)">
 
-        <textarea type="text"
-            class="form-control"
-            required="required"
-            formControlName="reaction"
-            style="height: 40px">
-            </textarea>
+  </form>
 
-        <button class="input-group-text bg-primary" [disabled]="form.invalid" id="basic-addon6">
-            <i class=" tx-white bg-primary" style="padding:6px; border-radius: 50%;"
-                [ngClass]="{'fal fa-paper-plane': !loading, 'fas fa-circle-notch fa-spin': loading}"></i>
-        </button>
-    </div>
-</form>
+  <!-- Display when recording -->
+  <div class="tunel__message-recording" *ngIf="enregistreurService.isRecording$ | async">
+    <span class="tunel__message-recording__icon"><i class="fad fa-microphone-alt"></i></span>
+    <span class="tunel__message-recording__timer">{{ enregistreurService.dureeEnregistrement$ | async }}</span>
+
+    <span class="tunel__message-recording__buttons">
+      <!-- Stop -->
+      <span class="tunel__message-recording__button tunel__message-recording__button--stop" (click)="annulerEnregistrement()">
+        <i class="fad fa-stop"></i>
+      </span>
+
+      <!-- Send -->
+      <span class="tunel__message-recording__button  tunel__message-recording__button--send" (click)="stopEnregistrer()">
+        <i class="fad fa-paper-plane"></i>
+      </span>
+    </span>
+
+  </div>
+
+</div>

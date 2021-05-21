@@ -1,52 +1,79 @@
-<div>
-    <!-- Header -->
-    <div class="border-bottom px-2 pt-2 mb-2 pb-2 tunel-header">
-        <div class="tx-15 tx-facebook d-flex">
-            <!-- Icone -->
-            <span class="border rounded-circle p-2 mr-2">
-                <i class="fas fa-comments-alt tx-teal"></i>
-            </span>
-            <div class="w-100">
-                <!-- libelle -->
-                <div>
-                    {{ tunel?.libelle }}
+<div class="tunel" *ngIf="tunel">
+  <!--#region Header -->
+  <div class="tunel__header">
+    <!-- header type correspondant-->
+    <div class="tunel__correspondant">
+      <!-- Image correspondant -->
+      <img [src]="tunel.user.photo.path" [alt]="tunel.user.nom_complet" class="tunel__correspondant-image">
 
-                    <span class="float-right">
-                        <!-- Participation tunel -->
-                        <span class="clickable mr-3"
-                            *ngIf="!tunel?.is_user_participant"
-                            (click)="participer()"
-                            [ngbTooltip]="'participerACeTunel' | translate">
-                            <i class="fad fa-user-plus tx-warning" *ngIf="!participerLoading"></i>
-                            <i class="fad fa-circle-notch fa-spin tx-warning" *ngIf="participerLoading"></i>
-                        </span>
+      <!-- Autres information correspondant -->
+      <div class="tunel__correspondant-name">
 
-                        <!-- Boutton afficher participant -->
-                        <span class="clickable"
-                            (click)="afficherParticipants = true;"
-                            [ngbTooltip]="'voirLesParticipants' | translate">
-                            <i class="fad fa-users tx-warning"></i>
-                        </span>
-                    </span>
-                </div>
+        <!-- Nom correspondant -->
+        <h4 class="tunel__correspondant-name--main">
+          {{ tunel.libelle }}
+        </h4>
 
-                <!-- tache -->
-                <div class="tx-12">
-                    <i class="far fa-tasks-alt tx-danger"></i>
-                    {{ tunel?.tache?.libelle }}
-                </div>
-            </div>
-        </div>
+        <!-- Correspodant fonction -->
+        <span class="tunel__correspondant-name--sub">
+          {{ 'creePar' | translate}}: @{{ tunel.user.nom_complet }}
+        </span>
+      </div>
+
+      <a class="tunel__correspondant-button" [routerLink]="[router.url.split('?')[0]]" (click)="helper.toggleModal('discussion-min-modal')">
+        <i class="fad fa-times-circle"></i>
+      </a>
     </div>
 
-    <!-- Reaction list -->
-    <app-reaction-tunel-list></app-reaction-tunel-list>
+    <!-- #region Navigation -->
+    <ul class="tunel__navigation">
+      <!-- Message -->
+      <a [routerLink]="['./']" [queryParams]="getNavigationQueryParamsByTab('message')" class="tunel__navigation-item  "
+          [routerLinkActive]="'tunel__navigation-item--active'">
+        <i class="fas fa-comment"></i>
+      </a>
 
-    <!-- reaction add -->
+      <!-- Participant -->
+      <a class="tunel__navigation-item" [routerLink]="['./']" [queryParams]="getNavigationQueryParamsByTab('participant')"
+          [routerLinkActive]="'tunel__navigation-item--active'">
+        <i class="fal fa-users"></i>
+      </a>
+
+      <!-- Fichier -->
+      <a class="tunel__navigation-item" [routerLink]="['./']" [queryParams]="getNavigationQueryParamsByTab('fichier')"
+          [routerLinkActive]="'tunel__navigation-item--active'">
+        <i class="fal fa-file-alt"></i>
+      </a>
+    </ul>
+    <!-- #endregion Navigation -->
+  </div>
+  <!-- #endregion Header -->
+
+  <!-- #region Messages -->
+  <ng-container *ngIf="showTabs.message">
+    <div class="tunel__body tunel__body--message scroll-11">
+      <app-reaction-tunel-list></app-reaction-tunel-list>
+    </div>
+
     <app-reaction-tunel-create *ngIf="tunel?.is_user_participant"></app-reaction-tunel-create>
 
-    <!-- Ajojuter participant -->
-    <app-overlay *ngIf="afficherParticipants" (closed)="afficherParticipants = false">
-        <app-participant-tunel></app-participant-tunel>
-    </app-overlay>
+  </ng-container>
+  <!-- #endregion Message -->
+
+  <!-- #region participant -->
+  <div class="tunel__body" *ngIf="showTabs.participant">
+    <app-participant-tunel></app-participant-tunel>
+  </div>
+  <!-- #endregion participant -->
+
+
+  <!-- #region fichier -->
+  <div class="tunel__body" *ngIf="showTabs.fichier">
+    <app-fichier-tunel></app-fichier-tunel>
+  </div>
+  <!-- #endregion fichier -->
+
+
+
+
 </div>

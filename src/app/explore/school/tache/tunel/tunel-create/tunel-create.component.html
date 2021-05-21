@@ -26,26 +26,24 @@
         <i class="fad fa-circle-notch fa-spin" *ngIf="loadingDependancies.affectation_tache"></i>
       </label>
 
-      <ng-multiselect-dropdown [data]="dependancies.affectation_taches" [settings]="dropdownSettings.single" formControlName="affectation_tache"
+      <angular2-multiselect [data]="affectationTacheService.data" [settings]="dropdownSettingsAlt.single" formControlName="affectation_tache"
           [ngClass]="{'is-invalid': shouldShowRequiredError( 'affectation_tache'), 'is-valid': isValid('affectation_tache')}"
           class="form-control p-0 form-control-sm">
-      </ng-multiselect-dropdown>
-      <ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
-        <div style="padding:1px 10px;margin-right:10px;right:2px;top:-2px">
-          <label style="color: #333;min-width: 130px;" [ngStyle]="{ 'color': getItems[id].isDisabled? 'lightgrey':''}">
-            {{getItems[id].tache_details.libelle}}
-          </label>
-        </div>
-      </ng-template>
-      <ng-template #optionSelectedTemplate let-option="option" let-id="id">
-        <div>
-          {{option}}
-        </div>
-      </ng-template>
+        <c-badge>
+          <ng-template let-item="item">
+            {{item.tache_details.libelle}}
+          </ng-template>
+        </c-badge>
+        <c-item>
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.tache_details.libelle}}</label>
+          </ng-template>
+        </c-item>
+      </angular2-multiselect>
 
       <!-- Message d'erreur -->
       <div *ngIf="shouldShowRequiredError('affectation_tache')" class="invalid-feedback">
-        {{ 'veuillezChoisirLeSousDomaineDeLaTache' | translate }}.
+        {{ 'veuillezChoisirUneTache' | translate }}.
       </div>
     </div>
   </div>

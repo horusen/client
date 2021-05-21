@@ -11,7 +11,8 @@ import { DiscussionService } from "../../../discussion/discussion.service";
 })
 export class AssetDiscussionFichierComponent
   extends BaseComponent
-  implements OnInit {
+  implements OnInit
+{
   constructor(
     public fichierService: FichierService,
     public route: ActivatedRoute,

@@ -25,7 +25,8 @@ export class DemandeAdhesionGroupeService extends BaseService {
     return this.factory.post(`${this.endPoint}`, { groupe }).pipe(
       tap({
         next: () => {
-          this.groupeService.setFieldInSingleData("user_has_demande", true);
+          if (this.groupeService.singleData)
+            this.groupeService.setFieldInSingleData("user_has_demande", true);
         },
       })
     );

@@ -12,7 +12,8 @@ import { TunelService } from "../tunel.service";
 })
 export class TunelCreateComponent
   extends BaseCreateComponent
-  implements OnInit {
+  implements OnInit
+{
   user: any; // personne avec laquelle le user connécté crée un tunel
   dependancies = {
     affectation_taches: [],
@@ -105,7 +106,7 @@ export class TunelCreateComponent
 
   getMembres(groupe: any) {
     this.loadingDependancies.membre = true;
-    this.membreGroupeService.get(groupe).subscribe((membres) => {
+    this.membreGroupeService.getByGroupe(groupe).subscribe((membres) => {
       this.dependancies.membres = membres
         .map((item: any) => item.membre_details)
         .filter(
@@ -124,10 +125,7 @@ export class TunelCreateComponent
     const data = {
       libelle: this.formValue("libelle"),
       affectation_tache: this.formValue("affectation_tache")[0].id,
-      participants: [
-        ...this.helper.idExtractor(participants),
-        ...[this.user.id_inscription],
-      ],
+      participants: [...this.helper.idExtractor(participants)],
     };
 
     this.tunelService

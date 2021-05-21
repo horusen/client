@@ -1,17 +1,19 @@
 import { MembreGroupeService } from "./../membre-groupe.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { BaseEditComponent } from "src/app/shared/components/base-component/base-edit.component";
 import { TypeMembreGroupeService } from "../type-membre-groupe/type-membre-groupe.service";
 
 @Component({
-  selector: "app-changer-privilege-membre-groupee",
+  selector: "app-changer-privilege-membre-groupe",
   templateUrl: "./changer-privilege-membre-groupee.component.html",
   styleUrls: ["./changer-privilege-membre-groupee.component.scss"],
 })
 export class ChangerPrivilegeMembreGroupeeComponent
   extends BaseEditComponent
-  implements OnInit {
+  implements OnInit
+{
   getPrivilegesLoading: boolean = false;
+  @Output() onFinished = new EventEmitter();
   constructor(
     public membreGroupeService: MembreGroupeService,
     public typeMembreGroupeService: TypeMembreGroupeService
@@ -39,6 +41,7 @@ export class ChangerPrivilegeMembreGroupeeComponent
       .changerPrivilege(this.single.id, type_membre)
       .subscribe(() => {
         this.loading = false;
+        this.onFinished.emit;
       });
   }
 }

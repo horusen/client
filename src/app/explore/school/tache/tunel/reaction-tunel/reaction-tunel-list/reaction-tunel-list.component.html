@@ -1,17 +1,131 @@
-<div class="chat-container scroll-11"
-    *ngIf="reactionTunelService.data.length && !loading">
-    <div class="chat-body w-100 pd-20 tx-facebook"
-        #scrollMe
-        [scrollTop]="scrollMe.scrollHeight">
-        <!-- reaction -->
-        <app-reaction-tunel-solo
-            *ngFor="let reaction of reactionTunelService.data"
-            [reaction]="reaction"
-            [reversed]="reaction.user?.id === auth.user?.id_inscription">
-        </app-reaction-tunel-solo>
+<div class="tunel__messages " *ngIf="reactionService.data.length && !loading">
+
+  <!-- Liste des message -->
+  <ng-container *ngFor="let reaction of reactionService.data">
+    <!-- Sent -->
+    <div class="tunel__message-container tunel__message-container--reverse" *ngIf="reaction.user?.id_inscription === auth.user?.id_inscription">
+
+      <!-- Reaction owner Name -->
+      <div class="tunel__message-owner">{{ reaction.user.nom_complet }}</div>
+
+      <div class="tunel__message tunel__message--reverse">
+        <!-- Reaction owner image -->
+        <div class="tunel__message-owner-image"><img [src]="reaction.user.photo.path" [alt]="reaction.user.nom_complet"></div>
+
+        <!-- Arrow -->
+        <div class="tunel__message-arrow"></div>
+
+        <div class="tunel__message-text">
+          <!-- Rebondissement message -->
+          <div class="tunel__message-rebondissement-text" *ngIf="reaction.rebondissement">
+            <!-- Rebondissement message user -->
+            <div class="font-weight-bolder">{{ reaction.rebondissement.user.nom_complet }}</div>
+
+            <!-- Rebondissement message reaction -->
+            {{ reaction.rebondissement.reaction }}
+          </div>
+
+          <!-- Reaction text -->
+          <span *ngIf="reaction.reaction">{{reaction?.reaction}}</span>
+
+          <!-- Reaction type fichier -->
+          <ng-container *ngIf="reaction.file">
+            <!-- Reaction image -->
+            <a [href]="factory.baseUrl + '/file/' + reaction.file.id + '/download'" target="_blank">
+              <img class="tunel__reaction-image" [src]="reaction.file.path" *ngIf="reaction.file.extension.type === 1">
+            </a>
+
+            <!-- Reaction fichier -->
+            <a [href]="factory.baseUrl + '/file/' + reaction.file.id + '/download'" target="_blank">
+              <span class="tunel__reaction-document" *ngIf="reaction.file.extension.type === 2">
+                <i class="fad fa-file-pdf"></i> {{ reaction.file.name }} <i class="fad fa-arrow-alt-to-bottom"></i>
+              </span>
+            </a>
+
+            <!-- Reaction audio -->
+            <audio class="tunel__reaction-audio" *ngIf="reaction.file.extension.type === 3" controls>
+              <source [src]="reaction.file.path">
+            </audio>
+
+          </ng-container>
+
+          <!-- Action buttons -->
+          <div class="tunel__message__action-buttons">
+            <span class="tunel__message__action-button" (click)="rebondir(reaction)" [ngbTooltip]="'REBONDIR' | translate"><i
+                  class="fad fa-comments"></i></span>
+            <span class="tunel__message__action-button" [ngbTooltip]="'PARTAGER' | translate"><i class="fad fa-share"></i></span>
+          </div>
+        </div>
+      </div>
     </div>
+
+
+
+    <!-- Received -->
+    <div class="tunel__message-container tunel__message-container--initial" *ngIf="reaction.user?.id_inscription !== auth.user?.id_inscription">
+      <div class="tunel__message-owner">{{ reaction.user.nom_complet }}</div>
+      <div class="tunel__message tunel__message--initial">
+        <!-- Reaction owner image -->
+        <div class="tunel__message-owner-image"><img [src]="reaction.user.photo.path" [alt]="reaction.user.nom_complet"></div>
+
+        <!-- Arrow -->
+        <div class="tunel__message-arrow"></div>
+
+        <!-- message text -->
+        <div class="tunel__message-text">
+          <!-- Rebondissement message -->
+          <div class="tunel__message-rebondissement-text" *ngIf="reaction.rebondissement">
+            <!-- Rebondissement message user -->
+            <div class="font-weight-bolder">{{ reaction.rebondissement.user.nom_complet }}</div>
+
+            <!-- Rebondissement message reaction -->
+            {{ reaction.rebondissement.reaction }}
+          </div>
+
+
+          <!-- Reaction text -->
+          <span *ngIf="reaction.reaction">{{reaction?.reaction}}</span>
+
+          <!-- Reaction type fichier -->
+          <ng-container *ngIf="reaction.file">
+            <!-- Reaction image -->
+            <a [href]="factory.baseUrl + '/file/' + reaction.file.id + '/download'" target="_blank">
+              <img class="tunel__reaction-image" [src]="reaction.file.path" *ngIf="reaction.file.extension.type === 1">
+            </a>
+
+            <!-- Reaction fichier -->
+            <a [href]="factory.baseUrl + '/file/' + reaction.file.id + '/download'" target="_blank">
+              <span class="tunel__reaction-document" *ngIf="reaction.file.extension.type === 2">
+                <i class="fad fa-file-pdf"></i> {{ reaction.file.name }} <i class="fad fa-arrow-alt-to-bottom"></i>
+              </span>
+            </a>
+
+            <!-- Reaction audio -->
+            <audio class="tunel__reaction-audio" *ngIf="reaction.file.extension.type === 3" controls>
+              <source [src]="reaction.file.path">
+            </audio>
+
+          </ng-container>
+
+
+          <!-- BOutton rebondissement et partager -->
+          <div class="tunel__message__action-buttons">
+            <span class="tunel__message__action-button" (click)="rebondir(reaction)" [ngbTooltip]="'REBONDIR' | translate"><i
+                  class="fad fa-comments"></i></span>
+            <span class="tunel__message__action-button" [ngbTooltip]="'PARTAGER' | translate"><i class="fad fa-share"></i></span>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </ng-container>
 </div>
 
-<app-loading class="w-100 mt-5" *ngIf="loading"></app-loading>
-<app-missing-data *ngIf="!reactionTunelService.data.length && !loading" [message]="'aucuneReaction' | translate">
-</app-missing-data>
+<div class="my-5" *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+
+
+<app-reaction-tunel-empty *ngIf="!loading && !reactionService.data.length"></app-reaction-tunel-empty>

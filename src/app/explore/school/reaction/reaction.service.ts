@@ -43,4 +43,10 @@ export class ReactionService extends BaseService {
       .get(`discussion/${discussion}/reaction`)
       .pipe(tap(this.listResponseHandler()));
   }
+
+  getByTunel(tunel: number) {
+    return this.factory
+      .get(`tunel/${tunel}/reaction`)
+      .pipe(tap(this.listResponseHandler()));
+  }
 }

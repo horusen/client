@@ -22,6 +22,12 @@ export class FichierService extends BaseService {
       .pipe(tap(this.listResponseHandler()));
   }
 
+  getByTunel(tunel: number, params?: Params) {
+    return this.factory
+      .get(`tunel/${tunel}/fichier`, { params })
+      .pipe(tap(this.listResponseHandler()));
+  }
+
   selectFichier(fichier: any) {
     this.selectedFichiers.push(fichier);
   }

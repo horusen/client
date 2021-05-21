@@ -66,6 +66,10 @@ export class Helper {
     $("#" + id).modal("show");
   }
 
+  hideModal(id: string): void {
+    $("#" + id).modal("hide");
+  }
+
   idExtractor(data: any[], idField: string = "id"): number[] {
     let returned: number[] = [];
     data.forEach((element) => {
@@ -317,7 +321,8 @@ export class Helper {
   }
 
   urlify(text: string) {
-    const urlRegex = /(https?:\/\/)?[\w\-~]+(\.[\w\-~]+)+(\/[\w\-~@:%]*)*(#[\w\-]*)?(\?[^\s]*)?/gi;
+    const urlRegex =
+      /(https?:\/\/)?[\w\-~]+(\.[\w\-~]+)+(\/[\w\-~@:%]*)*(#[\w\-]*)?(\?[^\s]*)?/gi;
     if (text) {
       return text.replace(
         urlRegex,

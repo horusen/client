@@ -9,7 +9,7 @@ import { BaseService } from "src/app/shared/services/base.service";
 export class TunelService extends BaseService {
   user$ = new ReplaySubject<any>(1);
   constructor() {
-    super("tache/tunel");
+    super("tunel");
   }
 
   set user(user: any) {

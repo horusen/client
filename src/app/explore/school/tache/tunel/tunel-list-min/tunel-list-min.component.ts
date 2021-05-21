@@ -14,7 +14,7 @@ export class TunelListMinComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this._subscription["user"] = this.tunelService.user$.subscribe((user) => {
-      this.getData(user.id);
+      this.getData(user.id_inscription);
     });
   }
 

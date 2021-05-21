@@ -19,19 +19,14 @@ export class ReactionListComponent extends BaseComponent implements OnInit {
   displayAssets: boolean = true;
   constructor(
     public reactionService: ReactionService,
-    public etablissementService: EtablissementService,
-    public chargerComService: ChargerCommunicationEtablissementService,
     public discussionService: DiscussionService,
-    public router: Router
+    public etablissementService?: EtablissementService,
+    public chargerComService?: ChargerCommunicationEtablissementService
   ) {
     super(reactionService);
   }
 
   ngOnInit(): void {
-    this.router.url.includes("discussion-min")
-      ? (this.minified = true)
-      : (this.minified = false);
-
     if (this.type == "discussion") {
       this._subscription[
         "discussion"
