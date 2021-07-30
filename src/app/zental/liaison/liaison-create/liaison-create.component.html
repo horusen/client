@@ -1,0 +1,152 @@
+<form class="custom-placeholder"
+      [formGroup]="form"
+      (submit)="create()">
+  <!-- Libelle-->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label"
+             for="libelle">
+        {{ 'LIBELLE' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control "
+             required
+             [formControlName]="'libelle'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'libelle'), 'is-valid': isValid('libelle')}">
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('libelle')"
+           class="invalid-feedback">
+        {{ 'veuillezSaisirLeLibelle' |translate }}.</div>
+    </div>
+  </div>
+
+  <!-- pays -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label"
+             for="pays">
+        {{ 'paysDeLiaison' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="paysLoading"></i>
+      </label>
+
+      <angular2-multiselect [data]="pays"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="pays_siege"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'pays_siege'), 'is-valid': isValid('pays_siege')}"
+                            class="form-control p-0 ">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('pays_siege')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignezLePaysDeLiaison' | translate }}.
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Bureaux et Ambassades -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <!-- Ambassades -->
+    <div class="col-6"
+         *ngIf="parent === 'ministere'">
+      <!-- Label -->
+      <label class="control-label"
+             for="ambassade">
+        {{ 'AMBASSADE' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.ambassades"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.ambassades"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="ambassade"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'ambassade'), 'is-valid': isValid('ambassade')}"
+                            class="form-control p-0 ">
+        <c-badge>
+          <ng-template let-item="item">
+            {{item.entite_diplomatique.libelle}}
+          </ng-template>
+        </c-badge>
+        <c-item>
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.entite_diplomatique.libelle}}</label>
+          </ng-template>
+        </c-item>
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('ambassade')"
+           class="invalid-feedback">
+        {{ 'VeuillezRenseignezUneAmbassade' | translate }}.
+      </div>
+    </div>
+
+
+    <!-- Bureaux -->
+    <div [ngClass]="{'col-6': parent === 'ministere', 'col-12': parent === 'ambassade'}">
+      <!-- Label -->
+      <label class="control-label"
+             for="ambassade">
+        {{ 'BUREAU' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.bureaux"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.bureaux"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="bureau"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'bureau'), 'is-valid': isValid('bureau')}"
+                            class="form-control p-0 ">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('bureau')"
+           class="invalid-feedback">
+        {{ 'VeuillezRenseignezUnBureau' | translate }}.
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Description -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <label class="control-label"
+             for="description">{{ 'DESCRIPTION' | translate }}</label>
+      <ckeditor [editor]="Editor"
+                class=""
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
+                formControlName="description">
+      </ckeditor>
+      <div *ngIf="shouldShowRequiredError('description')"
+           class="invalid-feedback">
+        {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-12 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1"
+              type="submit"
+              [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+
+    </div>
+  </div>
+</form>
+
+<app-loading *ngIf="!form"></app-loading>

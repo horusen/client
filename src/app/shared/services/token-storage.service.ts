@@ -1,4 +1,3 @@
-import { JsonPipe } from "@angular/common";
 import { Injectable } from "@angular/core";
 
 @Injectable({
@@ -18,7 +17,8 @@ export class TokenStorage {
   }
 
   public getSelectedProfile(): any {
-    return JSON.parse(localStorage.getItem("selected-profile"));
+    if (localStorage.getItem("selected-profile") != "undefined")
+      return JSON.parse(localStorage.getItem("selected-profile"));
   }
 
   public getProfiles(): any {

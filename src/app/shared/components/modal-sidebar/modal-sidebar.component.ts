@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 @Component({
   selector: "app-modal-sidebar",
@@ -16,6 +16,8 @@ export class ModalSidebarComponent implements OnInit {
     titre: "",
     position: "",
   };
+
+  @Output() closed = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}

@@ -1,0 +1,36 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 pb-2">
+    <i class="fad fa-circle  tx-20"></i>
+    {{ 'listeDesConsulats' | translate }}
+  </h5>
+</div>
+
+
+<!-- header -->
+<app-main-header [id]="'consulat'"></app-main-header>
+
+
+<app-consulat-list></app-consulat-list>
+
+
+
+
+<app-modal [configuration]="{ name: 'consulat-create-modal', titre: 'ajouterUnConsulat', icone: 'building' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-consulat-create *ngIf="create"></app-consulat-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'consulat-edit-modal', titre: 'modifierLesDetailsDuConsulat', icone: 'building' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-consulat-edit *ngIf="edit"></app-consulat-edit>
+</app-modal>
+
+<!--
+
+<app-modal-sidebar [configuration]="{ name: 'consulat-filter-modal', titre: 'FILTRE', icone: 'building' }"
+                   (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-filter-consulat *ngIf="filter"></app-filter-consulat>
+</app-modal-sidebar> -->

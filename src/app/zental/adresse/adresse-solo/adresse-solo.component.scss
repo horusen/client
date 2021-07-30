@@ -1,0 +1,24 @@
+.adresse {
+  &:hover {
+    .action {
+      visibility: visible;
+      height: auto;
+      opacity: 1;
+    }
+  }
+}
+
+.action {
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  transition: height 0.4s, opacity 0.2s, visiblity 0s;
+}
+
+a {
+  color: #777777;
+
+  &:hover {
+    color: #4c7e92;
+  }
+}

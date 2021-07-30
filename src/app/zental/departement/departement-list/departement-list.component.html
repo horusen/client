@@ -1,0 +1,72 @@
+<div class="row row-deck"
+     *ngIf="!loading && departementService.data.length">
+
+  <div class="col-lg-4  pt-2"
+       *ngFor="let departement of departementService.data">
+    <div class="mycard4 ">
+      <!-- <div class="image text-center"> <img src="assets/images/xs/avatar3.jpg" class="rounded" width="155"> </div>  -->
+
+      <!-- Domaine -->
+      <div class="d-flex align-items-center justify-content-between  bg-ether p-2">
+        <p> <i class="fad fa-star tx-warning mr-2 bg-white"
+             style="padding:6px; border-radius:50%"></i> Géstion</p>
+      </div>
+
+
+      <!-- Libelle -->
+      <div class="pb-2 tx-echos2">
+        <h5 class="tx-bolder p-2">{{ departement.libelle }} </h5>
+      </div>
+      <!-- <div class="pb-2 tx-echos">
+        <span class="badge badge-pill badge-primary bg-danger ">Urgence</span>
+        <span class="badge badge-pill badge-primary bg-teal">Stratégique</span>
+      </div> -->
+
+      <!-- petite description -->
+      <div class="px-2 ">
+        <p class=""
+           style="word-break: break-all;"
+           [innerHTML]="helper.strcut(departement.description, 50)"></p>
+        <span></span>
+      </div>
+
+      <!-- CTA -->
+      <div class="justify-content-between p-0 pt-2 pb-2">
+        <p class="mg-0">
+          <a [routerLink]="['./']"
+             class="pl-2">
+            <i class="fad fa-eye bg-light tx-yeto"
+               style="padding: 6px; border-radius: 50%;"></i>
+          </a>
+          <!-- Editer  -->
+          <a [routerLink]="['./']"
+             [fragment]="'edit-departement'"
+             class="pl-2"
+             (click)="modifier(departement)">
+            <i class="fad fa-edit bg-light tx-yeto"
+               style="padding: 6px; border-radius: 50%;">
+            </i>
+          </a>
+
+
+          <!-- Supprimer -->
+          <a [routerLink]="['./']"
+             class="pl-2"
+             (click)="supprimer(departement.id)">
+            <i class="fad fa-trash-alt bg-light tx-yeto"
+               style="padding: 6px; border-radius: 50%;"></i>
+          </a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<div class="my-5"
+     *ngIf="loading || !departementService.data.length">
+  <app-missing-data *ngIf="!loading && !departementService.data.length"></app-missing-data>
+  <app-loading *ngIf="loading"></app-loading>
+</div>

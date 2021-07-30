@@ -1,7 +1,7 @@
 import { AppInjector } from "./app-injector.service";
 import { tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, ReplaySubject, Subject } from "rxjs";
+import { BehaviorSubject, Observable, ReplaySubject, Subject } from "rxjs";
 import { Factory } from "./factory";
 import { Helper } from "./helper";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -62,7 +62,7 @@ export abstract class BaseService {
     return this._singleData;
   }
 
-  constructor(protected endPoint: string) {
+  constructor(public endPoint: string) {
     this.factory = AppInjector.injector.get(Factory);
     this.helper = AppInjector.injector.get(Helper);
   }
@@ -76,6 +76,14 @@ export abstract class BaseService {
             ? this.listResponseHandler()
             : this.onlyErrorResponseHandler()
         )
+      );
+  }
+
+  getAll(emit = true): Observable<any> {
+    return this.factory
+      .get(`${this.endPoint}/all`)
+      .pipe(
+        tap(emit ? this.listResponseHandler() : this.onlyErrorResponseHandler())
       );
   }
 
@@ -95,6 +103,10 @@ export abstract class BaseService {
             : this.onlyErrorResponseHandler()
         )
       );
+  }
+
+  checkIfItemInData(item: any, libelleID = "id") {
+    return this.data.map((i) => i[libelleID]).includes(item[libelleID]);
   }
 
   latest() {

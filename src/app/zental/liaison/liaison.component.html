@@ -1,0 +1,36 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 pb-2">
+    <i class="fad fa-circle  tx-20"></i>
+    {{ 'listeDesPaysLiés' | translate }}
+  </h5>
+</div>
+
+
+<!-- header -->
+<app-main-header [id]="'liaison'"></app-main-header>
+
+
+<app-liaison-list></app-liaison-list>
+
+
+
+
+<app-modal [configuration]="{ name: 'liaison-create-modal', titre: 'ajouterUneLiaison', icone: 'link' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-liaison-create *ngIf="create"></app-liaison-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'liaison-edit-modal', titre: 'modifierLesDetailsDeLaLiaison', icone: 'link' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-liaison-edit *ngIf="edit"></app-liaison-edit>
+</app-modal>
+
+
+<!--
+<app-modal-sidebar [configuration]="{ name: 'liaison-filter-modal', titre: 'FILTRE', icone: 'link' }"
+                   (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-filter-liaison *ngIf="filter"></app-filter-liaison>
+</app-modal-sidebar> -->

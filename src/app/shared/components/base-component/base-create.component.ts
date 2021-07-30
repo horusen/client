@@ -20,7 +20,8 @@ import { AppInjector } from "../../services/app-injector.service";
 })
 export class BaseCreateComponent
   extends BaseComponent
-  implements OnInit, OnDestroy {
+  implements OnInit, OnDestroy
+{
   /* PROPRIÉTÉS */
   public isFormOk: boolean = false; // permet de savoir si le formulaire est pret à etre rendu dans la vues
   public form: FormGroup; // Formulaire d'ajout
@@ -51,7 +52,7 @@ export class BaseCreateComponent
   public translate: TranslateService;
 
   /* CONSTRUCTOR */
-  constructor(public service: BaseService) {
+  constructor(public service?: BaseService) {
     super(service);
     this.fb = AppInjector.injector.get(FormBuilder);
     this.translate = AppInjector.injector.get(TranslateService);
@@ -82,12 +83,13 @@ export class BaseCreateComponent
   // Le parametre requiredFiel recoit les champs qui sont required
   // Le paramete callback permet de renseigner des actions à faire aprés l'initalisation du formulaire
   initForm(
-    requiredField?: string[],
-    ignoreField?: string[],
+    requiredField: string[] = [],
+    ignoreField: string[] = [],
     callback?: Function
   ) {
     // initialisation du formulaire
     if (this.schema) {
+      this.isFormOk = false;
       this.form = this.fb.group({});
       this.schema.forEach((field: string) => {
         if (!ignoreField.includes(field)) {
@@ -110,15 +112,26 @@ export class BaseCreateComponent
     }
   }
 
-  addBlurField(fields: string[]) {
+  addBlurField(name: string, required?: boolean) {
+    this.form.addControl(
+      name,
+      new FormControl(
+        "",
+        required
+          ? {
+              validators: [Validators.required],
+              updateOn: "blur",
+            }
+          : {
+              updateOn: "blur",
+            }
+      )
+    );
+  }
+
+  addBlurFields(fields: { name: string; required?: boolean }[]) {
     fields.forEach((field) => {
-      this.form.addControl(
-        field,
-        new FormControl("", {
-          validators: [Validators.required],
-          updateOn: "blur",
-        })
-      );
+      this.addBlurField(field.name, field.required);
     });
   }
 

@@ -90,7 +90,7 @@ export class Helper {
   alertDanger(word: string = "ERREUR"): void {
     Swal.fire({
       icon: "error",
-      title: "Erreur depuis le server",
+      title: word,
       showConfirmButton: false,
       timer: 1500,
     });
@@ -290,12 +290,19 @@ export class Helper {
     });
   }
 
+  log(message: string) {
+    console.log(message);
+  }
+
   getLastUrlFragment(url: string): string {
     const urlWithoutQueryParams = url.split("?")[0];
     const fragmentedUrl = urlWithoutQueryParams.split("/");
     return fragmentedUrl[fragmentedUrl.length - 1];
   }
 
+  serializeObject(object: {}) {
+    return this.omitEmptyArraysInObject(this.omitNullValueInObject(object));
+  }
   convertObjectToQueryParamsUrl(object: object) {
     let queryParams: string = "";
     let index: number = 0;
@@ -346,5 +353,9 @@ export class Helper {
     });
 
     return returnedObject;
+  }
+
+  stringify(element: object) {
+    return JSON.stringify(element);
   }
 }

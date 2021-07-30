@@ -1,0 +1,101 @@
+<!-- Liste des elements -->
+<div class="row  row-xs clearfix p-2 pl-2"
+     *ngIf="!loading && bureauService.data.length">
+  <div class=" col-lg-3  pt-2 pl-2 pr-2 pb-2"
+       *ngFor="let bureau of bureauService.data">
+    <div class="mycard4 ">
+
+      <!-- Icone -->
+      <div class="d-flex justify-content-center p-0">
+        <p class="mg-0 pb-4">
+          <span class=" pl-2"> <i class="fad fa-lamp-desk tx-40 tx-facebook bg-light "
+               style="padding:6px ; border-radius:50%"></i></span>
+
+        </p>
+      </div>
+
+      <!-- Badge -->
+      <div class=" text-center ">
+        <p class="text-center tx-facebook">{{ bureau.libelle }}</p>
+      </div>
+
+      <!-- footer -->
+      <div class="d-flex justify-content-between ">
+
+        <!-- CTA -->
+        <div class=" justify-content-between p-0">
+          <p class="mg-0 pt-2">
+            <!-- details -->
+            <a [routerLink]="[bureau.id]"
+               class=" pl-2">
+              <i class="fad fa-eye bg-white"
+                 style="padding:6px ; border-radius:50%"></i>
+            </a>
+
+            <!-- Edit -->
+            <a class=" pl-2"
+               [routerLink]="['./']"
+               [fragment]="'edit-bureau'"
+               (click)="modifier(bureau)">
+              <i class="fad fa-edit bg-white"
+                 style="padding:6px ; border-radius:50%"></i>
+            </a>
+
+            <!-- Supprimer -->
+            <a class=" pl-2"
+               (click)="supprimer(bureau.id)"
+               [routerLink]="['./']">
+              <i class="fad fa-trash-alt bg-white"
+                 style="padding:6px ; border-radius:50%"></i>
+            </a>
+
+            <!-- Discussion -->
+            <span class=" pl-2"> <i class="fad fa-comment-alt-lines bg-white"
+                 style="padding:6px ; border-radius:50%"></i></span>
+
+
+            <!-- Liaison -->
+            <span class=" pl-2"> <i class="fad fa-link bg-light  tx-echos "
+                 style="padding:6px ; border-radius:50%"></i></span>
+          </p>
+        </div>
+
+        <!-- Photo de l'abassadeur -->
+        <a class="nav-link  ml-4  "
+           id="v-pills-home-tab"
+           data-toggle="pill"
+           href="#utilisateurs"
+           role="tab"
+           aria-controls="v-pills-home"
+           aria-selected="true">
+          <div class="d-flex flex-row">
+            <div class="profiles">
+              <!-- <img class="rounded-circle " src="assets/images/xs/avatar7.jpg" alt="avatar" width="26"> -->
+              <!-- <img class="rounded-circle"
+                   src="assets/images/xs/avatar6.jpg"
+                   alt="avatar"
+                   width="26"> -->
+
+              <img class="rounded-circle"
+                   *ngIf="bureau?.bureauur?.photo"
+                   [src]="bureau?.bureauur?.photo"
+                   alt="avatar"
+                   width="26">
+
+            </div>
+
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="my-5"
+     *ngIf="loading || !bureauService.data.length">
+  <app-missing-data *ngIf="!loading && !bureauService.data.length"></app-missing-data>
+  <app-loading *ngIf="loading"></app-loading>
+</div>

@@ -12,7 +12,7 @@
 	.tx-bleu1{color: #aed6f1 }
 	.tx-violet1{color: #d2b4de }
 	.tx-orange1{color: #edbb99 }
-	
+
 	.tx-yellow{color: #eff28c }
 	.tx-yellow1{color:  #f9e79f  }
 	.tx-seed{color: #0b5345}
@@ -21,8 +21,8 @@
 	.bg-yeto{color:#fff;background:   rgb( 1, 42, 86, 0.8)   !important}
 	.bg-sidebar{color:#fff;background: #154360 !important}
 	.bg-sidebar-seed{color:#fff;background:#7ab800 !important}
-	
-	
+
+
 	.tx-success-100{color:#7ab800}
 	.tx-success-200{color: #145a32 }
  .nav-area{
@@ -34,11 +34,11 @@
 		width:70px;
 		height: 100%;
 		right: 0;
-		font-family:Times New Roman;
+		font-family:Trebuchetet MSn;
 		font-size:5px;
 		line-height:0px;
  }
- 
+
  .nav-area a,
  .nav-area a:link,
  .nav-area a:visited,
@@ -47,17 +47,17 @@
 	 text-decoration:none;
 	 font-weight:bold;
  }
- 
+
  .nav-area a:hover{
 	 color:red;
 	 text-decoration:none;
  }
- 
+
  .nav-area > li{
 	 display: block;
 	 text-align: left;
  }
- 
+
  .nav-area > li > a{
 	 padding: 20px 18px;
 	 display: block;
@@ -65,7 +65,7 @@
  .nav-area > li:hover{
 	 background-color:#fff;
  }
- 
+
  .nav-area > li > .sub-nav{
 	list-style: none;
 	top: 0;
@@ -81,14 +81,14 @@
 	visibility: hidden;
 	position:absolute;
  }
- 
+
  .nav-area > li:hover .sub-nav{
 	opacity:1;
 	visibility: visible;
 	margin-top:0;
 	background:#fff;
 	}
-	 
+
 	 .nav-area ul li:hover:after{
 		 color: #247c9d;
 	 }
@@ -98,18 +98,18 @@
 		 color:#fff;
 		 margin: 0 0 0 15px;
 	 }
- 
+
  .nav-area .sub-menu ul{
 	 padding: 0;
 	 margin:0;
  }
- 
+
  .nav-area .sub-menu ul li{
 	 padding:0;
 	 list-style: none;
 	 font-size: 12px;
  }
- 
+
  .nav-area .sub-menu h3{
 	 font-size: 20px;
 	 padding: 10px 10px;
@@ -122,12 +122,12 @@
 	 display: block;
 	 padding: 0 0 15px 0;
 	 color: #247c9d;
- } 
- 
+ }
+
  .nav-area .sub-menu u li a:hover{
 	 color: #012a56;
  }
- 
+
  .nav-area > li > ul li ul,
  .nav-area li > ul li,
  .nav-area > li > .sub-nav,

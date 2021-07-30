@@ -10,7 +10,8 @@ import { CommonService } from "../common.service";
 })
 export class CommonCreateComponent
   extends BaseCreateComponent
-  implements OnInit {
+  implements OnInit
+{
   @Output() itemCreated = new EventEmitter<{ name: string; item: any }>();
 
   @Input() configuration = {
@@ -18,6 +19,7 @@ export class CommonCreateComponent
     name: null,
     hasDescription: false,
     submitButtonClass: "",
+    item: null,
   };
 
   @Input() extraFields: any;
@@ -27,11 +29,12 @@ export class CommonCreateComponent
   }
 
   ngOnInit() {
-    this.enableRetrieveSchema = false;
+    this.initialiseForm();
+  }
 
+  initialiseForm() {
     this.form = this.fb.group({
-      libelle: ["", Validators.required],
-      inscription: [""],
+      libelle: [this.configuration?.item?.libelle, Validators.required],
     });
 
     if (this.extraFields && !this.extraFields[0]) {
@@ -41,14 +44,20 @@ export class CommonCreateComponent
     }
 
     if (this.configuration.hasDescription) {
-      this.form.addControl("description", new FormControl());
+      this.form.addControl(
+        "description",
+        new FormControl(this.configuration?.item?.description)
+      );
     }
   }
 
   create() {
     this.loading = true;
     this.commonService
-      .create(this.configuration.endpoint, this.form.value)
+      .create(
+        this.configuration.endpoint,
+        this.helper.serializeObject(this.form.value)
+      )
       .subscribe(
         (data) => {
           const output = { name: this.configuration.name, item: data };

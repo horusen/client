@@ -1,32 +1,26 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { AuthGuard } from "./authentification/auth.guard";
 import { ConnexionComponent } from "./authentification/connexion/connexion.component";
 import { InscriptionComponent } from "./authentification/inscription/inscription.component";
 
 const routes: Routes = [
   {
-    path: "school",
-    canActivate: [AuthGuard],
-    loadChildren: () =>
-      import("./explore/school/school.module").then(
-        (module) => module.SchoolModule
-      ),
-  },
-  {
     path: "connexion",
-    component: ConnexionComponent
+    component: ConnexionComponent,
   },
   {
     path: "inscription",
-    component: InscriptionComponent
+    component: InscriptionComponent,
   },
-
-  { path: "**", redirectTo: "school" },
+  {
+    path: "",
+    loadChildren: () =>
+      import("./zental/zental.module").then((module) => module.ZentalModule),
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: "legacy" })],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

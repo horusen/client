@@ -1,0 +1,39 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 pb-2">
+    <i class="fad fa-circle  tx-20"></i>
+    {{ 'listeDesDepartements' | translate }}
+  </h5>
+</div>
+
+
+<!-- header -->
+<app-main-header [id]="'departement'"
+                 [hasFilter]="false">
+</app-main-header>
+
+
+<app-departement-list></app-departement-list>
+
+
+
+
+<app-modal [configuration]="{ name: 'departement-create-modal', titre: 'ajouterUnDepartement', icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-common-create *ngIf="create"
+                     [configuration]="{ endpoint: 'departements', name: 'departement', hasDescription: true, submitButtonClass: 'btn-primary' }"
+                     [extraFields]="{ ministere: ministere?.id, ambassade: ambassade?.id }"
+                     (itemCreated)="onDepartementCreated($event.item)">
+  </app-common-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'departement-edit-modal', titre: 'modifierLesDetailsDuDepartement', icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' }); edit = false">
+  <app-common-edit *ngIf="edit"
+                   [configuration]="{ endpoint: 'departements', name: 'departement', hasDescription: true, item: departementSelectionne, submitButtonClass: 'btn-primary' }"
+                   [extraFields]="{ ministere: ministere?.id, ambassade: ambassade?.id }"
+                   (itemEdited)="onDepartementEdit($event.item)">
+  </app-common-edit>
+</app-modal>

@@ -1,0 +1,1607 @@
+<!-- Administration -->
+
+<ng-container *ngIf="ministere">
+  <div class=" row  pb-2  ">
+    <div class=" col">
+      <div class=" bg-light p-0 pt-2  ">
+        <ul class="nav bg-ether bg-face ">
+          <!-- Ambassade -->
+          <li class="nav-item active">
+            <a class="nav-link tx-primary"
+               [routerLink]="['ambassades']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-landmark "></i>
+              {{ 'AMBASSADES' | translate }}
+            </a>
+          </li>
+
+          <!-- Consulats -->
+          <li class="nav-item active">
+            <a class="nav-link tx-primary"
+               [routerLink]="['consulats']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-building "></i>
+              {{ 'CONSULATS' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Bureau -->
+          <li class="nav-item active">
+            <a class="nav-link tx-primary"
+               [routerLink]="['bureaux']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-lamp-desk "></i>
+              {{ 'BUREAUX' | translate }}
+            </a>
+          </li>
+
+          <!-- Liaisons -->
+          <li class="nav-item active">
+            <a class="nav-link tx-primary"
+               [routerLink]="['liaisons']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-link "></i>
+              {{ 'LIAISONS' | translate }}
+            </a>
+          </li>
+
+          <!-- Passerelles -->
+          <li class="nav-item active">
+            <a class="nav-link tx-primary"
+               [routerLink]="['passerelles']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-portal-enter "></i>
+              {{ 'PASSERELLES' | translate }}
+            </a>
+          </li>
+
+          <!-- departement -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['departements']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-th-large "></i>
+              {{ 'DEPARTEMENTS' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Domaines -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['domaines']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-stamp "></i>
+              {{ 'DOMAINES' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Services -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['services']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-ball-pile "></i>
+              {{ 'SERVICES' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Fonctions -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['fonctions']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-people-carry "></i>
+              {{ 'FONCTIONS' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Poste -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['postes']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-chair-office "></i>
+              {{ 'POSTES' | translate }}
+            </a>
+          </li>
+
+
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['ressources-humaines']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-sitemap "></i>
+              {{ 'ressourcesHumaines' | translate }}
+            </a>
+          </li>
+
+          <!-- <li class="nav-item"><a class="nav-link tx-primary"
+               id="grid-tab"
+               href="#structure_physique"><i class="fad fa-building"></i> Structure physique</a></li>
+          <li class="nav-item"><a class="nav-link tx-primary"
+               id="grid-tab"
+               href="#structure_administrative"><i class="fad fa-user-shield"></i> Structure
+              Administrative</a></li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Content -->
+  <div class="tab-content">
+    <!-- Ambassade -->
+    <div class="tab-pane fade show active"
+         id="ambassade_admin"
+         role="tabpanel">
+      <router-outlet></router-outlet>
+    </div>
+
+
+
+
+
+    <!-- Departements -->
+    <div class="tab-pane fade"
+         id="departement_admin"
+         role="tabpanel">
+      <div class="pl-2 pt-2">
+        <h5 class="pt-2 pb-2"><i class="fad fa-circle  tx-20"></i> Liste des départements </h5>
+      </div>
+      <div class=" mycard2 mt-2">
+        <div class="row row-xs clearfix mg-0 pd-0  ">
+          <div class="col-lg-5">
+            <div class="mycard2 form-group  pl-2">
+              <div class="input-group pt-2"
+                   style="width:340px">
+                <input type="text"
+                       class="form-control pd-y-10  tx-white"
+                       placeholder="Recherche..."
+                       style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="input-group pt-2 ">
+              <select class="custom-select border-0  bg-light"
+                      id="inputGroupSelect02">
+                <option selected> Domaines...</option>
+                <option value="1"> Académique</option>
+                <option value="2"> Business</option>
+                <option value="3"> Partenariat</option>
+                <option value="3"> Diplômatique</option>
+              </select>
+              <select class="custom-select border-0 bg-light "
+                      id="inputGroupSelect02">
+                <option selected> Sous domaine...</option>
+                <option value="1"> Important</option>
+                <option value="2"> Moins Important</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-4  pt-2">
+            <ul class="nav pl-2">
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-filter  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Filtrer</a></li>
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-sort-size-up  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Trier</a></li>
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-plus  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Nouveau</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row row-deck">
+
+        <div class="col-lg-4  pt-2">
+          <div class="mycard4 ">
+            <!-- <div class="image text-center"> <img src="assets/images/xs/avatar3.jpg" class="rounded" width="155"> </div>  -->
+            <div class="d-flex align-items-center justify-content-between  bg-ether p-2">
+              <p> <i class="fad fa-star tx-warning mr-2 bg-white"
+                   style="padding:6px; border-radius:50%"></i> Haut Niveau</p>
+            </div>
+
+            <div class="pb-2 tx-echos2">
+              <h5 class="tx-bolder p-2">Gestion de Visa </h5>
+            </div>
+            <div class="pb-2 tx-echos">
+              <span class="badge badge-pill badge-primary bg-danger ">Urgence</span>
+              <span class="badge badge-pill badge-primary bg-teal">Stratégique</span>
+            </div>
+            <div class="pt-2 ">
+              <p class=""> Ce département est conssacré pour les procédures de visas</p>
+              <span></span>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between p-2 bg-light">
+              <p class="mb-0">
+                <i class="fad fa-eye  tx-gray-600 mr-2 bg-white"
+                   style="padding:6px; border-radius:50%"></i>
+                <i class="fad fa-ball-pile tx-gray-600 mr-2 bg-white"
+                   style="padding:6px; border-radius:50%"></i>
+                <i class="fad fa-key tx-gray-600 mr-2 bg-white"
+                   style="padding:6px; border-radius:50%"></i>
+              </p>
+              <div class="profiles">
+
+                <img class="rounded-circle mg-l--10"
+                     src="assets/images/xs/avatar3.jpg"
+                     alt="avatar"
+                     width="30">
+              </div>
+              <!-- <div class="avatar mg-l--10"><span class="avatar-initial rounded-circle bg-echos op-4 ">2</span></div> -->
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Domaine -->
+    <div class="tab-pane fade "
+         id="domaine_admin"
+         role="tabpanel">
+      <div class="pl-2 pt-2">
+        <h5 class="pt-2 pb-2"><i class="fad fa-circle  tx-20"></i> Liste des domaines fonctionnels </h5>
+      </div>
+      <div class=" mycard2 mt-2">
+        <div class="row row-xs clearfix mg-0 pd-0  ">
+          <div class="col-lg-5">
+            <div class="form-group  pl-2">
+              <div class="input-group pt-2"
+                   style="width:340px">
+                <input type="text"
+                       class="form-control pd-y-10  tx-white"
+                       placeholder="Recherche..."
+                       style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="input-group pt-2 ">
+              <select class="custom-select border-0  bg-light"
+                      id="inputGroupSelect02">
+                <option selected> Domaines...</option>
+                <option value="1"> Académique</option>
+                <option value="2"> Business</option>
+                <option value="3"> Partenariat</option>
+                <option value="3"> Diplômatique</option>
+              </select>
+              <select class="custom-select border-0 bg-light "
+                      id="inputGroupSelect02">
+                <option selected> Sous domaine...</option>
+                <option value="1"> Important</option>
+                <option value="2"> Moins Important</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-4  pt-2">
+            <ul class="nav pl-2">
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-filter  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Filtrer</a></li>
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-sort-size-up  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Trier</a></li>
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-plus  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Nouveau</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row row-deck">
+
+        <div class="col-lg-4  pt-2">
+          <div class="mycard4 ">
+            <!-- <div class="image text-center"> <img src="assets/images/xs/avatar3.jpg" class="rounded" width="155"> </div>  -->
+            <div class="d-flex align-items-center justify-content-between  bg-ether p-2">
+              <p> <i class="fad fa-star tx-warning mr-2 bg-white"
+                   style="padding:6px; border-radius:50%"></i> Haut Niveau</p>
+            </div>
+
+            <div class="pb-2 tx-echos2">
+              <h5 class="tx-bolder p-2">Domaine de suivi de Visa </h5>
+            </div>
+            <div class="pb-2 tx-echos">
+              <span class="badge badge-pill badge-primary bg-danger ">Urgence</span>
+              <span class="badge badge-pill badge-primary bg-teal">Stratégique</span>
+            </div>
+            <div class="pt-2 ">
+              <p class=""> Ce domaine est conssacré pour les procédures de suivi de visas</p>
+              <span></span>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between p-2 bg-light">
+              <p class="mb-0">
+                <i class="fad fa-eye  tx-gray-600 mr-2 bg-white"
+                   style="padding:6px; border-radius:50%"></i>
+                <i class="fad fa-th-large tx-gray-600 mr-2 bg-white"
+                   style="padding:6px; border-radius:50%"></i>
+              </p>
+              <div class="profiles">
+
+                <img class="rounded-circle mg-l--10"
+                     src="assets/images/xs/avatar3.jpg"
+                     alt="avatar"
+                     width="30">
+              </div>
+              <!-- <div class="avatar mg-l--10"><span class="avatar-initial rounded-circle bg-echos op-4 ">2</span></div> -->
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Services -->
+    <div class="tab-pane fade "
+         id="services_admin">
+      <div class="pl-2 pt-2">
+        <h5 class="pt-2 pb-2"><i class="fad fa-circle  tx-20"></i> Liste de vos services d'ambassades </h5>
+      </div>
+
+      <div class=" mycard4 mt-2">
+        <div class="row row-xs clearfix mg-0 pd-0  ">
+          <div class="col-lg-5">
+            <div class="form-group  pl-2">
+              <div class="input-group pt-2"
+                   style="width:340px">
+                <input type="text"
+                       class="form-control pd-y-10  tx-white"
+                       placeholder="Recherche..."
+                       style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="input-group pt-2 ">
+              <select class="custom-select border-0  bg-light"
+                      id="inputGroupSelect02">
+                <option selected> Domaines...</option>
+                <option value="1"> Académique</option>
+                <option value="2"> Business</option>
+                <option value="3"> Partenariat</option>
+                <option value="3"> Diplômatique</option>
+              </select>
+              <select class="custom-select border-0 bg-light "
+                      id="inputGroupSelect02">
+                <option selected> Sous domaine...</option>
+                <option value="1"> Important</option>
+                <option value="2"> Moins Important</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-4  pt-2">
+            <ul class="nav pl-2">
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-filter  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Filtrer</a></li>
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-sort-size-up  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Trier</a></li>
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-plus  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Nouveau</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row row-xs mg-0 pd-0 clearfix pt-2">
+        <div class=" col-lg-12 col-md-6 col-sm-12 pt-2">
+          <div class="pl-2 pt-4">
+            <h5 class="pt-2 pb-2"><i class="fad fa-sparkles  tx-20"></i> Liste des services primaires</h5>
+          </div>
+          <div class="row row-xs mg-0 pd-0 clearfix pt-2">
+            <div class="mycard4 col-lg-3  pt-2 ">
+              <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
+                <p> <i class="fad fa-th-large bg-warning tx-white"
+                     style="padding:6px; border-radius:50%"></i> Nom du département</p>
+              </div>
+              <div class=" text-center ">
+                <span class="badge badge-pill badge-primary bg-norange "> Service de gestion de
+                  visa</span>
+                <p>
+                  <span class=""> 10 Projets </span><span class=""> || </span><span class=""> 6
+                    membres </span><span class=""> || </span><span class=" tx-warning "> Public
+                  </span>
+                </p>
+              </div>
+              <div class="d-flex align-items-center bg-light">
+                <div class=" justify-content-between p-0">
+                  <p class="mg-0 ">
+                    <span class=" pl-2"> <i class="fad fa-eye bg-white"
+                         style="padding:6px ; border-radius:50%"></i></span>
+                    <span class=" pl-2"> <i class="fad fa-share-all bg-white"
+                         style="padding:6px ; border-radius:50%"></i></span>
+                    <span class=" pl-2"> <i class="fad fa-comment-alt-lines bg-white"
+                         style="padding:6px ; border-radius:50%"></i></span>
+                  </p>
+                </div>
+                <a class="nav-link  ml-4 "
+                   id="v-pills-home-tab"
+                   data-toggle="pill"
+                   href="#utilisateurs"
+                   role="tab"
+                   aria-controls="v-pills-home"
+                   aria-selected="true">
+                  <div class="d-flex flex-row">
+                    <div class="profiles">
+                      <!-- <img class="rounded-circle " src="assets/images/xs/avatar7.jpg" alt="avatar" width="26"> -->
+                      <img class="rounded-circle"
+                           src="assets/images/xs/avatar6.jpg"
+                           alt="avatar"
+                           width="26">
+
+                    </div>
+                    <div class="avatar mg-l-10"><span class="avatar-initial rounded-circle bg-yeto2 ">+</span></div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body collapse show"
+               id="collapse5">
+            <nav>
+              <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                  <a class="page-link"
+                     href="#"
+                     tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link"
+                     href="#">1</a></li>
+                <li class="page-item"><a class="page-link"
+                     href="#">2</a></li>
+                <li class="page-item"><a class="page-link"
+                     href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link"
+                     href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="pl-2 pt-4">
+            <h5 class="pt-2 pb-2"><i class="fad fa-sparkles  tx-20"></i> Liste des services secondaires
+            </h5>
+          </div>
+          <div class="row row-xs mg-0 pd-0 clearfix pt-2">
+            <div class="mycard4 col-lg-3  pt-2 ">
+              <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
+                <p> <i class="fad fa-th-large bg-teal tx-white"
+                     style="padding:6px; border-radius:50%"></i> Nom du département</p>
+
+              </div>
+              <div class=" text-center ">
+                <span class="badge badge-pill badge-primary bg-teal "> Service de gestion de
+                  visa</span>
+                <p>
+                  <span class=""> 10 Projets </span><span class=""> || </span><span class=""> 6
+                    membres </span><span class=""> || </span><span class=" tx-warning "> Public
+                  </span>
+                </p>
+              </div>
+
+              <div class="d-flex align-items-center bg-light">
+                <div class=" justify-content-between p-0">
+                  <p class="mg-0 ">
+                    <span class=" pl-2"> <i class="fad fa-eye bg-white"
+                         style="padding:6px ; border-radius:50%"></i></span>
+                    <span class=" pl-2"> <i class="fad fa-share-all bg-white"
+                         style="padding:6px ; border-radius:50%"></i></span>
+                    <span class=" pl-2"> <i class="fad fa-comment-alt-lines bg-white"
+                         style="padding:6px ; border-radius:50%"></i></span>
+                  </p>
+                </div>
+                <a class="nav-link  ml-4 "
+                   id="v-pills-home-tab"
+                   data-toggle="pill"
+                   href="#utilisateurs"
+                   role="tab"
+                   aria-controls="v-pills-home"
+                   aria-selected="true">
+                  <div class="d-flex flex-row">
+                    <div class="profiles">
+                      <!-- <img class="rounded-circle " src="assets/images/xs/avatar7.jpg" alt="avatar" width="26"> -->
+                      <img class="rounded-circle"
+                           src="assets/images/xs/avatar6.jpg"
+                           alt="avatar"
+                           width="26">
+
+                    </div>
+                    <div class="avatar mg-l-10"><span class="avatar-initial rounded-circle bg-yeto2 ">+</span></div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body collapse show"
+               id="collapse5">
+            <nav>
+              <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                  <a class="page-link"
+                     href="#"
+                     tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link"
+                     href="#">1</a></li>
+                <li class="page-item"><a class="page-link"
+                     href="#">2</a></li>
+                <li class="page-item"><a class="page-link"
+                     href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link"
+                     href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="tab-pane fade"
+         id="groupes_admin"
+         role="tabpanel">
+      <div class="row row-deck">
+
+        <div class="col-lg-4 col-md-6 col-sm-12 pt-2">
+          <div class="card card-body p-4">
+            <!-- <div class="image text-center"> <img src="assets/images/xs/avatar3.jpg" class="rounded" width="155"> </div>  -->
+            <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
+              <p> <i class="fal fa-user bg-light tx-gray-600"
+                   style="padding:6px; border-radius:50%"></i> 6 pilotes</p>
+            </div>
+
+            <div class="pb-2 tx-echos2">
+              <h3 class="tx-bolder">Division de suivi des marchés publics </h3>
+            </div>
+            <div class="pb-2 tx-echos">
+              <span class="badge badge-pill badge-primary bg-nbleu op-6">Division des marchés
+                publics</span>
+            </div>
+            <div class="pt-2 ">
+              <p class="tx-bolder"> La division de marché public régule les marchés externes liés entre
+                le service interne et les fournisseurs.</p>
+              <span></span>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between ">
+              <p class="mb-0">
+                <i class="fad fa-plus-circle  tx-gray-600 mr-2"></i>
+                <i class="fad fa-calendar-alt tx-gray-600 mr-2"></i>
+              </p>
+              <div class="profiles">
+                <img class="rounded-circle mg-l--10"
+                     src="assets/images/xs/avatar7.jpg"
+                     alt="avatar"
+                     width="30">
+                <img class="rounded-circle mg-l--10"
+                     src="assets/images/xs/avatar6.jpg"
+                     alt="avatar"
+                     width="30">
+                <img class="rounded-circle mg-l--10"
+                     src="assets/images/xs/avatar5.jpg"
+                     alt="avatar"
+                     width="30">
+                <img class="rounded-circle mg-l--10"
+                     src="assets/images/xs/avatar4.jpg"
+                     alt="avatar"
+                     width="30">
+                <img class="rounded-circle mg-l--10"
+                     src="assets/images/xs/avatar3.jpg"
+                     alt="avatar"
+                     width="30">
+              </div>
+              <!-- <div class="avatar mg-l--10"><span class="avatar-initial rounded-circle bg-echos op-4 ">2</span></div> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="tab-pane fade "
+         id="contact_admin"
+         role="tabpanel">
+      <div class="input-group ">
+        <input type="text"
+               class="form-control pd-y-10 border-0 tx-white bg-light"
+               placeholder="Recherches...">
+        <div class="form-group   mb-0">
+          <div class="input-group bd-l bd-4 bd-light ">
+            <select class="custom-select border-0  tx-facebook bg-light"
+                    id="inputGroupSelect02">
+              <option selected> Services...</option>
+              <option value="1">Matin</option>
+              <option value="2">Midi</option>
+              <option value="3">Après-midi</option>
+            </select>
+            <select class="custom-select border-0  tx-facebook bg-light"
+                    id="inputGroupSelect02">
+              <option selected> Groupes...</option>
+              <option value="1">Equipe</option>
+              <option value="2">Individuelle</option>
+              <option value="3">Collaboration</option>
+            </select>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card card-body">
+            <div class="row row-deck">
+              <div class="col-lg-6 col-md-6 col-sm-12 pt-2">
+                <div class="card card-body p-4">
+
+                  <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
+                    <p> <i class="fal fa-users bg-nbleu tx-white"
+                         style="padding:6px; border-radius:50%"></i> 5 membres</p>
+                    <p> <i class="fal fa-university bg-nvert tx-white"
+                         style="padding:6px; border-radius:50%"></i> FST</p>
+                  </div>
+                  <div class="pb-2 tx-echos2">
+                    <h5 class="tx-bolder tx-center">Laboratoire d'Hydrochimie et d'Hydrogéologie
+                    </h5>
+                  </div>
+                  <div class="pb-2 tx-center">
+                    <span class="badge badge-pill badge-primary bg-norange ">Sciences
+                      expérimentales</span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-right justify-content-between bg-light pt-1 pb-2">
+
+                  <div class="profiles pl-4">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar7.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar6.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar5.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar4.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar3.jpg"
+                         alt="avatar"
+                         width="40">
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 pt-2">
+                <div class="card card-body p-4">
+                  <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
+                    <p> <i class="fal fa-users bg-nbleu tx-white"
+                         style="padding:6px; border-radius:50%"></i> 50 membres</p>
+                    <p> <i class="fal fa-university bg-nvert tx-white"
+                         style="padding:6px; border-radius:50%"></i> FASTEF</p>
+                  </div>
+                  <div class="pb-2 tx-echos2">
+                    <h5 class="tx-bolder tx-center">Sciences et Technologies de l'Education :
+                      Harisoa DEME </h5>
+                  </div>
+                  <div class="pb-2 tx-center">
+                    <span class="badge badge-pill badge-primary bg-nvert ">Sciences
+                      expérimentales</span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-right justify-content-between bg-light pt-1 pb-2">
+
+                  <div class="profiles pl-4">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar7.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar6.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar5.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar4.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar3.jpg"
+                         alt="avatar"
+                         width="40">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 pt-2">
+                <div class="card card-body p-4">
+                  <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
+                    <p> <i class="fal fa-users bg-nbleu tx-white"
+                         style="padding:6px; border-radius:50%"></i> 15 membres</p>
+                    <p> <i class="fal fa-university bg-nvert tx-white"
+                         style="padding:6px; border-radius:50%"></i> ESP</p>
+                  </div>
+                  <div class="pb-2 tx-echos2">
+                    <h5 class="tx-bolder tx-center">Analyses et Essai </h5>
+                  </div>
+                  <div class="pb-2 tx-center">
+                    <span class="badge badge-pill badge-primary bg-nviolet ">Sciences
+                      expérimentales</span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-right justify-content-between bg-light pt-1 pb-2">
+
+                  <div class="profiles pl-4">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar7.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar6.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar5.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar4.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar3.jpg"
+                         alt="avatar"
+                         width="40">
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 pt-2">
+                <div class="card card-body p-4">
+
+                  <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
+                    <p> <i class="fal fa-users bg-nbleu tx-white"
+                         style="padding:6px; border-radius:50%"></i> 12 membres</p>
+                    <p> <i class="fal fa-university bg-nvert tx-white"
+                         style="padding:6px; border-radius:50%"></i> FMPOS</p>
+                  </div>
+                  <div class="pb-2 tx-echos2">
+                    <h5 class="tx-bolder tx-center">Anatomie Pathologique </h5>
+                  </div>
+                  <div class="pb-2 tx-center">
+                    <span class="badge badge-pill badge-primary bg-nrouge ">Sciences
+                      expérimentales</span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-right justify-content-between bg-light pt-1 pb-2">
+
+                  <div class="profiles pl-4">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar7.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar6.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar5.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar4.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle mg-l--10"
+                         src="assets/images/xs/avatar3.jpg"
+                         alt="avatar"
+                         width="40">
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class=" col-lg-4 ">
+          <div class=" card row row-xs clearfix pt-2 bd-b pb-2 mg-0 pd-0 ">
+            <div class="col-lg-12">
+              <div class="image text-center"> <img src="assets/images/xs/G1.jpg"
+                     class="rounded"
+                     width="155"> </div>
+              <h6 class="mb-0 mt-0 tx-warning tx-center"> Laboratoire d'Hydrochimie et d'Hydrogéologie
+              </h6>
+              <p class="text-center "> Sciences expérimentales</p>
+              <div class="p-2 mt-2 bg-nbleu  rounded text-white stats">
+                <p class="text-center tx-white mb-0"> Faculté des Sciences et Techniques</p>
+              </div>
+            </div>
+            <div class="col-lg-12 pt-2">
+              <p class=" bg-white tx-gray-600 mb-0 p-2 tx-16"
+                 style="text-align:justify">
+                Détails du Laboratoire
+              </p>
+              <p class=" bg-light tx-gray-600 mb-0 p-2"
+                 style="text-align:justify">
+                Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée
+                à titre provisoire pour calibrer une mise en page, le texte définitif .
+              </p>
+            </div>
+            <div class=" col-lg-12 pt-4">
+              <div class="  table-responsive p-0">
+                <table class="table  table-hover table-lg mb-0 ">
+                  <tbody class=" border-0 ">
+
+                    <tr class="  ">
+                      <td class=" card bg-light">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> Responsable </a></div>
+                      </td>
+                      <td class=" width40 ">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> Abdoulaye FAYE </a></div>
+                      </td>
+                    </tr>
+                    <tr class="  ">
+                      <td class=" card bg-light">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> Email </a></div>
+                      </td>
+                      <td class=" width40 ">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> a.faye@fst.com </a></div>
+                      </td>
+                    </tr>
+                    <tr class="  ">
+                      <td class="card  bg-light">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> Phone </a></div>
+                      </td>
+                      <td class=" width40 ">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> 00 221 76 245 23 25 </a></div>
+                      </td>
+                    </tr>
+                    <tr class="  ">
+                      <td class="card  bg-light">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> Adresse </a></div>
+                      </td>
+                      <td class=" width40 ">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> Dakar Sénégal Liberté V </a></div>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <div class="ml-3 w-100">
+              <div class="button mt-2 d-flex flex-row align-items-center">
+                <button class="btn btn-lg  tx-echos w-100 tx"><i class="fas fa-tablet-android  tx-echos"></i> Page</button>
+                <button class="btn btn-lg  tx-echos w-100 ml-2"><i class="fas fa-comment-alt-lines  tx-echos"></i> Chat</button>
+                <button class="btn btn-lg  tx-echos w-100 ml-2"><i class="fas fa-stars tx-echos"></i>
+                  Favoris</button>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="tab-pane fade"
+         id="produit_admin"
+         role="tabpanel">
+      <div class="input-group ">
+        <input type="text"
+               class="form-control pd-y-10 border-0 tx-white bg-light"
+               placeholder="Recherches...">
+        <div class="form-group   mb-0">
+          <div class="input-group bd-l bd-4 bd-light ">
+            <select class="custom-select border-0  tx-facebook bg-light"
+                    id="inputGroupSelect02">
+              <option selected> Services...</option>
+              <option value="1">Matin</option>
+              <option value="2">Midi</option>
+              <option value="3">Après-midi</option>
+            </select>
+            <select class="custom-select border-0  tx-facebook bg-light"
+                    id="inputGroupSelect02">
+              <option selected> Groupes...</option>
+              <option value="1">Equipe</option>
+              <option value="2">Individuelle</option>
+              <option value="3">Collaboration</option>
+            </select>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="  d-flex justify-content-left">
+                  <div class="card p-3">
+                    <div class="d-flex align-items-center">
+                      <div class=""> <img src="assets/images/xs/G2.jpg"
+                             class="rounded"
+                             width="155"> </div>
+                      <div class="ml-3 w-100">
+                        <h6 class="mb-0 mt-0 tx-echos"> Nom du produit</h6>
+                        <div class="p-2 mt-2 bg-nbeige d-flex align-items-center rounded stats">
+                          <div class="d-flex flex-column text-center "> <span class="">Catégorie du produit</span></div>
+                        </div>
+                        <div class="button mt-2 d-flex flex-row align-items-center">
+                          <button class="btn btn-sm bg-bluelight tx-echos w-100 tx">Profil</button>
+                          <button class="btn btn-sm bg-bluelight tx-echos w-100 ml-2">Chat</button>
+                          <button class="btn btn-sm  bg-bluelight tx-echos w-100 ml-2">Calendrier</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+        <div class=" col-lg-4 ">
+          <div class=" card row row-xs clearfix pt-2 bd-b pb-2 mg-0 pd-0 ">
+            <div class="col-lg-12">
+              <div class="image text-center"> <img src="assets/images/xs/G2.jpg"
+                     class="rounded"
+                     width="155"> </div>
+              <h6 class="mb-0 mt-0 tx-echos tx-center"> Contact Free Business de Free Sénégal</h6>
+              <p class="text-center "> Services Internet 4G+</p>
+              <div class="p-2 mt-2 bg-nbeige  rounded  stats">
+                <p class="text-center tx-gray-800 mb-0"> Free Sénégal</p>
+              </div>
+            </div>
+            <div class="col-lg-12 pt-2">
+              <p class=" bg-white tx-gray-600 mb-0 p-2 tx-16"
+                 style="text-align:justify">
+                Détails du Produit
+              </p>
+              <p class=" bg-light tx-gray-600 mb-0 p-2"
+                 style="text-align:justify">
+                Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée
+                à titre provisoire pour calibrer une mise en page, le texte définitif .
+              </p>
+            </div>
+            <div class=" col-lg-12 pt-2">
+              <div class="  table-responsive p-0">
+                <table class="table  table-hover table-lg mb-0 ">
+                  <tbody class=" border-0 ">
+                    <tr class="  ">
+                      <td class=" card bg-light">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> Prix </a></div>
+                      </td>
+                      <td class=" width40 ">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> 12 000 FCFA </a></div>
+                      </td>
+                    </tr>
+                    <tr class="  ">
+                      <td class=" card bg-light">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> Email </a></div>
+                      </td>
+                      <td class=" width40 ">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> adama.sidibe@gmail.com </a></div>
+                      </td>
+                    </tr>
+                    <tr class="  ">
+                      <td class="card  bg-light">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> Phone </a></div>
+                      </td>
+                      <td class=" width40 ">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> 00 221 76 245 23 25 </a></div>
+                      </td>
+                    </tr>
+                    <tr class="  ">
+                      <td class="card  bg-light">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> Adresse </a></div>
+                      </td>
+                      <td class=" width40 ">
+                        <div class=" from"><a class=" tx-gray-600 tx-14"
+                             href="javascript:void(0);"> Dakar Sénégal Liberté V </a></div>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <div class="ml-3 w-100">
+              <div class="button mt-2 d-flex flex-row align-items-center">
+                <button class="btn btn-sm bg-bluelight tx-echos w-100 tx"><i class="fas fa-head-side  tx-echos"></i> Profil</button>
+                <button class="btn btn-sm  bg-bluelight tx-echos w-100 ml-2"><i class="fas fa-comment-alt-lines  tx-echos"></i>
+                  Chat</button>
+                <button class="btn btn-sm  bg-bluelight tx-echos w-100 ml-2"><i class="fas fa-stars tx-echos"></i> Favoris</button>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+    <div class="tab-pane fade"
+         id="structure_physique"
+         role="tabpanel">
+      <div class="pl-2 pt-4">
+        <h5 class="pt-2 pb-2"><i class="fad fa-circle  tx-20"></i> Composantes de votre structure physique
+        </h5>
+      </div>
+      <div class=" mycard2 mt-4">
+        <div class="row row-xs clearfix mg-0 pd-0  ">
+          <div class="col-lg-5">
+            <div class="form-group  pl-2">
+              <div class="input-group pt-2"
+                   style="width:340px">
+                <input type="text"
+                       class="form-control pd-y-10  tx-white"
+                       placeholder="Recherche..."
+                       style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="input-group pt-2 ">
+              <select class="custom-select border-0 bg-light "
+                      id="inputGroupSelect02">
+                <option selected> Services...</option>
+                <option value="1"> Important</option>
+                <option value="2"> Moins Important</option>
+              </select>
+              <select class="custom-select border-0  bg-light"
+                      id="inputGroupSelect02">
+                <option selected> Domaines...</option>
+                <option value="1"> Académique</option>
+                <option value="2"> Business</option>
+                <option value="3"> Partenariat</option>
+                <option value="3"> Diplômatique</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="col-lg-4s  pt-2">
+            <ul class="nav pl-2">
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-filter  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Filtrer</a></li>
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-sort-size-up  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Trier</a></li>
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-plus  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Nouveau</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8 pt-2">
+
+          <div class="row row-xs mg-0 pd-0 clearfix pt-2">
+            <div class="mycard2 col-lg-5  pt-2 bg-white">
+              <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
+                <p> <i class="fal fa-ball-pile bg-nbleu tx-white"
+                     style="padding:6px; border-radius:50%"></i> Nom du service lié</p>
+
+              </div>
+              <div class=" text-center ">
+                <span class=" tx-bold  "> Bureau de traitement de visa </span>
+                <p>
+                  <span class=""> 2 Personnes </span><span class=""> || </span><span class=" tx-success "> Ouvert </span>
+                </p>
+              </div>
+
+              <div class="d-flex align-items-center bg-light">
+                <div class=" justify-content-between p-0">
+                  <p class="mg-0 ">
+                    <span class=" pl-2"> <i class="fad fa-eye bg-white"
+                         style="padding:6px ; border-radius:50%"></i></span>
+                    <span class=" pl-2"> <i class="fad fa-share-all bg-white"
+                         style="padding:6px ; border-radius:50%"></i></span>
+                    <span class=" pl-2"> <i class="fad fa-comment-alt-lines bg-white"
+                         style="padding:6px ; border-radius:50%"></i></span>
+                  </p>
+                </div>
+                <a class="nav-link  ml-4 "
+                   id="v-pills-home-tab"
+                   data-toggle="pill"
+                   href="#utilisateurs"
+                   role="tab"
+                   aria-controls="v-pills-home"
+                   aria-selected="true">
+                  <div class="d-flex flex-row">
+                    <div class="profiles">
+                      <img class="rounded-circle "
+                           src="assets/images/xs/avatar7.jpg"
+                           alt="avatar"
+                           width="26">
+                      <img class="rounded-circle"
+                           src="assets/images/xs/avatar6.jpg"
+                           alt="avatar"
+                           width="26">
+
+                    </div>
+                    <div class="avatar mg-l-10"><span class="avatar-initial rounded-circle bg-yeto2 ">+</span></div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="col-lg-4 pt-2">
+          <h6 class="text-center tx-ether2 pt-2 pb-2"> Bureau de traitement de visas volants</h6>
+          <div class="mycard2 bg-white">
+            <div class="row row-xs clearfix pt-2  pb-4 mg-0 pd-0 ">
+
+              <div class="pl-2 ">
+                <h6 class="pt-2 pb-2"> Membres du bureau </h6>
+              </div>
+              <div class="col-lg-12  pb-1 pt-1">
+
+                <div class="d-flex flex-row justify-item-center ">
+                  <div class="profiles">
+                    <img class="rounded-circle ml--10"
+                         src="assets/images/xs/avatar7.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle ml--10"
+                         src="assets/images/xs/avatar6.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle ml--10"
+                         src="assets/images/xs/avatar5.jpg"
+                         alt="avatar"
+                         width="40">
+                    <img class="rounded-circle ml--10"
+                         src="assets/images/xs/avatar4.jpg"
+                         alt="avatar"
+                         width="40">
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="row row-xs  mg-0 pd-0  ">
+              <div class=" col-lg-12 ">
+                <div class=" my-card2  p-0">
+                  <table class="table  table-hover table-lg mb-0 ">
+                    <tbody class=" border-0 ">
+                      <tr>
+                        <td class="  ">
+                          <div class=" from"><a class=" tx-gray-600 tx-14"
+                               href="javascript:void(0);"><i class="fad fa-layer-plus"></i> Créer le </a></div>
+                        </td>
+                        <td class=" width40 ">
+                          <div class=" from"><a class=" tx-gray-600 tx-14"
+                               href="javascript:void(0);"> 25 Avril 2020 </a></div>
+                        </td>
+                      </tr>
+                      <tr class="  ">
+                        <td class=" ">
+                          <div class=" from"><a class=" tx-gray-600 tx-14"
+                               href="javascript:void(0);"><i class="fad fa-layer-minus"></i> Modifier </a></div>
+                        </td>
+                        <td class=" width40 ">
+                          <div class=" from"><a class=" tx-gray-600 tx-14"
+                               href="javascript:void(0);"> 25 Avril 2020 </a></div>
+                        </td>
+                      </tr>
+                      <tr class="  ">
+                        <td class=" ">
+                          <div class=" from"><a class=" tx-gray-600 tx-14"
+                               href="javascript:void(0);"><i class="fad fa-user"></i>
+                              Créer par </a></div>
+                        </td>
+                        <td class=" width40 ">
+                          <div class=" from"><a class=" tx-gray-600 tx-14"
+                               href="javascript:void(0);"> Mohamed Mballo </a></div>
+                        </td>
+                      </tr>
+                      <tr class="  ">
+                        <td class=" ">
+                          <div class=" from"><a class=" tx-gray-600 tx-14"
+                               href="javascript:void(0);"> <i class="fad fa-phone-office"></i> Téléphone </a></div>
+                        </td>
+                        <td class=" width40 ">
+                          <div class=" from"><a class=" tx-gray-600 tx-14"
+                               href="javascript:void(0);"> 33 825 44 23 </a></div>
+                        </td>
+                      </tr>
+                      <tr class="  ">
+                        <td class=" ">
+                          <div class=" from"><a class=" tx-gray-600 tx-14"
+                               href="javascript:void(0);"> <i class="fad fa-at"></i> Mail
+                            </a></div>
+                        </td>
+                        <td class=" width40 ">
+                          <div class=" from"><a class=" tx-gray-600 tx-14"
+                               href="javascript:void(0);"> 33 825 44 23 </a></div>
+                        </td>
+                      </tr>
+                      <tr class="  ">
+                        <td class="">
+                          <div class=" from"><a class=" tx-gray-600 tx-14"
+                               href="javascript:void(0);"> <i class="fad fa-tool"></i>
+                              Matériels </a></div>
+                        </td>
+                        <td class=" width40 ">
+                          <div class=" from"><a class=" tx-gray-600 tx-14"
+                               href="javascript:void(0);"> Lien </a></div>
+                        </td>
+                      </tr>
+                      <tr class="  ">
+                        <td class=" ">
+                          <div class=" from"><a class=" tx-gray-600 tx-14"
+                               href="javascript:void(0);"> Description </a></div>
+                        </td>
+                        <td class=" width40 ">
+                          <div class=" from"><a class=" tx-gray-600 tx-14"
+                               href="javascript:void(0);"> Bureau de traitement de vise
+                            </a></div>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="tab-pane fade"
+         id="structure_administrative"
+         role="tabpanel">
+      <div class="pl-2 pt-4">
+        <h5 class="pt-2 pb-2"><i class="fad fa-circle  tx-20"></i> Composantes de votre structure
+          administrative </h5>
+      </div>
+      <div class=" mycard2 mt-4">
+        <div class="row row-xs clearfix mg-0 pd-0  ">
+          <div class="col-lg-5">
+            <div class="form-group  pl-2">
+              <div class="input-group pt-2"
+                   style="width:340px">
+                <input type="text"
+                       class="form-control pd-y-10  tx-white"
+                       placeholder="Recherche..."
+                       style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="input-group pt-2 ">
+              <select class="custom-select border-0 bg-light "
+                      id="inputGroupSelect02">
+                <option selected> Services...</option>
+                <option value="1"> Important</option>
+                <option value="2"> Moins Important</option>
+              </select>
+              <select class="custom-select border-0  bg-light"
+                      id="inputGroupSelect02">
+                <option selected> Domaines...</option>
+                <option value="1"> Académique</option>
+                <option value="2"> Business</option>
+                <option value="3"> Partenariat</option>
+                <option value="3"> Diplômatique</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="col-lg-4s  pt-2">
+            <ul class="nav pl-2">
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-filter  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Filtrer</a></li>
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-sort-size-up  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Trier</a></li>
+              <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
+                   data-toggle="tab"
+                   href="#filtrer"><i class="fal fa-plus  tx-14 "
+                     style="padding:6px; border-radius:50%"></i> Nouveau</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-5 pt-2">
+
+          <div class="row row-xs mg-0 pd-0 clearfix pt-2">
+            <div class="mycard2 col-lg-6  pt-2 ">
+              <div class="d-flex align-items-center justify-content-between  bg-light">
+                <p> <i class="fal fa-star bg-light tx-primary"
+                     style="padding:6px; border-radius:50%"></i> Nom du service lié</p>
+
+              </div>
+              <div class=" text-center ">
+                <p class="mb-0"><span class=""> || </span></p>
+                <span class=" tx-bold  "> Charte du service consulaire</span>
+                <p class="mb-0"><span class=""> || </span></p>
+              </div>
+
+
+            </div>
+
+
+          </div>
+        </div>
+        <div class="col-lg-7 pt-2">
+          <h6 class="text-center tx-ether2 pt-2 pb-2"> Charte du service consulaire</h6>
+          <div class="mycard2 bg-white">
+            <p class="mb-0 tx-ether2"
+               style="text-align:justify">
+              Les chartes sont des actes juridiques signés par plusieurs acteurs pour définir un
+              objectif et parfois des moyens communs.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="tab-pane fade pt-2 bg-light"
+         id="hierarchie_admin">
+      <div class="row row-xs mg-0 pd-0 clearfix">
+        <div class="col-md-2">
+          <div class=" border-0 mb-0 pt-2 pb-2">
+            <span class="tx-16 tx-echos"><i class="fad fa-sort-amount-down-alt  "></i> Composantes</span>
+          </div>
+          <div class="mycard3 p-2">
+            <span class=" tx-bold  "><i class="fad fa-space-station-moon  "></i> Workspaces </span>
+          </div>
+          <div class="mycard3 p-2">
+            <span class=" tx-bold  "><i class="fad fa-th-large  "></i> Départements </span>
+          </div>
+          <div class="mycard3 p-2">
+            <span class=" tx-bold  "><i class="fad fa-stamp  "></i> Domaines </span>
+          </div>
+          <div class="mycard3 p-2">
+            <span class=" tx-bold  "><i class="fad fa-tools  "></i> Matériels </span>
+          </div>
+
+          <div class="mycard3 p-2">
+            <span class=" tx-bold  "><i class="fad fa-users  "></i> Equipes </span>
+          </div>
+          <div class="mycard3 p-2">
+            <span class=" tx-bold  "><i class="fad fa-project-diagram  "></i> Fonctions </span>
+          </div>
+          <div class="mycard3 p-2">
+            <span class=" tx-bold  "><i class="fad fa-tools  "></i> Postes </span>
+          </div>
+          <div class="mycard3 p-2">
+            <span class=" tx-bold  "><i class="fad fa-car  "></i> Parc automobile </span>
+          </div>
+
+        </div>
+
+
+        <div class="col-lg-4 pl-4 ">
+          <div class=" border-0 mb-0 pt-2 pb-2">
+            <span class="tx-16 tx-echos"><i class="fad fa-sort-amount-down-alt  "></i> Domaines </span>
+          </div>
+
+          <div class="form-group  pl-2">
+            <div class="input-group pt-2"
+                 style="width:330px">
+              <input type="text"
+                     class="form-control pd-y-10  tx-white"
+                     placeholder="Recherche..."
+                     style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+            </div>
+          </div>
+          <div class="input-group  ">
+            <select class="custom-select border-0  bg-light"
+                    id="inputGroupSelect02">
+              <option selected> Domaines...</option>
+              <option value="1"> Académique</option>
+              <option value="2"> Business</option>
+              <option value="3"> Partenariat</option>
+              <option value="3"> Diplômatique</option>
+            </select>
+            <select class="custom-select border-0 bg-light "
+                    id="inputGroupSelect02">
+              <option selected> Sous domaine...</option>
+              <option value="1"> Important</option>
+              <option value="2"> Moins Important</option>
+            </select>
+          </div>
+          <div class="mycard4 bg-white">
+            <div class=" text-center pt-2 pb-2">
+              <img src="assets/images/pictures/1.jpg"
+                   class="avatar-online image rounded1"
+                   width="80">
+            </div>
+            <div class="mycard-text bg-light">
+              <p> Physique des particules</p>
+            </div>
+            <div class="mycard-stats bg-teal pt-2 pb-2">
+              <i class="fad fa-microscope mr-2 bg-white"
+                 style="padding:6px; border-radius:50%"></i>
+              <i class="fad fa-users mr-2 bg-white"
+                 style="padding:6px; border-radius:50%"></i>
+              <i class="fad fa-th-large mr-2 bg-white"
+                 style="padding:6px; border-radius:50%"></i>
+              <i class="fad fa-project-diagram mr-2 bg-white"
+                 style="padding:6px; border-radius:50%"></i>
+              <i class="fad fa-sack-dollar mr-2 bg-white"
+                 style="padding:6px; border-radius:50%"></i>
+              <i class="fad fa-eye mr-2 bg-white"
+                 style="padding:6px; border-radius:50%"></i>
+              <i class="fad fa-comments-alt mr-2 bg-white "
+                 style="padding:6px; border-radius:50%"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 pl-4">
+          <div class=" border-0 mb-0 pt-2 pb-2">
+            <span class="tx-16 tx-echos"><i class="fad fa-sort-amount-down-alt   "></i>
+              Laboratoires</span>
+          </div>
+          <div class="form-group  pl-2">
+            <div class="input-group pt-2"
+                 style="width:330px">
+              <input type="text"
+                     class="form-control pd-y-10  tx-white"
+                     placeholder="Recherche..."
+                     style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+            </div>
+          </div>
+          <div class="input-group  ">
+            <select class="custom-select border-0  bg-light"
+                    id="inputGroupSelect02">
+              <option selected> Domaines...</option>
+              <option value="1"> Académique</option>
+              <option value="2"> Business</option>
+              <option value="3"> Partenariat</option>
+              <option value="3"> Diplômatique</option>
+            </select>
+            <select class="custom-select border-0 bg-light "
+                    id="inputGroupSelect02">
+              <option selected> Sous domaine...</option>
+              <option value="1"> Important</option>
+              <option value="2"> Moins Important</option>
+            </select>
+          </div>
+          <div class="mycard4   pt-2">
+            <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
+              <p> <i class="fal fa-users bg-nbleu tx-white"
+                   style="padding:6px; border-radius:50%"></i> 5 membres</p>
+              <p> <i class="fal fa-university bg-nvert tx-white"
+                   style="padding:6px; border-radius:50%"></i> FST</p>
+            </div>
+            <div class=" text-center ">
+              <span class=" tx-bold  "> Nom de votre laboratoire de recherches universitaire </span>
+              <p>
+                <span class=""> 100 Projets </span><span class=""> || </span><span class=""> 600
+                  membres </span><span class=""> || </span><span class=" tx-warning "> Public
+                </span>
+              </p>
+            </div>
+            <div class="pb-2 tx-center">
+              <span class="badge badge-pill badge-primary bg-norange ">Sciences expérimentales</span>
+            </div>
+            <div class="d-flex align-items-center bg-light">
+              <div class=" justify-content-between p-0">
+                <p class="mg-0 ">
+                  <span class=" pl-2"> <i class="fad fa-eye bg-white"
+                       style="padding:6px ; border-radius:50%"></i></span>
+                  <span class=" pl-2"> <i class="fad fa-share-all bg-white"
+                       style="padding:6px ; border-radius:50%"></i></span>
+                  <span class=" pl-2"> <i class="fad fa-comment-alt-lines bg-white"
+                       style="padding:6px ; border-radius:50%"></i></span>
+                </p>
+              </div>
+              <a class="nav-link  ml-4 "
+                 id="v-pills-home-tab"
+                 data-toggle="pill"
+                 href="#utilisateurs"
+                 role="tab"
+                 aria-controls="v-pills-home"
+                 aria-selected="true">
+                <div class="d-flex flex-row">
+                  <div class="profiles">
+                    <!-- <img class="rounded-circle " src="assets/images/xs/avatar7.jpg" alt="avatar" width="26"> -->
+                    <img class="rounded-circle"
+                         src="assets/images/xs/avatar6.jpg"
+                         alt="avatar"
+                         width="26">
+
+                  </div>
+                  <div class="avatar mg-l-10"><span class="avatar-initial rounded-circle bg-yeto2 ">+</span></div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</ng-container>

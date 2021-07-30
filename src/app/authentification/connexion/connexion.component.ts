@@ -34,15 +34,9 @@ export class ConnexionComponent implements OnInit {
 
   connexion() {
     this.loading = true;
-    this.authService.connexion(this.form.value).subscribe(
-      () => {
-        this.loading = false;
-        // this.router.navigate(["school", "tache"]);
-      },
-      (error) => {
-        this.helper.toastDanger(error?.error?.error, "Erreur de Connexion");
-      }
-    );
+    this.authService.connexion(this.form.value).subscribe(() => {
+      this.loading = false;
+    });
   }
 
   shouldShowRequiredError(field: string) {

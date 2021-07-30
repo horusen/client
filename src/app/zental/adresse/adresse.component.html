@@ -1,0 +1,19 @@
+<!-- Adresse Add -->
+<app-modal [configuration]="{ name: 'adresse-create-modal', titre: 'ajouterUneAdresse', icone: 'map-marker-alt' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-adresse-create *ngIf="onAdd"
+                      [parent]="parent"
+                      [parentID]="parentID">
+  </app-adresse-create>
+</app-modal>
+
+
+
+<!-- Adresse edit -->
+<app-modal [configuration]="{ name: 'adresse-edit-modal', titre: 'ajouterUneAdresse', icone: 'map-marker-alt' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-adresse-edit *ngIf="onEdit"
+                    [parent]="parent"
+                    [parentID]="parentID">
+  </app-adresse-edit>
+</app-modal>

@@ -1,0 +1,36 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 pb-2">
+    <i class="fad fa-circle  tx-20"></i>
+    {{ 'listeDesAmbassades' | translate }}
+  </h5>
+</div>
+
+
+<!-- header -->
+<app-main-header [id]="'ambassade'"></app-main-header>
+
+
+<app-ambassade-list></app-ambassade-list>
+
+
+
+
+<app-modal [configuration]="{ name: 'ambassade-create-modal', titre: 'ajouterUneAmbassade', icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-ambassade-create *ngIf="create"></app-ambassade-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'ambassade-edit-modal', titre: 'modifierLesDetailsDeLEmbassade', icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-ambassade-edit *ngIf="edit"></app-ambassade-edit>
+</app-modal>
+
+
+
+<app-modal-sidebar [configuration]="{ name: 'ambassade-filter-modal', titre: 'FILTRE', icone: 'landmark' }"
+                   (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-filter-ambassade *ngIf="filter"></app-filter-ambassade>
+</app-modal-sidebar>

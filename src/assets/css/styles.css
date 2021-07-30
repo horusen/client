@@ -11,7 +11,7 @@ Website: http://thevectorlab.net/
 body {
     color: #242d3e ;
     background: #f1f2f7;
-    font-family:times new roman;
+    font-family:Trebuchetet MSn;
     padding: 0px !important;
     margin: 0px !important;
     font-size:13px;
@@ -181,28 +181,28 @@ a, a:hover, a:focus {
     overflow-y: scroll;
 	border-right: 1px solid  #aeb6bf ;
 	z-index: -1;
-	
-	
+
+
 }
 
 #sidebar ul li {
     position: relative;
 	width:100%;
 	border-bottom: 2px solid rgb( 244, 208, 63, 0.1)
-	
+
 }
 
 #sidebar .sub-menu > .sub li  {
     padding-left: 20px;
 	margin-left: 5px;
 	background:rgb(  253, 254, 254);
-	
+
 }
 
 #sidebar .sub-menu > .sub li:last-child {
     padding-bottom: 10px;
-	
-	
+
+
 }
 
 /*LEFT NAVIGATION ICON*/
@@ -275,7 +275,7 @@ ul.sidebar-menu {
 
 #sidebar > ul > li.active > ul.sub, #sidebar > ul > li > ul.sub > li > a {
     display: block;
-	
+
 }
 
 ul.sidebar-menu li ul.sub li{
@@ -285,7 +285,7 @@ ul.sidebar-menu li ul.sub li{
     margin-right: 0;
 	width:90%;
 	border-bottom: 1px solid rgb( 126, 81, 9, 0.2)
-	
+
 }
 
 ul.sidebar-menu li ul.sub li:last-child{
@@ -305,7 +305,7 @@ ul.sidebar-menu li ul.sub li a {
     transition: all 0.3s ease;
     color:  #7d6608;
 	margin-left: 5px;
-	
+
 }
 
 ul.sidebar-menu li ul.sub li a:hover, ul.sidebar-menu li ul.sub li.active a {
@@ -439,7 +439,7 @@ a.logo:hover, a.logo:focus {
 
 a.logo span {
     color:red;
-	font-family:times new roman
+	font-family:Trebuchetet MS
 }
 
 
@@ -505,7 +505,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     top: 50px;
     width: 1170px;
     padding: 0;
-   
+
     border: none !important;
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -528,7 +528,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     -webkit-border-radius: 4px 4px 0px 0px;
     text-transform: uppercase;
     font-weight:none;
-	font-family: Times New roman
+	font-family: Trebuchetet MS
 
 }
 
@@ -827,14 +827,14 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     float: left;
     padding-right: 5px;
     margin-top: 15px;
-	
+
 }
 
 .sidebar-toggle-box .fa-head-vr {
     cursor: pointer;
     display: inline-block;
     font-size: 10px;
-	
+
 }
 
 
@@ -3121,19 +3121,19 @@ ul.amounts li {
 	padding:0px;
 	margin: 10px;
 	padding-bottom: 2px
-	
+
 }
 .tab-bg-dark-navy-blue .nav .nav-link.active{
     color:  #154360 ;
 	padding: 0px
-	
+
 }
 
 .card-heading .nav > li > a,
 .card-heading .nav > li.active > a, .card-heading .nav > li.active > a:hover, .card-heading .nav > li.active > a:focus {
     border-width: 0;
     border-radius: 0;
-	
+
 }
 
 .card-heading .nav > li > a {
@@ -6075,7 +6075,7 @@ a.guest-on i {
 
 .mega-menu ul li.dropdown a:hover {
     background:rgb( 254, 249, 231, 0.2);
-	
+
 }
 
 .mega-nav #main-content {
@@ -6142,7 +6142,7 @@ a.guest-on i {
 .mega-menu .dropdown-menu .nav-link{
     padding-left: 0;
     padding-right: 0;
-	color:   #34495e  
+	color:   #34495e
 }
 
 .yamm-content .accordion h5 .btn-link {
@@ -6613,8 +6613,8 @@ header.blue-bg .search:focus {
 
 .light-sidebar-nav #sidebar {
 	background-color:rgba( 253, 254, 254);
-	
-    
+
+
 }
 .light-sidebar-nav ul.sidebar-menu li {
     margin-left: 0;
@@ -6662,7 +6662,7 @@ header.blue-bg .search:focus {
 .light-sidebar-nav ul.sidebar-menu li a.active i,
 .light-sidebar-nav ul.sidebar-menu li a:hover i, ul.sidebar-menu li a:focus i{
     color: #1b2631 ;
-	
+
 
 }.input-group.md-form.form-sm.form-1 input{
 border: 0px solid #bdbdbd;
@@ -6727,12 +6727,12 @@ display: inline;
  border-style:dotted;
  border-color:black;
  }
- 
+
  .modal-dialog{
     position: relative;
-    display: table; /* This is important */ 
-    overflow-y: auto;    
+    display: table; /* This is important */
+    overflow-y: auto;
     overflow-x: auto;
     width: auto;
-    min-width: 0px;   
+    min-width: 0px;
 }

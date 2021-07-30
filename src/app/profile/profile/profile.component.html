@@ -1,6 +1,7 @@
 <!-- Liste des profils -->
 <!-- profil -->
-<span class="" *ngFor="let profil of auth.profiles">
+<span class=""
+      *ngFor="let profil of auth.profiles">
   <!-- <a href="" class="dropdown-item">
       <div>
         <div class="profil-list-item__type">
@@ -18,13 +19,22 @@
 
     </a> -->
 
-  <a class="dropdown-item clickable" (click)="changerProfile(profil)">
-    <span style="font-weight: 500;" class="d-flex align-items-center">
-      <i class="far fa-user-graduate" style="font-size: 11px;" aria-hidden="true" *ngIf="profil.type == 'eleve'"></i>
-      <i class="far fa-user-tie" style="font-size: 11px;" aria-hidden="true" *ngIf="profil.type == 'professeur'"></i>
-      <i class="far fa-user-cog" style="font-size: 11px;" aria-hidden="true" *ngIf="profil.type == 'employe'"></i>
+  <a class="dropdown-item clickable"
+     (click)="changerProfile(profil)">
+    <span style="font-weight: 500;"
+          class="d-flex mr-2 align-items-center ml-0">
+      <i class="far fa-user-graduate"
+         style="font-size: 11px;"
+         *ngIf="profil.type == 'eleve'"></i>
+      <i class="far fa-user-tie"
+         style="font-size: 11px;"
+         *ngIf="profil.type == 'professeur'"></i>
+      <i class="far fa-user-cog"
+         style="font-size: 11px;"
+         *ngIf="profil.type == 'employe'"></i>
       {{ profil.type }} <br>
     </span>
-    <span class="tx-11"> {{ profil.profil?.etablissement_details?.libelle }}</span>
+    <span class="tx-11 ml-0"
+          style="display: inline;"> {{ profil.profil?.etablissement_details?.libelle }}</span>
   </a>
 </span>

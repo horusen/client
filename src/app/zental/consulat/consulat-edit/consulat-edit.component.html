@@ -1,0 +1,117 @@
+<form class="custom-placeholder"
+      [formGroup]="form"
+      (submit)="update()">
+  <!-- Libelle-->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label"
+             for="libelle">
+        {{ 'LIBELLE' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'libelle'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'libelle'), 'is-valid': isValid('libelle')}">
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('libelle')"
+           class="invalid-feedback">
+        {{ 'veuillezSaisirLeLibelle' |translate }}.</div>
+    </div>
+  </div>
+
+  <!-- pays et villes-->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <!-- Pays -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label"
+             for="pays">
+        {{ 'paysDeSiege' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="paysLoading"></i>
+      </label>
+
+      <ng-multiselect-dropdown [data]="pays"
+                               [settings]="dropdownSettings.single"
+                               formControlName="pays_siege"
+                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'pays_siege'), 'is-valid': isValid('pays_siege')}"
+                               class="form-control p-0 form-control-sm">
+      </ng-multiselect-dropdown>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('pays_siege')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignezLePaysDeSiege' | translate }}.
+      </div>
+    </div>
+
+
+    <!-- Villes -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label"
+             for="pays">
+        {{ 'VILLE' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="villeLoading"></i>
+      </label>
+
+      <ng-multiselect-dropdown [data]="villes"
+                               [settings]="villeDropDownSettings"
+                               formControlName="ville"
+                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'ville'), 'is-valid': isValid('ville')}"
+                               class="form-control p-0 form-control-sm">
+      </ng-multiselect-dropdown>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('ville')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignezLaVille' | translate }}.
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Description -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <label class="control-label"
+             for="description">{{ 'DESCRIPTION' | translate }}</label>
+      <!-- <textarea name="description" maxlength="500" class="form-control  form-control-sm" cols="30" rows="3"
+                [formControlName]="'description'"
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"></textarea> -->
+      <ckeditor [editor]="Editor"
+                class=""
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
+                formControlName="description">
+      </ckeditor>
+      <div *ngIf="shouldShowRequiredError('description')"
+           class="invalid-feedback">
+        {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-12 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1"
+              type="submit"
+              [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+
+    </div>
+  </div>
+</form>
+
+<app-loading *ngIf="!form"></app-loading>

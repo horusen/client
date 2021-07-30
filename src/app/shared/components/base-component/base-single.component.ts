@@ -10,7 +10,8 @@ import { BaseService } from "../../services/base.service";
 })
 export class BaseSingleComponent
   extends BaseComponent
-  implements OnInit, OnDestroy {
+  implements OnInit, OnDestroy
+{
   id: number;
   single: any;
   public enableSubscribeToSingleData: boolean = true;
@@ -18,7 +19,7 @@ export class BaseSingleComponent
   public enableSubscribeToLoading: boolean = false;
   public enableFetchDataFromURL: boolean = false;
 
-  constructor(public service: BaseService, public route: ActivatedRoute) {
+  constructor(public service: BaseService, public route?: ActivatedRoute) {
     super(service);
   }
 

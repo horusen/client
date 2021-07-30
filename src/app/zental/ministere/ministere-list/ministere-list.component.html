@@ -1,0 +1,88 @@
+<div class=" ">
+  <div class="bd-b  pt-1">
+    <p class="tx-16">
+      <i class="fad fa-landmark  bg-light tx-24"
+         style="padding:8px; border-radius:50%"></i>
+      {{ 'listeDesMinisteres' | translate }}
+    </p>
+  </div>
+</div>
+<div class=" mg-b-20">
+
+  <div class="row row-xs clearfix p-2 pl-2"
+       *ngIf="ministereService.data.length && !loading">
+    <div class="col-lg-3 pt-2 pl-2 pr-2 pb-2"
+         *ngFor="let ministere of ministereService.data">
+      <div class="mycard4">
+        <!-- Pays -->
+        <div class="pt-2 pl-2 d-flex align-items-center justify-content-between">
+          <p class="tx-echos"><img src="assets/images/drapeaux/sn.svg"
+                 alt="avatar"
+                 width="40"> République du {{ ministere.pays.libelle }}</p>
+        </div>
+
+        <!-- Icone -->
+        <div class="d-flex justify-content-center p-0">
+          <p class="mg-0 pb-4"><span class="pl-2"><i class="fad fa-landmark tx-40 bg-light"
+                 style="padding: 6px; border-radius: 50%;"></i></span></p>
+        </div>
+
+        <h6>{{ ministere.libelle }}</h6>
+
+        <!--  -->
+        <!-- <div class="text-center"><span class="badge badge-pill badge-primary bg-norange"> Service d'ambassade</span>
+          <p><span> Français </span><span> || </span><span> 6 attachés </span><span> || </span><span class="tx-success-100"> Ouvert </span></p>
+        </div> -->
+
+        <!-- CTA -->
+        <div class="d-flex justify-content-between">
+          <div class="justify-content-between p-0">
+            <p class="mg-0 pt-2">
+              <!-- Details -->
+              <a [routerLink]="[ministere.id]"
+                 class="pl-2">
+                <i class="fad fa-eye bg-white"
+                   style="padding: 6px; border-radius: 50%; "></i>
+              </a>
+
+
+              <!-- Contacter -->
+              <a class="pl-2"
+                 href="#"><i class="fad fa-comment-alt-lines bg-white"
+                   style="padding: 6px; border-radius: 50%; "></i></a>
+
+              <!-- Supprimer -->
+              <a class="pl-2"
+                 [routerLink]="['./']"
+                 (click)="supprimer(ministere.id)">
+                <i class="fad fa-trash bg-white"
+                   style="padding: 6px; border-radius: 50%; "></i>
+              </a>
+
+            </p>
+
+            <!-- Image du ministre -->
+          </div><a id="v-pills-home-tab"
+             data-toggle="pill"
+             href="#utilisateurs"
+             role="tab"
+             aria-controls="v-pills-home"
+             aria-selected="true"
+             class="nav-link ml-4">
+            <div class="d-flex flex-row">
+              <div class="profiles"><img src="assets/images/xs/avatar6.jpg"
+                     alt="avatar"
+                     width="26"
+                     class="rounded-circle"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-loading *ngIf="loading"
+               class="my-5"></app-loading>
+
+  <app-ministere-missing-data *ngIf="!ministereService.data.length && !loading"></app-ministere-missing-data>
+</div>

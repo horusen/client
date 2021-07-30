@@ -1,0 +1,45 @@
+<form class="custom-placeholder"
+      [formGroup]="form"
+      (submit)="patch()">
+
+
+  <div class="formSep form-group  d-flex justify-content-center pb-0">
+    <div class="col-12 p-0">
+
+      <!-- <textarea name="description" maxlength="500" class="form-control  form-control-sm" cols="30" rows="3"
+                [formControlName]="'description'"
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"></textarea> -->
+      <ckeditor [editor]="Editor"
+                class=""
+                [ngClass]="{'is-invalid': shouldShowRequiredError(configuration.fieldName), 'is-valid': isValid(configuration.fieldName)}"
+                [formControlName]="configuration.fieldName">
+      </ckeditor>
+      <div *ngIf="shouldShowRequiredError(configuration.fieldName)"
+           class="invalid-feedback">
+        {{ 'saisissezLeTexteCorrespondant' | translate }}
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-12 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1"
+              type="submit"
+              [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+
+      <!-- Bouton reset -->
+      <button class="btn btn-sm border btn-link"
+              type="button"
+              (click)="initialiseForm()">
+        {{ 'REINITIALISER' | translate }}
+      </button>
+    </div>
+  </div>
+</form>

@@ -24,9 +24,7 @@ export class FichierSoloComponent implements OnInit {
     public dossierService: DossierService
   ) {}
 
-  ngOnInit(): void {
-    console.log(this.fichier);
-  }
+  ngOnInit(): void {}
 
   download() {
     this.loading = true;

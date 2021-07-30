@@ -18,7 +18,7 @@ export class BaseComponent implements OnDestroy {
   public helper: Helper = null;
   public auth: AuthService = null;
 
-  constructor(public service: BaseService) {
+  constructor(public service?: BaseService) {
     this.helper = AppInjector.injector.get(Helper);
     this.auth = AppInjector.injector.get(AuthService);
   }
@@ -90,5 +90,19 @@ export class BaseComponent implements OnDestroy {
         subscriptions[_subscription].unsubscribe();
       }
     });
+  }
+
+  supprimer(itemID: number) {
+    this.helper.alertConfirmation(() => {
+      this.loading = true;
+      this.service.delete(itemID).subscribe(() => {
+        this.loading = false;
+        this.helper.alertSuccess();
+      });
+    });
+  }
+
+  modifier(item: any): void {
+    this.service.singleData = item;
   }
 }

@@ -18,4 +18,8 @@ export class CommonService extends BaseService {
   create(endpoint: string, elements: object) {
     return this.factory.post(endpoint, elements);
   }
+
+  edit(endpoint: string, elements: object) {
+    return this.factory.put(endpoint, elements);
+  }
 }

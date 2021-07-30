@@ -1,0 +1,15 @@
+<router-outlet></router-outlet>
+
+
+
+<app-modal [configuration]="{ name: 'ministre-add-modal', titre: 'MINISTRE', icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-ministre-create *ngIf="create"></app-ministre-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'ministre-edit-modal', titre: 'MINISTRE', icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-ministre-edit *ngIf="edit"></app-ministre-edit>
+</app-modal>

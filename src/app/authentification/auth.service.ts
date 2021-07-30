@@ -25,18 +25,19 @@ export class AuthService {
     email: string;
     password: string;
   }): Observable<any> {
-    return this._factory.post("auth/connexion", elements).pipe(
+    return this._factory.post("auth/login", elements).pipe(
       tap({
         next: (token) => {
           this._tokenStorage.save(token);
-          this.changeProfile(this.profiles[0]);
+          this.router.navigate(["./"]);
+          // this.changeProfile(this.profiles[0]);
         },
       })
     );
   }
 
   incsription(elements: {}) {
-    return this._factory.post("auth/inscription", elements).pipe(
+    return this._factory.post("auth/signup", elements).pipe(
       tap({
         next: (token) => {
           this._tokenStorage.save(token);

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 1543 847"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="bg-5.svg"
+   width="1543"
+   height="847"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1002"
+     id="namedview6"
+     showgrid="false"
+     inkscape:zoom="0.84305556"
+     inkscape:cx="491.66392"
+     inkscape:cy="459.34573"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <path
+     fill="#a2d9ff"
+     fill-opacity="1"
+     d="M -7.1169687,547.22829 48.34761,445.83761 h 55.5725 55.46458 l 55.46458,304.17204 55.46458,-50.69534 55.57248,-354.86737 55.46458,50.69534 55.46458,101.39068 55.57249,202.78135 55.46458,-354.86737 55.46458,506.95339 55.46458,-405.56272 55.57248,101.39068 55.46458,-152.08601 h 55.46459 l 55.57248,202.78135 55.46459,50.69534 55.46457,-101.39068 55.46459,152.08602 55.5725,-101.39068 55.4645,50.69534 55.4647,-202.78136 55.5724,50.69535 55.4646,-50.69535 55.4646,50.69535 55.4645,-50.69535 55.5725,304.17204 55.4646,-304.17204 v 405.56272 h -55.4646 -55.5725 -55.4645 -55.4646 -55.4646 -55.5724 -55.4647 -55.4645 -55.5725 -55.46459 -55.46457 -55.46459 -55.57248 -55.46459 -55.46458 -55.57248 -55.46458 -55.46458 -55.46458 -55.57249 -55.46458 -55.46458 -55.57248 -55.46458 -55.46458 -55.46458 -55.5725 -55.4645787 z"
+     id="path2"
+     style="fill:#1f618d;fill-opacity:0.626016;stroke-width:1.30749" />
+</svg>

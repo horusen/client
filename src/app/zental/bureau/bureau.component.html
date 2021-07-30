@@ -1,0 +1,37 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 pb-2">
+    <i class="fad fa-circle  tx-20"></i>
+    {{ 'listeDesBureaux' | translate }}
+  </h5>
+</div>
+
+
+<!-- header -->
+<app-main-header [id]="'bureau'"
+                 [hasFilter]="false"></app-main-header>
+
+
+<app-bureau-list></app-bureau-list>
+
+
+
+
+<app-modal [configuration]="{ name: 'bureau-create-modal', titre: 'ajouterUnBureau', icone: 'lamp-desk' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-common-create *ngIf="create"
+                     [configuration]="{ endpoint: 'bureaux', name: 'bureau', hasDescription: true, submitButtonClass: 'btn-primary' }"
+                     [extraFields]="{pays: ministere.pays.id, ministere: ministere?.id, ambassade: ambassade?.id }"
+                     (itemCreated)="onBureauCreated($event.item)">
+  </app-common-create>
+</app-modal>
+
+
+<app-modal [configuration]="{ name: 'bureau-edit-modal', titre: 'modifierLesDetailsDuBureau', icone: 'lamp-desk' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' }); edit = false">
+  <app-common-edit *ngIf="edit"
+                   [configuration]="{ endpoint: 'bureaux', name: 'bureau', hasDescription: true, item: bureauService.singleData, submitButtonClass: 'btn-primary' }"
+                   [extraFields]="{pays: bureauService.singleData.pays, ministere: ministere?.id, ambassade: ambassade?.id }"
+                   (itemEdited)="onBureauEdit($event.item)">
+  </app-common-edit>
+</app-modal>

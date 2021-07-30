@@ -26,11 +26,13 @@ import { ProfileComponent } from "../profile/profile/profile.component";
 import { VoirPlusDirective } from "./directive/voir-plus.directive";
 import { ReadMoreComponent } from "./components/read-more.component";
 import { ColorPickerModule } from "ngx-color-picker";
+import { BaseContainerComponentComponent } from "./component/base-container-component/base-container-component.component";
+import { CommonEditComponent } from "./components/common-component/common-edit/common-edit.component";
 @NgModule({
   declarations: [
     ModalComponent,
     CommonCreateComponent,
-    // CommonEditComponent,
+    CommonEditComponent,
     LoadingComponent,
     MissingDataComponent,
     PageLoadingComponent,
@@ -39,6 +41,7 @@ import { ColorPickerModule } from "ngx-color-picker";
     ProfileComponent,
     VoirPlusDirective,
     ReadMoreComponent,
+    BaseContainerComponentComponent,
   ],
   imports: [
     // BrowserModule,
@@ -78,7 +81,7 @@ import { ColorPickerModule } from "ngx-color-picker";
     ModalComponent,
     CommonCreateComponent,
     ModalSidebarComponent,
-    // CommonEditComponent,
+    CommonEditComponent,
     LoadingComponent,
     MissingDataComponent,
     PageLoadingComponent,
