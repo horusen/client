@@ -25,7 +25,7 @@
     "@ckeditor/ckeditor5-build-classic": "^22.0.0",
     "@ctrl/ngx-emoji-mart": "^4.1.1",
     "@digitalascetic/ngx-pica": "^10.1.0",
-    "@ng-bootstrap/ng-bootstrap": "^7.0.0",
+    "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "@ngstack/translate": "^4.0.0",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
