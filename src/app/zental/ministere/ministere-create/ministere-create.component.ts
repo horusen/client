@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseCreateComponent } from "src/app/shared/components/base-component/base-create.component";
 import { PaysService } from "../../pays/pays.service";
@@ -13,7 +14,7 @@ export class MinistereCreateComponent
   extends BaseCreateComponent
   implements OnInit
 {
-  pays: any[];
+  pays: any[] = [];
   paysLoading = false;
 
   constructor(
@@ -26,21 +27,29 @@ export class MinistereCreateComponent
   }
 
   ngOnInit(): void {
-    this.enableRetrieveSchema = true;
-    super.ngOnInit();
-
-    this._subscription["schema"] = this.ministereService.schema$.subscribe(
-      () => {
-        // form initialisation
-        this.initialiseForm();
-      }
-    );
+    this.initialiseForm();
 
     this.getPays();
   }
 
-  initialiseForm() {
-    this.initForm(["libelle", "pays", "description", "mail"]);
+  initialiseForm(item?: any): void {
+    this.form = this.fb.group({
+      libelle: [item?.entite_diplomatique?.libelle, Validators.required],
+      site_web: [item?.entite_diplomatique?.site_web],
+      boite_postale: [item?.entite_diplomatique?.boite_postale],
+      date_creation: [item?.entite_diplomatique?.date_creation],
+      tel1: [item?.entite_diplomatique?.tel1],
+      tel2: [item?.entite_diplomatique?.tel2],
+      mail: [item?.entite_diplomatique?.mail],
+      pays_origine: [
+        item?.entite_diplomatique?.pays_siege
+          ? [item?.entite_diplomatique?.pays_siege]
+          : null,
+        Validators.required,
+      ],
+    });
+
+    this.isFormOk = true;
   }
 
   getPays(): void {
@@ -51,25 +60,26 @@ export class MinistereCreateComponent
     });
   }
 
-  create() {
+  create(): void {
     if (this.form.valid) {
       this.loading = true;
-      const data = Object.assign(this.form.value, {
-        pays: this.formValue("pays")[0].id,
-      });
+      const data = {
+        ...this.form.value,
+        pays_origine: this.formValue("pays_origine")[0].id,
+      };
 
       this.ministereService.add(data).subscribe(() => {
         this.loading = false;
+        this.form.reset();
+        this.helper.toggleModal(`ministere-add-modal`);
+        this.helper.alertSuccess();
         this.router.navigate(["./"], {
           relativeTo: this.route,
           queryParamsHandling: "preserve",
         });
-        this.helper.toggleModal("ministere-add-modal");
-        this.helper.alertSuccess();
-        this.initialiseForm();
       });
     } else {
-      this.helper.alertDanger("Remplissez convenablement le formulaire");
+      this.helper.alertDanger("Formulaire Invalide");
     }
   }
 }

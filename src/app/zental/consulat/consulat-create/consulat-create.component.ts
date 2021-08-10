@@ -76,7 +76,10 @@ export class ConsulatCreateComponent
       this.service.add(data).subscribe(() => {
         this.loading = false;
         this.form.reset();
-        this.formValuePatcher("pays_origine", this.ministere.pays.id);
+        this.formValuePatcher(
+          "pays_origine",
+          this.ministere.entite_diplomatique.pays_siege.id
+        );
         this.formValuePatcher("ministere", this.ministere.id);
         this.helper.toggleModal(`${this.element}-create-modal`);
         this.router.navigate(["./"], {

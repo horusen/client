@@ -18,7 +18,7 @@
         <div class="pt-2 pl-2 d-flex align-items-center justify-content-between">
           <p class="tx-echos"><img src="assets/images/drapeaux/sn.svg"
                  alt="avatar"
-                 width="40"> République du {{ ministere.pays.libelle }}</p>
+                 width="40"> République du {{ ministere.entite_diplomatique.pays_siege.libelle }}</p>
         </div>
 
         <!-- Icone -->
@@ -27,7 +27,7 @@
                  style="padding: 6px; border-radius: 50%;"></i></span></p>
         </div>
 
-        <h6>{{ ministere.libelle }}</h6>
+        <h6>{{ ministere.entite_diplomatique.libelle }}</h6>
 
         <!--  -->
         <!-- <div class="text-center"><span class="badge badge-pill badge-primary bg-norange"> Service d'ambassade</span>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { AmbassadeService } from "../../ambassade/ambassade.service";
@@ -11,6 +11,7 @@ import { PosteService } from "../poste.service";
   styleUrls: ["./poste-list.component.scss"],
 })
 export class PosteListComponent extends BaseComponent implements OnInit {
+  @Input() parent: { name: string; item: any };
   constructor(
     public posteService: PosteService,
     public ministereService: MinistereService,
@@ -39,9 +40,26 @@ export class PosteListComponent extends BaseComponent implements OnInit {
     }
   }
 
+  getData(params: Params): void {
+    if (this.parent.name === "ministere") {
+      this.getByMinistere(this.parent.item.id, params);
+    } else if (this.parent.name === "ambassade") {
+      this.getByAmbassade(this.parent.item.id, params);
+    } else if (this.parent.name === "consulat") {
+      this.getByConsulat(this.parent.item.id, params);
+    }
+  }
+
   getByMinistere(ministere: number, params: Params) {
     this.loading = true;
     this.posteService.getByMinistere(ministere, params).subscribe(() => {
+      this.loading = false;
+    });
+  }
+
+  getByConsulat(consulat: number, params: Params) {
+    this.loading = true;
+    this.posteService.getByConsulat(consulat, params).subscribe(() => {
       this.loading = false;
     });
   }

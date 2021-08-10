@@ -9,7 +9,7 @@ import { BureauShowComponent } from "./bureau-show/bureau-show.component";
 import { BureauDescriptionComponent } from "./bureau-show/bureau-description/bureau-description.component";
 import { BureauEmployesComponent } from "./bureau-show/bureau-employes/bureau-employes.component";
 import { EmployeModule } from "../employe/employe.module";
-import { AffectationBureauComponent } from './bureau-show/affectation-bureau/affectation-bureau.component';
+import { AffectationBureauComponent } from "./bureau-show/affectation-bureau/affectation-bureau.component";
 
 const routes: Routes = [
   {

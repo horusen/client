@@ -1,3 +1,4 @@
+import { ResponsableModule } from "./../responsable/responsable.module";
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -51,6 +52,7 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     SharedZentalModule,
+    ResponsableModule,
     RouterModule.forChild(routes),
   ],
   exports: [RouterModule],

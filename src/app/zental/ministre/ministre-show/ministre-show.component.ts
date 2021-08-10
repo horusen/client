@@ -25,26 +25,29 @@ export class MinistreShowComponent
 
   ngOnInit(): void {
     this.enableFetchDataFromURL = false;
+
     super.ngOnInit();
 
     this._subscription["ministere"] =
       this.ministereService.singleData$.subscribe((ministere) => {
         this.ministere = ministere;
-
-        if (this.router.url.includes("actuel")) {
-          this.getActuelMinistre(this.ministere.id);
-        }
+        this.getMinistre({});
+        this.route.params.subscribe((params) => {
+          this.getMinistre(params);
+        });
       });
-
-    if (!this.router.url.includes("actuel")) {
-      this.route.params.subscribe((params) => {
-        this.getByID(params.id);
-      });
-    }
   }
 
   edit(): void {
     this.ministreService.singleData = this.single;
+  }
+
+  getMinistre(params: any): void {
+    if (params.id && params?.id != "actuel") {
+      this.getByID(params.id);
+    } else {
+      this.getActuelMinistre(this.ministere.id);
+    }
   }
 
   getActuelMinistre(ministere: number): void {

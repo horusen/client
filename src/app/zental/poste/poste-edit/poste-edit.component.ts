@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AmbassadeService } from "../../ambassade/ambassade.service";
+import { ConsulatService } from "../../consulat/consulat.service";
 import { DomaineService } from "../../domaine/domaine.service";
 import { MinistereService } from "../../ministere/ministere.service";
 import { PosteCreateComponent } from "../poste-create/poste-create.component";
@@ -18,6 +19,7 @@ export class PosteEditComponent extends PosteCreateComponent implements OnInit {
     public domaineService: DomaineService,
     public ministereService: MinistereService,
     public ambassadeService: AmbassadeService,
+    public consulatService: ConsulatService,
     public router: Router,
     public route: ActivatedRoute
   ) {
@@ -26,6 +28,7 @@ export class PosteEditComponent extends PosteCreateComponent implements OnInit {
       domaineService,
       ministereService,
       ambassadeService,
+      consulatService,
       router,
       route
     );

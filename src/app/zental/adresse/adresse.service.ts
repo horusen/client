@@ -16,4 +16,16 @@ export class AdresseService extends BaseService {
       .get(`ministeres/${ministere}/adresses`)
       .pipe(tap(this.listResponseHandler()));
   }
+
+  getByAmbassade(ambassade: number): Observable<any> {
+    return this.factory
+      .get(`ambassades/${ambassade}/adresses`)
+      .pipe(tap(this.listResponseHandler()));
+  }
+
+  getByConsulat(consulat: number): Observable<any> {
+    return this.factory
+      .get(`consulats/${consulat}/adresses`)
+      .pipe(tap(this.listResponseHandler()));
+  }
 }

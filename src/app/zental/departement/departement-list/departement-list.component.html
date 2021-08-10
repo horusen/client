@@ -9,7 +9,7 @@
       <!-- Domaine -->
       <div class="d-flex align-items-center justify-content-between  bg-ether p-2">
         <p> <i class="fad fa-star tx-warning mr-2 bg-white"
-             style="padding:6px; border-radius:50%"></i> Géstion</p>
+             style="padding:6px; border-radius:50%"></i> {{ departement.domaine?.libelle }}</p>
       </div>
 
 
@@ -33,7 +33,7 @@
       <!-- CTA -->
       <div class="justify-content-between p-0 pt-2 pb-2">
         <p class="mg-0">
-          <a [routerLink]="['./']"
+          <a [routerLink]="[departement.id]"
              class="pl-2">
             <i class="fad fa-eye bg-light tx-yeto"
                style="padding: 6px; border-radius: 50%;"></i>

@@ -15,4 +15,6 @@
 
 
 
-<app-ministre-list></app-ministre-list>
+<app-responsable-list [parent]="{ name: 'ministre', entiteDiplomatique: ministere }"
+                      *ngIf="ministere">
+</app-responsable-list>

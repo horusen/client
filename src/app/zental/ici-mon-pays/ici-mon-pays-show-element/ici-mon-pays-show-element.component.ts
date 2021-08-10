@@ -29,8 +29,11 @@ export class IciMonPaysShowElementComponent
       this.ministereService.singleData$.subscribe((ministere) => {
         this.route.params.subscribe((element) => {
           this.element = element.id;
-          this.pays = ministere.pays.id;
-          this.showElement(ministere.pays.id, String(element.id));
+          this.pays = ministere.entite_diplomatique.pays_siege.id;
+          this.showElement(
+            ministere.entite_diplomatique.pays_siege.id,
+            String(element.id)
+          );
         });
       });
 

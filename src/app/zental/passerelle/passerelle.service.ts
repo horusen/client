@@ -23,4 +23,12 @@ export class PasserelleService extends BaseService {
         )
       );
   }
+
+  affecter(elements: any) {
+    return this.factory.post(`passerelles/affecter`, elements).pipe(
+      tap((response) => {
+        this.setFieldInSingleData("bureau", response);
+      })
+    );
+  }
 }

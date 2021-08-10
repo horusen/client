@@ -33,4 +33,28 @@ export class LiaisonService extends BaseService {
       .get(`ambassades/${ambassade}/${this.endPoint}`, { params })
       .pipe(tap(this.listResponseHandler()));
   }
+
+  getByConsulat(
+    consulat: number,
+    params: Params,
+    emitData = true
+  ): Observable<any> {
+    return this.factory
+      .get(`consulats/${consulat}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
+  affecter(elements: any) {
+    return this.factory.post(`liaisons/affecter`, elements).pipe(
+      tap((response) => {
+        this.setFieldInSingleData("bureau", response);
+      })
+    );
+  }
 }

@@ -8,6 +8,7 @@ import { MinistereDetailsComponent } from "./ministere-details/ministere-details
 import { ComposantDescriptionModule } from "../../composant-description/composant-description.module";
 import { DescriptionPartielMinistereComponent } from "./description-partiel-ministere/description-partiel-ministere.component";
 import { MinistreShowMinComponent } from "./ministre-show-min/ministre-show-min.component";
+import { InstitutionModule } from "../../institution/institution.module";
 
 const routes: Routes = [
   {
@@ -36,8 +37,8 @@ const routes: Routes = [
       {
         path: "services",
         loadChildren: () =>
-          import("./../../service/service.module").then(
-            (module) => module.ServiceModule
+          import("./../ministere-service/ministere-service.module").then(
+            (module) => module.MinistereServiceModule
           ),
       },
       {
@@ -64,6 +65,7 @@ const routes: Routes = [
     SharedModule,
     AdresseModule,
     ComposantDescriptionModule,
+    InstitutionModule,
   ],
   exports: [RouterModule],
 })

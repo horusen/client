@@ -1,0 +1,96 @@
+<div class="row row-xs clearfix mg-0 pd-0 pt-4 p-2"
+     *ngIf="!loading && responsableService.data.length">
+
+  <!-- Liste of element -->
+  <div class="col-lg-3 p-2"
+       *ngFor="let responsable of responsableService.data | paginate: {itemsPerPage: 5, id: 'responsable', currentPage: currentPage}">
+    <div class="mycard4 border ">
+      <div class="avatar5">
+        <img class="rounded-circle "
+             *ngIf="responsable.employe.photo?.path"
+             [src]="responsable.employe.photo?.path"
+             alt="avatar"
+             width="70">
+
+        <span *ngIf="!responsable.employe.photo?.path">
+          <i class="fad fa-user-circle"
+             style="font-size: 50px;"></i>
+        </span>
+      </div>
+
+      <!-- Infomation -->
+      <div class="mycard-text pt-4 px-2 pb-2">
+        <!-- Nom complet -->
+        <span class="date tx-bold tx-yeto tx-16">
+          {{ responsable.employe.nom_complet }}
+        </span>
+
+        <!-- Poste - fonction -->
+        <p class="mb-0 text-center">
+          <small>
+            <!-- poste -->
+            <span><i class="fal fa-calendar-alt mr-1"></i>{{ responsable.debut | date }} </span> -
+            <span><i class="fal fa-calendar-alt mr-1"></i>{{ responsable.fin | date }} </span>
+          </small>
+        </p>
+      </div>
+
+      <!-- 77 712 52 49 -->
+      <div class="pb-3 pt-1 card-container-icon">
+        <!-- Voir -->
+        <a [routerLink]="[responsable.id]"
+           class="mr-3 tx-facebook"
+           routerLinkActive="active">
+          <i class="fad  fa-info-circle"></i>
+        </a>
+
+        <!-- Modifier -->
+        <a [routerLink]="['./']"
+           [fragment]="'edit-' + parent.name"
+           class="tx-facebook"
+           (click)="modifier(responsable)">
+          <i class="fad mr-3 fa-edit"></i>
+        </a>
+
+        <!-- Supprimer -->
+        <a [routerLink]="['./']"
+           class="tx-facebook"
+           (click)="supprimer(responsable.id)">
+          <i class="fad mr-3 fa-trash"></i>
+        </a>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Pagination -->
+  <div class="col-12 mt-1 d-flex justify-content-center">
+    <pagination-controls id="responsable"
+                         (pageChange)="currentPage = $event"
+                         autoHide="true"
+                         previousLabel="{{ 'PRECEDENT' | translate }}"
+                         nextLabel="{{ 'SUIVANT' | translate }}">
+    </pagination-controls>
+  </div>
+</div>
+
+
+<!-- Loading && missing data handling -->
+<div class="row"
+     *ngIf="loading || !responsableService.data.length">
+
+  <!-- Loading -->
+  <div class="col-12 py-5"
+       *ngIf="loading">
+    <app-loading></app-loading>
+  </div>
+
+
+  <!-- Missing data handling -->
+  <div class="col-12 py-5"
+       *ngIf="!loading && !responsableService.data.length">
+    <app-missing-data></app-missing-data>
+  </div>
+</div>

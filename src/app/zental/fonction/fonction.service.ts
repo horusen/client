@@ -28,6 +28,22 @@ export class FonctionService extends BaseService {
       );
   }
 
+  getByConsulat(
+    consulat: number,
+    params?: Params,
+    emitData: boolean = true
+  ): Observable<any> {
+    return this.factory
+      .get(`consulats/${consulat}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
   getByAmbassade(
     ambassade: number,
     params?: Params,

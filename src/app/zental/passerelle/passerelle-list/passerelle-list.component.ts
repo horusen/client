@@ -23,7 +23,7 @@ export class PasserelleListComponent extends BaseComponent implements OnInit {
     this._subscription["ministere"] =
       this.ministereService.singleData$.subscribe((ministere) => {
         this.route.queryParams.subscribe((params) => {
-          this.getByPays(ministere.pays.id, params);
+          this.getByPays(ministere.entite_diplomatique.pays_siege.id, params);
         });
       });
   }

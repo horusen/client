@@ -9,11 +9,43 @@ import { RouterModule, Routes } from "@angular/router";
 import { SharedModule } from "src/app/shared/shared.module";
 import { SharedZentalModule } from "../shared-zental/shared-zental.module";
 import { FilterAmbassadeComponent } from "./filter-ambassade/filter-ambassade.component";
+import { AmbassadeDetailsComponent } from "./ambassade-show/ambassade-details/ambassade-details.component";
+import { AmbassadeListContainerComponent } from "./ambassade-list-container/ambassade-list-container.component";
 
 const routes: Routes = [
   {
     path: "",
     component: AmbassadeComponent,
+    children: [
+      {
+        path: "",
+        component: AmbassadeListContainerComponent,
+      },
+      {
+        path: ":id",
+        component: AmbassadeShowComponent,
+        children: [
+          {
+            path: "profil",
+            loadChildren: () =>
+              import("./profil-ambassade/profil-ambassade.module").then(
+                (module) => module.ProfilAmbassadeModule
+              ),
+          },
+          {
+            path: "admin",
+            loadChildren: () =>
+              import(
+                "./administration-ambassade/administration-ambassade.module"
+              ).then((module) => module.AdministrationAmbassadeModule),
+          },
+          {
+            path: "**",
+            redirectTo: "profil",
+          },
+        ],
+      },
+    ],
   },
 ];
 
@@ -25,6 +57,8 @@ const routes: Routes = [
     AmbassadeEditComponent,
     AmbassadeShowComponent,
     FilterAmbassadeComponent,
+    AmbassadeDetailsComponent,
+    AmbassadeListContainerComponent,
   ],
   imports: [
     CommonModule,

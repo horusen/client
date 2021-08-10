@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseContainerComponentComponent } from "src/app/shared/component/base-container-component/base-container-component.component";
 import { PosteService } from "./poste.service";
@@ -9,6 +9,7 @@ import { PosteService } from "./poste.service";
   styleUrls: ["./poste.component.scss"],
 })
 export class PosteComponent extends BaseContainerComponentComponent {
+  @Input() parent: { name: string; item: any };
   constructor(
     public posteService: PosteService,
     public router: Router,

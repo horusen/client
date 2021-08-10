@@ -1,19 +1,10 @@
-<!-- Title -->
-<div class="pl-2 pt-2">
-  <h5 class="pt-2 pb-2">
-    <i class="fad fa-circle  tx-20"></i>
-    {{ 'listeDesDomaines' | translate }}
-  </h5>
-</div>
-
-
 <!-- header -->
 <app-main-header [id]="'domaine'"
                  [hasFilter]="false">
 </app-main-header>
 
 
-<app-domaine-list></app-domaine-list>
+<app-domaine-list [parent]="parent"></app-domaine-list>
 
 
 

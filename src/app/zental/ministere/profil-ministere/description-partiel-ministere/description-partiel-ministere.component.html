@@ -26,15 +26,15 @@
         <div class="mg-b-20 bg-light p-4">
           <div class=" card-body p-0 mg-t-5 ">
             <p class="tx-facebook tx-14 "
-               *ngIf="single[typeDescription.slice(0, -1)]"
-               [innerHTML]="single[typeDescription.slice(0, -1)]"
+               *ngIf="single.entite_diplomatique[typeDescription.slice(0, -1)]"
+               [innerHTML]="single.entite_diplomatique[typeDescription.slice(0, -1)]"
                style="text-align:justify">
             </p>
 
 
             <!-- Mission data -->
             <div class="d-flex align-items-center flex-column justify-content-center"
-                 *ngIf="!single[typeDescription.slice(0, -1)]">
+                 *ngIf="!single.entite_diplomatique[typeDescription.slice(0, -1)]">
 
               <!-- Missions -->
               <ng-container *ngIf="typeDescription === 'missions'">

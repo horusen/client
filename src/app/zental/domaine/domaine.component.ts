@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseContainerComponentComponent } from "src/app/shared/component/base-container-component/base-container-component.component";
 import { AmbassadeService } from "../ambassade/ambassade.service";
@@ -11,6 +11,7 @@ import { DomaineService } from "./domaine.service";
   styleUrls: ["./domaine.component.scss"],
 })
 export class DomaineComponent extends BaseContainerComponentComponent {
+  @Input() parent: { name: string; item: any };
   ministere: any;
   ambassade: any;
 

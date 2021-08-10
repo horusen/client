@@ -14,10 +14,13 @@
         <!--  -->
         <div class="justify-content-between p-0 pt-2 pb-2">
           <p class="mg-0">
-            <!-- <span class="pl-2">
+            <a [routerLink]="[fonction.id]"
+               class="pl-2">
               <i class="fad fa-eye bg-light tx-yeto"
                  style="padding: 6px; border-radius: 50%;"></i>
-            </span> -->
+            </a>
+
+
             <!-- Editer  -->
             <a [routerLink]="['./']"
                [fragment]="'edit-fonction'"

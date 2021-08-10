@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AmbassadeService } from "../../ambassade/ambassade.service";
-import { DomaineService } from "../../domaine/domaine.service";
+import { ConsulatService } from "../../consulat/consulat.service";
+import { DepartementService } from "../../departement/departement.service";
 import { MinistereService } from "../../ministere/ministere.service";
 import { ServiceCreateComponent } from "../service-create/service-create.component";
 import { ServiceService } from "../service.service";
@@ -18,17 +19,19 @@ export class ServiceEditComponent
   service: any;
   constructor(
     public serviceService: ServiceService,
-    public domaineService: DomaineService,
+    public departementService: DepartementService,
     public ministereService: MinistereService,
     public ambassadeService: AmbassadeService,
+    public consulatService: ConsulatService,
     public router: Router,
     public route: ActivatedRoute
   ) {
     super(
       serviceService,
-      domaineService,
+      departementService,
       ministereService,
       ambassadeService,
+      consulatService,
       router,
       route
     );
@@ -51,7 +54,7 @@ export class ServiceEditComponent
     if (this.form.valid) {
       this.loading = true;
       const data = Object.assign({}, this.form.value, {
-        domaine: this.formValue("domaine")[0].id,
+        departement: this.formValue("departement")[0].id,
       });
 
       this.serviceService

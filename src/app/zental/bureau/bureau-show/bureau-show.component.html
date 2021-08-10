@@ -15,11 +15,11 @@
 
         <!-- Pays  -->
         <p class="text-center mb-0 ether2"
-           *ngIf="liaison"> {{ single.liaison.entite_diplomatique.pays_siege.libelle }}</p>
+           *ngIf="single.liaison">( {{ 'LIAISON' | translate }} ) {{ single.liaison.entite_diplomatique.pays_siege.libelle }}</p>
         <p class="text-center mb-0 ether2"
-           *ngIf="passerelle"> {{ single.passerelle.entite_diplomatique.pays_siege.libelle }}</p>
+           *ngIf="single.passerelle">( {{ 'PASSERELLE' | translate }} ) {{ single.passerelle.entite_diplomatique.pays_siege.libelle }}</p>
         <p class="text-center  text-warning mb-0 ether2"
-           *ngIf="!liaison && !passerelle"> {{ 'nonAffecte' | translate }}</p>
+           *ngIf="!single.liaison && !single.passerelle"> {{ 'nonAffecte' | translate }}</p>
 
         <!-- Date création -->
         <!-- <p class="text-center tx-warning tx-12	"> {{ 'DEPUIS' | translate }} : {{ single.date_creation | date }} </p> -->
@@ -32,7 +32,9 @@
     <!-- Action -->
     <div class=" text-center pt-1 pb-1 ">
       <!-- Affecter -->
-      <a class="ml-2">
+      <a class="ml-2"
+         [routerLink]="['./']"
+         (click)="affecterBureau()">
         <i class="fad fa-exchange tx-echos2 bg-bluelight"
            [ngbTooltip]=" 'AFFECTER' | translate "
            style="padding:10px; border-radius:50%">
@@ -41,12 +43,20 @@
 
 
       <!-- Modifier -->
-      <a class="ml-2"> <i class="fad fa-comment-alt-lines tx-echos2 bg-bluelight"
-           style="padding:10px; border-radius:50%"></i></a>
+      <a class="ml-2"
+         [routerLink]="['./']"
+         (click)="modifier()">
+        <i class="fad fa-edit tx-echos2 bg-bluelight"
+           style="padding:10px; border-radius:50%"></i>
+      </a>
 
       <!-- Supprimer -->
-      <a class="ml-2"> <i class="fad fa-page-break tx-echos2 bg-bluelight"
-           style="padding:6px; border-radius:50%"></i></a>
+      <a class="ml-2"
+         [routerLink]="['./']"
+         (click)="supprimer()">
+        <i class="fad fa-trash-alt tx-echos2 bg-bluelight"
+           style="padding:6px; border-radius:50%"></i>
+      </a>
     </div>
 
 
@@ -534,3 +544,24 @@
 
 
 </div>
+
+
+
+
+<app-modal [configuration]="{ name: 'affecter-bureau-modal', titre: 'affecterUnBureau', icone: 'exchange', taille: 'md' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-affectation-bureau *ngIf="affecter"
+                          [bureau]="single">
+  </app-affectation-bureau>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'bureau-edit-modal', titre: 'modifierLesDetailsDuBureau', icone: 'lamp-desk' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' }); edit = false">
+  <app-common-edit *ngIf="edit"
+                   [configuration]="{ endpoint: 'bureaux', name: 'bureau', hasDescription: true, item: single, submitButtonClass: 'btn-primary' }"
+                   [extraFields]="{pays: single.pays, ministere: ministere?.id, ambassade: ambassade?.id }"
+                   (itemEdited)="onBureauEdit($event.item)">
+  </app-common-edit>
+</app-modal>

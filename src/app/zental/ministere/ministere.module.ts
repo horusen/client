@@ -7,6 +7,8 @@ import { MinistereCreateComponent } from "./ministere-create/ministere-create.co
 import { RouterModule, Routes } from "@angular/router";
 import { SharedModule } from "src/app/shared/shared.module";
 import { MinistereMissingDataComponent } from "./ministere-missing-data/ministere-missing-data.component";
+import { InstitutionModule } from "../institution/institution.module";
+import { MinistereEditComponent } from './ministere-edit/ministere-edit.component';
 
 const routes: Routes = [
   {
@@ -52,8 +54,14 @@ const routes: Routes = [
     MinistereShowComponent,
     MinistereCreateComponent,
     MinistereMissingDataComponent,
+    MinistereEditComponent,
   ],
-  imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    SharedModule,
+    InstitutionModule,
+    RouterModule.forChild(routes),
+  ],
   exports: [RouterModule],
 })
 export class MinistereModule {}

@@ -1,3 +1,4 @@
+import { AmbassadeModule } from "./../ambassade/ambassade.module";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { AdministrationComponent } from "./administration.component";
@@ -14,6 +15,13 @@ const routes: Routes = [
         loadChildren: () =>
           import("./../ministere/ministere.module").then(
             (module) => module.MinistereModule
+          ),
+      },
+      {
+        path: "ambassade",
+        loadChildren: () =>
+          import("./../ambassade/ambassade.module").then(
+            (module) => module.AmbassadeModule
           ),
       },
       {

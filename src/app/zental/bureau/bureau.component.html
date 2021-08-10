@@ -8,8 +8,9 @@
 
 
 <!-- header -->
-<app-main-header [id]="'bureau'"
-                 [hasFilter]="false"></app-main-header>
+<app-main-header [hasFilter]="false"
+                 [id]="'bureau'">
+</app-main-header>
 
 
 <app-bureau-list></app-bureau-list>
@@ -21,7 +22,7 @@
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
   <app-common-create *ngIf="create"
                      [configuration]="{ endpoint: 'bureaux', name: 'bureau', hasDescription: true, submitButtonClass: 'btn-primary' }"
-                     [extraFields]="{pays: ministere.pays.id, ministere: ministere?.id, ambassade: ambassade?.id }"
+                     [extraFields]="{pays: ministere.entite_diplomatique.pays_siege.id, ministere: ministere?.id, ambassade: ambassade?.id }"
                      (itemCreated)="onBureauCreated($event.item)">
   </app-common-create>
 </app-modal>

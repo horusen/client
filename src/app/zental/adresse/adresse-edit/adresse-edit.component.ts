@@ -42,7 +42,7 @@ export class AdresseEditComponent
     this.form = this.fb.group({
       ville: ["", Validators.required],
       adresse: [adresse.adresse],
-      [this.parent]: this.parentID,
+      entite_diplomatique: this.parent.item.entite_diplomatique.id,
     });
 
     this.isFormOk = true;

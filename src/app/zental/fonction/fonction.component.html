@@ -13,7 +13,7 @@
 </app-main-header>
 
 
-<app-fonction-list></app-fonction-list>
+<app-fonction-list [parent]="parent"></app-fonction-list>
 
 
 
@@ -22,7 +22,7 @@
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
   <app-common-create *ngIf="create"
                      [configuration]="{ endpoint: 'fonctions', name: 'fonction', hasDescription: true, submitButtonClass: 'btn-primary' }"
-                     [extraFields]="{ ministere: ministere?.id, ambassade: ambassade?.id }"
+                     [extraFields]="{ ministere: ministere?.id, ambassade: ambassade?.id, consulat: consulat?.id }"
                      (itemCreated)="onFonctionCreated($event.item)">
   </app-common-create>
 </app-modal>
@@ -33,7 +33,7 @@
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' }); edit = false">
   <app-common-edit *ngIf="edit"
                    [configuration]="{ endpoint: 'fonctions', name: 'fonction', hasDescription: true, item: fonctionService.singleData, submitButtonClass: 'btn-primary' }"
-                   [extraFields]="{ ministere: ministere?.id, ambassade: ambassade?.id }"
+                   [extraFields]="{ ministere: ministere?.id, ambassade: ambassade?.id, consulat: consulat?.id }"
                    (itemEdited)="onFonctionEdit($event.item)">
   </app-common-edit>
 </app-modal>

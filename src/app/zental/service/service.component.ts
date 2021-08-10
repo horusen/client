@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from "@angular/router";
   styleUrls: ["./service.component.scss"],
 })
 export class ServiceComponent extends BaseContainerComponentComponent {
+  @Input() parent: { name: string; item: any };
   constructor(
     public serviceService: ServiceService,
     public router: Router,

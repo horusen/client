@@ -1,0 +1,139 @@
+<div class="row row-xs clearfix  mg-0 pd-0 p-0 pt-4 ">
+  <!-- Details et adresse -->
+  <div class=" col-lg-3 pr-2  pl-4">
+    <!-- Details -->
+    <div class="row row-xs clearfix pt-4 bd-b pb-2 mg-0 pd-0 bg-light ">
+      <div class="col-lg-12">
+        <!-- Drapeau -->
+        <div class="image text-center pb-2">
+          <img src="assets/images/drapeaux/cg.svg"
+               class="rounded"
+               width="80">
+        </div>
+
+        <!-- Libelle -->
+        <h6 class="text-center tx-ether">{{ parent.item.entite_diplomatique.libelle }}</h6>
+
+        <!-- Pays  -->
+        <p class="text-center mb-0 ether2"> {{ parent.item.entite_diplomatique.pays_siege.libelle }}</p>
+
+        <!-- Date création -->
+        <p class="text-center tx-warning tx-12	"> {{ 'DEPUIS' | translate }} : {{ parent.item.entite_diplomatique.date_creation | date }} </p>
+
+        <!-- Devise -->
+        <p class="text-center tx-ether2 tx-14	"> {{ parent.item.entite_diplomatique.devise }}</p>
+      </div>
+    </div>
+
+    <!-- Action -->
+    <div class=" text-center pt-1 pb-1 ">
+      <!-- Modifier -->
+      <a class="ml-2"
+         [routerLink]="['./']"
+         [fragment]="'edit-' + parent.name">
+        <i class="fad fa-edit tx-echos2 bg-bluelight"
+           style="padding:10px; border-radius:50%">
+        </i>
+      </a>
+
+      <!-- Contacter -->
+      <a class="ml-2"> <i class="fad fa-comment-alt-lines tx-echos2 bg-bluelight"
+           style="padding:10px; border-radius:50%"></i></a>
+
+      <!-- Lorem -->
+      <a class="ml-2"> <i class="fad fa-page-break tx-echos2 bg-bluelight"
+           style="padding:6px; border-radius:50%"></i></a>
+    </div>
+
+
+    <!-- Autres information et adresse -->
+    <div class=" ">
+      <ul class="list-group list-group-flush tx-13 ">
+        <!-- Telephone 1 -->
+        <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+          <div class="mr-2 ">
+            <i class="fad fa-phone-office tx-ether2 tx-20"></i>
+          </div>
+          <div class="pd-sm-l-10 pt-1">
+            <p class="tx-ether2 mg-b-0 tx-bold">{{ parent.item.entite_diplomatique.tel1 }}</p>
+          </div>
+        </li>
+
+        <!-- Telephone 2 -->
+        <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+          <div class="mr-2 "><i class="fad fa-mobile-android tx-ether2 tx-20"></i></div>
+          <div class="pd-sm-l-10 pt-1">
+            <p class="tx-ether2 mg-b-0 tx-bold"> {{ parent.item.entite_diplomatique.tel2 }}</p>
+          </div>
+        </li>
+
+        <!-- Email -->
+        <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+          <div class="mr-2 ">
+            <i class="fad fa-at tx-ether2 tx-20"></i>
+          </div>
+          <div class="pd-sm-l-10 pt-1">
+            <p class="tx-ether2 mg-b-0 tx-bold"> {{ parent.item.entite_diplomatique.mail }}</p>
+
+          </div>
+        </li>
+
+        <!-- Site web -->
+        <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+          <div class="mr-2 ">
+            <i class="fad fa-globe tx-ether2 tx-20"></i>
+          </div>
+          <div class="pd-sm-l-10 pt-1">
+            <p class="tx-ether2 mg-b-0 tx-bold">{{ parent.item.entite_diplomatique.site_web }}</p>
+
+          </div>
+        </li>
+
+
+        <!-- Adresse -->
+        <ng-container *ngIf="adresses?.length">
+          <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light"
+              *ngFor="let adresse of adresses">
+            <app-adresse-solo [adresse]="adresse"></app-adresse-solo>
+          </li>
+        </ng-container>
+
+      </ul>
+      <a [routerLink]="['./']"
+         [fragment]="'add-adresse'"
+         class="btn btn-block mt-1 btn-light">
+        <i class="fal fa-map-marker-alt tx-ether2 mr-2"></i>
+        {{ 'ajouterUneAdresse' | translate }}
+      </a>
+
+    </div>
+  </div>
+
+  <div class=" col-lg-9 pr-2 ">
+    <div class="card mg-b-20">
+      <div class=" collapse show"
+           id="collapse9">
+        <!-- Navigation -->
+        <ng-content select="[navigation-items]"></ng-content>
+
+
+        <!-- content -->
+        <div class="tab-content">
+          <div class="tab-pane fade active show"
+               id="le_ministere">
+            <router-outlet></router-outlet>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+<app-adresse [parent]="parent">
+</app-adresse>

@@ -1,0 +1,19 @@
+<router-outlet></router-outlet>
+
+
+
+<app-modal [configuration]="{ name: parent.name + '-add-modal', titre: (parent.name | uppercase) , icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-responsable-create [parent]="{ name: parent.name, entiteDiplomatique: parent.entiteDiplomatique }"
+                          *ngIf="create">
+  </app-responsable-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: parent.name + '-edit-modal', titre: (parent.name | uppercase), icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-responsable-edit [parent]="parent"
+                        *ngIf="edit">
+  </app-responsable-edit>
+</app-modal>

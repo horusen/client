@@ -7,13 +7,17 @@ import { ServiceEditComponent } from "./service-edit/service-edit.component";
 import { SharedModule } from "src/app/shared/shared.module";
 import { SharedZentalModule } from "../shared-zental/shared-zental.module";
 import { RouterModule, Routes } from "@angular/router";
+import { ServiceShowComponent } from "./service-show/service-show.component";
+import { ServiceDescriptionComponent } from "./service-show/service-description/service-description.component";
+import { ServiceEmployeComponent } from "./service-show/service-employe/service-employe.component";
+import { EmployeModule } from "../employe/employe.module";
 
-const routes: Routes = [
-  {
-    path: "",
-    component: ServiceComponent,
-  },
-];
+// const routes: Routes = [
+//   {
+//     path: "",
+//     component: ServiceComponent,
+//   },
+// ];
 
 @NgModule({
   declarations: [
@@ -21,13 +25,17 @@ const routes: Routes = [
     ServiceCreateComponent,
     ServiceListComponent,
     ServiceEditComponent,
+    ServiceShowComponent,
+    ServiceDescriptionComponent,
+    ServiceEmployeComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     SharedZentalModule,
-    RouterModule.forChild(routes),
+    EmployeModule,
+    // RouterModule.forChild(routes),
   ],
-  exports: [RouterModule],
+  exports: [ServiceComponent],
 })
 export class ServiceModule {}

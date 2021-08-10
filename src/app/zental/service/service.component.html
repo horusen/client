@@ -13,18 +13,20 @@
 
 
 
-<app-service-list></app-service-list>
+<app-service-list [parent]="parent"></app-service-list>
 
 
 
 <app-modal [configuration]="{ name: 'service-create-modal', titre: 'creerUnService', icone: 'ball-pile' }"
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
-  <app-service-create *ngIf="create"></app-service-create>
+  <app-service-create *ngIf="create"
+                      [parent]="parent"></app-service-create>
 </app-modal>
 
 
 
 <app-modal [configuration]="{ name: 'service-edit-modal', titre: 'modifierLesDetailsDuService', icone: 'ball-pile' }"
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
-  <app-service-edit *ngIf="edit"></app-service-edit>
+  <app-service-edit *ngIf="edit"
+                    [parent]="parent"></app-service-edit>
 </app-modal>

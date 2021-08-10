@@ -1,1 +1,135 @@
-<p>affectation-bureau works!</p>
+<form class="custom-placeholder"
+      [formGroup]="form"
+      (submit)="create()">
+  <!-- Affceter a -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label"
+             for="affecter">
+        {{ 'affecterA' | translate }}
+      </label>
+
+      <select (change)="selectFormHandler('affecter', $event.target.value)"
+              class="form-control">
+        <option [value]="affectation"
+                *ngFor="let affectation of dependancies.affecter"
+                [selected]="formValue('affecter') === affectation">
+          {{ affectation | translate }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+
+
+  <!-- Liaisons -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2"
+       *ngIf="formValue('affecter') === 'LIAISON'">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label"
+             for="liaison">
+        {{ 'LIAISON' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.liaisons"
+                            (click)="getLiaisons()"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="liaison"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'liaison'), 'is-valid': isValid('liaison')}"
+                            class="form-control p-0 form-control-sm">
+        <c-badge>
+          <ng-template let-item="item">
+            {{item.entite_diplomatique.pays_siege.libelle }}
+          </ng-template>
+        </c-badge>
+        <c-item>
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.entite_diplomatique.pays_siege.libelle}}</label>
+
+          </ng-template>
+        </c-item>
+      </angular2-multiselect>
+
+
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('passerelle')"
+           class="invalid-feedback">
+        {{ 'veuillezChoisirUnePasserelle' | translate }}.
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- passerelle -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2"
+       *ngIf="formValue('affecter') === 'PASSERELLE'">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label"
+             for="passerelle">
+        {{ 'PASSERELLE' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.passerelles"
+                            (click)="getPasserelles()"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="passerelle"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'passerelle'), 'is-valid': isValid('passerelle')}"
+                            class="form-control p-0 form-control-sm">
+        <c-badge>
+          <ng-template let-item="item">
+            {{item.entite_diplomatique.pays_siege.libelle }}
+          </ng-template>
+        </c-badge>
+        <c-item>
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.entite_diplomatique.pays_siege.libelle}}</label>
+
+          </ng-template>
+        </c-item>
+      </angular2-multiselect>
+
+
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('passerelle')"
+           class="invalid-feedback">
+        {{ 'veuillezChoisirUnePasserelle' | translate }}.
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-12 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1"
+              type="submit"
+              [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+
+      <!-- Bouton reset -->
+      <button class="btn btn-sm border btn-link"
+              type="button"
+              (click)="initialiseForm()">
+        {{ 'REINITIALISER' | translate }}
+      </button>
+    </div>
+  </div>
+</form>
+
+<app-loading *ngIf="!form"></app-loading>

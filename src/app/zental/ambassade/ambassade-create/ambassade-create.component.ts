@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MinistereService } from "../../ministere/ministere.service";
 import { PaysService } from "../../pays/pays.service";

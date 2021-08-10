@@ -33,4 +33,10 @@ export class PosteService extends BaseService {
       .get(`ambassades/${ambassade}/${this.endPoint}`, { params })
       .pipe(tap(this.listResponseHandler()));
   }
+
+  getByConsulat(consulat: number, params: Params): Observable<any> {
+    return this.factory
+      .get(`consulats/${consulat}/${this.endPoint}`, { params })
+      .pipe(tap(this.listResponseHandler()));
+  }
 }

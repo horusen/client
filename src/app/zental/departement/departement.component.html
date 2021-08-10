@@ -13,18 +13,14 @@
 </app-main-header>
 
 
-<app-departement-list></app-departement-list>
+<app-departement-list [parent]="parent"></app-departement-list>
 
 
 
 
 <app-modal [configuration]="{ name: 'departement-create-modal', titre: 'ajouterUnDepartement', icone: 'landmark' }"
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
-  <app-common-create *ngIf="create"
-                     [configuration]="{ endpoint: 'departements', name: 'departement', hasDescription: true, submitButtonClass: 'btn-primary' }"
-                     [extraFields]="{ ministere: ministere?.id, ambassade: ambassade?.id }"
-                     (itemCreated)="onDepartementCreated($event.item)">
-  </app-common-create>
+  <app-departement-create [parent]="parent"></app-departement-create>
 </app-modal>
 
 

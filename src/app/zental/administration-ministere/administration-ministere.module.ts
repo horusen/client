@@ -19,9 +19,9 @@ const routes: Routes = [
       {
         path: "ressources-humaines",
         loadChildren: () =>
-          import("./../employe/employe.module").then(
-            (module) => module.EmployeModule
-          ),
+          import(
+            "./../ministere/ministere-employe/ministere-employe.module"
+          ).then((module) => module.MinistereEmployeModule),
       },
       {
         path: "bureaux",
@@ -33,9 +33,9 @@ const routes: Routes = [
       {
         path: "departements",
         loadChildren: () =>
-          import("./../departement/departement.module").then(
-            (module) => module.DepartementModule
-          ),
+          import(
+            "./../ministere/ministere-departement/ministere-departement.module"
+          ).then((module) => module.MinistereDepartementModule),
       },
       {
         path: "consulats",
@@ -47,9 +47,9 @@ const routes: Routes = [
       {
         path: "services",
         loadChildren: () =>
-          import("./../service/service.module").then(
-            (module) => module.ServiceModule
-          ),
+          import(
+            "./../ministere/ministere-service/ministere-service.module"
+          ).then((module) => module.MinistereServiceModule),
       },
       {
         path: "passerelles",
@@ -68,23 +68,23 @@ const routes: Routes = [
       {
         path: "domaines",
         loadChildren: () =>
-          import("./../domaine/domaine.module").then(
-            (module) => module.DomaineModule
-          ),
+          import(
+            "./../ministere/ministere-domaine/ministere-domaine.module"
+          ).then((module) => module.MinistereDomaineModule),
       },
       {
         path: "postes",
         loadChildren: () =>
-          import("./../poste/poste.module").then(
-            (module) => module.PosteModule
+          import("./../ministere/ministere-poste/ministere-poste.module").then(
+            (module) => module.MinisterePosteModule
           ),
       },
       {
         path: "fonctions",
         loadChildren: () =>
-          import("./../fonction/fonction.module").then(
-            (module) => module.FonctionModule
-          ),
+          import(
+            "./../ministere/ministere-fonction/ministere-fonction.module"
+          ).then((module) => module.MinistereFonctionModule),
       },
       {
         path: "**",

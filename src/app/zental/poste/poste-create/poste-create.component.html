@@ -35,12 +35,12 @@
            *ngIf="domaineLoading"></i>
       </label>
 
-      <ng-multiselect-dropdown [data]="domaines"
-                               [settings]="dropdownSettings.single"
-                               formControlName="domaine"
-                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'domaine'), 'is-valid': isValid('domaine')}"
-                               class="form-control p-0 form-control-sm">
-      </ng-multiselect-dropdown>
+      <angular2-multiselect [data]="domaines"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="domaine"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'domaine'), 'is-valid': isValid('domaine')}"
+                            class="form-control p-0 form-control-sm">
+      </angular2-multiselect>
 
       <!-- Message d'erreur -->
       <div *ngIf="shouldShowRequiredError('domaine')"

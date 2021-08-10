@@ -37,7 +37,10 @@ export class EntiteDiplomatiqueCreateComponent
     this._subscription["ministere"] =
       this.ministereService.singleData$.subscribe((ministere) => {
         this.ministere = ministere;
-        this.formValuePatcher("pays_origine", ministere.pays.id);
+        this.formValuePatcher(
+          "pays_origine",
+          ministere.entite_diplomatique.pays_siege.id
+        );
       });
 
     this.getPays();
@@ -47,6 +50,12 @@ export class EntiteDiplomatiqueCreateComponent
     this.form = this.fb.group({
       libelle: [item?.entite_diplomatique?.libelle, Validators.required],
       description: [item?.entite_diplomatique?.description],
+      site_web: [item?.entite_diplomatique?.site_web],
+      boite_postale: [item?.entite_diplomatique?.boite_postale],
+      date_creation: [item?.entite_diplomatique?.date_creation],
+      tel1: [item?.entite_diplomatique?.tel1],
+      tel2: [item?.entite_diplomatique?.tel2],
+      mail: [item?.entite_diplomatique?.mail],
       pays_origine: [
         item?.entite_diplomatique?.pays_origine,
         Validators.required,
@@ -81,7 +90,10 @@ export class EntiteDiplomatiqueCreateComponent
       this.service.add(data).subscribe(() => {
         this.loading = false;
         this.form.reset();
-        this.formValuePatcher("pays_origine", this.ministere.pays.id);
+        this.formValuePatcher(
+          "pays_origine",
+          this.ministere.entite_diplomatique.pays_siege.id
+        );
         this.helper.toggleModal(`${this.element}-create-modal`);
         this.router.navigate(["./"], {
           relativeTo: this.route,

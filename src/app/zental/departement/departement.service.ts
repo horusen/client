@@ -28,6 +28,22 @@ export class DepartementService extends BaseService {
       );
   }
 
+  getByConsulat(
+    ministere: number,
+    params?: Params,
+    emitData: boolean = true
+  ): Observable<any> {
+    return this.factory
+      .get(`ministeres/${ministere}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
   getByAmbassade(
     ambassade: number,
     params?: Params,
@@ -35,6 +51,22 @@ export class DepartementService extends BaseService {
   ): Observable<any> {
     return this.factory
       .get(`ambassades/${ambassade}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
+  getByDomaine(
+    domaine: number,
+    params?: Params,
+    emitData: boolean = true
+  ): Observable<any> {
+    return this.factory
+      .get(`domaines/${domaine}/${this.endPoint}`, { params })
       .pipe(
         tap(
           emitData

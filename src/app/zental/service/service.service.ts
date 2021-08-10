@@ -15,7 +15,7 @@ export class ServiceService extends BaseService {
   getByMinistere(
     ministere: number,
     params: Params,
-    emitData = false
+    emitData = true
   ): Observable<any> {
     return this.factory
       .get(`ministeres/${ministere}/${this.endPoint}`, { params })
@@ -28,10 +28,26 @@ export class ServiceService extends BaseService {
       );
   }
 
+  getByDepartement(
+    departement: number,
+    params: Params,
+    emitData = true
+  ): Observable<any> {
+    return this.factory
+      .get(`departements/${departement}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
   getByAmbassade(
     ambassade: number,
     params: Params,
-    emitData = false
+    emitData = true
   ): Observable<any> {
     return this.factory
       .get(`ambassades/${ambassade}/${this.endPoint}`, { params })
@@ -59,4 +75,36 @@ export class ServiceService extends BaseService {
         )
       );
   }
+
+  getByDomaine(
+    domaine: number,
+    params: Params,
+    emitData = true
+  ): Observable<any> {
+    return this.factory
+      .get(`domaines/${domaine}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
+  // getByService(
+  //   service: number,
+  //   params: Params,
+  //   emitData = true
+  // ): Observable<any> {
+  //   return this.factory
+  //     .get(`services/${service}/${this.endPoint}`, { params })
+  //     .pipe(
+  //       tap(
+  //         emitData
+  //           ? this.listResponseHandler()
+  //           : this.onlyErrorResponseHandler()
+  //       )
+  //     );
+  // }
 }

@@ -1,4 +1,4 @@
-import { Input } from "@angular/core";
+import { EventEmitter, Input, Output } from "@angular/core";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
@@ -10,8 +10,9 @@ import { AdresseService } from "./adresse.service";
   styleUrls: ["./adresse.component.scss"],
 })
 export class AdresseComponent extends BaseComponent implements OnInit {
-  @Input() parent: string;
-  @Input() parentID: number;
+  @Input() parent: { name: string; item: any };
+  @Output() created = new EventEmitter<any>();
+  @Output() edited = new EventEmitter<any>();
   onEdit = false;
   onAdd = false;
 
@@ -25,11 +26,31 @@ export class AdresseComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+
+    this._subscription["created"] =
+      this.adresseService.lastItemcreated$.subscribe((adresse) => {
+        this.created.emit(adresse);
+      });
+
+    this._subscription["edited"] =
+      this.adresseService.lastItemEdited$.subscribe((adresse) => {
+        this.edited.emit(adresse);
+      });
   }
 
   getData(): void {
-    if (this.parent === "ministere")
-      this.adresseService.getByMinistere(this.parentID).subscribe(() => {});
+    if (this.parent.name === "ministere")
+      this.adresseService
+        .getByMinistere(this.parent.item.id)
+        .subscribe(() => {});
+    else if (this.parent.name === "ambassade")
+      this.adresseService
+        .getByAmbassade(this.parent.item.id)
+        .subscribe(() => {});
+    else if (this.parent.name === "consulat")
+      this.adresseService
+        .getByConsulat(this.parent.item.id)
+        .subscribe(() => {});
   }
 
   ngAfterViewInit(): void {

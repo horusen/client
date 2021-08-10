@@ -38,7 +38,7 @@ export class AffectationBureauComponent
   }
 
   ngOnInit(): void {
-    this.initialiseForm();
+    this.initialiseForm(this.bureau);
 
     this._subscription["ministere"] =
       this.ministereService.singleData$.subscribe((ministere) => {
@@ -46,11 +46,21 @@ export class AffectationBureauComponent
       });
   }
 
-  initialiseForm(): void {
+  initialiseForm(bureau?: any): void {
+    let bureauValue: string;
+
+    if (bureau.liaison) {
+      bureauValue = "LIAISON";
+    } else if (bureau.passerelle) {
+      bureauValue = "PASSERELLE";
+    } else {
+      bureauValue = this.dependancies.affecter[0];
+    }
+
     this.form = this.fb.group({
-      affecter: [this.dependancies.affecter[0], Validators.required], // Permet de sasvoir à quel objet on ajoute service
-      liaison: [null],
-      passerelle: [null],
+      affecter: [bureauValue, Validators.required], // Permet de sasvoir à quel objet on ajoute service
+      liaison: [bureau.liaison ? [bureau.liaison] : null],
+      passerelle: [bureau.passerelle ? [bureau.passerelle] : null],
       bureau: [this.bureau.id, Validators.required],
     });
   }
@@ -103,15 +113,17 @@ export class AffectationBureauComponent
         affecter: this.formValue("affecter"),
       };
 
-      this.bureauService.affecter(data).subscribe(() => {
-        this.loading = false;
-        this.form.reset();
-        this.helper.toggleModal(`affecter-bureau-modal`);
-        this.router.navigate(["./"], {
-          relativeTo: this.route,
-          queryParamsHandling: "preserve",
+      this.bureauService
+        .affecter(this.helper.serializeObject(data))
+        .subscribe(() => {
+          this.loading = false;
+          this.form.reset();
+          this.helper.toggleModal(`affecter-bureau-modal`);
+          this.router.navigate(["./"], {
+            relativeTo: this.route,
+            queryParamsHandling: "preserve",
+          });
         });
-      });
     } else {
       this.helper.alertDanger("Formulaire Invalide");
     }

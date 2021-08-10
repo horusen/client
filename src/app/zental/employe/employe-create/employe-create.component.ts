@@ -107,6 +107,9 @@ export class EmployeCreateComponent
     if (this.parent.name === "bureau") {
       this.formValuePatcher("affecter", "BUREAU");
       this.formValuePatcher("bureau", [this.parent.item]);
+    } else if (this.parent.name === "service") {
+      this.formValuePatcher("affecter", "serviceInterne");
+      this.formValuePatcher("service", [this.parent.item]);
     }
   }
 
@@ -300,12 +303,8 @@ export class EmployeCreateComponent
 
       this.employeService.add(this.formData).subscribe(() => {
         this.loading = false;
-        this.form.reset();
-        this.helper.toggleModal(`employe-create-modal`);
-        this.router.navigate(["./"], {
-          relativeTo: this.route,
-          queryParamsHandling: "preserve",
-        });
+        this.initialiseForm();
+        this.helper.alertSuccess();
       });
     } else {
       this.helper.alertDanger("Formulaire Invalide");

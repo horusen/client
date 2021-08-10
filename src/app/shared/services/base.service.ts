@@ -23,6 +23,7 @@ export abstract class BaseService {
   public loading$ = new BehaviorSubject(false);
   public schema$ = new ReplaySubject<string[]>(1);
   public lastItemcreated$ = new Subject<any>();
+  public lastItemEdited$ = new Subject<any>();
   public lastItemDeleted$ = new Subject<any>();
 
   set data(data: any[]) {
@@ -164,6 +165,7 @@ export abstract class BaseService {
       tap({
         next: (response) => {
           this.updateItemInData(id, response);
+          this.lastItemEdited$.next(response);
 
           if (this._singleData) {
             this.singleData = response;

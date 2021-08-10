@@ -10,8 +10,9 @@ import { MinistereService } from "../ministere.service";
 })
 export class MinistereShowComponent
   extends BaseSingleComponent
-  implements OnInit
+  implements OnInit, AfterViewInit
 {
+  edit = false;
   constructor(
     public ministereService: MinistereService,
     public route: ActivatedRoute,
@@ -23,5 +24,18 @@ export class MinistereShowComponent
   ngOnInit(): void {
     this.enableFetchDataFromURL = true;
     super.ngOnInit();
+  }
+
+  ngAfterViewInit(): void {
+    this.route.fragment.subscribe((fragment) => {
+      if (fragment === "edit-ministere") {
+        if (this.single) {
+          this.edit = true;
+          this.helper.toggleModal("ministere-edit-modal");
+        } else {
+          this.router.navigate(["./"], { relativeTo: this.route });
+        }
+      }
+    });
   }
 }

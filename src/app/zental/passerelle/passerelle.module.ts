@@ -8,11 +8,24 @@ import { PasserelleFilterComponent } from "./passerelle-filter/passerelle-filter
 import { SharedModule } from "src/app/shared/shared.module";
 import { SharedZentalModule } from "../shared-zental/shared-zental.module";
 import { RouterModule, Routes } from "@angular/router";
+import { PasserelleShowComponent } from "./passerelle-show/passerelle-show.component";
+import { AffecterPasserelleComponent } from "./affecter-passerelle/affecter-passerelle.component";
+import { PasserelleDescriptionComponent } from "./passerelle-description/passerelle-description.component";
+import { PasserelleEmployesComponent } from "./passerelle-employes/passerelle-employes.component";
+import { EmployeModule } from "../employe/employe.module";
 
 const routes: Routes = [
   {
     path: "",
     component: PasserelleComponent,
+  },
+  {
+    path: ":id",
+    component: PasserelleShowComponent,
+    children: [
+      { path: "", component: PasserelleDescriptionComponent },
+      { path: "employes", component: PasserelleEmployesComponent },
+    ],
   },
 ];
 
@@ -23,9 +36,14 @@ const routes: Routes = [
     PasserelleCreateComponent,
     PasserelleEditComponent,
     PasserelleFilterComponent,
+    PasserelleShowComponent,
+    AffecterPasserelleComponent,
+    PasserelleDescriptionComponent,
+    PasserelleEmployesComponent,
   ],
   imports: [
     CommonModule,
+    EmployeModule,
     SharedModule,
     SharedZentalModule,
     RouterModule.forChild(routes),

@@ -19,12 +19,14 @@
 
 <app-modal [configuration]="{ name: 'poste-create-modal', titre: 'creerUnPoste', icone: 'chair-office' }"
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
-  <app-poste-create *ngIf="create"></app-poste-create>
+  <app-poste-create *ngIf="create"
+                    [parent]="parent"></app-poste-create>
 </app-modal>
 
 
 
 <app-modal [configuration]="{ name: 'poste-edit-modal', titre: 'modifierLesDetailsDuPoste', icone: 'chair-office' }"
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
-  <app-poste-edit *ngIf="edit"></app-poste-edit>
+  <app-poste-edit *ngIf="edit"
+                  [parent]="parent"></app-poste-edit>
 </app-modal>

@@ -26,29 +26,37 @@ export class ComposantDescriptionComponent
   }
 
   ngOnInit(): void {
+    console.log(this.configuration);
     this.initialiseForm();
   }
 
   initialiseForm() {
     this.form = this.fb.group({
       [this.configuration.fieldName]: [
-        this.configuration.parentObject[this.configuration.fieldName],
+        this.configuration.parentObject.entite_diplomatique[
+          this.configuration.fieldName
+        ],
         Validators.required,
       ],
     });
   }
 
   patch(): void {
-    this.loading = true;
-    this.composantService
-      .patch(
-        this.configuration.path,
-        Object.assign(this.configuration.parentObject, this.form.value)
-      )
-      .subscribe((data) => {
-        this.response.emit(data);
-        this.loading = false;
-        this.initialiseForm();
-      });
+    if (this.form.value) {
+      this.loading = true;
+      const data = {
+        ...this.configuration.parentObject.entite_diplomatique,
+        ...this.form.value,
+        pays_siege:
+          this.configuration.parentObject.entite_diplomatique.pays_siege?.id,
+      };
+      this.composantService
+        .patch(this.configuration.path, data)
+        .subscribe((response) => {
+          this.response.emit(response);
+          this.loading = false;
+          this.initialiseForm();
+        });
+    }
   }
 }

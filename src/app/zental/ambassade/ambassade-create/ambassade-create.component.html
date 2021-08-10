@@ -24,9 +24,9 @@
     </div>
   </div>
 
-  <!-- pays -->
+  <!-- pays et date de creation-->
   <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
-    <div class="col-12">
+    <div class="col-6">
       <!-- Label -->
       <label class="control-label"
              for="pays">
@@ -48,6 +48,126 @@
         {{ 'veuillezRenseignezLePaysDeSiege' | translate }}.
       </div>
     </div>
+
+
+    <!-- Date de creation -->
+    <div class="col-6">
+      <!-- Label -->
+      <label for="type"
+             class="label-template-form">
+        {{ 'dateDeCreation' | translate }}
+      </label>
+
+      <!-- Date picker -->
+      <div class="input-group mb-2">
+        <input [dpDayPicker]="configCalendrier.day"
+               [theme]="'dp-material'"
+               formControlName="date_creation"
+               class="form-control ">
+        <div class="input-group-prepend">
+          <div class="input-group-text  bg-light"><i class="fal fa-calendar"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  tel 1, tel 2 et boite postal -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <!-- Telephone 1 -->
+    <div class="col-4">
+      <!-- Label -->
+      <label class="control-label"
+             for="telephone1">
+        {{ 'TELEPHONE' | translate }} 1
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'tel1'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'tel1'), 'is-valid': isValid('tel1')}">
+
+    </div>
+
+    <!-- tel2 -->
+    <div class="col-4">
+      <!-- Label -->
+      <label class="control-label"
+             for="tel2">
+        {{ 'TELEPHONE' | translate }} 2
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'tel2'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'tel2'), 'is-valid': isValid('tel2')}">
+
+    </div>
+
+    <!-- Boite postal -->
+    <div class="col-4">
+      <!-- Label -->
+      <label class="control-label"
+             for="boite_postale">
+        {{ 'boitePostale' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'boite_postale'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'boite_postale'), 'is-valid': isValid('boite_postale')}">
+    </div>
+
+  </div>
+
+
+  <!-- Email Site web et boite postal -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <!-- Email -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label"
+             for="mail">
+        {{ 'EMAIL' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'mail'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'mail'), 'is-valid': isValid('mail')}">
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('mail')"
+           class="invalid-feedback">
+        {{ 'veuillezSaisirUnMail' |translate }}.</div>
+    </div>
+
+    <!-- Siteweb -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label"
+             for="siteWeb">
+        {{ 'siteWeb' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'site_web'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'site_web'), 'is-valid': isValid('site_web')}">
+
+    </div>
+
+
   </div>
 
 

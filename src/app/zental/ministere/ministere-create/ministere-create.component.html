@@ -1,11 +1,9 @@
 <form class="custom-placeholder"
       [formGroup]="form"
-      *ngIf="isFormOk"
       (submit)="create()">
-  <!-- Libelle et devise-->
+  <!-- Libelle-->
   <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
-    <!-- Libelle -->
-    <div class="col-6">
+    <div class="col-12">
       <!-- Label -->
       <label class="control-label"
              for="libelle">
@@ -24,26 +22,9 @@
            class="invalid-feedback">
         {{ 'veuillezSaisirLeLibelle' |translate }}.</div>
     </div>
-
-
-    <!-- Devise -->
-    <div class="col-6">
-      <!-- Label -->
-      <label class="control-label"
-             for="devise">
-        {{ 'DEVISE' | translate }}
-      </label>
-
-      <!-- Input -->
-      <input type="text"
-             class="form-control form-control-sm"
-             required
-             [formControlName]="'devise'"
-             [ngClass]="{'is-invalid': shouldShowRequiredError( 'devise'), 'is-valid': isValid('devise')}">
-    </div>
   </div>
 
-  <!-- Pays et date de creation -->
+  <!-- pays et date de creation-->
   <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
     <!-- Pays -->
     <div class="col-6">
@@ -51,21 +32,24 @@
       <label class="control-label"
              for="pays">
         {{ 'PAYS' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="paysLoading"></i>
       </label>
 
-      <angular2-multiselect [data]="pays"
-                            [settings]="dropdownSettingsAlt.single"
-                            formControlName="pays"
-                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'pays'), 'is-valid': isValid('pays')}"
-                            class="form-control p-0 form-control-sm">
-      </angular2-multiselect>
+      <ng-multiselect-dropdown [data]="pays"
+                               [settings]="dropdownSettings.single"
+                               formControlName="pays_origine"
+                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'pays_origine'), 'is-valid': isValid('pays_origine')}"
+                               class="form-control p-0 form-control-sm">
+      </ng-multiselect-dropdown>
 
       <!-- Message d'erreur -->
-      <div *ngIf="shouldShowRequiredError('pays')"
+      <div *ngIf="shouldShowRequiredError('pays_origine')"
            class="invalid-feedback">
-        {{ 'veuillezRenseignezLePays' | translate }}.
+        {{ 'veuillezRenseignezLePaysDeSiege' | translate }}.
       </div>
     </div>
+
 
     <!-- Date de creation -->
     <div class="col-6">
@@ -113,7 +97,7 @@
       <!-- Label -->
       <label class="control-label"
              for="tel2">
-        {{ 'TELEPHONE' | translate }}
+        {{ 'TELEPHONE' | translate }} 2
       </label>
 
       <!-- Input -->
@@ -179,36 +163,17 @@
       <input type="text"
              class="form-control form-control-sm"
              required
-             [formControlName]="'siteweb'"
-             [ngClass]="{'is-invalid': shouldShowRequiredError( 'siteweb'), 'is-valid': isValid('siteweb')}">
+             [formControlName]="'site_web'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'site_web'), 'is-valid': isValid('site_web')}">
 
     </div>
 
 
   </div>
-
-
 
 
   <!-- Description -->
-  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
-    <div class="col-12">
-      <label class="control-label"
-             for="description">{{ 'DESCRIPTION' | translate }}</label>
-      <!-- <textarea name="description" maxlength="500" class="form-control  form-control-sm" cols="30" rows="3"
-                [formControlName]="'description'"
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"></textarea> -->
-      <ckeditor [editor]="Editor"
-                class=""
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
-                formControlName="description">
-      </ckeditor>
-      <div *ngIf="shouldShowRequiredError('description')"
-           class="invalid-feedback">
-        {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
-      </div>
-    </div>
-  </div>
+
 
 
   <!-- Boutton validation -->
@@ -223,14 +188,8 @@
         {{ 'VALIDER' | translate }}
       </button>
 
-      <!-- Bouton reset -->
-      <button class="btn btn-sm border btn-link"
-              type="button"
-              (click)="initialiseForm()">
-        {{ 'REINITIALISER' | translate }}
-      </button>
     </div>
   </div>
 </form>
 
-<app-loading *ngIf="!isFormOk"></app-loading>
+<app-loading *ngIf="!form"></app-loading>

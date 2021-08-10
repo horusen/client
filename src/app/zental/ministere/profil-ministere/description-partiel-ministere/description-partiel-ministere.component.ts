@@ -43,10 +43,7 @@ export class DescriptionPartielMinistereComponent
   }
 
   composantEditedHandler(ministere: any): void {
-    this.ministereService.setFieldInSingleData(
-      this.typeDescription.slice(0, -1),
-      ministere[this.typeDescription.slice(0, -1)]
-    );
+    this.ministereService.singleData = ministere;
     this.helper.toggleModal("composant-modal");
     this.router.navigate(["./"], {
       relativeTo: this.route,

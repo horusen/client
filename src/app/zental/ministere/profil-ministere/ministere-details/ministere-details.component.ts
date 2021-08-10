@@ -12,7 +12,6 @@ export class MinistereDetailsComponent
   extends BaseSingleComponent
   implements OnInit
 {
-  editHistoire: true;
   constructor(
     public ministereService: MinistereService,
     public route: ActivatedRoute,
@@ -23,23 +22,5 @@ export class MinistereDetailsComponent
 
   ngOnInit(): void {
     super.ngOnInit();
-  }
-
-  ngAfterViewInit(): void {
-    this.route.fragment.subscribe((fragment) => {
-      if (fragment === "edit-histoire") {
-        this.editHistoire = true;
-        this.helper.toggleModal("histoire-modal");
-      }
-    });
-  }
-
-  histoireEditedHandler(ministere: any): void {
-    this.ministereService.setFieldInSingleData("histoire", ministere.histoire);
-    this.helper.toggleModal("histoire-modal");
-    this.router.navigate(["./"], {
-      relativeTo: this.route,
-      queryParamsHandling: "preserve",
-    });
   }
 }

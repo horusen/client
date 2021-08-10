@@ -63,7 +63,7 @@ export class CommonCreateComponent
           const output = { name: this.configuration.name, item: data };
           this.itemCreated.emit(output);
           this.loading = false;
-          this.form.reset();
+          this.initialiseForm();
         },
         () => {},
         () => {}

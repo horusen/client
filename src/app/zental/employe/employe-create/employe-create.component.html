@@ -245,9 +245,9 @@
 
 
           <!-- Message d'erreur -->
-          <div *ngIf="shouldShowRequiredError('passerelle')"
+          <div *ngIf="shouldShowRequiredError('liaison')"
                class="invalid-feedback">
-            {{ 'veuillezChoisirUnePasserelle' | translate }}.
+            {{ 'veuillezChoisirUneLiaison' | translate }}.
           </div>
         </div>
 
@@ -443,7 +443,7 @@
 
 
 <!-- Disposition BUreaux-->
-<ng-container *ngIf="parent.name === 'bureau'">
+<ng-container *ngIf="parent.name === 'bureau' ||  parent.name === 'service'">
   <form class="custom-placeholder"
         [formGroup]="form"
         *ngIf="form"

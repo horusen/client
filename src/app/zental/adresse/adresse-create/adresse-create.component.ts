@@ -16,15 +16,12 @@ export class AdresseCreateComponent
   implements OnInit
 {
   // May represent Ministere, Ambassade or every entity which have physical adress
-  @Input() parent: string;
-  @Input() parentID: number;
+  @Input() parent: { name: string; item: any };
 
   villes: any[] = [];
   villesLoading = false;
 
-  villeDropdownSettings = Object.assign(this.dropdownSettingsAlt.single, {
-    primaryKey: "id_ville",
-  });
+  villeDropdownSettings = Object.assign(this.dropdownSettingsAlt.single, {});
 
   constructor(
     public adresseService: AdresseService,
@@ -49,20 +46,26 @@ export class AdresseCreateComponent
   initialiseForm(adresse?: any) {
     this.initForm(["ville", "adresse"], [], () => {
       // Ajout
-      this.addControl(this.parent, this.parentID, true);
+      this.addControl(
+        "entite_diplomatique",
+        this.parent.item.entite_diplomatique.id,
+        true
+      );
     });
   }
 
   getVilles(callback?: Function) {
     this.villesLoading = true;
-    this.villeService.getAll(false).subscribe((villes) => {
-      this.villes = villes;
-      this.villesLoading = false;
+    this.villeService
+      .getByPays(this.parent.item.entite_diplomatique.pays_siege.id)
+      .subscribe((villes) => {
+        this.villes = villes;
+        this.villesLoading = false;
 
-      if (callback) {
-        callback();
-      }
-    });
+        if (callback) {
+          callback();
+        }
+      });
   }
 
   create() {
