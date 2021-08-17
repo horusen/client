@@ -12,8 +12,15 @@ export class ContactUrgentService extends BaseService {
   }
 
   getContactUrgentByUser(user: number): Observable<any> {
-    return this.factory
-      .get(`users/${user}/contacts/urgents`)
-      .pipe(tap(this.listResponseHandler()));
+    this.loading = true;
+    return this.factory.get(`users/${user}/contacts/urgents`).pipe(
+      tap(
+        (data) => {
+          this.data = data;
+          this.loading = false;
+        },
+        (error) => this.errorResponseHandler(error)
+      )
+    );
   }
 }

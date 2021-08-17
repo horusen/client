@@ -17,4 +17,16 @@ export class ContactUserService extends BaseService {
       .get(`users/${user}/contacts`, { params })
       .pipe(tap(this.listResponseHandler()));
   }
+
+  delete(id: number) {
+    return this.factory.delete(`${this.endPoint}/${id}`).pipe(
+      tap({
+        next: (deletedItem) => {
+          this.deleteItemInData(id);
+          this.lastItemDeleted = deletedItem;
+        },
+        error: (error) => this.errorResponseHandler(error),
+      })
+    );
+  }
 }

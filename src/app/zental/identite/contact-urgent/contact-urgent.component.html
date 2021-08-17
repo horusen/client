@@ -1,9 +1,15 @@
-<div class="card">
-  <div class="row row-xs clearfix pt-2 bd-b pb-2 mg-0 pd-0 ">
-    <app-contact-urgent-show></app-contact-urgent-show>
+<div class="card"
+     [hidden]="!single && !loading">
 
-    <app-contact-urgent-list></app-contact-urgent-list>
+  <div class="row row-xs clearfix pt-2 bd-b pb-2 mg-0 pd-0 "
+       [hidden]="loading">
+    <app-contact-urgent-show class="col-12"></app-contact-urgent-show>
+    <app-contact-urgent-list class="col-12"></app-contact-urgent-list>
   </div>
 
+  <div class="my-5 col-12"
+       *ngIf="loading">
+    <app-loading></app-loading>
+  </div>
 
 </div>

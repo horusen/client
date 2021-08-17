@@ -1,17 +1,18 @@
 <div class="col-lg-12  pb-1 pt-1 pl-2">
 
   <div class="d-flex flex-row justify-item-center ">
-    <div class="profiles">
-      <ng-container *ngFor="let contact of contactUrgentService.data.slice(1, 5)">
+    <div class="profiles d-flex align-items-center">
+      <ng-container *ngFor="let contact of data.slice(0, 5)">
         <img class="rounded-circle ml--10"
+             *ngIf="contact.contact.photo"
              (click)="show(contact)"
-             [src]="contact.contact.photo.path"
+             [src]="contact.contact.photo?.path"
              alt="avatar"
              [ngbTooltip]="contact.contact.nom_complet"
              width="30">
 
 
-        <span *ngIf="!contact.contact.photo?.path">
+        <span *ngIf="!contact.contact.photo">
           <i class="fad fa-user-circle ml--10"
              (click)="show(contact)"
              [ngbTooltip]="contact.contact.nom_complet"
@@ -23,9 +24,54 @@
     </div>
 
     <div class="avatar mg-l-10 bg-echos"
-         *ngIf="contactUrgentService.data.length > 5">
-      <span class="avatar-initial rounded-circle bg-echos"> {{ contactUrgentService.data.length - 5 }}
+         *ngIf="data.length > 5">
+      <span class="avatar-initial rounded-circle bg-echos clickable"
+            [autoClose]="true"
+            placement="bottom"
+            [popoverTitle]="contactTitle"
+            [ngbPopover]="contact">
+        {{ data.length - 5 }}
       </span>
     </div>
   </div>
 </div>
+
+
+
+<ng-template #contactTitle>
+  <b class="text-center tx-pink font-weight-bolder">
+    {{ "AUTRES" | translate }}
+  </b>
+
+</ng-template>
+<!-- Body -->
+<ng-template #contact
+             class="p-3">
+  <div class="col-lg-12  pb-1 pt-1 pl-2">
+
+    <div class="d-flex flex-row justify-item-center ">
+      <div class="profiles d-flex align-items-center">
+        <ng-container *ngFor="let contact of data.slice(5)">
+          <img class="rounded-circle ml--10"
+               *ngIf="contact.contact.photo"
+               (click)="show(contact)"
+               [src]="contact.contact.photo?.path"
+               alt="avatar"
+               [ngbTooltip]="contact.contact.nom_complet"
+               width="30">
+
+
+          <span *ngIf="!contact.contact.photo">
+            <i class="fad fa-user-circle ml--10"
+               (click)="show(contact)"
+               [ngbTooltip]="contact.contact.nom_complet"
+               style="font-size: 30px;"></i>
+          </span>
+        </ng-container>
+
+
+      </div>
+
+    </div>
+  </div>
+</ng-template>

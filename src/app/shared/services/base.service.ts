@@ -42,6 +42,10 @@ export abstract class BaseService {
     this.lastItemcreated$.next(item);
   }
 
+  set lastItemDeleted(item: any) {
+    this.lastItemDeleted$.next(item);
+  }
+
   set loading(loading: boolean) {
     this.loading$.next(loading);
   }
