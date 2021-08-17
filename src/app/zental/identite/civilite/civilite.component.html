@@ -1,0 +1,28 @@
+<app-user-information></app-user-information>
+
+
+
+<!-- Information du père -->
+<app-information-membre-famille [user]="user"
+                                [typeMembreFamille]="'pere'"
+                                (create)="ajouterMembreFamille('pere')">
+</app-information-membre-famille>
+
+
+<!-- Information de la mère -->
+<app-information-membre-famille [user]="user"
+                                [typeMembreFamille]="'mere'"
+                                (create)="ajouterMembreFamille('mere')">
+</app-information-membre-famille>
+
+
+
+
+
+<app-modal [configuration]="{ name: 'ajouter-membre-famille-modal', taille:'md', titre: 'AJOUTER', icone: 'users-crown' }">
+  <app-ajouter-membre-famille [user]="user"
+                              (done)="ajouter = false"
+                              [type]="typeMembreFamilleParams"
+                              *ngIf="ajouter">
+  </app-ajouter-membre-famille>
+</app-modal>

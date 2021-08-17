@@ -2,8 +2,11 @@ import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseContainerComponentComponent } from "src/app/shared/component/base-container-component/base-container-component.component";
 import { AmbassadeService } from "../ambassade/ambassade.service";
+import { DomaineInstitutionService } from "../domaine-institution/domaine-institution.service";
 import { MinistereService } from "../ministere/ministere.service";
 import { DomaineService } from "./domaine.service";
+
+// Represente domaine institution
 
 @Component({
   selector: "app-domaine",
@@ -16,7 +19,7 @@ export class DomaineComponent extends BaseContainerComponentComponent {
   ambassade: any;
 
   constructor(
-    public domaineService: DomaineService,
+    public domaineService: DomaineInstitutionService,
     public ministereService: MinistereService,
     public ambassadeService: AmbassadeService,
     public route: ActivatedRoute,

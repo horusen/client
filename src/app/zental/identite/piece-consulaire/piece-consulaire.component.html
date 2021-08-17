@@ -1,0 +1,28 @@
+<div class=" ">
+  <ul class="list-group list-group-flush tx-13 "
+      *ngIf="!loading">
+    <app-piece-consulaire-solo *ngFor="let type of typesPiecesConsulaires"
+                               (create)="create(type)"
+                               (edit)="edit(type)"
+                               [type]="type">
+    </app-piece-consulaire-solo>
+  </ul>
+
+
+  <app-loading *ngIf="loading"></app-loading>
+</div>
+
+
+
+<app-modal [configuration]="{ name: 'piece-consulaire-add-modal', titre: modalTitle, icone: 'file-certificate' }">
+  <app-piece-consulaire-create *ngIf="selectedTypePieceConsulaire"
+                               [type]="selectedTypePieceConsulaire"
+                               (done)="selectedTypePieceConsulaire = false">
+  </app-piece-consulaire-create>
+</app-modal>
+
+
+<app-modal [configuration]="{ name: 'piece-consulaire-edit-modal', titre: modalTitle, icone: 'file-certificate' }">
+  <app-piece-consulaire-edit *ngIf="pieceConsulaireService.singleData">
+  </app-piece-consulaire-edit>
+</app-modal>

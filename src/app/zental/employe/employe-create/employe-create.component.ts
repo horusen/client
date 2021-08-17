@@ -1,4 +1,4 @@
-import { UserService } from "src/app/user/user.service";
+import { UserService } from "src/app/zental/user/user.service";
 import { ServiceService } from "./../../service/service.service";
 import { Component, Input, OnInit } from "@angular/core";
 import { Validators } from "@angular/forms";

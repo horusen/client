@@ -33,6 +33,13 @@ export class TokenStorage {
     localStorage.setItem("selected-profile", JSON.stringify(profile));
   }
 
+  public setUserField(field: string, value: any) {
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ ...this.getUser(), [field]: value })
+    );
+  }
+
   public save(token: any) {
     localStorage.setItem("user", JSON.stringify(token.user));
     localStorage.setItem("accessToken", token.access_token);

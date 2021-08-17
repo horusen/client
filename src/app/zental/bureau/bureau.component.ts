@@ -13,7 +13,6 @@ import { BureauService } from "./bureau.service";
 export class BureauComponent extends BaseContainerComponentComponent {
   ministere: any;
   ambassade: any;
-
   constructor(
     public bureauService: BureauService,
     public ministereService: MinistereService,

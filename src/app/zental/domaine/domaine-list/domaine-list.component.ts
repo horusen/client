@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { AmbassadeService } from "../../ambassade/ambassade.service";
+import { DomaineInstitutionService } from "../../domaine-institution/domaine-institution.service";
 import { MinistereService } from "../../ministere/ministere.service";
 import { DomaineService } from "../domaine.service";
 
@@ -15,7 +16,7 @@ export class DomaineListComponent extends BaseComponent implements OnInit {
   ministere: any;
   ambassade: any;
   constructor(
-    public domaineService: DomaineService,
+    public domaineService: DomaineInstitutionService,
     public ministereService: MinistereService,
     public ambassadeService: AmbassadeService,
     public router: Router,

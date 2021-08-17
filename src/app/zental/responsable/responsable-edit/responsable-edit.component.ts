@@ -1,7 +1,7 @@
 import { ActivatedRoute } from "@angular/router";
 import { Router } from "@angular/router";
 import { Component, Input, OnInit } from "@angular/core";
-import { UserService } from "src/app/user/user.service";
+import { UserService } from "src/app/zental/user/user.service";
 import { ResponsableCreateComponent } from "../responsable-create/responsable-create.component";
 import { ResponsableService } from "../responsable.service";
 

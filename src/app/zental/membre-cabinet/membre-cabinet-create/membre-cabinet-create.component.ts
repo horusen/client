@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseCreateComponent } from "src/app/shared/components/base-component/base-create.component";
-import { UserService } from "src/app/user/user.service";
+import { UserService } from "src/app/zental/user/user.service";
 import { AmbassadeService } from "../../ambassade/ambassade.service";
 import { ConsulatService } from "../../consulat/consulat.service";
 import { FonctionService } from "../../fonction/fonction.service";

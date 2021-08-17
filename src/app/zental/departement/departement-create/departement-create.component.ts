@@ -6,7 +6,7 @@ import { BaseCreateComponent } from "src/app/shared/components/base-component/ba
 import { DepartementService } from "../departement.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ConsulatService } from "../../consulat/consulat.service";
-import { DomaineService } from "../../domaine/domaine.service";
+import { DomaineInstitutionService } from "../../domaine-institution/domaine-institution.service";
 
 @Component({
   selector: "app-departement-create",
@@ -28,7 +28,7 @@ export class DepartementCreateComponent
     public departementService: DepartementService,
     public router: Router,
     public route: ActivatedRoute,
-    public domaineService: DomaineService,
+    public domaineService: DomaineInstitutionService,
     public ministereService: MinistereService,
     public ambassadeService: AmbassadeService,
     public consulatService: ConsulatService

@@ -1,0 +1,104 @@
+<div class="row row-xs  mg-0 pd-0  "
+     *ngIf="user">
+  <div class=" col-lg-12 ">
+    <div class=" mycard2   p-0">
+      <table class="table  table-hover table-sm mb-0 ">
+        <tbody class=" border-0 ">
+          <!-- Nom -->
+          <tr>
+            <td class=" bg-white ">
+              <div class=" from"><a class=" tx-echos tx-bold tx-14"
+                   href="javascript:void(0);"> {{ 'NOM' | translate }} </a></div>
+            </td>
+            <td class="  ">
+              <div class=" from"><a class=" tx-echos tx-14"
+                   href="javascript:void(0);"> {{ user.nom }} </a></div>
+            </td>
+          </tr>
+
+          <!-- Prenom -->
+          <tr class="  ">
+            <td class="  ">
+              <div class=" from"><a class="tx-bold tx-echos tx-14"
+                   href="javascript:void(0);"> {{ 'PRENOM' | translate }} </a></div>
+            </td>
+            <td class=" bg-white ">
+              <div class=" from"><a class=" tx-echos tx-14"
+                   href="javascript:void(0);"> {{ user.prenom }}</a></div>
+            </td>
+          </tr>
+
+          <!-- Date Naissance -->
+          <tr class="  "
+              *ngIf="user.date_naissance">
+            <td class="  bg-white">
+              <div class=" from"><a class=" tx-bold tx-echos tx-14"
+                   href="javascript:void(0);"> {{ 'dateDeNaissance' | translate }} </a></div>
+            </td>
+            <td class="  ">
+              <div class=" from"><a class=" tx-echos tx-14"
+                   href="javascript:void(0);"> {{ user.date_naissance | date }} </a></div>
+            </td>
+          </tr>
+
+          <!-- Lieu naissance -->
+          <tr class="  "
+              *ngIf="user.lieu_naissance">
+            <td class="  ">
+              <div class=" from"><a class="tx-bold tx-echos tx-14"
+                   href="javascript:void(0);"> {{ 'lieuDeNaissance' | translate }} </a></div>
+            </td>
+            <td class=" bg-white ">
+              <div class=" from"><a class=" tx-echos tx-14"
+                   href="javascript:void(0);"> {{ user.lieu_naissance?.libelle }} || {{ user.lieu_naissance.pays.libelle }} </a></div>
+            </td>
+          </tr>
+
+
+          <!-- Genre -->
+          <tr class="  "
+              *ngIf="user.sexe">
+            <td class="  bg-white">
+              <div class=" from"><a class="tx-bold tx-echos tx-14"
+                   href="javascript:void(0);"> {{ 'GENRE' | translate }}</a></div>
+            </td>
+            <td class=" * ">
+              <div class=" from"><a class=" tx-echos tx-14"
+                   href="javascript:void(0);"> {{ user.sexe | translate }} </a></div>
+            </td>
+          </tr>
+
+          <ng-container *ngIf="!currentUser && !user.email_verified_at">
+            <!-- Email -->
+            <tr class="  "
+                *ngIf="user.email">
+              <td class="  bg-white">
+                <div class=" from"><a class="tx-bold tx-echos tx-14"
+                     href="javascript:void(0);"> {{ 'EMAIL' | translate }}</a></div>
+              </td>
+              <td class=" * ">
+                <div class=" from"><a class=" tx-echos tx-14"
+                     href="javascript:void(0);"> {{ user.email }} </a></div>
+              </td>
+            </tr>
+
+
+            <!-- telehone -->
+            <tr class="  "
+                *ngIf="user.telephone">
+              <td class="  bg-white">
+                <div class=" from"><a class="tx-bold tx-echos tx-14"
+                     href="javascript:void(0);"> {{ 'TELEPHONE' | translate }}</a></div>
+              </td>
+              <td class=" * ">
+                <div class=" from"><a class=" tx-echos tx-14"
+                     href="javascript:void(0);"> {{ user.telephone | translate }} </a></div>
+              </td>
+            </tr>
+          </ng-container>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

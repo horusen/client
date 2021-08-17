@@ -28,6 +28,7 @@ import { ReadMoreComponent } from "./components/read-more.component";
 import { ColorPickerModule } from "ngx-color-picker";
 import { BaseContainerComponentComponent } from "./component/base-container-component/base-container-component.component";
 import { CommonEditComponent } from "./components/common-component/common-edit/common-edit.component";
+import { MissingDataAltComponent } from "./component/missing-data-alt/missing-data-alt.component";
 @NgModule({
   declarations: [
     ModalComponent,
@@ -42,6 +43,7 @@ import { CommonEditComponent } from "./components/common-component/common-edit/c
     VoirPlusDirective,
     ReadMoreComponent,
     BaseContainerComponentComponent,
+    MissingDataAltComponent,
   ],
   imports: [
     // BrowserModule,
@@ -88,6 +90,7 @@ import { CommonEditComponent } from "./components/common-component/common-edit/c
     ProfileComponent,
     ReadMoreComponent,
     ColorPickerModule,
+    MissingDataAltComponent,
   ],
 })
 export class SharedModule {}

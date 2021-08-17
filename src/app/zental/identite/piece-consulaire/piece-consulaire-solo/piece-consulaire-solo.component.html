@@ -1,0 +1,43 @@
+<li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light bd-b scaleUp">
+  <div class="mr-2 ">
+    <i class="fad fa-file-certificate tx-ether2 tx-20"></i>
+  </div>
+  <div class="pd-sm-l-10 pt-1 flex-1">
+    <p class="tx-ether2 mg-b-0 w-100 tx-bold">
+      <span class="float-left">{{ type.libelle }}</span>
+      <span class="float-right">
+        <i class="fad fa-circle-notch fa-spin "
+           *ngIf="loading"></i>
+
+        <!-- Action -->
+        <ng-container *ngIf="!loading && pieceConsulaire">
+          <!-- Show -->
+          <a [href]='pieceConsulaire.fichier_joint.path'
+             target="_blank"><i class="fal fa-eye"></i>
+          </a>
+
+          <!-- Edit -->
+          <a class="clickable"
+             (click)="modifier()">
+            <i class="fal fa-edit ml-2"></i>
+          </a>
+
+          <!-- Delete -->
+          <a class="clickable"
+             (click)="supprimer()">
+            <i class="fal fa-trash-alt ml-2"></i>
+          </a>
+        </ng-container>
+
+
+
+        <!-- Add -->
+        <a class="clickable"
+           (click)="create.emit()"
+           *ngIf="!loading && !pieceConsulaire">
+          <i class="fal fa-plus-circle"></i>
+        </a>
+      </span>
+    </p>
+  </div>
+</li>

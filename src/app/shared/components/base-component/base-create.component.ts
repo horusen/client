@@ -23,7 +23,7 @@ export class BaseCreateComponent
   implements OnInit, OnDestroy
 {
   /* PROPRIÉTÉS */
-  public isFormOk: boolean = false; // permet de savoir si le formulaire est pret à etre rendu dans la vues
+  public isFormOk = false; // permet de savoir si le formulaire est pret à etre rendu dans la vues
   public form: FormGroup; // Formulaire d'ajout
   public formData: FormData = new FormData();
   public schema: any; // Architechture de la table (depuis la base de données)
@@ -89,7 +89,6 @@ export class BaseCreateComponent
   ) {
     // initialisation du formulaire
     if (this.schema) {
-      this.isFormOk = false;
       this.form = this.fb.group({});
       this.schema.forEach((field: string) => {
         if (!ignoreField.includes(field)) {
@@ -271,6 +270,15 @@ export class BaseCreateComponent
     Object.keys(object).forEach((key) => {
       this.formData.append(key, object[key]);
     });
+  }
+
+  onFileChanged(event: any) {
+    let fichier: File = event.target.files[0];
+    if (fichier.type !== "application/pdf") {
+      return this.helper.alertDanger("Format Invalide");
+    }
+
+    this.formData.append("fichier_joint", fichier);
   }
 
   formInvalidError() {

@@ -1,0 +1,95 @@
+<ng-container *ngIf="user">
+  <!-- User identit -->
+  <div class="row row-xs clearfix pt-4 bd-b pb-2 mg-0 pd-0 bg-light ">
+    <div class="col-lg-12">
+      <!-- Image -->
+      <div class="image text-center">
+        <img *ngIf="user.photo"
+             [src]="user.photo.path"
+             class="rounded"
+             width="80">
+
+
+        <span *ngIf="!user.photo">
+          <i class="fad fa-user-circle"
+             style="font-size: 80px;"></i>
+        </span>
+      </div>
+
+      <!-- nom complet -->
+      <h6 class="text-center tx-ether"> {{ user.nom_complet }} </h6>
+
+      <!-- Lieu de naissance -->
+      <p class="text-center mb-0 ether2"
+         *ngIf="user.lieu_naissance">
+        {{ user.lieu_naissance?.libelle }} - {{ user.lieu_naissance?.pays?.libelle }}
+      </p>
+
+      <!-- Age -->
+      <p class="text-center tx-ether2 tx-14	">
+        <!-- {{ age }} {{ 'ANS' | translate }} -->
+        24 ans *
+      </p>
+      <!-- <p class="text-center tx-warning tx-12	"> Depuis : 02 Juillet 2021 || Venu(e) de : Congo</p> -->
+    </div>
+  </div>
+
+
+  <!-- Comment icon -->
+  <div class=" text-center pt-1 pb-1 ">
+    <a class="ml-2"> <i class="fad fa-comment-alt-lines tx-echos2 bg-bluelight"
+         style="padding:10px; border-radius:50%"></i></a>
+    <!-- <a class="ml-2"> <i class="fad fa-comment-alt-lines tx-echos2 bg-bluelight" style="padding:6px; border-radius:50%"></i></a>															 -->
+  </div>
+
+  <!-- Useer other information -->
+  <div class=" ">
+    <ul class="list-group list-group-flush tx-13 ">
+      <!-- Sexe -->
+      <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+        <div class="mr-2 ">
+          <i class="fad fa-venus-mars tx-ether2 tx-20"></i>
+        </div>
+        <div class="pd-sm-l-10 pt-1">
+          <p class="tx-ether2 mg-b-0 tx-bold"> {{ user.sexe | translate }} </p>
+        </div>
+      </li>
+
+      <!-- Situation matrimoniale -->
+      <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+        <div class="mr-2 ">
+          <i class="fad fa-rings-wedding tx-ether2 tx-20"></i>
+        </div>
+        <div class="pd-sm-l-10 pt-1">
+          <p class="tx-ether2 mg-b-0 tx-bold">{{ user.situation_matrimoniale.libelle | translate }}</p>
+        </div>
+      </li>
+
+      <!-- email -->
+      <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+        <div class="mr-2 ">
+          <i class="fad fa-at tx-ether2 tx-20"></i>
+        </div>
+        <div class="pd-sm-l-10 pt-1">
+          <p class="tx-ether2 mg-b-0 tx-bold">{{ user.email }}</p>
+        </div>
+
+      </li>
+
+      <!-- Teleone -->
+      <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+        <div class="mr-2 ">
+          <i class="fad fa-mobile-android tx-ether2 tx-20"></i>
+        </div>
+        <div class="pd-sm-l-10 pt-1">
+          <p class="tx-ether2 mg-b-0 tx-bold">{{ user.telephone }}</p>
+
+        </div>
+      </li>
+
+
+
+
+    </ul>
+  </div>
+</ng-container>

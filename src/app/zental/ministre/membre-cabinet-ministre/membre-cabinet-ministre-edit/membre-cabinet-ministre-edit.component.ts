@@ -1,7 +1,7 @@
 import { MembreCabinetMinistreCreateComponent } from "./../membre-cabinet-ministre-create/membre-cabinet-ministre-create.component";
 import { Component, OnInit } from "@angular/core";
 import { MembreCabinetMinistreService } from "../membre-cabinet-ministre.service";
-import { UserService } from "src/app/user/user.service";
+import { UserService } from "src/app/zental/user/user.service";
 import { PosteService } from "src/app/zental/poste/poste.service";
 import { FonctionService } from "src/app/zental/fonction/fonction.service";
 import { MinistreService } from "../../ministre.service";

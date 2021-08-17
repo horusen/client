@@ -21,6 +21,13 @@ const routes: Routes = [
             (module) => module.AdministrationModule
           ),
       },
+      {
+        path: "identite",
+        loadChildren: () =>
+          import("./identite/identite.module").then(
+            (module) => module.IdentiteModule
+          ),
+      },
     ],
   },
 ];

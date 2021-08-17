@@ -141,10 +141,12 @@ export abstract class BaseService {
     );
   }
 
-  getSingle(id: number) {
+  getSingle(id: number, emitData = true) {
     return this.factory.get(`${this.endPoint}/${id}`).pipe(
       tap({
-        next: (single) => (this.singleData = single),
+        next: (single) => {
+          if (emitData) this.singleData = single;
+        },
         error: (error) => this.errorResponseHandler(error),
       })
     );

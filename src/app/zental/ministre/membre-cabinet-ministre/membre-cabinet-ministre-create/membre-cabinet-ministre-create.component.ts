@@ -3,7 +3,7 @@ import { FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseCreateComponent } from "src/app/shared/components/base-component/base-create.component";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
-import { UserService } from "src/app/user/user.service";
+import { UserService } from "src/app/zental/user/user.service";
 import { FonctionService } from "src/app/zental/fonction/fonction.service";
 import { PosteService } from "src/app/zental/poste/poste.service";
 import { MinistreService } from "../../ministre.service";

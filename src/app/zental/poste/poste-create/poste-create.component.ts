@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { BaseCreateComponent } from "src/app/shared/components/base-component/base-create.component";
 import { AmbassadeService } from "../../ambassade/ambassade.service";
 import { ConsulatService } from "../../consulat/consulat.service";
+import { DomaineInstitutionService } from "../../domaine-institution/domaine-institution.service";
 import { DomaineService } from "../../domaine/domaine.service";
 import { MinistereService } from "../../ministere/ministere.service";
 import { PosteService } from "../poste.service";
@@ -24,7 +25,7 @@ export class PosteCreateComponent
 
   constructor(
     public posteService: PosteService,
-    public domaineService: DomaineService,
+    public domaineService: DomaineInstitutionService,
     public ministereService: MinistereService,
     public ambassadeService: AmbassadeService,
     public consulatService: ConsulatService,
