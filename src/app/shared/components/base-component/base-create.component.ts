@@ -9,6 +9,7 @@ import {
   FormGroup,
   FormControl,
   Validators,
+  ValidatorFn,
 } from "@angular/forms";
 import { BaseService } from "../../services/base.service";
 import { AppInjector } from "../../services/app-injector.service";
@@ -233,6 +234,13 @@ export class BaseCreateComponent
       this.form.addControl(name, new FormControl(value, Validators.required));
     } else {
       this.form.addControl(name, new FormControl(value));
+    }
+  }
+
+  addValidators(name: string, validators: ValidatorFn[]): void {
+    if (Object.keys(this.form.controls).includes(name)) {
+      this.form.controls[name].setValidators(validators);
+      this.form.controls[name].updateValueAndValidity();
     }
   }
 
