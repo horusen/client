@@ -59,8 +59,7 @@
         </c-item>
       </angular2-multiselect>
 
-      <a [routerLink]="['./']"
-         class="tx-facebook tx-12 mt-2 ml-1"
+      <a class="tx-facebook clickable tx-12 mt-2 ml-1"
          [autoClose]="false"
          placement="bottom"
          [popoverTitle]="userCreateTitle"
@@ -123,9 +122,8 @@
     {{ "ajouterUnNouvelUtilisateur" | translate }}
   </b>
 
-  <a [routerLink]="['./']"
-     (click)="popover.close()"
-     class="float-right">
+  <a (click)="popover.close()"
+     class="float-right clickable">
     <i class="far fa-times"></i>
   </a>
 
@@ -134,5 +132,5 @@
 <!-- Body -->
 <ng-template #userCreate
              class="p-3">
-  <app-user-create></app-user-create>
+  <app-user-create [type]="'contact'"></app-user-create>
 </ng-template>

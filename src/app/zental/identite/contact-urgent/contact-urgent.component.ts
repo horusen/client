@@ -16,15 +16,12 @@ export class ContactUrgentComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this._subscription["loading"] =
       this.contactUrgentService.loading$.subscribe((loading) => {
-        console.log("loading => ", loading);
-
         this.loading = loading;
       });
 
     this._subscription["single"] =
       this.contactUrgentService.singleData$.subscribe((single) => {
         this.single = single;
-        console.log("single => ", single);
       });
   }
 }

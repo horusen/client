@@ -32,7 +32,6 @@ export class ContactUserListComponent extends BaseComponent implements OnInit {
     this.loading = true;
     this.contactService.getByUser(user, params).subscribe(() => {
       this.loading = false;
-      console.log(this.contactService.data);
     });
   }
 }

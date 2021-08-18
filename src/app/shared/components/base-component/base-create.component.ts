@@ -136,7 +136,7 @@ export class BaseCreateComponent
   }
 
   formValue(field: string) {
-    return this.form.controls[field].value;
+    return this.form.controls[field]?.value;
   }
 
   formControl(field: string) {

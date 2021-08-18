@@ -95,6 +95,41 @@
                      href="javascript:void(0);"> {{ user.telephone | translate }} </a></div>
               </td>
             </tr>
+
+
+            <!-- Addresse -->
+            <tr class="  "
+                *ngIf="user.addresse">
+              <td class="  ">
+                <div class=" from"><a class="tx-bold tx-echos tx-14"
+                     href="javascript:void(0);"> {{ 'ADDRESSE' | translate }} </a></div>
+              </td>
+              <td class=" bg-white ">
+                <div class=" from"><a class=" tx-echos tx-14"
+                     href="javascript:void(0);">
+                    {{ user.addresse?.adresse }} || {{ user.addresse?.ville?.libelle }} - {{
+                    user.addresse?.ville?.pays?.libelle }} </a></div>
+              </td>
+            </tr>
+
+
+
+            <!-- Profession -->
+            <tr class="  "
+                *ngIf="user.profession">
+              <td class="  ">
+                <div class=" from"><a class="tx-bold tx-echos tx-14"
+                     href="javascript:void(0);"> {{ 'PROFESSION' | translate }} </a></div>
+              </td>
+              <td class=" bg-white ">
+                <div class=" from">
+                  <a class=" tx-echos tx-14"
+                     href="javascript:void(0);">
+                    {{ user.profession }}
+                  </a>
+                </div>
+              </td>
+            </tr>
           </ng-container>
 
         </tbody>
