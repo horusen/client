@@ -6,6 +6,7 @@ import { EmploieListComponent } from "./emploie-list/emploie-list.component";
 import { SharedModule } from "src/app/shared/shared.module";
 import { SharedZentalModule } from "../shared-zental/shared-zental.module";
 import { RouterModule, Routes } from "@angular/router";
+import { EmploieSoloComponent } from './emploie-solo/emploie-solo.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     EmploieComponent,
     EmploieCreateComponent,
     EmploieListComponent,
+    EmploieSoloComponent,
   ],
   imports: [
     CommonModule,

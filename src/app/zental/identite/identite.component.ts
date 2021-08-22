@@ -27,8 +27,10 @@ export class IdentiteComponent extends BaseSingleComponent implements OnInit {
         this.user = this.auth.user;
         this.identiteService.user = this.auth.user;
       } else {
+        this.loading = true;
         this.userService.getSingle(+params.id, false).subscribe((user) => {
           this.identiteService.user = user;
+          this.loading = false;
         });
       }
     });

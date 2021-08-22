@@ -2,118 +2,19 @@
      *ngIf="!loading && diplomeService.data.length">
   <div class=" col-lg-12 "
        *ngFor="let diplome of diplomeService.data">
-    <div class=" mycard2   p-0">
-      <table class="table  table-hover table-sm mb-0 ">
-        <tbody class=" border-0 ">
-          <!-- Libelle -->
-          <tr class=" ">
-            <td class=" ">
-              <div class=" from"><a class="tx-bold tx-teal tx-14 "
-                   href="javascript:void(0);"> {{ 'TITRE' | translate }}</a></div>
-            </td>
-            <td class=" bg-white ">
-              <div class=" from"><a class=" tx-teal tx-14"
-                   href="javascript:void(0);"> {{ diplome.libelle }} </a>
-
-                <a [routerLink]="['./']"
-                   class="float-right"
-                   (click)="supprimer(diplome.id)">
-                  <i class="fad fa-trash-alt tx-teal"></i>
-                </a>
-              </div>
-
-
-            </td>
-          </tr>
-
-          <!-- Niveau -->
-          <tr class="  ">
-            <td class="  ">
-              <div class=" from"><a class="tx-bold tx-echos tx-14"
-                   href="javascript:void(0);"> {{ 'NIVEAU' | translate }} </a></div>
-            </td>
-            <td class=" bg-white ">
-              <div class=" from"><a class=" tx-echos tx-14"
-                   href="javascript:void(0);"> {{ diplome.niveau?.libelle }}</a></div>
-            </td>
-          </tr>
-
-          <!-- Annee obtention -->
-          <tr class=" ">
-            <td class="  bg-white">
-              <div class=" from"><a class="tx-bold tx-echos tx-14"
-                   href="javascript:void(0);"> {{ 'anneeDObtention' | translate }} </a></div>
-            </td>
-            <td class="  ">
-              <div class=" from"><a class=" tx-echos tx-14"
-                   href="javascript:void(0);"> {{ diplome.annee_obtention }}</a></div>
-            </td>
-          </tr>
-
-          <!-- Etablissement -->
-          <tr>
-            <td class="  ">
-              <div class=" from"><a class="tx-bold tx-echos tx-14"
-                   href="javascript:void(0);"> {{ 'ETABLISSEMENT' | translate }}</a></div>
-            </td>
-            <td class=" bg-white ">
-              <div class=" from"><a class=" tx-echos tx-14"
-                   href="javascript:void(0);"> {{ diplome.etablissement }} </a></div>
-            </td>
-          </tr>
-
-
-          <!-- Lieu -->
-          <tr>
-            <td class=" bg-white ">
-              <div class=" from"><a class="tx-bold tx-echos tx-14"
-                   href="javascript:void(0);"> {{ 'LIEU' | translate }}</a></div>
-            </td>
-            <td class="  ">
-              <div class=" from"><a class=" tx-echos tx-14"
-                   href="javascript:void(0);"> {{ diplome.lieu.libelle }} || {{ diplome.lieu.pays.libelle }} </a></div>
-            </td>
-          </tr>
-
-          <!-- Fichier joint -->
-          <tr class=" "
-              *ngIf="diplome.fichier_joint">
-            <td class="  ">
-              <div class=" from"><a class="tx-bold tx-echos tx-14"
-                   href="javascript:void(0);"> {{ 'FICHIER' | translate }}</a></div>
-            </td>
-            <td class=" bg-white ">
-              <ul class=" p-0 pl-2 pr-2">
-                <li class="d-flex  pb-2">
-                  <div class=""><i class="fad fa-file-pdf tx-danger mr-2 tx-30 pt-1"></i>
-                  </div>
-                  <div class="pd-sm-l-10">
-                    <p class="tx-echos mg-b-0">
-                      {{ diplome.fichier_joint.name }}
-                    </p>
-                    <span class="tx-12 mg-b-0 tx-gray-500">{{ diplome.fichier_joint.extension.libelle | uppercase }} / {{ diplome.fichier_joint.size /
-                      1000
-                      }}
-                      ko</span>
-                  </div>
-                </li>
-              </ul>
-            </td>
-          </tr>
-
-        </tbody>
-      </table>
-    </div>
+    <app-diplome-solo [diplome]="diplome"></app-diplome-solo>
   </div>
 </div>
 
-<ng-container *ngIf="!loading && !diplomeService.data.length">
+<ng-container *ngIf="!loading || !diplomeService.data.length">
   <div class="my-5"
        *ngIf="loading">
     <app-loading></app-loading>
   </div>
 
-  <div class="d-flex align-items-center flex-column justify-content-center">
+  <div class="d-flex align-items-center flex-column justify-content-center"
+       *ngIf="!loading && !diplomeService.length">
+
     <svg id="f325d056-0601-4430-b2a9-a04a68291155"
          class="missing-icon"
          data-name="Layer 1"

@@ -6,6 +6,7 @@ import { DiplomeListComponent } from "./diplome-list/diplome-list.component";
 import { SharedModule } from "src/app/shared/shared.module";
 import { SharedZentalModule } from "../shared-zental/shared-zental.module";
 import { RouterModule, Routes } from "@angular/router";
+import { DiplomeSoloComponent } from './diplome-solo/diplome-solo.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     DiplomeComponent,
     DiplomeCreateComponent,
     DiplomeListComponent,
+    DiplomeSoloComponent,
   ],
   imports: [
     CommonModule,

@@ -14,6 +14,8 @@
   "GROUPES": "Groupes",
   "ADDRESSE": "Addresse",
   "SEXE": "Sexe",
+  "afficherDescription": "Afficher description",
+  "cacherDescription": "Cacher description",
   "veuillezRensfeignerUnEmail": "Veuillez renseigner un email",
   "ajouterVISA": "Ajouter un visa",
   "ajouterCarted'etranger": "Ajouter une carte d'etranger",
