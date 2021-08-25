@@ -41,7 +41,8 @@ export class AuthService {
       tap({
         next: (token) => {
           this._tokenStorage.save(token);
-          this.changeProfile(this.selectedProfile);
+          this.router.navigate(["./"]);
+          // this.changeProfile(this.selectedProfile);
         },
       })
     );

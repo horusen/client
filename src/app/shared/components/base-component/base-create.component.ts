@@ -136,15 +136,15 @@ export class BaseCreateComponent
   }
 
   formValue(field: string) {
-    return this.form.controls[field]?.value;
+    return this.form.get(field)?.value;
   }
 
   formControl(field: string) {
-    return this.form.controls[field];
+    return this.form.get(field);
   }
 
   selectFormHandler(target: string, data: any) {
-    this.form.controls[target].patchValue(data);
+    this.form.get(target).patchValue(data);
   }
 
   formValueComparer(
@@ -261,14 +261,14 @@ export class BaseCreateComponent
   }
 
   shouldShowRequiredError(field: string) {
-    const control = this.form.controls[field];
+    const control = this.form.get(field);
     if (control.touched) {
-      return control.invalid;
+      return control.errors?.required;
     }
   }
 
   isValid(field: string) {
-    const control = this.form.controls[field];
+    const control = this.form.get(field);
     if (control.touched) {
       return control.valid;
     }

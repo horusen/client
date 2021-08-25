@@ -9,6 +9,7 @@ import {
   ActivatedRoute,
 } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+import { Observable } from "rxjs";
 
 declare var $;
 
@@ -117,14 +118,9 @@ export class Helper {
     });
   }
 
-  getTranslation(word: string) {
+  getTranslation(word: string): Observable<string> {
     let translatedWord: string;
-    this.translate.get(word).subscribe((value) => {
-      translatedWord = value;
-      return translatedWord;
-    });
-
-    // return;
+    return this.translate.get(word);
   }
 
   alertConfirmation(callback: Function) {

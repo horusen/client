@@ -34,9 +34,21 @@ export class ConnexionComponent implements OnInit {
 
   connexion() {
     this.loading = true;
-    this.authService.connexion(this.form.value).subscribe(() => {
-      this.loading = false;
-    });
+    this.authService.connexion(this.form.value).subscribe(
+      () => {
+        this.loading = false;
+      },
+      (error) => {
+        if (error.status === 401) {
+          this.helper
+            .getTranslation("donneesDeConnexionInvalides")
+            .subscribe((word) => {
+              this.helper.alertDanger(word);
+              this.loading = false;
+            });
+        }
+      }
+    );
   }
 
   shouldShowRequiredError(field: string) {

@@ -6,7 +6,7 @@
       <div class="image text-center">
         <img *ngIf="user.photo"
              [src]="user.photo.path"
-             class="rounded"
+             class="rounded-circle"
              width="80">
 
 
@@ -17,7 +17,7 @@
       </div>
 
       <!-- nom complet -->
-      <h6 class="text-center tx-ether"> {{ user.nom_complet }} </h6>
+      <h5 class="text-center tx-ether"> {{ user.nom_complet }} </h5>
 
       <!-- Lieu de naissance -->
       <p class="text-center mb-0 ether2"
@@ -28,7 +28,7 @@
       <!-- Age -->
       <p class="text-center tx-ether2 tx-14	">
         <!-- {{ age }} {{ 'ANS' | translate }} -->
-        24 ans *
+        28 ans
       </p>
       <!-- <p class="text-center tx-warning tx-12	"> Depuis : 02 Juillet 2021 || Venu(e) de : Congo</p> -->
     </div>
