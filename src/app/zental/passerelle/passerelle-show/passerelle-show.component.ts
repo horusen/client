@@ -1,9 +1,8 @@
+import { MinistereService } from "src/app/zental/ministere/ministere.service";
 import { PasserelleService } from "./../passerelle.service";
 import { Component, OnInit } from "@angular/core";
 import { BaseSingleComponent } from "src/app/shared/components/base-component/base-single.component";
 import { ActivatedRoute, Router } from "@angular/router";
-import { MinistereService } from "../../ministere/ministere.service";
-import { AmbassadeService } from "../../ambassade/ambassade.service";
 
 @Component({
   selector: "app-passerelle-show",
@@ -17,13 +16,11 @@ export class PasserelleShowComponent
   affecter = false;
   edit = false;
   ministere: any;
-  ambassade: any;
   constructor(
     public passerelleService: PasserelleService,
-    public route: ActivatedRoute,
-    public router: Router,
     public ministereService: MinistereService,
-    public ambassadeService: AmbassadeService
+    public route: ActivatedRoute,
+    public router: Router
   ) {
     super(passerelleService);
   }
@@ -32,18 +29,10 @@ export class PasserelleShowComponent
     this.enableFetchDataFromURL = true;
     super.ngOnInit();
 
-    if (this.router.url.includes("ministere")) {
-      this._subscription["ministere"] =
-        this.ministereService.singleData$.subscribe((ministere) => {
-          this.ministere = ministere;
-          console.log("ministere");
-        });
-    } else if (this.router.url.includes("ambassade")) {
-      this._subscription["ambassade"] =
-        this.ambassadeService.singleData$.subscribe((ambassade) => {
-          this.ambassade = ambassade;
-        });
-    }
+    this._subscription["ministere"] =
+      this.ministereService.singleData$.subscribe((ministere) => {
+        this.ministere = ministere;
+      });
   }
 
   affecterPasserelle(): void {

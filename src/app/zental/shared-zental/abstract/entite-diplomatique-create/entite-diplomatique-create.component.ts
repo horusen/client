@@ -1,9 +1,9 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { ParentDefinition } from "src/app/shared/models/parent-definition.model";
+import { Component, Inject, Input, OnInit } from "@angular/core";
 import { Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseCreateComponent } from "src/app/shared/components/base-component/base-create.component";
 import { BaseService } from "src/app/shared/services/base.service";
-import { MinistereService } from "src/app/zental/ministere/ministere.service";
 import { PaysService } from "src/app/zental/pays/pays.service";
 
 @Component({
@@ -15,14 +15,13 @@ export class EntiteDiplomatiqueCreateComponent
   extends BaseCreateComponent
   implements OnInit
 {
-  ministere: any;
+  @Input() parent: ParentDefinition;
   pays: any[] = [];
   paysLoading = false;
   // element: string; // Obligatoire: A specifier dans le contructeur
 
   constructor(
     public service: BaseService,
-    public ministereService: MinistereService,
     public paysService: PaysService,
     public router: Router,
     public route: ActivatedRoute,
@@ -34,22 +33,13 @@ export class EntiteDiplomatiqueCreateComponent
   ngOnInit(): void {
     this.initialiseForm();
 
-    this._subscription["ministere"] =
-      this.ministereService.singleData$.subscribe((ministere) => {
-        this.ministere = ministere;
-        this.formValuePatcher(
-          "pays_origine",
-          ministere.entite_diplomatique.pays_siege.id
-        );
-      });
-
     this.getPays();
   }
 
   initialiseForm(item?: any): void {
     this.form = this.fb.group({
       libelle: [item?.entite_diplomatique?.libelle, Validators.required],
-      description: [item?.entite_diplomatique?.description],
+      histoire: [item?.entite_diplomatique?.histoire],
       site_web: [item?.entite_diplomatique?.site_web],
       boite_postale: [item?.entite_diplomatique?.boite_postale],
       date_creation: [item?.entite_diplomatique?.date_creation],
@@ -67,6 +57,14 @@ export class EntiteDiplomatiqueCreateComponent
         Validators.required,
       ],
     });
+
+    if (this.parent && this.parent.name !== "admin") {
+      this.addControl(this.parent.name, this.parent.item.id);
+      this.formValuePatcher(
+        "pays_origine",
+        this.parent.item.entite_diplomatique.pays_origine.id
+      );
+    }
 
     this.isFormOk = true;
   }
@@ -89,11 +87,7 @@ export class EntiteDiplomatiqueCreateComponent
 
       this.service.add(data).subscribe(() => {
         this.loading = false;
-        this.form.reset();
-        this.formValuePatcher(
-          "pays_origine",
-          this.ministere.entite_diplomatique.pays_siege.id
-        );
+        this.initialiseForm();
         this.helper.toggleModal(`${this.element}-create-modal`);
         this.router.navigate(["./"], {
           relativeTo: this.route,

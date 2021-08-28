@@ -1,3 +1,4 @@
+import { InscriptionConsulaireModule } from "./../inscription-consulaire/inscription-consulaire.module";
 import { ComposantDescriptionModule } from "./../composant-description/composant-description.module";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -8,7 +9,7 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { SharedZentalModule } from "../shared-zental/shared-zental.module";
 import { AdresseModule } from "../adresse/adresse.module";
 import { InstitutionDetailsComponent } from "./institution-details/institution-details.component";
-import { DescriptionPartielComponent } from './profil-institution/description-partiel/description-partiel.component';
+import { DescriptionPartielComponent } from "./profil-institution/description-partiel/description-partiel.component";
 
 @NgModule({
   declarations: [
@@ -24,12 +25,14 @@ import { DescriptionPartielComponent } from './profil-institution/description-pa
     AdresseModule,
     SharedZentalModule,
     ComposantDescriptionModule,
+    InscriptionConsulaireModule,
   ],
   exports: [
     InstitutionComponent,
     ProfilInstitutionComponent,
     AdministrationInstitutionComponent,
     InstitutionDetailsComponent,
+    DescriptionPartielComponent,
   ],
 })
 export class InstitutionModule {}

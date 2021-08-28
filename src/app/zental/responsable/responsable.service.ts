@@ -20,7 +20,7 @@ export class ResponsableService extends BaseService {
     );
   }
 
-  getByAcutelAmbassadeur(ambassade: number): Observable<any> {
+  getByActuelAmbassadeur(ambassade: number): Observable<any> {
     return this.factory.get(`ambassades/${ambassade}/ambassadeurs/actuel`).pipe(
       tap((responsable) => {
         this.singleData = responsable;
@@ -28,7 +28,7 @@ export class ResponsableService extends BaseService {
     );
   }
 
-  getByAcutelConsule(consulat: number): Observable<any> {
+  getByActuelConsule(consulat: number): Observable<any> {
     return this.factory.get(`consulats/${consulat}/consules/actuel`).pipe(
       tap((responsable) => {
         this.singleData = responsable;
@@ -50,7 +50,7 @@ export class ResponsableService extends BaseService {
 
   getByAnciensConsules(consulat: number, params: Params): Observable<any> {
     return this.factory
-      .get(`consulats/${consulat}/consule/anciens`, { params })
-      .pipe(tap(tap(this.listResponseHandler())));
+      .get(`consulats/${consulat}/consules/anciens`, { params })
+      .pipe(tap(this.listResponseHandler()));
   }
 }

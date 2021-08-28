@@ -1,3 +1,4 @@
+import { Router } from "@angular/router";
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { TokenStorage } from "src/app/shared/services/token-storage.service";
@@ -16,7 +17,8 @@ export class ConjointShowComponent extends BaseComponent implements OnInit {
   constructor(
     public conjointService: ConjointService,
     public identiteService: IdentiteService,
-    public tokenStorage: TokenStorage
+    public tokenStorage: TokenStorage,
+    public router: Router
   ) {
     super(conjointService);
   }
@@ -24,9 +26,7 @@ export class ConjointShowComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this._subscription["identite"] = this.identiteService.user$.subscribe(
       (user) => {
-        if (this.user?.id_inscription !== user.id_inscription)
-          if (this.user?.id_inscription !== user.id_inscription)
-            this.user = user;
+        if (this.user?.id_inscription !== user.id_inscription) this.user = user;
 
         this.getConjoint();
       }
@@ -40,8 +40,6 @@ export class ConjointShowComponent extends BaseComponent implements OnInit {
       .subscribe((conjoint) => {
         this.conjoint = conjoint;
         this.loading = false;
-        console.log(conjoint);
-        console.log(this.user);
       });
   }
 
@@ -49,16 +47,19 @@ export class ConjointShowComponent extends BaseComponent implements OnInit {
     // demander une confirmation de la part du user
     this.helper.alertConfirmation(() => {
       // supprimer le conjoint et mettre à jour la variable conjoint
-      this.conjointService.delete(this.conjoint.id).subscribe(() => {
+      this.conjointService.delete(this.conjoint.id).subscribe((response) => {
         // Mettre à jour le champs situation matrimoniale pour le user dans identite-service
-        this.identiteService.user = { ...this.user, situation_matrimoniale: 5 };
+        this.identiteService.user = {
+          ...this.user,
+          situation_matrimoniale: response,
+        };
 
         this.delete.emit();
 
         // Si le user dans identite-service est le même user que le user connécté mettre
         // à le champs situation matrimonial de celui-ci depuis le local-storage
         if (this.user.id_inscription === this.auth.user.id_inscription) {
-          this.tokenStorage.setUserField("situation_matrimoniale", 5);
+          this.tokenStorage.setUserField("situation_matrimoniale", response);
         }
       });
     });

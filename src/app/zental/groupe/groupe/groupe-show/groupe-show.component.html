@@ -1,0 +1,188 @@
+<ng-container *ngIf="!loading && single">
+  <div class="pl-2 pt-2">
+    <h5 class="d-flex align-items-center">
+      <!-- boutton precedent -->
+      <a [routerLink]="['..']"
+         [queryParamsHandling]="'merge'"
+         [ngbTooltip]="'revenirEnArriere' | translate"
+         class="p-2 mr-2 tx-15  d-flex border rounded-circle align-items-center justify-content-center">
+        <i class="fad fa-arrow-left"></i>
+      </a>
+
+      {{ 'GROUPE' | translate }}
+    </h5>
+  </div>
+
+
+  <div class="row row-xs clearfix  mg-0 pd-0 p-0 pt-2 "
+       *ngIf="single">
+    <!-- Details et adresse -->
+    <div class=" col-lg-3 p-0  ">
+      <!-- Details -->
+      <div class="row row-xs clearfix pt-4 bd-b pb-2 mg-0 pd-0 bg-light ">
+        <div class="col-lg-12">
+          <!-- Icone -->
+          <div class="image text-center pb-2">
+            <i class="fal fa-users-crown fa-3x"></i>
+          </div>
+
+          <!-- Libelle -->
+          <h6 class="text-center tx-ether">{{ single.libelle }}</h6>
+
+
+        </div>
+      </div>
+
+      <!-- Action -->
+      <div class=" text-center pt-1 pb-1 ">
+        <ng-container *ngIf="!localLoading">
+          <!-- Modifier -->
+          <a class="ml-2"
+             [routerLink]="['./']"
+             [queryParamsHandling]="'preserve'"
+             [fragment]="'edit-groupe'"
+             [ngbTooltip]="'MODIFIER' | translate"
+             *ngIf="single.user_membership?.admin">
+            <i class="fad fa-edit tx-echos2 bg-bluelight"
+               style="padding:10px; border-radius:50%"></i>
+          </a>
+
+          <!-- Supprimer -->
+          <a class="ml-2"
+             [routerLink]="['./']"
+             [queryParamsHandling]="'preserve'"
+             [ngbTooltip]="'SUPPRIMER' | translate"
+             *ngIf="single.inscription === auth.user.id_inscription"
+             (click)="supprimer()">
+            <i class="fad fa-trash-alt tx-echos2 bg-bluelight"
+               style="padding:6px; border-radius:50%"></i>
+          </a>
+
+          <!-- Quitter le groupe -->
+          <a class="ml-2"
+             [routerLink]="['./']"
+             [queryParamsHandling]="'preserve'"
+             *ngIf="single.user_membership"
+             [ngbTooltip]="'QUITTER' | translate"
+             (click)="quitter()">
+            <i class="fad fa-door-open tx-echos2 bg-bluelight"
+               style="padding:6px; border-radius:50%"></i>
+          </a>
+
+
+          <!-- faire une demande adhesion -->
+          <a class="btn btn-block btn-sm btn-primary"
+             [routerLink]="['./']"
+             [queryParamsHandling]="'preserve'"
+             *ngIf="!single.user_membership && !single.user_demande"
+             [ngbTooltip]="'faireUneDemandeDAdhesion' | translate"
+             (click)="faireUneDemande()">
+            {{ 'ADHESION' | translate }}
+            <i class="fad fa-user-plus"></i>
+          </a>
+
+
+          <!-- annuler demande adhesion -->
+          <a class="btn btn-block btn-sm btn-warning"
+             [routerLink]="['./']"
+             [queryParamsHandling]="'preserve'"
+             *ngIf="!single.user_membership && single.user_demande"
+             [ngbTooltip]="'annulerDemandeAdhesion' | translate"
+             (click)="annulerDemande()">
+            {{ 'ADHESION' | translate }}
+            <i class="fad fa-user-minus"></i>
+          </a>
+        </ng-container>
+
+
+        <i class="fad fa-circle-notch fa-spin "
+           *ngIf="localLoading"></i>
+      </div>
+
+    </div>
+
+    <div class=" col-lg-9 p-0">
+      <div class="border scroll-11"
+           style="min-height: 62vh;">
+        <div class=" collapse show"
+             id="collapse9">
+          <!-- Navigation -->
+          <ul class="nav bd-b bd-2 bd-facebook">
+            <!-- Description -->
+            <li class="nav-item">
+              <a class="nav-link tx-echos d-flex align-items-center"
+                 [routerLink]="['./']"
+                 [queryParamsHandling]="'merge'"
+                 [routerLinkActiveOptions]="{ exact: true }"
+                 [routerLinkActive]="'font-weight-bolder'">
+                <i class="fal fa-info-circle  tx-18 mr-1"
+                   [routerLinkActiveOptions]="{ exact: true }"
+                   [routerLinkActive]="'fas'"></i>
+                {{ 'DETAILS' | translate }}
+              </a>
+            </li>
+
+
+
+            <!-- Liste des membre -->
+            <li class="nav-item">
+              <a class="nav-link tx-echos d-flex align-items-center"
+                 [routerLink]="['membres']"
+                 [queryParamsHandling]="'merge'"
+                 [routerLinkActive]="'font-weight-bolder'">
+                <i class="fal fa-users  tx-18 mr-1"
+                   [routerLinkActive]="'fas'"></i>
+                {{ 'MEMBRES' | translate }}
+                <span class="badge border rounded-circle ml-1 p-1">{{ single.nombre_membres }}</span>
+              </a>
+            </li>
+
+
+            <!-- Liste des demandes adhesions -->
+            <li class="nav-item"
+                *ngIf="single.user_membership?.admin">
+              <a class="nav-link tx-echos d-flex align-items-center"
+                 [routerLink]="['demandes']"
+                 [queryParamsHandling]="'merge'"
+                 [routerLinkActive]="'font-weight-bolder'">
+                <i class="fal fa-user-plus  tx-18 mr-1"
+                   [routerLinkActive]="'fas'"></i>
+                {{ 'demandesAdhesions' | translate }}
+                <span class="badge border rounded-circle ml-1 p-1">{{ single.nombre_demandes }}</span>
+              </a>
+            </li>
+
+
+          </ul>
+
+          <!-- content -->
+          <div class="tab-content">
+            <div class="tab-pane fade active show"
+                 id="details">
+              <router-outlet></router-outlet>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</ng-container>
+
+
+
+<div class="my-5"
+     *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+
+
+
+
+<app-modal [configuration]="{ name: 'groupe-edit-modal', titre: 'modifierLesDetailsDuGroupe', icone: 'users-crown' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-groupe-edit (edited)="onEdited()"></app-groupe-edit>
+</app-modal>

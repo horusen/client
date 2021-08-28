@@ -13,9 +13,16 @@ import { AuthentificationModule } from "./authentification/authentification.modu
 import { NgxPicaModule } from "@digitalascetic/ngx-pica";
 import { ToastrModule } from "ngx-toastr";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { EmailVerificationComponent } from "./auth/email-verification/email-verification.component";
+import { EmailUnverifiedComponent } from "./auth/email-unverified/email-unverified.component";
+import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    EmailVerificationComponent,
+    EmailUnverifiedComponent,
+  ],
   imports: [
     AuthentificationModule,
     BrowserModule,
@@ -23,6 +30,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     HttpClientModule,
     SharedModule,
     NgxPicaModule,
+    MatTabsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     SweetAlert2Module.forRoot(),

@@ -23,6 +23,8 @@ export class MainHeaderComponent
   filterActive: boolean;
 
   @Input() hasFilter = true; // Permet d'afficher ou non le boutton filtre
+  @Input() hasAddButton = true; // Permet d'afficher ou non le boutton ajouter
+  @Input() searchInputWidth = 340; // Width of search bar in px
   @ViewChild("search") searchField: ElementRef;
   @ViewChild("sortOrdre") sortOrdre: ElementRef;
 

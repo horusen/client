@@ -8,6 +8,7 @@ import { InstitutionService } from "./institution.service";
 })
 export class InstitutionComponent implements OnInit, OnDestroy {
   @Input() parent: { name: string; item: any };
+  @Input() showNavigation = true;
   constructor(public institutionService: InstitutionService) {}
 
   ngOnInit(): void {

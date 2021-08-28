@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { BaseSingleComponent } from "src/app/shared/components/base-component/base-single.component";
 import { LiaisonService } from "../liaison.service";
 import { AmbassadeService } from "../../ambassade/ambassade.service";
+import { HttpErrorResponse } from "@angular/common/http";
+import { InscritptionConsulaireService } from "../../inscription-consulaire/inscritption-consulaire.service";
 
 @Component({
   selector: "app-liaison-show",
@@ -16,14 +18,14 @@ export class LiaisonShowComponent
 {
   affecter = false;
   edit = false;
-  ministere: any;
-  ambassade: any;
+  inscriptionConsulaire = false;
+  inscriptionConsulaireLoading = false;
+  redigerMotif = false;
   constructor(
     public liaisonService: LiaisonService,
     public route: ActivatedRoute,
     public router: Router,
-    public ministereService: MinistereService,
-    public ambassadeService: AmbassadeService
+    public inscriptionConsulaireService: InscritptionConsulaireService
   ) {
     super(liaisonService);
   }
@@ -31,24 +33,57 @@ export class LiaisonShowComponent
   ngOnInit(): void {
     this.enableFetchDataFromURL = true;
     super.ngOnInit();
-
-    if (this.router.url.includes("ministere")) {
-      this._subscription["ministere"] =
-        this.ministereService.singleData$.subscribe((ministere) => {
-          this.ministere = ministere;
-          console.log("ministere");
-        });
-    } else if (this.router.url.includes("ambassade")) {
-      this._subscription["ambassade"] =
-        this.ambassadeService.singleData$.subscribe((ambassade) => {
-          this.ambassade = ambassade;
-        });
-    }
   }
 
   affecterLiaison(): void {
     this.affecter = true;
     this.helper.toggleModal("affecter-liaison-modal");
+  }
+
+  checkEligibiliteInscriptionConsulaire(): void {
+    this.inscriptionConsulaireLoading = true;
+    this.inscriptionConsulaireService
+      .checkEligibilite(this.auth.user.id_inscription)
+      .subscribe({
+        next: () => {
+          this.inscriptionConsulaire = true;
+          this.helper.toggleModal("inscription-consulaire-modal");
+          this.inscriptionConsulaireLoading = false;
+        },
+        error: (error: HttpErrorResponse) => {
+          if (error.status === 401) {
+            this.helper.alertDanger(error.error.error);
+            this.inscriptionConsulaireLoading = false;
+          }
+        },
+      });
+  }
+
+  annulerInscriptionConsulaire(): void {
+    this.helper.alertConfirmation(() => {
+      this.inscriptionConsulaireLoading = true;
+      this.inscriptionConsulaireService
+        .changerEtat({ user: this.auth.user.id_inscription, etat: 4 })
+        .subscribe({
+          next: () => {
+            this.liaisonService.singleData.user_inscription_consulaire = null;
+
+            this.inscriptionConsulaireLoading = false;
+            this.helper.alertSuccess();
+          },
+        });
+    });
+  }
+
+  quitter(): void {
+    this.helper.alertConfirmation(() => {
+      this.redigerMotif = true;
+      this.helper.toggleModal("motif-inscription-consulaire-modal");
+    });
+  }
+
+  onMotifTermine(): void {
+    this.redigerMotif = false;
   }
 
   supprimer() {

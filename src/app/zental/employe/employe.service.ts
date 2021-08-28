@@ -23,6 +23,18 @@ export class EmployeService extends BaseService {
       .pipe(tap(this.listResponseHandler()));
   }
 
+  getByAmbassade(ambassade: number, params: Params) {
+    return this.factory
+      .get(`ambassades/${ambassade}/${this.endPoint}`, { params })
+      .pipe(tap(this.listResponseHandler()));
+  }
+
+  getByConsulat(consulat: number, params: Params) {
+    return this.factory
+      .get(`consulats/${consulat}/${this.endPoint}`, { params })
+      .pipe(tap(this.listResponseHandler()));
+  }
+
   getByDomaine(domaine: number, params: Params) {
     return this.factory
       .get(`domaines/${domaine}/${this.endPoint}`, { params })

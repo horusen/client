@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseContainerComponentComponent } from "src/app/shared/component/base-container-component/base-container-component.component";
+import { ParentDefinition } from "src/app/shared/models/parent-definition.model";
 import { ConsulatService } from "./consulat.service";
 
 @Component({
@@ -9,6 +10,9 @@ import { ConsulatService } from "./consulat.service";
   styleUrls: ["./consulat.component.scss"],
 })
 export class ConsulatComponent extends BaseContainerComponentComponent {
+  @Input() parent: ParentDefinition;
+  @Input() colonne_affichage = 4;
+  @Input() itemsPerPage = 8;
   constructor(
     public consulatService: ConsulatService,
     public router: Router,

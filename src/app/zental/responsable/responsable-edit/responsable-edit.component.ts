@@ -15,6 +15,7 @@ export class ResponsableEditComponent
   implements OnInit
 {
   @Input() parent: { name: string; entiteDiplomatique: any; item: any };
+  responsable: any;
   constructor(
     public responsableService: ResponsableService,
     public userService: UserService,
@@ -27,7 +28,11 @@ export class ResponsableEditComponent
   ngOnInit(): void {
     this.actuelResponsable = !!this.router.url.includes("actuel");
 
-    this.initialiseForm(this.parent.item);
+    this._subscription["responsable"] =
+      this.responsableService.singleData$.subscribe((responsable) => {
+        this.responsable = responsable;
+        this.initialiseForm(responsable);
+      });
 
     this.getUsers();
   }
@@ -37,9 +42,10 @@ export class ResponsableEditComponent
       this.loading = true;
       const data = Object.assign(this.form.value, {
         responsable: this.formValue("employe")[0].id_inscription,
+        employe: this.formValue("employe")[0].id_inscription,
       });
       this.responsableService
-        .update(this.parent.item.id, data)
+        .update(this.responsable.id, data)
         .subscribe(() => {
           this.loading = false;
           this.router.navigate(["./"], {

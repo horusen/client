@@ -1,20 +1,23 @@
+import { SharedIdentiteModule } from "./shared-identite/shared-identite.module";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { IdentiteComponent } from "./identite.component";
 import { SharedModule } from "src/app/shared/shared.module";
 import { RouterModule, Routes } from "@angular/router";
 import { CiviliteComponent } from "./civilite/civilite.component";
-import { UserInformationComponent } from "./user-information/user-information.component";
-import { InformationMembreFamilleComponent } from "./information-membre-famille/information-membre-famille.component";
+
 import { SharedZentalModule } from "../shared-zental/shared-zental.module";
-import { IdentiteDetailsComponent } from './identite-details/identite-details.component';
-import { PieceConsulaireComponent } from './piece-consulaire/piece-consulaire.component';
-import { PieceConsulaireCreateComponent } from './piece-consulaire/piece-consulaire-create/piece-consulaire-create.component';
-import { PieceConsulaireSoloComponent } from './piece-consulaire/piece-consulaire-solo/piece-consulaire-solo.component';
-import { PieceConsulaireEditComponent } from './piece-consulaire/piece-consulaire-edit/piece-consulaire-edit.component';
-import { ContactUrgentComponent } from './contact-urgent/contact-urgent.component';
-import { ContactUrgentListComponent } from './contact-urgent/contact-urgent-list/contact-urgent-list.component';
-import { ContactUrgentShowComponent } from './contact-urgent/contact-urgent-show/contact-urgent-show.component';
+import { IdentiteDetailsComponent } from "./identite-details/identite-details.component";
+import { PieceConsulaireComponent } from "./piece-consulaire/piece-consulaire.component";
+import { PieceConsulaireCreateComponent } from "./piece-consulaire/piece-consulaire-create/piece-consulaire-create.component";
+import { PieceConsulaireSoloComponent } from "./piece-consulaire/piece-consulaire-solo/piece-consulaire-solo.component";
+import { PieceConsulaireEditComponent } from "./piece-consulaire/piece-consulaire-edit/piece-consulaire-edit.component";
+import { ContactUrgentComponent } from "./contact-urgent/contact-urgent.component";
+import { ContactUrgentListComponent } from "./contact-urgent/contact-urgent-list/contact-urgent-list.component";
+import { ContactUrgentShowComponent } from "./contact-urgent/contact-urgent-show/contact-urgent-show.component";
+import { PieceConsulaireAltComponent } from "./piece-consulaire-alt/piece-consulaire-alt.component";
+import { IdentiteEditComponent } from "./identite-edit/identite-edit.component";
+import { AdresseModule } from "../adresse/adresse.module";
 
 const routes: Routes = [
   {
@@ -64,6 +67,13 @@ const routes: Routes = [
             (module) => module.DiplomeModule
           ),
       },
+      {
+        path: "groupe",
+        loadChildren: () =>
+          import("./identite-groupe/identite-groupe.module").then(
+            (module) => module.IdentiteGroupeModule
+          ),
+      },
     ],
   },
 ];
@@ -71,10 +81,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     IdentiteComponent,
-    CiviliteComponent,
 
-    UserInformationComponent,
-    InformationMembreFamilleComponent,
     IdentiteDetailsComponent,
     PieceConsulaireComponent,
     PieceConsulaireCreateComponent,
@@ -83,9 +90,13 @@ const routes: Routes = [
     ContactUrgentComponent,
     ContactUrgentListComponent,
     ContactUrgentShowComponent,
+    PieceConsulaireAltComponent,
+    IdentiteEditComponent,
   ],
   imports: [
     CommonModule,
+    AdresseModule,
+    SharedIdentiteModule,
     SharedZentalModule,
     SharedModule,
     RouterModule.forChild(routes),

@@ -1,0 +1,191 @@
+<div class="pd-0 ">
+  <form class="publisher publisher-multi"
+        [formGroup]="form"
+        (submit)="create">
+
+    <!-- Rebondissement -->
+    <div class="  mb-0 mg-l-10 pl-3  tx-echos p-2"
+         *ngIf="rebondissement"
+         style="border-radius: 30px 10px 20px 0px; background: #dbe5e7; position: relative">
+      <h6>{{ rebondissement.user.nom_complet }}</h6>
+
+
+      <!-- REbondissement text -->
+      <p class="p-0"
+         *ngIf="rebondissement.reaction"
+         [innerHTML]="rebondissement.reaction"></p>
+
+      <!-- rebondissement fichier -->
+      <div *ngIf="rebondissement.file">
+        <!-- REbondissement image -->
+        <div class="text-center">
+          <img [src]="rebondissement.file?.path"
+               *ngIf="rebondissement.file && helper.checkExtensions(rebondissement?.file.path, imageHandlerService.acceptedImageExtension)"
+               (click)="afficherImage(rebondissement.file)"
+               class="rebondissement-img"
+               [alt]="rebondissement.user.nom_complet + '_image'">
+        </div>
+
+        <!-- Rebondissemnt audio -->
+        <audio controls
+               *ngIf="helper.checkExtension(rebondissement.file.path, 'mp3')">
+          <source [src]="rebondissement.file.path">
+        </audio>
+
+
+        <div class="text-center">
+          <a class="p-3 clickable alert-info d-inline-block rounded-pill bd clickable"
+             *ngIf="helper.checkExtensions(rebondissement.file?.path, ['pdf', 'PDF'])">
+            <i class="fad fa-file-pdf"></i> {{ rebondissement.file.name }}
+            <i class="fad fa-download float-right ml-4 mr-2 mt-1"></i>
+          </a>
+        </div>
+      </div>
+
+
+
+      <span class="clickable"
+            (click)="annulerRebondissement()"
+            style="position:absolute; top: 5px; right: 5px;">
+        <i class="fal fa-times"></i>
+      </span>
+    </div>
+
+
+    <!-- Champs de saisi texte -->
+    <ng-container *ngIf="!(enregistreurService.isRecording$ | async)">
+      <!-- Champs de saisi -->
+      <div class="flexbox mt-1">
+        <img class="wd-36 rounded-circle flex-top avatar2 align-self-start"
+             *ngIf="entiteDiplomatique"
+             [src]="entiteDiplomatique.item.entite_diplomatique.pays_origine.drapeau"
+             [alt]="entiteDiplomatique.item.entite_diplomatique.pays_origine.libelle"
+             width="50"
+             height="50">
+
+
+        <textarea class="publisher-input auto-expand ml-2 "
+                  formControlName="reaction"
+                  rows="3"
+                  [attr.placeholder]="'ecrivezVotreMessageIci' | translate">
+              </textarea>
+
+
+      </div>
+
+
+      <!-- Call to actions -->
+      <div class="flexbox bg-light pt-2 pl-2 bd-b bd-2 bd-white bd-t">
+        <div class="gap-items">
+
+          <!-- Ajouter un fichier -->
+          <a class="publisher-btn pt-2"
+             (click)="documentUpload.click()"
+             [ngbTooltip]="'ajouterUnDocument' | translate"
+             [queryParamsHandling]="'preserve'"
+             [routerLink]="['./']">
+            <i class="fas fa-file-alt tx-16"></i>
+          </a>
+
+
+          <!-- Image -->
+          <a class="publisher-btn pt-2"
+             (click)="imageUpload.click()"
+             [ngbTooltip]="'ajouterUneImage' | translate"
+             [queryParamsHandling]="'preserve'"
+             [routerLink]="['./']">
+            <i class="fad fa-image tx-16"></i>
+          </a>
+
+          <!-- Message audio -->
+          <a class="publisher-btn pt-2"
+             (click)="enregistrer()"
+             [ngbTooltip]="'messageAudio' | translate"
+             [queryParamsHandling]="'preserve'"
+             [routerLink]="['./']">
+            <i class="fas fa-microphone tx-16"></i>
+          </a>
+
+
+
+
+          <!-- Emoji -->
+          <a class="publisher-btn pt-2"
+             [ngbTooltip]="'ajouterDesEmojis' | translate"
+             (click)="showEmojiPicker = !showEmojiPicker"
+             [queryParamsHandling]="'preserve'"
+             [routerLink]="['./']">
+            <i class="fas fa-smile tx-16"></i>
+          </a>
+
+          <emoji-mart class="emoji-mart"
+                      set="apple"
+                      (emojiSelect)="addEmoji($event)"
+                      *ngIf="showEmojiPicker"
+                      skin="3"
+                      title="Selectionner...">
+          </emoji-mart>
+        </div>
+
+        <!-- Submit button -->
+        <button class="btn btn-sm btn-custom-primary bg-echos"
+                type="submit"
+                (click)="create()">
+          {{ 'ENVOYER' | translate }}
+        </button>
+      </div>
+
+    </ng-container>
+
+
+    <!-- Enregistrement audio -->
+    <div class="row w-100"
+         *ngIf="enregistreurService.isRecording$ | async">
+      <div class="col-12 p-0">
+
+        <div class="w-100">
+          <div class="alert-info p-4 mb-0 rounded">
+            <div>
+              <!-- Signal d'enregistrement -->
+              <span><i class="fad fa-microphone-alt tx-danger"></i> {{ 'enTrainDEnregistrer' | translate }}</span>
+
+              <!-- Durée enregistrement -->
+              <span class="ml-2">{{ enregistreurService.dureeEnregistrement$ | async }}</span>
+
+              <!-- Bouton d'actions -->
+              <span class="float-right">
+                <!-- Boutton envoyer -->
+                <button class="btn btn-primary mr-2 btn-sm"
+                        (click)="stopEnregistrer()"
+                        type="button">{{ 'ENVOYER' | translate }}</button>
+
+                <!-- Boutton annuler -->
+                <button class="btn btn-danger btn-sm"
+                        (click)="annulerEnregistrement()"
+                        type="button">{{ 'ANNULER' | translate }}</button>
+              </span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Hidden input -->
+    <!-- Pdf input -->
+    <input type="file"
+           accept="application/pdf"
+           [hidden]="true"
+           #documentUpload
+           (change)="pdfFileProcess($event)">
+
+    <!-- Image input -->
+    <input type="file"
+           [hidden]="true"
+           accept="image/x-png,image/gif,image/jpeg"
+           #imageUpload
+           (change)="imageFileProcess($event)">
+  </form>
+</div>

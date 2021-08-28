@@ -12,6 +12,12 @@ export class PasserelleService extends BaseService {
     super("passerelles");
   }
 
+  getNonAffecteByPays(pays: number): Observable<any> {
+    return this.factory
+      .get(`pays/${pays}/${this.endPoint}/non-affecte`)
+      .pipe(tap(this.onlyErrorResponseHandler()));
+  }
+
   getByPays(pays: number, params: Params, emitData = true): Observable<any> {
     return this.factory
       .get(`pays/${pays}/${this.endPoint}`, { params })

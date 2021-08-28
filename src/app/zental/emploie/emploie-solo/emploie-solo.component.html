@@ -1,6 +1,6 @@
 <div class=" mycard2   p-0"
      *ngIf="emploie">
-  <table class="table  table-hover table-sm mb-0 ">
+  <table class="table  table-sm mb-0 ">
     <tbody class=" bd-t-0 ">
       <!-- Date -->
       <!-- <tr class=" bg-white">
@@ -22,6 +22,7 @@
                href="javascript:void(0);"> {{ emploie.libelle }} </a>
 
             <a [routerLink]="['./']"
+               *ngIf="(router.url.includes('identite') && user?.id_inscription === auth.user.id_inscription)"
                class="float-right"
                (click)="supprimer()">
               <!-- Delete button -->

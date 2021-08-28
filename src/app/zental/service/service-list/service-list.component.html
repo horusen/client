@@ -1,64 +1,126 @@
 <div class="row row-xs mg-0 pd-0 clearfix pt-2"
      *ngIf="!loading && serviceService.data.length">
-  <div class="mycard4 col-lg-3  pt-2 "
+  <div class="col-4 p-2"
        *ngFor="let service of serviceService.data">
-    <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
-      <!-- Icone -->
-      <p>
-        <i class="fad fa-star bg-light tx-facebook"
-           style="padding:6px; border-radius:50%"></i>
-      </p>
+    <div class="mycard4 border"
+         style="overflow: visible;">
+      <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
+        <!-- Icone -->
+        <p class="w-100 d-flex justify-content-between">
+          <i class="fad fa-star bg-light tx-facebook"
+             style="padding:6px; border-radius:50%"></i>
 
-      <!-- Informations -->
-    </div>
-    <div class=" text-center ">
-      <span class="badge badge-pill badge-primary  ">
-        {{ service.libelle }}
-      </span>
-      <p class="px-2 my-2">
-        <!-- <span *ngIf="service.nombre_membres">
-          {{ service.nombre_membres }} {{ service.nombre_membres > 1 ? 'MEMBRE' : 'MEMBRES' }} </span> -->
-        <span>{{ service.nombre_employes }} {{ (service.nombre_employes > 1 ? 'EMPLOYES' : 'EMPLOYE') | translate }}</span>
-        <span class="">
-          ||
-        </span><span class=" tx-danger "> {{ service.departement?.libelle }} </span>
-      </p>
-    </div>
-    <div class="d-flex align-items-center bg-light">
-      <div class=" justify-content-between p-0">
-        <p class="mg-0 ">
-          <!-- Voir -->
-          <a class=" pl-2"
-             [routerLink]="[service.id]"> <i class="fad fa-eye bg-white"
-               style="padding:6px ; border-radius:50%"></i></a>
 
-          <!-- Modifier -->
-          <a class=" pl-2"
-             [routerLink]="['./']"
-             [fragment]="'edit-service'"
-             (click)="modifier(service)">
-            <i class="fad fa-edit bg-white"
-               style="padding:6px ; border-radius:50%">
-            </i>
-          </a>
+          <i class="fad fa-comments-alt bg-light tx-warning"
+             *ngIf="service.service_com"
+             [tooltipClass]="'tooltip'"
+             [ngbTooltip]="'serviceCommunication' | translate"
+             placement="left-bottom"
+             style="padding:6px; border-radius:50%"></i>
+        </p>
 
-          <!-- Suprrimer -->
-          <a class=" pl-2"
-             [routerLink]="['./']"
-             (click)="supprimer(service.id)">
-            <i class="fad fa-trash bg-white"
-               style="padding:6px ; border-radius:50%">
-            </i>
-          </a>
-
-          <!-- Constacter -->
-          <span class=" pl-2"> <i class="fad fa-comment-alt-lines bg-white"
-               style="padding:6px ; border-radius:50%"></i></span>
+        <!-- Informations -->
+      </div>
+      <div class=" text-center ">
+        <span class="badge badge-pill badge-primary  ">
+          {{ service.libelle }}
+        </span>
+        <p class="px-2 my-2">
+          <!-- <span *ngIf="service.nombre_membres">
+                {{ service.nombre_membres }} {{ service.nombre_membres > 1 ? 'MEMBRE' : 'MEMBRES' }} </span> -->
+          <span>{{ service.nombre_employes }} {{ (service.nombre_employes > 1 ? 'EMPLOYES' : 'EMPLOYE') | translate }}</span>
+          <span class="">
+            ||
+          </span><span class=" tx-danger "> {{ service.departement?.libelle }} </span>
         </p>
       </div>
+      <div class="d-flex align-items-center bg-light">
+        <div class=" justify-content-between p-0">
+          <p class="mg-0 ">
+            <!-- Voir -->
+            <a class=" pl-2"
+               [routerLink]="[service.id]"> <i class="fad fa-eye bg-white"
+                 style="padding:6px ; border-radius:50%"></i></a>
 
+            <!-- Modifier -->
+            <a class=" pl-2"
+               [routerLink]="['./']"
+               [fragment]="'edit-service'"
+               (click)="modifier(service)">
+              <i class="fad fa-edit bg-white"
+                 style="padding:6px ; border-radius:50%">
+              </i>
+            </a>
+
+            <!-- Suprrimer -->
+            <a class=" pl-2"
+               [routerLink]="['./']"
+               (click)="supprimer(service.id)">
+              <i class="fad fa-trash bg-white"
+                 style="padding:6px ; border-radius:50%">
+              </i>
+            </a>
+
+            <!-- Constacter -->
+            <a class=" pl-2"
+               [routerLink]="['./']"
+               [queryParamsHandling]="'preserve'"
+               (click)="getDiscussion(service.id)"
+               [ngbTooltip]="'CONTACTER' | translate"
+               *ngIf="service.has_charger_com">
+              <i class="fad fa-comment-alt-lines bg-white"
+                 style="padding:6px ; border-radius:50%"></i>
+            </a>
+
+            <!-- Pas de charger de com -->
+            <span class=" pl-2"
+                  *ngIf="!service.has_charger_com"
+                  [queryParamsHandling]="'preserve'"
+                  (click)="getDiscussion(service.id)"
+                  [ngbTooltip]="'communicationIndisponible' | translate">
+              <i class="fad fa-comment-alt-lines bg-white"
+                 style="padding:6px ; border-radius:50%"></i>
+            </span>
+
+            <!-- Discussion loadings -->
+            <!-- <span class=" pl-2 tx-primary"
+                      *ngIf="discussionLoading">
+                  <i class="fad fa-circle-notch fa-spin bg-white"
+                     style="padding:6px ; border-radius:50%">
+                  </i>
+                </span> -->
+
+            <ng-container *ngIf="['ministere', 'ambassade', 'consulat', 'bureau'].includes(parent.name)">
+              <!-- Designer comme service communication -->
+              <a class=" pl-2"
+                 [routerLink]="['./']"
+                 [queryParamsHandling]="'preserve'"
+                 (click)="designerCommeServiceCommunication(service.id)"
+                 [ngbTooltip]="'designerCommeServiceCommunication' | translate"
+                 *ngIf="!service.service_com">
+                <i class="fad fa-comment-plus bg-white"
+                   style="padding:6px ; border-radius:50%"></i>
+              </a>
+
+
+              <!-- Resigner comme service de communication -->
+              <a class=" pl-2"
+                 [routerLink]="['./']"
+                 [queryParamsHandling]="'preserve'"
+                 (click)="resignerCommeServiceCommunication(service.id)"
+                 [ngbTooltip]="'nePlusDesignerCommeServiceCommunication' | translate"
+                 *ngIf="service.service_com">
+                <i class="fad fa-comment-minus bg-white"
+                   style="padding:6px ; border-radius:50%"></i>
+              </a>
+            </ng-container>
+          </p>
+        </div>
+
+      </div>
     </div>
   </div>
+
 </div>
 
 
@@ -68,4 +130,4 @@
 </div>
 
 
-<app-missing-data *ngIf="!loading && !serviceService.data.length"></app-missing-data>
+<app-missing-data-alt *ngIf="!loading && !serviceService.data.length"></app-missing-data-alt>

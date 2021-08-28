@@ -21,7 +21,10 @@
           <!-- Ici chez nous -->
           <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
             <a [routerLink]="'ici-chez-nous'"
-               class="nav-link3 tx-echos1"><i class="fad fa-flag tx-20 pr-2"></i>
+               [routerLinkActive]="'font-weight-bold'"
+               class="nav-link3 tx-echos1">
+              <i class="fal fa-flag tx-20 pr-2"
+                 [routerLinkActive]="'fas'"></i>
               {{ 'iciChezNous' | translate }}
             </a>
           </div>
@@ -29,7 +32,9 @@
           <!-- venir chez nous -->
           <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
             <a [routerLink]="'venir-chez-nous'"
-               class="nav-link3 tx-echos1"><i class="fad fa-house-night tx-20 pr-2"></i>
+               [routerLinkActive]="'font-weight-bold'"
+               class="nav-link3 tx-echos1"><i class="fal fa-house-night tx-20 pr-2"
+                 [routerLinkActive]="'fas'"></i>
               {{ 'venirChezNous' | translate }}
             </a>
           </div>
@@ -37,7 +42,9 @@
           <!-- Arts et cultures -->
           <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
             <a [routerLink]="'arts-et-cultures'"
-               class="nav-link3 tx-echos1"><i class="fad fa-palette tx-20 pr-2"></i>
+               [routerLinkActive]="'font-weight-bold'"
+               class="nav-link3 tx-echos1"><i class="fal fa-palette tx-20 pr-2"
+                 [routerLinkActive]="'fas'"></i>
               {{ 'artsEtCultures' | translate }}
             </a>
           </div>
@@ -45,7 +52,9 @@
           <!-- Mot du presidents -->
           <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
             <a [routerLink]="'mot-du-president'"
-               class="nav-link3 tx-echos1"><i class="fad fa-crown tx-20 pr-2"></i>
+               [routerLinkActive]="'font-weight-bold'"
+               class="nav-link3 tx-echos1"><i class="fal fa-crown tx-20 pr-2"
+                 [routerLinkActive]="'fas'"></i>
               {{ 'motDuPresident' | translate }}
             </a>
           </div>
@@ -53,7 +62,10 @@
           <!-- Grouvernement -->
           <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
             <a [routerLink]="'gouvernement'"
-               class="nav-link3 tx-echos1"><i class="fad fa-users-cog tx-20 pr-2"></i>
+               [routerLinkActive]="'font-weight-bold'"
+               class="nav-link3 tx-echos1">
+              <i class="fal fa-users-cog tx-20 pr-2"
+                 [routerLinkActive]="'fas'"></i>
               {{ 'GOUVERNEMENT' | translate }}
             </a>
           </div>
@@ -61,9 +73,11 @@
 
           <!-- Calendrier national -->
           <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
-            <a href="#liste_evenement"
-               data-toggle="pill"
-               class="nav-link3 tx-echos1"><i class="fad fa-calendar-alt tx-20 pr-2"></i>
+            <a [routerLink]="'calendrier'"
+               [routerLinkActive]="'font-weight-bold'"
+               class="nav-link3 tx-echos1">
+              <i [routerLinkActive]="'fas'"
+                 class="fal fa-calendar-alt tx-20 pr-2"></i>
               {{ 'calendrierNational' | translate }}
             </a>
           </div>

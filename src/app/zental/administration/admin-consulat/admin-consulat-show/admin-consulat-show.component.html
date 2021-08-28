@@ -1,0 +1,62 @@
+<ng-container *ngIf="single && !loading">
+  <!-- Header -->
+  <div class=" ">
+    <div class="  pt-1">
+      <p class="tx-16"><i class="fad fa-landmark  bg-light tx-24"
+           style="padding:8px; border-radius:50%"></i>
+        {{ ('administrationEtConfigurationDu' | translate) + single.entite_diplomatique.libelle }}
+      </p>
+    </div>
+  </div>
+
+
+  <div class="card mg-b-20">
+    <div class=" collapse show"
+         id="collapse9">
+      <!-- Navigation -->
+      <ul class="nav nav-tabs ">
+        <!-- Profil Ministere -->
+        <li class="nav-item ">
+          <a class="nav-link "
+             [routerLink]="['profil']"
+             [routerLinkActive]="' active show '">
+            {{ 'profilDuConsulat' | translate }}
+          </a>
+        </li>
+
+        <!-- Administration Ministere -->
+        <li class="nav-item">
+          <a class="nav-link "
+             [routerLink]="['admin']"
+             [routerLinkActive]="' active show '">
+            {{ 'ADMINISTRATION' | translate }}
+          </a>
+        </li>
+
+        <!-- configuration -->
+        <li class="nav-item">
+          <a class="nav-link"
+             data-toggle="tab"
+             href="#configuration">{{ 'CONFIGURATION' | translate }}</a>
+        </li>
+      </ul>
+
+
+      <!-- Content -->
+      <div class="tab-content">
+        <!-- Profil -->
+        <div class="tab-pane fade active show"
+             id="profil_ambassade">
+
+          <router-outlet></router-outlet>
+
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<app-loading *ngIf="loading"></app-loading>

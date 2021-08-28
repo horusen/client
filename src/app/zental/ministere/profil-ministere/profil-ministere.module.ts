@@ -9,6 +9,8 @@ import { ComposantDescriptionModule } from "../../composant-description/composan
 import { DescriptionPartielMinistereComponent } from "./description-partiel-ministere/description-partiel-ministere.component";
 import { MinistreShowMinComponent } from "./ministre-show-min/ministre-show-min.component";
 import { InstitutionModule } from "../../institution/institution.module";
+import { MinistereIciMonPaysComponent } from "./ministere-ici-mon-pays/ministere-ici-mon-pays.component";
+import { MinistereModule } from "../ministere.module";
 
 const routes: Routes = [
   {
@@ -42,6 +44,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: "consulats",
+        loadChildren: () =>
+          import("./../ministere-consulat/ministere-consulat.module").then(
+            (module) => module.MinistereConsulatModule
+          ),
+      },
+      {
         path: "ici-mon-pays",
         loadChildren: () =>
           import("./../../ici-mon-pays/ici-mon-pays.module").then(
@@ -58,6 +67,7 @@ const routes: Routes = [
     MinistereDetailsComponent,
     DescriptionPartielMinistereComponent,
     MinistreShowMinComponent,
+    MinistereIciMonPaysComponent,
   ],
   imports: [
     CommonModule,
@@ -66,6 +76,7 @@ const routes: Routes = [
     AdresseModule,
     ComposantDescriptionModule,
     InstitutionModule,
+    MinistereModule,
   ],
   exports: [RouterModule],
 })

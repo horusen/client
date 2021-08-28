@@ -1,33 +1,28 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ConsulatComponent } from "./consulat.component";
-import { ConsulatCreateComponent } from "./consulat-create/consulat-create.component";
 import { ConsulatEditComponent } from "./consulat-edit/consulat-edit.component";
 import { SharedModule } from "src/app/shared/shared.module";
 import { SharedZentalModule } from "../shared-zental/shared-zental.module";
-import { RouterModule, Routes } from "@angular/router";
 import { ConsulatListComponent } from "./consulat-list/consulat-list.component";
-
-const routes: Routes = [
-  {
-    path: "",
-    component: ConsulatComponent,
-  },
-];
+import { ConsulatShowComponent } from "./consulat-show/consulat-show.component";
+import { ConsulatDetailsComponent } from "./consulat-details/consulat-details.component";
+import { InstitutionModule } from "../institution/institution.module";
 
 @NgModule({
   declarations: [
     ConsulatComponent,
-    ConsulatCreateComponent,
     ConsulatEditComponent,
     ConsulatListComponent,
+    ConsulatShowComponent,
+    ConsulatDetailsComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    SharedZentalModule,
-    RouterModule.forChild(routes),
+  imports: [CommonModule, SharedModule, SharedZentalModule, InstitutionModule],
+  exports: [
+    ConsulatComponent,
+    ConsulatShowComponent,
+    ConsulatListComponent,
+    ConsulatEditComponent,
   ],
-  exports: [RouterModule],
 })
 export class ConsulatModule {}

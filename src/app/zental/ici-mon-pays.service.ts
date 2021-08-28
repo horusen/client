@@ -1,12 +1,13 @@
 import { tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, ReplaySubject } from "rxjs";
 import { BaseService } from "../shared/services/base.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class IciMonPaysService extends BaseService {
+  pays$ = new ReplaySubject<any>(1);
   constructor() {
     super("ici-mon-pays");
   }

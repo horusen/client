@@ -37,6 +37,8 @@ export class DepartementListComponent extends BaseComponent implements OnInit {
       this.getByConsulat(this.parent.item.id, params);
     } else if (this.parent.name === "domaine") {
       this.getByDomaine(this.parent.item.id, params);
+    } else if (this.parent.name === "bureau") {
+      this.getByBureau(this.parent.item.id, params);
     }
   }
 
@@ -65,6 +67,15 @@ export class DepartementListComponent extends BaseComponent implements OnInit {
     this.loading = true;
     this.departementService.getByAmbassade(ambassade, params).subscribe(() => {
       this.loading = false;
+    });
+  }
+
+  getByBureau(bureau: number, params: Params): void {
+    this.loading = true;
+    this.departementService.getByBureau(bureau, params).subscribe({
+      complete: () => {
+        this.loading = false;
+      },
     });
   }
 }

@@ -26,7 +26,6 @@ export class ComposantDescriptionComponent
   }
 
   ngOnInit(): void {
-    console.log(this.configuration);
     this.initialiseForm();
   }
 
@@ -49,10 +48,20 @@ export class ComposantDescriptionComponent
         ...this.form.value,
         pays_siege:
           this.configuration.parentObject.entite_diplomatique.pays_siege?.id,
+        pays_origine:
+          this.configuration.parentObject.entite_diplomatique.pays_origine?.id,
+        ville: this.configuration.parentObject.addresse
+          ? this.configuration.parentObject.addresse.ville.id_ville
+          : null,
+        addresse: this.configuration.parentObject.addresse
+          ? this.configuration.parentObject.addresse.addresse
+          : null,
       };
       this.composantService
         .patch(this.configuration.path, data)
         .subscribe((response) => {
+          console.log("composant-description => ", response);
+
           this.response.emit(response);
           this.loading = false;
           this.initialiseForm();

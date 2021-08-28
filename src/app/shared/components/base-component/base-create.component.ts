@@ -1,7 +1,13 @@
 import { TranslateService } from "@ngx-translate/core";
 import { BaseComponent } from "./base.component";
 
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from "@angular/core";
 import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import {
@@ -30,6 +36,8 @@ export class BaseCreateComponent
   public schema: any; // Architechture de la table (depuis la base de données)
   public Editor = ClassicEditor; // Editor variable
   public enableRetrieveSchema: boolean = true;
+  @Output() created = new EventEmitter();
+  @Output() edited = new EventEmitter();
 
   public configCalendrier = {
     // Configuration de ng2DatePicker
@@ -242,6 +250,10 @@ export class BaseCreateComponent
       this.form.controls[name].setValidators(validators);
       this.form.controls[name].updateValueAndValidity();
     }
+  }
+
+  removeValidators(name: string): void {
+    this.addValidators(name, []);
   }
 
   formValuePatcher(field: string, value: any) {

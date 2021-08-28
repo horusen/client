@@ -8,6 +8,7 @@
       {{ 'DIPLOMES' | translate }}
 
       <a [routerLink]="['./']"
+         *ngIf="(router.url.includes('identite') && user?.id_inscription === auth.user.id_inscription)"
          fragment="add-diplome"
          class="float-right"><i class="fad fa-plus-circle"></i></a>
     </h6>

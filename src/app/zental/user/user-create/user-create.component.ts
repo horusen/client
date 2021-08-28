@@ -21,7 +21,7 @@ export class UserCreateComponent extends BaseCreateComponent implements OnInit {
   }
 
   villeDropdownSettings = {
-    ...this.dropdownSettings.single,
+    ...this.dropdownSettingsAlt.single,
     idField: "id_ville",
   };
 
@@ -60,7 +60,7 @@ export class UserCreateComponent extends BaseCreateComponent implements OnInit {
         ville: [null, [Validators.required]],
         profession: [null, [Validators.required]],
       });
-    } else if (this.type === "contact") {
+    } else if (this.type === "contact" || this.type === "relation") {
       this.form = this.fb.group({
         email: [null, [Validators.email]],
         nom: [null, Validators.required],

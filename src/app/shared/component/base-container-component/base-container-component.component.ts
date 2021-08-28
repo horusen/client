@@ -51,4 +51,20 @@ export class BaseContainerComponentComponent
       }
     });
   }
+
+  onCreated(): void {
+    this.helper.toggleModal(`${this.element}-create-modal`);
+    this.router.navigate(["./"], {
+      relativeTo: this.route,
+      queryParamsHandling: "preserve",
+    });
+  }
+
+  onEdited(): void {
+    this.helper.toggleModal(`${this.element}-edit-modal`);
+    this.router.navigate(["./"], {
+      relativeTo: this.route,
+      queryParamsHandling: "preserve",
+    });
+  }
 }

@@ -1,0 +1,57 @@
+<div *ngIf="single && !loading">
+  <div class="p-2 bd-b d-flex align-items-center justify-content-between">
+    <!-- Information pays -->
+    <p class="tx-16">
+      <img height="30px"
+           width="30px"
+           [src]="single.drapeau"
+           style="border-radius:50%">
+      {{ single.libelle }}
+    </p>
+
+    <!-- Navigation -->
+    <ul class="nav p-2 nav-pills">
+      <li class="nav-item">
+        <a class="nav-link tx-facebook"
+           [routerLink]="['ambassades']"
+           [queryParamsHandling]="'preserve'"
+           routerLinkActive="active">
+          <span><i class="fad fa-landmark-alt mr-1"></i></span>
+          {{ 'AMBASSADE' | translate }}
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link tx-facebook"
+           [routerLink]="['consulats']"
+           [queryParamsHandling]="'preserve'"
+           routerLinkActive="active">
+          <span><i class="fad fa-landmark mr-1"></i></span>
+          {{ 'CONSULAT' | translate }}
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link tx-facebook"
+           [routerLink]="['liaisons']"
+           [queryParamsHandling]="'preserve'"
+           routerLinkActive="active">
+          <span><i class="fad fa-link mr-1"></i></span>
+          {{ 'LIAISON' | translate }}
+        </a>
+      </li>
+
+    </ul>
+  </div>
+
+
+
+
+  <router-outlet></router-outlet>
+
+</div>
+
+
+
+<div class="my-5"
+     *ngIf="loading">
+  <app-loading></app-loading>
+</div>

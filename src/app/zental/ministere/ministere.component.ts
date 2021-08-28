@@ -1,28 +1,26 @@
-import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { BaseContainerComponentComponent } from "src/app/shared/component/base-container-component/base-container-component.component";
+import { AfterViewInit, Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { BaseComponent } from "src/app/shared/components/base-component/base.component";
+import { ParentDefinition } from "src/app/shared/models/parent-definition.model";
+import { MinistereService } from "./ministere.service";
 
 @Component({
   selector: "app-ministere",
   templateUrl: "./ministere.component.html",
   styleUrls: ["./ministere.component.scss"],
 })
-export class MinistereComponent extends BaseComponent implements AfterViewInit {
-  create = false;
-  constructor(public route: ActivatedRoute, public router: Router) {
-    super();
+export class MinistereComponent
+  extends BaseContainerComponentComponent
+  implements AfterViewInit
+{
+  @Input() parent: ParentDefinition;
+  constructor(
+    public ministereService: MinistereService,
+    public router: Router,
+    public route: ActivatedRoute
+  ) {
+    super(ministereService, router, route);
+    this.element = "ministere";
   }
-
-  ngAfterViewInit(): void {
-    this.route.fragment.subscribe((fragment) => {
-      if (fragment === "add-ministere") {
-        this.ajouter();
-      }
-    });
-  }
-
-  ajouter() {
-    this.create = true;
-    this.helper.toggleModal("ministere-add-modal");
-  }
+  ngAfterViewInit(): void {}
 }

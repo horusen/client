@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseContainerComponentComponent } from "src/app/shared/component/base-container-component/base-container-component.component";
+import { ParentDefinition } from "src/app/shared/models/parent-definition.model";
 import { AmbassadeService } from "../ambassade/ambassade.service";
 import { MinistereService } from "../ministere/ministere.service";
 import { BureauService } from "./bureau.service";
@@ -11,12 +12,10 @@ import { BureauService } from "./bureau.service";
   styleUrls: ["./bureau.component.scss"],
 })
 export class BureauComponent extends BaseContainerComponentComponent {
-  ministere: any;
-  ambassade: any;
+  @Input() parent: ParentDefinition;
+  extraFields: any;
   constructor(
     public bureauService: BureauService,
-    public ministereService: MinistereService,
-    public ambassadeService: AmbassadeService,
     public router: Router,
     public route: ActivatedRoute
   ) {
@@ -25,17 +24,12 @@ export class BureauComponent extends BaseContainerComponentComponent {
   }
 
   ngOnInit(): void {
-    if (this.router.url.includes("ministere")) {
-      this._subscription["ministere"] =
-        this.ministereService.singleData$.subscribe((ministere) => [
-          (this.ministere = ministere),
-        ]);
-    } else if (this.router.url.includes("ambassade")) {
-      this._subscription["ambassade"] =
-        this.ambassadeService.singleData$.subscribe((ambassade) => [
-          (this.ambassade = ambassade),
-        ]);
-    }
+    this.extraFields = {
+      pays: this.parent.item.entite_diplomatique.pays_origine.id,
+      [this.parent.name]: this.parent.item.id,
+    };
+
+    console.log(this.extraFields);
   }
 
   onBureauCreated(bureau: any): void {

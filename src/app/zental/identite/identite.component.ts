@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "src/app/authentification/auth.service";
 import { BaseSingleComponent } from "src/app/shared/components/base-component/base-single.component";
 import { UserService } from "src/app/zental/user/user.service";
@@ -10,15 +10,30 @@ import { IdentiteService } from "./identite.service";
   templateUrl: "./identite.component.html",
   styleUrls: ["./identite.component.scss"],
 })
-export class IdentiteComponent extends BaseSingleComponent implements OnInit {
+export class IdentiteComponent
+  extends BaseSingleComponent
+  implements OnInit, AfterViewInit
+{
   user: any;
+  edit = false;
+
   constructor(
     public authService: AuthService,
     public userService: UserService,
     public identiteService: IdentiteService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    public router: Router
   ) {
     super(userService, route);
+  }
+
+  ngAfterViewInit(): void {
+    this.route.fragment.subscribe((fragment) => {
+      if (fragment == "edit-identite") {
+        this.edit = true;
+        this.helper.toggleModal("identite-edit-modal");
+      }
+    });
   }
 
   ngOnInit(): void {

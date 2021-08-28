@@ -171,8 +171,8 @@ export class Helper {
   strcut(text: string, wordCount: number) {
     text = this.fromHtmlStringToText(text);
     // if text's length lower than wordCound(nbre of word we want), simply return the text
-    if (text.length < wordCount) {
-      return text;
+    if (text?.length < wordCount) {
+      return text || "";
     }
 
     // Else if text's length greater than wordCount, return the cutted text with three dots wich is mean text's cutted before the end

@@ -1,3 +1,4 @@
+import { Router } from "@angular/router";
 import { BaseComponent } from "./../../../shared/components/base-component/base.component";
 import { Component, Input, OnInit } from "@angular/core";
 import { DiplomeService } from "../diplome.service";
@@ -9,8 +10,9 @@ import { DiplomeService } from "../diplome.service";
 })
 export class DiplomeSoloComponent extends BaseComponent implements OnInit {
   @Input() diplome: any;
+  @Input() user: any;
   showDescription: false;
-  constructor(public diplomeService: DiplomeService) {
+  constructor(public diplomeService: DiplomeService, public router: Router) {
     super();
   }
 

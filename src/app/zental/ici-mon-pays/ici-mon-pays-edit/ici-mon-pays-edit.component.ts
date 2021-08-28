@@ -13,7 +13,7 @@ export class IciMonPaysEditComponent
   implements OnInit
 {
   @Input() description: string;
-  @Input() pays: number;
+  @Input() pays: any;
   @Input() element: string;
   @Output() done = new EventEmitter();
   constructor(public iciMonPaysService: IciMonPaysService) {
@@ -21,7 +21,12 @@ export class IciMonPaysEditComponent
   }
 
   ngOnInit(): void {
-    this.form = this.initialiseForm(this.description, this.pays, this.element);
+
+    this.form = this.initialiseForm(
+      this.description,
+      this.pays.id,
+      this.element
+    );
   }
 
   initialiseForm(
@@ -43,6 +48,8 @@ export class IciMonPaysEditComponent
         this.loading = false;
         this.done.emit();
       });
+    } else {
+      this.helper.alertDanger("Formulaire invalide");
     }
   }
 }

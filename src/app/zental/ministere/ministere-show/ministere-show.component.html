@@ -5,6 +5,7 @@
 
 
 <app-institution [parent]="{ name: 'ministere', item: single }"
+                 [showNavigation]="parent.name !== 'zental'"
                  *ngIf="single && !loading">
 </app-institution>
 

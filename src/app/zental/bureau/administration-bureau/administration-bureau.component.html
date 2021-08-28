@@ -1,0 +1,113 @@
+<!-- Administration -->
+
+<ng-container *ngIf="single">
+  <div class=" row  pb-2  ">
+    <div class=" col">
+      <div class=" bg-light p-0 pt-2  ">
+        <ul class="nav bg-ether bg-face ">
+          <!-- Domaines -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['domaines']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-stamp "></i>
+              {{ 'DOMAINES' | translate }}
+            </a>
+          </li>
+
+
+          <!-- departement -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['departements']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-th-large "></i>
+              {{ 'DEPARTEMENTS' | translate }}
+            </a>
+          </li>
+
+
+
+          <!-- Services -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['services']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-ball-pile "></i>
+              {{ 'SERVICES' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Fonctions -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['fonctions']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-people-carry "></i>
+              {{ 'FONCTIONS' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Poste -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['postes']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-chair-office "></i>
+              {{ 'POSTES' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Emploue -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['ressources-humaines']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-sitemap "></i>
+              {{ 'ressourcesHumaines' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Inscirpition consulaire -->
+          <li class="nav-item "
+              *ngIf="single.liaison">
+            <a class="nav-link tx-primary"
+               [routerLink]="['inscriptions-consulaires']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-sitemap "></i>
+              {{ 'inscriptionsConsulaires' | translate }} ({{ 'LIAISON' | translate }})
+            </a>
+          </li>
+
+
+          <!-- Toloba -->
+          <li class="nav-item "
+              *ngIf="single.liaison">
+            <a class="nav-link tx-primary"
+               [routerLink]="['toloba']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-comments-alt "></i>
+              {{ 'TOLOBA' | translate }}
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Content -->
+  <div class="tab-content">
+    <!-- Ambassade -->
+    <div class="tab-pane fade show active"
+         id="ambassade_admin"
+         role="tabpanel">
+      <router-outlet></router-outlet>
+    </div>
+
+
+  </div>
+</ng-container>

@@ -6,8 +6,8 @@
       <div class="col-lg-12">
         <!-- Drapeau -->
         <div class="image text-center pb-2">
-          <img src="assets/images/drapeaux/cg.svg"
-               class="rounded"
+          <img [src]="parent.item.entite_diplomatique.pays_origine.drapeau"
+               [class]="parent.item.entite_diplomatique.libelle + '-drapeau'"
                width="80">
         </div>
 
@@ -15,7 +15,7 @@
         <h6 class="text-center tx-ether">{{ parent.item.entite_diplomatique.libelle }}</h6>
 
         <!-- Pays  -->
-        <p class="text-center mb-0 ether2"> {{ parent.item.entite_diplomatique.pays_siege.libelle }}</p>
+        <p class="text-center mb-0 ether2"> {{ parent.item.entite_diplomatique.pays_origine.libelle }}</p>
 
         <!-- Date création -->
         <p class="text-center tx-warning tx-12	"> {{ 'DEPUIS' | translate }} : {{ parent.item.entite_diplomatique.date_creation | date }} </p>
@@ -40,9 +40,12 @@
       <a class="ml-2"> <i class="fad fa-comment-alt-lines tx-echos2 bg-bluelight"
            style="padding:10px; border-radius:50%"></i></a>
 
-      <!-- Lorem -->
-      <a class="ml-2"> <i class="fad fa-page-break tx-echos2 bg-bluelight"
-           style="padding:6px; border-radius:50%"></i></a>
+
+      <ng-content select="[cta]"></ng-content>
+
+
+
+
     </div>
 
 
@@ -100,6 +103,7 @@
 
       </ul>
       <a [routerLink]="['./']"
+         *ngIf="parent.name !== 'consulat' && parent.item.entite_diplomatique.pays_siege"
          [fragment]="'add-adresse'"
          class="btn btn-block mt-1 btn-light">
         <i class="fal fa-map-marker-alt tx-ether2 mr-2"></i>

@@ -69,7 +69,7 @@ export class AffecterLiaisonComponent
     if (!this.bureaux.length) {
       this.dependancieLoading = true;
       this.bureauxService
-        .getByMinistere(ministere, {}, false)
+        .getNonAffecteByMinistere(ministere)
         .subscribe((bureaux) => {
           this.bureaux = bureaux;
           this.dependancieLoading = false;
@@ -81,7 +81,7 @@ export class AffecterLiaisonComponent
     if (!this.bureaux.length) {
       this.dependancieLoading = true;
       this.bureauxService
-        .getByAmbassade(ambassade, {}, false)
+        .getNonAffecteByAmbassade(ambassade)
         .subscribe((bureaux) => {
           this.bureaux = bureaux;
           this.dependancieLoading = false;
@@ -93,7 +93,7 @@ export class AffecterLiaisonComponent
     if (!this.bureaux.length) {
       this.dependancieLoading = true;
       this.bureauxService
-        .getByConsulat(consulat, {}, false)
+        .getNonAffecteByConsulat(consulat)
         .subscribe((bureaux) => {
           this.bureaux = bureaux;
           this.dependancieLoading = false;

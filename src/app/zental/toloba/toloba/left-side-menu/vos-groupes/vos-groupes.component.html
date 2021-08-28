@@ -1,0 +1,63 @@
+<div class="flex-fill pd-1 ">
+  <!-- Header -->
+  <nav class="nav flex-column mb-2 ">
+
+    <!-- Recherche -->
+    <div style="position: relative;">
+      <div class="form-group mb-0 d-flex align-items-center  ">
+        <!-- Search field -->
+        <div class="input-group w-100 px-3">
+          <input type="text"
+                 class="form-control pd-y-10 "
+                 (keyup.enter)="research(search.value)"
+                 #search
+                 [attr.placeholder]="('RECHERCHER' | translate) + '...'"
+                 style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+        </div>
+
+
+      </div>
+      <div class=""
+           style="position: absolute; top: 42px; z-index: 20000;">
+        <a [routerLink]="['./']"
+           [queryParams]="{ search: null }"
+           [queryParamsHandling]="'merge'"
+           class="tx-10 text-danger mr-1"
+           *ngIf="searchActive"
+           (click)="search.value = ''">
+          <span class=" mr-1"><i class="fal fa-times-circle"></i></span>
+          {{ 'annulerLaRecherche' | translate }}
+        </a>
+      </div>
+    </div>
+
+    <!-- Liste des élèments -->
+    <ng-container *ngIf="!loading && groupeService.data.length">
+      <app-vos-groupes-solo [groupe]="groupe"
+                            *ngFor="let groupe of groupeService.data | paginate: {itemsPerPage: 7, id: 'groupe', currentPage: currentPage}">
+      </app-vos-groupes-solo>
+
+
+    </ng-container>
+
+
+
+    <app-loading *ngIf="loading"></app-loading>
+
+
+    <app-missing-data-alt *ngIf="!loading && !groupeService.data.length"></app-missing-data-alt>
+
+
+  </nav>
+
+
+  <!-- Pagination -->
+  <div class="col-12 mt-1 d-flex justify-content-center">
+    <pagination-controls id="groupe"
+                         (pageChange)="currentPage = $event"
+                         autoHide="true"
+                         previousLabel="{{ 'PRECEDENT' | translate }}"
+                         nextLabel="{{ 'SUIVANT' | translate }}">
+    </pagination-controls>
+  </div>
+</div>

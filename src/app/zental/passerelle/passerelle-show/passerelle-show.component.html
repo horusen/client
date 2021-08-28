@@ -1,109 +1,135 @@
+<div class="pl-2 pt-2">
+  <h5 class="d-inline-block">
+    <!-- boutton precedent -->
+    <a [routerLink]="['..']"
+       [ngbTooltip]="'revenirEnArriere' | translate"
+       class="p-2 mr-2 tx-15  d-flex border rounded-circle align-items-center justify-content-center">
+      <i class="fad fa-arrow-left"></i>
+    </a>
+
+  </h5>
+</div>
+
 <div class="row row-xs clearfix  mg-0 pd-0 p-0 pt-4 "
      *ngIf="single">
-  <!-- Details et adresse -->
+  <!-- Left sidebar -->
   <div class=" col-lg-3 pr-2  pl-4">
-    <!-- Details -->
     <div class="row row-xs clearfix pt-4 bd-b pb-2 mg-0 pd-0 bg-light ">
       <div class="col-lg-12">
-        <!-- Drapeau -->
+        <!-- <h6 class="text-center tx-ether">{{ single.pays_siege.libelle }}</h6> -->
         <div class="image text-center pb-2">
-          <i class="fal fa-portal-enter fa-3x"></i>
+          <img [src]="single.pays_origine.drapeau"
+               class="rounded"
+               width="80">
         </div>
+        <h6 class="text-center tx-ether">{{ ('Passerelle' | translate) + ': ' + single.pays_origine.libelle + ' - ' + single.pays_siege.libelle }}
+        </h6>
+        <p class="text-center mb-0 ether2"> {{ single.pays_origine.libelle }}</p>
+        <p class="text-center tx-warning tx-12	"> {{ 'typeDePasserelle' | translate }} : {{ single.type.libelle | translate }} </p>
 
-        <!-- Libelle -->
-        <h6 class="text-center tx-ether">{{ single.entite_diplomatique.libelle }}</h6>
 
-        <!-- Pays  -->
-        <p class="text-center mb-0 ether2"
-           *ngIf="single.bureau">
-          ( {{ 'BUREAU' | translate }} ) {{ single.bureau.libelle }}
-        </p>
-
-        <p class="text-center  text-warning mb-0 ether2"
-           *ngIf="!single.bureau"> {{ 'nonRepresente' | translate }}</p>
-
-        <!-- Date création -->
-        <!-- <p class="text-center tx-warning tx-12	"> {{ 'DEPUIS' | translate }} : {{ single.date_creation | date }} </p> -->
-
-        <!-- Devise -->
-        <!-- <p class="text-center tx-ether2 tx-14	"> {{ single.devise }}</p> -->
       </div>
     </div>
-
-    <!-- Action -->
     <div class=" text-center pt-1 pb-1 ">
-      <!-- Affecter -->
+      <a class="ml-2"> <i class="fad fa-comment-alt-lines tx-echos2 bg-bluelight"
+           style="padding:10px; border-radius:50%"></i></a>
+
+      <!-- edit  -->
+      <a class="ml-2">
+        <i class="fad fa-page-break tx-echos2 bg-bluelight"
+           style="padding:6px; border-radius:50%"></i>
+      </a>
+
+      <!-- affecter à bureau  -->
       <a class="ml-2"
          [routerLink]="['./']"
+         [ngbTooltip]="'affecterUnBureau' | translate"
          (click)="affecterPasserelle()">
         <i class="fad fa-exchange tx-echos2 bg-bluelight"
-           [ngbTooltip]=" 'AFFECTER' | translate "
-           style="padding:10px; border-radius:50%">
-        </i>
-      </a>
-
-
-      <!-- Modifier -->
-      <a class="ml-2"
-         [routerLink]="['./']"
-         (click)="modifier()">
-        <i class="fad fa-edit tx-echos2 bg-bluelight"
-           style="padding:10px; border-radius:50%"></i>
-      </a>
-
-      <!-- Supprimer -->
-      <a class="ml-2"
-         [routerLink]="['./']"
-         (click)="supprimer()">
-        <i class="fad fa-trash-alt tx-echos2 bg-bluelight"
            style="padding:6px; border-radius:50%"></i>
       </a>
     </div>
 
 
-    <!-- Autres information et adresse -->
-
   </div>
 
-  <div class=" col-lg-9 pr-2">
+
+  <!-- Main content -->
+  <div class=" col-lg-9 pr-2 ">
+    <!-- Call to actions buttons -->
+    <div class="col-md-12 col-lg-12 p-0">
+
+      <div class=" collapse show"
+           id="collapse4">
+
+
+        <!-- Bureau -->
+        <a *ngIf="single.bureau"
+           [routerLink]="['/', 'administration', 'bureaux', single.bureau.id]"
+           class="btn btn-brand p-0 mr-2 btn-github">
+          <i class="fas fa-chair-office m-0"
+             style="line-height: 30px;"></i><span class="p-3 m-0">{{ 'BUREAU' | translate }}</span>
+        </a>
+
+
+
+        <!-- ministere -->
+        <a [routerLink]="['/', 'ministeres', ministere.id]"
+           *ngIf="ministere"
+           class="btn btn-brand p-0 mr-2 btn-dropbox">
+          <i class="fas fa-landmark m-0"
+             style="line-height: 30px;"></i><span class="p-3 m-0"> {{ 'MINISTERE' | translate }}</span>
+        </a>
+
+
+
+      </div>
+    </div>
+
+    <!-- Nav -->
     <div class="card mg-b-20">
       <div class=" collapse show"
            id="collapse9">
-        <!-- Navigation -->
+        <!-- Liste de navigation -->
         <ul class="nav bd-b bd-2 bd-facebook">
-          <!-- Description -->
+
+          <!-- Services -->
           <li class="nav-item">
             <a class="nav-link tx-echos"
-               [routerLink]="['./']"
-               [routerLinkActiveOptions]="{ exact: true }"
-               [routerLinkActive]="'font-weight-bolder'">
-              <i class="fal fa-info-circle  tx-20"
-                 [routerLinkActiveOptions]="{ exact: true }"
-                 [routerLinkActive]="'fas'"></i>
-              {{ 'DETAILS' | translate }}
+               [routerLink]="['services']"
+               [routerLinkActive]="' active font-weight-bold '">
+              <i class="fad fa-ball-pile  tx-20"></i>
+              {{ 'SERVICES' | translate }}
             </a>
           </li>
 
 
-          <!-- Liste des emplyes -->
+          <!-- Services -->
           <li class="nav-item">
             <a class="nav-link tx-echos"
                [routerLink]="['employes']"
-               *ngIf="single.bureau"
-               [routerLinkActive]="'font-weight-bolder'">
-              <i class="fal fa-users  tx-20"
-                 [routerLinkActive]="'fas'"></i>
-              {{ 'ressourcesHumaines' | translate }}
+               [routerLinkActive]="' active font-weight-bold '">
+              <i class="fad fa-sitemap  tx-20"></i>
+              {{ 'resssourcesHumaines' | translate }}
             </a>
           </li>
 
 
-        </ul>
+          <!-- Inscriptions-consulaires -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="['/', 'administration', 'bureaux', single.bureau?.id, 'admin' ,'inscriptions-consulaires']"
+               [routerLinkActive]="'active font-weight-bold'">
+              <i class="fad fa-file-certificate  tx-20"></i>
+              {{ 'ENREGISTREMENTS' | translate }}
+            </a>
+          </li>
 
-        <!-- content -->
+        </ul>
         <div class="tab-content">
+
           <div class="tab-pane fade active show"
-               id="details">
+               id="les_citoyens">
             <router-outlet></router-outlet>
           </div>
 
@@ -111,15 +137,18 @@
       </div>
     </div>
   </div>
+</div>
 
 
-
+<!-- Loading -->
+<div class="my-5"
+     *ngIf="loading">
+  <app-loading></app-loading>
 </div>
 
 
 
-
-<app-modal [configuration]="{ name: 'affecter-passerelle-modal', titre: 'affecterUnePasserelle', icone: 'exchange', taille: 'md' }"
+<app-modal [configuration]="{ name: 'affecter-passerelle-modal', titre: 'affecterUnBureau', icone: 'exchange', taille: 'md' }"
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
   <app-affecter-passerelle *ngIf="affecter"
                            [passerelle]="single">

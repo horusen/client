@@ -16,7 +16,23 @@
 
       <!-- Badge -->
       <div class=" text-center ">
-        <p class="text-center tx-facebook">{{ bureau.libelle }}</p>
+        <p class="text-center tx-facebook">{{ bureau.entite_diplomatique.libelle }}</p>
+
+        <!-- Liaison -->
+        <small *ngIf="bureau.liaison">
+          <span class="tx-warning font-weight-bold">{{ 'LIAISON' | translate }}</span>:
+          {{ bureau.liaison?.pays_origine.libelle }} - {{ bureau.liaison.pays_siege.libelle }}
+        </small>
+
+        <!-- Passerelle -->
+        <small *ngIf="bureau.passerelle">
+          <span class="tx-warning font-weight-bold">{{ 'PASSERELLE' | translate }}</span>:
+          {{ bureau.passerelle?.pays_origine.libelle }} - {{ bureau.passerelle.pays_siege.libelle }}
+        </small>
+
+        <!-- Aucune affectation -->
+        <small class="tx-italic"
+               *ngIf="!bureau.liaison && !bureau.passerelle">{{ 'aucuneAffectation' | translate }}</small>
       </div>
 
       <!-- footer -->
@@ -26,7 +42,7 @@
         <div class=" justify-content-between p-0">
           <p class="mg-0 pt-2">
             <!-- details -->
-            <a [routerLink]="[bureau.id]"
+            <a [routerLink]="urlNavigation.concat([bureau.id])"
                class=" pl-2">
               <i class="fad fa-eye bg-white"
                  style="padding:6px ; border-radius:50%"></i>
@@ -76,11 +92,11 @@
                    alt="avatar"
                    width="26"> -->
 
-              <img class="rounded-circle"
+              <!-- <img class="rounded-circle"
                    *ngIf="bureau?.bureauur?.photo"
                    [src]="bureau?.bureauur?.photo"
                    alt="avatar"
-                   width="26">
+                   width="26"> -->
 
             </div>
 
@@ -96,6 +112,6 @@
 
 <div class="my-5"
      *ngIf="loading || !bureauService.data.length">
-  <app-missing-data *ngIf="!loading && !bureauService.data.length"></app-missing-data>
+  <app-missing-data-alt *ngIf="!loading && !bureauService.data.length"></app-missing-data-alt>
   <app-loading *ngIf="loading"></app-loading>
 </div>

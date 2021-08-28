@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Router } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { UserService } from "src/app/zental/user/user.service";
 import { RelationFamilialeService } from "../../relation-familiale/relation-familiale.service";
@@ -18,7 +19,8 @@ export class InformationMembreFamilleComponent
   @Output() create = new EventEmitter();
   constructor(
     public userService: UserService,
-    public relationFamilialeService: RelationFamilialeService
+    public relationFamilialeService: RelationFamilialeService,
+    public router: Router
   ) {
     super();
   }

@@ -6,9 +6,9 @@
       <!-- Drapeaux -->
       <div class=" pt-2 pl-2 d-flex align-items-center justify-content-between bd-b border-danger">
         <p class="tx-echos"> <img class=""
-               src="assets/images/drapeaux/cv.svg"
-               alt="avatar"
-               width="40"> {{ 'republiqueDu' | translate }} {{ passerelle?.entite_diplomatique?.pays_siege?.libelle }} </p>
+               [src]="passerelle.pays_siege.drapeau"
+               [alt]="'drapeau-' + passerelle.pays_siege.libelle"
+               width="40"> {{ 'republiqueDu' | translate }} {{ passerelle?.pays_siege?.libelle }} </p>
       </div>
 
       <!-- icon -->
@@ -26,7 +26,7 @@
 
         <p class="text-center">
           <!-- Langue -->
-          <span class=""> Lingala </span>
+          <span class=""> Langue </span>
           <span class=""> || </span>
 
           <!-- Type passerelle -->
@@ -87,6 +87,6 @@
 
 <div class="my-5"
      *ngIf="loading || !passerelleService.data.length">
-  <app-missing-data *ngIf="!loading && !passerelleService.data.length"></app-missing-data>
+  <app-missing-data-alt *ngIf="!loading && !passerelleService.data.length"></app-missing-data-alt>
   <app-loading *ngIf="loading"></app-loading>
 </div>

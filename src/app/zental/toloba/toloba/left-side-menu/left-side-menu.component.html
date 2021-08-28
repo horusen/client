@@ -1,0 +1,102 @@
+<div class="bd-b   pd-0  bd-white">
+
+  <!-- Dialoguant information -->
+  <div class="row row-xs clearfix pt-2 bd-b pb-4 mg-0 pd-0 ">
+    <div class="col-lg-12">
+      <!-- Utilisateur -->
+      <div class=" text-center"
+           *ngIf="parent.name === 'user'">
+        <p class="text-center">
+          <img class=" rounded-circle wd-20p mb-0"
+               [src]="parent.item.photo.path"
+               alt="avatar"
+               *ngIf="parent.item.photo">
+
+
+          <i class="fad fa-user-circle"
+             *ngIf="!parent.item.photo"
+             style="font-size: 75px;">
+          </i>
+        </p>
+
+        <!-- Nom et prenom -->
+        <h6 class="text-center tx-echos">{{ parent.item.nom_complet }}</h6>
+        <p class="text-center mb-0"
+           *ngIf="parent.item.addresse"> {{ parent.item.addresse?.ville?.libelle }} - {{ parent.item.addresse?.ville?.pays?.libelle }}</p>
+        <!-- <div class=" text-center ">
+          <a class="ml-2"> <i class="fad fa-cog tx-echos2 bg-bluelight"
+               style="padding:6px; border-radius:50%"></i></a>
+          <a class="ml-2"> <i class="fad fa-question-circle tx-echos2 bg-bluelight"
+               style="padding:6px; border-radius:50%"></i></a>
+        </div> -->
+      </div>
+
+      <!-- institution -->
+      <div class=" text-center"
+           *ngIf="parent.name === 'entite_diplomatique'">
+        <p class="text-center">
+          <img class=" rounded-circle wd-20p mb-0"
+               width="70px"
+               height="70px"
+               [src]="parent.item.entite_diplomatique.pays_origine.drapeau"
+               [alt]="parent.item.entite_diplomatique.pays_origine.libelle"
+               *ngIf="parent.item.entite_diplomatique.pays_origine.drapeau">
+
+
+          <i class="fad fa-user-circle"
+             *ngIf="!parent.item.entite_diplomatique.pays_origine.drapeau"
+             style="font-size: 75px;">
+          </i>
+        </p>
+        <!-- Libelle -->
+        <h6 class="text-center tx-echos">{{ parent.item.entite_diplomatique.libelle }}</h6>
+        <p class="text-center mb-0"
+           *ngIf="auth.user.addresse"> {{ parent.item.entite_diplomatique.pays_origine.libelle }}</p>
+        <!-- <div class=" text-center ">
+          <a class="ml-2"> <i class="fad fa-cog tx-echos2 bg-bluelight"
+               style="padding:6px; border-radius:50%"></i></a>
+          <a class="ml-2"> <i class="fad fa-question-circle tx-echos2 bg-bluelight"
+               style="padding:6px; border-radius:50%"></i></a>
+        </div> -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- des menus -->
+  <div class="mg-l-1">
+    <select class="custom-select h-auto form-control-lg mb-2"
+            (change)="selectMenu($event.target.value)"
+            id="inputGroupSelect01">
+      <option *ngFor="let menu of activeMenuKeys"
+              [selected]="isMenuActive(menu)"
+              [value]="menu">
+        {{menu | translate}}
+      </option>
+
+    </select>
+
+  </div>
+
+  <!-- Contenus des menus -->
+  <div class="tab-content">
+    <div class="tab-pane fade active show"
+         id="chez_vous_sms">
+      <app-vos-services-consulaires *ngIf="activeMenu['vos-services-consulaires']"
+                                    [parent]="parent">
+      </app-vos-services-consulaires>
+
+      <app-votre-diaspora *ngIf="activeMenu['votre-diaspora']"
+                          [parent]="parent"></app-votre-diaspora>
+
+      <app-votre-diplomatie *ngIf="activeMenu['votre-diplomatie']"></app-votre-diplomatie>
+
+      <app-diplomatie-ailleurs *ngIf="activeMenu['diplomatie-ailleurs']"></app-diplomatie-ailleurs>
+
+      <app-vos-groupes *ngIf="activeMenu['vos-groupes']"></app-vos-groupes>
+
+      <app-vos-groupes [autresGroupes]="true"
+                       *ngIf="activeMenu['autres-groupes']">
+      </app-vos-groupes>
+    </div>
+  </div>

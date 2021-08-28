@@ -40,6 +40,10 @@ export class TokenStorage {
     );
   }
 
+  public setUser(user: any): void {
+    localStorage.setItem("user", JSON.stringify(user));
+  }
+
   public save(token: any) {
     localStorage.setItem("user", JSON.stringify(token.user));
     localStorage.setItem("accessToken", token.access_token);

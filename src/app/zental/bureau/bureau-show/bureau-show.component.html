@@ -1,552 +1,374 @@
-<div class="row row-xs clearfix  mg-0 pd-0 p-0 pt-4 "
-     *ngIf="single">
-  <!-- Details et adresse -->
-  <div class=" col-lg-3 pr-2  pl-4">
-    <!-- Details -->
-    <div class="row row-xs clearfix pt-4 bd-b pb-2 mg-0 pd-0 bg-light ">
+<router-outlet></router-outlet>
+
+
+<!-- <div class="row row-xs clearfix  mg-0 pd-0 p-0 pt-4 ">
+
+  <div class=" col-lg-3 pr-2  pl-4 ">
+    <div class="row row-xs clearfix pt-4 bd-b pb-2 mg-0 pd-0 bg-bluelight">
       <div class="col-lg-12">
-        <!-- Drapeau -->
-        <div class="image text-center pb-2">
-          <i class="fal fa-building fa-3x"></i>
-        </div>
+        <h6 class="text-center tx-primary"> Bureau du Gabon</h6>
+        <div class="image text-center pb-2"> <img src="assets/images/drapeaux/cg.svg"
+               class="rounded"
+               width="80"> </div>
+        <h6 class="text-center tx-primary"> République du Congo</h6>
+        <p class="text-center mb-0 ether2"> Congo - Brazzaville</p>
+        <p class="text-center tx-warning tx-12	"> Depuis : 02 Juillet 2021 </p>
 
-        <!-- Libelle -->
-        <h6 class="text-center tx-ether">{{ single.libelle }}</h6>
-
-        <!-- Pays  -->
-        <p class="text-center mb-0 ether2"
-           *ngIf="single.liaison">( {{ 'LIAISON' | translate }} ) {{ single.liaison.entite_diplomatique.pays_siege.libelle }}</p>
-        <p class="text-center mb-0 ether2"
-           *ngIf="single.passerelle">( {{ 'PASSERELLE' | translate }} ) {{ single.passerelle.entite_diplomatique.pays_siege.libelle }}</p>
-        <p class="text-center  text-warning mb-0 ether2"
-           *ngIf="!single.liaison && !single.passerelle"> {{ 'nonAffecte' | translate }}</p>
-
-        <!-- Date création -->
-        <!-- <p class="text-center tx-warning tx-12	"> {{ 'DEPUIS' | translate }} : {{ single.date_creation | date }} </p> -->
-
-        <!-- Devise -->
-        <!-- <p class="text-center tx-ether2 tx-14	"> {{ single.devise }}</p> -->
+        <p class="text-center tx-ether2 tx-14	"> Unité - Travail - Progrés</p>
       </div>
     </div>
-
-    <!-- Action -->
     <div class=" text-center pt-1 pb-1 ">
-      <!-- Affecter -->
-      <a class="ml-2"
-         [routerLink]="['./']"
-         (click)="affecterBureau()">
-        <i class="fad fa-exchange tx-echos2 bg-bluelight"
-           [ngbTooltip]=" 'AFFECTER' | translate "
-           style="padding:10px; border-radius:50%">
-        </i>
-      </a>
-
-
-      <!-- Modifier -->
-      <a class="ml-2"
-         [routerLink]="['./']"
-         (click)="modifier()">
-        <i class="fad fa-edit tx-echos2 bg-bluelight"
-           style="padding:10px; border-radius:50%"></i>
-      </a>
-
-      <!-- Supprimer -->
-      <a class="ml-2"
-         [routerLink]="['./']"
-         (click)="supprimer()">
-        <i class="fad fa-trash-alt tx-echos2 bg-bluelight"
-           style="padding:6px; border-radius:50%"></i>
-      </a>
+      <a class="ml-2"> <i class="fad fa-comment-alt-lines tx-echos2 bg-bluelight"
+           style="padding:10px; border-radius:50%"></i></a>
+      <a class="ml-2"> <i class="fad fa-page-break tx-echos2 bg-bluelight"
+           style="padding:6px; border-radius:50%"></i></a>
     </div>
 
+    <div class=" ">
+      <ul class="list-group list-group-flush tx-13 bg-bluelight ">
+        <li class="list-group-item d-flex pd-sm-x-0 bd-b ">
+          <div class="mr-2 ">
+            <i class="fad fa-phone-office tx-ether2 tx-20"></i>
+          </div>
+          <div class="pd-sm-l-10 pt-1">
+            <p class="tx-ether2 mg-b-0 tx-bold"> +221 00 000 00 00</p>
+          </div>
+        </li>
+        <li class="list-group-item d-flex pd-sm-x-0 bd-b ">
+          <div class="mr-2 "><i class="fad fa-mobile-android tx-ether2 tx-20"></i></div>
+          <div class="pd-sm-l-10 pt-1">
+            <p class="tx-ether2 mg-b-0 tx-bold"> +221 00 000 00 00</p>
+          </div>
+        </li>
 
-    <!-- Autres information et adresse -->
+        <li class="list-group-item d-flex pd-sm-x-0 bd-b ">
+          <div class="mr-2 ">
+            <i class="fad fa-at tx-ether2 tx-20"></i>
+          </div>
+          <div class="pd-sm-l-10 pt-1">
+            <p class="tx-ether2 mg-b-0 tx-bold"> mail@mail.com</p>
 
+          </div>
+        </li>
+        <li class="list-group-item d-flex pd-sm-x-0 bd-b">
+          <div class="mr-2 ">
+            <i class="fad fa-globe tx-ether2 tx-20"></i>
+          </div>
+          <div class="pd-sm-l-10 pt-1">
+            <p class="tx-ether2 mg-b-0 tx-bold"> www.site.cg</p>
+
+          </div>
+        </li>
+        <li class="list-group-item d-flex pd-sm-x-0 bd-b ">
+          <div class="mr-2 ">
+            <i class="fad fa-map-marker-alt tx-ether2 tx-20"></i>
+          </div>
+          <div class="pd-sm-l-10 pt-1">
+            <p class="tx-ether2 mg-b-0 tx-bold"> Liberte 5 Avenue du loyer villa 2345 </p>
+
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 
-  <div class=" col-lg-9 pr-2">
+
+  <div class=" col-lg-9 pr-2 ">
+    <div class="col-md-12 col-lg-12">
+
+      <div class="card-body collapse show"
+           id="collapse4">
+
+        <button type="button"
+                class="btn btn-brand btn-css3">
+          <i class="fas fa-link"></i><span> Lier vous</span>
+        </button>
+        <button type="button"
+                class="btn btn-brand btn-github">
+          <i class="fas fa-chair-office"></i><span>Bureaux</span>
+        </button>
+        <button type="button"
+                class="btn btn-brand btn-dropbox">
+          <i class="fas fa-landmark"></i><span> Amabassades</span>
+        </button>
+
+
+      </div>
+    </div>
     <div class="card mg-b-20">
       <div class=" collapse show"
            id="collapse9">
-        <!-- Navigation -->
         <ul class="nav bd-b bd-2 bd-facebook">
-          <!-- le ministere -->
           <li class="nav-item">
             <a class="nav-link tx-echos"
-               [routerLink]="['./']"
-               [routerLinkActiveOptions]="{ exact: true }"
-               [routerLinkActive]="'font-weight-bolder'">
-              <i class="fal fa-info-circle  tx-20"
-                 [routerLinkActiveOptions]="{ exact: true }"
-                 [routerLinkActive]="'fas'"></i>
-              {{ 'DETAILS' | translate }}
-            </a>
+               data-toggle="tab"
+               href="#bureaux_services"><i class="fad fa-user-crown  tx-20"></i> Postes</a>
           </li>
-
-
-          <!-- Bur -->
           <li class="nav-item">
             <a class="nav-link tx-echos"
-               [routerLink]="['employes']"
-               [routerLinkActive]="'font-weight-bolder'">
-              <i class="fal fa-users  tx-20"
-                 [routerLinkActive]="'fas'"></i>
-              {{ 'ressourcesHumaines' | translate }}
-            </a>
+               data-toggle="tab"
+               href="#bureaux_services"><i class="fad fa-user-crown  tx-20"></i> Services</a>
+          </li>
+          <li class="nav-item">
+
+            <a class="nav-link tx-echos "
+               data-toggle="tab"
+               href="#bureaux_citoyens"><i class="fad fa-user-circle  tx-20"></i> Citoyens</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               data-toggle="tab"
+               href="#bureaux_groupements"><i class="fad fa-users  tx-20"></i> Groupements</a>
           </li>
 
 
         </ul>
-
-        <!-- content -->
         <div class="tab-content">
+
           <div class="tab-pane fade active show"
-               id="details">
-            <router-outlet></router-outlet>
-          </div>
+               id="bureaux_citoyens">
 
-
-
-          <div class="tab-pane fade "
-               id="ministere_services">
-            <div class="pl-2 pt-2">
-              <h5 class="pt-2 pb-2"><i class="fad fa-circle  tx-20"></i> Liste de services du
-                ministères </h5>
-            </div>
-
-            <div class=" mycard4 mt-2">
-              <div class="row row-xs clearfix mg-0 pd-0  ">
-                <div class="col-lg-5">
-                  <div class="form-group  pl-2">
-                    <div class="input-group pt-2"
-                         style="width:340px">
-                      <input type="text"
-                             class="form-control pd-y-10  tx-white"
-                             placeholder="Recherche..."
-                             style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="input-group pt-2 ">
-                    <select class="custom-select border-0  bg-light"
-                            id="inputGroupSelect02">
-                      <option selected> Domaines...</option>
-                      <option value="1"> Académique</option>
-                      <option value="2"> Business</option>
-                      <option value="3"> Partenariat</option>
-                      <option value="3"> Diplômatique</option>
-                    </select>
-                    <select class="custom-select border-0 bg-light "
-                            id="inputGroupSelect02">
-                      <option selected> Sous domaine...</option>
-                      <option value="1"> Important</option>
-                      <option value="2"> Moins Important</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-lg-4  pt-2">
-                  <ul class="nav pl-2">
-                    <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
-                         data-toggle="tab"
-                         href="#filtrer"><i class="fal fa-filter  tx-14 "
-                           style="padding:6px; border-radius:50%"></i> Filtrer</a></li>
-                    <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
-                         data-toggle="tab"
-                         href="#filtrer"><i class="fal fa-sort-size-up  tx-14 "
-                           style="padding:6px; border-radius:50%"></i> Trier</a></li>
-                    <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
-                         data-toggle="tab"
-                         href="#filtrer"><i class="fal fa-plus  tx-14 "
-                           style="padding:6px; border-radius:50%"></i> Nouveau</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="row row-xs mg-0 pd-0 clearfix pt-2">
-              <div class=" col-lg-12 col-md-6 col-sm-12 pt-2">
-
-
-                <div class="card-body collapse show"
-                     id="collapse5">
-                  <nav>
-                    <ul class="pagination justify-content-center">
-                      <li class="page-item disabled">
-                        <a class="page-link"
-                           href="#"
-                           tabindex="-1">Previous</a>
-                      </li>
-                      <li class="page-item"><a class="page-link"
-                           href="#">1</a></li>
-                      <li class="page-item"><a class="page-link"
-                           href="#">2</a></li>
-                      <li class="page-item"><a class="page-link"
-                           href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link"
-                           href="#">Next</a>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-
-                <div class="pl-2 pt-4">
-                  <h5 class="pt-2 pb-2"><i class="fad fa-sparkles  tx-20"></i> Liste des
-                    services secondaires</h5>
-                </div>
-                <div class="row row-xs mg-0 pd-0 clearfix pt-2">
-                  <div class="mycard4 col-lg-3  pt-2 ">
-                    <div class="d-flex align-items-center justify-content-between pd-x-10 mg-b-10">
-                      <p> <i class="fad fa-th-large bg-teal tx-white"
-                           style="padding:6px; border-radius:50%"></i> Nom du département
-                      </p>
-
-                    </div>
-                    <div class=" text-center ">
-                      <span class="badge badge-pill badge-primary bg-teal "> Service de
-                        gestion de visa</span>
-                      <p>
-                        <span class=""> 10 Projets </span><span class=""> || </span><span class=""> 6 membres </span><span class="">
-                          || </span><span class=" tx-warning "> Public </span>
-                      </p>
-                    </div>
-
-                    <div class="d-flex align-items-center bg-light">
-                      <div class=" justify-content-between p-0">
-                        <p class="mg-0 ">
-                          <span class=" pl-2"> <i class="fad fa-eye bg-white"
-                               style="padding:6px ; border-radius:50%"></i></span>
-                          <span class=" pl-2"> <i class="fad fa-share-all bg-white"
-                               style="padding:6px ; border-radius:50%"></i></span>
-                          <span class=" pl-2"> <i class="fad fa-comment-alt-lines bg-white"
-                               style="padding:6px ; border-radius:50%"></i></span>
-                        </p>
-                      </div>
-                      <a class="nav-link  ml-4 "
-                         id="v-pills-home-tab"
-                         data-toggle="pill"
-                         href="#utilisateurs"
-                         role="tab"
-                         aria-controls="v-pills-home"
-                         aria-selected="true">
-                        <div class="d-flex flex-row">
-                          <div class="profiles">
-                            <!-- <img class="rounded-circle " src="assets/images/xs/avatar7.jpg" alt="avatar" width="26"> -->
-                            <img class="rounded-circle"
-                                 src="assets/images/xs/avatar6.jpg"
-                                 alt="avatar"
-                                 width="26">
-
-                          </div>
-                          <div class="avatar mg-l-10"><span class="avatar-initial rounded-circle bg-yeto2 ">+</span>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card-body collapse show"
-                     id="collapse5">
-                  <nav>
-                    <ul class="pagination justify-content-center">
-                      <li class="page-item disabled">
-                        <a class="page-link"
-                           href="#"
-                           tabindex="-1">Previous</a>
-                      </li>
-                      <li class="page-item"><a class="page-link"
-                           href="#">1</a></li>
-                      <li class="page-item"><a class="page-link"
-                           href="#">2</a></li>
-                      <li class="page-item"><a class="page-link"
-                           href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link"
-                           href="#">Next</a>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-
-              </div>
-
-            </div>
-
-
-          </div>
-
-          <div class="tab-pane fade "
-               id="ministere_consulats"
-               role="tabpanel">
-            <div class="pl-2 pt-2">
-              <h5 class="pt-2 pb-2"><i class="fad fa-circle  tx-20"></i> Liste des services
-                consulaires </h5>
-            </div>
-            <div class=" mycard2 mt-2">
-              <div class="d-flex justify-content-between">
+            <div class="row row-xs clearfix mg-0 pd-0  ">
+              <div class="col-lg-12 pl-2 pt-2 pr-4">
                 <div class="">
-                  <div class=" form-group  pl-2">
-                    <div class="input-group pt-2"
-                         style="width:340px">
-                      <input type="text"
-                             class="form-control pd-y-10  tx-white"
-                             placeholder="Recherche..."
-                             style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
-                    </div>
-                  </div>
+                  <h5 class="pt-2 pb-2 tx-bold tx-16"><i class="fad fa-bars  tx-20"></i> Tapez un nom pour rechercher un ressortissant de chez vous
+                  </h5>
                 </div>
-                <div class="">
-                  <div class="input-group pt-2 ">
-                    <select class="custom-select border-0  bg-light"
-                            id="inputGroupSelect02">
-                      <option selected> Continent...</option>
-                      <option value="1"> Académique</option>
-                      <option value="2"> Business</option>
-                      <option value="3"> Partenariat</option>
-                      <option value="3"> Diplômatique</option>
-                    </select>
-                    <select class="custom-select border-0 bg-light "
-                            id="inputGroupSelect02">
-                      <option selected> Langues...</option>
-                      <option value="1"> Important</option>
-                      <option value="2"> Moins Important</option>
-                    </select>
-
-                  </div>
-                </div>
-                <div class="  pt-2">
-                  <ul class="nav pl-2">
-                    <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
-                         data-toggle="tab"
-                         href="#filtrer"><i class="fal fa-filter  tx-14 "
-                           style="padding:6px; border-radius:50%"></i> Filtrer</a></li>
-                    <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
-                         data-toggle="tab"
-                         href="#filtrer"><i class="fal fa-sort-size-up  tx-14 "
-                           style="padding:6px; border-radius:50%"></i> Trier</a></li>
-                    <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto mr-2"
-                         data-toggle="tab"
-                         href="#filtrer"><i class="fal fa-plus  tx-14 "
-                           style="padding:6px; border-radius:50%"></i> Nouveau</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="row  row-xs clearfix p-2 pl-2">
-              <div class=" col-lg-4  pt-2 pl-2 pr-2 pb-2">
-                <div class="mycard4 ">
-                  <div class=" pt-2 pl-2 d-flex align-items-center justify-content-between ">
-                    <p class="tx-echos"> <img class=""
-                           src="assets/images/drapeaux/sn.svg"
-                           alt="avatar"
-                           width="40"> République du Sénégal</p>
-                  </div>
-                  <div class=" justify-content-between p-0">
-                    <p class="mg-0 pb-4">
-                      <span class=" pl-2"> <i class="fad fa-landmark tx-40  bg-light "
-                           style="padding:6px ; border-radius:50%"></i></span>
-
-                    </p>
-                  </div>
-                  <div class=" text-center ">
-                    <span class="badge badge-pill badge-primary bg-norange "> Service
-                      d'ambassade</span>
-                    <p>
-                      <span class=""> Français </span><span class=""> || </span><span class=""> 6 attachés </span><span class=""> ||
-                      </span><span class=" tx-success-100 "> Ouvert </span>
-                    </p>
-                  </div>
-                  <div class="d-flex justify-content-between ">
-                    <div class=" justify-content-between p-0">
-                      <p class="mg-0 pt-2">
-                        <span class=" pl-2"> <i class="fad fa-eye bg-white"
-                             style="padding:6px ; border-radius:50%"></i></span>
-                        <span class=" pl-2"> <i class="fad fa-share-all bg-white"
-                             style="padding:6px ; border-radius:50%"></i></span>
-                        <span class=" pl-2"> <i class="fad fa-comment-alt-lines bg-white"
-                             style="padding:6px ; border-radius:50%"></i></span>
-                        <span class=" pl-2"> <i class="fad fa-link bg-light  tx-echos "
-                             style="padding:6px ; border-radius:50%"></i></span>
-                      </p>
-                    </div>
-                    <a class="nav-link  ml-4  "
-                       id="v-pills-home-tab"
-                       data-toggle="pill"
-                       href="#utilisateurs"
-                       role="tab"
-                       aria-controls="v-pills-home"
-                       aria-selected="true">
-                      <div class="d-flex flex-row">
-                        <div class="profiles">
-                          <!-- <img class="rounded-circle " src="assets/images/xs/avatar7.jpg" alt="avatar" width="26"> -->
-                          <img class="rounded-circle"
-                               src="assets/images/xs/avatar6.jpg"
-                               alt="avatar"
-                               width="26">
-
+                <div class=" mycard4 mt-4">
+                  <div class="d-flex justify-content-between mg-0 pd-0  ">
+                    <div class="col-lg-5">
+                      <div class="form-group  pl-2">
+                        <div class="input-group pt-2"
+                             style="width:340px">
+                          <input type="text"
+                                 class="form-control pd-y-10  tx-white"
+                                 placeholder="Recherche..."
+                                 style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
                         </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-5">
+                      <div class="input-group pt-2 ">
+                        <select class="custom-select border-0  bg-light"
+                                id="inputGroupSelect02">
+                          <option selected> Profils ...</option>
+                          <option value="1"> Etudiants</option>
+                          <option value="2"> Travailleurs</option>
+                          <option value="3"> Etudiant - Travailleur</option>
+                          <option value="3"> Transitaires</option>
+                          <option value="3"> Neutres</option>
+                          <option value="3"> Diplômates</option>
+
+                        </select>
+                        <select class="custom-select border-0  bg-light"
+                                id="inputGroupSelect02">
+                          <option selected> Domaines...</option>
+                          <option value="1"> Académique</option>
+                          <option value="2"> Business</option>
+                          <option value="3"> Partenariat</option>
+                          <option value="3"> Diplômatique</option>
+                        </select>
+                        <select class="custom-select border-0 bg-light "
+                                id="inputGroupSelect02">
+                          <option selected> Sous domaine...</option>
+                          <option value="1"> Important</option>
+                          <option value="2"> Moins Important</option>
+                        </select>
 
                       </div>
-                    </a>
+                    </div>
+                    <div class="col-lg-2  pt-2">
+                      <ul class="nav ">
+                        <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto "
+                             data-toggle="tab"
+                             href="#filtrer"><i class="fal fa-filter  tx-14 "
+                               style="padding:6px; border-radius:50%"></i> Filtrer</a></li>
+                      </ul>
+
+
+                    </div>
                   </div>
                 </div>
+
+
+
+
+
+
               </div>
 
-            </div>
 
+
+            </div>
           </div>
-
           <div class="tab-pane fade "
-               id="ministere_ici_chez_nous">
-            <div class="row row-xs mg-0 pd-0 pt-2 pb-1 bg-light ">
-              <div class="col ">
-                <h6 class=""><i class="fad fa-globe-africa mg-r-3  "
-                     style="padding:6px; border-radius: 50%; "></i> Ici mon pays</h6>
+               id="les_groupements">
+          </div>
+          <div class="tab-pane fade "
+               id="les-services">
+            <div class="row row-xs clearfix pt-4 bd-b pb-2 mg-0 pd-0  ">
+
+              <div class="col">
+                <div class="image text-center"> <img class="rounded-circle ml--10"
+                       src="assets/images/xs/avatar4.jpg"
+                       alt="avatar"
+                       width="100"> </div>
+                <h6 class="text-center tx-ether pt-2"> Son Excellence Monsieur le Ministre des Affaires Etrangères</h6>
+                <h6 class="text-center tx-ether pt-2"> Jean - Claude GAKOSSO</h6>
+                <p class="text-center">
+                  <span class=""> Congo</span>
+                  <span class=""> || </span>
+                  <span class="tx-bold"> Brazzaville </span>
+                </p>
               </div>
             </div>
-            <div class=" row row-xs mg-0 pd-0 clearfix p-0 pt-2 ">
-              <div class="col-lg-3 pr-2">
-                <div class=" mycard2">
-                  <div class="flex-fill pd-1   pt-2">
-                    <nav class="nav flex-column  ">
+            <div class="row row-xs clearfix mg-0 pd-0  ">
+              <div class="col-lg-12 pl-2 pt-2 pr-4">
+                <div class="">
+                  <h5 class="pt-2 pb-2 tx-bold tx-16"><i class="fad fa-user-circle  tx-20"></i> Liste des membres du cabinet </h5>
+                </div>
+                <div class=" mycard4 mt-4">
+                  <div class="d-flex justify-content-between mg-0 pd-0  ">
+                    <div class="col-lg-5">
+                      <div class="form-group  pl-2">
+                        <div class="input-group pt-2"
+                             style="width:340px">
+                          <input type="text"
+                                 class="form-control pd-y-10  tx-white"
+                                 placeholder="Recherche..."
+                                 style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-group pt-2 ">
+                        <select class="custom-select border-0  bg-light"
+                                id="inputGroupSelect02">
+                          <option selected> Profils ...</option>
+                          <option value="1"> Etudiants</option>
+                          <option value="2"> Travailleurs</option>
+                          <option value="3"> Etudiant - Travailleur</option>
+                          <option value="3"> Transitaires</option>
+                          <option value="3"> Neutres</option>
+                          <option value="3"> Diplômates</option>
 
-                      <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
-                        <a href="#liste_parrainage"
-                           data-toggle="pill"
-                           class="nav-link3 tx-echos1"><i class="fad fa-flag tx-20 pr-2"></i> Ici chez nous</a>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
-                        <a href="#liste_parrainage"
-                           data-toggle="pill"
-                           class="nav-link3 tx-echos1"><i class="fad fa-house-night tx-20 pr-2"></i> Venir chez
-                          nous</a>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
-                        <a href="#liste_partenaire"
-                           data-toggle="pill"
-                           class="nav-link3 tx-echos1"><i class="fad fa-palette tx-20 pr-2"></i> Arts et Cultures</a>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
-                        <a href="#liste_partenaire"
-                           data-toggle="pill"
-                           class="nav-link3 tx-echos1"><i class="fad fa-crown tx-20 pr-2"></i> Mots du président</a>
-                      </div>
+                        </select>
+                        <select class="custom-select border-0  bg-light"
+                                id="inputGroupSelect02">
+                          <option selected> Domaines...</option>
+                          <option value="1"> Académique</option>
+                          <option value="2"> Business</option>
+                          <option value="3"> Partenariat</option>
+                          <option value="3"> Diplômatique</option>
+                        </select>
+                        <select class="custom-select border-0 bg-light "
+                                id="inputGroupSelect02">
+                          <option selected> Sous domaine...</option>
+                          <option value="1"> Important</option>
+                          <option value="2"> Moins Important</option>
+                        </select>
 
-                      <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
-                        <a href="#liste_observateurs"
-                           data-toggle="pill"
-                           class="nav-link3 tx-echos1"><i class="fad fa-users-cog tx-20 pr-2"></i> Gouvernement</a>
                       </div>
-                      <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
-                        <a href="#liste_arc"
-                           data-toggle="pill"
-                           class="nav-link3 tx-echos1"><i class="fab fa-black-tie tx-20 pr-2"></i> Services
-                          consulaires</a>
+                    </div>
+                    <div class="col-lg-3  pt-2">
+                      <ul class="nav ">
+                        <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto "
+                             data-toggle="tab"
+                             href="#filtrer"><i class="fal fa-filter  tx-14 "
+                               style="padding:6px; border-radius:50%"></i> Filtrer</a></li>
+                        <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto "
+                             data-toggle="tab"
+                             href="#filtrer"><i class="fal fa-plus  tx-14 "
+                               style="padding:6px; border-radius:50%"></i> Nouveau</a></li>
+                      </ul>
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row row-xs clearfix mg-0 pd-0 pt-4 p-2">
+                  <div class="col-lg-3">
+                    <div class="mycard4 ">
+                      <div class="avatar5"> <img class="rounded-circle "
+                             src="assets/images/xs/avatar7.jpg"
+                             alt="avatar"
+                             width="70"> </div>
+                      <div class="mycard-text pt-4 pb-2">
+                        <span class="date tx-bold tx-yeto tx-16"> Backoulas Fortuné Alain Junior</span>
+                        <p class="mb-0 "><small> Inscrit dépuis le: 23 Septembre 2021</small></p>
                       </div>
-                      <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
-                        <a href="#liste_evenement"
-                           data-toggle="pill"
-                           class="nav-link3 tx-echos1"><i class="fad fa-calendar-alt tx-20 pr-2"></i> Calendrier
-                          national</a>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="mycard4 ">
+                      <div class="avatar5"> <img class="rounded-circle "
+                             src="assets/images/xs/avatar7.jpg"
+                             alt="avatar"
+                             width="70"> </div>
+                      <div class="mycard-text pt-4 pb-2">
+                        <span class="date tx-bold tx-yeto tx-16"> Backoulas Fortuné Alain Junior</span>
+                        <p class="mb-0 "><small> Inscrit dépuis le: 23 Septembre 2021</small></p>
                       </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="mycard4 ">
+                      <div class="avatar5"> <img class="rounded-circle "
+                             src="assets/images/xs/avatar7.jpg"
+                             alt="avatar"
+                             width="70"> </div>
+                      <div class="mycard-text pt-4 pb-2">
+                        <span class="date tx-bold tx-yeto tx-16"> Backoulas Fortuné Alain Junior</span>
+                        <p class="mb-0 "><small> Inscrit dépuis le: 23 Septembre 2021</small></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="mycard4 ">
+                      <div class="avatar5"> <img class="rounded-circle "
+                             src="assets/images/xs/avatar7.jpg"
+                             alt="avatar"
+                             width="70"> </div>
+                      <div class="mycard-text pt-4 pb-2">
+                        <span class="date tx-bold tx-yeto tx-16"> Backoulas Fortuné Alain Junior</span>
+                        <p class="mb-0 "><small> Inscrit dépuis le: 23 Septembre 2021</small></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card-body collapse show"
+                       id="collapse5">
+                    <nav>
+                      <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                          <a class="page-link"
+                             href="#"
+                             tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item"><a class="page-link"
+                             href="#">1</a></li>
+                        <li class="page-item"><a class="page-link"
+                             href="#">2</a></li>
+                        <li class="page-item"><a class="page-link"
+                             href="#">3</a></li>
+                        <li class="page-item">
+                          <a class="page-link"
+                             href="#">Next</a>
+                        </li>
+                      </ul>
                     </nav>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-9">
-
-                <div class="">
-                  <h5 class="pt-2 pb-2 tx-bold tx-16"><i class="fad fa-flag-alt  tx-20"></i> Ici
-                    chez nous : présentation de votre pays </h5>
-                </div>
-                <div class=" mycard4 mt-4">
-                  <div class="nav-tabs-top">
-                    <ul class="nav  bg-light">
-                      <li class="nav-item">
-                        <a class="nav-link active show tx-facebook"
-                           data-toggle="tab"
-                           href="#editeur_texte">
-                          <i class="fad fa-text-size   tx-primary"
-                             style="padding:6px; border-radius:50%"></i> Editeur de
-                          texte</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link  tx-facebook"
-                           data-toggle="tab"
-                           href="#validant">
-                          <i class="fad fa-eye   tx-primary"
-                             style="padding:6px; border-radius:50%"></i> Aperçu et
-                          validation</a>
-                      </li>
-
-                    </ul>
-                    <div class="tab-content">
-                      <div class="tab-pane fade active show"
-                           id="editeur_texte">
-                      </div>
-                      <div class="tab-pane fade "
-                           id="validant">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="">
-                  <h5 class="pt-2 pb-2 tx-bold tx-16"><i class="fad fa-flag-alt  tx-20"></i>
-                    Venir chez nous : les conditions d'entrée dans votre pays </h5>
-                </div>
-                <div class=" mycard4 mt-4">
-                  <div class="nav-tabs-top">
-                    <ul class="nav  bg-light">
-                      <li class="nav-item">
-                        <a class="nav-link active show tx-facebook"
-                           data-toggle="tab"
-                           href="#editeur_texte">
-                          <i class="fad fa-text-size   tx-primary"
-                             style="padding:6px; border-radius:50%"></i> Editeur de
-                          texte</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link  tx-facebook"
-                           data-toggle="tab"
-                           href="#validant">
-                          <i class="fad fa-eye   tx-primary"
-                             style="padding:6px; border-radius:50%"></i> Aperçu et
-                          validation</a>
-                      </li>
-
-                    </ul>
-                    <div class="tab-content">
-                      <div class="tab-pane fade active show"
-                           id="editeur_texte">
-                      </div>
-                      <div class="tab-pane fade "
-                           id="validant">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-
-              </div>
             </div>
-
-
           </div>
         </div>
       </div>
     </div>
   </div>
-
-
-
 </div>
-
-
-
 
 <app-modal [configuration]="{ name: 'affecter-bureau-modal', titre: 'affecterUnBureau', icone: 'exchange', taille: 'md' }"
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
@@ -564,4 +386,4 @@
                    [extraFields]="{pays: single.pays, ministere: ministere?.id, ambassade: ambassade?.id }"
                    (itemEdited)="onBureauEdit($event.item)">
   </app-common-edit>
-</app-modal>
+</app-modal> -->

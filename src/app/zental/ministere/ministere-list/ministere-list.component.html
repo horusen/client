@@ -1,12 +1,18 @@
 <div class=" ">
   <div class="bd-b  pt-1">
     <p class="tx-16">
-      <i class="fad fa-landmark  bg-light tx-24"
+      <i class="fad fa-warehouse  bg-light tx-24"
          style="padding:8px; border-radius:50%"></i>
       {{ 'listeDesMinisteres' | translate }}
     </p>
   </div>
 </div>
+
+
+<app-main-header [id]="'ministere'"
+                 [hasFilter]="false"></app-main-header>
+
+
 <div class=" mg-b-20">
 
   <div class="row row-xs clearfix p-2 pl-2"
@@ -16,9 +22,11 @@
       <div class="mycard4">
         <!-- Pays -->
         <div class="pt-2 pl-2 d-flex align-items-center justify-content-between">
-          <p class="tx-echos"><img src="assets/images/drapeaux/sn.svg"
-                 alt="avatar"
-                 width="40"> République du {{ ministere.entite_diplomatique.pays_siege.libelle }}</p>
+          <p class="tx-echos">
+            <img [src]="ministere.entite_diplomatique.pays_siege.drapeau"
+                 [alt]="'drapeau-' + ministere.entite_diplomatique.pays_siege.libelle"
+                 width="40"> {{ ministere.entite_diplomatique.pays_siege.libelle }}
+          </p>
         </div>
 
         <!-- Icone -->
@@ -84,5 +92,5 @@
   <app-loading *ngIf="loading"
                class="my-5"></app-loading>
 
-  <app-ministere-missing-data *ngIf="!ministereService.data.length && !loading"></app-ministere-missing-data>
+  <app-missing-data-alt *ngIf="!ministereService.data.length && !loading"></app-missing-data-alt>
 </div>

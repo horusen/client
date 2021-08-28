@@ -17,13 +17,12 @@ export class EntiteDiplomatiqueEditComponent
   item: any;
   constructor(
     public service: BaseService,
-    public ministereService: MinistereService,
     public paysService: PaysService,
     public router: Router,
     public route: ActivatedRoute,
     @Inject(String) public element: string
   ) {
-    super(service, ministereService, paysService, router, route, element);
+    super(service, paysService, router, route, element);
   }
 
   ngOnInit(): void {
@@ -40,10 +39,12 @@ export class EntiteDiplomatiqueEditComponent
       const data = {
         ...this.form.value,
         pays_siege: this.formValue("pays_siege")[0].id,
+        pays_origine: this.formValue("pays_origine").id,
       };
       this.service.update(this.item.id, data).subscribe(() => {
         this.loading = false;
         this.helper.toggleModal(`${this.element}-edit-modal`);
+        this.helper.alertSuccess();
         this.initialiseForm(this.item);
         this.router.navigate(["./"], {
           relativeTo: this.route,

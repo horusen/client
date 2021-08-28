@@ -1,0 +1,19 @@
+<div class="row row-xs clearfix  mg-0 pd-0">
+
+  <!-- Discussion -->
+  <div class="col-lg-8  p-0">
+    <router-outlet></router-outlet>
+
+  </div>
+
+
+  <!-- Derniers conversation -->
+  <div class=" col-lg-4 p-0"
+       *ngIf="service">
+
+    <app-dernieres-discussions [dialoguant]="{ type: 'service', id: service.id }"></app-dernieres-discussions>
+
+  </div>
+
+
+</div>

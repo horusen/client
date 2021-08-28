@@ -1,0 +1,78 @@
+<div class="flex-fill pd-1  bd-b">
+  <nav class="nav flex-column mb-2 ">
+
+    <!-- Recherche -->
+    <div style="position: relative;"
+         class="w-100">
+      <div class="form-group mb-0 d-flex align-items-center  ">
+        <!-- Search field -->
+        <div class="input-group w-100 px-3">
+          <input type="text"
+                 class="form-control pd-y-10 "
+                 (keyup.enter)="research(search.value)"
+                 #search
+                 [attr.placeholder]="('RECHERCHER' | translate) + '...'"
+                 style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+        </div>
+
+
+      </div>
+      <div class=""
+           style="position: absolute; top: 42px; z-index: 20000;">
+        <a [routerLink]="['./']"
+           [queryParams]="{ search: null }"
+           [queryParamsHandling]="'merge'"
+           class="tx-10 text-danger mr-1"
+           *ngIf="searchActive"
+           (click)="search.value = ''">
+          <span class=" mr-1"><i class="fal fa-times-circle"></i></span>
+          {{ 'annulerLaRecherche' | translate }}
+        </a>
+      </div>
+    </div>
+
+    <!-- Liste des elements -->
+    <ng-container *ngIf="diplomatieService.data.length && !loading">
+      <div class="d-flex align-items-center scaleUp justify-content-between bd-b p-2 pr-4"
+           [ngClass]="{'border-primary border': rla.isActive}"
+           *ngFor="let pays of diplomatieService.data | paginate: {itemsPerPage: 6, id: 'diplomatie', currentPage: currentPage}">
+        <a [routerLink]="['diplomaties', pays.id]"
+           [queryParamsHandling]="'preserve'"
+           #rla="routerLinkActive"
+           [routerLinkActive]="'tx-facebook'"
+           class="nav-link tx-gray-600">
+          <img [src]="pays.drapeau"
+               [alt]="pays.libelle">
+          {{ pays.libelle }}
+        </a>
+
+
+        <span><i class="fad fa-list"></i></span>
+
+      </div>
+    </ng-container>
+
+
+    <!-- Loading -->
+    <div class="my-5"
+         *ngIf="loading">
+      <app-loading></app-loading>
+    </div>
+
+
+  </nav>
+
+
+  <!-- Pagination -->
+  <div class="col-12 mt-1 d-flex justify-content-center">
+    <pagination-controls id="diplomatie"
+                         (pageChange)="currentPage = $event"
+                         autoHide="true"
+                         previousLabel="{{ 'PRECEDENT' | translate }}"
+                         nextLabel="{{ 'SUIVANT' | translate }}">
+    </pagination-controls>
+  </div>
+
+
+
+</div>

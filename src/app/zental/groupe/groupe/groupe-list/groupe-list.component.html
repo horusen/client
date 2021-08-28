@@ -1,0 +1,18 @@
+<!-- Liste des elements -->
+<div class="row  row-xs clearfix p-2 pl-2"
+     *ngIf="!loading && groupeService.data.length">
+  <div class=" col-lg-4  pt-2 pl-2 pr-2 pb-2"
+       *ngFor="let groupe of groupeService.data">
+
+    <app-groupe-solo [groupe]="groupe"></app-groupe-solo>
+  </div>
+
+</div>
+
+
+
+<div class="my-5"
+     *ngIf="loading || !groupeService.data.length">
+  <app-missing-data-alt *ngIf="!loading && !groupeService.data.length"></app-missing-data-alt>
+  <app-loading *ngIf="loading"></app-loading>
+</div>

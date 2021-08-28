@@ -4,6 +4,7 @@ import { MinistereService } from "../../ministere/ministere.service";
 import { PasseFrontiereService } from "../../passe-frontiere/passe-frontiere.service";
 import { PaysService } from "../../pays/pays.service";
 import { TypePasserelleService } from "../../type-passerelle/type-passerelle.service";
+import { VilleService } from "../../villes/ville.service";
 import { PasserelleCreateComponent } from "../passerelle-create/passerelle-create.component";
 import { PasserelleService } from "../passerelle.service";
 
@@ -22,6 +23,7 @@ export class PasserelleEditComponent
     public passerelleService: PasserelleService,
     public ministereService: MinistereService,
     public paysService: PaysService,
+    public villeService: VilleService,
     public router: Router,
     public route: ActivatedRoute,
     public passeFrontiereService: PasseFrontiereService,
@@ -29,7 +31,6 @@ export class PasserelleEditComponent
   ) {
     super(
       passerelleService,
-      ministereService,
       paysService,
       router,
       route,

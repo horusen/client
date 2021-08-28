@@ -49,6 +49,12 @@ export class BaseComponent implements OnDestroy {
       enableSearchFilter: true,
       disabled: false,
     },
+    singleDisabled: {
+      singleSelection: true,
+      labelKey: "libelle",
+      enableSearchFilter: true,
+      disabled: true,
+    },
     multi: {
       singleSelection: false,
       selectAllText: "Tout selectionner",

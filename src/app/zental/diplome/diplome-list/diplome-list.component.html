@@ -2,7 +2,8 @@
      *ngIf="!loading && diplomeService.data.length">
   <div class=" col-lg-12 "
        *ngFor="let diplome of diplomeService.data">
-    <app-diplome-solo [diplome]="diplome"></app-diplome-solo>
+    <app-diplome-solo [diplome]="diplome"
+                      [user]="user"></app-diplome-solo>
   </div>
 </div>
 
@@ -13,7 +14,7 @@
   </div>
 
   <div class="d-flex align-items-center flex-column justify-content-center"
-       *ngIf="!loading && !diplomeService.length">
+       *ngIf="!loading && !diplomeService.data.length">
 
     <svg id="f325d056-0601-4430-b2a9-a04a68291155"
          class="missing-icon"

@@ -9,6 +9,7 @@
 
       <a [routerLink]="['./']"
          fragment="add-emploie"
+         *ngIf="(router.url.includes('identite') && user?.id_inscription === auth.user.id_inscription)"
          class="float-right"><i class="fad fa-plus-circle"></i></a>
     </h6>
   </div>

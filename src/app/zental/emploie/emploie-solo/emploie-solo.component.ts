@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { EmploieService } from "../emploie.service";
 
@@ -9,8 +10,9 @@ import { EmploieService } from "../emploie.service";
 })
 export class EmploieSoloComponent extends BaseComponent implements OnInit {
   @Input() emploie: any;
+  @Input() user: any;
   showDescription = false;
-  constructor(public emploieService: EmploieService) {
+  constructor(public emploieService: EmploieService, public router: Router) {
     super();
   }
 

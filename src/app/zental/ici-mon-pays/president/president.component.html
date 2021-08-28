@@ -1,0 +1,14 @@
+<app-president-show></app-president-show>
+
+
+<app-modal [configuration]="{ name: 'president-create-modal', titre: 'ajouterVotrePresident', icone: 'user-tie' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve'})">
+  <app-president-create *ngIf="create"></app-president-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'president-edit-modal', titre: 'modifierLesDetailsDeVotrePresident', icone: 'user-tie' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve'})">
+  <app-president-edit *ngIf="edit"></app-president-edit>
+</app-modal>

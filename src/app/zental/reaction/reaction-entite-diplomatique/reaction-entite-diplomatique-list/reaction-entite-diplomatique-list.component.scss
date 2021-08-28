@@ -1,0 +1,68 @@
+.avatar {
+  width: 40px;
+  height: 40px;
+
+  &-initial {
+    font-size: 15px;
+  }
+}
+
+.profiletimeline {
+  height: 575px;
+  overflow-y: auto;
+  margin: 0;
+  padding-left: 60px;
+}
+
+.avatar3 {
+  height: 45px;
+  width: 45px;
+  max-width: 45px !important;
+}
+
+.reaction {
+  &__cta {
+    opacity: 0;
+    max-height: 0;
+    transition: all 1s;
+  }
+  &:hover &__cta {
+    max-height: auto;
+    opacity: 1;
+  }
+
+  &__img {
+    width: 30%;
+    cursor: pointer;
+  }
+}
+
+.rebondissement-img {
+  width: 15%;
+}
+
+.profiletimeline .sl-left img {
+  max-width: none;
+}
+
+audio {
+  background: none;
+}
+
+.avatar-initial {
+  position: relative;
+  /* top: 0; */
+  /* left: 0; */
+  /* right: 0; */
+  padding: 10px;
+  /* bottom: 0; */
+  background-color: #8392a5;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: Trebuchet MS;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

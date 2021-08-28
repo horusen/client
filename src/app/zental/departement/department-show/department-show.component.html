@@ -1,4 +1,16 @@
-<div class="row row-xs clearfix  mg-0 pd-0 p-0 pt-4 "
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="d-inline-block">
+    <!-- boutton precedent -->
+    <a [routerLink]="['..']"
+       [ngbTooltip]="'revenirEnArriere' | translate"
+       class="p-2 mr-2 tx-15  d-flex border rounded-circle align-items-center justify-content-center">
+      <i class="fad fa-arrow-left"></i>
+    </a>
+
+  </h5>
+</div>
+<div class="row row-xs clearfix  mg-0 pd-0 p-0 pt-2 "
      *ngIf="single">
   <!-- Details et adresse -->
   <div class=" col-lg-3 pr-2  pl-4">

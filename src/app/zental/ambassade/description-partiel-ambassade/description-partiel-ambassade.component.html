@@ -1,0 +1,4 @@
+<app-description-partiel *ngIf="ambassade"
+                         [parent]="{ name: 'ambassade', item: ambassade, typeDescription }"
+                         (descriptionEdited)="onAmbassadeEdited($event)">
+</app-description-partiel>

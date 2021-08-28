@@ -5921,6 +5921,27 @@ span {
   /* box-shadow: 2px 2px 8px rgba(0,0,0,0.6);  */
 }
 
+.mycard6 {
+  display: grid;
+  /* grid-template-columns: 238px; */
+  /* grid-template-rows: 65px 0px 50px; */
+  grid-template-areas: "image" "text" "stats";
+  transition: 0.5s ease;
+  cursor: pointer;
+  margin: 0px;
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: 5px 5px 15px rgba(244, 242, 240, 0.9);
+  text-align: center;
+  border-radius: 20px;
+  transition: all 0.2 ease-in-out;
+  overflow: visible;
+}
+.mycard6:hover {
+  transform: scale(1);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
 .cardbarre {
   display: grid;
   /* grid-template-columns: 100%; */

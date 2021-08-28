@@ -9,7 +9,7 @@
 
         <!--  -->
         <a [routerLink]="['./']"
-           *ngIf="!conjoint && !loading"
+           *ngIf="!conjoint && !loading && (router.url.includes('identite') && user.id_inscription === auth.user.id_inscription)"
            class="
            float-right"
            fragment="conjoint-add">
@@ -17,7 +17,7 @@
         </a>
 
         <a [routerLink]="['./']"
-           *ngIf="conjoint && !loading"
+           *ngIf="conjoint && !loading && (router.url.includes('identite') && user.id_inscription === auth.user.id_inscription)"
            class="
            float-right"
            (click)="supprimer()">

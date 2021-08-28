@@ -1,0 +1,143 @@
+<div class="row row-xs clearfix  mg-0 pd-0 p-0 pt-4 "
+     *ngIf="single">
+  <!-- Details et adresse -->
+  <div class=" col-lg-3 pr-2  pl-4">
+    <!-- Details -->
+    <div class="row row-xs clearfix pt-4 bd-b pb-2 mg-0 pd-0 bg-light ">
+      <div class="col-lg-12">
+        <!-- Drapeau -->
+        <div class="image text-center pb-2">
+          <i class="fal fa-portal-enter fa-3x"></i>
+        </div>
+
+        <!-- Libelle -->
+        <h6 class="text-center tx-ether">{{ single.entite_diplomatique.libelle }}</h6>
+
+        <!-- Pays  -->
+        <p class="text-center mb-0 ether2"
+           *ngIf="single.bureau">
+          ( {{ 'BUREAU' | translate }} ) {{ single.bureau.libelle }}
+        </p>
+
+        <p class="text-center  text-warning mb-0 ether2"
+           *ngIf="!single.bureau"> {{ 'nonRepresente' | translate }}</p>
+
+        <!-- Date création -->
+        <!-- <p class="text-center tx-warning tx-12	"> {{ 'DEPUIS' | translate }} : {{ single.date_creation | date }} </p> -->
+
+        <!-- Devise -->
+        <!-- <p class="text-center tx-ether2 tx-14	"> {{ single.devise }}</p> -->
+      </div>
+    </div>
+
+    <!-- Action -->
+    <div class=" text-center pt-1 pb-1 ">
+      <!-- Affecter -->
+      <a class="ml-2"
+         [routerLink]="['./']"
+         (click)="affecterPasserelle()">
+        <i class="fad fa-exchange tx-echos2 bg-bluelight"
+           [ngbTooltip]=" 'AFFECTER' | translate "
+           style="padding:10px; border-radius:50%">
+        </i>
+      </a>
+
+
+      <!-- Modifier -->
+      <a class="ml-2"
+         [routerLink]="['./']"
+         (click)="modifier()">
+        <i class="fad fa-edit tx-echos2 bg-bluelight"
+           style="padding:10px; border-radius:50%"></i>
+      </a>
+
+      <!-- Supprimer -->
+      <a class="ml-2"
+         [routerLink]="['./']"
+         (click)="supprimer()">
+        <i class="fad fa-trash-alt tx-echos2 bg-bluelight"
+           style="padding:6px; border-radius:50%"></i>
+      </a>
+    </div>
+
+
+    <!-- Autres information et adresse -->
+
+  </div>
+
+  <div class=" col-lg-9 pr-2">
+    <div class="card mg-b-20">
+      <div class=" collapse show"
+           id="collapse9">
+        <!-- Navigation -->
+        <ul class="nav bd-b bd-2 bd-facebook">
+          <!-- Description -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="['./']"
+               [routerLinkActiveOptions]="{ exact: true }"
+               [routerLinkActive]="'font-weight-bolder'">
+              <i class="fal fa-info-circle  tx-20"
+                 [routerLinkActiveOptions]="{ exact: true }"
+                 [routerLinkActive]="'fas'"></i>
+              {{ 'DETAILS' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Liste des emplyes -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="['employes']"
+               *ngIf="single.bureau"
+               [routerLinkActive]="'font-weight-bolder'">
+              <i class="fal fa-users  tx-20"
+                 [routerLinkActive]="'fas'"></i>
+              {{ 'ressourcesHumaines' | translate }}
+            </a>
+          </li>
+
+
+        </ul>
+
+        <!-- content -->
+        <div class="tab-content">
+          <div class="tab-pane fade active show"
+               id="details">
+            <router-outlet></router-outlet>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+
+<app-modal [configuration]="{ name: 'affecter-passerelle-modal', titre: 'affecterUnePasserelle', icone: 'exchange', taille: 'md' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-affecter-passerelle *ngIf="affecter"
+                           [passerelle]="single">
+  </app-affecter-passerelle>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'passerelle-edit-modal', titre: 'modifierLesDetailsDeLaPasserelle', icone: 'link' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' }); edit = false">
+  <app-passerelle-edit *ngIf="edit"></app-passerelle-edit>
+</app-modal>
+
+
+
+
+
+<div class="my-5"
+     *ngIf="loading">
+  <app-loading></app-loading>
+</div>

@@ -1,45 +1,68 @@
 <div class="row  row-xs clearfix p-2 pl-2"
      *ngIf="liaisonService.data.length && !loading">
-  <div class=" col-lg-3  pt-2 pl-2 pr-2 pb-2"
-       *ngFor="let liaison of liaisonService.data">
+  <div *ngFor="let liaison of liaisonService.data |
+   paginate: {itemsPerPage: itemsPerPage, id: 'liaison', currentPage: currentPage}"
+       class="  pt-2 pl-2 pr-2 pb-2"
+       [ngClass]="{
+         'col-3': colonne_affichage === 4,
+         'col-4': colonne_affichage === 3,
+         'col-6': colonne_affichage === 2
+      }">
     <div class="mycard4 ">
       <!-- Drapeaux -->
-      <div class=" pt-2 pl-2 d-flex align-items-center justify-content-between bd-b border-warning">
+      <div class=" pt-2 pb-2 pl-2 d-flex align-items-center justify-content-between bd-b border-warning">
         <p class="tx-echos"> <img class=""
-               src="assets/images/drapeaux/cv.svg"
-               alt="avatar"
-               width="40"> {{ 'republiqueDu' | translate }} {{ liaison?.entite_diplomatique?.pays_siege?.libelle }} </p>
+               [src]="liaison.pays_origine.drapeau"
+               [alt]="'drapeau-' + liaison.pays_origine.libelle"
+               width="40">
+          {{ 'republiqueDu' | translate }} {{ liaison?.pays_origine?.libelle }}
+        </p>
       </div>
 
       <!-- icon -->
       <div class="d-flex justify-content-center p-0">
         <p class="mg-0 pb-4 text-center">
-          <span class=" pl-2"> <i class="fad fa-link tx-40  bg-light "
-               style="padding:6px ; border-radius:50%"></i></span>
-
+          <span class=" pl-2">
+            <i class="fad fa-link tx-40  bg-light "
+               style="padding:6px ; border-radius:50%">
+            </i>
+          </span>
         </p>
       </div>
 
       <!-- Type -->
       <div class=" text-center ">
-        <span class="badge badge-pill badge-warning bg-warning "> {{ 'LIAISON' | translate }}</span>
+        <span class="badge badge-pill badge-warning bg-warning ">
+          {{ liaison?.pays_siege?.libelle }}
+        </span>
 
         <p class="text-center">
           <!-- Langue -->
-          <span class=""> Portuguais </span>
+          <span class=""> Langue </span>
           <span class=""> || </span>
 
           <!-- Pays ambassade -->
-          <span class=""> {{liaison.ambassades[0]?.entite_diplomatique?.pays_siege?.libelle }} </span>
           <span class=""
-                *ngIf="liaison.bureau">
-            ||
+                *ngIf="liaison.ambassade">
+            {{liaison.ambassade?.entite_diplomatique?.pays_siege?.libelle }} ||
           </span>
+
+          <!-- Pays consulat -->
+          <span class=""
+                *ngIf="liaison.consulat">
+            {{liaison.consulat?.entite_diplomatique?.pays_siege?.libelle }} ||
+          </span>
+
 
           <!-- Bureau -->
           <span class=" tx-success-100 ">
-            <ng-container *ngIf="liaison.bureau">{{ liaison?.bureau?.libelle }}</ng-container>
-            <ng-container *ngIf="!liaison.bureau">{{ 'nonRepresente' | translate}}</ng-container>
+            <ng-container *ngIf="liaison.bureau">
+              {{ liaison?.bureau?.entite_diplomatique.libelle }}
+            </ng-container>
+            <!-- No data handling -->
+            <ng-container *ngIf="!liaison.bureau">
+              {{ 'nonRepresente' | translate}}
+            </ng-container>
           </span>
         </p>
       </div>
@@ -50,9 +73,11 @@
         <p class="mg-0 pt-2">
           <!-- details -->
           <a [routerLink]="[liaison.id]"
+             [queryParamsHandling]="'preserve'"
              class=" pl-2">
             <i class="fad fa-eye bg-white"
-               style="padding:6px ; border-radius:50%"></i>
+               style="padding:6px ; border-radius:50%">
+            </i>
           </a>
 
           <!-- Edit -->
@@ -61,7 +86,8 @@
              [fragment]="'edit-liaison'"
              (click)="modifier(liaison)">
             <i class="fad fa-edit bg-white"
-               style="padding:6px ; border-radius:50%"></i>
+               style="padding:6px ; border-radius:50%">
+            </i>
           </a>
 
           <!-- Supprimer -->
@@ -69,20 +95,36 @@
              (click)="supprimer(liaison.id)"
              [routerLink]="['./']">
             <i class="fad fa-trash-alt bg-white"
-               style="padding:6px ; border-radius:50%"></i>
+               style="padding:6px ; border-radius:50%">
+            </i>
           </a>
 
           <!-- Discussion -->
-          <span class=" pl-2"> <i class="fad fa-comment-alt-lines bg-white"
-               style="padding:6px ; border-radius:50%"></i></span>
+          <span class=" pl-2">
+            <i class="fad fa-comment-alt-lines bg-white"
+               style="padding:6px ; border-radius:50%"></i>
+          </span>
 
 
           <!-- Liaison -->
-          <span class=" pl-2"> <i class="fad fa-link bg-light  tx-echos "
-               style="padding:6px ; border-radius:50%"></i></span>
+          <span class=" pl-2">
+            <i class="fad fa-link bg-light  tx-echos "
+               style="padding:6px ; border-radius:50%"></i>
+          </span>
         </p>
       </div>
     </div>
+  </div>
+
+
+  <!-- Pagination control -->
+  <div class="col-12 mt-1 d-flex justify-content-center">
+    <pagination-controls id="liaison"
+                         (pageChange)="currentPage = $event"
+                         autoHide="true"
+                         previousLabel="{{ 'PRECEDENT' | translate }}"
+                         nextLabel="{{ 'SUIVANT' | translate }}">
+    </pagination-controls>
   </div>
 
 </div>
@@ -92,6 +134,8 @@
 
 <div class="my-5"
      *ngIf="loading || !liaisonService.data.length">
-  <app-missing-data *ngIf="!loading && !liaisonService.data.length"></app-missing-data>
+  <app-missing-data-alt *ngIf="!loading &&
+                                       !liaisonService.data.length">
+  </app-missing-data-alt>
   <app-loading *ngIf="loading"></app-loading>
 </div>

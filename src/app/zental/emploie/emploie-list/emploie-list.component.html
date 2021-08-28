@@ -2,7 +2,8 @@
      *ngIf="!loading && emploieService.data.length">
   <div class=" col-lg-12 "
        *ngFor="let emploie of emploieService.data">
-    <app-emploie-solo [emploie]="emploie"></app-emploie-solo>
+    <app-emploie-solo [emploie]="emploie"
+                      [user]="user"></app-emploie-solo>
   </div>
 
 </div>

@@ -47,13 +47,13 @@ export class ResponsableCreateComponent
   getPosteFieldValue(): number {
     if (this.parent.name === "ministre") return 1;
     else if (this.parent.name === "ambassadeur") return 2;
-    else if (this.parent.name === "consule") return 3;
+    else if (this.parent.name === "consul") return 3;
   }
 
   getInstitutionName(): string {
     if (this.parent.name === "ministre") return "ministere";
     else if (this.parent.name === "ambassadeur") return "ambassade";
-    else if (this.parent.name === "consule") return "consulat";
+    else if (this.parent.name === "consul") return "consulat";
   }
 
   initialiseForm(responsable?: any): void {

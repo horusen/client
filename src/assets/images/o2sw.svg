@@ -1,0 +1,21 @@
+<svg width="142" height="44" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <filter height="200%" width="200%" y="-50%" x="-50%" id="svg_20_blur">
+   <feGaussianBlur stdDeviation="0" in="SourceGraphic"/>
+  </filter>
+ </defs>
+ <title/>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="46" width="144" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <rect stroke="#005fbf" opacity="0.75" id="svg_23" height="24.332764" width="27" y="10.686351" x="86.852951" stroke-width="null" fill="#005fbf"/>
+  <text stroke="null" transform="matrix(1,0,0,0.8693482875823975,0,2.368062287569046) " xml:space="preserve" text-anchor="start" font-family="'Simonetta', serif" font-size="20" id="svg_22" y="29.048498" x="90.361173" stroke-opacity="null" stroke-width="0" fill="#fcfcfc">sw</text>
+  <rect fill="#2652e4" id="svg_9" y="-11" x="151" width="92" transform="rotate(90 197,16.500000000000018) " rx="6.86" height="55" class="cls-4"/>
+  <text filter="url(#svg_20_blur)" xml:space="preserve" text-anchor="start" font-family="'Times New Roman', Times, serif" font-size="24" id="svg_20" y="30.102708" x="18.171963" stroke-opacity="null" stroke-width="0" stroke="null" fill="#0b447c">Open</text>
+  <text stroke="null" transform="matrix(1,0,0,1.043478267691124,0,-2.176099614500975) " opacity="0.57" xml:space="preserve" text-anchor="start" font-family="'Times New Roman', Times, serif" font-size="52" id="svg_21" y="40.430635" x="62.186519" stroke-opacity="null" stroke-width="0" fill="#0b447c">2</text>
+  <ellipse opacity="0.36" ry="2.56404" rx="2.435838" id="svg_24" cy="22.403014" cx="26.633954" stroke-width="null" stroke="#809fbf" fill="#0b447c"/>
+ </g>
+</svg>

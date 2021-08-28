@@ -31,21 +31,9 @@ export class AdresseEditComponent
 
         this.initialiseForm(this.single);
 
-        this.getVilles(() => {
-          this.formValuePatcher("ville", [this.single.ville]);
-        });
+        this.getVilles();
       }
     );
-  }
-
-  initialiseForm(adresse: any) {
-    this.form = this.fb.group({
-      ville: ["", Validators.required],
-      adresse: [adresse.adresse],
-      entite_diplomatique: this.parent.item.entite_diplomatique.id,
-    });
-
-    this.isFormOk = true;
   }
 
   edit() {

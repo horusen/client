@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
+import { Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { BaseCreateComponent } from "src/app/shared/components/base-component/base-create.component";
+import { ParentDefinition } from "src/app/shared/models/parent-definition.model";
 import { AmbassadeService } from "../../ambassade/ambassade.service";
-import { BureauService } from "../../bureau/bureau.service";
-import { MinistereService } from "../../ministere/ministere.service";
+import { ConsulatService } from "../../consulat/consulat.service";
 import { PaysService } from "../../pays/pays.service";
-import { EntiteDiplomatiqueCreateComponent } from "../../shared-zental/abstract/entite-diplomatique-create/entite-diplomatique-create.component";
 import { LiaisonService } from "../liaison.service";
 
 @Component({
@@ -13,61 +14,108 @@ import { LiaisonService } from "../liaison.service";
   styleUrls: ["./liaison-create.component.scss"],
 })
 export class LiaisonCreateComponent
-  extends EntiteDiplomatiqueCreateComponent
+  extends BaseCreateComponent
   implements OnInit
 {
+  @Input() parent: ParentDefinition;
   ambassade: any;
-  parent: string;
   dependancies = {
     ambassades: [],
-    bureaux: [],
+    pays: [],
+    consulats: [],
+    lierA: ["CONSULAT", "AMBASSADE"],
   };
   dependanciesLoading = {
     ambassades: false,
-    bureaux: false,
+    pays: false,
+    consulats: false,
   };
   constructor(
     public liaisonService: LiaisonService,
-    public ministereService: MinistereService,
     public paysService: PaysService,
     public router: Router,
     public route: ActivatedRoute,
-    public bureauService: BureauService,
-    public ambassadeService: AmbassadeService
+    public ambassadeService: AmbassadeService,
+    public consulatService: ConsulatService
   ) {
-    super(
-      liaisonService,
-      ministereService,
-      paysService,
-      router,
-      route,
-      "liaison"
-    );
+    super(liaisonService);
   }
 
   ngOnInit(): void {
-    super.ngOnInit();
+    this.initialiseForm();
 
-    this.addControls(["ambassade", "bureau"], [null, null], [true, true]);
-    if (this.router.url.includes("ministere")) {
-      this.parent = "ministere";
-      this._subscription["ministere2"] =
-        this.ministereService.singleData$.subscribe((ministere) => {
-          this.getAmbassades(ministere.id);
-          this.getBureauxByMinistere(ministere.id);
-        });
-    } else if (this.router.url.includes("ambassade")) {
-      this.parent = "ambassade";
-      this._subscription["ambassade"] =
-        this.ambassadeService.singleData$.subscribe((ambassade) => {
-          this.ambassade = ambassade;
-          this.formValuePatcher("ambassade", [ambassade]);
-          this.getBureauxByAmbassade(ambassade.id);
-        });
+    this.getPays();
+  }
+
+  initialiseForm(liaison?: any): void {
+    // Form Initialisation
+    this.form = this.fb.group({
+      pays_origine: [
+        liaison?.pays_origine
+          ? [liaison.pays_origine]
+          : this.parent.item.entite_diplomatique.pays_origine.id,
+        Validators.required,
+      ],
+      pays_siege: [
+        liaison?.pays_siege ? [liaison.pays_siege] : null,
+        Validators.required,
+      ],
+      lierA: [null, Validators.required],
+      date_creation: [
+        liaison ? liaison.date_creation : null,
+        Validators.required,
+      ],
+      consulat: [liaison?.consulat ? [liaison.consulat] : []],
+      ambassade: [liaison?.ambassade ? [liaison.ambassade] : []],
+    });
+
+    // Set and remove validators
+    this.form.controls.lierA.valueChanges.subscribe({
+      next: (value) => {
+        if (value === "AMBASSADE") {
+          this.addValidators("ambassade", [Validators.required]);
+          this.removeValidators("consulat");
+        } else if (value === "CONSULAT") {
+          this.addValidators("consulat", [Validators.required]);
+          this.removeValidators("ambassade");
+        }
+      },
+    });
+
+    if (this.parent.name === "ministere") {
+      this.form.controls.lierA.valueChanges.subscribe({
+        next: (value) => {
+          if (value === "AMBASSADE") {
+            this.getAmbassadesByMinistere(this.parent.item.id);
+            this.formValuePatcher("consulat", []);
+          } else if (value === "CONSULAT") {
+            this.getConsulatsByMinistere(this.parent.item.id);
+            this.formValuePatcher("ambassade", []);
+          }
+        },
+      });
+    } else if (this.parent.name === "ambassade") {
+      this.form.controls.lierA.valueChanges.subscribe({
+        next: (value) => {
+          if (value === "AMBASSADE") {
+            this.formValuePatcher("ambassade", [this.parent.item]);
+          } else if (value === "CONSULAT") {
+            this.getConsulatsByAmbassade(this.parent.item.id);
+          }
+        },
+      });
+    } else if (this.parent.name === "consulat") {
+      this.formValuePatcher("consulat", [this.parent.item]);
+    }
+
+    if ((liaison && liaison.consulat) || this.parent.name === "consulat") {
+      this.formValuePatcher("lierA", "CONSULAT");
+    } else {
+      this.formValuePatcher("lierA", "AMBASSADE");
     }
   }
 
-  getAmbassades(ministere: number): void {
+  getAmbassadesByMinistere(ministere: number): void {
     this.dependanciesLoading.ambassades = true;
     this.ambassadeService
       .getByMinistere(ministere, {}, false)
@@ -77,50 +125,62 @@ export class LiaisonCreateComponent
       });
   }
 
-  getBureauxByMinistere(ministere: number): void {
-    this.dependanciesLoading.bureaux = true;
-    this.bureauService
+  getConsulatsByMinistere(ministere: number): void {
+    this.dependanciesLoading.consulats = true;
+    this.consulatService
       .getByMinistere(ministere, {}, false)
-      .subscribe((bureaux) => {
-        this.dependancies.bureaux = bureaux;
-        this.dependanciesLoading.bureaux = false;
+      .subscribe((consulats) => {
+        this.dependancies.consulats = consulats;
+        this.dependanciesLoading.consulats = false;
       });
+    return;
   }
 
-  getBureauxByAmbassade(ambassade: number): void {
-    this.dependanciesLoading.bureaux = true;
-    this.bureauService
+  getConsulatsByAmbassade(ambassade: number): void {
+    this.dependanciesLoading.consulats = true;
+    this.consulatService
       .getByAmbassade(ambassade, {}, false)
-      .subscribe((bureaux) => {
-        this.dependancies.bureaux = bureaux;
-        this.dependanciesLoading.bureaux = false;
+      .subscribe((consulats) => {
+        this.dependancies.consulats = consulats;
+        this.dependanciesLoading.consulats = false;
       });
+    return;
+  }
+
+  getPays(): void {
+    this.dependanciesLoading.pays = true;
+    this.paysService.getAll(false).subscribe((pays) => {
+      this.dependancies.pays = pays;
+      this.dependanciesLoading.pays = false;
+    });
   }
 
   create(): void {
     if (this.form.valid) {
       this.loading = true;
       const data = {
-        ...this.form.value,
         pays_siege: this.formValue("pays_siege")[0].id,
-        ambassade: this.formValue("ambassade")[0].id,
-        bureau: this.formValue("bureau")[0].id,
-        ministere: this.parent === "ministere" ? this.ministere.id : null,
+        pays_origine: this.formValue("pays_origine"),
+        date_creation: this.formValue("date_creation"),
+        ambassade: this.formValue("ambassade")?.length
+          ? this.formValue("ambassade")[0].id
+          : null,
+        consulat: this.formValue("consulat")?.length
+          ? this.formValue("consulat")[0].id
+          : null,
       };
 
-      this.service.add(data).subscribe(() => {
-        this.loading = false;
-        this.form.reset();
-        this.formValuePatcher("pays_origine", this.ministere.pays.id);
-        this.parent === "ambassade"
-          ? this.formValuePatcher("ambassade", [this.ambassade])
-          : null;
-        this.helper.toggleModal(`liaison-create-modal`);
-        this.router.navigate(["./"], {
-          relativeTo: this.route,
-          queryParamsHandling: "preserve",
+      this.liaisonService
+        .add(this.helper.serializeObject(data))
+        .subscribe(() => {
+          this.loading = false;
+          this.helper.toggleModal(`liaison-create-modal`);
+          this.router.navigate(["./"], {
+            relativeTo: this.route,
+            queryParamsHandling: "preserve",
+          });
+          this.initialiseForm();
         });
-      });
     } else {
       this.helper.alertDanger("Formulaire Invalide");
     }

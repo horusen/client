@@ -9,7 +9,7 @@
 
 
 <!-- Adresse edit -->
-<app-modal [configuration]="{ name: 'adresse-edit-modal', titre: 'ajouterUneAdresse', icone: 'map-marker-alt' }"
+<app-modal [configuration]="{ name: 'adresse-edit-modal', titre: 'modifierLesDetailsDeVotreAddresse', icone: 'map-marker-alt' }"
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
   <app-adresse-edit *ngIf="onEdit"
                     [parent]="parent">

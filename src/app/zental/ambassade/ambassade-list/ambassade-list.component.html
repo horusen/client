@@ -1,15 +1,21 @@
 <!-- Liste des elements -->
 <div class="row  row-xs clearfix p-2 pl-2"
      *ngIf="!loading && ambassadeService.data.length">
-  <div class=" col-lg-3  pt-2 pl-2 pr-2 pb-2"
-       *ngFor="let ambassade of ambassadeService.data">
+  <div class="pt-2 pl-2 pr-2 pb-2"
+       *ngFor="let ambassade of ambassadeService.data |
+              paginate: {itemsPerPage: itemsPerPage, id: 'ambassade', currentPage: currentPage}"
+       [ngClass]="{
+         'col-3': colonne_affichage === 4,
+         'col-4': colonne_affichage === 3,
+         'col-6': colonne_affichage === 2
+      }">
     <div class="mycard4">
       <!-- Pays -->
       <div class=" pt-2 pl-2 d-flex align-items-center justify-content-between bd-b border-primary mb-2">
-        <p class="tx-echos"> <img class=""
-               src="assets/images/drapeaux/sn.svg"
-               alt="avatar"
-               width="40"> République du {{ ambassade.entite_diplomatique.pays_siege.libelle }}</p>
+        <p class="tx-echos"> <img class="mb-2"
+               [src]="ambassade.entite_diplomatique.pays_origine.drapeau"
+               [alt]="'drapeau-' + ambassade.entite_diplomatique.pays_origine.libelle"
+               width="40"> République du {{ ambassade.entite_diplomatique.pays_origine.libelle }}</p>
       </div>
 
       <!-- Icone -->
@@ -23,7 +29,7 @@
 
       <!-- Badge -->
       <div class=" text-center ">
-        <span class="badge badge-pill badge-primary bg-primary "> {{ 'serviceAmbassade' | translate }}</span>
+        <span class="badge badge-pill badge-primary bg-primary "> {{ ambassade.entite_diplomatique.pays_siege.libelle }}</span>
         <p class="text-center">
           <!-- Langue pays de siège -->
           <span class="">
@@ -48,7 +54,8 @@
         <div class=" justify-content-between p-0">
           <p class="mg-0 pt-2">
             <!-- details -->
-            <a [routerLink]="['/', 'administration', 'ambassade', ambassade.id]"
+            <a [routerLink]="navigationUrl?.concat([ambassade.id])"
+               [queryParamsHandling]="'preserve'"
                class=" pl-2"> <i class="fad fa-eye bg-white"
                  style="padding:6px ; border-radius:50%"></i></a>
 
@@ -110,12 +117,20 @@
     </div>
   </div>
 
+  <div class="col-12 mt-1 d-flex justify-content-center">
+    <pagination-controls id="ambassade"
+                         (pageChange)="currentPage = $event"
+                         autoHide="true"
+                         previousLabel="{{ 'PRECEDENT' | translate }}"
+                         nextLabel="{{ 'SUIVANT' | translate }}">
+    </pagination-controls>
+  </div>
 </div>
 
 
 
 <div class="my-5"
      *ngIf="loading || !ambassadeService.data.length">
-  <app-missing-data *ngIf="!loading && !ambassadeService.data.length"></app-missing-data>
+  <app-missing-data-alt *ngIf="!loading && !ambassadeService.data.length"></app-missing-data-alt>
   <app-loading *ngIf="loading"></app-loading>
 </div>

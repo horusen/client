@@ -12,6 +12,22 @@ export class DepartementService extends BaseService {
     super("departements");
   }
 
+  getByBureau(
+    bureau: number,
+    params?: Params,
+    emitData: boolean = true
+  ): Observable<any> {
+    return this.factory
+      .get(`bureaux/${bureau}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
   getByMinistere(
     ministere: number,
     params?: Params,
@@ -29,12 +45,12 @@ export class DepartementService extends BaseService {
   }
 
   getByConsulat(
-    ministere: number,
+    consulat: number,
     params?: Params,
     emitData: boolean = true
   ): Observable<any> {
     return this.factory
-      .get(`ministeres/${ministere}/${this.endPoint}`, { params })
+      .get(`consulats/${consulat}/${this.endPoint}`, { params })
       .pipe(
         tap(
           emitData

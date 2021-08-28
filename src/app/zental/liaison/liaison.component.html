@@ -1,24 +1,22 @@
-<!-- Title -->
-<div class="pl-2 pt-2">
-  <h5 class="pt-2 pb-2">
-    <i class="fad fa-circle  tx-20"></i>
-    {{ 'listeDesPaysLiés' | translate }}
-  </h5>
-</div>
-
-
 <!-- header -->
-<app-main-header [id]="'liaison'"></app-main-header>
+<app-main-header [id]="'liaison'"
+                 [hasAddButton]="parent.name !== 'zental' || false">
+</app-main-header>
 
 
-<app-liaison-list></app-liaison-list>
+<app-liaison-list [parent]="parent"
+                  [itemsPerPage]="itemsPerPage"
+                  [colonne_affichage]="colonne_affichage">
+</app-liaison-list>
 
 
 
 
 <app-modal [configuration]="{ name: 'liaison-create-modal', titre: 'ajouterUneLiaison', icone: 'link' }"
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
-  <app-liaison-create *ngIf="create"></app-liaison-create>
+  <app-liaison-create [parent]="parent"
+                      *ngIf="create">
+  </app-liaison-create>
 </app-modal>
 
 

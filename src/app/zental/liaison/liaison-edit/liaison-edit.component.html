@@ -32,14 +32,14 @@
              for="pays">
         {{ 'paysDeLiaison' | translate }}
         <i class="fad fa-circle-notch fa-spin"
-           *ngIf="paysLoading"></i>
+           *ngIf=""></i>
       </label>
 
-      <angular2-multiselect [data]="pays"
+      <angular2-multiselect [data]="[]"
                             [settings]="dropdownSettingsAlt.single"
                             formControlName="pays_siege"
                             [ngClass]="{'is-invalid': shouldShowRequiredError( 'pays_siege'), 'is-valid': isValid('pays_siege')}"
-                            class="form-control p-0 ">
+                            class="form-control ">
       </angular2-multiselect>
 
       <!-- Message d'erreur -->
@@ -55,7 +55,7 @@
   <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
     <!-- Ambassades -->
     <div class="col-6"
-         *ngIf="parent === 'ministere'">
+         *ngIf="parent.name === 'ministere'">
       <!-- Label -->
       <label class="control-label"
              for="ambassade">
@@ -68,7 +68,7 @@
                             [settings]="dropdownSettingsAlt.single"
                             formControlName="ambassade"
                             [ngClass]="{'is-invalid': shouldShowRequiredError( 'ambassade'), 'is-valid': isValid('ambassade')}"
-                            class="form-control p-0 ">
+                            class="form-control ">
         <c-badge>
           <ng-template let-item="item">
             {{item.entite_diplomatique.libelle}}
@@ -90,20 +90,20 @@
 
 
     <!-- Bureaux -->
-    <div [ngClass]="{'col-6': parent === 'ministere', 'col-12': parent === 'ambassade'}">
+    <div [ngClass]="{'col-6': parent.name === 'ministere', 'col-12': parent.name === 'ambassade'}">
       <!-- Label -->
       <label class="control-label"
              for="ambassade">
         {{ 'BUREAU' | translate }}
         <i class="fad fa-circle-notch fa-spin"
-           *ngIf="dependanciesLoading.bureaux"></i>
+           *ngIf=""></i>
       </label>
 
-      <angular2-multiselect [data]="dependancies.bureaux"
+      <angular2-multiselect [data]="[]"
                             [settings]="dropdownSettingsAlt.single"
                             formControlName="bureau"
                             [ngClass]="{'is-invalid': shouldShowRequiredError( 'bureau'), 'is-valid': isValid('bureau')}"
-                            class="form-control p-0 ">
+                            class="form-control ">
       </angular2-multiselect>
 
       <!-- Message d'erreur -->

@@ -14,7 +14,7 @@ export class ResponsableListComponent extends BaseComponent implements OnInit {
     public responsableService: ResponsableService,
     public route: ActivatedRoute
   ) {
-    super();
+    super(responsableService);
   }
 
   ngOnInit(): void {
@@ -26,7 +26,7 @@ export class ResponsableListComponent extends BaseComponent implements OnInit {
       this.getByAnciensMinistres(this.parent.entiteDiplomatique.id, params);
     } else if (this.parent.name === "ambassadeur") {
       this.getByAnciensAmbassadeurs(this.parent.entiteDiplomatique.id, params);
-    } else if (this.parent.name === "consule") {
+    } else if (this.parent.name === "consul") {
       this.getByAnciensConsules(this.parent.entiteDiplomatique.id, params);
     }
   }

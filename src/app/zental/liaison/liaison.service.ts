@@ -12,6 +12,40 @@ export class LiaisonService extends BaseService {
     super("liaisons");
   }
 
+  getNonAffecteByMinistere(ministere: number): Observable<any> {
+    return this.factory
+      .get(`ministeres/${ministere}/${this.endPoint}/non-affecte`)
+      .pipe(tap(this.onlyErrorResponseHandler()));
+  }
+
+  getNonAffecteByConsulat(consulat: number): Observable<any> {
+    return this.factory
+      .get(`consulats/${consulat}/${this.endPoint}/non-affecte`)
+      .pipe(tap(this.onlyErrorResponseHandler()));
+  }
+
+  getNonAffecteByAmbassade(ambassade: number): Observable<any> {
+    return this.factory
+      .get(`ambassades/${ambassade}/${this.endPoint}/non-affecte`)
+      .pipe(tap(this.onlyErrorResponseHandler()));
+  }
+
+  getByDiplomatie(
+    pays: number,
+    params: Params,
+    emitData = true
+  ): Observable<any> {
+    return this.factory
+      .get(`diplomaties/${pays}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
   getByMinistere(
     ministere: number,
     params: Params,
@@ -28,10 +62,20 @@ export class LiaisonService extends BaseService {
       );
   }
 
-  getByAmbassade(ambassade: number, params: Params): Observable<any> {
+  getByAmbassade(
+    ambassade: number,
+    params: Params,
+    emitData = true
+  ): Observable<any> {
     return this.factory
       .get(`ambassades/${ambassade}/${this.endPoint}`, { params })
-      .pipe(tap(this.listResponseHandler()));
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
   }
 
   getByConsulat(

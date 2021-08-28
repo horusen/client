@@ -1,1 +1,161 @@
-<p>administration-ambassade works!</p>
+<!-- Administration -->
+
+<ng-container *ngIf="single">
+  <div class=" row  pb-2  ">
+    <div class=" col">
+      <div class=" bg-light p-0 pt-2  ">
+        <ul class="nav bg-ether bg-face ">
+
+          <!-- Consulats -->
+          <li class="nav-item active">
+            <a class="nav-link tx-primary"
+               [routerLink]="['consulats']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-building "></i>
+              {{ 'CONSULATS' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Bureau -->
+          <li class="nav-item active">
+            <a class="nav-link tx-primary"
+               [routerLink]="['bureaux']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-lamp-desk "></i>
+              {{ 'BUREAUX' | translate }}
+            </a>
+          </li>
+
+          <!-- Liaisons -->
+          <li class="nav-item active">
+            <a class="nav-link tx-primary"
+               [routerLink]="['liaisons']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-link "></i>
+              {{ 'LIAISONS' | translate }}
+            </a>
+          </li>
+
+          <!-- departement -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['departements']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-th-large "></i>
+              {{ 'DEPARTEMENTS' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Domaines -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['domaines']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-stamp "></i>
+              {{ 'DOMAINES' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Services -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['services']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-ball-pile "></i>
+              {{ 'SERVICES' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Fonctions -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['fonctions']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-people-carry "></i>
+              {{ 'FONCTIONS' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Poste -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['postes']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-chair-office "></i>
+              {{ 'POSTES' | translate }}
+            </a>
+          </li>
+
+
+          <!-- ressources humaines -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['ressources-humaines']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-sitemap "></i>
+              {{ 'ressourcesHumaines' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Inscription consulaire -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['inscriptions-consulaires']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-file-certificate "></i>
+              {{ 'inscriptionsConsulaires' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Citoyens -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['citoyens']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-users-crown "></i>
+              {{ 'CITOYENS' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Tolova -->
+          <li class="nav-item ">
+            <a class="nav-link tx-primary"
+               [routerLink]="['toloba']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fad fa-comments-alt "></i>
+              {{ 'TOLOBA' | translate }}
+            </a>
+          </li>
+
+          <!-- <li class="nav-item"><a class="nav-link tx-primary"
+               id="grid-tab"
+               href="#structure_physique"><i class="fad fa-building"></i> Structure physique</a></li>
+          <li class="nav-item"><a class="nav-link tx-primary"
+               id="grid-tab"
+               href="#structure_administrative"><i class="fad fa-user-shield"></i> Structure
+              Administrative</a></li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Content -->
+  <div class="tab-content">
+    <!-- Ambassade -->
+    <div class="tab-pane fade show active"
+         id="ambassade_admin"
+         role="tabpanel">
+      <router-outlet></router-outlet>
+    </div>
+
+
+
+  </div>
+</ng-container>

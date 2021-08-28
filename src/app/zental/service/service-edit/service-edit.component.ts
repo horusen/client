@@ -26,15 +26,7 @@ export class ServiceEditComponent
     public router: Router,
     public route: ActivatedRoute
   ) {
-    super(
-      serviceService,
-      departementService,
-      ministereService,
-      ambassadeService,
-      consulatService,
-      router,
-      route
-    );
+    super(serviceService, departementService, router, route);
   }
 
   ngOnInit(): void {

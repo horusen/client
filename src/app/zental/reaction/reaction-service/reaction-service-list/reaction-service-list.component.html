@@ -1,0 +1,46 @@
+<div class="profiletimeline border-0 mt-0 scroll-11 d-flex flex-column"
+     [ngClass]="{
+       'justify-content-center': loading || !reactionService.data.length,
+      'justify-content-end': !loading && reactionService.data.length
+    }">
+
+  <!-- liste des reaction -->
+  <ng-container *ngIf="!loading && reactionService.data.length && service">
+    <ng-container *ngFor="let reaction of reactionService.data; let i = index">
+      <!-- Correspondant -->
+      <ng-container *ngIf="!isDialoguant(reaction.service)">
+        <app-reaction-utilisateur [reaction]="reaction"
+                                  *ngIf="!reaction.service && !reaction.institution">
+        </app-reaction-utilisateur>
+
+
+        <app-reaction-solo-entite-diplomatique [reaction]="reaction"
+                                               *ngIf="reaction.institution">
+        </app-reaction-solo-entite-diplomatique>
+
+
+        <app-reaction-solo-service [reaction]="reaction"
+                                   *ngIf="reaction.service && !reaction.institution">
+        </app-reaction-solo-service>
+      </ng-container>
+
+
+
+      <!-- User connecté -->
+      <app-reaction-solo-service *ngIf="isDialoguant(reaction.service)"
+                                 [reaction]="reaction"
+                                 [reversed]="true">
+      </app-reaction-solo-service>
+
+
+    </ng-container>
+  </ng-container>
+
+
+  <!-- Loading -->
+  <app-loading *ngIf="loading "></app-loading>
+
+
+  <!-- missing data -->
+  <app-missing-data-alt *ngIf="!loading && !reactionService.data.length"></app-missing-data-alt>
+</div>

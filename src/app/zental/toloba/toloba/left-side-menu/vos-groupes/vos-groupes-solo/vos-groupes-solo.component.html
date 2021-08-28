@@ -1,0 +1,46 @@
+<div class=" d-flex align-items-center scaleUp justify-content-between bd-b p-2 pr-4"
+     *ngIf="groupe"
+     [ngClass]="{ 'border border-primary': rla.isActive }">
+  <a [routerLink]="[groupe.id]"
+     [routerLinkActive]="'border border-primary'"
+     #rla="routerLinkActive"
+     (click)="getDiscussion()"
+     class="nav-link tx-gray-600">
+    <i class="fad fa-users-crown tx-gray-600"></i>
+    {{ groupe.libelle }}
+  </a>
+
+
+  <div>
+    <!-- Voir les details -->
+    <a class="mr-3"
+       [routerLink]="['groupes', groupe.id]"
+       [queryParamsHandling]="'preserve'">
+      <i class="fad fa-eye"></i>
+    </a>
+
+    <!-- Faire une demande adhesion -->
+    <a [routerLink]="[router.url.split('?')[0]]"
+       [queryParamsHandling]="'preserve'"
+       *ngIf="!groupe.user_membership && !groupe.user_demande"
+       (click)="faireUneDemande()">
+      <i class="fad fa-user-plus"></i>
+    </a>
+
+    <!-- Annuler demande adhesion groupe -->
+    <a [routerLink]="[router.url.split('?')[0]]"
+       [queryParamsHandling]="'preserve'"
+       *ngIf="!groupe.user_membership && groupe.user_demande"
+       (click)="annulerDemande()">
+      <i class="fad fa-user-minus"></i>
+    </a>
+
+
+    <a [routerLink]="[router.url.split('?')[0]]"
+       [queryParamsHandling]="'preserve'"
+       *ngIf="groupe.user_membership"
+       (click)="getDiscussion()">
+      <i class="fad fa-comments-alt"></i>
+    </a>
+  </div>
+</div>

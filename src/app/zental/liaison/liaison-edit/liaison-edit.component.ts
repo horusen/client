@@ -1,10 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AmbassadeService } from "../../ambassade/ambassade.service";
-import { BureauService } from "../../bureau/bureau.service";
+import { ConsulatService } from "../../consulat/consulat.service";
 import { MinistereService } from "../../ministere/ministere.service";
 import { PaysService } from "../../pays/pays.service";
-import { EntiteDiplomatiqueEditComponent } from "../../shared-zental/abstract/entite-diplomatique-edit/entite-diplomatique-edit.component";
 import { LiaisonCreateComponent } from "../liaison-create/liaison-create.component";
 import { LiaisonService } from "../liaison.service";
 
@@ -25,17 +24,16 @@ export class LiaisonEditComponent
     public paysService: PaysService,
     public router: Router,
     public route: ActivatedRoute,
-    public bureauService: BureauService,
-    public ambassadeService: AmbassadeService
+    public ambassadeService: AmbassadeService,
+    public consulatService: ConsulatService
   ) {
     super(
       liaisonService,
-      ministereService,
       paysService,
       router,
       route,
-      bureauService,
-      ambassadeService
+      ambassadeService,
+      consulatService
     );
   }
 
@@ -63,7 +61,7 @@ export class LiaisonEditComponent
         pays_siege: this.formValue("pays_siege")[0].id,
         ambassade: this.formValue("ambassade")[0].id,
         bureau: this.formValue("bureau")[0].id,
-        ministere: this.parent === "ministere" ? this.ministere.id : null,
+        // ministere: this.parent.name === "ministere" ? this.parent.item.id : null,
       };
 
       this.service.update(this.liaison.id, data).subscribe(() => {

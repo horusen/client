@@ -67,6 +67,7 @@
 
 <div class="my-5"
      *ngIf="loading || !departementService.data.length">
-  <app-missing-data *ngIf="!loading && !departementService.data.length"></app-missing-data>
+  <app-missing-data-alt *ngIf="!loading && !departementService.data.length">
+  </app-missing-data-alt>
   <app-loading *ngIf="loading"></app-loading>
 </div>

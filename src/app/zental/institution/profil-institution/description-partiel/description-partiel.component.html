@@ -24,19 +24,20 @@
     <div class="mg-b-20 bg-light p-4">
       <div class=" card-body p-0 mg-t-5 ">
         <p class="tx-facebook tx-14 "
-           *ngIf="parent.item.entite_diplomatique[parent.typeDescription]"
-           [innerHTML]="parent.item.entite_diplomatique[parent.typeDescription]"
+           *ngIf="parent.item.entite_diplomatique[parent.typeDescription.slice(0, -1)]"
+           [innerHTML]="parent.item.entite_diplomatique[parent.typeDescription.slice(0, -1)]"
            style="text-align:justify">
         </p>
 
 
         <!-- Mission data -->
         <div class="d-flex align-items-center flex-column justify-content-center"
-             *ngIf="parent.item.entite_diplomatique[parent.typeDescription]">
+             *ngIf="!parent.item.entite_diplomatique[parent.typeDescription.slice(0, -1)]">
 
           <!-- Missions -->
-          <ng-container *ngIf="typeDescription === 'mission'">
-            <svg id="b9b061f4-2238-46cf-9cbb-0fa8bffbec0a"
+          <ng-container *ngIf="parent.typeDescription === 'missions'">
+            <svg class="missing-icon"
+                 id="b9b061f4-2238-46cf-9cbb-0fa8bffbec0a"
                  data-name="Layer 1"
                  xmlns="http://www.w3.org/2000/svg"
                  width="793.56289"
@@ -218,17 +219,18 @@
                     fill="#3f3d56" />
             </svg>
 
-            <h6 class="mt-3">
+            <h5 class="mt-3">
               <a [routerLink]="['./']"
                  [fragment]="'edit'">
                 {{ 'cliquerIciPourLesMissionsDuMinistere' | translate }}
               </a>
-            </h6>
+            </h5>
           </ng-container>
 
 
-          <ng-container *ngIf="typeDescription === 'organisation'">
-            <svg id="e2e16f07-c08d-4c73-859c-14fba73875a7"
+          <ng-container *ngIf="parent.typeDescription === 'organisations'">
+            <svg class="missing-icon"
+                 id="e2e16f07-c08d-4c73-859c-14fba73875a7"
                  data-name="Layer 1"
                  xmlns="http://www.w3.org/2000/svg"
                  width="765.83927"
@@ -340,12 +342,12 @@
                        fill="#ccc" />
             </svg>
 
-            <h6 class="mt-3">
+            <h5 class="mt-3">
               <a [routerLink]="['./']"
                  [fragment]="'edit'">
                 {{ 'cliquerIciPourLOrganisationDuMinistere' | translate }}
               </a>
-            </h6>
+            </h5>
           </ng-container>
         </div>
       </div>
@@ -364,9 +366,9 @@
   <app-composant-description *ngIf="edit"
                              (response)="composantEditedHandler($event)"
                              [configuration]="{
-                              fieldName: typeDescription.slice(0, -1),
-                              path: ministereService.endPoint+ '/' + single.id,
-                              parentObject: single
+                              fieldName: parent.typeDescription?.slice(0, -1),
+                              path: parent.name + 's/' + parent.item.id,
+                              parentObject: parent.item
   }">
   </app-composant-description>
 </app-modal>

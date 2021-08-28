@@ -17,7 +17,7 @@
                             [settings]="dropdownSettingsAlt.single"
                             formControlName="type_relation"
                             [ngClass]="{'is-invalid': shouldShowRequiredError( 'type_relation'), 'is-valid': isValid('type_relation')}"
-                            class="form-control p-0 form-control-sm">
+                            class="form-control form-control-sm">
       </angular2-multiselect>
 
       <!-- Message d'erreur -->
@@ -115,5 +115,5 @@
 <!-- Body -->
 <ng-template #userCreate
              class="p-3">
-  <app-user-create></app-user-create>
+  <app-user-create [type]="'relation'"></app-user-create>
 </ng-template>

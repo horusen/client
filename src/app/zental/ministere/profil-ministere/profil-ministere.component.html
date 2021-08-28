@@ -80,11 +80,14 @@
     </li>
 
 
-
+    <!-- Consulats -->
     <li class="nav-item">
       <a class="nav-link tx-echos"
-         data-toggle="tab"
-         href="#ministere_consulats"><i class="fal fa-construction  tx-20"></i> Consulats</a>
+         [routerLink]="['consulats']"
+         [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-construction  tx-20"></i>
+        {{ 'CONSULATS' | translate }}
+      </a>
     </li>
 
 
@@ -101,3 +104,10 @@
 
   </ul>
 </app-profil-institution>
+
+
+
+<app-modal [configuration]="{ name: 'ministere-edit-modal', titre: 'modifierLesDetailsDuMinistere', icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve'})">
+  <app-ministere-edit *ngIf="edit"></app-ministere-edit>
+</app-modal>

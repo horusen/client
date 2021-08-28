@@ -13,7 +13,7 @@
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
   <app-common-create *ngIf="create"
                      [configuration]="{ endpoint: 'domaines/institutions', name: 'domaine', hasDescription: true, submitButtonClass: 'btn-primary' }"
-                     [extraFields]="{ ministere: ministere?.id, ambassade: ambassade?.id }"
+                     [extraFields]="extraFields"
                      (itemCreated)="onDomaineCreated($event.item)">
   </app-common-create>
 </app-modal>

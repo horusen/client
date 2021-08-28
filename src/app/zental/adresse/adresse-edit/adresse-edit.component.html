@@ -16,7 +16,7 @@
                             [settings]="villeDropdownSettings"
                             formControlName="ville"
                             [ngClass]="{'is-invalid': shouldShowRequiredError( 'ville'), 'is-valid': isValid('ville')}"
-                            class="form-control p-0 form-control-sm">
+                            class="form-control form-control-sm">
       </angular2-multiselect>
 
       <!-- Message d'erreur -->
@@ -33,7 +33,7 @@
     <div class="col-10">
       <!-- Label -->
       <label class="control-label"
-             for="adresse">
+             for="addresse">
         {{ 'ADRESSE' | translate }}
       </label>
 
@@ -41,11 +41,11 @@
       <input type="text"
              class="form-control form-control-sm"
              required
-             [formControlName]="'adresse'"
-             [ngClass]="{'is-invalid': shouldShowRequiredError( 'adresse'), 'is-valid': isValid('adresse')}">
+             [formControlName]="'addresse'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'addresse'), 'is-valid': isValid('addresse')}">
 
       <!-- MEssage d'erreur -->
-      <div *ngIf="shouldShowRequiredError('adresse')"
+      <div *ngIf="shouldShowRequiredError('addresse')"
            class="invalid-feedback">
         {{ 'veuillezSaisirLAdresse' |translate }}.</div>
     </div>

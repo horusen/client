@@ -12,6 +12,38 @@ export class PosteService extends BaseService {
     super("postes");
   }
 
+  getByBureau(
+    bureau: number,
+    params?: Params,
+    emitData: boolean = true
+  ): Observable<any> {
+    return this.factory
+      .get(`bureaux/${bureau}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
+  getByService(
+    service: number,
+    params?: Params,
+    emitData: boolean = true
+  ): Observable<any> {
+    return this.factory
+      .get(`services/${service}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
   getByMinistere(
     ministere: number,
     params: Params,
@@ -28,15 +60,35 @@ export class PosteService extends BaseService {
       );
   }
 
-  getByAmbassade(ambassade: number, params: Params): Observable<any> {
+  getByAmbassade(
+    ambassade: number,
+    params: Params,
+    emitData = true
+  ): Observable<any> {
     return this.factory
       .get(`ambassades/${ambassade}/${this.endPoint}`, { params })
-      .pipe(tap(this.listResponseHandler()));
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
   }
 
-  getByConsulat(consulat: number, params: Params): Observable<any> {
+  getByConsulat(
+    consulat: number,
+    params: Params,
+    emitData = true
+  ): Observable<any> {
     return this.factory
       .get(`consulats/${consulat}/${this.endPoint}`, { params })
-      .pipe(tap(this.listResponseHandler()));
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
   }
 }

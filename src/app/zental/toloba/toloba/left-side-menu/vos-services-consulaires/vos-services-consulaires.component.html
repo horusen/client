@@ -1,0 +1,71 @@
+<div class="flex-fill pd-1 ">
+  <!-- Header -->
+  <nav class="nav flex-column mb-2 ">
+
+    <!-- Recherche -->
+    <div style="position: relative;">
+      <div class="form-group mb-0 d-flex align-items-center  ">
+        <!-- Search field -->
+        <div class="input-group w-100 px-3">
+          <input type="text"
+                 class="form-control pd-y-10 "
+                 (keyup.enter)="research(search.value)"
+                 #search
+                 [attr.placeholder]="('RECHERCHER' | translate) + '...'"
+                 style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+        </div>
+
+
+      </div>
+      <div class=""
+           style="position: absolute; top: 42px; z-index: 20000;">
+        <a [routerLink]="['./']"
+           [queryParams]="{ search: null }"
+           [queryParamsHandling]="'merge'"
+           class="tx-10 text-danger mr-1"
+           *ngIf="searchActive"
+           (click)="search.value = ''">
+          <span class=" mr-1"><i class="fal fa-times-circle"></i></span>
+          {{ 'annulerLaRecherche' | translate }}
+        </a>
+      </div>
+    </div>
+
+    <!-- Liste des élèments -->
+    <ng-container *ngIf="!loading && serviceService.data.length">
+      <div class=" d-flex align-items-center scaleUp justify-content-between bd-b p-2 pr-4"
+           *ngFor="let service of serviceService.data | paginate: {itemsPerPage: 7, id: 'service-consulaire', currentPage: currentPage}">
+        <a routerLink="./"
+           [queryParamsHandling]="'merge'"
+           (click)="getDiscussion(service.id)"
+           class="nav-link tx-gray-600">
+          <i class="fad fa-ball-pile tx-gray-600"></i>
+          {{ service.libelle }}
+        </a>
+
+
+        <span><i class="fad fa-list"></i></span>
+      </div>
+    </ng-container>
+
+
+
+    <app-loading *ngIf="loading"></app-loading>
+
+
+    <app-missing-data-alt *ngIf="!loading && !serviceService.data.length"></app-missing-data-alt>
+
+
+  </nav>
+
+
+  <!-- Pagination -->
+  <div class="col-12 mt-1 d-flex justify-content-center">
+    <pagination-controls id="service-consulaire"
+                         (pageChange)="currentPage = $event"
+                         autoHide="true"
+                         previousLabel="{{ 'PRECEDENT' | translate }}"
+                         nextLabel="{{ 'SUIVANT' | translate }}">
+    </pagination-controls>
+  </div>
+</div>

@@ -138,15 +138,9 @@ export class InscriptionComponent
   onFileChanged(event) {
     let image = event.target.files[0];
 
-    let reader = new FileReader();
-    reader.readAsDataURL(image);
-    reader.onload = () => {
-      this.imageUrl = reader.result;
-    };
-
     this.formData.append("photo", image);
     this.ngxPicaService
-      .resizeImage(image, 35, 35)
+      .resizeImage(image, 150, 150)
       .subscribe((imageRetailler) => {
         this.formData.append(
           "photo_min",
@@ -154,6 +148,12 @@ export class InscriptionComponent
             type: imageRetailler.type,
           })
         );
+
+        let reader = new FileReader();
+        reader.readAsDataURL(imageRetailler);
+        reader.onload = () => {
+          this.imageUrl = reader.result;
+        };
       });
   }
 

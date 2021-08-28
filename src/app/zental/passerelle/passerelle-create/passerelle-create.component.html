@@ -1,58 +1,40 @@
 <form class="custom-placeholder"
       [formGroup]="form"
       (submit)="create()">
-  <!-- Libelle-->
+
+
+  <!-- Pays-->
   <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
     <div class="col-12">
-      <!-- Label -->
-      <label class="control-label"
-             for="libelle">
-        {{ 'LIBELLE' | translate }}
-      </label>
-
-      <!-- Input -->
-      <input type="text"
-             class="form-control form-control-sm"
-             required
-             [formControlName]="'libelle'"
-             [ngClass]="{'is-invalid': shouldShowRequiredError( 'libelle'), 'is-valid': isValid('libelle')}">
-
-      <!-- MEssage d'erreur -->
-      <div *ngIf="shouldShowRequiredError('libelle')"
-           class="invalid-feedback">
-        {{ 'veuillezSaisirLeLibelle' |translate }}.</div>
-    </div>
-  </div>
-
-  <!-- pays type et passe frontiere-->
-  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
-    <!-- Pays -->
-    <div class="col-4">
       <!-- Label -->
       <label class="control-label"
              for="pays">
         {{ 'paysFrontalie' | translate }}
         <i class="fad fa-circle-notch fa-spin"
-           *ngIf="paysLoading"></i>
+           *ngIf="dependanciesLoading.pays"></i>
       </label>
 
-      <ng-multiselect-dropdown [data]="pays"
-                               [settings]="dropdownSettings.single"
-                               formControlName="pays_siege"
-                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'pays_siege'), 'is-valid': isValid('pays_siege')}"
-                               class="form-control p-0 form-control-sm">
-      </ng-multiselect-dropdown>
+      <angular2-multiselect [data]="dependancies.pays"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="pays_siege"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'pays_siege'), 'is-valid': isValid('pays_siege')}"
+                            class="form-control  form-control-sm">
+      </angular2-multiselect>
 
       <!-- Message d'erreur -->
       <div *ngIf="shouldShowRequiredError('pays_siege')"
            class="invalid-feedback">
-        {{ 'veuillezRenseignezLePaysDeSiege' | translate }}.
+        {{ 'veuillezRenseignerCeChamps' | translate }}.
       </div>
     </div>
 
 
+  </div>
+
+  <!--  type et passe frontiere-->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
     <!-- Type -->
-    <div class="col-4">
+    <div class="col-6">
       <!-- Label -->
       <label class="control-label"
              for="pays">
@@ -61,12 +43,12 @@
            *ngIf="dependanciesLoading.types"></i>
       </label>
 
-      <ng-multiselect-dropdown [data]="dependancies.types"
-                               [settings]="dropdownSettings.single"
-                               formControlName="type"
-                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'type'), 'is-valid': isValid('type')}"
-                               class="form-control p-0 form-control-sm">
-      </ng-multiselect-dropdown>
+      <angular2-multiselect [data]="dependancies.types"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="type"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'type'), 'is-valid': isValid('type')}"
+                            class="form-control form-control-sm">
+      </angular2-multiselect>
 
       <!-- Message d'erreur -->
       <div *ngIf="shouldShowRequiredError('type')"
@@ -77,7 +59,7 @@
 
 
     <!-- Passe -->
-    <div class="col-4">
+    <div class="col-6">
       <!-- Label -->
       <label class="control-label"
              for="pays">
@@ -86,12 +68,12 @@
            *ngIf="dependanciesLoading.passeFrontieres"></i>
       </label>
 
-      <ng-multiselect-dropdown [data]="dependancies.passeFrontieres"
-                               [settings]="dropdownSettings.single"
-                               formControlName="passe_frontiere"
-                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'passe_frontiere'), 'is-valid': isValid('passe_frontiere')}"
-                               class="form-control p-0 form-control-sm">
-      </ng-multiselect-dropdown>
+      <angular2-multiselect [data]="dependancies.passeFrontieres"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="passe_frontiere"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'passe_frontiere'), 'is-valid': isValid('passe_frontiere')}"
+                            class="form-control form-control-sm">
+      </angular2-multiselect>
 
       <!-- Message d'erreur -->
       <div *ngIf="shouldShowRequiredError('passe_frontiere')"
@@ -101,26 +83,6 @@
     </div>
   </div>
 
-
-  <!-- Description -->
-  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
-    <div class="col-12">
-      <label class="control-label"
-             for="description">{{ 'DESCRIPTION' | translate }}</label>
-      <!-- <textarea name="description" maxlength="500" class="form-control  form-control-sm" cols="30" rows="3"
-                [formControlName]="'description'"
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"></textarea> -->
-      <ckeditor [editor]="Editor"
-                class=""
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
-                formControlName="description">
-      </ckeditor>
-      <div *ngIf="shouldShowRequiredError('description')"
-           class="invalid-feedback">
-        {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
-      </div>
-    </div>
-  </div>
 
 
   <!-- Boutton validation -->

@@ -1,0 +1,300 @@
+<div class="sl-item d-flex align-items-center bd-b bd-2 bd-white pb-3"
+     [ngClass]="{  ' flex-row-reverse': reversed }"
+     *ngIf="reaction">
+  <!-- Image profil -->
+  <div [ngClass]="{ 'sl-left': !reversed, 'sl-right': reversed }">
+    <span class="avatar-initial rounded-circle w-100 bg-primary op-6"
+          [ngClass]="{
+          'bg-primary':
+            helper.parseInt(
+              reaction.service.id.toString()
+                .charAt(reaction.service.id.toString().length - 1)
+            ) -
+              1 ==
+              0 ||
+            helper.parseInt(
+              reaction.service.id.toString()
+                .charAt(reaction.service.id.toString().length - 1)
+            ) +
+              5 -
+              1 ==
+              0,
+          'bg-warning':
+            helper.parseInt(
+              reaction.service.id.toString()
+                .charAt(reaction.service.id.toString().length - 1)
+            ) -
+              2 ==
+              0 ||
+            helper.parseInt(
+              reaction.service.id.toString()
+                .charAt(reaction.service.id.toString().length - 1)
+            ) +
+              5 -
+              2 ==
+              0,
+          'bg-success':
+            helper.parseInt(
+              reaction.service.id.toString()
+                .charAt(reaction.service.id.toString().length - 1)
+            ) -
+              3 ==
+              0 ||
+            helper.parseInt(
+              reaction.service.id.toString()
+                .charAt(reaction.service.id.toString().length - 1)
+            ) +
+              5 -
+              3 ==
+              0,
+          'bg-info':
+            helper.parseInt(
+              reaction.service.id.toString()
+                .charAt(reaction.service.id.toString().length - 1)
+            ) -
+              4 ==
+              0 ||
+            helper.parseInt(
+              reaction.service.id.toString()
+                .charAt(reaction.service.id.toString().length - 1)
+            ) +
+              5 -
+              4 ==
+              0,
+          'bg-danger':
+            helper.parseInt(
+              reaction.service.id.toString()
+                .charAt(reaction.service.id.toString().length - 1)
+            ) -
+              5 ==
+              0 ||
+            helper.parseInt(
+              reaction.service.id.toString()
+                .charAt(reaction.service.id.toString().length - 1)
+            ) +
+              5 -
+              5 ==
+              0
+        }">
+      {{ reaction.service.libelle.split(" ")[0].charAt(0) +
+      (reaction.service.libelle.split(" ")[1]
+      ? reaction.service.libelle.split(" ")[1].charAt(0)
+      : reaction.service.libelle.split(" ")[0].charAt(1))
+      }}
+    </span>
+  </div>
+
+  <!-- Information et reaction -->
+  <div [ngClass]="{ 'sl-right': !reversed, 'sl-left': reversed }">
+    <!-- Nom et date de la reaction -->
+    <div class=" d-flex justify-content-between  mg-b-5 wd-100p">
+      <p class="mb-0 w-100 text-right"
+         [ngClass]="{  'text-right': reversed }">
+        <span class="mb-0 ">{{ reaction.service.libelle }}</span>
+        <span class="tx-yeto">{{ reaction.created_at | date:'dd MMMM' }} - {{ reaction.created_at | date:'hh:mm' }}</span>
+      </p>
+    </div>
+
+    <!-- REaction -->
+    <div class="d-flex align-items-center"
+         [ngClass]="{  'justify-content-start flex-row-reverse': reversed }">
+      <!-- Barre vertica; -->
+      <div class="tx-30 pd-y-20 pd-x-2  "
+           [ngClass]="{
+        'bg-primary':
+          helper.parseInt(
+            reaction.user.id_inscription
+              .toString()
+              .charAt(reaction.user.id_inscription.toString().length - 1)
+          ) -
+            1 ==
+            0
+          ,
+          'bg-dribbble': helper.parseInt(
+            reaction.user.id_inscription
+              .toString()
+              .charAt(reaction.user.id_inscription.toString().length - 1)
+          )  - 6 == 0,
+        'bg-warning':
+          helper.parseInt(
+            reaction.user.id_inscription
+              .toString()
+              .charAt(reaction.user.id_inscription.toString().length - 1)
+          ) -
+            2 ==
+            0,
+            'bg-youtube': helper.parseInt(
+            reaction.user.id_inscription
+              .toString()
+              .charAt(reaction.user.id_inscription.toString().length - 1)
+          )  -
+            7 ==
+            0,
+
+        'bg-success':
+          helper.parseInt(
+            reaction.user.id_inscription
+              .toString()
+              .charAt(reaction.user.id_inscription.toString().length - 1)
+          ) -
+            3 ==
+            0 ,
+
+            'bg-twitter': helper.parseInt(
+            reaction.user.id_inscription
+              .toString()
+              .charAt(reaction.user.id_inscription.toString().length - 1)
+          )  -
+            8 ==
+            0,
+
+        'bg-info':
+          helper.parseInt(
+            reaction.user.id_inscription
+              .toString()
+              .charAt(reaction.user.id_inscription.toString().length - 1)
+          ) -
+            4 ==
+            0,
+          'bg-yellow': helper.parseInt(
+            reaction.user.id_inscription
+              .toString()
+              .charAt(reaction.user.id_inscription.toString().length - 1)
+          )  -
+            9 ==
+            0,
+
+        'bg-danger':
+          helper.parseInt(
+            reaction.user.id_inscription
+              .toString()
+              .charAt(reaction.user.id_inscription.toString().length - 1)
+          ) -  5 ==  0,
+            'bg-facebook': helper.parseInt(
+            reaction.user.id_inscription
+              .toString()
+              .charAt(reaction.user.id_inscription.toString().length - 1)
+          ) ==   0
+
+      }">
+      </div>
+
+
+      <div class="reaction "
+           [ngClass]="{ 'mg-l-10': !reversed, 'mg-r-10': reversed }">
+        <!-- REbondissement -->
+        <div class="  mb-0  pl-3  tx-echos p-2"
+             *ngIf="reaction.rebondissement"
+             style="border-radius: 30px 10px 20px 0px; background: #dbe5e7;">
+
+
+          <h6>{{ reaction.rebondissement.user.nom_complet }}</h6>
+
+          <!-- REbondissement text -->
+          <p class="p-0"
+             *ngIf="reaction.rebondissement.reaction"
+             [innerHTML]="reaction.rebondissement.reaction"></p>
+
+          <div *ngIf="reaction.rebondissement.file"
+               class="mt-2">
+            <!-- Image -->
+            <div class="text-center">
+              <img [src]="reaction.rebondissement.file?.path"
+                   *ngIf="helper.checkExtensions(reaction.rebondissement?.file.path, imageHandlerreaction.service.acceptedImageExtension)"
+                   (click)="afficherImage(reaction.rebondissement.file)"
+                   class="rebondissement-img"
+                   [alt]="reaction.rebondissement.user.nom_complet + '_image'">
+            </div>
+
+
+            <!-- Document -->
+            <a class="p-3 alert-info d-inline-block  clickable rounded-pill bd clickable"
+               *ngIf="helper.checkExtensions(reaction.rebondissement.file?.path, ['pdf', 'PDF'])">
+              <i class="fad fa-file-pdf"></i> {{ reaction.rebondissement.file.name }}
+            </a>
+
+            <!-- Audio -->
+            <audio controls
+                   class="audio-chat"
+                   *ngIf="helper.checkExtension(reaction.rebondissement.file?.path, 'mp3')">
+              <source [src]="reaction.file?.path">
+            </audio>
+          </div>
+
+
+
+
+
+        </div>
+
+
+        <!-- Reaction text -->
+        <p class="  mb-0  bg-light w-100 tx-right tx-echos p-2"
+           [ngClass]="{ 'mg-l-10': !reversed, 'mg-r-10': reversed }"
+           *ngIf="reaction.reaction"
+           style="border-radius: 10px 20px 0px 30px"
+           [innerHTML]="reaction.reaction">
+
+        </p>
+
+        <div [ngClass]="{ 'mg-l-10': !reversed, 'mg-r-10': reversed }"
+             class=" text-right"
+             *ngIf="reaction.file">
+          <!-- REaction image -->
+          <a [href]="reaction.file.path"
+             target="_blank"
+             *ngIf="helper.checkExtensions(reaction?.file.path, imageHandlerreaction.service.acceptedImageExtension)">
+            <img [src]="reaction.file?.path"
+                 (click)="afficherImage(reaction.file)"
+                 class="reaction__img"
+                 [alt]="reaction.user.nom_complet + '_image'">
+          </a>
+
+          <!-- Audio -->
+          <div class="p-0 ">
+            <audio controls
+                   class="audio-chat"
+                   *ngIf="helper.checkExtension(reaction.file?.path, 'mp3')">
+              <source [src]="reaction.file?.path">
+            </audio>
+
+
+            <!-- Document -->
+            <a class="p-3 alert-info d-block rounded-pill bd clickable"
+               [href]="reaction.file.path"
+               target="_blank"
+               *ngIf="helper.checkExtensions(reaction.file?.path, ['pdf', 'PDF'])">
+              <i class="fad fa-file-pdf"></i> {{ reaction.file.name }}
+              <i class="fad fa-download float-right ml-4 mr-0 mt-1"></i>
+            </a>
+          </div>
+        </div>
+
+
+
+
+        <!-- Boutton action -->
+        <div class="ml-4 tx-10 reaction__cta "
+             [ngClass]="{ 'text-right': reversed }">
+          <!-- Rebondir -->
+          <span class="mr-3 ml-0 clickable"
+                (click)="rebondir(reaction)"
+                [ngbTooltip]="'REBONDIR' | translate">
+            <i class="fad fa-comments"></i>
+          </span>
+
+          <!-- Supprimer -->
+          <span class="clickable"
+                (click)="supprimer(reaction.id)"
+                [ngbTooltip]="'SUPPRIMER' | translate">
+            <i class="fad fa-trash"></i>
+          </span>
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+</div>

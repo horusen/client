@@ -24,9 +24,8 @@
     </div>
   </div>
 
-  <!-- pays et villes-->
+  <!-- pays et date de creation-->
   <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
-    <!-- Pays -->
     <div class="col-6">
       <!-- Label -->
       <label class="control-label"
@@ -36,12 +35,12 @@
            *ngIf="paysLoading"></i>
       </label>
 
-      <ng-multiselect-dropdown [data]="pays"
-                               [settings]="dropdownSettings.single"
-                               formControlName="pays_siege"
-                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'pays_siege'), 'is-valid': isValid('pays_siege')}"
-                               class="form-control p-0 form-control-sm">
-      </ng-multiselect-dropdown>
+      <angular2-multiselect [data]="pays"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="pays_siege"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'pays_siege'), 'is-valid': isValid('pays_siege')}"
+                            class="form-control form-control-sm">
+      </angular2-multiselect>
 
       <!-- Message d'erreur -->
       <div *ngIf="shouldShowRequiredError('pays_siege')"
@@ -51,29 +50,174 @@
     </div>
 
 
-    <!-- Villes -->
+    <!-- Date de creation -->
+    <div class="col-6">
+      <!-- Label -->
+      <label for="type"
+             class="label-template-form">
+        {{ 'dateDeCreation' | translate }}
+      </label>
+
+      <!-- Date picker -->
+      <div class="input-group mb-2">
+        <input [dpDayPicker]="configCalendrier.day"
+               [theme]="'dp-material'"
+               formControlName="date_creation"
+               class="form-control ">
+        <div class="input-group-prepend">
+          <div class="input-group-text  bg-light"><i class="fal fa-calendar"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  tel 1, tel 2 et boite postal -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <!-- Telephone 1 -->
+    <div class="col-4">
+      <!-- Label -->
+      <label class="control-label"
+             for="telephone1">
+        {{ 'TELEPHONE' | translate }} 1
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'tel1'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'tel1'), 'is-valid': isValid('tel1')}">
+
+    </div>
+
+    <!-- tel2 -->
+    <div class="col-4">
+      <!-- Label -->
+      <label class="control-label"
+             for="tel2">
+        {{ 'TELEPHONE' | translate }} 2
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'tel2'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'tel2'), 'is-valid': isValid('tel2')}">
+
+    </div>
+
+    <!-- Boite postal -->
+    <div class="col-4">
+      <!-- Label -->
+      <label class="control-label"
+             for="boite_postale">
+        {{ 'boitePostale' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'boite_postale'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'boite_postale'), 'is-valid': isValid('boite_postale')}">
+    </div>
+
+  </div>
+
+
+  <!-- Email Site web et boite postal -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <!-- Email -->
     <div class="col-6">
       <!-- Label -->
       <label class="control-label"
-             for="pays">
+             for="mail">
+        {{ 'EMAIL' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'mail'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'mail'), 'is-valid': isValid('mail')}">
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('mail')"
+           class="invalid-feedback">
+        {{ 'veuillezSaisirUnMail' |translate }}.</div>
+    </div>
+
+    <!-- Siteweb -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label"
+             for="siteWeb">
+        {{ 'siteWeb' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'site_web'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'site_web'), 'is-valid': isValid('site_web')}">
+
+    </div>
+
+
+  </div>
+
+  <!-- addr -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 ">
+    <!-- Addresse -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label"
+             for="addresse">
+        {{ 'ADDRESSE' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="addresse"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'addresse'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'addresse'), 'is-valid': isValid('addresse')}">
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('addresse')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignerCeChamps' |translate }}.</div>
+    </div>
+
+
+    <!-- Ville -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label"
+             for="vill">
         {{ 'VILLE' | translate }}
         <i class="fad fa-circle-notch fa-spin"
            *ngIf="villeLoading"></i>
       </label>
 
-      <ng-multiselect-dropdown [data]="villes"
-                               [settings]="villeDropDownSettings"
-                               formControlName="ville"
-                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'ville'), 'is-valid': isValid('ville')}"
-                               class="form-control p-0 form-control-sm">
-      </ng-multiselect-dropdown>
+      <angular2-multiselect [data]="villes"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="ville"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'ville'), 'is-valid': isValid('ville')}"
+                            class="form-control  ">
+      </angular2-multiselect>
 
       <!-- Message d'erreur -->
       <div *ngIf="shouldShowRequiredError('ville')"
            class="invalid-feedback">
-        {{ 'veuillezRenseignezLaVille' | translate }}.
+        {{ 'veuillezRenseignerCeChamps' | translate }}.
       </div>
     </div>
+
   </div>
 
 
@@ -82,17 +226,14 @@
     <div class="col-12">
       <label class="control-label"
              for="description">{{ 'DESCRIPTION' | translate }}</label>
-      <!-- <textarea name="description" maxlength="500" class="form-control  form-control-sm" cols="30" rows="3"
-                [formControlName]="'description'"
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"></textarea> -->
       <ckeditor [editor]="Editor"
                 class=""
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
-                formControlName="description">
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'histoire'), 'is-valid': isValid('histoire')}"
+                formControlName="histoire">
       </ckeditor>
-      <div *ngIf="shouldShowRequiredError('description')"
+      <div *ngIf="shouldShowRequiredError('histoire')"
            class="invalid-feedback">
-        {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
+        {{ 'veuillezRenseignerCeChamps' | translate }}
       </div>
     </div>
   </div>
@@ -103,8 +244,7 @@
     <div class="col-12 text-right">
       <!-- Boutton sumit -->
       <button class="btn btn-sm btn-primary mr-1"
-              type="submit"
-              [disabled]="form.invalid">
+              type="submit">
         <i class="fad fa-circle-notch fa-spin"
            *ngIf="loading"></i>
         {{ 'VALIDER' | translate }}

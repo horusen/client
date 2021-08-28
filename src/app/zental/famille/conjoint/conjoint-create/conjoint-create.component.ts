@@ -154,21 +154,18 @@ export class ConjointCreateComponent
         situation_matrimoniale: this.formValue("situation_matrimoniale"),
       };
 
-      this.conjointService.add(data).subscribe(() => {
+      this.conjointService.add(data).subscribe((response) => {
         this.loading = false;
         this.initialiseForm();
 
         // Modifiere le champ situation matrimoniale du user depuis identite
         this.identiteService.user = {
           ...this.user,
-          situation_matrimoniale: data.situation_matrimoniale,
+          situation_matrimoniale: response,
         };
 
         // si le user depuis identité est le user connecté, modifier le champ situation matrimoniale depuis le localStorage
-        this.tokenStorage.setUserField(
-          "situation_matrimoniale",
-          data.situation_matrimoniale
-        );
+        this.tokenStorage.setUserField("situation_matrimoniale", response);
       });
     }
   }

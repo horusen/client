@@ -3,7 +3,6 @@ import { Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseCreateComponent } from "src/app/shared/components/base-component/base-create.component";
 import { LiaisonService } from "src/app/zental/liaison/liaison.service";
-import { MinistereService } from "src/app/zental/ministere/ministere.service";
 import { PasserelleService } from "src/app/zental/passerelle/passerelle.service";
 import { BureauService } from "../../bureau.service";
 
@@ -16,7 +15,6 @@ export class AffectationBureauComponent
   extends BaseCreateComponent
   implements OnInit
 {
-  ministere: any;
   @Input() bureau: any;
   dependancies = {
     affecter: ["LIAISON", "PASSERELLE"],
@@ -30,7 +28,6 @@ export class AffectationBureauComponent
     public bureauService: BureauService,
     public liaisonService: LiaisonService,
     public passerelleService: PasserelleService,
-    public ministereService: MinistereService,
     public route: ActivatedRoute,
     public router: Router
   ) {
@@ -39,11 +36,6 @@ export class AffectationBureauComponent
 
   ngOnInit(): void {
     this.initialiseForm(this.bureau);
-
-    this._subscription["ministere"] =
-      this.ministereService.singleData$.subscribe((ministere) => {
-        this.ministere = ministere;
-      });
   }
 
   initialiseForm(bureau?: any): void {
@@ -66,18 +58,52 @@ export class AffectationBureauComponent
   }
 
   getLiaisons(): void {
-    this._getLiaisonsByMinistere(this.ministere.id);
+    if (this.bureau.ministere) {
+      this._getLiaisonsByMinistere(this.bureau.ministere.id);
+    } else if (this.bureau.ambassade) {
+      this._getLiaisonsByAmbassade(this.bureau.ambassade.id);
+    } else if (this.bureau.consulat) {
+      this._getLiaisonsByConsulat(this.bureau.consulat.id);
+    }
   }
 
   getPasserelles(): void {
-    this._getPasserellesByPays(this.ministere.pays.id);
+    if (this.bureau.ministere) {
+      this._getPasserellesByPays(
+        this.bureau.ministere.entite_diplomatique.pays_origine.id
+      );
+    }
   }
 
   private _getLiaisonsByMinistere(ministere: number): void {
     if (!this.dependancies.liaisons.length) {
       this.dependanciesLoading = true;
       this.liaisonService
-        .getByMinistere(ministere, {}, false)
+        .getNonAffecteByMinistere(ministere)
+        .subscribe((liaisons) => {
+          this.dependancies.liaisons = liaisons;
+          this.dependanciesLoading = false;
+        });
+    }
+  }
+
+  private _getLiaisonsByAmbassade(ambassade: number): void {
+    if (!this.dependancies.liaisons.length) {
+      this.dependanciesLoading = true;
+      this.liaisonService
+        .getNonAffecteByAmbassade(ambassade)
+        .subscribe((liaisons) => {
+          this.dependancies.liaisons = liaisons;
+          this.dependanciesLoading = false;
+        });
+    }
+  }
+
+  private _getLiaisonsByConsulat(consulat: number): void {
+    if (!this.dependancies.liaisons.length) {
+      this.dependanciesLoading = true;
+      this.liaisonService
+        .getNonAffecteByConsulat(consulat)
         .subscribe((liaisons) => {
           this.dependancies.liaisons = liaisons;
           this.dependanciesLoading = false;
@@ -89,7 +115,7 @@ export class AffectationBureauComponent
     if (!this.dependancies.passerelles.length) {
       this.dependanciesLoading = true;
       this.passerelleService
-        .getByPays(pays, {}, false)
+        .getNonAffecteByPays(pays)
         .subscribe((passerelles) => {
           this.dependancies.passerelles = passerelles;
           this.dependanciesLoading = false;

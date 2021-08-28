@@ -19,6 +19,13 @@ const routes: Routes = [
     children: [
       { path: "", component: ServiceDescriptionComponent },
       { path: "employe", component: ServiceEmployeComponent },
+      {
+        path: "toloba",
+        loadChildren: () =>
+          import("../../toloba/toloba-service/toloba-service.module").then(
+            (module) => module.TolobaServiceModule
+          ),
+      },
     ],
   },
 ];

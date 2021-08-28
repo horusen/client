@@ -35,6 +35,8 @@ export class FonctionListComponent extends BaseComponent implements OnInit {
       this.getByAmbassade(this.parent.item.id, params);
     } else if (this.parent.name === "consulat") {
       this.getByConsulat(this.parent.item.id, params);
+    } else if (this.parent.name === "bureau") {
+      this.getByBureau(this.parent.item.id, params);
     }
   }
 
@@ -56,6 +58,15 @@ export class FonctionListComponent extends BaseComponent implements OnInit {
     this.loading = true;
     this.fonctionService.getByConsulat(consulat, params).subscribe(() => {
       this.loading = false;
+    });
+  }
+
+  getByBureau(bureau: number, params: Params): void {
+    this.loading = true;
+    this.fonctionService.getByBureau(bureau, params).subscribe({
+      complete: () => {
+        this.loading = false;
+      },
     });
   }
 }

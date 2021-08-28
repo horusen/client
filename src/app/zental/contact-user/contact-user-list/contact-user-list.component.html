@@ -49,6 +49,7 @@
         <!-- Supprimer -->
         <a [routerLink]="['./']"
            class="tx-facebook"
+           *ngIf="(router.url.includes('identite') && user.id_inscription === auth.user.id_inscription)"
            (click)="supprimer(contact.id)">
           <i class="fad mr-3 fa-trash"></i>
         </a>
@@ -85,6 +86,7 @@
   <!-- Missing data handling -->
   <div class="col-12 py-5"
        *ngIf="!loading && !contactService.data.length">
-    <app-missing-data></app-missing-data>
+    <app-missing-data-alt>
+    </app-missing-data-alt>
   </div>
 </div>

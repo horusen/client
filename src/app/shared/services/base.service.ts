@@ -84,9 +84,9 @@ export abstract class BaseService {
       );
   }
 
-  getAll(emit = true): Observable<any> {
+  getAll(emit = true, params?: Params): Observable<any> {
     return this.factory
-      .get(`${this.endPoint}/all`)
+      .get(`${this.endPoint}/all`, { params })
       .pipe(
         tap(emit ? this.listResponseHandler() : this.onlyErrorResponseHandler())
       );
@@ -162,8 +162,8 @@ export abstract class BaseService {
   }
 
   setFieldInRowData(index: number, field: string, value: any) {
-    this.data[index][field] = value;
-    this.data$.next(this.data);
+    this._data[index][field] = value;
+    this.data$.next(this._data);
   }
 
   update(id: number, data: {}) {
@@ -254,6 +254,9 @@ export abstract class BaseService {
     this.singleData$.next(this._singleData);
   }
 
+  emitData(): void {
+    this.data$.next(this._data);
+  }
   onlyErrorResponseHandler = () => {
     return {
       error: (error) => this.errorResponseHandler(error),

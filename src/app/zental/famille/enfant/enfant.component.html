@@ -11,6 +11,7 @@
 
         <a [routerLink]="['./']"
            [fragment]="'add-enfant'"
+           *ngIf="(router.url.includes('identite') && user.id_inscription === auth.user.id_inscription)"
            class="float-right">
           <i class="fad fa-plus-circle"></i>
         </a>

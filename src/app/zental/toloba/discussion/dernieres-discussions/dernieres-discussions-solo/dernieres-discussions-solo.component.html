@@ -1,0 +1,379 @@
+<ng-container *ngIf="correspondant">
+  <!-- Correspondant user -->
+  <a [routerLink]="['discussion', discussion?.id]"
+     [routerLinkActive]="'border border-primary '"
+     class="w-100 p-1 d-flex bd-b mb-1"
+     [queryParamsHandling]="'preserve'"
+     *ngIf="type_correspondant === 'user'">
+    <!-- Image de profil -->
+    <div class="mr-2  ">
+      <div class="avatar">
+        <img class="avatar4"
+             *ngIf="correspondant.photo"
+             [src]="correspondant.photo?.path"
+             [alt]="correspondant.nom_complet">
+      </div>
+
+      <span *ngIf="!correspondant.photo">
+        <i class="fad fa-user-circle"
+           style="font-size: 45px;"></i>
+      </span>
+    </div>
+
+    <!-- NOm correspondant -->
+    <div class="">
+      <p class="tx-ether4 mg-b-0">
+        {{correspondant.nom_complet }}
+      </p>
+
+
+      <span class="tx-12 mg-b-0 tx-gray-500">
+        <span class="font-weight-bold m-0"
+              *ngIf="discussion?.last_reaction?.user?.id_inscription === dialoguant.id">
+          {{ ('VOUS' | translate) }}:
+        </span>
+
+        <!-- reaction fichier -->
+        <span *ngIf="discussion?.last_reaction?.file"
+              class="font-italic">
+          <i class="fal fa-paperclip"></i> {{ 'pieceJointe' | translate }}
+        </span>
+
+        <!-- REaction text -->
+        <span *ngIf="!discussion?.last_reaction?.file">{{ helper.strcut(discussion?.last_reaction?.reaction, 23) }}</span>
+      </span>
+    </div>
+
+
+    <div class="mg-l-auto text-right">
+      <!-- Date -->
+      <p class="mg-b-0  tx-dar">
+        <small>{{ discussion?.last_reaction?.created_at
+          | date:getDateFormat(discussion?.touched_at)
+          }}
+
+        </small>
+      </p>
+      <!-- <span class="badge rounded-circle  bg-nbleu tx-white"
+            style="padding:6px 6px">20</span> -->
+    </div>
+  </a>
+
+
+  <!-- Correspondant service -->
+  <a [routerLink]="['discussion', discussion?.id]"
+     [routerLinkActive]="'border border-primary '"
+     class="w-100 p-1 d-flex bd-b mb-1"
+     [queryParamsHandling]="'preserve'"
+     *ngIf="type_correspondant === 'service'">
+    <!-- Image de profil -->
+    <div class="mr-2  ">
+      <div class="avatar">
+        <span class="avatar-initial rounded-circle w-100 bg-primary op-6"
+              [ngClass]="{
+                        'bg-primary':
+                          helper.parseInt(
+                            correspondant.id.toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) -
+                            1 ==
+                            0 ||
+                          helper.parseInt(
+                            correspondant.id.toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) +
+                            5 -
+                            1 ==
+                            0,
+                        'bg-warning':
+                          helper.parseInt(
+                            correspondant.id.toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) -
+                            2 ==
+                            0 ||
+                          helper.parseInt(
+                            correspondant.id.toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) +
+                            5 -
+                            2 ==
+                            0,
+                        'bg-success':
+                          helper.parseInt(
+                            correspondant.id.toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) -
+                            3 ==
+                            0 ||
+                          helper.parseInt(
+                            correspondant.id.toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) +
+                            5 -
+                            3 ==
+                            0,
+                        'bg-info':
+                          helper.parseInt(
+                            correspondant.id.toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) -
+                            4 ==
+                            0 ||
+                          helper.parseInt(
+                            correspondant.id.toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) +
+                            5 -
+                            4 ==
+                            0,
+                        'bg-danger':
+                          helper.parseInt(
+                            correspondant.id.toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) -
+                            5 ==
+                            0 ||
+                          helper.parseInt(
+                            correspondant.id.toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) +
+                            5 -
+                            5 ==
+                            0
+                      }">
+          {{ correspondant.libelle.split(" ")[0].charAt(0) +
+          (correspondant.libelle.split(" ")[1]
+          ? correspondant.libelle.split(" ")[1].charAt(0)
+          : correspondant.libelle.split(" ")[0].charAt(1))
+          }}
+        </span>
+      </div>
+    </div>
+
+    <!-- NOm correspondant -->
+    <div class="">
+      <p class="tx-ether4 mg-b-0">
+        {{correspondant.libelle }}
+      </p>
+
+
+      <span class="tx-12 mg-b-0 tx-gray-500">
+        <span class="font-weight-bold m-0"
+              *ngIf="
+                dialoguant.type === 'service' && discussion?.last_reaction?.service?.id === dialoguant.id
+                || dialoguant.type === 'user' && discussion?.last_reaction?.user?.id_inscription === dialoguant.id">
+          {{ ('VOUS' | translate) }}:
+        </span>
+
+        <!-- reaction fichier -->
+        <span *ngIf="discussion?.last_reaction?.file"
+              class="font-italic">
+          <i class="fal fa-paperclip"></i>{{ 'pieceJointe' | translate }}
+        </span>
+
+        <!-- REaction text -->
+        <span *ngIf="!discussion?.last_reaction?.file">{{ helper.strcut(discussion?.last_reaction?.reaction, 23) }}</span>
+      </span>
+    </div>
+
+
+    <div class="mg-l-auto text-right">
+      <!-- Date -->
+      <p class="mg-b-0  tx-dar">
+        <small>
+          {{ discussion?.last_reaction?.created_at | date:getDateFormat(discussion?.touched_at) }}
+        </small>
+      </p>
+      <!-- <span class="badge rounded-circle  bg-nbleu tx-white"
+            style="padding:6px 6px">20</span> -->
+    </div>
+  </a>
+
+
+  <!-- Correspondant groupe -->
+  <a [routerLink]="['discussion', discussion?.id]"
+     [routerLinkActive]="'border border-primary '"
+     class="w-100 p-1 d-flex bd-b mb-1"
+     [queryParamsHandling]="'preserve'"
+     *ngIf="type_correspondant === 'groupe'">
+    <!-- Image de profil -->
+    <div class="mr-2  ">
+      <div class="avatar">
+        <span class="avatar-initial rounded-circle w-100 bg-primary op-6"
+              [ngClass]="{
+                          'bg-primary':
+                            helper.parseInt(
+                              correspondant.id.toString()
+                                .charAt(correspondant.id.toString().length - 1)
+                            ) -
+                              1 ==
+                              0 ||
+                            helper.parseInt(
+                              correspondant.id.toString()
+                                .charAt(correspondant.id.toString().length - 1)
+                            ) +
+                              5 -
+                              1 ==
+                              0,
+                          'bg-warning':
+                            helper.parseInt(
+                              correspondant.id.toString()
+                                .charAt(correspondant.id.toString().length - 1)
+                            ) -
+                              2 ==
+                              0 ||
+                            helper.parseInt(
+                              correspondant.id.toString()
+                                .charAt(correspondant.id.toString().length - 1)
+                            ) +
+                              5 -
+                              2 ==
+                              0,
+                          'bg-success':
+                            helper.parseInt(
+                              correspondant.id.toString()
+                                .charAt(correspondant.id.toString().length - 1)
+                            ) -
+                              3 ==
+                              0 ||
+                            helper.parseInt(
+                              correspondant.id.toString()
+                                .charAt(correspondant.id.toString().length - 1)
+                            ) +
+                              5 -
+                              3 ==
+                              0,
+                          'bg-info':
+                            helper.parseInt(
+                              correspondant.id.toString()
+                                .charAt(correspondant.id.toString().length - 1)
+                            ) -
+                              4 ==
+                              0 ||
+                            helper.parseInt(
+                              correspondant.id.toString()
+                                .charAt(correspondant.id.toString().length - 1)
+                            ) +
+                              5 -
+                              4 ==
+                              0,
+                          'bg-danger':
+                            helper.parseInt(
+                              correspondant.id.toString()
+                                .charAt(correspondant.id.toString().length - 1)
+                            ) -
+                              5 ==
+                              0 ||
+                            helper.parseInt(
+                              correspondant.id.toString()
+                                .charAt(correspondant.id.toString().length - 1)
+                            ) +
+                              5 -
+                              5 ==
+                              0
+                        }">
+          <i class="fad fa-users"></i>
+        </span>
+      </div>
+    </div>
+
+    <!-- NOm correspondant -->
+    <div class="">
+      <p class="tx-ether4 mg-b-0">
+        {{correspondant.libelle }}
+      </p>
+
+
+      <span class="tx-12 mg-b-0 tx-gray-500">
+        <span class="font-weight-bold m-0"
+              *ngIf="
+                   dialoguant.type === 'user' && discussion?.last_reaction?.user?.id_inscription === dialoguant.id">
+          {{ ('VOUS' | translate) }}:
+        </span>
+
+        <!-- reaction fichier -->
+        <span *ngIf="discussion?.last_reaction?.file"
+              class="font-italic">
+          <i class="fal fa-paperclip"></i>{{ 'pieceJointe' | translate }}
+        </span>
+
+        <!-- REaction text -->
+        <span *ngIf="!discussion?.last_reaction?.file">{{ helper.strcut(discussion?.last_reaction?.reaction, 23) }}</span>
+      </span>
+    </div>
+
+
+    <div class="mg-l-auto text-right">
+      <!-- Date -->
+      <p class="mg-b-0  tx-dar">
+        <small>
+          {{ discussion?.last_reaction?.created_at | date:getDateFormat(discussion?.touched_at) }}
+        </small>
+      </p>
+      <!-- <span class="badge rounded-circle  bg-nbleu tx-white"
+            style="padding:6px 6px">20</span> -->
+    </div>
+  </a>
+
+
+  <!-- Correspondant entite diplomatique -->
+  <a [routerLink]="['discussion', discussion?.id]"
+     [routerLinkActive]="'border border-primary '"
+     class="w-100 p-1 d-flex bd-b mb-1"
+     [queryParamsHandling]="'preserve'"
+     *ngIf="type_correspondant === 'entite_diplomatique'">
+    <!-- Image de profil -->
+    <div class="mr-2  ">
+      <div class="avatar">
+        <img class="avatar4 h-100"
+             *ngIf="correspondant.entite_diplomatique.pays_origine.drapeau"
+             [src]="correspondant.entite_diplomatique.pays_origine.drapeau"
+             [alt]="correspondant.entite_diplomatique.libelle">
+      </div>
+
+      <span *ngIf="!correspondant.entite_diplomatique.pays_origine.drapeau">
+        <i class="fad fa-user-circle"
+           style="font-size: 45px;"></i>
+      </span>
+    </div>
+
+    <!-- NOm correspondant -->
+    <div class="">
+      <p class="tx-ether4 mg-b-0">
+        {{correspondant.entite_diplomatique.libelle }}
+      </p>
+
+
+      <span class="tx-12 mg-b-0 tx-gray-500">
+        <span class="font-weight-bold m-0"
+              *ngIf="discussion?.last_reaction?.user?.id_inscription === dialoguant.id">
+          {{ ('VOUS' | translate) }}:
+        </span>
+
+        <!-- reaction fichier -->
+        <span *ngIf="discussion?.last_reaction?.file"
+              class="font-italic">
+          <i class="fal fa-paperclip"></i> {{ 'pieceJointe' | translate }}
+        </span>
+
+        <!-- REaction text -->
+        <span *ngIf="!discussion?.last_reaction?.file">{{ helper.strcut(discussion?.last_reaction?.reaction, 23) }}</span>
+      </span>
+    </div>
+
+
+    <div class="mg-l-auto text-right">
+      <!-- Date -->
+      <p class="mg-b-0  tx-dar">
+        <small>{{ discussion?.last_reaction?.created_at
+          | date:getDateFormat(discussion?.touched_at)
+          }}
+
+        </small>
+      </p>
+      <!-- <span class="badge rounded-circle  bg-nbleu tx-white"
+            style="padding:6px 6px">20</span> -->
+    </div>
+  </a>
+</ng-container>

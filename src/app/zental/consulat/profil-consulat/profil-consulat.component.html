@@ -1,0 +1,103 @@
+<app-profil-institution [parent]="{ name: 'consulat', item: single }"
+                        *ngIf="single">
+  <ul class="nav bd-b bd-2 bd-facebook"
+      navigation-items>
+    <!-- le consulat -->
+    <li class="nav-item">
+      <a class="nav-link tx-echos"
+         [routerLink]="['./']"
+         [routerLinkActiveOptions]="{ exact: true }"
+         [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-landmark  tx-20"
+           [routerLinkActive]="'fas'"
+           [routerLinkActiveOptions]="{ exact: true }">
+        </i>
+        {{ 'leConsulat' | translate }}
+      </a>
+    </li>
+
+    <!-- Le consul -->
+    <li class="nav-item">
+      <a class="nav-link tx-echos"
+         [routerLink]="['consuls', 'actuel']"
+         [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-user-crown  tx-20"
+           [routerLinkActive]="'fas'">
+        </i>
+        {{ 'LeConsul' | translate}}
+      </a>
+    </li>
+
+
+    <!-- Portrait -->
+    <li class="nav-item">
+      <a class="nav-link tx-echos"
+         [routerLink]="'consuls'"
+         [routerLinkActiveOptions]="{ exact: true }"
+         [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-user-crown  tx-20"
+           [routerLinkActiveOptions]="{ exact: true }"
+           [routerLinkActive]="'fas'">
+        </i>
+        {{ 'PORTRAIT' | translate }}
+      </a>
+    </li>
+
+    <!-- Mission -->
+    <li class="nav-item">
+      <a class="nav-link tx-echos"
+         [routerLink]="'missions'"
+         [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-bullseye-arrow  tx-20"
+           [routerLinkActive]="'fas'"></i>
+        {{ 'MISSIONS' | translate }}
+      </a>
+    </li>
+
+
+    <!-- Organisation -->
+    <li class="nav-item">
+      <a class="nav-link tx-echos"
+         [routerLink]="'organisations'"
+         [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-line-columns  tx-20"
+           [routerLinkActive]="'fas'"></i>
+        {{ 'ORGANISATIONS' | translate }}
+      </a>
+    </li>
+
+
+    <!-- Services -->
+    <li class="nav-item ">
+      <a class="nav-link  tx-echos"
+         [routerLink]="['services']"
+         [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-ball-pile  tx-20"
+           [routerLinkActive]="'fas'"></i>
+        {{ 'SERVICES' | translate }}
+      </a>
+    </li>
+
+
+
+
+
+    <!-- Ici mon pays -->
+    <li class="nav-item ">
+      <a class="nav-link tx-echos"
+         [routerLinkActive]="'font-weight-bolder'"
+         [routerLink]="'ici-mon-pays'">
+        <i class="fal fa-building  tx-20"
+           [routerLinkActive]="'fas'"></i>
+        {{ 'iciMonPays' | translate }}
+      </a>
+    </li>
+
+  </ul>
+</app-profil-institution>
+
+
+<app-modal [configuration]="{ name: 'consulat-edit-modal', titre: 'modifierLesDetailsDuConsulat', icone: 'landmark-alt' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve'})">
+  <app-consulat-edit *ngIf="edit"></app-consulat-edit>
+</app-modal>

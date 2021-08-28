@@ -15,8 +15,7 @@ import { DomaineService } from "./domaine.service";
 })
 export class DomaineComponent extends BaseContainerComponentComponent {
   @Input() parent: { name: string; item: any };
-  ministere: any;
-  ambassade: any;
+  extraFields: any;
 
   constructor(
     public domaineService: DomaineInstitutionService,
@@ -30,17 +29,7 @@ export class DomaineComponent extends BaseContainerComponentComponent {
   }
 
   ngOnInit(): void {
-    if (this.router.url.includes("ministere")) {
-      this._subscription["ministere"] =
-        this.ministereService.singleData$.subscribe((ministere) => [
-          (this.ministere = ministere),
-        ]);
-    } else if (this.router.url.includes("ambassade")) {
-      this._subscription["ambassade"] =
-        this.ambassadeService.singleData$.subscribe((ambassade) => [
-          (this.ambassade = ambassade),
-        ]);
-    }
+    this.extraFields = { [this.parent.name]: this.parent.item.id };
   }
 
   onDomaineCreated(domaine: any): void {

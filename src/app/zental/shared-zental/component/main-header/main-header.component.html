@@ -6,7 +6,7 @@
       <div class="form-group mb-0 d-flex align-items-center  ">
         <!-- Search field -->
         <div class="input-group"
-             style="width:340px">
+             [style.width.px]="searchInputWidth">
           <input type="text"
                  class="form-control pd-y-10 "
                  (keyup.enter)="research(search.value)"
@@ -15,13 +15,6 @@
                  style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
         </div>
 
-        <!-- Boutton valider -->
-        <!-- <a role="button"
-           (click)="research(search.value)"
-           class="btn btn-light d-flex align-items-center justify-content-center rounded-circle"
-           style="width: 45px; height: 45px;">
-          <i class="fad fa-search tx-ether3"></i>
-        </a> -->
       </div>
       <div class=""
            style="position: absolute; top: 42px; z-index: 20000;">
@@ -37,6 +30,9 @@
       </div>
     </div>
 
+    <ng-content>
+
+    </ng-content>
 
 
     <!-- Autres elemenst -->
@@ -67,7 +63,8 @@
         </li>
 
         <!-- Ajouter -->
-        <li class="nav-item tx-ether">
+        <li class="nav-item tx-ether"
+            *ngIf="hasAddButton">
           <a class="nav-link3  tx-yeto mr-2"
              [routerLink]="['./']"
              [fragment]="'add' + (id ? '-' + id : '')"

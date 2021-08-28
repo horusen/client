@@ -128,16 +128,30 @@
 
             <li class="list-inline-item dropdown">
               <a class="tx-ether"
-                 href=""
+                 [routerLink]="['./', 'identite']"
                  data-toggle="dropdown"
                  aria-haspopup="true"
-                 aria-expanded="false"><span class="select-profile">HI, Adama!</span><img src="assets/images/xs/avatar7.jpg"
+                 aria-expanded="false">
+                <span class="select-profile">{{ auth.user.prenom }}</span>
+
+                <img [src]="auth.user.photo.path"
+                     *ngIf="auth.user.photo"
                      class="
                      img-fluid
                      wd-35
                      ht-35
                      rounded-circle"
-                     alt=""></a>
+                     alt="">
+
+                <img src="assets/images/xs/avatar7.jpg"
+                     *ngIf="!auth.user.photo"
+                     class="
+                     img-fluid
+                     wd-35
+                     ht-35
+                     rounded-circle"
+                     alt="">
+              </a>
               <div class="dropdown-menu dropdown-menu-right dropdown-profile shadow-2">
                 <div class="user-profile-area">
                   <div class="user-profile-heading">
@@ -169,7 +183,8 @@
                   <a href=""
                      class="dropdown-item"><i class="icon-heart"
                        aria-hidden="true"></i> Support</a>
-                  <a href="page-singin.html"
+                  <a [routerLink]="['./']"
+                     (click)="logout()"
                      class="dropdown-item"><i class="icon-power"
                        aria-hidden="true"></i> Sign-out</a>
                 </div>

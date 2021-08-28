@@ -1,8 +1,8 @@
+import { Validators } from "@angular/forms";
 import { Input } from "@angular/core";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseCreateComponent } from "src/app/shared/components/base-component/base-create.component";
-import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { VilleService } from "../../villes/ville.service";
 import { AdresseService } from "../adresse.service";
 
@@ -24,58 +24,73 @@ export class AdresseCreateComponent
   villeDropdownSettings = Object.assign(this.dropdownSettingsAlt.single, {});
 
   constructor(
-    public adresseService: AdresseService,
+    public addresseService: AdresseService,
     public villeService: VilleService,
     public router: Router,
     public route: ActivatedRoute
   ) {
-    super(adresseService);
+    super(addresseService);
   }
 
   ngOnInit(): void {
     this.enableRetrieveSchema = true;
     super.ngOnInit();
 
-    this._subscription["schema"] = this.adresseService.schema$.subscribe(() => {
-      this.initialiseForm();
-    });
+    this.initialiseForm();
 
     this.getVilles();
   }
 
-  initialiseForm(adresse?: any) {
-    this.initForm(["ville", "adresse"], [], () => {
-      // Ajout
-      this.addControl(
-        "entite_diplomatique",
-        this.parent.item.entite_diplomatique.id,
-        true
-      );
+  initialiseForm(addresse?: any) {
+    this.form = this.fb.group({
+      addresse: [addresse?.addresse, Validators.required],
+      ville: [addresse ? [addresse.ville] : null, Validators.required],
+      [this.parent.name === "user" ? "user" : "entite_diplomatique"]: [
+        this.parent.item.entite_diplomatique?.id ||
+          this.parent.item.id_inscription,
+        Validators.required,
+      ],
+    });
+
+    this.isFormOk = true;
+  }
+
+  getVilleByPays(pays: number): void {
+    this.villesLoading = true;
+    this.villeService.getByPays(pays, false).subscribe({
+      next: (villes) => {
+        this.villes = villes;
+        this.villesLoading = false;
+      },
     });
   }
 
-  getVilles(callback?: Function) {
+  getAllVilles(): void {
     this.villesLoading = true;
-    this.villeService
-      .getByPays(this.parent.item.entite_diplomatique.pays_siege.id)
-      .subscribe((villes) => {
+    this.villeService.getAll().subscribe({
+      next: (villes) => {
         this.villes = villes;
         this.villesLoading = false;
+      },
+    });
+  }
 
-        if (callback) {
-          callback();
-        }
-      });
+  getVilles() {
+    if (this.parent.name === "user") {
+      this.getAllVilles();
+    } else {
+      this.getVilleByPays(this.parent.item.entite_diplomatique.pays_siege.id);
+    }
   }
 
   create() {
     if (this.form.valid) {
       this.loading = true;
-      const data = Object.assign(this.form.value, {
+      const data = Object.assign({}, this.form.value, {
         ville: this.formValue("ville")[0].id_ville,
       });
 
-      this.adresseService.add(data).subscribe(() => {
+      this.addresseService.add(data).subscribe(() => {
         this.loading = false;
         this.router.navigate(["./"], {
           relativeTo: this.route,

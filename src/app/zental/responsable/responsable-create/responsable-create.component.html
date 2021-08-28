@@ -13,8 +13,8 @@
         <label class="control-label"
                for="responsable">
           <span *ngIf="parent.name === 'ministre'">{{ 'MINISTRE' | translate }}</span>
-          <span *ngIf="parent.name === 'ambassadeur'">{{ 'MINISTRE' | translate }}</span>
-          <span *ngIf="parent.name === 'ministre'">{{ 'MINISTRE' | translate }}</span>
+          <span *ngIf="parent.name === 'ambassadeur'">{{ 'AMBASSADEUR' | translate }}</span>
+          <span *ngIf="parent.name === 'consul'">{{ 'CONSUL' | translate }}</span>
           <i class="fad fa-circle-notch fa-spin"
              *ngIf="dependanciesLoading.users"></i>
         </label>
@@ -79,7 +79,9 @@
         <!-- Label -->
         <label class="control-label"
                for="responsable">
-          {{ 'MINISTRE' | translate }}
+          <span *ngIf="parent.name === 'ministre'">{{ 'MINISTRE' | translate }}</span>
+          <span *ngIf="parent.name === 'ambassadeur'">{{ 'AMBASSADEUR' | translate }}</span>
+          <span *ngIf="parent.name === 'consul'">{{ 'CONSUL' | translate }}</span>
           <i class="fad fa-circle-notch fa-spin"
              *ngIf="dependanciesLoading.users"></i>
         </label>
@@ -88,7 +90,7 @@
                               [settings]="dropdownSettingsAlt.user"
                               formControlName="employe"
                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'employe'), 'is-valid': isValid('employe')}"
-                              class="form-control p-0 form-control-sm">
+                              class="form-control  form-control-sm">
           <c-badge>
             <ng-template let-item="item">
               {{item.nom_complet}}

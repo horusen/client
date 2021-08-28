@@ -25,11 +25,11 @@
         </div>
 
         <!-- Right -->
-        <h3 class="fw-300 mb-3 tx-nfacebook">{{ 'inscrivezVous' | translate }}</h3>
+        <h4 class="fw-300 mb-3 tx-nfacebook">{{ 'inscrivezVous' | translate }}</h4>
       </div>
 
       <!-- Formulaire d'inscription -->
-      <form class="custom-placeholder row m-0 p-0 justify-content-center h-100 "
+      <form class="custom-placeholder row m-0 p-0 justify-content-center "
             [formGroup]="form"
             *ngIf="form"
             (submit)="inscription()">
@@ -43,7 +43,7 @@
           <div class="row justify-content-center">
             <div class="d-flex users-icon bg-light clickable align-items-center justify-content-center border rounded-circle"
                  (click)="userPhoto.click()">
-              <span class="icone">
+              <span class="icone m-0">
                 <i class="fad  fa-users"
                    *ngIf="!imageUrl"></i>
                 <img [src]="imageUrl"
@@ -155,7 +155,7 @@
               </label>
 
               <angular2-multiselect [data]="dependancies.villes"
-                                    [settings]="dropdownSettingsAlt.single"
+                                    [settings]="villeDropdownSettings"
                                     formControlName="lieu_naissance"
                                     [ngClass]="{'is-invalid': shouldShowRequiredError( 'part1.lieu_naissance'), 'is-valid': isValid('part1.lieu_naissance')}"
                                     class="form-control">
@@ -236,6 +236,7 @@
         <div class="col-12 p-0"
              id="part2"
              *ngIf="tabs.part2"
+             style="margin-top: 75px;"
              formGroupName="part2">
           <!-- email telephone -->
           <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12">

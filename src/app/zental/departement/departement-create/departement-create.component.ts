@@ -1,11 +1,8 @@
-import { AmbassadeService } from "./../../ambassade/ambassade.service";
-import { MinistereService } from "./../../ministere/ministere.service";
 import { Validators } from "@angular/forms";
 import { Component, Input, OnInit } from "@angular/core";
 import { BaseCreateComponent } from "src/app/shared/components/base-component/base-create.component";
 import { DepartementService } from "../departement.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ConsulatService } from "../../consulat/consulat.service";
 import { DomaineInstitutionService } from "../../domaine-institution/domaine-institution.service";
 
 @Component({
@@ -18,9 +15,7 @@ export class DepartementCreateComponent
   implements OnInit
 {
   @Input() parent: { name: string; item: any };
-  ministere: any;
-  ambassade: any;
-  consulat: any;
+
   domaines: any = [];
   domaineLoading = false;
 
@@ -28,10 +23,7 @@ export class DepartementCreateComponent
     public departementService: DepartementService,
     public router: Router,
     public route: ActivatedRoute,
-    public domaineService: DomaineInstitutionService,
-    public ministereService: MinistereService,
-    public ambassadeService: AmbassadeService,
-    public consulatService: ConsulatService
+    public domaineService: DomaineInstitutionService
   ) {
     super(departementService);
   }
@@ -39,31 +31,30 @@ export class DepartementCreateComponent
   ngOnInit(): void {
     this.initialiseForm();
 
-    if (this.router.url.includes("ministere")) {
-      this.ministereService.singleData$.subscribe((ministere) => {
-        if (this.parent.name === "ministere")
-          this.getDepartementsByMinistere(this.parent.item.id);
-        this.formValuePatcher("ministere", ministere.id);
-        this.ministere = ministere;
-      });
-    } else if (this.router.url.includes("ambassade")) {
-      this.ambassadeService.singleData$.subscribe((ambassade) => {
-        if (this.parent.name === "ambassade")
-          this.getDepartementsByAmbassade(this.parent.item.id);
-        this.formValuePatcher("ambassade", ambassade.id);
-        this.ambassade = ambassade;
-      });
-    } else if (this.router.url.includes("consulat")) {
-      this.consulatService.singleData$.subscribe((consulat) => {
-        if (this.parent.name === "consulat")
-          this.getDepartementsByConsulat(this.parent.item.id);
-        this.formValuePatcher("consulat", consulat.id);
-        this.consulat = consulat;
-      });
+    this.getDomaines();
+  }
+
+  getDomaines(): void {
+    if (this.parent.name === "ministere") {
+      this.getDomainesByMinistere(this.parent.item.id);
+    } else if (this.parent.name === "ambassade") {
+      this.getDomainesByAmbassade(this.parent.item.id);
+    } else if (this.parent.name === "consulat") {
+      this.getDomainesByConsulat(this.parent.item.id);
+    } else if (this.parent.name === "bureau") {
+      this.getDomainesByBureau(this.parent.item.id);
     }
   }
 
-  getDepartementsByMinistere(ministere: number): void {
+  getDomainesByBureau(bureau: number): void {
+    this.domaineLoading = true;
+    this.domaineService.getByBureau(bureau, {}, false).subscribe((domaines) => {
+      this.domaines = domaines;
+      this.domaineLoading = false;
+    });
+  }
+
+  getDomainesByMinistere(ministere: number): void {
     this.domaineLoading = true;
     this.domaineService
       .getByMinistere(ministere, {}, false)
@@ -73,7 +64,7 @@ export class DepartementCreateComponent
       });
   }
 
-  getDepartementsByConsulat(consulat: number): void {
+  getDomainesByConsulat(consulat: number): void {
     this.domaineLoading = true;
     this.domaineService
       .getByConsulat(consulat, {}, false)
@@ -83,7 +74,7 @@ export class DepartementCreateComponent
       });
   }
 
-  getDepartementsByAmbassade(ambassade: number): void {
+  getDomainesByAmbassade(ambassade: number): void {
     this.domaineLoading = true;
     this.domaineService
       .getByAmbassade(ambassade, {}, false)
@@ -101,27 +92,8 @@ export class DepartementCreateComponent
         departement?.domaine ? [departement?.domaine] : [],
         Validators.required,
       ],
+      [this.parent.name]: this.parent.item.id,
     });
-
-    if (this.router.url.includes("ministere")) {
-      this.addControl("ministere", departement?.ministere);
-    } else if (this.router.url.includes("ambassade")) {
-      this.addControl("ambassade", departement?.ambassade);
-    } else if (this.router.url.includes("consulat")) {
-      this.addControl("consulat", departement?.consulat);
-    }
-
-    if (this.parent.name === "domaine") {
-      this.formValuePatcher("domaine", [this.parent.item]);
-    }
-
-    if (this.router.url.includes("ministere")) {
-      this.formValuePatcher("ministere", this.ministere?.id);
-    } else if (this.router.url.includes("ambassade")) {
-      this.formValuePatcher("ambassade", this.ambassade?.id);
-    } else if (this.router.url.includes("consulat")) {
-      this.formValuePatcher("consulat", this.consulat?.id);
-    }
   }
 
   create(): void {
@@ -136,15 +108,6 @@ export class DepartementCreateComponent
         .subscribe(() => {
           this.loading = false;
           this.initialiseForm();
-          this.ministere
-            ? this.formValuePatcher("ministere", this.ministere.id)
-            : null;
-          this.ambassade
-            ? this.formValuePatcher("ambassade", this.ambassade.id)
-            : null;
-          this.consulat
-            ? this.formValuePatcher("consulat", this.consulat.id)
-            : null;
           this.router.navigate(["./"], {
             relativeTo: this.route,
             queryParamsHandling: "preserve",

@@ -1,3 +1,5 @@
+import { ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 import { AdresseService } from "./../../adresse/adresse.service";
 import { Component, Input, OnInit } from "@angular/core";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
@@ -12,8 +14,14 @@ export class ProfilInstitutionComponent
   implements OnInit
 {
   @Input() parent: { name: string; item: any };
+
   adresses = [];
-  constructor(public adresseService: AdresseService) {
+
+  constructor(
+    public adresseService: AdresseService,
+    public router: Router,
+    public route: ActivatedRoute
+  ) {
     super();
   }
 

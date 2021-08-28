@@ -9,7 +9,7 @@
 
         <!--  -->
         <a [routerLink]="['./']"
-           *ngIf="!relationFamiliale && !loading"
+           *ngIf="!relationFamiliale && !loading && (router.url.includes('identite') && user.id_inscription === auth.user.id_inscription)"
            class="
            float-right"
            (click)="create.emit()">
@@ -17,7 +17,7 @@
         </a>
 
         <a [routerLink]="['./']"
-           *ngIf="relationFamiliale && !loading"
+           *ngIf="(relationFamiliale && !loading) && (router.url.includes('identite') && user.id_inscription === auth.user.id_inscription)"
            class="
            float-right"
            (click)="supprimer()">

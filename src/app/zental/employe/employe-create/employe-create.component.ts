@@ -79,17 +79,16 @@ export class EmployeCreateComponent
   ngOnInit(): void {
     this.initialiseForm();
 
-    this._subscription["ministere"] =
-      this.ministereService.singleData$.subscribe((ministere) => {
-        this.ministere = ministere;
-        this._getPostes(this.ministere.id);
-        this._getFonctions(this.ministere.id);
-      });
+    console.log(this.form.value);
+
+    this.getPostes();
+
+    this.getFonctions();
   }
 
   initialiseForm(): void {
     this.form = this.fb.group({
-      affecter: [this.dependancies.affecter[0], Validators.required], // Permet de sasvoir à quel objet on ajoute service
+      affecter: [null, Validators.required], // Permet de sasvoir à quel objet on ajoute service
       employe: [null, Validators.required],
       fonction: [null, Validators.required],
       poste: [null, Validators.required],
@@ -102,9 +101,67 @@ export class EmployeCreateComponent
       bureau: [null],
       service: [null],
       note: [null],
+      charger_com: [false, Validators.required],
     });
 
-    if (this.parent.name === "bureau") {
+    // Set and reset validators
+    this.form.controls.affecter.valueChanges.subscribe((value) => {
+      if (
+        value === "AMBASSADE" ||
+        value === "CONSULAT" ||
+        value === "servicesInternes"
+      ) {
+        this._removeValidators();
+        this.addValidators("service", [Validators.required]);
+      } else if (value === "BUREAU") {
+        this._removeValidators();
+        this.addValidators("bureau", [Validators.required]);
+      } else if (value === "LAISON") {
+        this._removeValidators();
+        this.addValidators("liaison", [Validators.required]);
+      } else if (value === "PASSERELLE") {
+        this._removeValidators();
+        this.addValidators("passerelle", [Validators.required]);
+      }
+    });
+
+    if (this.parent.name === "ministere") {
+      this.formValuePatcher("affecter", this.dependancies.affecter[0]);
+    } else if (this.parent.name === "ambassade") {
+      // Remove unecessary element from dependancies affectation
+      this.dependancies.affecter = this.dependancies.affecter.filter(
+        (item) => item !== "PASSERELLE"
+      );
+
+      // Set a default value for ambassade field
+      this.form.controls.affecter.valueChanges.subscribe({
+        next: (value) => {
+          if (value === "AMBASSADE") {
+            this.formValuePatcher("ambassade", [this.parent.item]);
+          }
+        },
+      });
+
+      // SEt affecter field to "AMBASSADE" by default
+      this.formValuePatcher("affecter", this.dependancies.affecter[0]);
+    } else if (this.parent.name === "consulat") {
+      // remove uncessary item in dependancies affecter
+      this.dependancies.affecter = this.dependancies.affecter.filter(
+        (item) => item !== "AMBASSADE" && item !== "PASSERELLE"
+      );
+
+      // Set a default value for consulat
+      this.form.controls.affecter.valueChanges.subscribe({
+        next: (value) => {
+          if (value === "CONSULAT") {
+            this.formValuePatcher("consulat", [this.parent.item]);
+          }
+        },
+      });
+
+      // Set affecter to "CONSULAT" by default
+      this.formValuePatcher("affecter", "CONSULAT");
+    } else if (this.parent.name === "bureau") {
       this.formValuePatcher("affecter", "BUREAU");
       this.formValuePatcher("bureau", [this.parent.item]);
     } else if (this.parent.name === "service") {
@@ -113,13 +170,21 @@ export class EmployeCreateComponent
     }
   }
 
+  // Reset all validors from passerelle, bureaux, service, liaison
+  private _removeValidators() {
+    this.removeValidators("service");
+    this.removeValidators("liaison");
+    this.removeValidators("bureau");
+    this.removeValidators("passerelle");
+  }
+
   getServices(): void {
-    if (this.formValue("affecter") === "serviceInterne") {
-      this._getServicesByMinistere(this.ministere.id);
-    } else if (this.formValue("affecter") === "AMBASSADE") {
-      this._getServicesByAmbassade(this.formValue("ambassade"));
-    } else if (this.formValue("affecter") === "CONSULAT") {
-      this._getServicesByConsulat(this.formValue("consulat"));
+    if (this.parent.name === "ministere") {
+      this._getServicesByMinistere(this.parent.item.id);
+    } else if (this.parent.name === "ambassade") {
+      this._getServicesByAmbassade(this.parent.item.id);
+    } else if (this.parent.name === "consulat") {
+      this._getServicesByConsulat(this.parent.item.id);
     }
   }
 
@@ -134,34 +199,70 @@ export class EmployeCreateComponent
   }
 
   getAmbassades(): void {
-    this._getAmbassadeByMinistere(this.ministere.id);
+    this._getAmbassadeByMinistere(this.parent.item.id);
   }
 
   getLiaisons(): void {
-    this._getLiaisonsByMinistere(this.ministere.id);
+    if (this.parent.name === "ministere") {
+      this._getLiaisonsByMinistere(this.parent.item.id);
+    } else if (this.parent.name === "ambassade") {
+      this._getLiaisonsByAmbassade(this.parent.item.id);
+    } else if (this.parent.name === "consulat") {
+      this._getLiaisonsByConsulat(this.parent.item.id);
+    }
   }
 
   getPasserelles(): void {
-    this._getPasserellesByPays(this.ministere.pays.id);
+    this._getPasserellesByPays(this.parent.item.pays_origine.id);
   }
 
   getConsulats(): void {
-    this._getConsulatsByMinistere(this.ministere.id);
+    if (this.parent.name === "ministere") {
+      this._getConsulatsByMinistere(this.parent.item.id);
+    } else if (this.parent.name === "ambassade") {
+      this._getConsulatsByAmbassade(this.parent.item.id);
+    }
   }
 
   getBureaux(): void {
-    this._getBureauxByMinistere(this.ministere.id);
+    if (this.parent.name === "ministere") {
+      this._getBureauxByMinistere(this.parent.item.id);
+    } else if (this.parent.name === "ambassade") {
+      this._getBureauxByAmbassade(this.parent.item.id);
+    } else if (this.parent.name === "consulat") {
+      this._getBureauxByConsulat(this.parent.item.id);
+    }
   }
 
-  resetSubscription(): void {
-    Object.keys(this._subscription).forEach((key) => {
-      if (["consulat", "ambassade"].includes(key)) {
-        this._subscription[key].unsubscribe();
-      }
-    });
+  getPostes(): void {
+    if (this.parent.name === "ministere") {
+      this._getPostesByMinistere(this.parent.item.id);
+    } else if (this.parent.name === "ambassade") {
+      this._getPostesByAmbassade(this.parent.item.id);
+    } else if (this.parent.name === "consulat") {
+      this._getPostesByConsulat(this.parent.item.id);
+    } else if (this.parent.name === "bureau") {
+      this._getPostesByBureau(this.parent.item.id);
+    } else if (this.parent.name === "service") {
+      this._getPostesByService(this.parent.item.id);
+    }
   }
 
-  private _getPostes(ministere: number): void {
+  getFonctions(): void {
+    if (this.parent.name === "ministere") {
+      this._getFonctionsByMinistere(this.parent.item.id);
+    } else if (this.parent.name === "ambassade") {
+      this._getFonctionsByAmbassade(this.parent.item.id);
+    } else if (this.parent.name === "consulat") {
+      this._getFonctionsByConsulat(this.parent.item.id);
+    } else if (this.parent.name === "bureau") {
+      this._getFonctionsByBureau(this.parent.item.id);
+    } else if (this.parent.name === "service") {
+      this._getFonctionsByService(this.parent.item.id);
+    }
+  }
+
+  private _getPostesByMinistere(ministere: number): void {
     if (!this.dependancies.postes.length) {
       this.dependanciesLoading.postes = true;
       this.posteService
@@ -173,11 +274,103 @@ export class EmployeCreateComponent
     }
   }
 
-  private _getFonctions(ministere: number): void {
+  private _getPostesByService(service: number): void {
+    if (!this.dependancies.postes.length) {
+      this.dependanciesLoading.postes = true;
+      this.posteService.getByService(service, {}, false).subscribe((postes) => {
+        this.dependancies.postes = postes;
+        this.dependanciesLoading.postes = false;
+      });
+    }
+  }
+
+  private _getFonctionsByService(service: number): void {
+    if (!this.dependancies.fonctions.length) {
+      this.dependanciesLoading.fonctions = true;
+      this.fonctionService
+        .getByService(service, {}, false)
+        .subscribe((fonctions) => {
+          this.dependancies.fonctions = fonctions;
+          this.dependanciesLoading.fonctions = false;
+        });
+    }
+  }
+
+  private _getPostesByBureau(bureau: number): void {
+    if (!this.dependancies.postes.length) {
+      this.dependanciesLoading.postes = true;
+      this.posteService.getByBureau(bureau, {}, false).subscribe((postes) => {
+        this.dependancies.postes = postes;
+        this.dependanciesLoading.postes = false;
+      });
+    }
+  }
+
+  private _getFonctionsByMinistere(ministere: number): void {
     if (!this.dependancies.fonctions.length) {
       this.dependanciesLoading.fonctions = true;
       this.fonctionService
         .getByMinistere(ministere, {}, false)
+        .subscribe((fonctions) => {
+          this.dependancies.fonctions = fonctions;
+          this.dependanciesLoading.fonctions = false;
+        });
+    }
+  }
+
+  private _getPostesByAmbassade(ambassade: number): void {
+    if (!this.dependancies.postes.length) {
+      this.dependanciesLoading.postes = true;
+      this.posteService
+        .getByAmbassade(ambassade, {}, false)
+        .subscribe((postes) => {
+          this.dependancies.postes = postes;
+          this.dependanciesLoading.postes = false;
+        });
+    }
+  }
+
+  private _getFonctionsByAmbassade(ambassade: number): void {
+    if (!this.dependancies.fonctions.length) {
+      this.dependanciesLoading.fonctions = true;
+      this.fonctionService
+        .getByAmbassade(ambassade, {}, false)
+        .subscribe((fonctions) => {
+          this.dependancies.fonctions = fonctions;
+          this.dependanciesLoading.fonctions = false;
+        });
+    }
+  }
+
+  private _getPostesByConsulat(consulat: number): void {
+    if (!this.dependancies.postes.length) {
+      this.dependanciesLoading.postes = true;
+      this.posteService
+        .getByConsulat(consulat, {}, false)
+        .subscribe((postes) => {
+          this.dependancies.postes = postes;
+          this.dependanciesLoading.postes = false;
+        });
+    }
+  }
+
+  private _getFonctionsByBureau(bureau: number): void {
+    if (!this.dependancies.fonctions.length) {
+      this.dependanciesLoading.fonctions = true;
+      this.fonctionService
+        .getByBureau(bureau, {}, false)
+        .subscribe((fonctions) => {
+          this.dependancies.fonctions = fonctions;
+          this.dependanciesLoading.fonctions = false;
+        });
+    }
+  }
+
+  private _getFonctionsByConsulat(consulat: number): void {
+    if (!this.dependancies.fonctions.length) {
+      this.dependanciesLoading.fonctions = true;
+      this.fonctionService
+        .getByConsulat(consulat, {}, false)
         .subscribe((fonctions) => {
           this.dependancies.fonctions = fonctions;
           this.dependanciesLoading.fonctions = false;
@@ -209,11 +402,47 @@ export class EmployeCreateComponent
     }
   }
 
+  private _getBureauxByAmbassade(ambassade: number): void {
+    if (!this.dependancies.bureaux.length) {
+      this.dependanciesLoading.bureaux = true;
+      this.bureauService
+        .getByAmbassade(ambassade, {}, false)
+        .subscribe((bureaux) => {
+          this.dependancies.bureaux = bureaux;
+          this.dependanciesLoading.bureaux = false;
+        });
+    }
+  }
+
+  private _getBureauxByConsulat(consulat: number): void {
+    if (!this.dependancies.bureaux.length) {
+      this.dependanciesLoading.bureaux = true;
+      this.bureauService
+        .getByConsulat(consulat, {}, false)
+        .subscribe((bureaux) => {
+          this.dependancies.bureaux = bureaux;
+          this.dependanciesLoading.bureaux = false;
+        });
+    }
+  }
+
   private _getConsulatsByMinistere(ministere: number): void {
     if (!this.dependancies.consulats.length) {
       this.dependanciesLoading.consulats = true;
       this.consulatService
         .getByMinistere(ministere, {}, false)
+        .subscribe((consulats) => {
+          this.dependancies.consulats = consulats;
+          this.dependanciesLoading.consulats = false;
+        });
+    }
+  }
+
+  private _getConsulatsByAmbassade(ambassade: number): void {
+    if (!this.dependancies.consulats.length) {
+      this.dependanciesLoading.consulats = true;
+      this.consulatService
+        .getByAmbassade(ambassade, {}, false)
         .subscribe((consulats) => {
           this.dependancies.consulats = consulats;
           this.dependanciesLoading.consulats = false;
@@ -235,6 +464,26 @@ export class EmployeCreateComponent
     this.dependanciesLoading.liaisons = true;
     this.liaisonService
       .getByMinistere(ministere, {}, false)
+      .subscribe((liaisons) => {
+        this.dependancies.liaisons = liaisons;
+        this.dependanciesLoading.liaisons = false;
+      });
+  }
+
+  private _getLiaisonsByAmbassade(ambassade: number): void {
+    this.dependanciesLoading.liaisons = true;
+    this.liaisonService
+      .getByAmbassade(ambassade, {}, false)
+      .subscribe((liaisons) => {
+        this.dependancies.liaisons = liaisons;
+        this.dependanciesLoading.liaisons = false;
+      });
+  }
+
+  private _getLiaisonsByConsulat(consulat: number): void {
+    this.dependanciesLoading.liaisons = true;
+    this.liaisonService
+      .getByConsulat(consulat, {}, false)
       .subscribe((liaisons) => {
         this.dependancies.liaisons = liaisons;
         this.dependanciesLoading.liaisons = false;
@@ -274,10 +523,11 @@ export class EmployeCreateComponent
   create(): void {
     if (this.form.valid) {
       this.loading = true;
+      console.log(this.form.value);
+
       const data = {
+        ...this.form.value,
         employe: this.formValue("employe")[0].id_inscription,
-        debut: this.formValue("debut"),
-        fin: this.formValue("fin"),
         fonction: this.formValue("fonction")[0].id,
         poste: this.formValue("poste")[0].id,
         liaison:
@@ -299,7 +549,12 @@ export class EmployeCreateComponent
           : null,
       };
 
-      this.fillFormData(this.helper.serializeObject(data));
+      console.log(data);
+
+      this.fillFormData({
+        ...this.helper.serializeObject(data),
+        charger_com: this.formValue("charger_com"),
+      });
 
       this.employeService.add(this.formData).subscribe(() => {
         this.loading = false;

@@ -11,23 +11,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { PasserelleShowComponent } from "./passerelle-show/passerelle-show.component";
 import { AffecterPasserelleComponent } from "./affecter-passerelle/affecter-passerelle.component";
 import { PasserelleDescriptionComponent } from "./passerelle-description/passerelle-description.component";
-import { PasserelleEmployesComponent } from "./passerelle-employes/passerelle-employes.component";
 import { EmployeModule } from "../employe/employe.module";
-
-const routes: Routes = [
-  {
-    path: "",
-    component: PasserelleComponent,
-  },
-  {
-    path: ":id",
-    component: PasserelleShowComponent,
-    children: [
-      { path: "", component: PasserelleDescriptionComponent },
-      { path: "employes", component: PasserelleEmployesComponent },
-    ],
-  },
-];
 
 @NgModule({
   declarations: [
@@ -39,15 +23,13 @@ const routes: Routes = [
     PasserelleShowComponent,
     AffecterPasserelleComponent,
     PasserelleDescriptionComponent,
-    PasserelleEmployesComponent,
   ],
   imports: [
     CommonModule,
-    EmployeModule,
     SharedModule,
     SharedZentalModule,
-    RouterModule.forChild(routes),
+    // RouterModule.forChild(routes),
   ],
-  exports: [RouterModule],
+  exports: [PasserelleComponent],
 })
 export class PasserelleModule {}

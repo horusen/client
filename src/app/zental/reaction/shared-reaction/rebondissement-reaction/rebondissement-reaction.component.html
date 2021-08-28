@@ -1,0 +1,52 @@
+<div class="  mb-0  pl-3  tx-echos p-2"
+     *ngIf="rebondissement"
+     style="border-radius: 30px 10px 20px 0px; background: #dbe5e7;">
+
+  <!-- NOm user -->
+  <h6 *ngIf="!rebondissement.service && !rebondissement?.institution">{{ rebondissement.user.nom_complet }}</h6>
+
+
+  <!-- Libelle service -->
+  <h6 *ngIf="rebondissement.service && !rebondissement?.institution">{{ rebondissement.service.libelle }}</h6>
+
+
+  <!-- Libelle entite diplomatique -->
+  <h6 *ngIf="rebondissement.institution">{{ rebondissement.institution?.institution?.entite_diplomatique.libelle }}</h6>
+
+  <!-- reaction text -->
+  <p class="p-0"
+     *ngIf="rebondissement.reaction"
+     [innerHTML]="rebondissement.reaction"></p>
+
+  <div *ngIf="rebondissement.file">
+    <!-- reaction image -->
+    <div class="text-center">
+      <img [src]="rebondissement.file?.path"
+           *ngIf="helper.checkExtensions(rebondissement?.file.path, imageHandlerService.acceptedImageExtension)"
+           (click)="afficherImage(rebondissement.file)"
+           class="rebondissement-img"
+           [alt]="rebondissement.user.nom_complet + '_image'">
+
+    </div>
+
+
+    <!-- Document -->
+    <a class="p-3 alert-info d-inline-block  clickable rounded-pill bd clickable"
+       *ngIf="helper.checkExtensions(rebondissement.file?.path, ['pdf', 'PDF'])">
+      <i class="fad fa-file-pdf"></i> {{ rebondissement.file.name }}
+    </a>
+
+
+    <div class="p-0 ">
+      <audio controls
+             class="audio-chat"
+             *ngIf="helper.checkExtension(rebondissement.file?.path, 'mp3')">
+        <source [src]="rebondissement.file?.path">
+      </audio>
+    </div>
+  </div>
+
+
+
+
+</div>

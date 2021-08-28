@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseSingleComponent } from "src/app/shared/components/base-component/base-single.component";
+import { ParentDefinition } from "src/app/shared/models/parent-definition.model";
 import { MinistereService } from "../ministere.service";
 
 @Component({
@@ -12,6 +13,7 @@ export class MinistereShowComponent
   extends BaseSingleComponent
   implements OnInit, AfterViewInit
 {
+  @Input() parent: ParentDefinition;
   edit = false;
   constructor(
     public ministereService: MinistereService,

@@ -12,6 +12,38 @@ export class FonctionService extends BaseService {
     super("fonctions");
   }
 
+  getByService(
+    service: number,
+    params?: Params,
+    emitData: boolean = true
+  ): Observable<any> {
+    return this.factory
+      .get(`services/${service}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
+  getByBureau(
+    bureau: number,
+    params?: Params,
+    emitData: boolean = true
+  ): Observable<any> {
+    return this.factory
+      .get(`bureaux/${bureau}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
   getByMinistere(
     ministere: number,
     params?: Params,

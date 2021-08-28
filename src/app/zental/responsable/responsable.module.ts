@@ -6,6 +6,8 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { SharedZentalModule } from "../shared-zental/shared-zental.module";
 import { ResponsableCreateComponent } from "./responsable-create/responsable-create.component";
 import { ResponsableEditComponent } from "./responsable-edit/responsable-edit.component";
+import { ResonsableShowComponent } from "./resonsable-show/resonsable-show.component";
+import { EmployeModule } from "../employe/employe.module";
 
 @NgModule({
   declarations: [
@@ -13,8 +15,13 @@ import { ResponsableEditComponent } from "./responsable-edit/responsable-edit.co
     ResponsableCreateComponent,
     ResponsableEditComponent,
     ResponsableListComponent,
+    ResonsableShowComponent,
   ],
-  imports: [CommonModule, SharedModule, SharedZentalModule],
-  exports: [ResponsableComponent, ResponsableListComponent],
+  imports: [CommonModule, SharedModule, SharedZentalModule, EmployeModule],
+  exports: [
+    ResponsableComponent,
+    ResponsableListComponent,
+    ResonsableShowComponent,
+  ],
 })
 export class ResponsableModule {}

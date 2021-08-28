@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { BaseSingleComponent } from "src/app/shared/components/base-component/base-single.component";
-import { DomaineService } from "../../domaine.service";
+import { DomaineInstitutionService } from "src/app/zental/domaine-institution/domaine-institution.service";
 
 @Component({
   selector: "app-domaine-departement",
@@ -11,7 +11,7 @@ export class DomaineDepartementComponent
   extends BaseSingleComponent
   implements OnInit
 {
-  constructor(public domaineService: DomaineService) {
+  constructor(public domaineService: DomaineInstitutionService) {
     super(domaineService);
   }
 

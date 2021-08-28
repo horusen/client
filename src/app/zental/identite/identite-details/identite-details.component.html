@@ -7,7 +7,8 @@
         <img *ngIf="user.photo"
              [src]="user.photo.path"
              class="rounded-circle"
-             width="80">
+             width="80"
+             height="80">
 
 
         <span *ngIf="!user.photo">
@@ -39,7 +40,16 @@
   <div class=" text-center pt-1 pb-1 ">
     <a class="ml-2"> <i class="fad fa-comment-alt-lines tx-echos2 bg-bluelight"
          style="padding:10px; border-radius:50%"></i></a>
-    <!-- <a class="ml-2"> <i class="fad fa-comment-alt-lines tx-echos2 bg-bluelight" style="padding:6px; border-radius:50%"></i></a>															 -->
+
+    <!-- Boutton modifier -->
+    <a class="ml-2"
+       [routerLink]="['./']"
+       *ngIf="auth.user.id_inscription == user.id_inscription"
+       [fragment]="'edit-identite'">
+      <i class="fad fa-edit tx-echos2 bg-bluelight"
+         style="padding:10px; border-radius:50%"></i>
+    </a>
+
   </div>
 
   <!-- Useer other information -->
@@ -61,7 +71,7 @@
           <i class="fad fa-rings-wedding tx-ether2 tx-20"></i>
         </div>
         <div class="pd-sm-l-10 pt-1">
-          <p class="tx-ether2 mg-b-0 tx-bold">{{ user.situation_matrimoniale.libelle | translate }}</p>
+          <p class="tx-ether2 mg-b-0 tx-bold">{{ (user.situation_matrimoniale?.libelle || 'NON-DEFINIE') | translate }}</p>
         </div>
       </li>
 
@@ -87,9 +97,26 @@
         </div>
       </li>
 
+      <!-- Liste des addresses -->
+      <li *ngIf="user.addresse"
+          class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+        <app-adresse-solo [adresse]="user.addresse"></app-adresse-solo>
+      </li>
 
+      <a [routerLink]="['./']"
+         *ngIf="!user.addresse"
+         [fragment]="'add-adresse'"
+         class="btn btn-block mt-1 btn-light">
+        <i class="fal fa-map-marker-alt tx-ether2 mr-2"></i>
+        {{ 'ajouterUneAdresse' | translate }}
+      </a>
 
 
     </ul>
   </div>
 </ng-container>
+
+
+<app-adresse [parent]="{ name: 'user', item: user }"
+             *ngIf="user">
+</app-adresse>

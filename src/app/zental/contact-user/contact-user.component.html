@@ -9,6 +9,8 @@
 
 <!-- header -->
 <app-main-header [id]="'contact'"
+                 *ngIf="user"
+                 [hasAddButton]="(router.url.includes('identite') && user.id_inscription === auth.user.id_inscription)"
                  [hasFilter]="false">
 </app-main-header>
 

@@ -1,7 +1,13 @@
 <!-- Title -->
 <div class="pl-2 pt-2">
-  <h5 class="pt-2 pb-2">
-    <i class="fad fa-circle  tx-20"></i>
+  <h5 class="pt-2 d-flex align-items-center pb-2">
+    <!-- boutton precedent -->
+    <a [routerLink]="['..']"
+       [ngbTooltip]="'revenirEnArriere' | translate"
+       class="p-2 mr-2 tx-15  d-flex border rounded-circle align-items-center justify-content-center">
+      <i class="fad fa-arrow-left"></i>
+    </a>
+
     {{ 'listeDesBureaux' | translate }}
   </h5>
 </div>
@@ -9,22 +15,21 @@
 
 <!-- header -->
 <app-main-header [hasFilter]="false"
+                 [hasAddButton]="parent.name !== 'zenta' || false"
                  [id]="'bureau'">
 </app-main-header>
 
 
-<app-bureau-list></app-bureau-list>
+<app-bureau-list [parent]="parent"></app-bureau-list>
 
 
 
 
 <app-modal [configuration]="{ name: 'bureau-create-modal', titre: 'ajouterUnBureau', icone: 'lamp-desk' }"
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
-  <app-common-create *ngIf="create"
-                     [configuration]="{ endpoint: 'bureaux', name: 'bureau', hasDescription: true, submitButtonClass: 'btn-primary' }"
-                     [extraFields]="{pays: ministere.entite_diplomatique.pays_siege.id, ministere: ministere?.id, ambassade: ambassade?.id }"
-                     (itemCreated)="onBureauCreated($event.item)">
-  </app-common-create>
+  <app-bureau-create [parent]="parent"
+                     *ngIf="create">
+  </app-bureau-create>
 </app-modal>
 
 
@@ -32,7 +37,7 @@
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' }); edit = false">
   <app-common-edit *ngIf="edit"
                    [configuration]="{ endpoint: 'bureaux', name: 'bureau', hasDescription: true, item: bureauService.singleData, submitButtonClass: 'btn-primary' }"
-                   [extraFields]="{pays: bureauService.singleData.pays, ministere: ministere?.id, ambassade: ambassade?.id }"
+                   [extraFields]="extraFields"
                    (itemEdited)="onBureauEdit($event.item)">
   </app-common-edit>
 </app-modal>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
 import { IdentiteService } from "src/app/zental/identite/identite.service";
 import { RelationFamilialeService } from "src/app/zental/relation-familiale/relation-familiale.service";
@@ -12,7 +13,8 @@ export class EnfantListComponent extends BaseComponent implements OnInit {
   user: any;
   constructor(
     public relationFamilialeService: RelationFamilialeService,
-    public identiteService: IdentiteService
+    public identiteService: IdentiteService,
+    public router: Router
   ) {
     super(relationFamilialeService);
   }

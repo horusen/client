@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-between align-items-center"
+     *ngIf="demande">
+  <!-- image et prenom -->
+  <div class="d-flex align-items-center">
+    <!-- Image -->
+    <div class="image-container rounded-circle">
+      <img [src]="demande?.user?.photo?.path"
+           [alt]="'demande-' + demande?.user?.nom_complet">
+    </div>
+
+    <!-- Nom complet user -->
+    <h6 class="ml-2">{{ demande?.user?.nom_complet }}</h6>
+  </div>
+
+  <!-- Boutton de validation -->
+  <div class="d-flex align-items-center">
+    <ng-container *ngIf="!loading">
+      <button class="btn btn-xs btn-success ml-2"
+              (click)="valider('accepter')"
+              [ngbTooltip]="'ACCEPTER' | translate">
+        <i class="fas fa-thumbs-up"></i>
+      </button>
+
+      <button class="btn btn-xs btn-danger"
+              (click)="valider('refuser')"
+              [ngbTooltip]="'REFUSER' | translate">
+        <i class="fas fa-thumbs-down"></i>
+      </button>
+    </ng-container>
+
+    <i class="fad fa-circle-notch fa-spin "
+       *ngIf="loading"></i>
+  </div>
+</div>

@@ -1,6 +1,7 @@
-import { DomaineService } from "./../../domaine.service";
+import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { BaseSingleComponent } from "src/app/shared/components/base-component/base-single.component";
+import { DomaineInstitutionService } from "src/app/zental/domaine-institution/domaine-institution.service";
 
 @Component({
   selector: "app-domaine-description",
@@ -11,11 +12,15 @@ export class DomaineDescriptionComponent
   extends BaseSingleComponent
   implements OnInit
 {
-  constructor(public domaineService: DomaineService) {
-    super(domaineService);
+  constructor(
+    public domaineService: DomaineInstitutionService,
+    public route: ActivatedRoute
+  ) {
+    super(domaineService, route);
   }
 
   ngOnInit(): void {
+    this.enableFetchDataFromURL = true;
     super.ngOnInit();
   }
 }

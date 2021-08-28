@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { MinistereService } from "../../ministere/ministere.service";
 import { PaysService } from "../../pays/pays.service";
 import { EntiteDiplomatiqueCreateComponent } from "../../shared-zental/abstract/entite-diplomatique-create/entite-diplomatique-create.component";
 import { VilleService } from "../../villes/ville.service";
@@ -24,31 +23,31 @@ export class ConsulatCreateComponent
   };
   constructor(
     public consulatService: ConsulatService,
-    public ministereService: MinistereService,
     public villeService: VilleService,
     public paysService: PaysService,
     public router: Router,
     public route: ActivatedRoute
   ) {
-    super(
-      consulatService,
-      ministereService,
-      paysService,
-      router,
-      route,
-      "consulat"
-    );
+    super(consulatService, paysService, router, route, "consulat");
   }
 
   ngOnInit(): void {
     super.ngOnInit();
+    console.log(this.form.value);
+  }
 
-    this._subscription["ministere2"] =
-      this.ministereService.singleData$.subscribe((ministere) => {
-        this.addControl("ministere", ministere.id);
-      });
-
-    this.addControl("ville", null, true);
+  initialiseForm(item?: any): void {
+    super.initialiseForm(item);
+    this.addControl(
+      "ville",
+      item?.addresse ? [item?.addresse?.ville] : null,
+      true
+    );
+    this.addControl(
+      "addresse",
+      item?.addresse ? item?.addresse?.addresse : null,
+      true
+    );
 
     this.form.controls.pays_siege.valueChanges.subscribe((pays) => {
       if (pays) this.getVilles(pays[0].id);
@@ -56,7 +55,6 @@ export class ConsulatCreateComponent
   }
 
   getVilles(pays: number): void {
-    console.log("hitted");
     this.villeLoading = true;
     this.villeService.getByPays(pays, false).subscribe((villes) => {
       this.villes = villes;
@@ -75,12 +73,7 @@ export class ConsulatCreateComponent
 
       this.service.add(data).subscribe(() => {
         this.loading = false;
-        this.form.reset();
-        this.formValuePatcher(
-          "pays_origine",
-          this.ministere.entite_diplomatique.pays_siege.id
-        );
-        this.formValuePatcher("ministere", this.ministere.id);
+        this.initialiseForm();
         this.helper.toggleModal(`${this.element}-create-modal`);
         this.router.navigate(["./"], {
           relativeTo: this.route,

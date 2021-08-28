@@ -1,5 +1,5 @@
 <!-- Disposition ministere -->
-<ng-container *ngIf="parent.name === 'ministere'">
+<ng-container *ngIf="parent.name !== 'bureau' &&  parent.name !== 'service'">
   <form class="custom-placeholder"
         [formGroup]="form"
         *ngIf="form"
@@ -22,7 +22,7 @@
                               (click)="getUsers()"
                               formControlName="employe"
                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'employe'), 'is-valid': isValid('employe')}"
-                              class="form-control p-0 form-control-sm">
+                              class="form-control  form-control-sm">
           <c-badge>
             <ng-template let-item="item">
               {{item.nom_complet}}
@@ -105,11 +105,11 @@
           </label>
 
           <angular2-multiselect [data]="dependancies.ambassades"
-                                [settings]="dropdownSettingsAlt.single"
+                                [settings]="parent.name === 'ambassade' ? dropdownSettingsAlt.singleDisabled : dropdownSettingsAlt.single"
                                 (click)="getAmbassades()"
                                 formControlName="ambassade"
                                 [ngClass]="{'is-invalid': shouldShowRequiredError( 'ambassade'), 'is-valid': isValid('ambassade')}"
-                                class="form-control p-0 form-control-sm">
+                                class="form-control  form-control-sm">
             <c-badge>
               <ng-template let-item="item">
                 {{item.entite_diplomatique.pays_siege.libelle}}
@@ -145,18 +145,19 @@
 
           <angular2-multiselect [data]="dependancies.consulats"
                                 (click)="getConsulats()"
-                                [settings]="dropdownSettingsAlt.single"
+                                [settings]="parent.name === 'consulat' ? dropdownSettingsAlt.singleDisabled : dropdownSettingsAlt.single"
                                 formControlName="consulat"
                                 [ngClass]="{'is-invalid': shouldShowRequiredError( 'consulat'), 'is-valid': isValid('consulat')}"
-                                class="form-control p-0 form-control-sm">
+                                class="form-control form-control-sm">
             <c-badge>
               <ng-template let-item="item">
-                {{item.entite_diplomatique.pays_siege.libelle + ' (' + item.ville.libelle + ')'}}
+                {{item.entite_diplomatique.pays_siege.libelle + ' (' + item.addresse.ville.libelle + ')'}}
               </ng-template>
             </c-badge>
             <c-item>
               <ng-template let-item="item">
-                <label style="color: #333;min-width: 150px;">{{item.entite_diplomatique.pays_siege.libelle + ' (' + item.ville.libelle + ')'}}</label>
+                <label style="color: #333;min-width: 150px;">{{item.entite_diplomatique.pays_siege.libelle + ' (' + item.addresse.ville.libelle +
+                  ')'}}</label>
 
               </ng-template>
             </c-item>
@@ -188,7 +189,7 @@
                                 [settings]="dropdownSettingsAlt.single"
                                 formControlName="passerelle"
                                 [ngClass]="{'is-invalid': shouldShowRequiredError( 'passerelle'), 'is-valid': isValid('passerelle')}"
-                                class="form-control p-0 form-control-sm">
+                                class="form-control form-control-sm">
             <c-badge>
               <ng-template let-item="item">
                 {{item.entite_diplomatique.pays_siege.libelle }}
@@ -228,7 +229,7 @@
                                 [settings]="dropdownSettingsAlt.single"
                                 formControlName="liaison"
                                 [ngClass]="{'is-invalid': shouldShowRequiredError( 'liaison'), 'is-valid': isValid('liaison')}"
-                                class="form-control p-0 form-control-sm">
+                                class="form-control form-control-sm">
             <c-badge>
               <ng-template let-item="item">
                 {{item.entite_diplomatique.pays_siege.libelle }}
@@ -267,7 +268,7 @@
                                 [settings]="dropdownSettingsAlt.single"
                                 formControlName="service"
                                 [ngClass]="{'is-invalid': shouldShowRequiredError( 'service'), 'is-valid': isValid('service')}"
-                                class="form-control p-0 form-control-sm">
+                                class="form-control form-control-sm">
 
           </angular2-multiselect>
 
@@ -296,7 +297,7 @@
                                 [settings]="dropdownSettingsAlt.single"
                                 formControlName="bureau"
                                 [ngClass]="{'is-invalid': shouldShowRequiredError( 'bureau'), 'is-valid': isValid('bureau')}"
-                                class="form-control p-0 form-control-sm">
+                                class="form-control form-control-sm">
 
           </angular2-multiselect>
 
@@ -327,7 +328,7 @@
                               [settings]="dropdownSettingsAlt.single"
                               formControlName="service"
                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'service'), 'is-valid': isValid('service')}"
-                              class="form-control p-0 form-control-sm">
+                              class="form-control form-control-sm">
 
         </angular2-multiselect>
 
@@ -359,7 +360,7 @@
                               [settings]="dropdownSettingsAlt.single"
                               formControlName="poste"
                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'poste'), 'is-valid': isValid('poste')}"
-                              class="form-control p-0 form-control-sm">
+                              class="form-control form-control-sm">
         </angular2-multiselect>
 
         <!-- <div class=" p-0">
@@ -394,7 +395,7 @@
                               [settings]="dropdownSettingsAlt.single"
                               formControlName="fonction"
                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'fonction'), 'is-valid': isValid('fonction')}"
-                              class="form-control p-0 form-control-sm">
+                              class="form-control form-control-sm">
         </angular2-multiselect>
 
         <!-- <div class=" p-0">
@@ -466,7 +467,7 @@
                               (click)="getUsers()"
                               formControlName="employe"
                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'employe'), 'is-valid': isValid('employe')}"
-                              class="form-control p-0 form-control-sm">
+                              class="form-control form-control-sm">
           <c-badge>
             <ng-template let-item="item">
               {{item.nom_complet}}
@@ -532,7 +533,7 @@
                               [settings]="dropdownSettingsAlt.single"
                               formControlName="poste"
                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'poste'), 'is-valid': isValid('poste')}"
-                              class="form-control p-0 form-control-sm">
+                              class="form-control form-control-sm">
         </angular2-multiselect>
 
         <!-- <div class=" p-0">
@@ -567,7 +568,7 @@
                               [settings]="dropdownSettingsAlt.single"
                               formControlName="fonction"
                               [ngClass]="{'is-invalid': shouldShowRequiredError( 'fonction'), 'is-valid': isValid('fonction')}"
-                              class="form-control p-0 form-control-sm">
+                              class="form-control form-control-sm">
         </angular2-multiselect>
 
         <!-- <div class=" p-0">
@@ -614,6 +615,25 @@
                class="form-control"
                id="customFile" />
 
+      </div>
+    </div>
+
+
+    <!-- Charger com -->
+    <div class="formSep form-group col-12 d-flex justify-content-center pb-0 pt-2"
+         *ngIf="!parent.item.service_com">
+      <div class="col-12">
+        <div class="form-check d-flex align-items-baseline">
+          <input class="form-check-input"
+                 formControlName="charger_com"
+                 type="checkbox"
+                 value=""
+                 id="flexCheckDefault">
+          <label class="form-check-label ml-3"
+                 for="flexCheckDefault">
+            {{ 'designerCommeChargerDeCommunication' | translate }}
+          </label>
+        </div>
       </div>
     </div>
 

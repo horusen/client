@@ -10,6 +10,7 @@ import { EmploieService } from "../emploie.service";
   styleUrls: ["./emploie-list.component.scss"],
 })
 export class EmploieListComponent extends BaseComponent implements OnInit {
+  user: any;
   constructor(
     public emploieService: EmploieService,
     public identiteService: IdentiteService,
@@ -21,6 +22,7 @@ export class EmploieListComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this._subscription["identite"] = this.identiteService.user$.subscribe(
       (user) => {
+        this.user = user;
         this.getData(user.id_inscription);
       }
     );

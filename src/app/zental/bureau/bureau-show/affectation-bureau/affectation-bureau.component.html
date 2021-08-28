@@ -41,15 +41,15 @@
                             [settings]="dropdownSettingsAlt.single"
                             formControlName="liaison"
                             [ngClass]="{'is-invalid': shouldShowRequiredError( 'liaison'), 'is-valid': isValid('liaison')}"
-                            class="form-control p-0 form-control-sm">
+                            class="form-control  form-control-sm">
         <c-badge>
           <ng-template let-item="item">
-            {{item.entite_diplomatique.pays_siege.libelle }}
+            {{item.pays_origine.libelle + ' - ' + item.pays_siege.libelle }}
           </ng-template>
         </c-badge>
         <c-item>
           <ng-template let-item="item">
-            <label style="color: #333;min-width: 150px;">{{item.entite_diplomatique.pays_siege.libelle}}</label>
+            <label style="color: #333;min-width: 150px;">{{item.pays_origine.libelle + ' - ' + item.pays_siege.libelle}}</label>
 
           </ng-template>
         </c-item>
@@ -84,15 +84,15 @@
                             [settings]="dropdownSettingsAlt.single"
                             formControlName="passerelle"
                             [ngClass]="{'is-invalid': shouldShowRequiredError( 'passerelle'), 'is-valid': isValid('passerelle')}"
-                            class="form-control p-0 form-control-sm">
+                            class="form-control  form-control-sm">
         <c-badge>
           <ng-template let-item="item">
-            {{item.entite_diplomatique.pays_siege.libelle }}
+            {{item.pays_origine.libelle + ' - ' + item.pays_siege.libelle }}
           </ng-template>
         </c-badge>
         <c-item>
           <ng-template let-item="item">
-            <label style="color: #333;min-width: 150px;">{{item.entite_diplomatique.pays_siege.libelle}}</label>
+            <label style="color: #333;min-width: 150px;">{{item.pays_origine.libelle + ' - ' + item.pays_siege.libelle}}</label>
 
           </ng-template>
         </c-item>

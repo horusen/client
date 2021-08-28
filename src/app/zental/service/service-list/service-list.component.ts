@@ -4,6 +4,7 @@ import { BaseComponent } from "src/app/shared/components/base-component/base.com
 import { AmbassadeService } from "../../ambassade/ambassade.service";
 import { DepartementService } from "../../departement/departement.service";
 import { MinistereService } from "../../ministere/ministere.service";
+import { DiscussionService } from "../../toloba/discussion/discussion/discussion.service";
 import { ServiceService } from "../service.service";
 
 @Component({
@@ -13,11 +14,10 @@ import { ServiceService } from "../service.service";
 })
 export class ServiceListComponent extends BaseComponent implements OnInit {
   @Input() parent: { name: string; item: any };
+  discussionLoading = false;
   constructor(
     public serviceService: ServiceService,
-    public ministereService: MinistereService,
-    public ambassadeService: AmbassadeService,
-    public departementService: DepartementService,
+    public discussionService: DiscussionService,
     public route: ActivatedRoute,
     public router: Router
   ) {
@@ -41,6 +41,8 @@ export class ServiceListComponent extends BaseComponent implements OnInit {
       this.getByDomaine(this.parent.item.id, params);
     } else if (this.parent.name === "departement") {
       this.getByDepartement(this.parent.item.id, params);
+    } else if (this.parent.name === "bureau") {
+      this.getByBureau(this.parent.item.id, params);
     }
   }
 
@@ -48,6 +50,15 @@ export class ServiceListComponent extends BaseComponent implements OnInit {
     this.loading = true;
     this.serviceService.getByMinistere(ministere, params).subscribe(() => {
       this.loading = false;
+    });
+  }
+
+  getByBureau(bureau: number, params: Params): void {
+    this.loading = true;
+    this.serviceService.getByBureau(bureau, params).subscribe({
+      complete: () => {
+        this.loading = false;
+      },
     });
   }
 
@@ -88,5 +99,39 @@ export class ServiceListComponent extends BaseComponent implements OnInit {
 
   modifier(service: any) {
     this.serviceService.singleData = service;
+  }
+
+  getDiscussion(service: number) {
+    this.discussionLoading = true;
+    this.discussionService
+      .check(2, this.auth.user.id_inscription, service)
+      .subscribe((discussion) => {
+        this.router.navigate(["/", "toloba", "discussion", discussion.id], {
+          queryParamsHandling: "preserve",
+        });
+      });
+  }
+
+  updateServiceCommunication(service: number, service_com: boolean): void {
+    this.helper.alertConfirmation(() => {
+      this.serviceService
+        .updateServiceCommunication(service, {
+          service_com,
+          [this.parent.name]: this.parent.item.id,
+        })
+        .subscribe({
+          next: () => {
+            this.helper.alertSuccess();
+          },
+        });
+    });
+  }
+
+  designerCommeServiceCommunication(service: number) {
+    this.updateServiceCommunication(service, true);
+  }
+
+  resignerCommeServiceCommunication(service: number) {
+    this.updateServiceCommunication(service, false);
   }
 }

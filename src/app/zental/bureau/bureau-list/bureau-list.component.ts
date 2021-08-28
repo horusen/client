@@ -1,8 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { ParentDefinition } from "src/app/shared/models/parent-definition.model";
+import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { BaseComponent } from "src/app/shared/components/base-component/base.component";
-import { AmbassadeService } from "../../ambassade/ambassade.service";
-import { MinistereService } from "../../ministere/ministere.service";
 import { BureauService } from "../bureau.service";
 
 @Component({
@@ -11,10 +10,10 @@ import { BureauService } from "../bureau.service";
   styleUrls: ["./bureau-list.component.scss"],
 })
 export class BureauListComponent extends BaseComponent implements OnInit {
+  @Input() parent: ParentDefinition;
+  urlNavigation: String[];
   constructor(
     public bureauService: BureauService,
-    public ministereService: MinistereService,
-    public ambassadeService: AmbassadeService,
     public router: Router,
     public route: ActivatedRoute
   ) {
@@ -23,17 +22,45 @@ export class BureauListComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      if (this.router.url.includes("ministere")) {
-        this._subscription["ministere"] =
-          this.ministereService.singleData$.subscribe((ministere) => {
-            this.getByMinistere(ministere.id, params);
-          });
-      } else if (this.router.url.includes("ambassade")) {
-        this._subscription["ambassade"] =
-          this.ambassadeService.singleData$.subscribe((ambassade) => {
-            this.getByAmbassade(ambassade.id, params);
-          });
-      }
+      this.getData(params);
+    });
+
+    this.urlNavigation = this.getNaviagationURL(this.router.url);
+  }
+
+  getData(params: Params): void {
+    if (this.parent.name === "zental") {
+      this.getAll(params);
+    } else if (this.parent.name === "ministere") {
+      this.getByMinistere(this.parent.item.id, params);
+    } else if (this.parent.name === "ambassade") {
+      this.getByAmbassade(this.parent.item.id, params);
+    } else if (this.parent.name === "consulat") {
+      this.getByConsulat(this.parent.item.id, params);
+    } else if (this.parent.name === "admin") {
+      this.getByUser(this.auth.user.id_inscription, params);
+    }
+  }
+
+  getNaviagationURL(url: string): string[] {
+    if (url.split("/").includes("administration"))
+      return ["/", "administration", "bureaux"];
+    return ["/", "bureaux"];
+  }
+
+  getAll(params: Params): void {
+    this.loading = true;
+    this.bureauService.getAll(true, params).subscribe(() => {
+      this.loading = false;
+    });
+  }
+
+  getByUser(user: number, params: Params): void {
+    this.loading = true;
+    this.bureauService.getByUser(user, params).subscribe({
+      complete: () => {
+        this.loading = false;
+      },
     });
   }
 
@@ -47,6 +74,13 @@ export class BureauListComponent extends BaseComponent implements OnInit {
   getByAmbassade(ambassade: number, params: Params) {
     this.loading = true;
     this.bureauService.getByAmbassade(ambassade, params).subscribe(() => {
+      this.loading = false;
+    });
+  }
+
+  getByConsulat(consulat: number, params: Params): void {
+    this.loading = true;
+    this.bureauService.getByConsulat(consulat, params).subscribe(() => {
       this.loading = false;
     });
   }

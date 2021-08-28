@@ -12,6 +12,36 @@ export class BureauService extends BaseService {
     super("bureaux");
   }
 
+  getNonAffecteByMinistere(ministere: number): Observable<any> {
+    return this.factory
+      .get(`ministeres/${ministere}/${this.endPoint}/non-affecte`)
+      .pipe(tap(this.onlyErrorResponseHandler()));
+  }
+
+  getNonAffecteByAmbassade(ambassade: number): Observable<any> {
+    return this.factory
+      .get(`ambassades/${ambassade}/${this.endPoint}/non-affecte`)
+      .pipe(tap(this.onlyErrorResponseHandler()));
+  }
+
+  getNonAffecteByConsulat(consulat: number): Observable<any> {
+    return this.factory
+      .get(`consulats/${consulat}/${this.endPoint}/non-affecte`)
+      .pipe(tap(this.onlyErrorResponseHandler()));
+  }
+
+  getByUser(user: number, params?: Params, emitData = true): Observable<any> {
+    return this.factory
+      .get(`users/${user}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
   getByMinistere(
     ministere: number,
     params?: Params,

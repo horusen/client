@@ -10,7 +10,5 @@ export class IdentiteInformationComponent implements OnInit {
   @Input() currentUser = false;
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.user);
-  }
+  ngOnInit(): void {}
 }

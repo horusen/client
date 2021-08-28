@@ -1,0 +1,28 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 d-flex align-items-center pb-2">
+    <i class="fad fa-users-cog ml-2  tx-20"></i>
+    {{ 'listeDesMembresDuGouvernement' | translate }}
+  </h5>
+</div>
+
+
+<app-main-header [id]="'ministre-gouvernement'"
+                 [hasFilter]="false"></app-main-header>
+
+
+<app-ministre-gouvernement-list></app-ministre-gouvernement-list>
+
+
+
+<app-modal [configuration]="{ name: 'ministre-gouvernement-create-modal', titre: 'ajouterUnMinistreAuGouvernement', icone: 'user-tie' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve'})">
+  <app-ministre-gouvernement-create *ngIf="create"></app-ministre-gouvernement-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'ministre-gouvernement-edit-modal', titre: 'modifierLesDetailsDuMinistre', icone: 'user-tie' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve'})">
+  <app-ministre-gouvernement-edit *ngIf="edit"></app-ministre-gouvernement-edit>
+</app-modal>

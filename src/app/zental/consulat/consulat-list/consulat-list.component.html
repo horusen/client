@@ -1,15 +1,21 @@
 <!-- Liste des elements -->
 <div class="row  row-xs clearfix p-2 pl-2"
      *ngIf="!loading && consulatService.data.length">
-  <div class=" col-lg-3  pt-2 pl-2 pr-2 pb-2"
-       *ngFor="let consulat of consulatService.data">
+  <div *ngFor="let consulat of consulatService.data |
+              paginate: {itemsPerPage: itemsPerPage, id: 'consulat', currentPage: currentPage}"
+       class=" pt-2 pl-2 pr-2 pb-2"
+       [ngClass]="{
+         'col-3': colonne_affichage === 4,
+         'col-4': colonne_affichage === 3,
+         'col-6': colonne_affichage === 2
+        }">
     <div class="mycard4 ">
       <!-- Pays -->
       <div class=" pt-2 pl-2 d-flex align-items-center justify-content  bd-b border-success">
         <p class="tx-echos"> <img class=""
-               src="assets/images/drapeaux/sn.svg"
-               alt="avatar"
-               width="40"> République du {{ consulat.entite_diplomatique.pays_siege.libelle }}</p>
+               [src]="consulat.entite_diplomatique.pays_origine.drapeau"
+               [alt]="'drapeau-' + consulat.entite_diplomatique.pays_origine.libelle"
+               width="40"> République du {{ consulat.entite_diplomatique.pays_origine.libelle }}</p>
       </div>
 
       <!-- Icone -->
@@ -23,7 +29,7 @@
 
       <!-- Badge -->
       <div class=" text-center ">
-        <span class="badge badge-pill badge-success  "> {{ 'CONSULAT' | translate }}</span>
+        <span class="badge badge-pill badge-success  "> {{ consulat.entite_diplomatique.pays_siege.libelle}}</span>
         <p class="text-center">
           <!-- Langue pays de siège -->
           <span class="">
@@ -48,8 +54,13 @@
         <div class=" justify-content-between p-0">
           <p class="mg-0 pt-2">
             <!-- details -->
-            <span class=" pl-2"> <i class="fad fa-eye bg-white"
-                 style="padding:6px ; border-radius:50%"></i></span>
+            <a [routerLink]="navigationUrl.concat([consulat.id])"
+               [queryParamsHandling]="'preserve'"
+               class=" pl-2">
+              <i class="fad fa-eye bg-white"
+                 style="padding:6px ; border-radius:50%">
+              </i>
+            </a>
 
             <!-- Edit -->
             <a class=" pl-2"
@@ -109,12 +120,22 @@
     </div>
   </div>
 
+  <!-- Pagination controls -->
+  <div class="col-12 mt-1 d-flex justify-content-center">
+    <pagination-controls id="consulat"
+                         (pageChange)="currentPage = $event"
+                         autoHide="true"
+                         previousLabel="{{ 'PRECEDENT' | translate }}"
+                         nextLabel="{{ 'SUIVANT' | translate }}">
+    </pagination-controls>
+  </div>
+
 </div>
 
 
 
 <div class="my-5"
      *ngIf="loading || !consulatService.data.length">
-  <app-missing-data *ngIf="!loading && !consulatService.data.length"></app-missing-data>
+  <app-missing-data-alt *ngIf="!loading && !consulatService.data.length"></app-missing-data-alt>
   <app-loading *ngIf="loading"></app-loading>
 </div>

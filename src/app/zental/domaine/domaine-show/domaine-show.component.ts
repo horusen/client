@@ -2,6 +2,7 @@ import { DomaineService } from "./../domaine.service";
 import { Component, OnInit } from "@angular/core";
 import { BaseSingleComponent } from "src/app/shared/components/base-component/base-single.component";
 import { ActivatedRoute, Router } from "@angular/router";
+import { DomaineInstitutionService } from "../../domaine-institution/domaine-institution.service";
 
 @Component({
   selector: "app-domaine-show",
@@ -14,7 +15,7 @@ export class DomaineShowComponent
 {
   edit = false;
   constructor(
-    public domaineService: DomaineService,
+    public domaineService: DomaineInstitutionService,
     public route: ActivatedRoute,
     public router: Router
   ) {

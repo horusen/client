@@ -4,7 +4,6 @@ import { BaseComponent } from "src/app/shared/components/base-component/base.com
 import { AmbassadeService } from "../../ambassade/ambassade.service";
 import { DomaineInstitutionService } from "../../domaine-institution/domaine-institution.service";
 import { MinistereService } from "../../ministere/ministere.service";
-import { DomaineService } from "../domaine.service";
 
 @Component({
   selector: "app-domaine-list",
@@ -38,6 +37,8 @@ export class DomaineListComponent extends BaseComponent implements OnInit {
       this.getByAmbassade(this.parent.item.id, params);
     } else if (this.parent.name === "consulat") {
       this.getByConsulat(this.parent.item.id, params);
+    } else if (this.parent.name === "bureau") {
+      this.getByBureau(this.parent.item.id, params);
     }
   }
 
@@ -45,6 +46,15 @@ export class DomaineListComponent extends BaseComponent implements OnInit {
     this.loading = true;
     this.domaineService.getByMinistere(ministere, params).subscribe(() => {
       this.loading = false;
+    });
+  }
+
+  getByBureau(bureau: number, params: Params): void {
+    this.loading = true;
+    this.domaineService.getByBureau(bureau, params).subscribe({
+      complete: () => {
+        this.loading = false;
+      },
     });
   }
 

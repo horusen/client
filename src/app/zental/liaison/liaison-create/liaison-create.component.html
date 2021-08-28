@@ -1,61 +1,86 @@
 <form class="custom-placeholder"
       [formGroup]="form"
       (submit)="create()">
-  <!-- Libelle-->
+
+
+  <!-- pays de siege et date creation -->
   <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
-    <div class="col-12">
-      <!-- Label -->
-      <label class="control-label"
-             for="libelle">
-        {{ 'LIBELLE' | translate }}
-      </label>
-
-      <!-- Input -->
-      <input type="text"
-             class="form-control "
-             required
-             [formControlName]="'libelle'"
-             [ngClass]="{'is-invalid': shouldShowRequiredError( 'libelle'), 'is-valid': isValid('libelle')}">
-
-      <!-- MEssage d'erreur -->
-      <div *ngIf="shouldShowRequiredError('libelle')"
-           class="invalid-feedback">
-        {{ 'veuillezSaisirLeLibelle' |translate }}.</div>
-    </div>
-  </div>
-
-  <!-- pays -->
-  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
-    <div class="col-12">
+    <div class="col-6">
       <!-- Label -->
       <label class="control-label"
              for="pays">
-        {{ 'paysDeLiaison' | translate }}
+        {{ 'paysLie' | translate }}
         <i class="fad fa-circle-notch fa-spin"
-           *ngIf="paysLoading"></i>
+           *ngIf="dependanciesLoading.pays"></i>
       </label>
 
-      <angular2-multiselect [data]="pays"
+      <angular2-multiselect [data]="dependancies.pays"
                             [settings]="dropdownSettingsAlt.single"
                             formControlName="pays_siege"
                             [ngClass]="{'is-invalid': shouldShowRequiredError( 'pays_siege'), 'is-valid': isValid('pays_siege')}"
-                            class="form-control p-0 ">
+                            class="form-control  form-control-sm">
       </angular2-multiselect>
 
       <!-- Message d'erreur -->
       <div *ngIf="shouldShowRequiredError('pays_siege')"
            class="invalid-feedback">
-        {{ 'veuillezRenseignezLePaysDeLiaison' | translate }}.
+        {{ 'veuillezRenseignezLePaysDeSiege' | translate }}.
+      </div>
+    </div>
+
+    <!-- Date de creation -->
+    <div class="col-6">
+      <!-- Label -->
+      <label for="type"
+             class="label-template-form">
+        {{ 'dateDeCreation' | translate }}
+      </label>
+
+      <!-- Date picker -->
+      <div class="input-group mb-2">
+        <input [dpDayPicker]="configCalendrier.day"
+               [theme]="'dp-material'"
+               formControlName="date_creation"
+               class="form-control ">
+        <div class="input-group-prepend">
+          <div class="input-group-text  bg-light"><i class="fal fa-calendar"></i>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
 
-  <!-- Bureaux et Ambassades -->
+  <!-- Liaison entité -->
   <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
-    <!-- Ambassades -->
     <div class="col-6"
-         *ngIf="parent === 'ministere'">
+         *ngIf="parent.name !== 'consulat'">
+      <!-- Label -->
+      <label class="control-label"
+             for="lierA">
+        {{ 'lieA' | translate }}
+      </label>
+
+      <select (change)="selectFormHandler('lierA', $event.target.value)"
+              [ngClass]="{'is-invalid': shouldShowRequiredError( 'lierA'), 'is-valid': isValid('lierA')}"
+              class="form-control">
+        <option value="AMBASSADE"
+                [selected]="formValue('lierA') === 'AMBASSADE'">{{ 'AMBASSADE' | translate }}</option>
+        <option value="CONSULAT"
+                [selected]="formValue('lierA') === 'CONSULAR'">{{ 'CONSULAT' | translate }}</option>
+      </select>
+
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('lierA')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignerCeChamps' |translate }}.</div>
+    </div>
+
+    <!-- Entité -->
+    <!-- Ambassasde -->
+    <div class="col-6"
+         *ngIf="formValue('lierA') === 'AMBASSADE'">
       <!-- Label -->
       <label class="control-label"
              for="ambassade">
@@ -67,8 +92,9 @@
       <angular2-multiselect [data]="dependancies.ambassades"
                             [settings]="dropdownSettingsAlt.single"
                             formControlName="ambassade"
+                            [disabled]="parent.name === 'ambassade'"
                             [ngClass]="{'is-invalid': shouldShowRequiredError( 'ambassade'), 'is-valid': isValid('ambassade')}"
-                            class="form-control p-0 ">
+                            class="form-control  form-control-sm">
         <c-badge>
           <ng-template let-item="item">
             {{item.entite_diplomatique.libelle}}
@@ -76,7 +102,11 @@
         </c-badge>
         <c-item>
           <ng-template let-item="item">
+            <img [src]="item?.entite_diplomatique.pays_siege.drapeau"
+                 class="float-left"
+                 style="width: 25px; height: 25px; margin-left: 20px; margin-right: 20px" />
             <label style="color: #333;min-width: 150px;">{{item.entite_diplomatique.libelle}}</label>
+
           </ng-template>
         </c-item>
       </angular2-multiselect>
@@ -84,53 +114,51 @@
       <!-- Message d'erreur -->
       <div *ngIf="shouldShowRequiredError('ambassade')"
            class="invalid-feedback">
-        {{ 'VeuillezRenseignezUneAmbassade' | translate }}.
+        {{ 'veuillezRenseignerLeChamps' | translate }}.
       </div>
     </div>
 
-
-    <!-- Bureaux -->
-    <div [ngClass]="{'col-6': parent === 'ministere', 'col-12': parent === 'ambassade'}">
+    <!-- consulat -->
+    <div class="col-6"
+         *ngIf="formValue('lierA') === 'CONSULAT'">
       <!-- Label -->
       <label class="control-label"
-             for="ambassade">
-        {{ 'BUREAU' | translate }}
+             for="consulat">
+        {{ 'CONSULAT' | translate }}
         <i class="fad fa-circle-notch fa-spin"
-           *ngIf="dependanciesLoading.bureaux"></i>
+           *ngIf="dependanciesLoading.consulats"></i>
       </label>
 
-      <angular2-multiselect [data]="dependancies.bureaux"
+      <angular2-multiselect [data]="dependancies.consulats"
                             [settings]="dropdownSettingsAlt.single"
-                            formControlName="bureau"
-                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'bureau'), 'is-valid': isValid('bureau')}"
-                            class="form-control p-0 ">
+                            formControlName="consulat"
+                            [disabled]="parent.name === 'consulat'"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'consulat'), 'is-valid': isValid('consulat')}"
+                            class="form-control  form-control-sm">
+        <c-badge>
+          <ng-template let-item="item">
+            {{item.entite_diplomatique.libelle}}
+          </ng-template>
+        </c-badge>
+        <c-item>
+          <ng-template let-item="item">
+            <img [src]="item?.entite_diplomatique.pays_siege.drapeau"
+                 class="float-left"
+                 style="width: 25px; height: 25px; margin-left: 20px; margin-right: 20px" />
+            <label style="color: #333;min-width: 150px;">{{item.entite_diplomatique.libelle}}</label>
+
+          </ng-template>
+        </c-item>
       </angular2-multiselect>
 
       <!-- Message d'erreur -->
-      <div *ngIf="shouldShowRequiredError('bureau')"
+      <div *ngIf="shouldShowRequiredError('consulat')"
            class="invalid-feedback">
-        {{ 'VeuillezRenseignezUnBureau' | translate }}.
+        {{ 'veuillezRenseignerLeChamps' | translate }}.
       </div>
     </div>
   </div>
 
-
-  <!-- Description -->
-  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
-    <div class="col-12">
-      <label class="control-label"
-             for="description">{{ 'DESCRIPTION' | translate }}</label>
-      <ckeditor [editor]="Editor"
-                class=""
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
-                formControlName="description">
-      </ckeditor>
-      <div *ngIf="shouldShowRequiredError('description')"
-           class="invalid-feedback">
-        {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
-      </div>
-    </div>
-  </div>
 
 
   <!-- Boutton validation -->

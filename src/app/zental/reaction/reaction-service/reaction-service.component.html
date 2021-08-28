@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="bd-b bd-white my-4">
+      <!-- Liste des reaction -->
+      <app-reaction-service-list></app-reaction-service-list>
+
+      <!-- Ajouter une reaction -->
+      <app-reaction-service-create *ngIf="userIsChargerCom"></app-reaction-service-create>
+    </div>
+  </div>
+</div>

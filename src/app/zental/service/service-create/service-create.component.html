@@ -40,7 +40,7 @@
                             [settings]="dropdownSettingsAlt.single"
                             formControlName="departement"
                             [ngClass]="{'is-invalid': shouldShowRequiredError( 'departement'), 'is-valid': isValid('departement')}"
-                            class="form-control p-0 form-control-sm">
+                            class="form-control  form-control-sm">
       </angular2-multiselect>
 
       <!-- Message d'erreur -->
@@ -68,6 +68,23 @@
       <div *ngIf="shouldShowRequiredError('description')"
            class="invalid-feedback">
         {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
+      </div>
+    </div>
+  </div>
+
+
+  <div class="formSep form-group col-12 d-flex justify-content-center pb-0 pt-2">
+    <div class="col-12">
+      <div class="form-check d-flex align-items-baseline">
+        <input class="form-check-input"
+               formControlName="service_com"
+               type="checkbox"
+               value=""
+               id="flexCheckDefault">
+        <label class="form-check-label ml-3"
+               for="flexCheckDefault">
+          {{ 'choisirCommeServiceDeCommunication' | translate }}
+        </label>
       </div>
     </div>
   </div>

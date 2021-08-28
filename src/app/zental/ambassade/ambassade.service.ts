@@ -29,4 +29,26 @@ export class AmbassadeService extends BaseService {
         )
       );
   }
+
+  getByUser(user: number, params?: Params): Observable<any> {
+    return this.factory
+      .get(`users/${user}/${this.endPoint}`, { params })
+      .pipe(tap(this.listResponseHandler()));
+  }
+
+  getByPays(
+    pays: number,
+    params?: Params,
+    emitData: boolean = true
+  ): Observable<any> {
+    return this.factory
+      .get(`pays/${pays}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
 }

@@ -39,7 +39,7 @@
                                [settings]="dropdownSettings.single"
                                formControlName="pays_siege"
                                [ngClass]="{'is-invalid': shouldShowRequiredError( 'pays_siege'), 'is-valid': isValid('pays_siege')}"
-                               class="form-control p-0 form-control-sm">
+                               class="form-control form-control-sm">
       </ng-multiselect-dropdown>
 
       <!-- Message d'erreur -->
@@ -175,15 +175,15 @@
   <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
     <div class="col-12">
       <label class="control-label"
-             for="description">{{ 'DESCRIPTION' | translate }}</label>
+             for="histoire">{{ 'HISTOIRE' | translate }}</label>
       <ckeditor [editor]="Editor"
                 class=""
-                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
-                formControlName="description">
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'histoire'), 'is-valid': isValid('histoire')}"
+                formControlName="histoire">
       </ckeditor>
-      <div *ngIf="shouldShowRequiredError('description')"
+      <div *ngIf="shouldShowRequiredError('histoire')"
            class="invalid-feedback">
-        {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
+        {{ 'veuillezRenseignerCeChamps' | translate }}
       </div>
     </div>
   </div>

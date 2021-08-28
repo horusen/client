@@ -60,9 +60,8 @@ export class EnregistreurService {
           });
 
           // Rendu en live
-          let video: HTMLVideoElement = document.querySelector(
-            "#videoRecordingRR"
-          );
+          let video: HTMLVideoElement =
+            document.querySelector("#videoRecordingRR");
           video.muted = true;
           video.volume = 0;
           video.srcObject = stream;

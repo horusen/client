@@ -116,13 +116,13 @@
              *ngIf="villeLoading"></i>
         </label>
 
-        <ng-multiselect-dropdown [data]="villes"
-                                 [settings]="villeDropdownSettings"
-                                 (click)="getVilles()"
-                                 formControlName="lieu_naissance"
-                                 [ngClass]="{'is-invalid': shouldShowRequiredError( 'lieu_naissance'), 'is-valid': isValid('lieu_naissance')}"
-                                 class="form-control p-0 form-control-sm">
-        </ng-multiselect-dropdown>
+        <angular2-multiselect [data]="villes"
+                              [settings]="villeDropdownSettings"
+                              (click)="getVilles()"
+                              formControlName="lieu_naissance"
+                              [ngClass]="{'is-invalid': shouldShowRequiredError( 'lieu_naissance'), 'is-valid': isValid('lieu_naissance')}"
+                              class="form-control form-control-sm">
+        </angular2-multiselect>
 
         <!-- Message d'erreur -->
         <div *ngIf="shouldShowRequiredError('lieu_naissance')"
@@ -215,13 +215,13 @@
              *ngIf="villeLoading"></i>
         </label>
 
-        <ng-multiselect-dropdown [data]="villes"
-                                 [settings]="villeDropdownSettings"
-                                 (click)="getVilles()"
-                                 formControlName="ville"
-                                 [ngClass]="{'is-invalid': shouldShowRequiredError( 'ville'), 'is-valid': isValid('ville')}"
-                                 class="form-control p-0 form-control-sm">
-        </ng-multiselect-dropdown>
+        <angular2-multiselect [data]="villes"
+                              [settings]="villeDropdownSettings"
+                              (click)="getVilles()"
+                              formControlName="ville"
+                              [ngClass]="{'is-invalid': shouldShowRequiredError( 'ville'), 'is-valid': isValid('ville')}"
+                              class="form-control form-control-sm">
+        </angular2-multiselect>
 
         <!-- Message d'erreur -->
         <div *ngIf="shouldShowRequiredError('ville')"
@@ -306,7 +306,7 @@
 
 
   <!-- Disposition type contact -->
-  <ng-container *ngIf="type === 'contact'">
+  <ng-container *ngIf="type === 'contact' || type === 'relation'">
     <!-- Prenom et nom -->
     <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12 ">
       <!-- prenom -->
@@ -387,13 +387,13 @@
              *ngIf="villeLoading"></i>
         </label>
 
-        <ng-multiselect-dropdown [data]="villes"
-                                 [settings]="villeDropdownSettings"
-                                 (click)="getVilles()"
-                                 formControlName="ville"
-                                 [ngClass]="{'is-invalid': shouldShowRequiredError( 'ville'), 'is-valid': isValid('ville')}"
-                                 class="form-control p-0 form-control-sm">
-        </ng-multiselect-dropdown>
+        <angular2-multiselect [data]="villes"
+                              [settings]="villeDropdownSettings"
+                              (click)="getVilles()"
+                              formControlName="ville"
+                              [ngClass]="{'is-invalid': shouldShowRequiredError( 'ville'), 'is-valid': isValid('ville')}"
+                              class="form-control form-control-sm">
+        </angular2-multiselect>
 
         <!-- Message d'erreur -->
         <div *ngIf="shouldShowRequiredError('ville')"

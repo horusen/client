@@ -40,6 +40,7 @@
 
         <!-- Supprimer -->
         <a [routerLink]="['./']"
+           *ngIf="(router.url.includes('identite') && user.id_inscription === auth.user.id_inscription)"
            class="tx-facebook"
            (click)="supprimer(relationFamiliale.id)">
           <i class="fad mr-3 fa-trash"></i>
@@ -76,7 +77,7 @@
 
   <!-- Missing data handling -->
   <div class="col-12 py-5"
-       *ngIf="!loading && !relationFamilialeService.data.length">
+       *ngIf="!loading && !data.length">
     <app-missing-data-alt></app-missing-data-alt>
   </div>
 </div>

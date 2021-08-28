@@ -21,7 +21,6 @@ export class CiviliteComponent extends BaseComponent implements OnInit {
     this._subscription["identite"] = this.identiteSevice.user$.subscribe(
       (user) => {
         if (this.user?.id_inscription !== user.id_inscription) this.user = user;
-        console.log(user);
       }
     );
   }

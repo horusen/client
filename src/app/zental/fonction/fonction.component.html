@@ -22,7 +22,7 @@
            (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
   <app-common-create *ngIf="create"
                      [configuration]="{ endpoint: 'fonctions', name: 'fonction', hasDescription: true, submitButtonClass: 'btn-primary' }"
-                     [extraFields]="{ ministere: ministere?.id, ambassade: ambassade?.id, consulat: consulat?.id }"
+                     [extraFields]="extraFields"
                      (itemCreated)="onFonctionCreated($event.item)">
   </app-common-create>
 </app-modal>

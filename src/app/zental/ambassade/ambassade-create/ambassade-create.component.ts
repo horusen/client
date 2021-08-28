@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { MinistereService } from "../../ministere/ministere.service";
 import { PaysService } from "../../pays/pays.service";
 import { EntiteDiplomatiqueCreateComponent } from "../../shared-zental/abstract/entite-diplomatique-create/entite-diplomatique-create.component";
 import { AmbassadeService } from "../ambassade.service";
@@ -16,18 +15,10 @@ export class AmbassadeCreateComponent
 {
   constructor(
     public ambassadeService: AmbassadeService,
-    public ministereService: MinistereService,
     public paysService: PaysService,
     public router: Router,
     public route: ActivatedRoute
   ) {
-    super(
-      ambassadeService,
-      ministereService,
-      paysService,
-      router,
-      route,
-      "ambassade"
-    );
+    super(ambassadeService, paysService, router, route, "ambassade");
   }
 }

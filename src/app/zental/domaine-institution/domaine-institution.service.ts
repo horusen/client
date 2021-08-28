@@ -12,6 +12,22 @@ export class DomaineInstitutionService extends BaseService {
     super("domaines/institutions");
   }
 
+  getByBureau(
+    bureau: number,
+    params?: Params,
+    emitData: boolean = true
+  ): Observable<any> {
+    return this.factory
+      .get(`bureaux/${bureau}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
   getByMinistere(
     ministere: number,
     params?: Params,

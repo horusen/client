@@ -33,14 +33,14 @@
              for="pays">
         {{ 'paysFrontalie' | translate }}
         <i class="fad fa-circle-notch fa-spin"
-           *ngIf="paysLoading"></i>
+           *ngIf="dependanciesLoading.pays"></i>
       </label>
 
-      <ng-multiselect-dropdown [data]="pays"
+      <ng-multiselect-dropdown [data]="dependancies.pays"
                                [settings]="dropdownSettings.single"
                                formControlName="pays_siege"
                                [ngClass]="{'is-invalid': shouldShowRequiredError( 'pays_siege'), 'is-valid': isValid('pays_siege')}"
-                               class="form-control p-0 form-control-sm">
+                               class="form-control form-control-sm">
       </ng-multiselect-dropdown>
 
       <!-- Message d'erreur -->
@@ -65,7 +65,7 @@
                                [settings]="dropdownSettings.single"
                                formControlName="type"
                                [ngClass]="{'is-invalid': shouldShowRequiredError( 'type'), 'is-valid': isValid('type')}"
-                               class="form-control p-0 form-control-sm">
+                               class="form-control form-control-sm">
       </ng-multiselect-dropdown>
 
       <!-- Message d'erreur -->
@@ -90,7 +90,7 @@
                                [settings]="dropdownSettings.single"
                                formControlName="passe_frontiere"
                                [ngClass]="{'is-invalid': shouldShowRequiredError( 'passe_frontiere'), 'is-valid': isValid('passe_frontiere')}"
-                               class="form-control p-0 form-control-sm">
+                               class="form-control form-control-sm">
       </ng-multiselect-dropdown>
 
       <!-- Message d'erreur -->

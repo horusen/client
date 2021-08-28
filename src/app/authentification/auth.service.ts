@@ -3,7 +3,7 @@ import { TokenStorage } from "../shared/services/token-storage.service";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Factory } from "../shared/services/factory";
-import { Router } from "@angular/router";
+import { Params, Router } from "@angular/router";
 import { Helper } from "../shared/services/helper";
 
 @Injectable({
@@ -36,6 +36,32 @@ export class AuthService {
     );
   }
 
+  editUser(elements: any): Observable<any> {
+    return this._factory.post(`${"auth/edit"}`, elements).pipe(
+      tap({
+        next: (response) => {
+          elements.forEach((value, key) => {
+            this._tokenStorage.setUserField(key, response[key]);
+          });
+        },
+      })
+    );
+  }
+
+  setUserField(field: string, value: any): void {
+    this._tokenStorage.setUserField(field, value);
+  }
+
+  verifyEmail(user: number, params: Params): Observable<any> {
+    return this._factory.get(`email/verify/${user}`, { params }).pipe(
+      tap({
+        next: (response) => {
+          this._tokenStorage.setUserField("email_verified_at", Date.now());
+        },
+      })
+    );
+  }
+
   incsription(elements: {}) {
     return this._factory.post("auth/signup", elements).pipe(
       tap({
@@ -49,14 +75,17 @@ export class AuthService {
   }
 
   deconnexion() {
-    return this._factory.get("auth/deconnexion").pipe(
+    return this._factory.get("auth/logout").pipe(
       tap({
         next: () => {
           this._tokenStorage.clear();
-          this.router.navigate(["connexion"]);
         },
       })
     );
+  }
+
+  resendEmailVerification(user: number): Observable<any> {
+    return this._factory.get(`user/${user}/email/resend`);
   }
 
   get user(): any {

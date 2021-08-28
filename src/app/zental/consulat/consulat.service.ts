@@ -28,9 +28,37 @@ export class ConsulatService extends BaseService {
       );
   }
 
-  getByAmbassade(ambassade: number, params: Params): Observable<any> {
+  getByAmbassade(
+    ambassade: number,
+    params: Params,
+    emitData = true
+  ): Observable<any> {
     return this.factory
       .get(`ambassades/${ambassade}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
+  getByPays(pays: number, params: Params, emitData = true): Observable<any> {
+    return this.factory
+      .get(`pays/${pays}/${this.endPoint}`, { params })
+      .pipe(
+        tap(
+          emitData
+            ? this.listResponseHandler()
+            : this.onlyErrorResponseHandler()
+        )
+      );
+  }
+
+  getByUser(user: number, params: Params): Observable<any> {
+    return this.factory
+      .get(`users/${user}/${this.endPoint}`, { params })
       .pipe(tap(this.listResponseHandler()));
   }
 }

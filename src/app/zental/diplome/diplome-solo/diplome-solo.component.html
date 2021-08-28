@@ -1,6 +1,6 @@
 <div class=" mycard2   p-0"
      *ngIf="diplome">
-  <table class="table  table-hover table-sm mb-0 ">
+  <table class="table   table-sm mb-0 ">
     <tbody class=" border-0 ">
       <!-- Libelle -->
       <tr class=" ">
@@ -14,6 +14,7 @@
 
             <a [routerLink]="['./']"
                class="float-right"
+               *ngIf="(router.url.includes('identite') && user?.id_inscription === auth.user.id_inscription)"
                (click)="supprimer(diplome.id)">
               <!-- Delete button -->
               <i class="fad fa-trash-alt tx-teal"

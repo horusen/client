@@ -18,17 +18,11 @@ export class ServiceCreateComponent
   implements OnInit
 {
   @Input() parent: { name: string; item: any };
-  ministere: any;
-  ambassade: any;
-  consulat: any;
   departements: any = [];
   departementLoading = false;
   constructor(
     public serviceService: ServiceService,
     public departementService: DepartementService,
-    public ministereService: MinistereService,
-    public ambassadeService: AmbassadeService,
-    public consulatService: ConsulatService,
     public router: Router,
     public route: ActivatedRoute
   ) {
@@ -39,23 +33,6 @@ export class ServiceCreateComponent
     this.initialiseForm();
 
     this.getDepartements();
-
-    if (this.router.url.includes("ministere")) {
-      this.ministereService.singleData$.subscribe((ministere) => {
-        this.formValuePatcher("ministere", ministere.id);
-        this.ministere = ministere;
-      });
-    } else if (this.router.url.includes("ambassade")) {
-      this.ambassadeService.singleData$.subscribe((ambassade) => {
-        this.formValuePatcher("ambassade", ambassade.id);
-        this.ambassade = ambassade;
-      });
-    } else if (this.router.url.includes("consulat")) {
-      this.consulatService.singleData$.subscribe((consulat) => {
-        this.formValuePatcher("consulat", consulat.id);
-        this.consulat = consulat;
-      });
-    }
   }
 
   getDepartements(): void {
@@ -67,6 +44,8 @@ export class ServiceCreateComponent
       this.getDepartementsByConsulat(this.parent.item.id);
     } else if (this.parent.name === "domaine") {
       this.getDepartementByDomaine(this.parent.item.id);
+    } else if (this.parent.name === "bureau") {
+      this.getDepartementsByBureau(this.parent.item.id);
     }
   }
 
@@ -74,6 +53,16 @@ export class ServiceCreateComponent
     this.departementLoading = true;
     this.departementService
       .getByMinistere(ministere, {}, false)
+      .subscribe((departements) => {
+        this.departements = departements;
+        this.departementLoading = false;
+      });
+  }
+
+  getDepartementsByBureau(bureau: number): void {
+    this.departementLoading = true;
+    this.departementService
+      .getByBureau(bureau, {}, false)
       .subscribe((departements) => {
         this.departements = departements;
         this.departementLoading = false;
@@ -115,19 +104,9 @@ export class ServiceCreateComponent
       libelle: [service?.libelle, Validators.required],
       departement: [service ? [service.departement] : [], Validators.required],
       description: [service?.description],
+      [this.parent.name]: [this.parent.item.id, Validators.required],
+      service_com: [false, Validators.required],
     });
-
-    if (this.router.url.includes("ministere")) {
-      this.addControl("ministere", service?.ministeres[0].id, true);
-    } else if (this.router.url.includes("ambassade")) {
-      this.addControl("ambassade", service?.ambassades[0].id, true);
-    } else if (this.router.url.includes("consulat")) {
-      this.addControl("consulat", service?.consulats[0].id, true);
-    }
-
-    if (this.parent.name === "departement") {
-      this.formValuePatcher("departement", [this.parent.item]);
-    }
   }
 
   create(): void {
@@ -138,19 +117,13 @@ export class ServiceCreateComponent
       });
 
       this.serviceService
-        .add(this.helper.serializeObject(data))
+        .add({
+          ...this.helper.serializeObject(data),
+          service_com: this.formValue("service_com"),
+        })
         .subscribe(() => {
           this.loading = false;
           this.initialiseForm();
-          this.ministere
-            ? this.formValuePatcher("ministere", this.ministere.id)
-            : null;
-          this.ambassade
-            ? this.formValuePatcher("ambassade", this.ambassade.id)
-            : null;
-          this.consulat
-            ? this.formValuePatcher("consulat", this.consulat.id)
-            : null;
           this.router.navigate(["./"], {
             relativeTo: this.route,
             queryParamsHandling: "preserve",

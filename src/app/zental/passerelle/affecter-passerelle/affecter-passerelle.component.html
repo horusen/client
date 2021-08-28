@@ -19,7 +19,18 @@
                             [settings]="dropdownSettingsAlt.single"
                             formControlName="bureau"
                             [ngClass]="{'is-invalid': shouldShowRequiredError( 'bureau'), 'is-valid': isValid('bureau')}"
-                            class="form-control p-0 form-control-sm">
+                            class="form-control form-control-sm">
+        <c-badge>
+          <ng-template let-item="item">
+            {{item.entite_diplomatique.libelle }}
+          </ng-template>
+        </c-badge>
+        <c-item>
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.entite_diplomatique.libelle}}</label>
+
+          </ng-template>
+        </c-item>
       </angular2-multiselect>
 
     </div>

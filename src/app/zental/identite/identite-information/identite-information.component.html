@@ -112,25 +112,47 @@
               </td>
             </tr>
 
-
-
-            <!-- Profession -->
-            <tr class="  "
-                *ngIf="user.profession">
-              <td class="  ">
-                <div class=" from"><a class="tx-bold tx-echos tx-14"
-                     href="javascript:void(0);"> {{ 'PROFESSION' | translate }} </a></div>
-              </td>
-              <td class=" bg-white ">
-                <div class=" from">
-                  <a class=" tx-echos tx-14"
-                     href="javascript:void(0);">
-                    {{ user.profession }}
-                  </a>
-                </div>
-              </td>
-            </tr>
           </ng-container>
+
+
+          <!-- Profession -->
+          <tr class="  "
+              *ngIf="user.profession">
+            <td class="  ">
+              <div class=" from"><a class="tx-bold tx-echos tx-14"
+                   href="javascript:void(0);"> {{ 'PROFESSION' | translate }} </a></div>
+            </td>
+            <td class=" bg-white ">
+              <div class=" from">
+                <a class=" tx-echos tx-14"
+                   href="javascript:void(0);">
+                  {{ user.profession }}
+                </a>
+              </div>
+            </td>
+          </tr>
+
+
+          <!-- Profession -->
+          <tr class="  "
+              *ngIf="user.nationalites?.length">
+            <td class="  ">
+              <div class=" from"><a class="tx-bold tx-echos tx-14"
+                   href="javascript:void(0);"> {{ 'NATIONALITES' | translate }} </a></div>
+            </td>
+            <td class=" bg-white ">
+              <div class=" from">
+                <a class=" tx-echos tx-14"
+                   href="javascript:void(0);">
+
+                  <span *ngFor="let nationalite of user.nationalites; let i = index">
+                    <span *ngIf="i > 0"> - </span>
+                    {{ nationalite.pays.libelle }}
+                  </span>
+                </a>
+              </div>
+            </td>
+          </tr>
 
         </tbody>
       </table>

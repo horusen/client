@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { Component, Input, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BaseSingleComponent } from "src/app/shared/components/base-component/base-single.component";
 import { IciMonPaysService } from "../../ici-mon-pays.service";
 import { MinistereService } from "../../ministere/ministere.service";
@@ -13,33 +13,42 @@ export class IciMonPaysShowElementComponent
   extends BaseSingleComponent
   implements OnInit
 {
-  element: string;
-  pays: any;
+  public pays: any;
+  private _validElements = [
+    "ici-chez-nous",
+    "venir-chez-nous",
+    "arts-et-cultures",
+  ];
+
   onEdit = false;
+  element: string;
   constructor(
     public iciMonPaysService: IciMonPaysService,
     public route: ActivatedRoute,
+    public router: Router,
     public ministereService: MinistereService
   ) {
     super(iciMonPaysService, route);
   }
 
   ngOnInit(): void {
-    this._subscription["ministere"] =
-      this.ministereService.singleData$.subscribe((ministere) => {
-        this.route.params.subscribe((element) => {
-          this.element = element.id;
-          this.pays = ministere.entite_diplomatique.pays_siege.id;
-          this.showElement(
-            ministere.entite_diplomatique.pays_siege.id,
-            String(element.id)
-          );
-        });
-      });
+    super.ngOnInit();
 
-    this._subscription["single"] = this.iciMonPaysService.singleData$.subscribe(
-      (response) => {
-        this.single = response;
+    this._subscription["pays"] = this.iciMonPaysService.pays$.subscribe(
+      (pays) => {
+        this.pays = pays;
+        this.route.params.subscribe((params) => {
+          if (this._validElements.includes(params.id)) {
+            this.onEdit = false;
+            this.element = params.id;
+            this.showElement(pays.id, params.id);
+          } else {
+            this.router.navigate(["ici-chez-nous"], {
+              relativeTo: this.route,
+              queryParamsHandling: "preserve",
+            });
+          }
+        });
       }
     );
   }

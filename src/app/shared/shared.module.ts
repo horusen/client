@@ -54,6 +54,7 @@ import { MissingDataAltComponent } from "./component/missing-data-alt/missing-da
     NgxPicaModule,
     RouterModule,
     FormsModule,
+
     ReactiveFormsModule,
     CKEditorModule,
     NgMultiSelectDropDownModule.forRoot(),
