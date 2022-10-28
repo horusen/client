@@ -148,5 +148,8 @@
       }
     }
   },
-  "defaultProject": "blogpost"
+  "defaultProject": "blogpost",
+  "cli": {
+    "analytics": "6656e6b4-15b1-4e9a-af79-6d97bb1cc6d9"
+  }
 }
