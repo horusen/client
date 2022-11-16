@@ -1,0 +1,20 @@
+<ng-container *ngIf="single">
+  <div class=" ">
+    <div class="  p-2 bd-b">
+      <p class="tx-16"><i class="fad fa-link  bg-light tx-24"
+           style="padding:8px; border-radius:50%"></i>
+        {{ ('LIAISON' | translate) + ": " + single.pays_origine.libelle + " - " + single.pays_siege.libelle }}
+      </p>
+    </div>
+  </div>
+
+  <app-service [parent]="{ name: 'bureau', item: single.bureau.id }">
+  </app-service>
+
+</ng-container>
+
+
+<div class="my-5"
+     *ngIf="loading">
+  <app-loading></app-loading>
+</div>

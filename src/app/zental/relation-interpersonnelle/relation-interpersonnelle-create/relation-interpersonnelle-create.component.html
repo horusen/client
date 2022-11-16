@@ -1,0 +1,119 @@
+<form class="custom-placeholder"
+      [formGroup]="form"
+      (submit)="create()">
+
+  <!-- Departement -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label"
+             for="domaine">
+        {{ 'typeDeRelation' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.types"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.types"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="type_relation"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'type_relation'), 'is-valid': isValid('type_relation')}"
+                            class="form-control form-control-sm">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('type_relation')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignerCeChamp' | translate }}.
+      </div>
+    </div>
+  </div>
+
+  <!-- Utilisateur-->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label"
+             for="ministre">
+        {{ 'UTILISATEUR' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.users"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.users"
+                            [settings]="dropdownSettingsAlt.user"
+                            formControlName="personne_en_relation"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'personne_en_relation'), 'is-valid': isValid('personne_en_relation')}"
+                            class="form-control form-control-sm">
+        <c-badge>
+          <ng-template let-item="item">
+            {{item.nom_complet}}
+          </ng-template>
+        </c-badge>
+        <c-item>
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.nom_complet}}</label>
+            <img [src]="item?.photo_min?.path"
+                 class="float-right rounded-circle border border-warning"
+                 style="width: 30px;margin-right: 20px;" />
+          </ng-template>
+        </c-item>
+      </angular2-multiselect>
+
+      <a [routerLink]="['./']"
+         class="tx-facebook tx-12 mt-2 ml-1"
+         [autoClose]="false"
+         placement="bottom"
+         [popoverTitle]="userCreateTitle"
+         [ngbPopover]="userCreate"
+         [triggers]="'manual'"
+         #popover="ngbPopover"
+         (click)="popover.open()">
+        <i class="fal fa-plus-circle"></i> {{ 'AJOUTER' | translate }}
+      </a>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('personne_en_relation')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignerUnUtilisateur' | translate }}.
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class=" text-right col-12">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1"
+              type="submit"
+              [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+
+    </div>
+  </div>
+</form>
+
+
+
+<!-- header -->
+<ng-template #userCreateTitle>
+  <b class="text-center tx-pink font-weight-bolder">
+    {{ "ajouterUnNouvelUtilisateur" | translate }}
+  </b>
+
+  <a [routerLink]="['./']"
+     (click)="popover.close()"
+     class="float-right">
+    <i class="far fa-times"></i>
+  </a>
+
+</ng-template>
+
+<!-- Body -->
+<ng-template #userCreate
+             class="p-3">
+  <app-user-create [type]="'relation'"></app-user-create>
+</ng-template>

@@ -1,0 +1,20 @@
+<ng-container *ngIf="single">
+  <div class=" ">
+    <div class="  p-2 bd-b">
+      <p class="tx-16"><i class="fad fa-landmark  bg-light tx-24"
+           style="padding:8px; border-radius:50%"></i>
+        {{ single.entite_diplomatique.libelle }}
+      </p>
+    </div>
+  </div>
+
+  <app-service [parent]="{ name: 'ambassade', item: single }">
+  </app-service>
+
+</ng-container>
+
+
+<div class="my-5"
+     *ngIf="loading">
+  <app-loading></app-loading>
+</div>

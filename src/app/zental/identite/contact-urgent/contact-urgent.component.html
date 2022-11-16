@@ -1,0 +1,16 @@
+<div class="card"
+     [hidden]="!single && !loading">
+
+  <div class="row row-xs clearfix pt-2 bd-b pb-2 mg-0 pd-0 "
+       [hidden]="loading">
+    <p class="text-center w-100 tx-warning">{{ 'contactUrgent' | translate }}</p>
+    <app-contact-urgent-show class="col-12"></app-contact-urgent-show>
+    <app-contact-urgent-list class="col-12"></app-contact-urgent-list>
+  </div>
+
+  <div class="my-5 col-12"
+       *ngIf="loading">
+    <app-loading></app-loading>
+  </div>
+
+</div>

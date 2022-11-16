@@ -1,0 +1,478 @@
+<form class="custom-placeholder row m-0 p-0 justify-content-center h-100 align-items-center"
+      [formGroup]="form"
+      (submit)="create()">
+
+  <!-- Disposition type enfant -->
+  <ng-container *ngIf="type === 'enfant'">
+    <!-- Prenom et nom -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12 ">
+      <!-- prenom -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="prenom">
+          {{ 'PRENOM' | translate }}
+        </label>
+
+        <!-- Input -->
+        <input type="prenom"
+               class="form-control form-control-sm"
+               required
+               [formControlName]="'prenom'"
+               [ngClass]="{'is-invalid': shouldShowRequiredError( 'prenom'), 'is-valid': isValid('prenom')}">
+
+        <!-- MEssage d'erreur -->
+        <div *ngIf="shouldShowRequiredError('prenom')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignerUnPrenom' |translate }}.</div>
+      </div>
+
+      <!-- Nom -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="nom">
+          {{ 'NOM' | translate }}
+        </label>
+
+        <!-- Input -->
+        <input type="nom"
+               class="form-control form-control-sm"
+               required
+               [formControlName]="'nom'"
+               [ngClass]="{'is-invalid': shouldShowRequiredError( 'nom'), 'is-valid': isValid('nom')}">
+
+        <!-- MEssage d'erreur -->
+        <div *ngIf="shouldShowRequiredError('nom')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignerUnNom' |translate }}.</div>
+      </div>
+
+    </div>
+
+
+    <!-- Date de naissance et sexe -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12">
+      <!-- Date de naissance -->
+      <div class="col-6">
+        <!-- Label -->
+        <label for="type"
+               class="label-template-form">
+          {{ 'dateDeNaissance' | translate }}
+        </label>
+
+        <!-- Date picker -->
+        <div class="input-group mb-2">
+          <input [dpDayPicker]="configCalendrier.day"
+                 [theme]="'dp-material'"
+                 formControlName="date_naissance"
+                 class="form-control ">
+          <div class="input-group-prepend">
+            <div class="input-group-text  bg-light"><i class="fal fa-calendar"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Message d'erreur -->
+        <div *ngIf="shouldShowRequiredError('date_naissance')"
+             class="invalid-feedback">
+          {{ 'veuillezChoisirUneDateDebut' | translate }}.
+        </div>
+      </div>
+
+      <!-- Sexe -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="sexe">
+          {{ 'SEXE' | translate }}
+        </label>
+
+        <select (change)="selectFormHandler('sexe', $event.target.value)"
+                class="form-control">
+          <option value="homme"
+                  selected>{{ 'HOMME' | translate }}</option>
+          <option value="femme">{{ 'FEMME' | translate }}</option>
+        </select>
+
+
+        <!-- MEssage d'erreur -->
+        <div *ngIf="shouldShowRequiredError('sexe')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignerCeChamps' |translate }}.</div>
+      </div>
+    </div>
+
+
+    <!-- Lieu naissance -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12 ">
+
+      <div class="col-12">
+        <!-- Label -->
+        <label class="control-label"
+               for="pays">
+          {{ 'lieuDeNaissance' | translate }}
+          <i class="fad fa-circle-notch fa-spin"
+             *ngIf="villeLoading"></i>
+        </label>
+
+        <angular2-multiselect [data]="villes"
+                              [settings]="villeDropdownSettings"
+                              (click)="getVilles()"
+                              formControlName="lieu_naissance"
+                              [ngClass]="{'is-invalid': shouldShowRequiredError( 'lieu_naissance'), 'is-valid': isValid('lieu_naissance')}"
+                              class="form-control form-control-sm">
+        </angular2-multiselect>
+
+        <!-- Message d'erreur -->
+        <div *ngIf="shouldShowRequiredError('lieu_naissance')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignerCeChamps' | translate }}.
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+
+  <!-- Disposition type parent -->
+  <ng-container *ngIf="type === 'parent'">
+    <!-- Prenom et nom -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12 ">
+      <!-- prenom -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="prenom">
+          {{ 'PRENOM' | translate }}
+        </label>
+
+        <!-- Input -->
+        <input type="prenom"
+               class="form-control form-control-sm"
+               required
+               [formControlName]="'prenom'"
+               [ngClass]="{'is-invalid': shouldShowRequiredError( 'prenom'), 'is-valid': isValid('prenom')}">
+
+        <!-- MEssage d'erreur -->
+        <div *ngIf="shouldShowRequiredError('prenom')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignerUnPrenom' |translate }}.</div>
+      </div>
+
+      <!-- Nom -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="nom">
+          {{ 'NOM' | translate }}
+        </label>
+
+        <!-- Input -->
+        <input type="nom"
+               class="form-control form-control-sm"
+               required
+               [formControlName]="'nom'"
+               [ngClass]="{'is-invalid': shouldShowRequiredError( 'nom'), 'is-valid': isValid('nom')}">
+
+        <!-- MEssage d'erreur -->
+        <div *ngIf="shouldShowRequiredError('nom')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignerUnNom' |translate }}.</div>
+      </div>
+
+    </div>
+
+    <!-- Adresse et ville -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12 ">
+      <!-- Adresse -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="addresse">
+          {{ 'ADRESSE' | translate }}
+        </label>
+
+        <!-- Input -->
+        <input type="addresse"
+               class="form-control form-control-sm"
+               required
+               [formControlName]="'addresse'"
+               [ngClass]="{'is-invalid': shouldShowRequiredError( 'addresse'), 'is-valid': isValid('addresse')}">
+
+        <!-- MEssage d'erreur -->
+        <div *ngIf="shouldShowRequiredError('addresse')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignerCeChamps' |translate }}.</div>
+      </div>
+
+      <!-- Ville -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="pays">
+          {{ 'VILLE' | translate }}
+          <i class="fad fa-circle-notch fa-spin"
+             *ngIf="villeLoading"></i>
+        </label>
+
+        <angular2-multiselect [data]="villes"
+                              [settings]="villeDropdownSettings"
+                              (click)="getVilles()"
+                              formControlName="ville"
+                              [ngClass]="{'is-invalid': shouldShowRequiredError( 'ville'), 'is-valid': isValid('ville')}"
+                              class="form-control form-control-sm">
+        </angular2-multiselect>
+
+        <!-- Message d'erreur -->
+        <div *ngIf="shouldShowRequiredError('ville')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignezLaVille' | translate }}.
+        </div>
+      </div>
+    </div>
+
+    <!-- Email et telephone -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12 ">
+      <!-- EMAIL -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="email">
+          {{ 'EMAIL' | translate }}
+        </label>
+
+        <!-- Input -->
+        <input type="email"
+               class="form-control form-control-sm"
+               required
+               [formControlName]="'email'"
+               [ngClass]="{'is-invalid': shouldShowRequiredError( 'email'), 'is-valid': isValid('email')}">
+
+        <!-- MEssage d'erreur -->
+        <div *ngIf="shouldShowRequiredError('email')"
+             class="invalid-feedback">
+          {{ 'veuillezRensfeignerUnEmail' |translate }}.</div>
+      </div>
+
+      <!-- Telephone -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="telephone">
+          {{ 'TELEPHONE' | translate }}
+        </label>
+
+        <!-- Input -->
+        <input type="telephone"
+               class="form-control form-control-sm"
+               required
+               [formControlName]="'telephone'"
+               [ngClass]="{'is-invalid': shouldShowRequiredError( 'telephone'), 'is-valid': isValid('telephone')}">
+
+        <!-- MEssage d'erreur -->
+        <div *ngIf="shouldShowRequiredError('telephone')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignerUnNumeroDeTelephone' |translate }}.</div>
+      </div>
+
+    </div>
+
+
+    <!-- Profession -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12 ">
+      <div class="col-12">
+        <!-- Label -->
+        <label class="control-label"
+               for="prenom">
+          {{ 'PROFESSION' | translate }}
+        </label>
+
+        <!-- Input -->
+        <input type="profession"
+               class="form-control form-control-sm"
+               required
+               [formControlName]="'profession'"
+               [ngClass]="{'is-invalid': shouldShowRequiredError( 'profession'), 'is-valid': isValid('profession')}">
+
+        <!-- MEssage d'erreur -->
+        <div *ngIf="shouldShowRequiredError('profession')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignerCeChamps' |translate }}.</div>
+      </div>
+
+
+    </div>
+  </ng-container>
+
+
+  <!-- Disposition type contact -->
+  <ng-container *ngIf="type === 'contact' || type === 'relation'">
+    <!-- Prenom et nom -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12 ">
+      <!-- prenom -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="prenom">
+          {{ 'PRENOM' | translate }}
+        </label>
+
+        <!-- Input -->
+        <input type="prenom"
+               class="form-control form-control-sm"
+               required
+               [formControlName]="'prenom'"
+               [ngClass]="{'is-invalid': shouldShowRequiredError( 'prenom'), 'is-valid': isValid('prenom')}">
+
+        <!-- MEssage d'erreur -->
+        <div *ngIf="shouldShowRequiredError('prenom')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignerUnPrenom' |translate }}.</div>
+      </div>
+
+      <!-- Nom -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="nom">
+          {{ 'NOM' | translate }}
+        </label>
+
+        <!-- Input -->
+        <input type="nom"
+               class="form-control form-control-sm"
+               required
+               [formControlName]="'nom'"
+               [ngClass]="{'is-invalid': shouldShowRequiredError( 'nom'), 'is-valid': isValid('nom')}">
+
+        <!-- MEssage d'erreur -->
+        <div *ngIf="shouldShowRequiredError('nom')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignerUnNom' |translate }}.</div>
+      </div>
+
+    </div>
+
+
+    <!-- Adresse et ville -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12 ">
+      <!-- Adresse -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="addresse">
+          {{ 'ADRESSE' | translate }}
+        </label>
+
+        <!-- Input -->
+        <input type="addresse"
+               class="form-control form-control-sm"
+               required
+               [formControlName]="'addresse'"
+               [ngClass]="{'is-invalid': shouldShowRequiredError( 'addresse'), 'is-valid': isValid('addresse')}">
+
+        <!-- MEssage d'erreur -->
+        <div *ngIf="shouldShowRequiredError('addresse')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignerCeChamps' |translate }}.</div>
+      </div>
+
+      <!-- Ville -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="pays">
+          {{ 'VILLE' | translate }}
+          <i class="fad fa-circle-notch fa-spin"
+             *ngIf="villeLoading"></i>
+        </label>
+
+        <angular2-multiselect [data]="villes"
+                              [settings]="villeDropdownSettings"
+                              (click)="getVilles()"
+                              formControlName="ville"
+                              [ngClass]="{'is-invalid': shouldShowRequiredError( 'ville'), 'is-valid': isValid('ville')}"
+                              class="form-control form-control-sm">
+        </angular2-multiselect>
+
+        <!-- Message d'erreur -->
+        <div *ngIf="shouldShowRequiredError('ville')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignezLaVille' | translate }}.
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Email et telephone -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12 ">
+      <!-- EMAIL -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="email">
+          {{ 'EMAIL' | translate }}
+        </label>
+
+        <!-- Input -->
+        <input type="email"
+               class="form-control form-control-sm"
+               required
+               [formControlName]="'email'"
+               [ngClass]="{'is-invalid': shouldShowRequiredError( 'email'), 'is-valid': isValid('email')}">
+
+        <!-- MEssage d'erreur -->
+        <div *ngIf="shouldShowRequiredError('email')"
+             class="invalid-feedback">
+          {{ 'veuillezRensfeignerUnEmail' |translate }}.</div>
+      </div>
+
+      <!-- Telephone -->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="telephone">
+          {{ 'TELEPHONE' | translate }}
+        </label>
+
+        <!-- Input -->
+        <input type="telephone"
+               class="form-control form-control-sm"
+               required
+               [formControlName]="'telephone'"
+               [ngClass]="{'is-invalid': shouldShowRequiredError( 'telephone'), 'is-valid': isValid('telephone')}">
+
+        <!-- MEssage d'erreur -->
+        <div *ngIf="shouldShowRequiredError('telephone')"
+             class="invalid-feedback">
+          {{ 'veuillezRenseignerUnNumeroDeTelephone' |translate }}.</div>
+      </div>
+
+    </div>
+  </ng-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--        Boutton        validation        -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12">
+    <div class=" col-12 text-right">
+      <button class="btn btn-sm btn-pink text-white mr-1"
+              type="submit">
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,38 @@
+<div class="bd-t bd-b">
+  <!-- Titre -->
+  <div class=" row row-xs clearfix pt-3  pl-2 pr-4"
+       style="z-index: auto !important;">
+    <div class="col-lg-12 ">
+      <h6 class=""><i class="fad fa-circle  "
+           style="padding:6px; border-radius: 50%; "></i>
+        {{ 'CONJOINT' | translate }}
+
+        <!--  -->
+        <a [routerLink]="['./']"
+           *ngIf="!conjoint && !loading && (router.url.includes('identite') && user.id_inscription === auth.user.id_inscription)"
+           class="
+           float-right"
+           fragment="conjoint-add">
+          <i class="fad fa-plus-circle"></i>
+        </a>
+
+        <a [routerLink]="['./']"
+           *ngIf="conjoint && !loading && (router.url.includes('identite') && user.id_inscription === auth.user.id_inscription)"
+           class="
+           float-right"
+           (click)="supprimer()">
+          <i class="fad fa-trash-alt"></i>
+        </a>
+      </h6>
+    </div>
+  </div>
+
+  <app-identite-information [user]="conjoint.conjoint1.id_inscription === user.id_inscription ?  conjoint?.conjoint2 : conjoint.conjoint1"
+                            *ngIf="conjoint && !loading">
+  </app-identite-information>
+
+
+  <app-missing-data-alt *ngIf="!conjoint && !loading"></app-missing-data-alt>
+
+  <app-loading *ngIf="loading"></app-loading>
+</div>

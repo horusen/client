@@ -1,0 +1,96 @@
+<div class="row row-xs clearfix mg-0 pd-0 pt-4 p-2"
+     *ngIf="!loading && membreCabinetService.data.length">
+
+  <!-- Liste of element -->
+  <div class="col-lg-3 p-2"
+       *ngFor="let membre of membreCabinetService.data | paginate: {itemsPerPage: 5, id: 'membre', currentPage: currentPage}">
+    <div class="mycard4 border ">
+      <div class="avatar5">
+        <img class="rounded-circle "
+             *ngIf="membre.employe.photo?.path"
+             [src]="membre.employe.photo?.path"
+             alt="avatar"
+             width="70">
+
+        <span *ngIf="!membre.employe.photo.path">
+          <i class="fad fa-user-circle"
+             style="font-size: 70px;"></i>
+        </span>
+      </div>
+
+      <!-- Infomation -->
+      <div class="mycard-text pt-4 px-2 pb-2">
+        <!-- Nom complet -->
+        <span class="date tx-bold tx-yeto tx-16">
+          {{ membre.employe.nom_complet }}
+        </span>
+
+        <!-- Poste - fonction -->
+        <p class="mb-0 text-center">
+          <small>
+            <!-- poste -->
+            <span class="tx-primary">{{ membre.poste.libelle }} </span> - {{ membre.fonction.libelle }}
+          </small>
+        </p>
+      </div>
+
+
+      <div class="pb-3 pt-1 card-container-icon">
+        <!-- Voir -->
+        <a [routerLink]="['./']"
+           class="mr-3 tx-facebook"
+           routerLinkActive="active">
+          <i class="fad  fa-info-circle"></i>
+        </a>
+
+        <!-- Modifier -->
+        <a [routerLink]="['./']"
+           [fragment]="'edit-membre-cabinet'"
+           class="tx-facebook"
+           (click)="modifier(membre)">
+          <i class="fad mr-3 fa-edit"></i>
+        </a>
+
+        <!-- Supprimer -->
+        <a [routerLink]="['./']"
+           class="tx-facebook"
+           (click)="supprimer(membre.id)">
+          <i class="fad mr-3 fa-trash"></i>
+        </a>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Pagination -->
+  <div class="col-12 mt-1 d-flex justify-content-center">
+    <pagination-controls id="membre"
+                         (pageChange)="currentPage = $event"
+                         autoHide="true"
+                         previousLabel="{{ 'PRECEDENT' | translate }}"
+                         nextLabel="{{ 'SUIVANT' | translate }}">
+    </pagination-controls>
+  </div>
+</div>
+
+
+<!-- Loading && missing data handling -->
+<div class="row"
+     *ngIf="loading || !membreCabinetService.data.length">
+
+  <!-- Loading -->
+  <div class="col-12 py-5"
+       *ngIf="loading">
+    <app-loading></app-loading>
+  </div>
+
+
+  <!-- Missing data handling -->
+  <div class="col-12 py-5"
+       *ngIf="!loading && !membreCabinetService.data.length">
+    <app-missing-data-alt>
+    </app-missing-data-alt>
+  </div>
+</div>

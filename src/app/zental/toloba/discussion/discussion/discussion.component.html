@@ -1,0 +1,290 @@
+<div class="   p-0"
+     *ngIf="single"
+     style="background-image: linear-gradient(to right top,#F3F8FA,#E8ECF1);">
+
+
+
+  <!-- header -->
+  <div class="   "
+       *ngIf="correspondant">
+    <!-- Header personne -->
+    <div *ngIf="type_correspondant === 'user'"
+         class="media pt-3 bd-b">
+
+      <!-- image -->
+      <div class="mr-2 mg-l-10 pt-2">
+        <div class="avatar">
+          <img class="avatar3"
+               [src]="correspondant.photo?.path"
+               alt="avatar"
+               width="100px"
+               height="100px">
+        </div>
+      </div>
+
+      <!-- information -->
+      <div class=" d-flex justify-content-between mg-t-6 mg-b-5 wd-100p">
+        <div class="d-inline-block">
+          <h6 class="mb-0 tx-13 tx-yeto">{{ correspondant.nom_complet }}</h6>
+          <p>
+            <span class="mb-0 tx-lorange t">{{ correspondant.profession }}</span>
+            <span class="tx-yeto"> {{ correspondant.lieu_naissance?.pays?.libelle }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header service -->
+    <a *ngIf="type_correspondant === 'service'"
+       class="media align-items-center pt-3 bd-b">
+
+      <!-- Initial -->
+      <div class="mr-2">
+        <div class="avatar mg-l-5">
+          <span class="avatar-initial rounded-circle w-100 bg-primary op-6"
+                [ngClass]="{
+                        'bg-primary':
+                          helper.parseInt(
+                            correspondant.id
+                              .toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) -
+                            1 ==
+                            0 ||
+                          helper.parseInt(
+                            correspondant.id
+                              .toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) +
+                            5 -
+                            1 ==
+                            0,
+                        'bg-warning':
+                          helper.parseInt(
+                            correspondant.id
+                              .toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) -
+                            2 ==
+                            0 ||
+                          helper.parseInt(
+                            correspondant.id
+                              .toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) +
+                            5 -
+                            2 ==
+                            0,
+                        'bg-success':
+                          helper.parseInt(
+                            correspondant.id
+                              .toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) -
+                            3 ==
+                            0 ||
+                          helper.parseInt(
+                            correspondant.id
+                              .toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) +
+                            5 -
+                            3 ==
+                            0,
+                        'bg-info':
+                          helper.parseInt(
+                            correspondant.id
+                              .toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) -
+                            4 ==
+                            0 ||
+                          helper.parseInt(
+                            correspondant.id
+                              .toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) +
+                            5 -
+                            4 ==
+                            0,
+                        'bg-danger':
+                          helper.parseInt(
+                            correspondant.id
+                              .toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) -
+                            5 ==
+                            0 ||
+                          helper.parseInt(
+                            correspondant.id
+                              .toString()
+                              .charAt(correspondant.id.toString().length - 1)
+                          ) +
+                            5 -
+                            5 ==
+                            0
+                      }">
+            {{ correspondant.libelle.split(" ")[0].charAt(0) +
+            (correspondant.libelle.split(" ")[1]
+            ? correspondant.libelle.split(" ")[1].charAt(0)
+            : correspondant.libelle.split(" ")[0].charAt(1))
+            }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Nom service -->
+      <div class=" d-flex justify-content-between mg-t-6 mg-b-5 wd-100p">
+        <div class="d-inline-block">
+          <h6 class="mb-0 tx-13 tx-yeto"> {{ 'SERVICE' | translate}}: {{ correspondant.libelle }}</h6>
+          <p>
+            <span class="mb-0 tx-lorange t">
+              {{ correspondant.institution.entite_diplomatique.libelle }}
+            </span>
+            <span class="tx-yeto">
+              {{ correspondant.institution.entite_diplomatique.pays_origine.libelle }} </span>
+          </p>
+        </div>
+      </div>
+    </a>
+
+    <!-- Header groupe -->
+    <div *ngIf="type_correspondant === 'groupe'"
+         class="media pt-3 bd-b">
+
+      <!-- image -->
+      <div class="mr-2">
+        <div class="avatar mg-l-5">
+          <span class="avatar-initial rounded-circle w-100 bg-primary op-6"
+                [ngClass]="{
+                              'bg-primary':
+                                helper.parseInt(
+                                  correspondant.id
+                                    .toString()
+                                    .charAt(correspondant.id.toString().length - 1)
+                                ) -
+                                  1 ==
+                                  0 ||
+                                helper.parseInt(
+                                  correspondant.id
+                                    .toString()
+                                    .charAt(correspondant.id.toString().length - 1)
+                                ) +
+                                  5 -
+                                  1 ==
+                                  0,
+                              'bg-warning':
+                                helper.parseInt(
+                                  correspondant.id
+                                    .toString()
+                                    .charAt(correspondant.id.toString().length - 1)
+                                ) -
+                                  2 ==
+                                  0 ||
+                                helper.parseInt(
+                                  correspondant.id
+                                    .toString()
+                                    .charAt(correspondant.id.toString().length - 1)
+                                ) +
+                                  5 -
+                                  2 ==
+                                  0,
+                              'bg-success':
+                                helper.parseInt(
+                                  correspondant.id
+                                    .toString()
+                                    .charAt(correspondant.id.toString().length - 1)
+                                ) -
+                                  3 ==
+                                  0 ||
+                                helper.parseInt(
+                                  correspondant.id
+                                    .toString()
+                                    .charAt(correspondant.id.toString().length - 1)
+                                ) +
+                                  5 -
+                                  3 ==
+                                  0,
+                              'bg-info':
+                                helper.parseInt(
+                                  correspondant.id
+                                    .toString()
+                                    .charAt(correspondant.id.toString().length - 1)
+                                ) -
+                                  4 ==
+                                  0 ||
+                                helper.parseInt(
+                                  correspondant.id
+                                    .toString()
+                                    .charAt(correspondant.id.toString().length - 1)
+                                ) +
+                                  5 -
+                                  4 ==
+                                  0,
+                              'bg-danger':
+                                helper.parseInt(
+                                  correspondant.id
+                                    .toString()
+                                    .charAt(correspondant.id.toString().length - 1)
+                                ) -
+                                  5 ==
+                                  0 ||
+                                helper.parseInt(
+                                  correspondant.id
+                                    .toString()
+                                    .charAt(correspondant.id.toString().length - 1)
+                                ) +
+                                  5 -
+                                  5 ==
+                                  0
+                            }">
+            <i class="fad fa-users-crown"></i>
+          </span>
+        </div>
+      </div>
+
+      <!-- information -->
+      <div class=" d-flex justify-content-between mg-t-6 mg-b-5 wd-100p">
+        <div class="d-inline-block">
+          <h6 class="mb-0 tx-13 tx-yeto">{{ correspondant.libelle }}</h6>
+          <p class="tx-12">
+            {{ helper.strcut(correspondant.description, 100) }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header entite diplomatique -->
+    <div *ngIf="type_correspondant === 'entite_diplomatique'"
+         class="media pt-3 bd-b">
+
+      <!-- image -->
+      <div class="mr-2 mg-l-10 pt-2">
+        <div class="avatar">
+          <img class="avatar3 h-100"
+               [src]="correspondant.entite_diplomatique.pays_origine.drapeau"
+               alt="avatar"
+               width="100px"
+               height="100px">
+        </div>
+      </div>
+
+      <!-- information -->
+      <div class=" d-flex justify-content-between mg-t-6 mg-b-5 wd-100p">
+        <div class="d-inline-block">
+          <h6 class="mb-0 tx-13 tx-yeto">{{ correspondant.entite_diplomatique.libelle }}</h6>
+          <p>
+            <span class="mb-0 tx-lorange t">{{ correspondant.entite_diplomatique.pays_origine.libelle }}</span>
+            <!-- <span class="tx-yeto"> {{ correspondant.lieu_naissance?. }}</span> -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- reaction -->
+  <app-reaction *ngIf="parent.name === 'user'"></app-reaction>
+  <app-reaction-service *ngIf="parent.name === 'service'"></app-reaction-service>
+  <app-reaction-entite-diplomatique *ngIf="parent.name === 'entite_diplomatique'"></app-reaction-entite-diplomatique>
+</div>

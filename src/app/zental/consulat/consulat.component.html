@@ -1,0 +1,47 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 d-flex align-items-center pb-2">
+    <!-- boutton precedent -->
+    <a [routerLink]="['..']"
+       [ngbTooltip]="'revenirEnArriere' | translate"
+       class="p-2 mr-2 tx-15  d-flex border rounded-circle align-items-center justify-content-center">
+      <i class="fad fa-arrow-left"></i>
+    </a>
+
+    {{ 'listeDesConsulats' | translate }}
+  </h5>
+</div>
+
+
+<!-- header -->
+<app-main-header [id]="'consulat'"
+                 [hasAddButton]="parent.name !== 'zental'">
+</app-main-header>
+
+
+<app-consulat-list [parent]="parent"
+                   [colonne_affichage]="colonne_affichage"
+                   [itemsPerPage]="itemsPerPage"></app-consulat-list>
+
+
+
+
+<app-modal [configuration]="{ name: 'consulat-create-modal', titre: 'ajouterUnConsulat', icone: 'building' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-consulat-create [parent]="parent"
+                       *ngIf="create"></app-consulat-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'consulat-edit-modal', titre: 'modifierLesDetailsDuConsulat', icone: 'building' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-consulat-edit *ngIf="edit"></app-consulat-edit>
+</app-modal>
+
+<!--
+
+<app-modal-sidebar [configuration]="{ name: 'consulat-filter-modal', titre: 'FILTRE', icone: 'building' }"
+                   (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-filter-consulat *ngIf="filter"></app-filter-consulat>
+</app-modal-sidebar> -->

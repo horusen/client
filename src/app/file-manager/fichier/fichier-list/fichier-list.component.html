@@ -1,0 +1,18 @@
+<div class="table-responsive">
+    <table class="table  table-hover table-sm mb-0 ">
+        <tbody>
+            <ng-container *ngIf="fichierService.data.length && !loading">
+                <app-fichier-solo *ngFor="let fichier of fichierService.data"
+                                  [dossier]="dossier"
+                                  [fichier]="fichier">
+                </app-fichier-solo>
+            </ng-container>
+
+            <app-loading *ngIf="loading"></app-loading>
+            <app-missing-data-alt *ngIf="!fichierService.data.length &&
+                                                                    !loading"
+                                  [message]="'aucunFichierEnregistreDansVotreRepertoire' | translate">
+            </app-missing-data-alt>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,52 @@
+<form class="custom-placeholder row"
+      [formGroup]="form"
+      (submit)="edit()">
+  <!-- Libelle -->
+  <div class="formSep form-group col-12 d-flex justify-content-center pb-0 pt-2">
+    <div class="col-12 p-0">
+      <!-- Label -->
+      <label class="control-label"
+             for="libelle">
+        {{ "LIBELLE" | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'libelle'"
+             [ngClass]="{
+          'is-invalid': shouldShowRequiredError('libelle'),
+          'is-valid': isValid('libelle')
+        }" />
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <label class="control-label"
+             for="description">{{ 'DESCRIPTION' | translate }}</label>
+      <ckeditor [editor]="Editor"
+                class=""
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
+                formControlName="description">
+      </ckeditor>
+      <div *ngIf="shouldShowRequiredError('description')"
+           class="invalid-feedback">
+        {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Valider -->
+  <div class="col-12 mt-2">
+    <button class="btn btn-sm mb-3 float-right"
+            [class]="configuration.submitButtonClass">
+      {{ "VALIDER" | translate }}
+      <span *ngIf="loading">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </span>
+    </button>
+  </div>
+</form>

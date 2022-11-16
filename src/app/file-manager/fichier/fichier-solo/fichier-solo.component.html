@@ -1,0 +1,157 @@
+<div class="row w-100">
+  <div class="col-12 p-0">
+    <tr class=" bd-b w-100" *ngIf="fichier">
+      <!-- Boutton check -->
+      <td class=" " style="width: 10%" *ngIf="selection">
+        <div *ngIf="!fichier.has_password" class="form-check  bg-d">
+          <input class="form-check-input " type="checkbox" [checked]="verifyIfChecked()" (change)="onSelected($event)" id="defaultCheck1">
+        </div>
+      </td>
+
+      <!-- Icone -->
+      <td style="width: 10%">
+        <div class=" pd-y-10 pd-x-10">
+          <i class="fal  bg-light tx-facebook tx-24" [ngClass]="{
+                        'fa-file-image': fichier.extension.type == 1,
+                        'fa-file-pdf': fichier.extension.type == 2,
+                        'fa-file-music': fichier.extension.type == 3
+                    }" style="padding:6px; border-radius: 50%; ">
+          </i>
+          <i class="fad fa-lock" *ngIf="fichier.has_password"></i>
+        </div>
+      </td>
+
+      <!-- Libelle -->
+      <td class=" " style="width: 70%">
+        <div class=" from">
+          <a class=" tx-facebook tx-14" [href]="'http://localhost:8000/api/file/' + fichier.id + '/download'" target="_blank">
+            {{ fichier.name }}
+            <!-- loading -->
+            <i class="fas fa-circle-notch fa-spin" *ngIf="loading"></i>
+
+            <p class="mg-0">
+              <small>
+                {{ fichier.created_at | date }}
+                /
+                {{ fichier.size }}
+                ko</small>
+              <i class="fad fa-redo bg-light tx-facebook tx-12 mg-t-10 mg-l-20 mr-2"></i>
+              <i class="fad fa-star bg-light tx-success tx-12 mg-t-10 mr-2"></i>
+              <i class="fad fa-star bg-light tx-warning tx-12 mg-t-10 mr-2"></i>
+              <i class="fad fa-star bg-light tx-danger tx-12 mg-t-10 mr-2"></i>
+
+            </p>
+          </a>
+        </div>
+      </td>
+
+      <!-- Image user -->
+      <td [style.width]="selection ? '10%' : '20%'">
+        <div class=" ">
+          <div class="">
+            <img class="avatar" [src]="fichier.user.photo" [alt]="fichier.user.nom_complet">
+          </div>
+        </div>
+      </td>
+
+      <!-- Boutton option -->
+      <td style="width: 10%">
+        <div class=" float-right">
+          <ul class="nav mg-r-4">
+            <li class="nav-item">
+              <div style="margin-top:14px; margin-right: 4px">
+                <!-- Boutton dropdown -->
+                <a class="" role="button" id="menu1" data-toggle="dropdown">
+                  <i class="fal fa-ellipsis-h bg- tx-facebook tx-24"></i>
+                </a>
+
+                <!-- Options -->
+                <div class="dropdown-menu p-0">
+                  <ng-container *ngIf="!fichier.has_password">
+                    <!-- Partager -->
+                    <a class="dropdown-item tx-primary" href="#"><i class="fal fa-share-alt fa-sm tx-primary"></i>
+                      <span class="tx-">
+                        Partager</span></a>
+
+                    <!-- EXPORTER -->
+                    <a class="dropdown-item clickable tx-primary" (click)="download()"><i class="fal fa-file-export tx-primary fa-sm"></i>
+                      <span class="tx-primary">
+                        {{ 'EXPORTER' | translate }}
+                      </span>
+                    </a>
+
+                    <!-- Option hors dossier -->
+                    <ng-container *ngIf="!dossier">
+                      <!-- Ajouter dans un dossier -->
+                      <a class="dropdown-item clickable tx-primary" (click)="ajouterFichierDansDossier()"><i
+                            class="fal fa-folder-plus tx-primary fa-sm"></i>
+                        <span class="tx-primary">
+                          {{ 'ajouterDansUnDossier' | translate }}
+                        </span>
+                      </a>
+
+                      <!-- Supprimer -->
+                      <a class="dropdown-item tx-primary clickable" (click)="supprimer()"><i class="fal fa-trash-alt tx-primary fa-sm"></i>
+                        <span class="tx-primary">
+                          {{ 'SUPPRIMER' | translate }}
+                        </span>
+                      </a>
+                    </ng-container>
+
+                    <!-- Option dans dossier -->
+                    <ng-container *ngIf="dossier">
+                      <!-- Supprimer du dossier-->
+                      <a class="dropdown-item tx-primary clickable" (click)="supprimerDuDossier()"><i
+                            class="fal fa-folder-minus tx-primary fa-sm"></i>
+                        <span class="tx-primary">
+                          {{ 'supprimerDuDossier' | translate }}
+                        </span>
+                      </a>
+                    </ng-container>
+
+                    <!-- Cacher -->
+                    <a class="dropdown-item tx-primary clickable" (click)="processPassword('add')">
+                      <i class="fal fa-eye-slash tx-primary fa-sm"></i>
+                      <span class="tx-primary"> {{ 'CACHER' | translate }}</span>
+                    </a>
+                  </ng-container>
+
+
+                  <ng-container *ngIf="fichier.has_password">
+                    <!-- Afficher -->
+                    <a class="dropdown-item tx-primary" (click)="processPassword('check')">
+                      <span>
+                        <i class="fal fa-eye fa-sm"></i>
+                        <span class="tx-primary"> {{ 'VOIR' | translate }}</span>
+                      </span>
+                    </a>
+
+                    <!-- Afficher -->
+                    <a class="dropdown-item tx-primary" (click)="processPassword('edit')">
+                      <span>
+                        <i class="fal fa-unlock fa-sm"></i>
+                        <span class="tx-primary">
+                          {{ 'modifierLeMotDePasse' | translate }}</span>
+                      </span>
+                    </a>
+
+                    <!-- Supprimer -->
+                    <a class="dropdown-item tx-primary" (click)="processPassword('delete')">
+                      <span>
+                        <i class="fal fa-lock-open fa-sm"></i>
+                        <span class="tx-primary">
+                          {{ 'supprimerLeMotDePasse' | translate }}</span>
+                      </span>
+                    </a>
+                  </ng-container>
+
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </div>
+</div>

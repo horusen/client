@@ -1,0 +1,41 @@
+.profiletimeline {
+  height: 575px;
+  overflow-y: auto;
+  margin: 0;
+  padding-left: 60px;
+}
+
+.avatar3 {
+  height: 45px;
+  width: 45px;
+  max-width: 45px !important;
+}
+
+.reaction {
+  &__cta {
+    opacity: 0;
+    max-height: 0;
+    transition: all 1s;
+  }
+  &:hover &__cta {
+    max-height: auto;
+    opacity: 1;
+  }
+
+  &__img {
+    width: 30%;
+    cursor: pointer;
+  }
+}
+
+.rebondissement-img {
+  width: 15%;
+}
+
+.profiletimeline .sl-left img {
+  max-width: none;
+}
+
+audio {
+  background: none;
+}

@@ -1,0 +1,36 @@
+.profil-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &-item {
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: 1px solid #999999;
+    justify-content: space-between;
+    align-items: center;
+    &__type {
+      font-weight: 500;
+    }
+
+    &__etablissement {
+      font-size: 12px;
+      color: #737373;
+    }
+
+    button {
+      background: #3385ff;
+      color: white;
+      font-size: 12px;
+      padding: 5px;
+      border: none;
+
+      &:hover {
+        background: darken(#3385ff, 15%);
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<!-- header -->
+<app-main-header [id]="'ambassade'"
+                 [hasAddButton]="parent.name !== 'zental' && parent.name !== 'pays'">
+</app-main-header>
+
+
+<app-ambassade-list [parent]="parent"
+                    [colonne_affichage]="colonne_affichage"
+                    [itemsPerPage]="itemsPerPage">
+</app-ambassade-list>
+
+
+
+
+
+<app-modal [configuration]="{ name: 'ambassade-create-modal', titre: 'ajouterUneAmbassade', icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-ambassade-create *ngIf="create"
+                        [parent]="parent">
+  </app-ambassade-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'ambassade-edit-modal', titre: 'modifierLesDetailsDeLEmbassade', icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-ambassade-edit *ngIf="edit"></app-ambassade-edit>
+</app-modal>
+
+
+
+<app-modal-sidebar [configuration]="{ name: 'ambassade-filter-modal', titre: 'FILTRE', icone: 'landmark' }"
+                   (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-filter-ambassade *ngIf="filter"></app-filter-ambassade>
+</app-modal-sidebar>

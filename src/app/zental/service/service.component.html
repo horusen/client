@@ -1,0 +1,32 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 pb-2">
+    <i class="fad fa-circle  tx-20"></i>
+    {{ 'listeDesServices' | translate }}
+  </h5>
+</div>
+
+
+<app-main-header [id]="'service'"
+                 [hasFilter]="false">
+</app-main-header>
+
+
+
+<app-service-list [parent]="parent"></app-service-list>
+
+
+
+<app-modal [configuration]="{ name: 'service-create-modal', titre: 'creerUnService', icone: 'ball-pile' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-service-create *ngIf="create"
+                      [parent]="parent"></app-service-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'service-edit-modal', titre: 'modifierLesDetailsDuService', icone: 'ball-pile' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-service-edit *ngIf="edit"
+                    [parent]="parent"></app-service-edit>
+</app-modal>

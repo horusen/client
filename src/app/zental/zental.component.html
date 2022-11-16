@@ -1,0 +1,322 @@
+<!-- Header -->
+<div class="row row-xs clearfix  mg-0 pd-0  bd-b p-0">
+  <div class="col-lg-1 pt-1 ">
+    <div class="d-flex flex-row">
+      <a href=""
+         class=""
+         style="font-style: trebuchet MS 'Cantique'; text-align: center; font-size: 150%; vertical-align: middle;">
+        <span class="tx-facebook"><i class="fad fa-landmark tx-26  tx-facebook "></i> Zentale</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-lg-11 ">
+    <div class="row row-xs clearfix  mg-0 pd-0 ">
+      <div class="col-lg-3 ">
+        <div class="d-flex flex-row  mg-t-6">
+          <div class="profiles">
+            <img class="rounded-circle ml-4"
+                 src="assets/images/xs/avatar7.jpg"
+                 alt="avatar"
+                 width="30">
+            <img class="rounded-circle"
+                 src="assets/images/xs/avatar6.jpg"
+                 alt="avatar"
+                 width="30">
+            <img class="rounded-circle"
+                 src="assets/images/xs/avatar5.jpg"
+                 alt="avatar"
+                 width="30">
+            <img class="rounded-circle"
+                 src="assets/images/xs/avatar4.jpg"
+                 alt="avatar"
+                 width="30">
+            <img class="rounded-circle"
+                 src="assets/images/xs/avatar3.jpg"
+                 alt="avatar"
+                 width="30">
+          </div>
+          <div class="avatar mg-l-10"><span class="avatar-initial rounded-circle bg-ether2 op-4 ">2</span></div>
+        </div>
+      </div>
+      <div class="col-lg-4 ">
+        <div class="card-body   p-0">
+          <ul class="nav  mg-0 pd-0 mg-t-6">
+            <li class="nav-item ">
+              <a class="nav-link3 "
+                 data-toggle="tab"
+                 href="#"><span class="tx-facebook">
+                  <i class="fad fa-space-station-moon bg-facebook"
+                     style="padding:6px; border-radius:50%"></i>
+                  Murs</span></a>
+            </li>
+            <li class="nav-item mr-4">
+              <a class="nav-link3 "
+                 data-toggle="tab"
+                 href="#toloba_yasolo"><span class="tx-facebook">
+                  <i class="fad fa-globe bg-light"
+                     style="padding:6px; border-radius:50%"></i>
+                  Ma diaspora</span></a>
+            </li>
+
+
+            <li class="list-inline-item dropdown pt-1">
+              <a class="tx-ether3"
+                 href=""
+                 data-toggle="dropdown"
+                 aria-haspopup="true"
+                 aria-expanded="false"><i class="fad fa-door-open bg-light"
+                   style="padding:6px; border-radius:50%"></i></a>
+              <div class="dropdown-menu dropdown-menu-right dropdown-profile shadow-2">
+                <div class="user-profile-area">
+
+                  <a href=""
+                     class="dropdown-item"><i class="icon-user"
+                       aria-hidden="true"></i> Ministère</a>
+                  <a href=""
+                     class="dropdown-item"><i class="icon-envelope"
+                       aria-hidden="true"></i> Bureaux </a>
+                  <a href=""
+                     class="dropdown-item"><i class="icon-settings"
+                       aria-hidden="true"></i> Associations</a>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link3 "
+                 data-toggle="tab"
+                 href="#calendriers_memoires"><span class="tx-ether3">
+                  <i class="fad fa-tachometer-alt-average bg-light"
+                     style="padding:6px; border-radius:50%"></i>
+                </span></a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link3 "
+                 data-toggle="tab"
+                 href="#soutenance_memoire"><span class="tx-ether3">
+                  <i class="fad fa-bells bg-light"
+                     style="padding:6px; border-radius:50%"></i>
+                </span></a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link3 "
+                 data-toggle="tab"
+                 href="#lab_brain"><span class="tx-ether3">
+                  <i class="fad fa-question-circle   bg-light"
+                     style="padding:6px; border-radius:50%"></i> </span></a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class=" form-group mg-t-5 mg-b-5 mg-l-40"
+             style="border-radius:20px 20px 20px 20px">
+          <div class="input-group "
+               style="width:360px">
+            <input type="text"
+                   class="form-control pd-y-10  tx-white"
+                   placeholder="Recherche..."
+                   style="border-radius:50px 50px 50px 50px">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-1 ">
+        <div class="card-body   p-0">
+          <ul class="nav  mg-0 pd-0 pt-2">
+
+            <li class="list-inline-item dropdown">
+              <a class="tx-ether"
+                 [routerLink]="['./', 'identite']"
+                 data-toggle="dropdown"
+                 aria-haspopup="true"
+                 aria-expanded="false">
+                <span class="select-profile">{{ auth.user.prenom }}</span>
+
+                <img [src]="auth.user.photo.path"
+                     *ngIf="auth.user.photo"
+                     class="
+                     img-fluid
+                     wd-35
+                     ht-35
+                     rounded-circle"
+                     alt="">
+
+                <img src="assets/images/xs/avatar7.jpg"
+                     *ngIf="!auth.user.photo"
+                     class="
+                     img-fluid
+                     wd-35
+                     ht-35
+                     rounded-circle"
+                     alt="">
+              </a>
+              <!-- <div class="dropdown-menu dropdown-menu-right dropdown-profile shadow-2">
+                <div class="user-profile-area">
+                  <div class="user-profile-heading">
+                    <div class="profile-thumbnail">
+                      <img src="https://via.placeholder.com/100x100"
+                           class="img-fluid wd-35 ht-35 rounded-circle"
+                           alt="">
+                    </div>
+                    <div class="profile-text">
+                      <h6>John Deo</h6>
+                      <span>email@example.com</span>
+                    </div>
+                  </div>
+                  <a href=""
+                     class="dropdown-item"><i class="icon-user"
+                       aria-hidden="true"></i> My profile</a>
+                  <a href=""
+                     class="dropdown-item"><i class="icon-envelope"
+                       aria-hidden="true"></i> Messages <span class="badge badge-success ft-right mg-t-3">10+</span></a>
+                  <a href=""
+                     class="dropdown-item"><i class="icon-settings"
+                       aria-hidden="true"></i> settings</a>
+                  <a href=""
+                     class="dropdown-item"><i class="icon-share"
+                       aria-hidden="true"></i> My Activity <span class="badge badge-warning ft-right mg-t-3">5+</span></a>
+                  <a href=""
+                     class="dropdown-item"><i class="icon-cloud-download"
+                       aria-hidden="true"></i> My Download <span class="badge badge-success ft-right mg-t-3">10+</span></a>
+                  <a href=""
+                     class="dropdown-item"><i class="icon-heart"
+                       aria-hidden="true"></i> Support</a>
+                  <a [routerLink]="['./']"
+                     (click)="logout()"
+                     class="dropdown-item"><i class="icon-power"
+                       aria-hidden="true"></i> Sign-out</a>
+                </div>
+              </div> -->
+            </li>
+
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- body -->
+<div class="page-container">
+  <!-- Sidebar -->
+  <div class="page-sidebar ">
+    <div class="page-sidebar-inner">
+      <div class="page-sidebar-menu ">
+        <ul class="navbar nav  "
+            role="tablist">
+
+          <!-- administration -->
+          <li class="nav-item tx-center bd-b">
+            <a class="nav-link "
+               [routerLink]="['administration']"
+               [routerLinkActive]="'active'">
+              <i class="fas fa-cog tx-facebook tx-20"></i>
+              <p class=" tx-facebook tx-10 p-0 mb-0"
+                 [routerLinkActive]="'font-weight-bolder'"> {{ 'ADMIN' | translate }}
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item tx-center bd-b">
+            <a class="nav-link  "
+               data-toggle="pill"
+               href="#manager_amb">
+              <i class="fad fa-steering-wheel  tx-facebook tx-20"></i>
+              <p class=" tx-facebook tx-10 p-0 mb-0"> Manager</p>
+            </a>
+          </li>
+          <li class="nav-item tx-center bd-b">
+            <a class="nav-link  "
+               data-toggle="pill"
+               href="#fluxplus">
+              <i class="fad fa-mailbox  tx-facebook tx-20"></i>
+              <p class=" tx-facebook tx-10 p-0 mb-0"> FluxPlus</p>
+            </a>
+          </li>
+          <li class="nav-item tx-center bd-b">
+            <a class="nav-link   tx-danger "
+               data-toggle="pill"
+               href="#etats_civils">
+              <i class="fad fa-id-card-alt  tx-facebook tx-20"></i>
+              <p class=" tx-facebook tx-10 p-0 mb-0">Etats</p>
+            </a>
+          </li>
+          <li class="nav-item tx-center bd-b">
+            <a class="nav-link   tx-danger "
+               data-toggle="pill"
+               href="#actes_consulaires">
+              <i class="fad fa-address-card tx-facebook tx-20"></i>
+              <p class=" tx-facebook tx-10 p-0 mb-0">Actes</p>
+            </a>
+          </li>
+
+          <li class="nav-item tx-center bd-b">
+            <a class="nav-link   tx-success-100 "
+               data-toggle="pill"
+               href="#visa_consul">
+              <i class="fad fa-portal-enter  tx-facebook tx-20"></i>
+              <p class=" tx-facebook tx-10 p-0 mb-0">Visa</p>
+            </a>
+          </li>
+
+          <li class="nav-item tx-center bd-b">
+            <a class="nav-link  "
+               data-toggle="pill"
+               href="#notre_diaspora">
+              <i class="fad fa-globe  tx-facebook tx-20"></i>
+              <p class=" tx-facebook tx-10 p-0 mb-0"> Diaspora</p>
+            </a>
+          </li>
+
+          <li class="nav-item tx-center bd-b">
+            <a class="nav-link  "
+               data-toggle="pill"
+               href="#plumes_amb">
+              <i class="fad fa-feather-alt  tx-facebook tx-20"></i>
+              <p class=" tx-facebook tx-10 p-0 mb-0"> Plumes</p>
+            </a>
+          </li>
+
+          <li class="nav-item tx-center bd-b">
+            <a class="nav-link "
+               data-toggle="pill"
+               href="#documents_amb">
+              <i class="fad fa-folder-tree tx-facebook tx-20"></i>
+              <p class=" tx-facebook tx-10 p-0 mb-0 tx-center">Documents</p>
+            </a>
+          </li>
+          <li class="nav-item tx-center bd-b">
+            <a class="nav-link "
+               data-toggle="pill"
+               href="#objets">
+              <i class="fad fa-circle tx-facebook tx-20"></i>
+              <p class=" tx-facebook tx-10 p-0 mb-0 tx-center">Objets</p>
+            </a>
+          </li>
+
+
+          <li class="nav-item tx-center bd-b pt-4">
+            <a class="nav-link  "
+               data-toggle="pill"
+               href="#">
+              <i class="fad fa-th tx-10 tx- tx-30"></i>
+            </a>
+          </li>
+
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- main content -->
+  <div class="page-content ">
+    <router-outlet></router-outlet>
+
+  </div>
+</div>

@@ -1,0 +1,206 @@
+<form class="custom-placeholder"
+      [formGroup]="form"
+      *ngIf="isFormOk"
+      (submit)="create()">
+
+  <!-- Disposition actuel responsable -->
+  <ng-container *ngIf="actuelResponsable">
+    <!-- Responsable et date debut fonction -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+      <!-- Responsable-->
+      <div class="col-6">
+        <!-- Label -->
+        <label class="control-label"
+               for="responsable">
+          <span *ngIf="parent.name === 'ministre'">{{ 'MINISTRE' | translate }}</span>
+          <span *ngIf="parent.name === 'ambassadeur'">{{ 'AMBASSADEUR' | translate }}</span>
+          <span *ngIf="parent.name === 'consul'">{{ 'CONSUL' | translate }}</span>
+          <i class="fad fa-circle-notch fa-spin"
+             *ngIf="dependanciesLoading.users"></i>
+        </label>
+
+        <angular2-multiselect [data]="dependancies.users"
+                              [settings]="dropdownSettingsAlt.user"
+                              formControlName="employe"
+                              [ngClass]="{'is-invalid': shouldShowRequiredError( 'employe'), 'is-valid': isValid('employe')}"
+                              class="form-control form-control-sm">
+          <c-badge>
+            <ng-template let-item="item">
+              {{item.nom_complet}}
+            </ng-template>
+          </c-badge>
+          <c-item>
+            <ng-template let-item="item">
+              <label style="color: #333;min-width: 150px;">{{item.nom_complet}}</label>
+              <img [src]="item?.photo_min?.path"
+                   class="float-right rounded-circle border border-warning"
+                   style="width: 30px;margin-right: 20px;" />
+            </ng-template>
+          </c-item>
+        </angular2-multiselect>
+
+        <!-- Message d'erreur -->
+        <div *ngIf="shouldShowRequiredError('employe')"
+             class="invalid-feedback">
+          {{ 'veuillezLeResponsable' | translate }}.
+        </div>
+      </div>
+
+      <!-- Date debut fonction -->
+      <div class="col-6">
+        <!-- Label -->
+        <label for="type"
+               class="label-template-form">
+          {{ 'dateDebutDeFonction' | translate }}
+        </label>
+
+        <!-- Date picker -->
+        <div class="input-group mb-2">
+          <input [dpDayPicker]="configCalendrier.day"
+                 [theme]="'dp-material'"
+                 formControlName="debut"
+                 class="form-control ">
+          <div class="input-group-prepend">
+            <div class="input-group-text  bg-light"><i class="fal fa-calendar"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+
+  <!-- Disposition ancien responsable -->
+  <ng-container *ngIf="!actuelResponsable">
+    <!-- Responsable  -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+      <!-- Responsable-->
+      <div class="col-10">
+        <!-- Label -->
+        <label class="control-label"
+               for="responsable">
+          <span *ngIf="parent.name === 'ministre'">{{ 'MINISTRE' | translate }}</span>
+          <span *ngIf="parent.name === 'ambassadeur'">{{ 'AMBASSADEUR' | translate }}</span>
+          <span *ngIf="parent.name === 'consul'">{{ 'CONSUL' | translate }}</span>
+          <i class="fad fa-circle-notch fa-spin"
+             *ngIf="dependanciesLoading.users"></i>
+        </label>
+
+        <angular2-multiselect [data]="dependancies.users"
+                              [settings]="dropdownSettingsAlt.user"
+                              formControlName="employe"
+                              [ngClass]="{'is-invalid': shouldShowRequiredError( 'employe'), 'is-valid': isValid('employe')}"
+                              class="form-control  form-control-sm">
+          <c-badge>
+            <ng-template let-item="item">
+              {{item.nom_complet}}
+            </ng-template>
+          </c-badge>
+          <c-item>
+            <ng-template let-item="item">
+              <label style="color: #333;min-width: 150px;">{{item.nom_complet}}</label>
+              <img [src]="item?.photo_min?.path"
+                   class="float-right rounded-circle border border-warning"
+                   style="width: 30px;margin-right: 20px;" />
+            </ng-template>
+          </c-item>
+        </angular2-multiselect>
+
+        <!-- Message d'erreur -->
+        <div *ngIf="shouldShowRequiredError('employe')"
+             class="invalid-feedback">
+          {{ 'veuillezLeResponsable' | translate }}.
+        </div>
+      </div>
+    </div>
+
+    <!-- Debut et fin  -->
+    <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+      <!-- Date debut fonction -->
+      <div class="col-5">
+        <!-- Label -->
+        <label for="type"
+               class="label-template-form">
+          {{ 'dateDebutDeFonction' | translate }}
+        </label>
+
+        <!-- Date picker -->
+        <div class="input-group mb-2">
+          <input [dpDayPicker]="configCalendrier.day"
+                 [theme]="'dp-material'"
+                 formControlName="debut"
+                 class="form-control ">
+          <div class="input-group-prepend">
+            <div class="input-group-text  bg-light"><i class="fal fa-calendar"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Date fin fonction -->
+      <div class="col-5">
+        <!-- Label -->
+        <label for="type"
+               class="label-template-form">
+          {{ 'dateFinDeFonction' | translate }}
+        </label>
+
+        <!-- Date picker -->
+        <div class="input-group mb-2">
+          <input [dpDayPicker]="configCalendrier.day"
+                 [theme]="'dp-material'"
+                 formControlName="fin"
+                 class="form-control ">
+          <div class="input-group-prepend">
+            <div class="input-group-text  bg-light"><i class="fal fa-calendar"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+
+  <!-- Biographie -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <div [ngClass]="{ 'col-12': actuelResponsable, 'col-10': !actuelResponsable }">
+      <label class="control-label"
+             for="note">{{ 'BIOGRAPHIE' | translate }}</label>
+
+      <ckeditor [editor]="Editor"
+                class=""
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'note'), 'is-valid': isValid('note')}"
+                formControlName="note">
+      </ckeditor>
+      <div *ngIf="shouldShowRequiredError('note')"
+           class="invalid-feedback">
+        {{ 'veuillezAjouterLaBiographieDuResponsable' | translate }}
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class=" text-right"
+         [ngClass]="{ 'col-12': actuelResponsable, 'col-10': !actuelResponsable }">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1"
+              type="submit"
+              [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+
+      <!-- Bouton reset -->
+      <button class="btn btn-sm border btn-link"
+              type="button"
+              (click)="initialiseForm()">
+        {{ 'REINITIALISER' | translate }}
+      </button>
+    </div>
+  </div>
+</form>
+
+<app-loading *ngIf="!isFormOk"></app-loading>

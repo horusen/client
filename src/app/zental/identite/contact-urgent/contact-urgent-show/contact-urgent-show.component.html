@@ -1,0 +1,32 @@
+<div class="col-12 text-center"
+     *ngIf="single">
+  <!-- image -->
+  <div class="image text-center">
+    <img class="rounded-circle "
+         [src]="single.contact.photo.path"
+         *ngIf="single.contact.photo"
+         alt="avatar"
+         width="100">
+
+
+    <span *ngIf="!single.contact.photo?.path">
+      <i class="fad fa-user-circle"
+         style="font-size: 100px;"></i>
+    </span>
+  </div>
+
+
+  <!-- Nom -->
+  <h6 class="text-center tx-ether pt-2">{{ single.contact.nom_complet }}</h6>
+
+  <!-- Type et telephone -->
+  <h6 class="text-center tx-ether pt-2"> {{ single.type_contact.libelle }} - {{ single.contact.telephone }}</h6>
+
+  <!--  -->
+  <!-- <p class="text-center">
+    <span class=""> Dakar</span>
+    <span class=""> || </span>
+    <span class="tx-bold"> Sénégal </span>
+  </p> -->
+
+</div>

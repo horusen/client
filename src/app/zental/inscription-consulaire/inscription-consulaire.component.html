@@ -1,0 +1,16 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 d-flex align-items-center pb-2">
+    <!-- boutton precedent -->
+    <!-- <a [routerLink]="['..']"
+       [ngbTooltip]="'revenirEnArriere' | translate"
+       class="p-2 mr-2 tx-15  d-flex border rounded-circle align-items-center justify-content-center">
+      <i class="fad fa-arrow-left"></i>
+    </a> -->
+    <i class="fad mx-2 fa-file-certificate"></i>
+    {{ 'inscriptionsConsulaires' | translate }}
+  </h5>
+</div>
+
+
+<app-inscription-consulaire-list [parent]="parent"></app-inscription-consulaire-list>

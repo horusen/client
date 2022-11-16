@@ -1,0 +1,77 @@
+<ng-container *ngIf="single && !loading">
+  <div class="col-md-12 p-0 d-flex  col-lg-12"
+       [ngClass]="{  'justify-content-end': etat !== 1,  'justify-content-between': etat === 1 }">
+    <!-- Boutton de validation -->
+    <div class=""
+         *ngIf="etat === 1"
+         id="collapse4">
+
+      <button type="button"
+              (click)="validerInscription()"
+              [disabled]="validationsLoading.rejeter || validationsLoading.valider"
+              class="btn btn-sm btn-brand mr-2 p-0 btn-spotify">
+        <i class="fas fa-user-check m-0"
+           *ngIf="!validationsLoading.valider"
+           style="line-height: 30px;">
+        </i>
+
+        <!-- Loading icon -->
+        <i class="fad fa-circle-notch fa-spin"
+           style="line-height: 30px;"
+           *ngIf="validationsLoading.valider"></i>
+        <span class="p-3 m-0">{{ 'VALIDER' | translate }}</span>
+      </button>
+
+
+      <button type="button"
+              (click)="rejeterInscription()"
+              [disabled]="validationsLoading.rejeter || validationsLoading.valider"
+              class="btn btn-sm btn-brand p-0 btn-youtube">
+        <i class="fas fa-user-times m-0"
+           *ngIf="!validationsLoading.rejeter"
+           style="line-height: 30px;"></i>
+
+
+        <!-- Loading icon -->
+        <i class="fad fa-circle-notch fa-spin"
+           style="line-height: 30px;"
+           *ngIf="validationsLoading.rejeter"></i>
+        <span class="p-3 m-0">{{ 'REJETER' | translate }}</span>
+      </button>
+
+
+
+    </div>
+
+    <!-- Voir plus de details -->
+    <button type="button"
+            class="btn btn-sm border btn-brand mr-2 p-0 btn-instagram">
+      <i class="fas fa-user-circle m-0"
+         style="line-height: 30px;"></i>
+      <span class="p-3 m-0">{{ 'voirProfil' | translate }}</span>
+    </button>
+  </div>
+
+  <app-identite-min *ngIf="single"
+                    [user]="single.user">
+  </app-identite-min>
+
+</ng-container>
+
+<div class="my-5"
+     *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+
+
+<app-missing-data-alt *ngIf="!single && !loading"></app-missing-data-alt>
+
+
+
+<app-modal [configuration]="{ name: 'motif-inscription-consulaire-modal', titre: 'motifDeRejetInscriptionConsulaire', icone: 'file-certificate' }">
+  <app-motif-inscription-consulaire *ngIf="redigerMotif"
+                                    [inscriptionConsulaire]="single.id"
+                                    [etatInscriptionConsulaire]="3"
+                                    (done)="onMotifTermine()">
+  </app-motif-inscription-consulaire>
+</app-modal>

@@ -1,0 +1,88 @@
+<div class="bg-light h-100 bd-r pl-2"
+     style="background-image: linear-gradient(to right top,#F3F8FA,#E8ECF1);">
+  <div class="d-flex justify-content-between mg-0 pd-0 m-0  bd-b "
+       style="background-image: linear-gradient(to right top,#F3F8FA,#E8ECF1);">
+    <div class="col-lg-9">
+      <div class="form-group  ">
+        <div class="input-group pt-2"
+             style="width:240px">
+          <input type="text"
+                 class="form-control pd-y-10  tx-white"
+                 placeholder="Recherche..."
+                 style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3  pt-2">
+      <ul class="nav ">
+        <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto "
+             data-toggle="tab"
+             href="#filtrer"><i class="fal fa-filter  tx-14 bg-white"
+               style="padding:6px; border-radius:50%"></i> </a></li>
+      </ul>
+
+
+    </div>
+  </div>
+  <div class="  p-1"
+       style="background-image: linear-gradient(to right top,#F3F8FA,#E8ECF1);">
+    <!-- <div class="row row-xs clearfix pt-2 bd-b pb-2 mg-0 pd-0 ">
+      <div class="col-lg-12">
+        <div class=" text-center">
+          <p class="text-center"><img class=" rounded-circle wd-20p"
+                 src="assets/images/sm/avatar1.jpg"
+                 alt="avatar"></p>
+          <h6 class="text-center tx-echos"> Adama Sidibé</h6>
+          <p class="text-center mb-0"> Dakar - Sénégal</p>
+          <div class=" text-center ">
+            <a class="ml-2"> <i class="fad fa-cog tx-echos2 bg-bluelight"
+                 style="padding:6px; border-radius:50%"></i></a>
+            <a class="ml-2"> <i class="fad fa-question-circle tx-echos2 bg-bluelight"
+                 style="padding:6px; border-radius:50%"></i></a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+    <!-- Tous les messages -->
+    <div class="  ">
+      <div class=" row row-xs mg-0 bd-b clearfix  pt-2 pb-2">
+        <div class="col-lg-10 ">
+          <div class="">
+            <p class="mb-0 tx-light pl-3 tx-16 tx-bold">{{ 'tousLesMessages' | translate }}</p>
+          </div>
+        </div>
+        <!-- <div class="col-lg-2 pl-2">
+          <span class="badge rounded-circle  bg-white tx-nbleu"
+                style="padding:6px 6px">20</span>
+        </div> -->
+      </div>
+    </div>
+    <div class="row row-xs clearfix  mg-0 pd-0 ">
+      <div class="col-lg-12 ">
+        <!-- Liste des dernieres discussions -->
+        <ul class="list-group border-0 tx-13 "
+            *ngIf="!loading && discussionService.data.length">
+
+          <li class="list-group-item border-0 p-0 scaleUp"
+              style="background: #f0f4f7 "
+              *ngFor="let discussion of discussionService.data">
+
+            <app-dernieres-discussions-solo [dialoguant]="dialoguant"
+                                            [discussion]="discussion">
+            </app-dernieres-discussions-solo>
+          </li>
+
+        </ul>
+
+        <!-- loading -->
+        <app-loading *ngIf="loading"></app-loading>
+
+        <!-- Missing data -->
+        <app-missing-data-alt *ngIf="!loading && !discussionService.data.length"></app-missing-data-alt>
+      </div>
+    </div>
+  </div>
+</div>

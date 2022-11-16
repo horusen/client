@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-12 p-0">
+        <!-- Icone fermer modal -->
+        <span class="image-viewer__close">
+            <i class="fad fa-2x fa-times" (click)="close()"></i>
+        </span>
+        <img [src]="imageViewerService.image.path"
+            class="w-100"
+            [alt]="imageViewerService.image.name"
+            *ngIf="imageViewerService.image">
+
+        <!-- Fleche gauche -->
+        <!-- <span class="image-viewer__fleche image-viewer__fleche-gauche" *ngIf="this.index > 0">
+            <i class="fad fa-angle-left" (click)="previous()"></i>
+        </span> -->
+
+        <!-- Fleche droite -->
+        <!-- <span class="image-viewer__fleche image-viewer__fleche-droite" *ngIf="index < (data?.length - 1)">
+            <i class="fad fa-angle-right " (click)="next()"></i>
+        </span> -->
+    </div>
+</div>

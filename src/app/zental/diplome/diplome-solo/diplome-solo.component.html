@@ -1,0 +1,156 @@
+<div class=" mycard2   p-0"
+     *ngIf="diplome">
+  <table class="table   table-sm mb-0 ">
+    <tbody class=" border-0 ">
+      <!-- Libelle -->
+      <tr class=" ">
+        <td class=" ">
+          <div class=" from"><a class="tx-bold tx-teal tx-14 "
+               href="javascript:void(0);"> {{ 'TITRE' | translate }}</a></div>
+        </td>
+        <td class=" bg-white ">
+          <div class=" from"><a class=" tx-teal tx-14"
+               href="javascript:void(0);"> {{ diplome.libelle }} </a>
+
+            <a [routerLink]="['./']"
+               class="float-right"
+               *ngIf="(router.url.includes('identite') && user?.id_inscription === auth.user.id_inscription)"
+               (click)="supprimer(diplome.id)">
+              <!-- Delete button -->
+              <i class="fad fa-trash-alt tx-teal"
+                 *ngIf="!loading"></i>
+
+
+              <!-- Loading icon -->
+              <i class="fad fa-circle-notch fa-spin tx-teal"
+                 *ngIf="loading"></i>
+            </a>
+          </div>
+
+
+        </td>
+      </tr>
+
+      <!-- Niveau -->
+      <tr class="  ">
+        <td class="  ">
+          <div class=" from"><a class="tx-bold tx-echos tx-14"
+               href="javascript:void(0);"> {{ 'NIVEAU' | translate }} </a></div>
+        </td>
+        <td class=" bg-white ">
+          <div class=" from"><a class=" tx-echos tx-14"
+               href="javascript:void(0);"> {{ diplome.niveau?.libelle }}</a></div>
+        </td>
+      </tr>
+
+      <!-- Annee obtention -->
+      <tr class=" ">
+        <td class="  bg-white">
+          <div class=" from"><a class="tx-bold tx-echos tx-14"
+               href="javascript:void(0);"> {{ 'anneeDObtention' | translate }} </a></div>
+        </td>
+        <td class="  ">
+          <div class=" from"><a class=" tx-echos tx-14"
+               href="javascript:void(0);"> {{ diplome.annee_obtention }}</a></div>
+        </td>
+      </tr>
+
+      <!-- Etablissement -->
+      <tr>
+        <td class="  ">
+          <div class=" from"><a class="tx-bold tx-echos tx-14"
+               href="javascript:void(0);"> {{ 'ETABLISSEMENT' | translate }}</a></div>
+        </td>
+        <td class=" bg-white ">
+          <div class=" from"><a class=" tx-echos tx-14"
+               href="javascript:void(0);"> {{ diplome.etablissement }} </a></div>
+        </td>
+      </tr>
+
+
+      <!-- Lieu -->
+      <tr>
+        <td class=" bg-white ">
+          <div class=" from"><a class="tx-bold tx-echos tx-14"
+               href="javascript:void(0);"> {{ 'LIEU' | translate }}</a></div>
+        </td>
+        <td class="  ">
+          <div class=" from"><a class=" tx-echos tx-14"
+               href="javascript:void(0);"> {{ diplome.lieu.libelle }} || {{ diplome.lieu.pays.libelle }} </a></div>
+        </td>
+      </tr>
+
+      <!-- Fichier joint -->
+      <tr class=" "
+          *ngIf="diplome.fichier_joint">
+        <td class="  ">
+          <div class=" from"><a class="tx-bold tx-echos tx-14"
+               href="javascript:void(0);"> {{ 'FICHIER' | translate }}</a></div>
+        </td>
+        <td class=" bg-white ">
+          <ul class=" p-0 pl-2 pr-2">
+            <li class="d-flex  pb-2">
+              <div class=""><i class="fad fa-file-pdf tx-danger mr-2 tx-30 pt-1"></i>
+              </div>
+              <div class="pd-sm-l-10">
+                <p class="tx-echos mg-b-0">
+                  {{ diplome.fichier_joint.name }}
+                </p>
+                <span class="tx-12 mg-b-0 tx-gray-500">{{ diplome.fichier_joint.extension.libelle | uppercase }} / {{ diplome.fichier_joint.size /
+                  1000
+                  }}
+                  ko</span>
+              </div>
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+      <!-- Show description -->
+      <tr *ngIf="!showDescription">
+        <td></td>
+        <td>
+          <p class="text-right tx-12 tx-primary">
+            <span class="clickable"
+                  (click)="showDescription = true">
+              {{ 'afficherDescription' | translate }}
+            </span>
+          </p>
+        </td>
+      </tr>
+
+
+      <!-- Description -->
+      <tr *ngIf="showDescription">
+        <td class="bg-white  ">
+          <div class=" from"><a class="tx-bold tx-echos tx-14"
+               href="javascript:void(0);"> {{ 'DESCRIPTION' | translate }}</a></div>
+        </td>
+        <td class="  ">
+          <div class=" from">
+            <p class=" tx-echos tx-14"
+               style="white-space: pre-wrap;"
+               href="javascript:void(0);"
+               [innerHTML]="diplome.description"> </p>
+          </div>
+        </td>
+      </tr>
+
+
+      <!-- Hide description -->
+      <tr *ngIf="showDescription">
+        <td></td>
+        <td>
+          <p class="text-right tx-12 tx-primary">
+            <span class="clickable"
+                  (click)="showDescription = false">
+              {{ 'cacherDescription' | translate }}
+            </span>
+          </p>
+
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

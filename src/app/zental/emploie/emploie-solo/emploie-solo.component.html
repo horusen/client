@@ -1,0 +1,180 @@
+<div class=" mycard2   p-0"
+     *ngIf="emploie">
+  <table class="table  table-sm mb-0 ">
+    <tbody class=" bd-t-0 ">
+      <!-- Date -->
+      <!-- <tr class=" bg-white">
+        <td class=" ">
+          <div class=" from"><a class="tx-bold tx-teal tx-14 "
+               href="javascript:void(0);"> </a></div>
+        </td>
+      </tr> -->
+
+
+      <!-- Titre -->
+      <tr class=" ">
+        <td class=" ">
+          <div class=" from"><a class="tx-bold tx-teal tx-14 "
+               href="javascript:void(0);"> {{ 'TITRE' | translate }}</a></div>
+        </td>
+        <td class=" bg-white ">
+          <div class=" from"><a class=" tx-teal tx-14"
+               href="javascript:void(0);"> {{ emploie.libelle }} </a>
+
+            <a [routerLink]="['./']"
+               *ngIf="(router.url.includes('identite') && user?.id_inscription === auth.user.id_inscription)"
+               class="float-right"
+               (click)="supprimer()">
+              <!-- Delete button -->
+              <i class="fad fa-trash-alt tx-teal"
+                 *ngIf="!loading"></i>
+
+
+              <!-- Loading icon -->
+              <i class="fad fa-circle-notch fa-spin tx-teal"
+                 *ngIf="loading"></i>
+            </a>
+          </div>
+
+
+        </td>
+      </tr>
+
+
+      <!-- Domaine -->
+      <tr class="  ">
+        <td class=" bg-white ">
+          <div class=" from"><a class="tx-bold tx-echos tx-14"
+               href="javascript:void(0);"> {{ 'DOMAINE' | translate }} </a></div>
+        </td>
+        <td class="  ">
+          <div class=" from"><a class=" tx-echos tx-14"
+               href="javascript:void(0);"> {{ emploie.domaine.libelle }}</a></div>
+        </td>
+      </tr>
+
+      <!-- Debut -->
+      <tr class=" ">
+        <td class="  ">
+          <div class=" from"><a class="tx-bold tx-echos tx-14"
+               href="javascript:void(0);"> {{ 'debutFonction' | translate }} </a></div>
+        </td>
+        <td class=" bg-white ">
+          <div class=" from"><a class=" tx-echos tx-14"
+               href="javascript:void(0);"> {{ emploie.debut | date }}</a></div>
+        </td>
+      </tr>
+
+      <!-- Fin  -->
+      <tr class="">
+        <td class=" bg-white ">
+          <div class=" from"><a class="tx-bold tx-echos tx-14"
+               href="javascript:void(0);"> {{ 'finFonction' | translate }} </a></div>
+        </td>
+        <td class="  ">
+          <div class=" from"><a class=" tx-echos tx-14"
+               href="javascript:void(0);"> {{ emploie.fin | date }} </a></div>
+        </td>
+      </tr>
+
+
+      <!-- Type de contrat -->
+      <tr>
+        <td class=" ">
+          <div class=" from"><a class="tx-bold tx-echos tx-14"
+               href="javascript:void(0);"> {{ 'typeContrat' | translate }}</a></div>
+        </td>
+        <td class="  bg-white ">
+          <div class=" from"><a class=" tx-echos tx-14"
+               href="javascript:void(0);"> {{ emploie.type_contrat.libelle }} </a></div>
+        </td>
+      </tr>
+
+
+      <!-- Lieu -->
+      <tr>
+        <td class="bg-white  ">
+          <div class=" from"><a class="tx-bold tx-echos tx-14"
+               href="javascript:void(0);"> {{ 'LIEU' | translate }}</a></div>
+        </td>
+        <td class="  ">
+          <div class=" from"><a class=" tx-echos tx-14"
+               href="javascript:void(0);"> {{ emploie.lieu.libelle }} || {{ emploie.lieu.pays.libelle }} </a></div>
+        </td>
+      </tr>
+
+
+      <!-- Fichier -->
+      <tr class=" "
+          *ngIf="emploie.fichier_joint">
+        <td class="  ">
+          <div class=" from"><a class="tx-bold tx-echos tx-14"
+               href="javascript:void(0);"> {{ 'JUSTIFICATIF' | translate }}</a></div>
+        </td>
+        <td class=" bg-white ">
+          <ul class=" p-0 pl-2 pr-2">
+            <li class="d-flex  pb-2">
+              <div class=""><i class="fad fa-file-pdf tx-danger mr-2 tx-30 pt-1"></i>
+              </div>
+              <div class="pd-sm-l-10">
+                <p class="tx-echos mg-b-0">{{ emploie.fichier_joint.name }}
+                  .</p>
+                <span class="tx-12 mg-b-0 tx-gray-500">{{ emploie.fichier_joint.extension.libelle }} / {{ emploie.fichier_joint.size / 1000
+                  }}ko</span>
+              </div>
+
+
+
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+      <!-- Show description -->
+      <tr *ngIf="!showDescription">
+        <td></td>
+        <td>
+          <p class="text-right tx-12 tx-primary">
+            <span class="clickable"
+                  (click)="showDescription = true">
+              {{ 'afficherDescription' | translate }}
+            </span>
+          </p>
+        </td>
+      </tr>
+
+
+      <!-- Description -->
+      <tr *ngIf="showDescription">
+        <td class="bg-white  ">
+          <div class=" from"><a class="tx-bold tx-echos tx-14"
+               href="javascript:void(0);"> {{ 'DESCRIPTION' | translate }}</a></div>
+        </td>
+        <td class="  ">
+          <div class=" from">
+            <p class=" tx-echos tx-14"
+               style="white-space: pre-wrap;"
+               href="javascript:void(0);"
+               [innerHTML]="emploie.description"> </p>
+          </div>
+        </td>
+      </tr>
+
+
+      <!-- Hide description -->
+      <tr *ngIf="showDescription">
+        <td></td>
+        <td>
+          <p class="text-right tx-12 tx-primary">
+            <span class="clickable"
+                  (click)="showDescription = false">
+              {{ 'cacherDescription' | translate }}
+            </span>
+          </p>
+
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,38 @@
+<ul class="nav p-4 nav-pills">
+  <li class="nav-item">
+    <a class="nav-link"
+       [routerLink]="['ministeres']"
+       routerLinkActive="active">
+      <span><i class="fad fa-warehouse mr-1"></i></span>
+      {{ 'MINISTERE' | translate }}
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"
+       [routerLink]="['ambassades']"
+       routerLinkActive="active">
+      <span><i class="fad fa-landmark-alt mr-1"></i></span>
+      {{ 'AMBASSADE' | translate }}
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"
+       [routerLink]="['consulats']"
+       routerLinkActive="active">
+      <span><i class="fad fa-landmark mr-1"></i></span>
+      {{ 'CONSULAT' | translate }}
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"
+       [routerLink]="['bureaux']"
+       routerLinkActive="active">
+      <span><i class="fad fa-lamp-desk mr-1"></i></span>
+      {{ 'BUREAU' | translate }}
+    </a>
+  </li>
+
+</ul>
+
+
+<router-outlet></router-outlet>

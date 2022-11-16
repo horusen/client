@@ -1,0 +1,26 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 pb-2">
+    <i class="fad fa-address-book  tx-20"></i>
+    {{ 'CONTACTS' | translate }}
+  </h5>
+</div>
+
+
+<!-- header -->
+<app-main-header [id]="'contact'"
+                 *ngIf="user"
+                 [hasAddButton]="(router.url.includes('identite') && user.id_inscription === auth.user.id_inscription)"
+                 [hasFilter]="false">
+</app-main-header>
+
+
+<app-contact-user-list></app-contact-user-list>
+
+
+
+
+<app-modal [configuration]="{ name: 'contact-create-modal', titre: 'ajouterUnContact', icone: 'address-book' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-contact-user-create></app-contact-user-create>
+</app-modal>

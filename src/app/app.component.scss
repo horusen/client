@@ -1,0 +1,72 @@
+// Overwrite imported package style
+$invalid-color: #dc3545;
+$valid-color: #23bf08;
+
+::ng-deep {
+  // Angular 2 Multiselect
+  .form-control .cuppa-dropdown .selected-list {
+    .c-btn {
+      border: none !important;
+      min-height: auto !important;
+    }
+
+    .c-list .c-token {
+      background: rgb(1, 42, 86, 0.8);
+    }
+  }
+
+  // CkEditor
+  .ck.ck-content {
+    min-height: 90px !important;
+  }
+
+  .is-invalid {
+    .ck.ck-toolbar {
+      border-left: 1px solid $invalid-color !important;
+      border-right: 1px solid $invalid-color !important;
+      border-top: 1px solid $invalid-color !important;
+    }
+
+    .ck.ck-content {
+      border-left: 1px solid $invalid-color !important;
+      border-right: 1px solid $invalid-color !important;
+      border-bottom: 1px solid $invalid-color !important;
+    }
+  }
+
+  .is-valid {
+    .ck.ck-toolbar {
+      border-left: 1px solid $valid-color !important;
+      border-right: 1px solid $valid-color !important;
+      border-top: 1px solid $valid-color !important;
+    }
+
+    .ck.ck-content {
+      border-left: 1px solid $valid-color !important;
+      border-right: 1px solid $valid-color !important;
+      border-bottom: 1px solid $valid-color !important;
+    }
+  }
+
+  .popover-header {
+    text-align: center;
+  }
+
+  .popover-body {
+    background: white;
+    min-width: 300px;
+  }
+
+  .form-control {
+    height: auto;
+    .form-control-sm {
+      height: auto;
+      min-height: calc(1.8125rem + 2px);
+    }
+  }
+}
+
+.p-form-group-3 {
+  padding-left: 70px !important;
+  padding-right: 70px !important;
+}

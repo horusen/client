@@ -1,0 +1,31 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 d-flex align-items-center pb-2">
+    <!-- boutton precedent -->
+    <a [routerLink]="['..']"
+       [ngbTooltip]="'revenirEnArriere' | translate"
+       class="p-2 mr-2 tx-15  d-flex border rounded-circle align-items-center justify-content-center">
+      <i class="fad fa-arrow-left"></i>
+    </a>
+
+    {{ 'listeDesMinisteres' | translate }}
+  </h5>
+</div>
+
+
+<!-- header -->
+<app-main-header [id]="'ministere'"
+                 [hasAddButton]="false">
+</app-main-header>
+
+
+
+<app-ministere-list [parent]="parent"></app-ministere-list>
+
+
+
+
+<app-modal [configuration]="{ name: 'ministere-create-modal', titre: 'ajouterUnMinistere', icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-ministere-create *ngIf="create"></app-ministere-create>
+</app-modal>

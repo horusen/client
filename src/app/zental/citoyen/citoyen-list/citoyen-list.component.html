@@ -1,0 +1,96 @@
+<div class="row row-xs clearfix mg-0 pd-0 pt-4 p-2"
+     *ngIf="!loading && citoyenService.data.length">
+
+  <!-- Liste of element -->
+  <div class="col-lg-2 p-2"
+       *ngFor="let citoyen of citoyenService.data | paginate: {itemsPerPage: 12, id: 'citoyen', currentPage: currentPage}">
+    <div class="mycard4 border ">
+      <div class="avatar5">
+        <img class="rounded-circle "
+             *ngIf="citoyen.photo?.path"
+             [src]="citoyen.photo?.path"
+             alt="avatar"
+             width="70">
+
+        <span *ngIf="!citoyen?.photo?.path">
+          <i class="fad fa-user-circle"
+             style="font-size: 70px;"></i>
+        </span>
+      </div>
+
+      <!-- Infomation -->
+      <div class="mycard-text pt-4 px-2 pb-2">
+        <!-- Nom complet -->
+        <span class="date tx-bold tx-yeto tx-16">
+          {{ citoyen.nom_complet }}
+        </span>
+
+        <!-- Date naissance - lieu_naissance -->
+        <p class="mb-0 text-center">
+          <small>
+            <!-- date naissance -->
+            <span class="tx-primary">
+              <i class="fad fa-calendar-alt"></i>
+              {{ 'neLe' | translate }}:
+            </span>
+            {{ citoyen.date_naissance | date:'dd-MM-yyyy' }}
+
+            <span *ngIf="citoyen.lieu_naissance">
+              {{ 'à' | translate}}
+            </span>
+
+            <span class="font-weight-bolder"
+                  [ngbTooltip]="citoyen.lieu_naissance.pays.libelle"
+                  *ngIf="citoyen.lieu_naissance">
+              {{ citoyen.lieu_naissance.libelle }}
+            </span>
+          </small>
+        </p>
+      </div>
+
+
+      <div class="pb-3 pt-1 card-container-icon">
+
+
+        <!-- Supprimer -->
+        <a [routerLink]="['./']"
+           class="tx-facebook"
+           (click)="supprimer(citoyen.id)">
+          <i class="fad mr-3 fa-trash"></i>
+        </a>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Pagination -->
+  <div class="col-12 mt-1 d-flex justify-content-center">
+    <pagination-controls id="citoyen"
+                         (pageChange)="currentPage = $event"
+                         autoHide="true"
+                         previousLabel="{{ 'PRECEDENT' | translate }}"
+                         nextLabel="{{ 'SUIVANT' | translate }}">
+    </pagination-controls>
+  </div>
+</div>
+
+
+<!-- Loading && missing data handling -->
+<div class="row"
+     *ngIf="loading || !citoyenService.data.length">
+
+  <!-- Loading -->
+  <div class="col-12 py-5"
+       *ngIf="loading">
+    <app-loading></app-loading>
+  </div>
+
+
+  <!-- Missing data handling -->
+  <div class="col-12 py-5"
+       *ngIf="!loading && !citoyenService.data.length">
+    <app-missing-data-alt></app-missing-data-alt>
+  </div>
+</div>

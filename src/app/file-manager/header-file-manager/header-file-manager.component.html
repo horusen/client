@@ -1,0 +1,117 @@
+<div class=" p-0">
+    <div class="row row-xs mg-0 pd-0 bg-light p-0">
+        <!-- left side -->
+        <div class="col-lg-7 ">
+            <ul class="nav">
+                <!-- Home -->
+                <li class="nav-item">
+                    <a class="nav-link px-1"
+                        href="#"><i
+                            class="fad fa-home bg-light tx-facebook tx-20"
+                            style="padding:6px; border-radius: 50%; "></i>
+                    </a>
+                </li>
+
+                <!-- Actualiser -->
+                <li class="nav-item">
+                    <a class="nav-link px-1 bd-r"
+                        href="#"><i
+                            class="fad fa-sync-alt bg-light tx-facebook tx-20 mg-r-10"
+                            style="padding:6px; border-radius: 50%;"></i></a>
+                </li>
+
+                <!-- Dossier -->
+                <li class="nav-item">
+                    <a class="nav-link px-1"
+
+                        [routerLink]="['dossier']">
+                        <i class="fad fa-folder bg-light tx-facebook tx-20 mg-l-10"
+                            routerLinkActive="fas"
+                            style="padding:6px; border-radius: 50%;">
+                        </i>
+                    </a>
+                </li>
+
+                <!-- Fichier -->
+                <li class="nav-item">
+                    <a class="nav-link px-1"
+                        [routerLink]="['./']">
+                        <i class="fad fa-file-alt bg-light tx-facebook tx-20"
+                            [routerLinkActiveOptions]="{exact: true}"
+                            routerLinkActive="fas"
+                            style="padding:6px; border-radius: 50%;"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Right side -->
+        <div class="col-lg-5">
+            <ul class="nav float-right list-inline justify-content-end">
+                <!-- Loading -->
+                <li class="nav-item" *ngIf="loading">
+                    <a class="nav-link px-1">
+                        <i class="fad fa-spin fa-circle-notch bg-light tx-facebook tx-20"
+                            style="padding:6px; border-radius: 50%; "></i>
+                    </a>
+                </li>
+
+                <!-- Affichage mode list -->
+                <li class="nav-item">
+                    <a class="nav-link px-1"
+                        href="#"><i
+                            class="fad fa-bars bg-light tx-facebook tx-20"
+                            style="padding:6px; border-radius: 50%; "></i>
+                    </a></li>
+
+                <!-- Affichage mode card -->
+                <li class="nav-item">
+                    <a class="nav-link px-1"
+                        href="#"><i
+                            class="fad fa-th-list bg-light tx-warning tx-20"
+                            style="padding:6px; border-radius: 50%; "></i>
+                    </a></li>
+
+                <!-- Ajouter fichier -->
+                <li class="nav-item">
+                    <a class="nav-link clickable px-1" [ngbPopover]="fichierAdd">
+                        <i class="fad fa-file-plus bg-light tx-teal tx-20"
+                            style="padding:6px; border-radius: 50%; ">
+                        </i>
+                    </a>
+                    <ng-template #fichierAdd class="p-3">
+                        <app-fichier-add></app-fichier-add>
+                    </ng-template>
+                </li>
+
+
+
+                <!-- Export -->
+                <li class="nav-item">
+                    <a class="nav-link px-1 clickable" (click)="exporter()">
+                        <i class="fad fa-file-export bg-light tx-danger tx-20"
+                            style="padding:6px; border-radius: 50%;">
+                        </i>
+                    </a>
+                </li>
+
+                <!-- Ajouter dans dossier -->
+                <li class="nav-item">
+                    <a class="nav-link px-1 clickable" (click)="ajouterDansDossier()">
+                        <i class="fad fa-folder-plus bg-light tx-success-100 tx-20"
+                            style="padding:6px; border-radius: 50%;"></i>
+                    </a>
+                </li>
+
+                <!-- Supprimer -->
+                <li class="nav-item">
+                    <a class="nav-link px-1 clickable" (click)="supprimer()">
+                        <i class="fad fa-trash-alt bg-light tx-primary tx-20"
+                            style="padding:6px; border-radius: 50%;">
+                        </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

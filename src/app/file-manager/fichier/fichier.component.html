@@ -1,0 +1,12 @@
+<app-fichier-list></app-fichier-list>
+
+
+<app-modal
+    [configuration]="{titre: 'motDePasseFichier', name: 'password-fichier-modal', icone: 'unlock-alt', taille: 'md'}">
+    <app-password-fichier></app-password-fichier>
+</app-modal>
+
+<app-modal
+    [configuration]="{titre: 'ajouterLesFichiersDansUnDossier', name: 'test', icone: 'folder',  taille: 'md'}">
+    <app-dossier-list-min></app-dossier-list-min>
+</app-modal>

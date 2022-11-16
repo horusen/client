@@ -1,0 +1,30 @@
+<!-- header -->
+<app-main-header [id]="'domaine'"
+                 [hasFilter]="false">
+</app-main-header>
+
+
+<app-domaine-list [parent]="parent"></app-domaine-list>
+
+
+
+
+<app-modal [configuration]="{ name: 'domaine-create-modal', titre: 'ajouterUnDomaine', icone: 'stamp' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-common-create *ngIf="create"
+                     [configuration]="{ endpoint: 'domaines/institutions', name: 'domaine', hasDescription: true, submitButtonClass: 'btn-primary' }"
+                     [extraFields]="extraFields"
+                     (itemCreated)="onDomaineCreated($event.item)">
+  </app-common-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'domaine-edit-modal', titre: 'modifierLesDetailsDuDomaine', icone: 'stamp' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' }); edit = false">
+  <app-common-edit *ngIf="edit"
+                   [configuration]="{ endpoint: 'domaines/institutions', name: 'domaine', hasDescription: true, item: domaineSelectionne, submitButtonClass: 'btn-primary' }"
+                   [extraFields]="{ ministere: ministere?.id, ambassade: ambassade?.id }"
+                   (itemEdited)="onDomaineEdit($event.item)">
+  </app-common-edit>
+</app-modal>

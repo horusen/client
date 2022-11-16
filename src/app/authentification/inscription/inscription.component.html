@@ -1,0 +1,501 @@
+<div class="container-fluid">
+  <div class="row h-full ">
+    <!-- left side image -->
+    <div class="col-lg-6 background-11 pt-8  text-left ">
+      <img class="pt-8"
+           src="assets/images/capturelog/account.svg"
+           width="500" />
+    </div>
+
+    <div class="col-lg-6 "
+         style="position: relative;">
+      <!-- Logo -->
+      <a class="navbar-brand w-100 overflow-hidden "
+         href="o2sw.html">
+        <img src='assets/images/o2sw.svg'
+             alt='logo'
+             width='140px'>
+      </a>
+
+      <!-- Titre -->
+      <div class="text-center">
+        <div class="d-block mb-3 pt-6 ">
+          <i class="fad fa-clipboard-list color-11 tx-18 bg-nfacebook"
+             style="padding:14px; border-radius:50%"></i>
+        </div>
+
+        <!-- Right -->
+        <h4 class="fw-300 mb-3 tx-nfacebook">{{ 'inscrivezVous' | translate }}</h4>
+      </div>
+
+      <!-- Formulaire d'inscription -->
+      <form class="custom-placeholder row m-0 p-0 justify-content-center "
+            [formGroup]="form"
+            *ngIf="form"
+            (submit)="inscription()">
+        <!-- Form part 1 -->
+        <div class="col-12 p-0"
+             *ngIf="tabs.part1"
+             id="part1"
+             formGroupName="part1">
+
+          <!-- Image -->
+          <div class="row justify-content-center">
+            <div class="d-flex users-icon bg-light clickable align-items-center justify-content-center border rounded-circle"
+                 (click)="userPhoto.click()">
+              <span class="icone m-0">
+                <i class="fad  fa-users"
+                   *ngIf="!imageUrl"></i>
+                <img [src]="imageUrl"
+                     *ngIf="imageUrl">
+
+              </span>
+
+              <span class="cam-icon tx-primary"><i class="fad fa-camera"></i></span>
+              <div class="text border-top tx-primary"><i class="fas fa-pen"></i> {{ 'CHANGER' | translate }} </div>
+              <input type="file"
+                     hidden
+                     #userPhoto
+                     (change)="onFileChanged($event)">
+            </div>
+
+            <!-- Label -->
+            <label class="control-label col-12 tx-center "
+                   for="libelle">
+              {{ 'photoDeProfil' | translate }}
+            </label>
+
+          </div>
+
+          <!-- Prenom et nom -->
+          <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12 ">
+            <!-- prenom -->
+            <div class="col-6">
+              <!-- Label -->
+              <label class="control-label"
+                     for="prenom">
+                {{ 'PRENOM' | translate }}
+              </label>
+
+              <!-- Input -->
+              <input type="prenom"
+                     class="form-control form-control-sm"
+                     required
+                     [formControlName]="'prenom'"
+                     [ngClass]="{'is-invalid': shouldShowRequiredError( 'part1.prenom'), 'is-valid': isValid('part1.prenom')}">
+
+              <!-- MEssage d'erreur -->
+              <div *ngIf="shouldShowRequiredError('part1.prenom')"
+                   class="invalid-feedback">
+                {{ 'veuillezRemplirCeChamps' |translate }}.</div>
+            </div>
+
+            <!-- Nom -->
+            <div class="col-6">
+              <!-- Label -->
+              <label class="control-label"
+                     for="nom">
+                {{ 'NOM' | translate }}
+              </label>
+
+              <!-- Input -->
+              <input type="nom"
+                     class="form-control form-control-sm"
+                     required
+                     [formControlName]="'nom'"
+                     [ngClass]="{'is-invalid': shouldShowRequiredError( 'part1.nom'), 'is-valid': isValid('part1.nom')}">
+
+              <!-- MEssage d'erreur -->
+              <div *ngIf="shouldShowRequiredError('part1.nom')"
+                   class="invalid-feedback">
+                {{ 'veuillezRemplirCeChamps' |translate }}.</div>
+            </div>
+
+          </div>
+
+          <!-- Date et lieu naissance -->
+          <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12">
+            <!-- Date de naissance -->
+            <div class="col-6">
+              <!-- Label -->
+              <label for="type"
+                     class="label-template-form">
+                {{ 'dateDeNaissance' | translate }}
+              </label>
+
+              <!-- Date picker -->
+              <div class="input-group mb-2">
+                <input [dpDayPicker]="configCalendrier.day"
+                       [theme]="'dp-material'"
+                       formControlName="date_naissance"
+                       [ngClass]="{'is-invalid': shouldShowRequiredError( 'part1.date_naissance'), 'is-valid': isValid('part1.date_naissance')}"
+                       class="form-control ">
+                <div class="input-group-prepend">
+                  <div class="input-group-text  bg-light"><i class="fal fa-calendar"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Message d'erreur -->
+              <div *ngIf="shouldShowRequiredError('part1.date_naissance')"
+                   class="invalid-feedback">
+                {{ 'veuillezSaisirCeChamps' | translate }}.
+              </div>
+            </div>
+
+
+            <!-- Lieu de naissance -->
+            <div class="col-6">
+              <!-- Label -->
+              <label class="control-label"
+                     for="lieu_naissance">
+                {{ 'lieuDeNaissance' | translate }}
+                <i class="fad fa-circle-notch fa-spin"
+                   *ngIf="dependanciesLoading.villes"></i>
+              </label>
+
+              <angular2-multiselect [data]="dependancies.villes"
+                                    [settings]="villeDropdownSettings"
+                                    formControlName="lieu_naissance"
+                                    [ngClass]="{'is-invalid': shouldShowRequiredError( 'part1.lieu_naissance'), 'is-valid': isValid('part1.lieu_naissance')}"
+                                    class="form-control">
+              </angular2-multiselect>
+
+              <!-- Message d'erreur -->
+              <div *ngIf="shouldShowRequiredError('part1.lieu_naissance')"
+                   class="invalid-feedback">
+                {{ 'veuillezRenseignerCeChamps' | translate }}.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Sexe profession -->
+          <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12">
+            <!-- Sexe -->
+            <div class="col-6">
+              <!-- Label -->
+              <label class="control-label"
+                     for="sexe">
+                {{ 'SEXE' | translate }}
+              </label>
+
+              <select (change)="selectFormHandler('part1.sexe', $event.target.value)"
+                      [ngClass]="{'is-invalid': shouldShowRequiredError( 'part1.sexe'), 'is-valid': isValid('part1.sexe')}"
+                      class="form-control">
+                <option value="homme"
+                        selected>{{ 'HOMME' | translate }}</option>
+                <option value="femme">{{ 'FEMME' | translate }}</option>
+              </select>
+
+
+              <!-- MEssage d'erreur -->
+              <div *ngIf="shouldShowRequiredError('part1.sexe')"
+                   class="invalid-feedback">
+                {{ 'veuillezRenseignerCeChamps' |translate }}.</div>
+            </div>
+
+
+            <!-- profession -->
+            <div class="col-6">
+              <!-- Label -->
+              <label class="control-label"
+                     for="profession">
+                {{ 'PROFESSION' | translate }}
+              </label>
+
+              <!-- Input -->
+              <input type="profession"
+                     class="form-control form-control-sm"
+                     required
+                     [formControlName]="'profession'"
+                     [ngClass]="{'is-invalid': shouldShowRequiredError( 'part1.profession'), 'is-valid': isValid('part1.profession')}">
+
+              <!-- MEssage d'erreur -->
+              <div *ngIf="shouldShowRequiredError('part1.profession')"
+                   class="invalid-feedback">
+                {{ 'veuillezRenseignerCeChamps' |translate }}.</div>
+            </div>
+          </div>
+
+          <!-- Boutton de navigation -->
+          <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12">
+            <div class=" col-12 text-right">
+              <!-- Boutton sumit -->
+              <button class="btn  btn-facebook mr-1"
+                      (click)="showTab('part2')"
+                      [disabled]="form.get('part1').invalid">
+
+                {{ 'SUIVANT' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form part 2 -->
+        <div class="col-12 p-0"
+             id="part2"
+             *ngIf="tabs.part2"
+             style="margin-top: 75px;"
+             formGroupName="part2">
+          <!-- email telephone -->
+          <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12">
+            <!-- Email -->
+            <div class="col-6">
+              <!-- Label -->
+              <label class="control-label"
+                     for="email">
+                {{ 'EMAIL' | translate }}
+              </label>
+
+              <!-- Input -->
+              <input type="email"
+                     class="form-control form-control-sm"
+                     required
+                     [formControlName]="'email'"
+                     [ngClass]="{'is-invalid': shouldShowRequiredError( 'part2.email'), 'is-valid': isValid('part2.email')}">
+
+              <!-- MEssage d'erreur -->
+              <div *ngIf="shouldShowRequiredError('part2.email')"
+                   class="invalid-feedback">
+                {{ 'veuillezRenseignerCeChamps' |translate }}.</div>
+            </div>
+
+
+            <!-- TElephone -->
+            <div class="col-6">
+              <!-- Label -->
+              <label class="control-label"
+                     for="telephone">
+                {{ 'TELEPHONE' | translate }}
+              </label>
+
+              <!-- Input -->
+              <input type="text"
+                     class="form-control form-control-sm"
+                     required
+                     [formControlName]="'telephone'"
+                     [ngClass]="{'is-invalid': shouldShowRequiredError( 'part2.telephone'), 'is-valid': isValid('part2.telephone')}">
+
+              <!-- MEssage d'erreur -->
+              <div *ngIf="shouldShowRequiredError('part2.telephone')"
+                   class="invalid-feedback">
+                {{ 'veuillezRenseignerCeChamps' |translate }}.</div>
+            </div>
+
+
+          </div>
+
+          <!-- mot de passes -->
+          <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12">
+            <!-- Mot de passe -->
+            <div class="col-6">
+              <!-- Label -->
+              <label class="control-label"
+                     for="libelle">
+                {{ 'motDePasse' | translate }}
+              </label>
+
+              <!-- Input -->
+              <input type="password"
+                     class="form-control form-control-sm"
+                     required
+                     [formControlName]="'password'"
+                     [ngClass]="{'is-invalid': shouldShowRequiredError( 'part2.password'), 'is-valid': isValid('part2.password')}">
+
+              <!-- MEssage d'erreur -->
+              <div *ngIf="shouldShowRequiredError('part2.password')"
+                   class="invalid-feedback">
+                {{ 'veuillezSaisirVotreMotDePasse' |translate }}.</div>
+            </div>
+
+            <!-- Confirmation mot de passe -->
+            <div class="col-6">
+              <!-- Label -->
+              <label class="control-label"
+                     for="libelle">
+                {{ 'confirmationMotDePasse' | translate }}
+              </label>
+
+              <!-- Input -->
+              <input type="password"
+                     class="form-control form-control-sm"
+                     required
+                     [formControlName]="'password_confirmation'"
+                     [ngClass]="{'is-invalid': shouldShowRequiredError( 'part2.password_confirmation'), 'is-valid': isValid('part2.password_confirmation')}">
+
+              <!-- MEssage d'erreur -->
+              <div *ngIf="shouldShowRequiredError('part2.password_confirmation')"
+                   class="invalid-feedback">
+                {{ 'veuillezSaisirVotreMotDePasse' |translate }}.</div>
+
+              <div *ngIf="form.get('part2.password_confirmation').touched
+                          && form.get('part2.password_confirmation').value
+                          && form.get('part2.password_confirmation').errors?.notMatchWithPassword"
+                   class="invalid-feedback">
+                {{ 'lesMotsDePassesNeSontPasLesMemes' |translate }}.</div>
+
+            </div>
+          </div>
+
+          <!-- addr -->
+          <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12">
+            <!-- Addresse -->
+            <div class="col-6">
+              <!-- Label -->
+              <label class="control-label"
+                     for="addresse">
+                {{ 'ADDRESSE' | translate }}
+              </label>
+
+              <!-- Input -->
+              <input type="addresse"
+                     class="form-control form-control-sm"
+                     required
+                     [formControlName]="'addresse'"
+                     [ngClass]="{'is-invalid': shouldShowRequiredError( 'part2.addresse'), 'is-valid': isValid('part2.addresse')}">
+
+              <!-- MEssage d'erreur -->
+              <div *ngIf="shouldShowRequiredError('part2.addresse')"
+                   class="invalid-feedback">
+                {{ 'veuillezRenseignerCeChamps' |translate }}.</div>
+            </div>
+
+
+            <!-- Ville -->
+            <div class="col-6">
+              <!-- Label -->
+              <label class="control-label"
+                     for="vill">
+                {{ 'VILLE' | translate }}
+                <i class="fad fa-circle-notch fa-spin"
+                   *ngIf="dependanciesLoading.villes"></i>
+              </label>
+
+              <angular2-multiselect [data]="dependancies.villes"
+                                    [settings]="dropdownSettingsAlt.single"
+                                    formControlName="ville"
+                                    [ngClass]="{'is-invalid': shouldShowRequiredError( 'part2.ville'), 'is-valid': isValid('part2.ville')}"
+                                    class="form-control  ">
+              </angular2-multiselect>
+
+              <!-- Message d'erreur -->
+              <div *ngIf="shouldShowRequiredError('part2.ville')"
+                   class="invalid-feedback">
+                {{ 'veuillezRenseignerCeChamps' | translate }}.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- nationalites -->
+          <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12">
+            <!-- Ville -->
+            <div class="col-12">
+              <!-- Label -->
+              <label class="control-label"
+                     for="vill">
+                {{ 'NATIONALITES' | translate }}
+                <i class="fad fa-circle-notch fa-spin"
+                   *ngIf="dependanciesLoading.pays"></i>
+              </label>
+
+              <angular2-multiselect [data]="dependancies.pays"
+                                    [settings]="dropdownSettingsAlt.multi"
+                                    formControlName="nationalites"
+                                    [ngClass]="{'is-invalid': shouldShowRequiredError( 'part2.nationalites'), 'is-valid': isValid('part2.nationalites')}"
+                                    class="form-control ">
+              </angular2-multiselect>
+
+              <!-- Message d'erreur -->
+              <div *ngIf="shouldShowRequiredError('part2.nationalites')"
+                   class="invalid-feedback">
+                {{ 'veuillezRenseignerCeChamps' | translate }}.
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- Boutton suivant -->
+          <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12">
+            <div class=" col-12 d-flex justify-content-between">
+              <!-- Boutton sumit -->
+              <button class="btn  btn-facebook mr-1"
+                      (click)="showTab('part1')">
+                {{ 'PRECEDENT' | translate }}
+              </button>
+
+              <!-- Boutton sumit -->
+              <button class="btn  btn-facebook mr-1"
+                      [disabled]="form.get('part2').invalid"
+                      (click)="showTab('part3')">
+                {{ 'SUIVANT' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form part 3 -->
+        <div class="col-12 p-0"
+             role="tabpanel"
+             *ngIf="tabs.part3"
+             formGroupName="part3">
+
+
+
+          <!-- Condition d'utilisation -->
+          <div class="formSep form-group col-12 d-flex justify-content-center pb-0 pt-2">
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input"
+                       formControlName="condition_utilisation"
+                       type="checkbox"
+                       value=""
+                       id="flexCheckDefault">
+                <label class="form-check-label ml-3"
+                       for="flexCheckDefault">
+                  {{ 'jAiLuEtJAccepteLes' | translate }} <a href="#"
+                     class="text-primary">{{ 'conditionsDUtilisationDeLaPlateforme' | translate }}</a>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Boutton validation -->
+          <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2 col-12">
+            <div class=" col-12 d-flex justify-content-between">
+              <button class="btn  btn-facebook mr-1"
+                      (click)="showTab('part2')">
+                {{ 'PRECEDENT' | translate }}
+              </button>
+
+              <!-- Boutton sumit -->
+              <button class="btn  btn-success mr-1"
+                      type="submit"
+                      [disabled]="form.invalid">
+                <i class="fad fa-circle-notch fa-spin"
+                   *ngIf="loading"></i>
+                {{ 'VALIDER' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- Footer -->
+      <footer>
+        <hr class="color-9  ">
+        <div class="fs--1 text-center">{{ 'vousAvezDejaUnCompte' | translate }}?
+          <a class="tx-norange "
+             [routerLink]="['/', 'connexion']"> {{ 'cliquezIci' | translate }}.</a>
+        </div>
+        <hr class="color-9">
+      </footer>
+    </div>
+
+  </div>
+
+
+</div>

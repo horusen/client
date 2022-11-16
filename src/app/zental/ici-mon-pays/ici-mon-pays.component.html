@@ -1,0 +1,91 @@
+<!-- Header -->
+<div class="row row-xs mg-0 pd-0 pt-2 pb-1 bg-light ">
+  <div class="col ">
+    <h6 class="">
+      <i class="fad fa-globe-africa mg-r-3  "
+         style="padding:6px; border-radius: 50%; ">
+      </i>
+      {{ 'iciMonPays' | translate }}
+    </h6>
+  </div>
+</div>
+
+<!-- Liste des elements -->
+<div class=" row row-xs mg-0 pd-0 clearfix p-0 pt-2 ">
+  <!-- navigation -->
+  <div class="col-lg-3 pr-2">
+    <div class=" mycard2">
+      <div class="flex-fill pd-1   pt-2">
+        <!-- Nav list -->
+        <nav class="nav flex-column  ">
+          <!-- Ici chez nous -->
+          <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
+            <a [routerLink]="'ici-chez-nous'"
+               [routerLinkActive]="'font-weight-bold'"
+               class="nav-link3 tx-echos1">
+              <i class="fal fa-flag tx-20 pr-2"
+                 [routerLinkActive]="'fas'"></i>
+              {{ 'iciChezNous' | translate }}
+            </a>
+          </div>
+
+          <!-- venir chez nous -->
+          <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
+            <a [routerLink]="'venir-chez-nous'"
+               [routerLinkActive]="'font-weight-bold'"
+               class="nav-link3 tx-echos1"><i class="fal fa-house-night tx-20 pr-2"
+                 [routerLinkActive]="'fas'"></i>
+              {{ 'venirChezNous' | translate }}
+            </a>
+          </div>
+
+          <!-- Arts et cultures -->
+          <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
+            <a [routerLink]="'arts-et-cultures'"
+               [routerLinkActive]="'font-weight-bold'"
+               class="nav-link3 tx-echos1"><i class="fal fa-palette tx-20 pr-2"
+                 [routerLinkActive]="'fas'"></i>
+              {{ 'artsEtCultures' | translate }}
+            </a>
+          </div>
+
+          <!-- Mot du presidents -->
+          <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
+            <a [routerLink]="'mot-du-president'"
+               [routerLinkActive]="'font-weight-bold'"
+               class="nav-link3 tx-echos1"><i class="fal fa-crown tx-20 pr-2"
+                 [routerLinkActive]="'fas'"></i>
+              {{ 'motDuPresident' | translate }}
+            </a>
+          </div>
+
+          <!-- Grouvernement -->
+          <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
+            <a [routerLink]="'gouvernement'"
+               [routerLinkActive]="'font-weight-bold'"
+               class="nav-link3 tx-echos1">
+              <i class="fal fa-users-cog tx-20 pr-2"
+                 [routerLinkActive]="'fas'"></i>
+              {{ 'GOUVERNEMENT' | translate }}
+            </a>
+          </div>
+
+
+          <!-- Calendrier national -->
+          <div class="d-flex align-items-center justify-content-between pb-1 pt-1">
+            <a [routerLink]="'calendrier'"
+               [routerLinkActive]="'font-weight-bold'"
+               class="nav-link3 tx-echos1">
+              <i [routerLinkActive]="'fas'"
+                 class="fal fa-calendar-alt tx-20 pr-2"></i>
+              {{ 'calendrierNational' | translate }}
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <router-outlet></router-outlet>
+  </div>
+</div>

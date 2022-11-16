@@ -1,0 +1,226 @@
+<form class="custom-placeholder"
+      [formGroup]="form"
+      *ngIf="form"
+      (submit)="create()">
+
+  <!--Service et user-->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <!-- Services -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label"
+             for="user">
+        {{ 'SERVICE' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.services"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.services"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="service"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'service'), 'is-valid': isValid('service')}"
+                            class="form-control form-control-sm">
+      </angular2-multiselect>
+
+
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('membre')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignerLeService' | translate }}.
+      </div>
+    </div>
+
+
+    <!-- Users -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label"
+             for="user">
+        {{ 'MEMBRE' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.users"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.users"
+                            [settings]="dropdownSettingsAlt.user"
+                            formControlName="membre"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'membre'), 'is-valid': isValid('membre')}"
+                            class="form-control form-control-sm">
+        <c-badge>
+          <ng-template let-item="item">
+            {{item.nom_complet}}
+          </ng-template>
+        </c-badge>
+        <c-item>
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.nom_complet}}</label>
+            <img [src]="item?.photo_min?.path"
+                 class="float-right rounded-circle border border-warning"
+                 style="width: 30px;margin-right: 20px;" />
+          </ng-template>
+        </c-item>
+      </angular2-multiselect>
+
+
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('membre')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignerLeMembreQueVousVoulezAjouter' | translate }}.
+      </div>
+    </div>
+  </div>
+
+  <!-- poste et fonction et debut -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <!-- Poste -->
+    <div class="col-4">
+      <!-- Label -->
+      <label class="control-label"
+             for="poste">
+        {{ 'POSTE' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.postes"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.postes"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="poste"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'poste'), 'is-valid': isValid('poste')}"
+                            class="form-control form-control-sm">
+      </angular2-multiselect>
+
+      <!-- <div class=" p-0">
+        <span class="clickable text-primary tx-6 ml-2"
+              placement="bottom"
+              [autoClose]="'outside'"
+              [popoverTitle]="postePopoverTitle"
+              [ngbPopover]="postePopover">
+          {{ 'AJOUTER' | translate }} <i class="fal fa-plus-circle"></i>
+        </span>
+      </div> -->
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('poste')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignerUnPoste' | translate }}.
+      </div>
+    </div>
+
+
+    <!-- FOnction -->
+    <div class="col-4">
+      <!-- Label -->
+      <label class="control-label"
+             for="fonction">
+        {{ 'FONCTION' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.fonctions"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.fonctions"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="fonction"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'fonction'), 'is-valid': isValid('fonction')}"
+                            class="form-control form-control-sm">
+      </angular2-multiselect>
+
+      <!-- <div class=" p-0">
+        <span class="clickable text-primary tx-12 ml-2"
+              placement="bottom"
+              [autoClose]="'outside'"
+              [popoverTitle]="fonctionPopoverTitle"
+              [ngbPopover]="fonctionPopover">
+          {{ 'AJOUTER' | translate }} <i class="fal fa-plus-circle"></i>
+        </span>
+      </div> -->
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('fonction')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignerUneFonction' | translate }}.
+      </div>
+    </div>
+
+    <!-- Debut -->
+    <div class="col-4">
+      <!-- Label -->
+      <label for="type"
+             class="label-template-form">
+        {{ 'dateDebutDeFonction' | translate }}
+      </label>
+
+      <!-- Date picker -->
+      <div class="input-group mb-2">
+        <input [dpDayPicker]="configCalendrier.day"
+               [format]="'DD MMM YYYY'"
+               [theme]="'dp-material'"
+               formControlName="debut"
+               class="form-control ">
+        <div class="input-group-prepend">
+          <div class="input-group-text  bg-light"><i class="fal fa-calendar"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- NOTE -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <label class="control-label"
+             for="note">{{ 'NOTE' | translate }}</label>
+      <ckeditor [editor]="Editor"
+                class=""
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'note'), 'is-valid': isValid('note')}"
+                formControlName="note">
+      </ckeditor>
+
+    </div>
+  </div>
+
+
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <!-- photo -->
+    <div class="col-12">
+      <label class="form-label"
+             for="customFile">{{ 'fichierJoint' | translate }}</label>
+      <input type="file"
+             (change)="onFileChanged($event)"
+             accept="application/pdf"
+             class="form-control"
+             id="customFile" />
+
+    </div>
+  </div>
+
+
+
+
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-12 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1"
+              type="submit"
+              [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+
+      <!-- Bouton reset -->
+      <button class="btn btn-sm border btn-link"
+              type="button"
+              (click)="initialiseForm()">
+        {{ 'REINITIALISER' | translate }}
+      </button>
+    </div>
+  </div>
+</form>
+
+<app-loading *ngIf="!form"></app-loading>

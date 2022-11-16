@@ -1,0 +1,141 @@
+<!-- Liste des elements -->
+<div class="row  row-xs clearfix p-2 pl-2"
+     *ngIf="!loading && consulatService.data.length">
+  <div *ngFor="let consulat of consulatService.data |
+              paginate: {itemsPerPage: itemsPerPage, id: 'consulat', currentPage: currentPage}"
+       class=" pt-2 pl-2 pr-2 pb-2"
+       [ngClass]="{
+         'col-3': colonne_affichage === 4,
+         'col-4': colonne_affichage === 3,
+         'col-6': colonne_affichage === 2
+        }">
+    <div class="mycard4 ">
+      <!-- Pays -->
+      <div class=" pt-2 pl-2 d-flex align-items-center justify-content  bd-b border-success">
+        <p class="tx-echos"> <img class=""
+               [src]="consulat.entite_diplomatique.pays_origine.drapeau"
+               [alt]="'drapeau-' + consulat.entite_diplomatique.pays_origine.libelle"
+               width="40"> République du {{ consulat.entite_diplomatique.pays_origine.libelle }}</p>
+      </div>
+
+      <!-- Icone -->
+      <div class=" justify-content-between p-0">
+        <p class="mg-0 pb-4 text-center">
+          <span class=" pl-2"> <i class="fad fa-building tx-40  bg-light "
+               style="padding:6px ; border-radius:50%"></i></span>
+
+        </p>
+      </div>
+
+      <!-- Badge -->
+      <div class=" text-center ">
+        <span class="badge badge-pill badge-success  "> {{ consulat.entite_diplomatique.pays_siege.libelle}}</span>
+        <p class="text-center">
+          <!-- Langue pays de siège -->
+          <span class="">
+            Français
+          </span>
+
+          <!-- Nombre attachés -->
+          <span class=""> || </span><span class="">
+            6 attachés
+          </span>
+
+          <!-- Etat de l'consulat -->
+          <span class=""> || </span>
+          <span class=" tx-success-100 "> {{ (consulat.etat ? 'OUVERTE' : 'FERMEE') | translate }} </span>
+        </p>
+      </div>
+
+      <!-- footer -->
+      <div class="d-flex justify-content-between ">
+
+        <!-- CTA -->
+        <div class=" justify-content-between p-0">
+          <p class="mg-0 pt-2">
+            <!-- details -->
+            <a [routerLink]="navigationUrl.concat([consulat.id])"
+               [queryParamsHandling]="'preserve'"
+               class=" pl-2">
+              <i class="fad fa-eye bg-white"
+                 style="padding:6px ; border-radius:50%">
+              </i>
+            </a>
+
+            <!-- Edit -->
+            <a class=" pl-2"
+               [routerLink]="['./']"
+               [fragment]="'edit-consulat'"
+               (click)="modifier(consulat)">
+              <i class="fad fa-edit bg-white"
+                 style="padding:6px ; border-radius:50%"></i>
+            </a>
+
+            <!-- Supprimer -->
+            <a class=" pl-2"
+               (click)="supprimer(consulat.id)"
+               [routerLink]="['./']">
+              <i class="fad fa-trash-alt bg-white"
+                 style="padding:6px ; border-radius:50%"></i>
+            </a>
+
+            <!-- Discussion -->
+            <span class=" pl-2"> <i class="fad fa-comment-alt-lines bg-white"
+                 style="padding:6px ; border-radius:50%"></i></span>
+
+
+            <!-- Liaison -->
+            <span class=" pl-2"> <i class="fad fa-link bg-light  tx-echos "
+                 style="padding:6px ; border-radius:50%"></i></span>
+          </p>
+        </div>
+
+        <!-- Photo de l'abassadeur -->
+        <a class="nav-link  ml-4  "
+           id="v-pills-home-tab"
+           data-toggle="pill"
+           href="#utilisateurs"
+           role="tab"
+           aria-controls="v-pills-home"
+           aria-selected="true">
+          <div class="d-flex flex-row">
+            <div class="profiles">
+              <!-- <img class="rounded-circle " src="assets/images/xs/avatar7.jpg" alt="avatar" width="26"> -->
+              <!-- <img class="rounded-circle"
+                   src="assets/images/xs/avatar6.jpg"
+                   alt="avatar"
+                   width="26"> -->
+
+              <img class="rounded-circle"
+                   *ngIf="consulat?.consulatur?.photo"
+                   [src]="consulat?.consulatur?.photo"
+                   alt="avatar"
+                   width="26">
+
+            </div>
+
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination controls -->
+  <div class="col-12 mt-1 d-flex justify-content-center">
+    <pagination-controls id="consulat"
+                         (pageChange)="currentPage = $event"
+                         autoHide="true"
+                         previousLabel="{{ 'PRECEDENT' | translate }}"
+                         nextLabel="{{ 'SUIVANT' | translate }}">
+    </pagination-controls>
+  </div>
+
+</div>
+
+
+
+<div class="my-5"
+     *ngIf="loading || !consulatService.data.length">
+  <app-missing-data-alt *ngIf="!loading && !consulatService.data.length"></app-missing-data-alt>
+  <app-loading *ngIf="loading"></app-loading>
+</div>

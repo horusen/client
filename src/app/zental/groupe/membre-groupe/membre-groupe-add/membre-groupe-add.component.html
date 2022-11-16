@@ -1,0 +1,64 @@
+<form class="custom-placeholder membre-groupe-form"
+      [formGroup]="form"
+      *ngIf="form"
+      (submit)="create()">
+
+  <!-- membre -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <div class="col-10">
+      <!-- Label -->
+      <label class="control-label"
+             for="employe">
+        {{ 'UTILISATEUR' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.employes"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.nonMembres"
+                            [settings]="dropdownSettingsAlt.users"
+                            formControlName="membres"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'membres'), 'is-valid': isValid('membres')}"
+                            class="form-control  form-control-sm">
+        <c-badge>
+          <ng-template let-item="item">
+            {{item.nom_complet}}
+          </ng-template>
+        </c-badge>
+        <c-item>
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.nom_complet}}</label>
+            <img [src]="item?.photo?.path"
+                 class="float-right rounded-circle border border-warning"
+                 style="width: 30px;margin-right: 20px;" />
+          </ng-template>
+        </c-item>
+      </angular2-multiselect>
+
+
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('membres')"
+           class="invalid-feedback">
+        {{ 'veuillezChoisirUnUtilisateur' | translate }}.
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-10 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1"
+              type="submit"
+              [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+
+    </div>
+  </div>
+</form>

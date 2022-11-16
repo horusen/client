@@ -1,0 +1,39 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 d-flex align-items-center pb-2">
+    <!-- boutton precedent -->
+    <a [routerLink]="['..']"
+       [ngbTooltip]="'revenirEnArriere' | translate"
+       class="p-2 mr-2 tx-15  d-flex border rounded-circle align-items-center justify-content-center">
+      <i class="fad fa-arrow-left"></i>
+    </a>
+
+    {{ 'listeDesPasserelles' | translate }}
+  </h5>
+</div>
+
+
+<!-- header -->
+<app-main-header [id]="'passerelle'"
+                 [hasAddButton]="parent.name !== 'zental'">
+</app-main-header>
+
+
+<app-passerelle-list [parent]="parent"></app-passerelle-list>
+
+
+
+
+<app-modal [configuration]="{ name: 'passerelle-create-modal', titre: 'ajouterUnePasserelle', icone: 'link' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-passerelle-create *ngIf="create"
+                         [parent]="parent">
+  </app-passerelle-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'passerelle-edit-modal', titre: 'modifierLesDetailsDeLaPasserelle', icone: 'link' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-passerelle-edit *ngIf="edit"></app-passerelle-edit>
+</app-modal>

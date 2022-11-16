@@ -1,0 +1,39 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 pb-2">
+    <i class="fad fa-circle  tx-20"></i>
+    {{ 'listeDesFonctions' | translate }}
+  </h5>
+</div>
+
+
+<!-- header -->
+<app-main-header [id]="'fonction'"
+                 [hasFilter]="false">
+</app-main-header>
+
+
+<app-fonction-list [parent]="parent"></app-fonction-list>
+
+
+
+
+<app-modal [configuration]="{ name: 'fonction-create-modal', titre: 'ajouterUneFonction', icone: 'people-carry' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-common-create *ngIf="create"
+                     [configuration]="{ endpoint: 'fonctions', name: 'fonction', hasDescription: true, submitButtonClass: 'btn-primary' }"
+                     [extraFields]="extraFields"
+                     (itemCreated)="onFonctionCreated($event.item)">
+  </app-common-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'fonction-edit-modal', titre: 'modifierLesDetailsDeLaFonction', icone: 'people-carry' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' }); edit = false">
+  <app-common-edit *ngIf="edit"
+                   [configuration]="{ endpoint: 'fonctions', name: 'fonction', hasDescription: true, item: fonctionService.singleData, submitButtonClass: 'btn-primary' }"
+                   [extraFields]="{ ministere: ministere?.id, ambassade: ambassade?.id, consulat: consulat?.id }"
+                   (itemEdited)="onFonctionEdit($event.item)">
+  </app-common-edit>
+</app-modal>

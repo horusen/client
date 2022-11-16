@@ -1,0 +1,79 @@
+<form class="custom-placeholder"
+      [formGroup]="form"
+      *ngIf="isFormOk"
+      (submit)="edit()">
+
+  <!-- Ville -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <div class="col-10">
+      <!-- Label -->
+      <label class="control-label"
+             for="pays">
+        {{ 'VILLE' | translate }}
+      </label>
+
+      <angular2-multiselect [data]="villes"
+                            [settings]="villeDropdownSettings"
+                            formControlName="ville"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'ville'), 'is-valid': isValid('ville')}"
+                            class="form-control form-control-sm">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('ville')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignezLaVille' | translate }}.
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Adresse-->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <div class="col-10">
+      <!-- Label -->
+      <label class="control-label"
+             for="addresse">
+        {{ 'ADRESSE' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'addresse'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'addresse'), 'is-valid': isValid('addresse')}">
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('addresse')"
+           class="invalid-feedback">
+        {{ 'veuillezSaisirLAdresse' |translate }}.</div>
+    </div>
+  </div>
+
+
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-10 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1"
+              type="submit"
+              [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+
+      <!-- Bouton reset -->
+      <button class="btn btn-sm border btn-link"
+              type="button"
+              (click)="initialiseForm()">
+        {{ 'REINITIALISER' | translate }}
+      </button>
+    </div>
+  </div>
+</form>
+
+<app-loading *ngIf="!isFormOk"></app-loading>

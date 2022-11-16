@@ -1,0 +1,88 @@
+<div class=" row m-0"
+     id="chatPeopleList">
+  <div class="col-12 p-0">
+    <form class="custom-placeholder"
+          [formGroup]="form"
+          *ngIf="form"
+          (submit)="applyfilter()">
+
+      <!-- Filtrer par Continent -->
+      <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+        <div class="col-12">
+          <!-- Label -->
+          <label class="control-label"
+                 for="continent">
+            {{ 'CONTINENTS' | translate }}
+            <i class="fad fa-circle-notch fa-spin"
+               *ngIf="dependanciesLoading.continents"></i>
+          </label>
+
+          <angular2-multiselect [data]="dependancies.continents"
+                                (click)="getContinents()"
+                                [settings]="dropdownSettingsAlt.multi"
+                                formControlName="continents"
+                                class="form-control form-control-sm">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+
+      <!-- Langue -->
+      <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+        <div class="col-12">
+          <!-- Label -->
+          <label class="control-label"
+                 for="langue">
+            {{ 'LANGUES' | translate }}
+            <i class="fad fa-circle-notch fa-spin"
+               *ngIf="dependanciesLoading.langues"></i>
+          </label>
+
+          <angular2-multiselect [data]="dependancies.langues"
+                                (click)="getLangues()"
+                                [settings]="dropdownSettingsAlt.multi"
+                                formControlName="langues"
+                                class="form-control form-control-sm">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+
+      <!-- Etat -->
+      <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+        <div class="col-12">
+          <div class="form-group trier">
+            <label for="etat"
+                   class="control-label">{{ 'ETAT' | translate}}</label>
+            <select class="custom-select"
+                    (change)="selectFormHandler('etats', [$event.target.value])"
+                    id="etat">
+              <option [selected]="!formValue('etats')"
+                      [value]="''">--{{ 'SELECT' | translate }}--</option>
+              <option [selected]="formValue('etats') ? formValue('etats')[0] === 1 : false"
+                      [value]="1"> {{ 'OUVERTE' | translate }}</option>
+              <option [selected]="formValue('etats') ? formValue('etats')[0] === 0 : false"
+                      [value]="1"> {{ 'FERMEE' | translate }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <!-- Boutton validation -->
+      <div class="d-flex justify-content-center mb-3">
+        <div class="col-12 text-right">
+          <!-- Boutton sumit -->
+          <button class="btn btn-sm btn-block btn-primary mr-1">
+            <i class="fad fa-circle-notch fa-spin"
+               *ngIf="loading"></i>
+            {{ 'VALIDER' | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

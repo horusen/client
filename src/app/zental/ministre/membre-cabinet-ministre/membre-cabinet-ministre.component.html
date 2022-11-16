@@ -1,0 +1,40 @@
+<!-- Liste des membres du cabinets -->
+<div class="row row-xs clearfix mg-0 pd-0  ">
+  <div class="col-lg-12 pl-2 pt-2 pr-4">
+    <div class="">
+      <h5 class="pt-2 pb-2 tx-bold tx-16">
+        <i class="fad fa-user-circle  tx-20"></i>
+        {{ 'listeDesMembresDuCabinet' | translate }}
+      </h5>
+    </div>
+
+    <!-- Header: research, filter, add -->
+    <app-main-header [id]="'membre-cabinet'"></app-main-header>
+
+    <!-- List of elements -->
+    <app-membre-cabinet-ministre-list></app-membre-cabinet-ministre-list>
+
+
+
+  </div>
+</div>
+
+
+
+<app-modal [configuration]="{ name: 'membre-cabinet-create-modal', titre: 'membresCabinetMinistre', icone: 'users-crown' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-membre-cabinet-ministre-create *ngIf="create"></app-membre-cabinet-ministre-create>
+</app-modal>
+
+
+<app-modal [configuration]="{ name: 'membre-cabinet-edit-modal', titre: 'membresCabinetMinistre', icone: 'users-crown'}"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-membre-cabinet-ministre-edit *ngIf="edit"></app-membre-cabinet-ministre-edit>
+</app-modal>
+
+
+<!-- Filtre -->
+<app-modal-sidebar [configuration]="{name: 'membre-cabinet-filter-modal', titre: 'FILTRE', icone: 'filter'}"
+                   (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-filtre-membre-cabinet-ministre *ngIf="filter"></app-filtre-membre-cabinet-ministre>
+</app-modal-sidebar>

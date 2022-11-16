@@ -1,0 +1,95 @@
+<!-- Nav bar -->
+<div class="card mg-b-20">
+  <div class=" collapse show"
+       id="collapse9">
+    <ul class="nav bd-b bd-2 bd-facebook">
+      <!-- Civile -->
+      <li class="nav-item ">
+        <a class="nav-link tx-echos"
+           [routerLink]="['./']"
+           [routerLinkActiveOptions]="{ exact: true }"
+           [routerLinkActive]="'font-weight-bold'"
+           [queryParamsHandling]="'preserve'">
+          <i class="fal fa-id-card-alt  tx-20"
+             [routerLinkActiveOptions]="{ exact: true }"
+             [routerLinkActive]="'fas'">
+          </i>
+          {{ 'CIVILE' | translate }}
+        </a>
+      </li>
+
+      <li class="nav-item ">
+        <a class="nav-link  tx-echos"
+           [routerLink]="['famille']"
+           [routerLinkActive]="'font-weight-bold'"
+           [queryParamsHandling]="'preserve'">
+          <i class="fal fa-house-day  tx-20"
+             [routerLinkActive]="'fas'">
+          </i>
+          {{ 'FAMILLE' | translate }}
+        </a>
+      </li>
+
+      <!-- Contact -->
+      <li class="nav-item">
+        <a class="nav-link tx-echos"
+           [routerLink]="['contact']"
+           [routerLinkActive]="'font-weight-bold'"
+           [queryParamsHandling]="'preserve'">
+          <i class="fal fa-address-book  tx-20"
+             [routerLinkActive]="'fas'"></i>
+          {{ 'CONTACTS' | translate }}
+        </a>
+      </li>
+
+      <!-- Etudes -->
+      <li class="nav-item">
+        <a class="nav-link tx-echos"
+           [routerLink]="['diplome']"
+           [routerLinkActive]="'font-weight-bold'"
+           [queryParamsHandling]="'preserve'">
+          <i class="fal fa-graduation-cap  tx-20"
+             [routerLinkActive]="'fas'">
+          </i>
+          {{ 'ETUDES' |translate }}
+        </a>
+      </li>
+
+
+      <!-- Emploie -->
+      <li class="nav-item">
+        <a class="nav-link tx-echos"
+           [routerLink]="['emploie']"
+           [routerLinkActive]="'font-weight-bold'"
+           [queryParamsHandling]="'preserve'">
+          <i class="fal fa-chair-office  tx-20"
+             [routerLinkActive]="'fas'">
+          </i>
+          {{ 'EMPLOIE' | translate }}
+        </a>
+      </li>
+
+
+      <!-- Relation -->
+      <li class="nav-item">
+        <a class="nav-link tx-echos"
+           [routerLink]="['pieces-consulaires']"
+           [routerLinkActive]="'font-weight-bold'"
+           [queryParamsHandling]="'preserve'">
+          <i class="fal fa-file-certificate  tx-20"
+             [routerLinkActive]="'fas'">
+          </i>
+          {{ 'piecesConsulaires' | translate }}
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade active show"
+           id="identite_civile">
+        <router-outlet></router-outlet>
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="bd-t bd-b">
+  <!-- Titre -->
+  <div class=" row row-xs clearfix pt-3  pl-2 pr-4"
+       style="z-index: auto !important;">
+    <div class="col-lg-12 ">
+      <h6 class=""><i class="fad fa-circle  "
+           style="padding:6px; border-radius: 50%; "></i>
+        {{ 'informationDu' + typeMembreFamille | translate }}
+
+        <!--  -->
+        <a [routerLink]="['./']"
+           *ngIf="!relationFamiliale && !loading && (router.url.includes('identite') && user.id_inscription === auth.user.id_inscription)"
+           class="
+           float-right"
+           (click)="create.emit()">
+          <i class="fad fa-plus-circle"></i>
+        </a>
+
+        <a [routerLink]="['./']"
+           *ngIf="(relationFamiliale && !loading) && (router.url.includes('identite') && user.id_inscription === auth.user.id_inscription)"
+           class="
+           float-right"
+           (click)="supprimer()">
+          <i class="fad fa-trash-alt"></i>
+        </a>
+      </h6>
+    </div>
+  </div>
+
+  <app-identite-information [user]='relationFamiliale?.membre_famille'
+                            *ngIf="relationFamiliale && !loading">
+  </app-identite-information>
+
+
+  <app-missing-data-alt *ngIf="!relationFamiliale && !loading"></app-missing-data-alt>
+
+  <app-loading *ngIf="loading"></app-loading>
+</div>

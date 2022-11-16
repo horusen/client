@@ -1,0 +1,80 @@
+<!-- Header navigation -->
+<div class=" cardbarre">
+  <div class="row row-xs justify-content-between align-items-center p-2 mg-0 pd-0  ">
+    <!-- Recherche -->
+    <div style="position: relative;">
+      <div class="form-group mb-0 d-flex align-items-center  ">
+        <!-- Search field -->
+        <div class="input-group"
+             [style.width.px]="searchInputWidth">
+          <input type="text"
+                 class="form-control pd-y-10 "
+                 (keyup.enter)="research(search.value)"
+                 #search
+                 [attr.placeholder]="('RECHERCHER' | translate) + '...'"
+                 style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+        </div>
+
+      </div>
+      <div class=""
+           style="position: absolute; top: 42px; z-index: 20000;">
+        <a [routerLink]="['./']"
+           [queryParams]="{ search: null }"
+           [queryParamsHandling]="'merge'"
+           class="tx-10 text-danger mr-1"
+           *ngIf="searchActive"
+           (click)="search.value = ''">
+          <span class=" mr-1"><i class="fal fa-times-circle"></i></span>
+          {{ 'annulerLaRecherche' | translate }}
+        </a>
+      </div>
+    </div>
+
+    <ng-content>
+
+    </ng-content>
+
+
+    <!-- Autres elemenst -->
+    <div>
+      <ul class="nav ">
+        <!-- Filtre -->
+        <li class="nav-item tx-ether d-flex align-items-center mr-2"
+            *ngIf="hasFilter">
+          <!-- Afficher la liste des filtres -->
+          <a class="nav-link3  tx-yeto"
+             [routerLink]="['./']"
+             [fragment]="'showFilter'"
+             [queryParamsHandling]="'merge'">
+            <i class="fal fa-filter  tx-14 "
+               style="padding:6px; border-radius:50%"></i>
+            {{ 'FILTRE' | translate}}
+          </a>
+
+          <!-- Annuler les filres -->
+          <a [routerLink]="['./']"
+             [queryParams]="{ filter: null }"
+             [queryParamsHandling]="'merge'"
+             class="tx-14 text-danger"
+             *ngIf="filterActive">
+            <span class=""><i class="fal fa-times-circle"></i></span>
+          </a>
+
+        </li>
+
+        <!-- Ajouter -->
+        <li class="nav-item tx-ether"
+            *ngIf="hasAddButton">
+          <a class="nav-link3  tx-yeto mr-2"
+             [routerLink]="['./']"
+             [fragment]="'add' + (id ? '-' + id : '')"
+             [queryParamsHandling]="'merge'">
+            <i class="fal fa-plus  tx-14 "
+               style="padding:6px; border-radius:50%"></i>
+            {{ 'NOUVEAU' | translate }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

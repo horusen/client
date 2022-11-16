@@ -1,0 +1,512 @@
+<div class="pl-2 pt-2">
+  <h5 class="d-inline-block">
+    <!-- boutton precedent -->
+    <a [routerLink]="['..']"
+       [ngbTooltip]="'revenirEnArriere' | translate"
+       class="p-2 mr-2 tx-15  d-flex border rounded-circle align-items-center justify-content-center">
+      <i class="fad fa-arrow-left"></i>
+    </a>
+
+  </h5>
+</div>
+
+<div class="row row-xs clearfix  mg-0 pd-0 p-0 pt-4 "
+     *ngIf="single">
+  <!-- Left sidebar -->
+  <div class=" col-lg-3 pr-2  pl-4">
+    <div class="row row-xs clearfix pt-4 bd-b pb-2 mg-0 pd-0 bg-light ">
+      <div class="col-lg-12">
+        <!-- <h6 class="text-center tx-ether">{{ single.pays_siege.libelle }}</h6> -->
+        <div class="image text-center pb-2">
+          <img [src]="single.pays_origine.drapeau"
+               class="rounded"
+               width="80">
+        </div>
+        <h6 class="text-center tx-ether">{{ ('LIAISON' | translate) + ': ' + single.pays_origine.libelle + ' - ' + single.pays_siege.libelle }}</h6>
+        <p class="text-center mb-0 ether2"> {{ single.pays_origine.libelle }}</p>
+        <p class="text-center tx-warning tx-12	"> {{ 'DEPUIS' | translate }} : {{ single.date_creation }} </p>
+
+        <!-- <p class="text-center tx-ether2 tx-14	"> Unité - Travail - Progrés</p> -->
+      </div>
+    </div>
+    <div class=" text-center pt-1 pb-1 ">
+      <a class="ml-2"> <i class="fad fa-comment-alt-lines tx-echos2 bg-bluelight"
+           style="padding:10px; border-radius:50%"></i></a>
+
+      <!-- edit  -->
+      <a class="ml-2">
+        <i class="fad fa-page-break tx-echos2 bg-bluelight"
+           style="padding:6px; border-radius:50%"></i>
+      </a>
+
+      <!-- affecter à bureau  -->
+      <a class="ml-2"
+         [routerLink]="['./']"
+         [ngbTooltip]="'affecterUnBureau' | translate"
+         (click)="affecterLiaison()">
+        <i class="fad fa-exchange tx-echos2 bg-bluelight"
+           style="padding:6px; border-radius:50%"></i>
+      </a>
+    </div>
+
+
+  </div>
+
+
+  <!-- Main content -->
+  <div class=" col-lg-9 pr-2 ">
+    <!-- Call to actions buttons -->
+    <div class="col-md-12 col-lg-12 p-0">
+
+      <div class=" collapse show"
+           id="collapse4">
+
+        <!-- Inscription consulaire -->
+        <ng-container>
+
+          <!-- se déclarer -->
+          <a [routerLink]="['./']"
+             *ngIf="!single.user_inscription_consulaire"
+             (click)="checkEligibiliteInscriptionConsulaire()"
+             class="btn btn-brand btn-css3 mr-2 p-0 ">
+
+            <!-- Ione -->
+            <i class="fas fa-link m-0"
+               *ngIf="!inscriptionConsulaireLoading"
+               style="line-height: 30px;"></i>
+
+            <!-- Loading -->
+            <i class="fad fa-circle-notch fa-spin m-0 "
+               style="line-height: 30px;"
+               *ngIf="inscriptionConsulaireLoading"></i>
+            <span class="p-3 m-0"> {{ 'seDeclarer' | translate }}</span>
+          </a>
+
+
+          <!-- annuler déclaration -->
+          <a [routerLink]="['./']"
+             *ngIf="single.user_inscription_consulaire === 1"
+             (click)="annulerInscriptionConsulaire()"
+             class="btn btn-brand btn-css3 border mr-2 p-0 ">
+
+            <!-- Ione -->
+            <i class="fas fa-file-times m-0"
+               *ngIf="!inscriptionConsulaireLoading"
+               style="line-height: 30px;"></i>
+
+            <!-- Loading -->
+            <i class="fad fa-circle-notch fa-spin m-0 "
+               style="line-height: 30px;"
+               *ngIf="inscriptionConsulaireLoading"></i>
+            <span class="p-3 m-0"> {{ 'annulerDeclaration' | translate }}</span>
+          </a>
+
+
+          <!-- Quitter espace consulaire -->
+          <a [routerLink]="['./']"
+             *ngIf="single.user_inscription_consulaire === 2"
+             (click)="quitter()"
+             class="btn btn-brand btn-css3 mr-2 p-0 ">
+
+            <!-- Ione -->
+            <i class="fas fa-portal-exit m-0"
+               *ngIf="!inscriptionConsulaireLoading"
+               style="line-height: 30px;"></i>
+
+            <!-- Loading -->
+            <i class="fad fa-circle-notch fa-spin m-0 "
+               style="line-height: 30px;"
+               *ngIf="inscriptionConsulaireLoading"></i>
+            <span class="p-3 m-0"> {{ 'QUITTER' | translate }}</span>
+          </a>
+
+
+        </ng-container>
+
+        <!-- Bureau -->
+        <a *ngIf="single.bureau"
+           [routerLink]="['/', 'administration', 'bureaux', single.bureau.id]"
+           class="btn btn-brand p-0 mr-2 btn-github">
+          <i class="fas fa-chair-office m-0"
+             style="line-height: 30px;"></i><span class="p-3 m-0">{{ 'BUREAU' | translate }}</span>
+        </a>
+
+
+
+        <!-- Ambassade -->
+        <a [routerLink]="['/', 'ambassades', single.ambassade.id]"
+           *ngIf="single.ambassade"
+           class="btn btn-brand p-0 mr-2 btn-dropbox">
+          <i class="fas fa-landmark m-0"
+             style="line-height: 30px;"></i><span class="p-3 m-0"> {{ 'AMBASSADE' | translate }}</span>
+        </a>
+
+
+        <!-- consulat -->
+        <a [routerLink]="['/', 'consulats', single.consulat.id]"
+           *ngIf="single.consulat"
+           class="btn btn-brand p-0 mr-2 btn-dropbox">
+          <i class="fas fa-landmark m-0"
+             style="line-height: 30px;"></i><span class="p-3 m-0"> {{ 'CONSULAT' | translate }}</span>
+        </a>
+
+
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div class="card mg-b-20">
+      <div class=" collapse show"
+           id="collapse9">
+        <!-- Liste de navigation -->
+        <ul class="nav bd-b bd-2 bd-facebook">
+          <!-- Liste des citoyens -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos "
+               [routerLink]="['citoyens']"
+               [routerLinkActive]="' active font-weight-bold '">
+              <i class="fad fa-user-crown  tx-20"></i>
+              {{ 'CITOYENS' | translate }}
+            </a>
+          </li>
+
+          <!-- Groupements -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               data-toggle="tab"
+               href="#les_groupements"><i class="fad fa-users  tx-20"></i> Groupements</a>
+          </li>
+
+
+          <!-- Services -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               *ngIf="single.bureau"
+               [routerLink]="['services']"
+               [routerLinkActive]="' active font-weight-bold '">
+              <i class="fad fa-ball-pile  tx-20"></i>
+              {{ 'SERVICES' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Employes -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               *ngIf="single.bureau"
+               [routerLink]="['employes']"
+               [routerLinkActive]="' active font-weight-bold '">
+              <i class="fad fa-sitemap  tx-20"></i>
+              {{ 'ressourcesHumaines' | translate }}
+            </a>
+          </li>
+
+
+
+          <!-- Inscriptions-consulaires -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               *ngIf="single.bureau"
+               [routerLink]="['/', 'administration', 'bureaux', single.bureau?.id, 'admin' ,'inscriptions-consulaires']"
+               [routerLinkActive]="'active font-weight-bold'">
+              <i class="fad fa-file-certificate  tx-20"></i>
+              {{ 'inscriptionsConsulaires' | translate }}
+            </a>
+          </li>
+
+        </ul>
+        <div class="tab-content">
+
+          <div class="tab-pane fade active show"
+               id="les_citoyens">
+            <router-outlet></router-outlet>
+            <!-- <div class="row row-xs clearfix mg-0 pd-0  ">
+              <div class="col-lg-12 pl-2 pt-2 pr-4">
+                <div class="">
+                  <h5 class="pt-2 pb-2 tx-bold tx-16"><i class="fad fa-bars  tx-20"></i> Tapez un nom
+                    pour rechercher un ressortissant de chez vous </h5>
+                </div>
+                <div class=" mycard4 mt-4">
+                  <div class="d-flex justify-content-between mg-0 pd-0  ">
+                    <div class="col-lg-5">
+                      <div class="form-group  pl-2">
+                        <div class="input-group pt-2"
+                             style="width:340px">
+                          <input type="text"
+                                 class="form-control pd-y-10  tx-white"
+                                 placeholder="Recherche..."
+                                 style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-5">
+                      <div class="input-group pt-2 ">
+                        <select class="custom-select border-0  bg-light"
+                                id="inputGroupSelect02">
+                          <option selected> Profils ...</option>
+                          <option value="1"> Etudiants</option>
+                          <option value="2"> Travailleurs</option>
+                          <option value="3"> Etudiant - Travailleur</option>
+                          <option value="3"> Transitaires</option>
+                          <option value="3"> Neutres</option>
+                          <option value="3"> Diplômates</option>
+
+                        </select>
+                        <select class="custom-select border-0  bg-light"
+                                id="inputGroupSelect02">
+                          <option selected> Domaines...</option>
+                          <option value="1"> Académique</option>
+                          <option value="2"> Business</option>
+                          <option value="3"> Partenariat</option>
+                          <option value="3"> Diplômatique</option>
+                        </select>
+                        <select class="custom-select border-0 bg-light "
+                                id="inputGroupSelect02">
+                          <option selected> Sous domaine...</option>
+                          <option value="1"> Important</option>
+                          <option value="2"> Moins Important</option>
+                        </select>
+
+                      </div>
+                    </div>
+                    <div class="col-lg-2  pt-2">
+                      <ul class="nav ">
+                        <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto "
+                             data-toggle="tab"
+                             href="#filtrer"><i class="fal fa-filter  tx-14 "
+                               style="padding:6px; border-radius:50%"></i> Filtrer</a></li>
+                      </ul>
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+
+              </div>
+
+
+
+            </div> -->
+          </div>
+          <div class="tab-pane fade "
+               id="les_groupements">
+          </div>
+          <div class="tab-pane fade "
+               id="les-services">
+            <div class="row row-xs clearfix pt-4 bd-b pb-2 mg-0 pd-0  ">
+
+              <div class="col">
+                <div class="image text-center"> <img class="rounded-circle ml--10"
+                       src="assets/images/xs/avatar4.jpg"
+                       alt="avatar"
+                       width="100"> </div>
+                <h6 class="text-center tx-ether pt-2"> Son Excellence Monsieur le Ministre des Affaires
+                  Etrangères</h6>
+                <h6 class="text-center tx-ether pt-2"> Jean - Claude GAKOSSO</h6>
+                <p class="text-center">
+                  <span class=""> Congo</span>
+                  <span class=""> || </span>
+                  <span class="tx-bold"> Brazzaville </span>
+                </p>
+              </div>
+            </div>
+            <div class="row row-xs clearfix mg-0 pd-0  ">
+              <div class="col-lg-12 pl-2 pt-2 pr-4">
+                <div class="">
+                  <h5 class="pt-2 pb-2 tx-bold tx-16"><i class="fad fa-user-circle  tx-20"></i> Liste
+                    des membres du cabinet </h5>
+                </div>
+                <div class=" mycard4 mt-4">
+                  <div class="d-flex justify-content-between mg-0 pd-0  ">
+                    <div class="col-lg-5">
+                      <div class="form-group  pl-2">
+                        <div class="input-group pt-2"
+                             style="width:340px">
+                          <input type="text"
+                                 class="form-control pd-y-10  tx-white"
+                                 placeholder="Recherche..."
+                                 style="border-radius: 50px 50px 50px 50px; background-image: linear-gradient(to right,#f3f4f5,#f3f4f5); ">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-group pt-2 ">
+                        <select class="custom-select border-0  bg-light"
+                                id="inputGroupSelect02">
+                          <option selected> Profils ...</option>
+                          <option value="1"> Etudiants</option>
+                          <option value="2"> Travailleurs</option>
+                          <option value="3"> Etudiant - Travailleur</option>
+                          <option value="3"> Transitaires</option>
+                          <option value="3"> Neutres</option>
+                          <option value="3"> Diplômates</option>
+
+                        </select>
+                        <select class="custom-select border-0  bg-light"
+                                id="inputGroupSelect02">
+                          <option selected> Domaines...</option>
+                          <option value="1"> Académique</option>
+                          <option value="2"> Business</option>
+                          <option value="3"> Partenariat</option>
+                          <option value="3"> Diplômatique</option>
+                        </select>
+                        <select class="custom-select border-0 bg-light "
+                                id="inputGroupSelect02">
+                          <option selected> Sous domaine...</option>
+                          <option value="1"> Important</option>
+                          <option value="2"> Moins Important</option>
+                        </select>
+
+                      </div>
+                    </div>
+                    <div class="col-lg-3  pt-2">
+                      <ul class="nav ">
+                        <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto "
+                             data-toggle="tab"
+                             href="#filtrer"><i class="fal fa-filter  tx-14 "
+                               style="padding:6px; border-radius:50%"></i> Filtrer</a></li>
+                        <li class="nav-item tx-ether"><a class="nav-link3  tx-yeto "
+                             data-toggle="tab"
+                             href="#filtrer"><i class="fal fa-plus  tx-14 "
+                               style="padding:6px; border-radius:50%"></i> Nouveau</a></li>
+                      </ul>
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row row-xs clearfix mg-0 pd-0 pt-4 p-2">
+                  <div class="col-lg-3">
+                    <div class="mycard4 ">
+                      <div class="avatar5"> <img class="rounded-circle "
+                             src="assets/images/xs/avatar7.jpg"
+                             alt="avatar"
+                             width="70"> </div>
+                      <div class="mycard-text pt-4 pb-2">
+                        <span class="date tx-bold tx-yeto tx-16"> Backoulas Fortuné Alain
+                          Junior</span>
+                        <p class="mb-0 "><small> Inscrit dépuis le: 23 Septembre 2021</small></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="mycard4 ">
+                      <div class="avatar5"> <img class="rounded-circle "
+                             src="assets/images/xs/avatar7.jpg"
+                             alt="avatar"
+                             width="70"> </div>
+                      <div class="mycard-text pt-4 pb-2">
+                        <span class="date tx-bold tx-yeto tx-16"> Backoulas Fortuné Alain
+                          Junior</span>
+                        <p class="mb-0 "><small> Inscrit dépuis le: 23 Septembre 2021</small></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="mycard4 ">
+                      <div class="avatar5"> <img class="rounded-circle "
+                             src="assets/images/xs/avatar7.jpg"
+                             alt="avatar"
+                             width="70"> </div>
+                      <div class="mycard-text pt-4 pb-2">
+                        <span class="date tx-bold tx-yeto tx-16"> Backoulas Fortuné Alain
+                          Junior</span>
+                        <p class="mb-0 "><small> Inscrit dépuis le: 23 Septembre 2021</small></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="mycard4 ">
+                      <div class="avatar5"> <img class="rounded-circle "
+                             src="assets/images/xs/avatar7.jpg"
+                             alt="avatar"
+                             width="70"> </div>
+                      <div class="mycard-text pt-4 pb-2">
+                        <span class="date tx-bold tx-yeto tx-16"> Backoulas Fortuné Alain
+                          Junior</span>
+                        <p class="mb-0 "><small> Inscrit dépuis le: 23 Septembre 2021</small></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card-body collapse show"
+                       id="collapse5">
+                    <nav>
+                      <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                          <a class="page-link"
+                             href="#"
+                             tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item"><a class="page-link"
+                             href="#">1</a></li>
+                        <li class="page-item"><a class="page-link"
+                             href="#">2</a></li>
+                        <li class="page-item"><a class="page-link"
+                             href="#">3</a></li>
+                        <li class="page-item">
+                          <a class="page-link"
+                             href="#">Next</a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Loading -->
+<div class="my-5"
+     *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+
+
+
+<!-- Affectation liaison bureau -->
+<app-modal [configuration]="{ name: 'affecter-liaison-modal', titre: 'affecterUneliaison', icone: 'exchange', taille: 'md' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-affecter-liaison *ngIf="affecter"
+                        [liaison]="single">
+  </app-affecter-liaison>
+</app-modal>
+
+
+<!-- Modifier liaison -->
+<app-modal [configuration]="{ name: 'liaison-edit-modal', titre: 'modifierLesDetailsDeLaLiaison', icone: 'link' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' }); edit = false">
+  <app-liaison-edit *ngIf="edit"></app-liaison-edit>
+</app-modal>
+
+
+<!-- Se declare -->
+<app-modal [configuration]="{ name: 'inscription-consulaire-modal', titre: 'ajouterUnJustificatifDeResidence', icone: 'file-certificate' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve'})">
+  <app-inscription-consulaire-create [parent]="{ name: 'liaison', item: single?.liaison }"
+                                     *ngIf="inscriptionConsulaire && single.liaison">
+  </app-inscription-consulaire-create>
+</app-modal>
+
+
+<!-- Motif inscription consulaire -->
+<app-modal [configuration]="{ name: 'motif-inscription-consulaire-modal', titre: 'motifQuitterServiceConsulaire', icone: 'file-certificate' }">
+  <app-motif-inscription-consulaire [user]="auth.user.id_inscription"
+                                    *ngIf="redigerMotif"
+                                    (done)="onMotifTermine()"
+                                    [etatInscriptionConsulaire]="5">
+  </app-motif-inscription-consulaire>
+</app-modal>

@@ -1,0 +1,37 @@
+<section class="py-0 font-1">
+  <div class="container-fluid ">
+    <div class="row h-full ">
+
+      <div class="col-lg-2  pl-4 pt-8  pl-4 text-left ">
+
+      </div>
+
+      <div class="col-lg-6 text-center  ml-8">
+        <a class="navbar-brand overflow-hidden "
+           href="o2sw.html">
+          <img src='assets/images/o2sw.svg'
+               alt='logo'
+               width='140px'>
+        </a>
+        <span class="d-block mb-3 pt-8"><i class="fad fa-at color-11 tx-18 bg-nfacebook"
+             style="padding:10px; border-radius:50%"></i></span>
+        <h3 class="fw-300 mb-5 tx-nfacebook"> {{ 'validationMail' | translate }}</h3>
+        <h5 class="fw-300  tx-nfacebook"> {{ 'cetteAddresseMailNAPasEncoreValideeSonInscription' | translate }}.</h5>
+        <h5 class="fw-300 mb-5 tx-nfacebook">{{ 'nousVousPrionsDeBienValiderVotreMail' | translate }}.</h5>
+
+        <hr class="color-9 mt-6">
+        <div class="fs--1 ">{{ 'cliquerIciPourEnvoyerUnAutreMail' | translate }}
+          <a class="tx-norange "
+             [routerLink]="['./']"
+             (click)="resendEmailVerification(auth.user.id_inscription)"> {{ 'cliquerIci' | translate }}
+            <i class="fad fa-circle-notch fa-spin"
+               *ngIf="loading"></i>.</a>
+        </div>
+        <hr class="color-9">
+      </div>
+      <div class="col-lg-2  pl-4 pt-8  pl-4 text-left ">
+
+      </div>
+    </div>
+  </div>
+</section>

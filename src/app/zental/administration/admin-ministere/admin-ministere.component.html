@@ -1,0 +1,9 @@
+<router-outlet></router-outlet>
+
+
+
+
+<app-modal [configuration]="{ name: 'ministere-create-modal', titre: 'ajouterUnMinistere', icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-ministere-create *ngIf="create"></app-ministere-create>
+</app-modal>

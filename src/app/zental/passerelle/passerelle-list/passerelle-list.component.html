@@ -1,0 +1,92 @@
+<div class="row  row-xs clearfix p-2 pl-2"
+     *ngIf="passerelleService.data.length && !loading">
+  <div class=" col-lg-3  pt-2 pl-2 pr-2 pb-2"
+       *ngFor="let passerelle of passerelleService.data">
+    <div class="mycard4 ">
+      <!-- Drapeaux -->
+      <div class=" pt-2 pl-2 d-flex align-items-center justify-content-between bd-b border-danger">
+        <p class="tx-echos"> <img class=""
+               [src]="passerelle.pays_siege.drapeau"
+               [alt]="'drapeau-' + passerelle.pays_siege.libelle"
+               width="40"> {{ 'republiqueDu' | translate }} {{ passerelle?.pays_siege?.libelle }} </p>
+      </div>
+
+      <!-- icon -->
+      <div class="d-flex justify-content-center p-0">
+        <p class="mg-0 pb-4 text-center">
+          <span class=" pl-2"> <i class="fad fa-portal-enter  tx-40  bg-light "
+               style="padding:6px ; border-radius:50%"></i></span>
+
+        </p>
+      </div>
+
+      <!-- Type -->
+      <div class=" text-center ">
+        <span class="badge badge-pill  badge-danger  "> {{ 'PASSERELLE' | translate }}</span>
+
+        <p class="text-center">
+          <!-- Langue -->
+          <span class=""> Langue </span>
+          <span class=""> || </span>
+
+          <!-- Type passerelle -->
+          <span class=""> {{passerelle.type.libelle }} </span>
+          <span class=""> || </span>
+
+          <!-- passe -->
+          <span class=" tx-success-100 ">
+            {{ passerelle?.passe_frontiere.libelle }}
+          </span>
+        </p>
+      </div>
+
+
+      <!-- CTA -->
+      <div class=" justify-content-between p-0">
+        <p class="mg-0 pt-2">
+          <!-- details -->
+          <a [routerLink]="[passerelle.id]"
+             class=" pl-2"> <i class="fad fa-eye bg-white"
+               style="padding:6px ; border-radius:50%"></i>
+          </a>
+
+          <!-- Edit -->
+          <a class=" pl-2"
+             [routerLink]="['./']"
+             [fragment]="'edit-passerelle'"
+             (click)="modifier(passerelle)">
+            <i class="fad fa-edit bg-white"
+               style="padding:6px ; border-radius:50%"></i>
+          </a>
+
+          <!-- Supprimer -->
+          <a class=" pl-2"
+             (click)="supprimer(passerelle.id)"
+             [routerLink]="['./']">
+            <i class="fad fa-trash-alt bg-white"
+               style="padding:6px ; border-radius:50%"></i>
+          </a>
+
+          <!-- Discussion -->
+          <span class=" pl-2"> <i class="fad fa-comment-alt-lines bg-white"
+               style="padding:6px ; border-radius:50%"></i></span>
+
+
+          <!-- Liaison -->
+          <span class=" pl-2"> <i class="fad fa-link bg-light  tx-echos "
+               style="padding:6px ; border-radius:50%"></i></span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<div class="my-5"
+     *ngIf="loading || !passerelleService.data.length">
+  <app-missing-data-alt *ngIf="!loading && !passerelleService.data.length"></app-missing-data-alt>
+  <app-loading *ngIf="loading"></app-loading>
+</div>

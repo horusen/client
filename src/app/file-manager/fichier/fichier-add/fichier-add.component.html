@@ -1,0 +1,63 @@
+<div class="d-flex justify-content-between slide-bottom">
+    <!-- Image -->
+    <div (click)="imageUpload.click()">
+        <div class="pd-y-10 pd-x-10 clickable">
+            <i class="fal fa-image bg-light tx-danger tx-24" style="padding: 15px; border-radius: 50%;"></i>
+        </div>
+        <p class="text-center tx-danger clickable">{{ 'IMAGE' | translate }}</p>
+    </div>
+
+
+    <!-- Document -->
+    <div (click)="documentUpload.click()">
+        <div class="pd-y-10 pd-x-10 clickable">
+            <i class="fal fa-file-pdf bg-light tx-facebook tx-24" style="padding: 15px; border-radius: 50%;"></i>
+        </div>
+        <p class="text-center tx-facebook clickable">{{ 'DOCUMENT' | translate }}</p>
+    </div>
+
+
+    <div>
+        <div class="pd-y-10 pd-x-10 clickable">
+            <i class="fal fa-music bg-light tx-success tx-24" style="padding: 15px; border-radius: 50%;"></i>
+        </div>
+        <p class="text-center tx-success clickable">{{ 'AUDIO' | translate }}</p>
+    </div>
+</div>
+
+
+
+
+
+<form [formGroup]="form">
+    <!-- Pdf input -->
+    <!-- <input
+    type="file"
+    accept="application/pdf"
+    [hidden]="true"
+    #documentUpload
+    (change)="pdfFileProcess($event)"> -->
+
+    <!-- Image input -->
+    <input
+        type="file"
+        [hidden]="true"
+        accept="image/x-png,image/gif,image/jpeg"
+        #imageUpload
+        (change)="imageFileAdded($event)">
+    <!-- Pdf input -->
+    <input
+        type="file"
+        (change)="imageFileAdded($event)"
+        accept="application/pdf"
+        [hidden]="true"
+        #documentUpload>
+
+    <!-- Image input -->
+    <!-- <input
+        type="file"
+        (change)="log('test')"
+        accept="image/x-png,image/gif,image/jpeg"
+        [hidden]="true"
+        #imageUpload> -->
+</form>

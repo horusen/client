@@ -1,0 +1,22 @@
+<div class="row row-xs clearfix  mg-0 pd-0">
+  <!-- Menu -->
+  <div class="col-lg-3 p-0 border-left"
+       style="border-color: #f0eeee">
+    <app-left-side-menu [parent]="{ name: 'user', item: auth.user }"></app-left-side-menu>
+  </div>
+
+
+  <!-- Discussion -->
+  <div class="col-lg-6  p-0">
+    <router-outlet></router-outlet>
+
+  </div>
+
+
+  <!-- Derniers conversation -->
+  <div class=" col-lg-3 p-0">
+    <app-dernieres-discussions [dialoguant]="{ type: 'user', id: auth.user.id_inscription }"></app-dernieres-discussions>
+  </div>
+
+
+</div>

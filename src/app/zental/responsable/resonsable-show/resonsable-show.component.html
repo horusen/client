@@ -1,0 +1,61 @@
+<ng-container *ngIf="responsable">
+  <!-- Ministre -->
+  <div class="row row-xs clearfix pt-4 bd-b pb-2 mg-0 pd-0  ">
+
+    <div class="col">
+      <div class="image text-center">
+        <!-- Image -->
+        <img class="rounded-circle ml--10"
+             [src]="responsable.item.employe.photo?.path"
+             alt="avatar"
+             width="100">
+
+        <a [routerLink]="['./']"
+           (click)="edit()"
+           [fragment]="'edit-' + name"
+           class="float-right"><i class="fad fa-edit"></i></a>
+      </div>
+
+
+      <!-- Honneurs -->
+      <h6 class="text-center tx-ether pt-2">
+        <!-- Ministre -->
+        <ng-container *ngIf="responsable.name === 'ministre'">
+          {{ (responsable.item.sexe === 'homme'
+          ? 'sonExcellenceMonsieurLeMinistreDesAffairesEtrangere'
+          : 'sonExcellenceMadameLaMinistreDesAffairesEtrangeres')
+          | translate }}
+        </ng-container>
+
+        <!-- Ambassadeur -->
+        <ng-container *ngIf="responsable.name === 'ambassadeur'">
+          {{ (responsable.item.sexe === 'homme'
+          ? 'sonExcellenceMonsieurLAmbassadeur'
+          : 'sonExcellenceMadameLAmbassadrice')
+          | translate }}
+        </ng-container>
+
+        <!-- consul -->
+        <ng-container *ngIf="responsable.name === 'consul'">
+          {{ (responsable.item.sexe === 'homme'
+          ? 'sonExcellenceMonsieurLeConsul'
+          : 'sonExcellenceMadameLaConsule')
+          | translate }}
+        </ng-container>
+      </h6>
+
+      <!-- NOm ministre -->
+      <h5 class="text-center tx-ether pt-2">{{ responsable.item.employe.nom_complet }}</h5>
+
+      <!-- Pays -->
+      <p class="text-center">
+        <span class=""> {{ responsable.institution.entite_diplomatique.pays_siege?.libelle }}</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Liste des membres du cabinets -->
+  <app-employe [parent]="{ name: responsable.institutionName, item: responsable.institution  }"
+               [titre]="'listeDesMembresDuCabinet' | translate">
+  </app-employe>
+</ng-container>

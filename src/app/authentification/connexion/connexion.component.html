@@ -1,0 +1,118 @@
+<section class="py-0 font-1">
+  <div class="container-fluid ">
+    <div class="row h-full ">
+      <!-- Left side image -->
+      <div class="col-lg-6  pl-4 pt-8  pl-4 text-left background-11">
+        <img src="assets/images/capturelog/fond_zental2.svg"
+             width="700">
+      </div>
+
+      <div class="col-lg-6  ">
+        <!-- Logo -->
+        <a class="navbar-brand overflow-hidden "
+           href="o2sw.html">
+          <img src="assets/images/o2sw.svg"
+               alt="logo"
+               width="140px">
+        </a>
+
+
+        <!-- Titre -->
+        ,<div class="text-center"
+             style="margin-top: 7.5rem;">
+          <span class="d-block mb-3 pt-8">
+            <i class="fad fa-user color-11 tx-18 bg-nfacebook"
+               style="padding:10px; border-radius:50%">
+            </i>
+          </span>
+          <h3 class="fw-300 mb-5 tx-nfacebook">{{ 'connectezVous' | translate }}</h3>
+        </div>
+
+
+        <div class="row justify-content-center h-100">
+          <div class="col-8">
+            <form class="custom-placeholder"
+                  [formGroup]="form"
+                  *ngIf="form"
+                  (submit)="connexion()">
+              <!-- Emal -->
+              <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+                <div class="col-12">
+                  <!-- Label -->
+                  <label class="control-label"
+                         for="email">
+                    {{ 'EMAIL' | translate }}
+                  </label>
+
+                  <!-- Input -->
+                  <input type="email"
+                         class="form-control form-control-sm"
+                         required
+                         [formControlName]="'email'"
+                         [ngClass]="{'is-invalid': shouldShowRequiredError( 'email'), 'is-valid': isValid('email')}">
+
+                  <!-- MEssage d'erreur -->
+                  <div *ngIf="shouldShowRequiredError('email')"
+                       class="invalid-feedback">
+                    {{ 'veuillezSasirVotreEmail' |translate }}.</div>
+                </div>
+              </div>
+
+
+              <!-- Mot de passe -->
+              <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+                <div class="col-12">
+                  <!-- Label -->
+                  <label class="control-label"
+                         for="libelle">
+                    {{ 'motDePasse' | translate }}
+                  </label>
+
+                  <!-- Input -->
+                  <input type="password"
+                         class="form-control form-control-sm"
+                         required
+                         [formControlName]="'password'"
+                         [ngClass]="{'is-invalid': shouldShowRequiredError( 'password'), 'is-valid': isValid('password')}">
+
+                  <!-- MEssage d'erreur -->
+                  <div *ngIf="shouldShowRequiredError('password')"
+                       class="invalid-feedback">
+                    {{ 'veuillezSaisirVotreMotDePasse' |translate }}.</div>
+                </div>
+              </div>
+
+
+
+
+              <!-- Boutton validation -->
+              <div class="d-flex justify-content-center mt-2">
+                <div class="col-12 text-right">
+                  <!-- Boutton sumit -->
+                  <button class="btn btn-sm btn-facebook mr-1"
+                          type="submit"
+                          [disabled]="form.invalid">
+                    <i class="fad fa-circle-notch fa-spin"
+                       *ngIf="loading"></i>
+                    {{ 'VALIDER' | translate }}
+                  </button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+
+        <footer>
+          <hr class="color-9 mt-6">
+          <div class="fs--1 ">{{ 'besoinDUnCompte' | translate }} ?
+            <a class="tx-norange "
+               [routerLink]="['/', 'inscription']"> {{ 'cliquezIci' | translate }}.</a>
+          </div>
+          <hr class="color-9">
+        </footer>
+      </div>
+    </div>
+  </div>
+</section>

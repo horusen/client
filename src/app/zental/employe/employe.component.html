@@ -1,0 +1,37 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 pb-2">
+    <i class="fad fa-circle  tx-20"></i>
+    {{ titre || ('ressourcesHumaines' | translate) }}
+  </h5>
+</div>
+
+
+<!-- header -->
+<app-main-header [id]="'rh'"></app-main-header>
+
+
+<app-employe-list [parent]="parent"></app-employe-list>
+
+
+
+
+<app-modal [configuration]="{ name: 'rh-create-modal', titre: 'ajouterUnEmploye', icone: 'user-tie' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-employe-create *ngIf="create"
+                      [parent]="parent"></app-employe-create>
+</app-modal>
+
+
+<!--
+<app-modal [configuration]="{ name: 'employe-edit-modal', titre: 'modifierLesDetailsDeLEmbassade', icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-employe-edit *ngIf="edit"></app-employe-edit>
+</app-modal>
+
+
+
+<app-modal-sidebar [configuration]="{ name: 'employe-filter-modal', titre: 'FILTRE', icone: 'landmark' }"
+                   (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-filter-employe *ngIf="filter"></app-filter-employe>
+</app-modal-sidebar> -->

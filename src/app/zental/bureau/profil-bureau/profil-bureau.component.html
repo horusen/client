@@ -1,0 +1,102 @@
+<app-profil-institution [parent]="{ name: 'buraeu', item: single }"
+                        *ngIf="single">
+
+  <a class="ml-2"
+     cta
+     [ngbTooltip]="'AFFECTER' | translate"
+     (click)="affecterBureau()"
+     [placement]="'bottom'"
+     [routerLink]="['./']">
+
+    <!-- Icone  -->
+    <i class="fad fa-exchange tx-echos2 bg-bluelight"
+       style="padding:6px; border-radius:50%"></i>
+
+  </a>
+
+  <ul class="nav bd-b bd-2 bd-facebook"
+      navigation-items>
+    <!-- Details -->
+    <li class="nav-item">
+      <a class="nav-link tx-echos"
+         [routerLink]="['./']"
+         [routerLinkActiveOptions]="{ exact: true }"
+         [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-landmark  tx-20"
+           [routerLinkActive]="'fas'"
+           [routerLinkActiveOptions]="{ exact: true }">
+        </i>
+        {{ 'DETAILS' | translate }}
+      </a>
+    </li>
+
+
+    <!-- Services -->
+    <li class="nav-item ">
+      <a class="nav-link  tx-echos"
+         [routerLink]="['services']"
+         [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-ball-pile  tx-20"
+           [routerLinkActive]="'fas'"></i>
+        {{ 'SERVICES' | translate }}
+      </a>
+    </li>
+
+
+
+
+    <!-- Citoyens -->
+    <li class="nav-item"
+        *ngIf="single.liaison">
+      <a class="nav-link tx-echos"
+         [routerLink]="['citoyens']"
+         [routerLinkActive]="'font-weight-bolder'">
+        <i class="fal fa-users-crown  tx-20"></i>
+        {{ 'CITOYENS' | translate }}
+
+        <span>({{ 'LIAISON' | translate }})</span>
+      </a>
+    </li>
+
+
+
+    <!-- Groupements -->
+    <li class="nav-item "
+        *ngIf="single.liaison">
+      <a class="nav-link  tx-echos"
+         [routerLink]="['']">
+        <i class="fal fa-users  tx-20"
+           [routerLinkActive]="'fas'">
+        </i>
+        {{ 'GROUPEMENTS' | translate }}
+
+        <span>({{ 'LIAISON' | translate }})</span>
+      </a>
+    </li>
+
+
+  </ul>
+
+
+
+</app-profil-institution>
+
+
+
+<app-modal [configuration]="{ name: 'affecter-bureau-modal', titre: 'affecterUnBureau', icone: 'exchange', taille: 'md' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-affectation-bureau *ngIf="affecter"
+                          [bureau]="single">
+  </app-affectation-bureau>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'bureau-edit-modal', titre: 'modifierLesDetailsDuBureau', icone: 'lamp-desk' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' }); edit = false">
+  <app-common-edit *ngIf="edit"
+                   [configuration]="{ endpoint: 'bureaux', name: 'bureau', hasDescription: true, item: single, submitButtonClass: 'btn-primary' }"
+                   [extraFields]="{pays: single.pays, ministere: ministere?.id, ambassade: ambassade?.id }"
+                   (itemEdited)="onBureauEdit($event.item)">
+  </app-common-edit>
+</app-modal>

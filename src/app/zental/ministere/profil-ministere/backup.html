@@ -1,0 +1,208 @@
+<div class="row row-xs clearfix  mg-0 pd-0 p-0 pt-4 ">
+  <!-- Details et adresse -->
+  <div class=" col-lg-3 pr-2  pl-4">
+    <!-- Details -->
+    <div class="row row-xs clearfix pt-4 bd-b pb-2 mg-0 pd-0 bg-light ">
+      <div class="col-lg-12">
+        <!-- Drapeau -->
+        <div class="image text-center pb-2">
+          <img src="assets/images/drapeaux/cg.svg"
+               class="rounded"
+               width="80">
+        </div>
+
+        <!-- Libelle -->
+        <h6 class="text-center tx-ether">{{ single.libelle }}</h6>
+
+        <!-- Pays  -->
+        <p class="text-center mb-0 ether2"> {{ single.pays.libelle }}</p>
+
+        <!-- Date création -->
+        <p class="text-center tx-warning tx-12	"> {{ 'DEPUIS' | translate }} : {{ single.date_creation | date }} </p>
+
+        <!-- Devise -->
+        <p class="text-center tx-ether2 tx-14	"> {{ single.devise }}</p>
+      </div>
+    </div>
+
+    <!-- Action -->
+    <div class=" text-center pt-1 pb-1 ">
+      <!-- Contacter -->
+      <a class="ml-2"> <i class="fad fa-comment-alt-lines tx-echos2 bg-bluelight"
+           style="padding:10px; border-radius:50%"></i></a>
+
+      <!-- Lorem -->
+      <a class="ml-2"> <i class="fad fa-page-break tx-echos2 bg-bluelight"
+           style="padding:6px; border-radius:50%"></i></a>
+    </div>
+
+
+    <!-- Autres information et adresse -->
+    <div class=" ">
+      <ul class="list-group list-group-flush tx-13 ">
+        <!-- Telephone 1 -->
+        <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+          <div class="mr-2 ">
+            <i class="fad fa-phone-office tx-ether2 tx-20"></i>
+          </div>
+          <div class="pd-sm-l-10 pt-1">
+            <p class="tx-ether2 mg-b-0 tx-bold">{{ single.tel1 }}</p>
+          </div>
+        </li>
+
+        <!-- Telephone 2 -->
+        <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+          <div class="mr-2 "><i class="fad fa-mobile-android tx-ether2 tx-20"></i></div>
+          <div class="pd-sm-l-10 pt-1">
+            <p class="tx-ether2 mg-b-0 tx-bold"> {{ single.tel2 }}</p>
+          </div>
+        </li>
+
+        <!-- Email -->
+        <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+          <div class="mr-2 ">
+            <i class="fad fa-at tx-ether2 tx-20"></i>
+          </div>
+          <div class="pd-sm-l-10 pt-1">
+            <p class="tx-ether2 mg-b-0 tx-bold"> {{ single.mail }}</p>
+
+          </div>
+        </li>
+
+        <!-- Site web -->
+        <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+          <div class="mr-2 ">
+            <i class="fad fa-globe tx-ether2 tx-20"></i>
+          </div>
+          <div class="pd-sm-l-10 pt-1">
+            <p class="tx-ether2 mg-b-0 tx-bold">{{ single.siteweb }}</p>
+
+          </div>
+        </li>
+
+
+        <!-- Adresse -->
+        <ng-container *ngIf="single.adresses?.length">
+          <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light"
+              *ngFor="let adresse of single.adresses">
+            <app-adresse-solo [adresse]="adresse"></app-adresse-solo>
+          </li>
+        </ng-container>
+
+      </ul>
+      <a [routerLink]="['./']"
+         [fragment]="'add-adresse'"
+         class="btn btn-block mt-1 btn-light">
+        <i class="fal fa-map-marker-alt tx-ether2 mr-2"></i>
+        {{ 'ajouterUneAdresse' | translate }}
+      </a>
+
+    </div>
+  </div>
+
+  <div class=" col-lg-9 pr-2 pt-4">
+    <div class="card mg-b-20">
+      <div class=" collapse show"
+           id="collapse9">
+        <!-- Navigation -->
+        <ul class="nav bd-b bd-2 bd-facebook">
+          <!-- le ministere -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="['./']">
+              <i class="fad fa-landmark  tx-20"></i>
+              {{ 'leMinistere' | translate }}
+            </a>
+          </li>
+
+          <!-- Le ministre -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="['ministres', 'actuel']"
+               [routerLinkActive]="'font-weight-bolder'">
+              <i class="fad fa-user-crown  tx-20"></i>
+              {{ 'leMinistre' | translate}}
+            </a>
+          </li>
+
+
+          <!-- Portrait -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="'ministres'">
+              <i class="fad fa-user-crown  tx-20"></i>
+              {{ 'PORTRAIT' | translate }}
+            </a>
+          </li>
+
+          <!-- Mission -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="'missions'">
+              <i class="fad fa-bullseye-arrow  tx-20"></i>
+              {{ 'MISSIONS' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Organisation -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="'organisations'">
+              <i class="fad fa-line-columns  tx-20"></i>
+              {{ 'ORGANISATIONS' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Services -->
+          <li class="nav-item ">
+            <a class="nav-link  tx-echos"
+               [routerLink]="['services']"
+               [routerLinkActive]="'active'">
+              <i class="fad fa-ball-pile  tx-20"></i>
+              {{ 'SERVICES' | translate }}
+            </a>
+          </li>
+
+
+
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               data-toggle="tab"
+               href="#ministere_consulats"><i class="fad fa-construction  tx-20"></i> Consulats</a>
+          </li>
+
+
+          <!-- Ici mon pays -->
+          <li class="nav-item ">
+            <a class="nav-link tx-echos"
+               [routerLink]="'ici-mon-pays'">
+              <i class="fad fa-building  tx-20"></i>
+              {{ 'iciMonPays' | translate }}
+            </a>
+          </li>
+
+        </ul>
+
+        <!-- content -->
+        <div class="tab-content">
+          <div class="tab-pane fade active show"
+               id="le_ministere">
+            <router-outlet></router-outlet>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+<app-adresse [parent]="'ministere'"
+             [parentID]="single.id">
+</app-adresse>

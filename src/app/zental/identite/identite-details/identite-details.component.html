@@ -1,0 +1,122 @@
+<ng-container *ngIf="user">
+  <!-- User identit -->
+  <div class="row row-xs clearfix pt-4 bd-b pb-2 mg-0 pd-0 bg-light ">
+    <div class="col-lg-12">
+      <!-- Image -->
+      <div class="image text-center">
+        <img *ngIf="user.photo"
+             [src]="user.photo.path"
+             class="rounded-circle"
+             width="80"
+             height="80">
+
+
+        <span *ngIf="!user.photo">
+          <i class="fad fa-user-circle"
+             style="font-size: 80px;"></i>
+        </span>
+      </div>
+
+      <!-- nom complet -->
+      <h5 class="text-center tx-ether"> {{ user.nom_complet }} </h5>
+
+      <!-- Lieu de naissance -->
+      <p class="text-center mb-0 ether2"
+         *ngIf="user.lieu_naissance">
+        {{ user.lieu_naissance?.libelle }} - {{ user.lieu_naissance?.pays?.libelle }}
+      </p>
+
+      <!-- Age -->
+      <p class="text-center tx-ether2 tx-14	">
+        <!-- {{ age }} {{ 'ANS' | translate }} -->
+        28 ans
+      </p>
+      <!-- <p class="text-center tx-warning tx-12	"> Depuis : 02 Juillet 2021 || Venu(e) de : Congo</p> -->
+    </div>
+  </div>
+
+
+  <!-- Comment icon -->
+  <div class=" text-center pt-1 pb-1 ">
+    <a class="ml-2"> <i class="fad fa-comment-alt-lines tx-echos2 bg-bluelight"
+         style="padding:10px; border-radius:50%"></i></a>
+
+    <!-- Boutton modifier -->
+    <a class="ml-2"
+       [routerLink]="['./']"
+       *ngIf="auth.user.id_inscription == user.id_inscription"
+       [fragment]="'edit-identite'">
+      <i class="fad fa-edit tx-echos2 bg-bluelight"
+         style="padding:10px; border-radius:50%"></i>
+    </a>
+
+  </div>
+
+  <!-- Useer other information -->
+  <div class=" ">
+    <ul class="list-group list-group-flush tx-13 ">
+      <!-- Sexe -->
+      <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+        <div class="mr-2 ">
+          <i class="fad fa-venus-mars tx-ether2 tx-20"></i>
+        </div>
+        <div class="pd-sm-l-10 pt-1">
+          <p class="tx-ether2 mg-b-0 tx-bold"> {{ user.sexe | translate }} </p>
+        </div>
+      </li>
+
+      <!-- Situation matrimoniale -->
+      <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+        <div class="mr-2 ">
+          <i class="fad fa-rings-wedding tx-ether2 tx-20"></i>
+        </div>
+        <div class="pd-sm-l-10 pt-1">
+          <p class="tx-ether2 mg-b-0 tx-bold">{{ (user.situation_matrimoniale?.libelle || 'NON-DEFINIE') | translate }}</p>
+        </div>
+      </li>
+
+      <!-- email -->
+      <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+        <div class="mr-2 ">
+          <i class="fad fa-at tx-ether2 tx-20"></i>
+        </div>
+        <div class="pd-sm-l-10 pt-1">
+          <p class="tx-ether2 mg-b-0 tx-bold">{{ user.email }}</p>
+        </div>
+
+      </li>
+
+      <!-- Teleone -->
+      <li class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+        <div class="mr-2 ">
+          <i class="fad fa-mobile-android tx-ether2 tx-20"></i>
+        </div>
+        <div class="pd-sm-l-10 pt-1">
+          <p class="tx-ether2 mg-b-0 tx-bold">{{ user.telephone }}</p>
+
+        </div>
+      </li>
+
+      <!-- Liste des addresses -->
+      <li *ngIf="user.addresse"
+          class="list-group-item d-flex pd-sm-x-0 bd-b bg-light">
+        <app-adresse-solo [adresse]="user.addresse"></app-adresse-solo>
+      </li>
+
+      <a [routerLink]="['./']"
+         *ngIf="!user.addresse"
+         [fragment]="'add-adresse'"
+         class="btn btn-block mt-1 btn-light">
+        <i class="fal fa-map-marker-alt tx-ether2 mr-2"></i>
+        {{ 'ajouterUneAdresse' | translate }}
+      </a>
+
+
+    </ul>
+  </div>
+</ng-container>
+
+
+<app-adresse [parent]="{ name: 'user', item: user }"
+             *ngIf="user">
+</app-adresse>

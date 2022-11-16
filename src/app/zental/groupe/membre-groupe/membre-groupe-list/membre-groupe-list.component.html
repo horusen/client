@@ -1,0 +1,112 @@
+<div class="row row-xs clearfix mg-0 pd-0 pt-4 p-2"
+     *ngIf="!loading && membreService.data.length">
+
+  <!-- Liste of element -->
+  <div class="col-lg-4 p-2"
+       *ngFor="let membre of membreService.data | paginate: {itemsPerPage: 6, id: 'membre', currentPage: currentPage}">
+    <div class="mycard4 border ">
+      <div class="avatar5">
+        <img class="rounded-circle "
+             *ngIf="membre.membre.photo?.path"
+             [src]="membre.membre.photo?.path"
+             alt="avatar"
+             width="70"
+             height="70">
+
+        <span *ngIf="!membre.membre.photo?.path">
+          <i class="fad fa-user-circle"
+             style="font-size: 70px;"></i>
+        </span>
+      </div>
+
+      <!-- Infomation -->
+      <div class="mycard-text px-2 py-2">
+        <!-- Nom complet -->
+        <span class="date tx-bold tx-yeto tx-16">
+          {{ membre.membre.nom_complet }}
+
+          <i class="fas fa-check-circle tx-success"
+             *ngIf="membre.admin"
+             [ngbTooltip]=" 'ADMIN' | translate ">
+          </i>
+        </span>
+
+
+      </div>
+
+
+      <div class="pb-3 pt-1 card-container-icon">
+        <!-- Voir -->
+        <a [routerLink]="['./']"
+           class="mr-3 tx-facebook"
+           routerLinkActive="active">
+          <i class="fad  fa-info-circle"></i>
+        </a>
+
+
+        <ng-container *ngIf="groupe.user_membership?.admin">
+          <!-- designer comme admin -->
+          <a [routerLink]="['./']"
+             class="mr-3 tx-facebook"
+             *ngIf="!membre.admin"
+             (click)="designerCommeAdmin(membre)"
+             routerLinkActive="active">
+            <i class="fad  fa-check-circle"></i>
+          </a>
+
+
+          <!-- designer comme non admin -->
+          <a [routerLink]="['./']"
+             class="mr-3 tx-facebook"
+             *ngIf="membre.admin"
+             (click)="designerCommeNonAdmin(membre)"
+             routerLinkActive="active">
+            <i class="fad  fa-minus-circle"></i>
+          </a>
+
+
+
+          <!-- Supprimer -->
+          <a [routerLink]="['./']"
+             class="tx-facebook"
+             (click)="supprimer(membre.id)">
+            <i class="fad mr-3 fa-trash"></i>
+          </a>
+        </ng-container>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Pagination -->
+  <div class="col-12 mt-1 d-flex justify-content-center">
+    <pagination-controls id="membre"
+                         (pageChange)="currentPage = $event"
+                         autoHide="true"
+                         previousLabel="{{ 'PRECEDENT' | translate }}"
+                         nextLabel="{{ 'SUIVANT' | translate }}">
+    </pagination-controls>
+  </div>
+</div>
+
+
+<!-- Loading && missing data handling -->
+<div class="row"
+     *ngIf="loading || !membreService.data.length">
+
+  <!-- Loading -->
+  <div class="col-12 py-5"
+       *ngIf="loading">
+    <app-loading></app-loading>
+  </div>
+
+
+  <!-- Missing data handling -->
+  <div class="col-12 py-5"
+       *ngIf="!loading && !membreService.data.length">
+    <app-missing-data-alt>
+    </app-missing-data-alt>
+  </div>
+</div>

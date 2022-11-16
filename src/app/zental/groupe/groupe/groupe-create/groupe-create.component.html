@@ -1,0 +1,65 @@
+<form class="custom-placeholder"
+      [formGroup]="form"
+      (submit)="create()">
+  <!-- Libelle-->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <!-- Libelle -->
+    <div class="col-10">
+      <!-- Label -->
+      <label class="control-label"
+             for="libelle">
+        {{ 'LIBELLE' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control "
+             required
+             [formControlName]="'libelle'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'libelle'), 'is-valid': isValid('libelle')}">
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('libelle')"
+           class="invalid-feedback">
+        {{ 'veuillezSaisirLeLibelle' |translate }}.</div>
+    </div>
+  </div>
+
+
+  <!-- Description -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <div class="col-10">
+      <label class="control-label"
+             for="description">{{ 'DESCRIPTION' | translate }}</label>
+      <ckeditor [editor]="Editor"
+                class=""
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
+                formControlName="description">
+      </ckeditor>
+      <div *ngIf="shouldShowRequiredError('description')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignerCeChamps' | translate }}
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-10 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1"
+              type="submit"
+              [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+
+    </div>
+  </div>
+</form>
+
+<app-loading *ngIf="!form"></app-loading>

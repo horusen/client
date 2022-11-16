@@ -1,0 +1,119 @@
+<div class="pl-2 pt-2">
+  <h5 class="d-inline-block">
+    <!-- boutton precedent -->
+    <a [routerLink]="['..']"
+       [ngbTooltip]="'revenirEnArriere' | translate"
+       class="p-2 mr-2 tx-15  d-flex border rounded-circle align-items-center justify-content-center">
+      <i class="fad fa-arrow-left"></i>
+    </a>
+
+  </h5>
+</div>
+
+<div class="row row-xs clearfix  mg-0 pd-0 p-0 pt-4 "
+     *ngIf="single">
+  <!-- Details et adresse -->
+  <div class=" col-lg-3 pr-2  pl-4">
+    <!-- Details -->
+    <div class="row row-xs clearfix pt-4 bd-b pb-2 mg-0 pd-0 bg-light ">
+      <div class="col-lg-12">
+        <!-- Icone -->
+        <div class="image text-center pb-2">
+          <i class="fal fa-chair-office fa-3x"></i>
+        </div>
+
+        <!-- Libelle -->
+        <h6 class="text-center tx-ether">{{ single.libelle }}</h6>
+
+
+      </div>
+    </div>
+
+    <!-- Action -->
+    <div class=" text-center pt-1 pb-1 ">
+      <!-- Modifier -->
+      <a class="ml-2"
+         [routerLink]="['./']"
+         (click)="modifier()">
+        <i class="fad fa-edit tx-echos2 bg-bluelight"
+           style="padding:10px; border-radius:50%"></i>
+      </a>
+
+      <!-- Supprimer -->
+      <a class="ml-2"
+         [routerLink]="['./']"
+         (click)="supprimer()">
+        <i class="fad fa-trash-alt tx-echos2 bg-bluelight"
+           style="padding:6px; border-radius:50%"></i>
+      </a>
+    </div>
+
+  </div>
+
+  <div class=" col-lg-9 pr-2">
+    <div class="card mg-b-20">
+      <div class=" collapse show"
+           id="collapse9">
+        <!-- Navigation -->
+        <ul class="nav bd-b bd-2 bd-facebook">
+          <!-- Description -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="['./']"
+               [routerLinkActiveOptions]="{ exact: true }"
+               [routerLinkActive]="'font-weight-bolder'">
+              <i class="fal fa-info-circle  tx-20"
+                 [routerLinkActiveOptions]="{ exact: true }"
+                 [routerLinkActive]="'fas'"></i>
+              {{ 'DETAILS' | translate }}
+            </a>
+          </li>
+
+
+
+          <!-- Liste des employes -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="['employe']"
+               [routerLinkActive]="'font-weight-bolder'">
+              <i class="fal fa-sitemap  tx-20"
+                 [routerLinkActive]="'fas'"></i>
+              {{ 'EMPLOYES' | translate }}
+            </a>
+          </li>
+
+
+        </ul>
+
+        <!-- content -->
+        <div class="tab-content">
+          <div class="tab-pane fade active show"
+               id="details">
+            <router-outlet></router-outlet>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+
+<app-modal [configuration]="{ name: 'poste-edit-modal', titre: 'modifierLesDetailsDuPoste', icone: 'link' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' }); edit = false">
+  <app-poste-edit *ngIf="edit"></app-poste-edit>
+</app-modal>
+
+
+
+
+
+<div class="my-5"
+     *ngIf="loading">
+  <app-loading></app-loading>
+</div>

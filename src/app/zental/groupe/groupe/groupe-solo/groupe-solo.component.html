@@ -1,0 +1,60 @@
+<div class="mycard4 border p-2"
+     *ngIf="groupe">
+
+  <!-- Icone -->
+  <div class="d-flex justify-content-center">
+    <p class="mg-0 pb-4">
+      <span class=" pl-2">
+        <i class="fad fa-users-crown tx-40 tx-facebook bg-light "
+           style="padding:6px ; border-radius:50%"></i>
+      </span>
+
+    </p>
+  </div>
+
+  <!-- Badge -->
+  <div class=" text-center ">
+    <p class="text-center tx-facebook">{{ groupe.libelle }}</p>
+  </div>
+
+  <!-- footer -->
+  <div class="d-flex justify-content-between ">
+
+    <!-- CTA -->
+    <div class=" justify-content-between p-0">
+      <p class="mg-0 pt-2">
+        <!-- details -->
+        <a [routerLink]="groupe.id"
+           (click)="select()"
+           class=" pl-2">
+          <i class="fad fa-eye bg-white"
+             style="padding:6px ; border-radius:50%"></i>
+        </a>
+
+        <!-- Edit -->
+        <a class=" pl-2"
+           [routerLink]="['./']"
+           [fragment]="'edit-groupe'"
+           (click)="select()">
+          <i class="fad fa-edit bg-white"
+             style="padding:6px ; border-radius:50%"></i>
+        </a>
+
+        <!-- Supprimer -->
+        <a class=" pl-2"
+           (click)="supprimer()"
+           [routerLink]="['./']">
+          <i class="fad fa-trash-alt bg-white"
+             style="padding:6px ; border-radius:50%"></i>
+        </a>
+
+        <!-- Toloba -->
+        <span class=" pl-2"> <i class="fad fa-comment-alt-lines bg-white"
+             style="padding:6px ; border-radius:50%"></i></span>
+
+      </p>
+    </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="table-responsive">
+    <table class="table  table-hover table-sm mb-0 ">
+        <tbody *ngIf="dossierService.data.length && !loading">
+            <app-dossier-solo *ngFor="let dossier of dossierService.data"
+                              [dossier]="dossier"></app-dossier-solo>
+        </tbody>
+
+        <app-loading *ngIf="loading"></app-loading>
+        <app-missing-data-alt *ngIf="!dossierService.data.length &&
+                                                                !loading">
+        </app-missing-data-alt>
+    </table>
+</div>

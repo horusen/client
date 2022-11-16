@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-12 mb-1">
+        <button class="btn btn-sm btn-success float-right"
+                [ngbPopover]="dossierCreate"
+                [autoClose]="'outside'">
+            {{ 'CREER' | translate }} <i class="fal fa-plus"></i>
+        </button>
+    </div>
+    <div class="col-12"
+         style="min-height: 100px;">
+        <!-- Liste des dossiers -->
+        <ul class="list-group"
+            *ngIf="data.length && !loading">
+            <li class="list-group-item"
+                *ngFor="let item of data">
+                <i class="fal fa-folder"></i> {{ item.libelle }}
+                <span class="float-right clickable"
+                      (click)="ajouterFichierDansDossier(item.id)">
+                    <i class="fad fa-folder-plus"></i>
+                </span>
+            </li>
+        </ul>
+
+        <!-- Loading -->
+        <app-loading *ngIf="loading"></app-loading>
+
+        <!-- missing data -->
+        <app-missing-data-alt *ngIf="!loading &&
+                                             !data.length">
+        </app-missing-data-alt>
+    </div>
+</div>
+
+
+<ng-template #dossierCreate>
+    <div class="bg-white">
+        <app-common-create [configuration]="{endpoint: 'dossier', name: 'dossier'}"
+                           (itemCreated)="onDossierCreate($event)">
+        </app-common-create>
+    </div>
+</ng-template>

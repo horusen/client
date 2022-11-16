@@ -1,0 +1,18 @@
+<ul class="list-group"
+    *ngIf="!loading && demandeAdhesionService.data.length">
+  <li class="list-group-item"
+      *ngFor="let demande of demandeAdhesionService.data">
+    <app-demande-adhesion-groupe-solo [demande]="demande"></app-demande-adhesion-groupe-solo>
+  </li>
+</ul>
+
+
+<div class="my-5"
+     *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+
+
+<div class="mb-5">
+  <app-missing-data-alt *ngIf="!loading && !demandeAdhesionService.data.length"></app-missing-data-alt>
+</div>

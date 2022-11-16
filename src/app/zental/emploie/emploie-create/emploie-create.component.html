@@ -1,0 +1,226 @@
+<form class="custom-placeholder"
+      [formGroup]="form"
+      (submit)="create()">
+  <!-- Libelle et type contrat-->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <!-- Libelle -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label"
+             for="libelle">
+        {{ 'LIBELLE' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control "
+             required
+             [formControlName]="'libelle'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'libelle'), 'is-valid': isValid('libelle')}">
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('libelle')"
+           class="invalid-feedback">
+        {{ 'veuillezSaisirLeLibelle' |translate }}.</div>
+    </div>
+
+
+    <!-- type_contrat -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label"
+             for="pays">
+        {{ 'typeDeContrat' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.villes"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.typeContrats"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="type_contrat"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'type_contrat'), 'is-valid': isValid('type_contrat')}"
+                            class="form-control ">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('type_contrat')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignerCeChamps' | translate }}.
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Etablissementet pays -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <!-- Etablissement -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label"
+             for="etablissement">
+        {{ 'ETABLISSEMENT' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control "
+             required
+             [formControlName]="'etablissement'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'etablissement'), 'is-valid': isValid('etablissement')}">
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('etablissement')"
+           class="invalid-feedback">
+        {{ 'veuillezSaisirCeChamps' |translate }}.</div>
+    </div>
+
+    <!-- Lieu -->
+    <div class="col-6">
+      <!-- Label -->
+      <label class="control-label"
+             for="pays">
+        {{ 'lieuDeFonction' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.villes"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.villes"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="lieu"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'lieu'), 'is-valid': isValid('lieu')}"
+                            class="form-control ">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('lieu')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignerCeChamps' | translate }}.
+      </div>
+    </div>
+  </div>
+
+  <!-- Domaine, debut et fin  -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <!-- Domaine -->
+    <div class="col-4">
+      <!-- Label -->
+      <label class="control-label"
+             for="domaines">
+        {{ 'DOMAINES' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.domaines"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.domaines"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="domaine"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'domaine'), 'is-valid': isValid('domaine')}"
+                            class="form-control ">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('domaine')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignerCeChamps' | translate }}.
+      </div>
+    </div>
+
+    <!-- Debut fonction -->
+    <div class="col-4">
+      <!-- Label -->
+      <label for="type"
+             class="label-template-form">
+        {{ 'debutDeFonciton' | translate }}
+      </label>
+
+      <!-- Date picker -->
+      <div class="input-group mb-2">
+        <input [dpDayPicker]="configCalendrier.day"
+               [theme]="'dp-material'"
+               formControlName="debut"
+               class="form-control ">
+        <div class="input-group-prepend">
+          <div class="input-group-text  bg-light"><i class="fal fa-calendar"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Fin fonction -->
+    <div class="col-4">
+      <!-- Label -->
+      <label for="type"
+             class="label-template-form">
+        {{ 'finDeFonction' | translate }}
+      </label>
+
+      <!-- Date picker -->
+      <div class="input-group mb-2">
+        <input [dpDayPicker]="configCalendrier.day"
+               [theme]="'dp-material'"
+               formControlName="fin"
+               class="form-control ">
+        <div class="input-group-prepend">
+          <div class="input-group-text  bg-light"><i class="fal fa-calendar"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <label class="control-label"
+             for="description">{{ 'DESCRIPTION' | translate }}</label>
+      <ckeditor [editor]="Editor"
+                class=""
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
+                formControlName="description">
+      </ckeditor>
+      <div *ngIf="shouldShowRequiredError('description')"
+           class="invalid-feedback">
+        {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
+      </div>
+    </div>
+  </div>
+
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <!-- photo -->
+    <div class="col-12">
+      <label class="form-label"
+             for="customFile">{{ 'fichierJoint' | translate }}</label>
+      <input type="file"
+             (change)="onFileChanged($event)"
+             accept="application/pdf"
+             class="form-control"
+             id="customFile" />
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-12 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1"
+              type="submit"
+              [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+
+    </div>
+  </div>
+</form>
+
+<app-loading *ngIf="!form"></app-loading>

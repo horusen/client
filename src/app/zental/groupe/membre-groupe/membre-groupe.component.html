@@ -1,0 +1,17 @@
+<!-- header -->
+<app-main-header [id]="'membre-groupe'"
+                 [hasFilter]="false">
+</app-main-header>
+
+
+<app-membre-groupe-list></app-membre-groupe-list>
+
+
+
+
+<app-modal [configuration]="{ name: 'membre-groupe-create-modal', titre: 'ajouterDesMembresAuxGroupes', icone: 'users-crown' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-membre-groupe-add *ngIf="create"
+                         (created)="onCreated()">
+  </app-membre-groupe-add>
+</app-modal>

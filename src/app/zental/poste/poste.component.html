@@ -1,0 +1,32 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 pb-2">
+    <i class="fad fa-circle  tx-20"></i>
+    {{ 'listeDesPostes' | translate }}
+  </h5>
+</div>
+
+
+<app-main-header [id]="'poste'"
+                 [hasFilter]="false">
+</app-main-header>
+
+
+
+<app-poste-list [parent]="parent"></app-poste-list>
+
+
+
+<app-modal [configuration]="{ name: 'poste-create-modal', titre: 'creerUnPoste', icone: 'chair-office' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-poste-create *ngIf="create"
+                    [parent]="parent"></app-poste-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'poste-edit-modal', titre: 'modifierLesDetailsDuPoste', icone: 'chair-office' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-poste-edit *ngIf="edit"
+                  [parent]="parent"></app-poste-edit>
+</app-modal>

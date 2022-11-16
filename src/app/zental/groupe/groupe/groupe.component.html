@@ -1,0 +1,31 @@
+<!-- Title -->
+<div class="pl-2 pt-2">
+  <h5 class="pt-2 pb-2">
+    <i class="fad fa-users  tx-20"></i>
+    {{ 'GROUPE' | translate }}
+  </h5>
+</div>
+
+
+<!-- header -->
+<app-main-header [id]="'groupe'"
+                 [hasFilter]="false">
+</app-main-header>
+
+
+<app-groupe-list [parent]="parent"></app-groupe-list>
+
+
+
+
+<app-modal [configuration]="{ name: 'groupe-create-modal', titre: 'ajouterUnGroupe', icone: 'users-crown' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-groupe-create (created)="onCreated()"></app-groupe-create>
+</app-modal>
+
+
+
+<app-modal [configuration]="{ name: 'groupe-edit-modal', titre: 'modifierLesDetailsDuGroupe', icone: 'users-crown' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-groupe-edit (edited)="onEdited()"></app-groupe-edit>
+</app-modal>

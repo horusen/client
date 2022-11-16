@@ -1,0 +1,153 @@
+<div class=" row row-xs clearfix pt-3  pl-2 pr-4"
+     style="z-index: auto !important;">
+  <div class="col-lg-12 ">
+    <h5 class=""><i class="fad fa-clipboard-user  "
+         style="padding:6px; border-radius: 50%; "></i>
+      {{ 'IDENTITE' | translate }}</h5>
+  </div>
+</div>
+<!-- Header  -->
+
+
+
+
+<div class="row row-xs clearfix  mg-0 pd-0 p-0 "
+     *ngIf="user && !loading">
+  <!-- Sidebar -->
+  <div class=" col-lg-3 pr-2  pl-4">
+    <app-identite-details></app-identite-details>
+
+  </div>
+
+  <!-- Main content -->
+  <div class=" col-lg-6 pr-2 pt-4">
+    <!-- Nav bar -->
+    <div class="card mg-b-20">
+      <div class=" collapse show"
+           id="collapse9">
+        <ul class="nav bd-b bd-2 bd-facebook">
+          <!-- Civile -->
+          <li class="nav-item ">
+            <a class="nav-link tx-echos"
+               [routerLink]="['./']"
+               [routerLinkActiveOptions]="{ exact: true }"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fal fa-id-card-alt  tx-20"
+                 [routerLinkActiveOptions]="{ exact: true }"
+                 [routerLinkActive]="'fas'">
+              </i>
+              {{ 'CIVILE' | translate }}
+            </a>
+          </li>
+
+          <li class="nav-item ">
+            <a class="nav-link  tx-echos"
+               [routerLink]="['famille']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fal fa-house-day  tx-20"
+                 [routerLinkActive]="'fas'">
+              </i>
+              {{ 'FAMILLE' | translate }}
+            </a>
+          </li>
+
+          <!-- Contact -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="['contact']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fal fa-address-book  tx-20"
+                 [routerLinkActive]="'fas'"></i>
+              {{ 'CONTACTS' | translate }}
+            </a>
+          </li>
+
+          <!-- Etudes -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="['diplome']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fal fa-graduation-cap  tx-20"
+                 [routerLinkActive]="'fas'">
+              </i>
+              {{ 'ETUDES' |translate }}
+            </a>
+          </li>
+
+
+          <!-- Emploie -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="['emploie']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fal fa-chair-office  tx-20"
+                 [routerLinkActive]="'fas'">
+              </i>
+              {{ 'EMPLOIE' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Relation -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="['relation']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fal fa-hands-helping  tx-20"
+                 [routerLinkActive]="'fas'">
+              </i>
+              {{ 'RELATIONS' | translate }}
+            </a>
+          </li>
+
+
+          <!-- Groupes -->
+          <li class="nav-item">
+            <a class="nav-link tx-echos"
+               [routerLink]="['groupe']"
+               [routerLinkActive]="'font-weight-bold'">
+              <i class="fal fa-users  tx-20"
+                 [routerLinkActive]="'fas'">
+              </i>
+              {{ 'GROUPE' | translate }}
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade active show"
+               id="identite_civile">
+            <router-outlet></router-outlet>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Autres information -->
+  <div class=" col-lg-3 pr-4 pt-4">
+
+
+    <app-piece-consulaire></app-piece-consulaire>
+
+
+    <app-contact-urgent></app-contact-urgent>
+
+  </div>
+</div>
+
+
+<div class="my-5"
+     *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+
+
+
+
+<app-modal [configuration]="{ name: 'identite-edit-modal', titre: 'modifierLesDetailsDeVotreProfil', icone: 'user-circle' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve'})">
+  <app-identite-edit *ngIf="edit"></app-identite-edit>
+</app-modal>

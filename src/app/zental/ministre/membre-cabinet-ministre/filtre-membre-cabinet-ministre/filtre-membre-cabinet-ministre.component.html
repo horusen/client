@@ -1,0 +1,88 @@
+<div class=" row m-0"
+     id="chatPeopleList">
+  <div class="col-12 p-0">
+    <form class="custom-placeholder"
+          [formGroup]="form"
+          *ngIf="form"
+          (submit)="applyfilter()">
+
+      <!-- Filtrer par DOmaine -->
+      <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+        <div class="col-12">
+          <!-- Label -->
+          <label class="control-label"
+                 for="domaine">
+            {{ 'DOMAINES' | translate }}
+            <i class="fad fa-circle-notch fa-spin"
+               *ngIf="dependanciesLoading.domaines"></i>
+          </label>
+
+          <angular2-multiselect [data]="dependancies.domaines"
+                                (click)="getDomaines()"
+                                [settings]="dropdownSettingsAlt.multi"
+                                formControlName="domaines"
+                                class="form-control form-control-sm">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+
+      <!-- Poste -->
+      <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+        <div class="col-12">
+          <!-- Label -->
+          <label class="control-label"
+                 for="poste">
+            {{ 'POSTES' | translate }}
+            <i class="fad fa-circle-notch fa-spin"
+               *ngIf="dependanciesLoading.postes"></i>
+          </label>
+
+          <angular2-multiselect [data]="dependancies.postes"
+                                (click)="getPostes()"
+                                [settings]="dropdownSettingsAlt.multi"
+                                formControlName="postes"
+                                class="form-control form-control-sm">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+
+      <!-- Fonction -->
+      <div class="formSep form-group p-form-group-3 d-flex justify-content-center pb-0 pt-3">
+        <div class="col-12">
+          <!-- Label -->
+          <label class="control-label"
+                 for="fonction">
+            {{ 'FONCTIONS' | translate }}
+            <i class="fad fa-circle-notch fa-spin"
+               *ngIf="dependanciesLoading.fonctions"></i>
+          </label>
+
+          <angular2-multiselect [data]="dependancies.fonctions"
+                                (click)="getFonctions()"
+                                [settings]="dropdownSettingsAlt.multi"
+                                formControlName="fonctions"
+                                class="form-control form-control-sm">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+
+
+
+
+      <!-- Boutton validation -->
+      <div class="d-flex justify-content-center mb-3">
+        <div class="col-12 text-right">
+          <!-- Boutton sumit -->
+          <button class="btn btn-sm btn-block btn-primary mr-1">
+            <i class="fad fa-circle-notch fa-spin"
+               *ngIf="loading"></i>
+            {{ 'VALIDER' | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

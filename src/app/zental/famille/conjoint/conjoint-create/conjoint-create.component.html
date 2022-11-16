@@ -1,0 +1,183 @@
+<form class="custom-placeholder"
+      [formGroup]="form"
+      *ngIf="isFormOk && dependancies.situationsMatrimoniales.length"
+      (submit)="create()">
+  <!-- Situation matrimonial-->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <div class="col-lg-12 mb-3">
+      <fieldset class="fieldset1 p-2">
+        <legend class="legend1 text-primary ml-3">
+          {{ 'etesVousMarie' | translate }}</legend>
+        <div class="d-flex justify-content-around">
+          <label *ngFor="let item of dependancies.situationsMatrimoniales">
+            <input type="radio"
+                   class="option-input radio"
+                   [value]="item.id"
+                   formControlName="situation_matrimoniale" />
+            {{ item.libelle |translate }}
+          </label>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+
+  <!-- Vivre ensembme-->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2"
+       *ngIf="formValue('situation_matrimoniale') === 2">
+    <div class="col-lg-12 mb-3">
+      <fieldset class="fieldset1 p-2">
+        <legend class="legend1 text-primary ml-3">
+          {{ 'vivezVousEnsemble' | translate }}</legend>
+        <div class="d-flex justify-content-around">
+          <label *ngFor="let item of dependancies.booleanResponse">
+            <input type="radio"
+                   class="option-input radio"
+                   [value]="item"
+                   formControlName="vivre_ensemble" />
+            {{ item |translate }}
+          </label>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+
+  <!-- Meme pays-->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2"
+       *ngIf="formValue('situation_matrimoniale') === 2 && formValue('vivre_ensemble') === 'NON'">
+    <div class="col-lg-12 mb-3">
+      <fieldset class="fieldset1 p-2">
+        <legend class="legend1 text-primary ml-3">
+          {{ 'etesVousDansLeMemePays' | translate }}</legend>
+        <div class="d-flex justify-content-around">
+          <label *ngFor="let item of dependancies.booleanResponse">
+            <input type="radio"
+                   class="option-input radio"
+                   [value]="item"
+                   formControlName="meme_pays" />
+            {{ item |translate }}
+          </label>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+  <!-- Meme nationalite -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3"
+       *ngIf="formValue('situation_matrimoniale') === 2">
+    <div class="col-lg-12 mb-3">
+      <fieldset class="fieldset1 p-2">
+        <legend class="legend1 text-primary ml-3">
+          {{ 'etesVousDeLaMemeNationalite' | translate }}</legend>
+        <div class="d-flex justify-content-around">
+          <label *ngFor="let item of dependancies.booleanResponse">
+            <input type="radio"
+                   class="option-input radio"
+                   [value]="item"
+                   formControlName="meme_nationalite" />
+            {{ item |translate }}
+          </label>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+
+
+  <!-- Conjoint -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2"
+       *ngIf="formValue('situation_matrimoniale')===2">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label"
+             for="conjoint">
+        {{ 'CONJOINT' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="dependanciesLoading.users"></i>
+      </label>
+
+      <angular2-multiselect [data]="dependancies.users"
+                            [settings]="dropdownSettingsAlt.user"
+                            formControlName="conjoint2"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'conjoint2'), 'is-valid': isValid('conjoint2')}"
+                            class="form-control form-control-sm">
+        <c-badge>
+          <ng-template let-item="item">
+            {{item.nom_complet}}
+          </ng-template>
+        </c-badge>
+        <c-item>
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.nom_complet}}</label>
+            <img [src]="item?.photo_min?.path"
+                 class="float-right rounded-circle border border-warning"
+                 style="width: 30px;margin-right: 20px;" />
+          </ng-template>
+        </c-item>
+      </angular2-multiselect>
+
+      <a [routerLink]="['./']"
+         class="tx-facebook tx-12 mt-2 ml-1"
+         [autoClose]="false"
+         placement="bottom"
+         [popoverTitle]="userCreateTitle"
+         [ngbPopover]="userCreate"
+         [triggers]="'manual'"
+         #popover="ngbPopover"
+         (click)="popover.open()">
+        <i class="fal fa-plus-circle"></i> {{ 'AJOUTER' | translate }}
+      </a>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('conjoint2')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignerUnUtilisateur' | translate }}.
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-12 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1"
+              type="submit"
+              [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+
+    </div>
+  </div>
+</form>
+
+<app-loading *ngIf="!form || dependanciesLoading.situationsMatrimoniales"></app-loading>
+
+
+<ng-template #userCreateTitle>
+  <b class="text-center tx-pink font-weight-bolder">
+    {{ "ajouterUnNouvelUtilisateur" | translate }}
+  </b>
+
+  <a [routerLink]="['./']"
+     (click)="popover.close()"
+     class="float-right">
+    <i class="far fa-times"></i>
+  </a>
+
+</ng-template>
+
+<!-- Body -->
+<ng-template #userCreate
+             class="p-3">
+  <app-user-create [extraRequiredFields]="['addresse', 'profession']"></app-user-create>
+</ng-template>

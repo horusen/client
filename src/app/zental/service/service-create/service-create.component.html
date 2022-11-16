@@ -1,0 +1,115 @@
+<form class="custom-placeholder"
+      [formGroup]="form"
+      (submit)="create()">
+  <!-- Libelle-->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label"
+             for="libelle">
+        {{ 'LIBELLE' | translate }}
+      </label>
+
+      <!-- Input -->
+      <input type="text"
+             class="form-control form-control-sm"
+             required
+             [formControlName]="'libelle'"
+             [ngClass]="{'is-invalid': shouldShowRequiredError( 'libelle'), 'is-valid': isValid('libelle')}">
+
+      <!-- MEssage d'erreur -->
+      <div *ngIf="shouldShowRequiredError('libelle')"
+           class="invalid-feedback">
+        {{ 'veuillezSaisirLeLibelle' |translate }}.</div>
+    </div>
+  </div>
+
+  <!-- Departement -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-2"
+       *ngIf="parent.name !== 'departement'">
+    <div class="col-12">
+      <!-- Label -->
+      <label class="control-label"
+             for="departement">
+        {{ 'DEPARTEMENT' | translate }}
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="departementLoading"></i>
+      </label>
+
+      <angular2-multiselect [data]="departements"
+                            [settings]="dropdownSettingsAlt.single"
+                            formControlName="departement"
+                            [ngClass]="{'is-invalid': shouldShowRequiredError( 'departement'), 'is-valid': isValid('departement')}"
+                            class="form-control  form-control-sm">
+      </angular2-multiselect>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="shouldShowRequiredError('departement')"
+           class="invalid-feedback">
+        {{ 'veuillezRenseignezLeDepartement' | translate }}.
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Description -->
+  <div class="formSep form-group  d-flex justify-content-center pb-0 pt-3">
+    <div class="col-12">
+      <label class="control-label"
+             for="description">{{ 'DESCRIPTION' | translate }}</label>
+      <!-- <textarea name="description" maxlength="500" class="form-control  form-control-sm" cols="30" rows="3"
+                [formControlName]="'description'"
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"></textarea> -->
+      <ckeditor [editor]="Editor"
+                class=""
+                [ngClass]="{'is-invalid': shouldShowRequiredError( 'description'), 'is-valid': isValid('description')}"
+                formControlName="description">
+      </ckeditor>
+      <div *ngIf="shouldShowRequiredError('description')"
+           class="invalid-feedback">
+        {{ 'saisissezLaDescriptionDeVotreTache' | translate }}
+      </div>
+    </div>
+  </div>
+
+
+  <div class="formSep form-group col-12 d-flex justify-content-center pb-0 pt-2">
+    <div class="col-12">
+      <div class="form-check d-flex align-items-baseline">
+        <input class="form-check-input"
+               formControlName="service_com"
+               type="checkbox"
+               value=""
+               id="flexCheckDefault">
+        <label class="form-check-label ml-3"
+               for="flexCheckDefault">
+          {{ 'choisirCommeServiceDeCommunication' | translate }}
+        </label>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Boutton validation -->
+  <div class="d-flex justify-content-center">
+    <div class="col-12 text-right">
+      <!-- Boutton sumit -->
+      <button class="btn btn-sm btn-primary mr-1"
+              type="submit"
+              [disabled]="form.invalid">
+        <i class="fad fa-circle-notch fa-spin"
+           *ngIf="loading"></i>
+        {{ 'VALIDER' | translate }}
+      </button>
+
+      <!-- Bouton reset -->
+      <button class="btn btn-sm border btn-link"
+              type="button"
+              (click)="initialiseForm()">
+        {{ 'REINITIALISER' | translate }}
+      </button>
+    </div>
+  </div>
+</form>
+
+<app-loading *ngIf="!form"></app-loading>

@@ -1,0 +1,18 @@
+<div class="my-5"
+     *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+
+
+<app-institution [parent]="{ name: 'ambassade', item: single }"
+                 [showNavigation]="parent.name !== 'zental'"
+                 *ngIf="single && !loading">
+</app-institution>
+
+
+
+
+<app-modal [configuration]="{ name: 'ambassade-edit-modal', titre: 'modifierLesDetailsDuambassade', icone: 'landmark' }"
+           (closed)="router.navigate(['./'], { relativeTo: this.route, queryParamsHandling: 'preserve' })">
+  <app-ambassade-edit *ngIf="edit"></app-ambassade-edit>
+</app-modal>
